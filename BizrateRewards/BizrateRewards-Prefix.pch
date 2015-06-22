@@ -1,0 +1,19 @@
+//
+//  BizrateRewards-Prefix.pch
+//  BizrateRewards
+//
+//  Created by Eugenity on 22.06.15.
+//  Copyright (c) 2015 ThinkMobiles. All rights reserved.
+//
+
+#ifndef BizrateRewards_BizrateRewards_Prefix_pch
+#define BizrateRewards_BizrateRewards_Prefix_pch
+
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+#import <SDWebImage/UIImageView+WebCache.h>
+#import <MBProgressHUD/MBProgressHUD.h>
+
+#import "BZRMacros.h"
+
+#endif
