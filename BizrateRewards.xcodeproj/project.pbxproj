@@ -29,6 +29,9 @@
 		58A0B2201B3854CF003C100C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58A0B21F1B3854CF003C100C /* Images.xcassets */; };
 		58A0B2231B3854CF003C100C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58A0B2211B3854CF003C100C /* LaunchScreen.xib */; };
 		58A0B22F1B3854CF003C100C /* BizrateRewardsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A0B22E1B3854CF003C100C /* BizrateRewardsTests.m */; };
+		58ACC06A1B3937010081E546 /* BZRPageContentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ACC0691B3937010081E546 /* BZRPageContentController.m */; };
+		58ACC06D1B3937160081E546 /* BZRBaseTutorialController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ACC06C1B3937160081E546 /* BZRBaseTutorialController.m */; };
+		58ACC0721B3938CD0081E546 /* BZRPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ACC0711B3938CD0081E546 /* BZRPageViewController.m */; };
 		58B574E11B38AE200083A80A /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B574E01B38AE200083A80A /* KeychainItemWrapper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 /* End PBXBuildFile section */
 
@@ -83,6 +86,12 @@
 		58A0B2281B3854CF003C100C /* BizrateRewardsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BizrateRewardsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		58A0B22D1B3854CF003C100C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		58A0B22E1B3854CF003C100C /* BizrateRewardsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BizrateRewardsTests.m; sourceTree = "<group>"; };
+		58ACC0681B3937010081E546 /* BZRPageContentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRPageContentController.h; path = Classes/MVC/Controllers/TutorialViewControllers/PageContentController/BZRPageContentController.h; sourceTree = "<group>"; };
+		58ACC0691B3937010081E546 /* BZRPageContentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRPageContentController.m; path = Classes/MVC/Controllers/TutorialViewControllers/PageContentController/BZRPageContentController.m; sourceTree = "<group>"; };
+		58ACC06B1B3937160081E546 /* BZRBaseTutorialController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRBaseTutorialController.h; path = Classes/MVC/Controllers/TutorialViewControllers/BaseTutorialController/BZRBaseTutorialController.h; sourceTree = "<group>"; };
+		58ACC06C1B3937160081E546 /* BZRBaseTutorialController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRBaseTutorialController.m; path = Classes/MVC/Controllers/TutorialViewControllers/BaseTutorialController/BZRBaseTutorialController.m; sourceTree = "<group>"; };
+		58ACC0701B3938CD0081E546 /* BZRPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRPageViewController.h; path = Classes/MVC/Controllers/TutorialViewControllers/PageViewController/BZRPageViewController.h; sourceTree = "<group>"; };
+		58ACC0711B3938CD0081E546 /* BZRPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRPageViewController.m; path = Classes/MVC/Controllers/TutorialViewControllers/PageViewController/BZRPageViewController.m; sourceTree = "<group>"; };
 		58B574DF1B38AE200083A80A /* KeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KeychainItemWrapper.h; path = Classes/Utilities/KeyChain/KeychainItemWrapper.h; sourceTree = "<group>"; };
 		58B574E01B38AE200083A80A /* KeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KeychainItemWrapper.m; path = Classes/Utilities/KeyChain/KeychainItemWrapper.m; sourceTree = "<group>"; };
 		7AF1FB2A8C4A8673EF3998F1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -209,6 +218,7 @@
 		58219EE71B38A23A00A9541A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				58ACC05F1B3932840081E546 /* TutorialViewControllers */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -421,6 +431,43 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		58ACC05F1B3932840081E546 /* TutorialViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				58ACC06F1B3938B40081E546 /* PageViewController */,
+				58ACC0641B3936780081E546 /* PageContentController */,
+				58ACC0631B3936340081E546 /* BaseTutorialController */,
+			);
+			name = TutorialViewControllers;
+			sourceTree = "<group>";
+		};
+		58ACC0631B3936340081E546 /* BaseTutorialController */ = {
+			isa = PBXGroup;
+			children = (
+				58ACC06B1B3937160081E546 /* BZRBaseTutorialController.h */,
+				58ACC06C1B3937160081E546 /* BZRBaseTutorialController.m */,
+			);
+			name = BaseTutorialController;
+			sourceTree = "<group>";
+		};
+		58ACC0641B3936780081E546 /* PageContentController */ = {
+			isa = PBXGroup;
+			children = (
+				58ACC0681B3937010081E546 /* BZRPageContentController.h */,
+				58ACC0691B3937010081E546 /* BZRPageContentController.m */,
+			);
+			name = PageContentController;
+			sourceTree = "<group>";
+		};
+		58ACC06F1B3938B40081E546 /* PageViewController */ = {
+			isa = PBXGroup;
+			children = (
+				58ACC0701B3938CD0081E546 /* BZRPageViewController.h */,
+				58ACC0711B3938CD0081E546 /* BZRPageViewController.m */,
+			);
+			name = PageViewController;
+			sourceTree = "<group>";
+		};
 		D31C9EB6CC9E9EA49476A0B1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -581,6 +628,8 @@
 			files = (
 				58219F0D1B38A38600A9541A /* UIView+MakeFromXib.m in Sources */,
 				58B574E11B38AE200083A80A /* KeychainItemWrapper.m in Sources */,
+				58ACC06A1B3937010081E546 /* BZRPageContentController.m in Sources */,
+				58ACC06D1B3937160081E546 /* BZRBaseTutorialController.m in Sources */,
 				58219EF51B38A2E000A9541A /* BZRNetworkManager.m in Sources */,
 				58A0B2181B3854CF003C100C /* AppDelegate.m in Sources */,
 				58219F021B38A32700A9541A /* BZRAlertMessageService.m in Sources */,
@@ -589,6 +638,7 @@
 				58219EF91B38A2EE00A9541A /* BZRDataManager.m in Sources */,
 				58219F051B38A33E00A9541A /* UIViewController+fixOrientation.m in Sources */,
 				58219EFC1B38A30300A9541A /* BZRValidator.m in Sources */,
+				58ACC0721B3938CD0081E546 /* BZRPageViewController.m in Sources */,
 				58219F151B38A3D700A9541A /* NSString+ContainsString.m in Sources */,
 				58219F0A1B38A37600A9541A /* UIView+Shaking.m in Sources */,
 				58A0B2151B3854CF003C100C /* main.m in Sources */,
@@ -721,6 +771,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BizrateRewards/BizrateRewards-Prefix.pch";
 				INFOPLIST_FILE = BizrateRewards/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -734,6 +785,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BizrateRewards/BizrateRewards-Prefix.pch";
 				INFOPLIST_FILE = BizrateRewards/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

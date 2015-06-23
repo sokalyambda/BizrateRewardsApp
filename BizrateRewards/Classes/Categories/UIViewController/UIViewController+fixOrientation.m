@@ -11,7 +11,7 @@
 @implementation UIViewController (fixOrientation)
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
-    return UIInterfaceOrientationIsLandscape(toInterfaceOrientation);
+    return UIInterfaceOrientationIsPortrait(toInterfaceOrientation);
 }
 
 - (BOOL)shouldAutorotate {
@@ -19,7 +19,7 @@
 }
 
 - (NSUInteger)supportedInterfaceOrientations {
-    return UIInterfaceOrientationMaskLandscape;
+    return UIInterfaceOrientationMaskPortrait;
 }
 
 @end
