@@ -45,6 +45,12 @@
     [self.navigationController setNavigationBarHidden:YES];
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self.navigationController setNavigationBarHidden:NO];
+}
+
 #pragma mark - Actions
 
 - (void)setupPageViewController
