@@ -381,6 +381,9 @@
                                                         <include reference="m2u-b4-jTU"/>
                                                     </mask>
                                                 </variation>
+                                                <connections>
+                                                    <outlet property="delegate" destination="AFG-jK-mMj" id="W66-oT-eDL"/>
+                                                </connections>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QPu-Yg-UNs" userLabel="Password Field">
                                                 <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
@@ -399,6 +402,9 @@
                                                         <include reference="6hD-io-bVg"/>
                                                     </mask>
                                                 </variation>
+                                                <connections>
+                                                    <outlet property="delegate" destination="AFG-jK-mMj" id="8o8-R9-BNe"/>
+                                                </connections>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wtM-tQ-uCN">
                                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -684,6 +690,9 @@
                         </variation>
                     </view>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+                    <connections>
+                        <outlet property="scrollView" destination="nrb-am-Wxi" id="dYW-at-S93"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S2t-sY-Sxl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -746,6 +755,9 @@
                                                         <include reference="cDH-XZ-UBS"/>
                                                     </mask>
                                                 </variation>
+                                                <connections>
+                                                    <outlet property="delegate" destination="25h-nv-K7N" id="boi-Ta-HbH"/>
+                                                </connections>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Last name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jNZ-QB-c6x" userLabel="Last name Field">
                                                 <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
@@ -764,6 +776,9 @@
                                                         <include reference="a0f-ip-dBH"/>
                                                     </mask>
                                                 </variation>
+                                                <connections>
+                                                    <outlet property="delegate" destination="25h-nv-K7N" id="Q6W-wQ-98c"/>
+                                                </connections>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email address" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="m9D-Fh-S9F" userLabel="Email address Field">
                                                 <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
@@ -782,6 +797,9 @@
                                                         <include reference="L26-CL-cFs"/>
                                                     </mask>
                                                 </variation>
+                                                <connections>
+                                                    <outlet property="delegate" destination="25h-nv-K7N" id="csI-9N-zTL"/>
+                                                </connections>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Date of birth" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HHf-8U-4hf" userLabel="Date of birth Field">
                                                 <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
@@ -800,6 +818,9 @@
                                                         <include reference="6j0-P0-rc9"/>
                                                     </mask>
                                                 </variation>
+                                                <connections>
+                                                    <outlet property="delegate" destination="25h-nv-K7N" id="W2Q-77-NbY"/>
+                                                </connections>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Gender" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EUb-db-MYr" userLabel="Gender Field">
                                                 <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
@@ -818,6 +839,9 @@
                                                         <include reference="ZUV-QO-3bc"/>
                                                     </mask>
                                                 </variation>
+                                                <connections>
+                                                    <outlet property="delegate" destination="25h-nv-K7N" id="0mP-y9-3jd"/>
+                                                </connections>
                                             </textField>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S0U-Tt-ZdX" userLabel="Privacy And Terms Holder">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -1040,7 +1064,6 @@
                                     </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="4iN-qP-cMV" secondAttribute="width" id="6SC-UV-Xjy"/>
                                     <constraint firstAttribute="bottom" secondItem="4iN-qP-cMV" secondAttribute="bottom" id="9l4-sf-wQP"/>
                                     <constraint firstItem="4iN-qP-cMV" firstAttribute="leading" secondItem="nVr-3b-WMG" secondAttribute="leading" id="JdD-Su-vng"/>
                                     <constraint firstItem="4iN-qP-cMV" firstAttribute="top" secondItem="nVr-3b-WMG" secondAttribute="top" id="JeS-c4-PtJ"/>
@@ -1052,7 +1075,6 @@
                                         <exclude reference="4iN-qP-cMV"/>
                                     </mask>
                                     <mask key="constraints">
-                                        <exclude reference="6SC-UV-Xjy"/>
                                         <exclude reference="9l4-sf-wQP"/>
                                         <exclude reference="JdD-Su-vng"/>
                                         <exclude reference="JeS-c4-PtJ"/>
@@ -1065,7 +1087,6 @@
                                         <include reference="4iN-qP-cMV"/>
                                     </mask>
                                     <mask key="constraints">
-                                        <exclude reference="6SC-UV-Xjy"/>
                                         <include reference="9l4-sf-wQP"/>
                                         <include reference="JdD-Su-vng"/>
                                         <include reference="JeS-c4-PtJ"/>
@@ -1106,6 +1127,9 @@
                         </variation>
                     </view>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+                    <connections>
+                        <outlet property="scrollView" destination="nVr-3b-WMG" id="ka7-V5-C6h"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NFs-hW-qXn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1633,6 +1657,9 @@
                                                         <include reference="baR-Yy-H14"/>
                                                     </mask>
                                                 </variation>
+                                                <connections>
+                                                    <outlet property="delegate" destination="vLX-7s-wiZ" id="g76-a4-wpx"/>
+                                                </connections>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DQs-5z-XUm" userLabel="Password Field">
                                                 <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
@@ -1651,6 +1678,9 @@
                                                         <include reference="Gu1-ZK-vus"/>
                                                     </mask>
                                                 </variation>
+                                                <connections>
+                                                    <outlet property="delegate" destination="vLX-7s-wiZ" id="fcb-0D-EJ7"/>
+                                                </connections>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I acknowledge the privacy policy" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zdh-DT-Ebk">
                                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -1942,6 +1972,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="qta-XG-zY2"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+                    <connections>
+                        <outlet property="scrollView" destination="Ig0-1s-7m5" id="sF9-Hh-hs4"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h10-WX-iDB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
