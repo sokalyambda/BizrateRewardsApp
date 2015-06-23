@@ -12,6 +12,7 @@
 
 @interface BZRBaseTutorialController ()<UIPageViewControllerDataSource>
 
+@property (weak, nonatomic) IBOutlet UIView *pageContentHolder;
 @property (strong, nonatomic) BZRPageViewController *pageViewController;
 @property (strong, nonatomic) NSArray *pageImagesNames;
 
@@ -58,8 +59,10 @@
     
     [self.pageViewController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
     
+    self.pageViewController.view.frame = CGRectMake(0, 0, CGRectGetWidth(self.pageContentHolder.frame), CGRectGetHeight(self.pageContentHolder.frame));
+    
     [self addChildViewController:self.pageViewController];
-    [self.view addSubview:self.pageViewController.view];
+    [self.pageContentHolder addSubview:self.pageViewController.view];
     [self.pageViewController didMoveToParentViewController:self];
 }
 
@@ -94,7 +97,7 @@
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController
 {
-    NSUInteger index = [(BZRPageContentController *)viewController index];
+    NSUInteger index = ((BZRPageContentController *)viewController).index;
     
     if (index == NSNotFound) {
         return nil;
@@ -114,8 +117,8 @@
     return [self.pageImagesNames count];
 }
 
-- (NSInteger)presentationIndexForPageViewController:(UIPageViewController *)pageViewController {
-    // The selected item reflected in the page indicator.
+- (NSInteger)presentationIndexForPageViewController:(UIPageViewController *)pageViewController
+{
     return 0;
 }
 
