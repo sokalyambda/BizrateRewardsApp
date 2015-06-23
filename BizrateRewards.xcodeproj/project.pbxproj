@@ -32,6 +32,11 @@
 		58ACC06A1B3937010081E546 /* BZRPageContentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ACC0691B3937010081E546 /* BZRPageContentController.m */; };
 		58ACC06D1B3937160081E546 /* BZRBaseTutorialController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ACC06C1B3937160081E546 /* BZRBaseTutorialController.m */; };
 		58ACC0721B3938CD0081E546 /* BZRPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ACC0711B3938CD0081E546 /* BZRPageViewController.m */; };
+		58ACC0761B395E6A0081E546 /* BZRPrivacyAndTermsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ACC0751B395E6A0081E546 /* BZRPrivacyAndTermsController.m */; };
+		58ACC07E1B3968830081E546 /* BZRSignInController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ACC07D1B3968830081E546 /* BZRSignInController.m */; };
+		58ACC0811B39689F0081E546 /* BZRSignUpController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ACC0801B39689F0081E546 /* BZRSignUpController.m */; };
+		58ACC0841B3968BF0081E546 /* BZRChooseSignUpTypeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ACC0831B3968BF0081E546 /* BZRChooseSignUpTypeController.m */; };
+		58ACC0871B3968DA0081E546 /* BZRGetStartedController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ACC0861B3968DA0081E546 /* BZRGetStartedController.m */; };
 		58B574E11B38AE200083A80A /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B574E01B38AE200083A80A /* KeychainItemWrapper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 /* End PBXBuildFile section */
 
@@ -92,6 +97,16 @@
 		58ACC06C1B3937160081E546 /* BZRBaseTutorialController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRBaseTutorialController.m; path = Classes/MVC/Controllers/TutorialViewControllers/BaseTutorialController/BZRBaseTutorialController.m; sourceTree = "<group>"; };
 		58ACC0701B3938CD0081E546 /* BZRPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRPageViewController.h; path = Classes/MVC/Controllers/TutorialViewControllers/PageViewController/BZRPageViewController.h; sourceTree = "<group>"; };
 		58ACC0711B3938CD0081E546 /* BZRPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRPageViewController.m; path = Classes/MVC/Controllers/TutorialViewControllers/PageViewController/BZRPageViewController.m; sourceTree = "<group>"; };
+		58ACC0741B395E6A0081E546 /* BZRPrivacyAndTermsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRPrivacyAndTermsController.h; path = Classes/MVC/Controllers/PrivacyAndTermsController/BZRPrivacyAndTermsController.h; sourceTree = "<group>"; };
+		58ACC0751B395E6A0081E546 /* BZRPrivacyAndTermsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRPrivacyAndTermsController.m; path = Classes/MVC/Controllers/PrivacyAndTermsController/BZRPrivacyAndTermsController.m; sourceTree = "<group>"; };
+		58ACC07C1B3968830081E546 /* BZRSignInController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRSignInController.h; path = Classes/MVC/Controllers/AuthorizationControllers/SignInController/BZRSignInController.h; sourceTree = "<group>"; };
+		58ACC07D1B3968830081E546 /* BZRSignInController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRSignInController.m; path = Classes/MVC/Controllers/AuthorizationControllers/SignInController/BZRSignInController.m; sourceTree = "<group>"; };
+		58ACC07F1B39689F0081E546 /* BZRSignUpController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRSignUpController.h; path = Classes/MVC/Controllers/AuthorizationControllers/SignUpController/BZRSignUpController.h; sourceTree = "<group>"; };
+		58ACC0801B39689F0081E546 /* BZRSignUpController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRSignUpController.m; path = Classes/MVC/Controllers/AuthorizationControllers/SignUpController/BZRSignUpController.m; sourceTree = "<group>"; };
+		58ACC0821B3968BF0081E546 /* BZRChooseSignUpTypeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRChooseSignUpTypeController.h; path = Classes/MVC/Controllers/AuthorizationControllers/ChooseSignUpTypeController/BZRChooseSignUpTypeController.h; sourceTree = "<group>"; };
+		58ACC0831B3968BF0081E546 /* BZRChooseSignUpTypeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRChooseSignUpTypeController.m; path = Classes/MVC/Controllers/AuthorizationControllers/ChooseSignUpTypeController/BZRChooseSignUpTypeController.m; sourceTree = "<group>"; };
+		58ACC0851B3968DA0081E546 /* BZRGetStartedController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRGetStartedController.h; path = Classes/MVC/Controllers/AuthorizationControllers/GetStartedController/BZRGetStartedController.h; sourceTree = "<group>"; };
+		58ACC0861B3968DA0081E546 /* BZRGetStartedController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRGetStartedController.m; path = Classes/MVC/Controllers/AuthorizationControllers/GetStartedController/BZRGetStartedController.m; sourceTree = "<group>"; };
 		58B574DF1B38AE200083A80A /* KeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KeychainItemWrapper.h; path = Classes/Utilities/KeyChain/KeychainItemWrapper.h; sourceTree = "<group>"; };
 		58B574E01B38AE200083A80A /* KeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KeychainItemWrapper.m; path = Classes/Utilities/KeyChain/KeychainItemWrapper.m; sourceTree = "<group>"; };
 		7AF1FB2A8C4A8673EF3998F1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -218,6 +233,8 @@
 		58219EE71B38A23A00A9541A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				58ACC0771B3967C90081E546 /* AuthorizationControllers */,
+				58ACC0731B395E020081E546 /* PrivacyAndTermsController */,
 				58ACC05F1B3932840081E546 /* TutorialViewControllers */,
 			);
 			name = Controllers;
@@ -468,6 +485,62 @@
 			name = PageViewController;
 			sourceTree = "<group>";
 		};
+		58ACC0731B395E020081E546 /* PrivacyAndTermsController */ = {
+			isa = PBXGroup;
+			children = (
+				58ACC0741B395E6A0081E546 /* BZRPrivacyAndTermsController.h */,
+				58ACC0751B395E6A0081E546 /* BZRPrivacyAndTermsController.m */,
+			);
+			name = PrivacyAndTermsController;
+			sourceTree = "<group>";
+		};
+		58ACC0771B3967C90081E546 /* AuthorizationControllers */ = {
+			isa = PBXGroup;
+			children = (
+				58ACC07B1B3967F80081E546 /* GetStartedController */,
+				58ACC07A1B3967E80081E546 /* ChooseSignUpTypeController */,
+				58ACC0791B3967DD0081E546 /* SignUpController */,
+				58ACC0781B3967D20081E546 /* SignInController */,
+			);
+			name = AuthorizationControllers;
+			sourceTree = "<group>";
+		};
+		58ACC0781B3967D20081E546 /* SignInController */ = {
+			isa = PBXGroup;
+			children = (
+				58ACC07C1B3968830081E546 /* BZRSignInController.h */,
+				58ACC07D1B3968830081E546 /* BZRSignInController.m */,
+			);
+			name = SignInController;
+			sourceTree = "<group>";
+		};
+		58ACC0791B3967DD0081E546 /* SignUpController */ = {
+			isa = PBXGroup;
+			children = (
+				58ACC07F1B39689F0081E546 /* BZRSignUpController.h */,
+				58ACC0801B39689F0081E546 /* BZRSignUpController.m */,
+			);
+			name = SignUpController;
+			sourceTree = "<group>";
+		};
+		58ACC07A1B3967E80081E546 /* ChooseSignUpTypeController */ = {
+			isa = PBXGroup;
+			children = (
+				58ACC0821B3968BF0081E546 /* BZRChooseSignUpTypeController.h */,
+				58ACC0831B3968BF0081E546 /* BZRChooseSignUpTypeController.m */,
+			);
+			name = ChooseSignUpTypeController;
+			sourceTree = "<group>";
+		};
+		58ACC07B1B3967F80081E546 /* GetStartedController */ = {
+			isa = PBXGroup;
+			children = (
+				58ACC0851B3968DA0081E546 /* BZRGetStartedController.h */,
+				58ACC0861B3968DA0081E546 /* BZRGetStartedController.m */,
+			);
+			name = GetStartedController;
+			sourceTree = "<group>";
+		};
 		D31C9EB6CC9E9EA49476A0B1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -627,20 +700,25 @@
 			buildActionMask = 2147483647;
 			files = (
 				58219F0D1B38A38600A9541A /* UIView+MakeFromXib.m in Sources */,
+				58ACC0841B3968BF0081E546 /* BZRChooseSignUpTypeController.m in Sources */,
 				58B574E11B38AE200083A80A /* KeychainItemWrapper.m in Sources */,
 				58ACC06A1B3937010081E546 /* BZRPageContentController.m in Sources */,
 				58ACC06D1B3937160081E546 /* BZRBaseTutorialController.m in Sources */,
+				58ACC0761B395E6A0081E546 /* BZRPrivacyAndTermsController.m in Sources */,
 				58219EF51B38A2E000A9541A /* BZRNetworkManager.m in Sources */,
 				58A0B2181B3854CF003C100C /* AppDelegate.m in Sources */,
 				58219F021B38A32700A9541A /* BZRAlertMessageService.m in Sources */,
 				58219F111B38A3B200A9541A /* UIImagePickerController+fixOrientation.m in Sources */,
+				58ACC0811B39689F0081E546 /* BZRSignUpController.m in Sources */,
 				58219F191B38A3F600A9541A /* NSDictionary+JSONRepresentation.m in Sources */,
 				58219EF91B38A2EE00A9541A /* BZRDataManager.m in Sources */,
 				58219F051B38A33E00A9541A /* UIViewController+fixOrientation.m in Sources */,
 				58219EFC1B38A30300A9541A /* BZRValidator.m in Sources */,
 				58ACC0721B3938CD0081E546 /* BZRPageViewController.m in Sources */,
+				58ACC07E1B3968830081E546 /* BZRSignInController.m in Sources */,
 				58219F151B38A3D700A9541A /* NSString+ContainsString.m in Sources */,
 				58219F0A1B38A37600A9541A /* UIView+Shaking.m in Sources */,
+				58ACC0871B3968DA0081E546 /* BZRGetStartedController.m in Sources */,
 				58A0B2151B3854CF003C100C /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
