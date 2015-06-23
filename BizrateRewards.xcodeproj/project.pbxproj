@@ -38,6 +38,7 @@
 		58ACC0841B3968BF0081E546 /* BZRChooseSignUpTypeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ACC0831B3968BF0081E546 /* BZRChooseSignUpTypeController.m */; };
 		58ACC0871B3968DA0081E546 /* BZRGetStartedController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ACC0861B3968DA0081E546 /* BZRGetStartedController.m */; };
 		58ACC08B1B39A35D0081E546 /* BZRBaseAuthController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ACC08A1B39A35D0081E546 /* BZRBaseAuthController.m */; };
+		58ACC08F1B39AD490081E546 /* BZRDashboardController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ACC08E1B39AD490081E546 /* BZRDashboardController.m */; };
 		58B574E11B38AE200083A80A /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B574E01B38AE200083A80A /* KeychainItemWrapper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 /* End PBXBuildFile section */
 
@@ -110,6 +111,8 @@
 		58ACC0861B3968DA0081E546 /* BZRGetStartedController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRGetStartedController.m; path = Classes/MVC/Controllers/AuthorizationControllers/GetStartedController/BZRGetStartedController.m; sourceTree = "<group>"; };
 		58ACC0891B39A35D0081E546 /* BZRBaseAuthController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRBaseAuthController.h; path = Classes/MVC/Controllers/AuthorizationControllers/BaseAuthController/BZRBaseAuthController.h; sourceTree = "<group>"; };
 		58ACC08A1B39A35D0081E546 /* BZRBaseAuthController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRBaseAuthController.m; path = Classes/MVC/Controllers/AuthorizationControllers/BaseAuthController/BZRBaseAuthController.m; sourceTree = "<group>"; };
+		58ACC08D1B39AD490081E546 /* BZRDashboardController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRDashboardController.h; path = Classes/MVC/Controllers/DashboardController/BZRDashboardController.h; sourceTree = "<group>"; };
+		58ACC08E1B39AD490081E546 /* BZRDashboardController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRDashboardController.m; path = Classes/MVC/Controllers/DashboardController/BZRDashboardController.m; sourceTree = "<group>"; };
 		58B574DF1B38AE200083A80A /* KeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KeychainItemWrapper.h; path = Classes/Utilities/KeyChain/KeychainItemWrapper.h; sourceTree = "<group>"; };
 		58B574E01B38AE200083A80A /* KeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KeychainItemWrapper.m; path = Classes/Utilities/KeyChain/KeychainItemWrapper.m; sourceTree = "<group>"; };
 		7AF1FB2A8C4A8673EF3998F1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -236,6 +239,7 @@
 		58219EE71B38A23A00A9541A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				58ACC08C1B39AD2D0081E546 /* DashboardController */,
 				58ACC0771B3967C90081E546 /* AuthorizationControllers */,
 				58ACC0731B395E020081E546 /* PrivacyAndTermsController */,
 				58ACC05F1B3932840081E546 /* TutorialViewControllers */,
@@ -554,6 +558,15 @@
 			name = BaseAuthController;
 			sourceTree = "<group>";
 		};
+		58ACC08C1B39AD2D0081E546 /* DashboardController */ = {
+			isa = PBXGroup;
+			children = (
+				58ACC08D1B39AD490081E546 /* BZRDashboardController.h */,
+				58ACC08E1B39AD490081E546 /* BZRDashboardController.m */,
+			);
+			name = DashboardController;
+			sourceTree = "<group>";
+		};
 		D31C9EB6CC9E9EA49476A0B1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -712,6 +725,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				58ACC08F1B39AD490081E546 /* BZRDashboardController.m in Sources */,
 				58219F0D1B38A38600A9541A /* UIView+MakeFromXib.m in Sources */,
 				58ACC0841B3968BF0081E546 /* BZRChooseSignUpTypeController.m in Sources */,
 				58B574E11B38AE200083A80A /* KeychainItemWrapper.m in Sources */,
