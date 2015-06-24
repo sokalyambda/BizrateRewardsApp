@@ -28,6 +28,8 @@
 		58A0B21E1B3854CF003C100C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 58A0B21C1B3854CF003C100C /* Main.storyboard */; };
 		58A0B2201B3854CF003C100C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58A0B21F1B3854CF003C100C /* Images.xcassets */; };
 		58A0B22F1B3854CF003C100C /* BizrateRewardsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A0B22E1B3854CF003C100C /* BizrateRewardsTests.m */; };
+		58A91F2F1B3A80A80032607F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58A91F2E1B3A80A80032607F /* CoreLocation.framework */; };
+		58A91F331B3A823D0032607F /* BZRLocationObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A91F321B3A823D0032607F /* BZRLocationObserver.m */; };
 		58ACC06A1B3937010081E546 /* BZRPageContentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ACC0691B3937010081E546 /* BZRPageContentController.m */; };
 		58ACC06D1B3937160081E546 /* BZRBaseTutorialController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ACC06C1B3937160081E546 /* BZRBaseTutorialController.m */; };
 		58ACC0721B3938CD0081E546 /* BZRPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ACC0711B3938CD0081E546 /* BZRPageViewController.m */; };
@@ -91,6 +93,9 @@
 		58A0B2281B3854CF003C100C /* BizrateRewardsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BizrateRewardsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		58A0B22D1B3854CF003C100C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		58A0B22E1B3854CF003C100C /* BizrateRewardsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BizrateRewardsTests.m; sourceTree = "<group>"; };
+		58A91F2E1B3A80A80032607F /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		58A91F311B3A823D0032607F /* BZRLocationObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRLocationObserver.h; path = Classes/LocationObserver/BZRLocationObserver.h; sourceTree = "<group>"; };
+		58A91F321B3A823D0032607F /* BZRLocationObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRLocationObserver.m; path = Classes/LocationObserver/BZRLocationObserver.m; sourceTree = "<group>"; };
 		58ACC0681B3937010081E546 /* BZRPageContentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRPageContentController.h; path = Classes/MVC/Controllers/TutorialViewControllers/PageContentController/BZRPageContentController.h; sourceTree = "<group>"; };
 		58ACC0691B3937010081E546 /* BZRPageContentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRPageContentController.m; path = Classes/MVC/Controllers/TutorialViewControllers/PageContentController/BZRPageContentController.m; sourceTree = "<group>"; };
 		58ACC06B1B3937160081E546 /* BZRBaseTutorialController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRBaseTutorialController.h; path = Classes/MVC/Controllers/TutorialViewControllers/BaseTutorialController/BZRBaseTutorialController.h; sourceTree = "<group>"; };
@@ -122,6 +127,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				58A91F2F1B3A80A80032607F /* CoreLocation.framework in Frameworks */,
 				58219F241B38A5A600A9541A /* QuartzCore.framework in Frameworks */,
 				58219F221B38A59F00A9541A /* CoreGraphics.framework in Frameworks */,
 				58219F201B38A59000A9541A /* Security.framework in Frameworks */,
@@ -144,6 +150,7 @@
 		58219EDB1B38A06600A9541A /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				58A91F301B3A821C0032607F /* LocationObserver */,
 				58219EE41B38A21F00A9541A /* Server APIs */,
 				58219EE31B38A21900A9541A /* Utilities */,
 				58219EE11B38A1F300A9541A /* Categories */,
@@ -452,6 +459,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		58A91F301B3A821C0032607F /* LocationObserver */ = {
+			isa = PBXGroup;
+			children = (
+				58A91F311B3A823D0032607F /* BZRLocationObserver.h */,
+				58A91F321B3A823D0032607F /* BZRLocationObserver.m */,
+			);
+			name = LocationObserver;
+			sourceTree = "<group>";
+		};
 		58ACC05F1B3932840081E546 /* TutorialViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -567,6 +583,7 @@
 		D31C9EB6CC9E9EA49476A0B1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				58A91F2E1B3A80A80032607F /* CoreLocation.framework */,
 				58219F231B38A5A600A9541A /* QuartzCore.framework */,
 				58219F211B38A59F00A9541A /* CoreGraphics.framework */,
 				58219F1F1B38A59000A9541A /* Security.framework */,
@@ -728,6 +745,7 @@
 				58ACC06A1B3937010081E546 /* BZRPageContentController.m in Sources */,
 				58ACC06D1B3937160081E546 /* BZRBaseTutorialController.m in Sources */,
 				58ACC0761B395E6A0081E546 /* BZRPrivacyAndTermsController.m in Sources */,
+				58A91F331B3A823D0032607F /* BZRLocationObserver.m in Sources */,
 				58219EF51B38A2E000A9541A /* BZRNetworkManager.m in Sources */,
 				58A0B2181B3854CF003C100C /* AppDelegate.m in Sources */,
 				58219F021B38A32700A9541A /* BZRAlertMessageService.m in Sources */,
