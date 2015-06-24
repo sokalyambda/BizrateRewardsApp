@@ -7,15 +7,18 @@
 //
 
 #import "BZRNetworkManager.h"
+#import "BZRStorageManager.h"
 
 #import "BZRApiConstants.h"
 
 @interface BZRDataManager : NSObject
 
-@property (strong, atomic, readonly) BZRUserProfile *userProfile;
-
 + (BZRDataManager *)sharedInstance;
 
 - (void)signInWithUserName:(NSString *)userName password:(NSString *)password withResult:(SuccessBlock)result;
+- (void)signUpWithUserName:(NSString *)userName password:(NSString *)password withResult:(SuccessBlock)result;
+
+- (void)signInWithFacebookWithResult:(SuccessBlock)result;
+- (void)signUpWithFacebookWithResult:(SuccessBlock)result;
 
 @end

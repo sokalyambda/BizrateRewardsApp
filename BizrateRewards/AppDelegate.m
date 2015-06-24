@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 
+#import "BZRStorageManager.h"
+
 @interface AppDelegate ()
 
 @end
@@ -23,7 +25,24 @@
     
     [self registerApplicationForPushNotifications:application];
     
-    return YES;
+    return [[FBSDKApplicationDelegate sharedInstance] application:application
+                                    didFinishLaunchingWithOptions:launchOptions];
+}
+
+- (void)applicationDidBecomeActive:(UIApplication *)application
+{
+    [FBSDKAppEvents activateApp];
+}
+
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation
+{
+    return [[FBSDKApplicationDelegate sharedInstance] application:application
+                                                          openURL:url
+                                                sourceApplication:sourceApplication
+                                                       annotation:annotation];
 }
 
 - (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
@@ -38,10 +57,14 @@
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
-    NSString *token = [[[[deviceToken description]
+    NSString *token = [[[deviceToken.description
                                               stringByReplacingOccurrencesOfString:@"<" withString:@""]
                                              stringByReplacingOccurrencesOfString:@">" withString:@""]
                                             stringByReplacingOccurrencesOfString:@" " withString:@""];
+    if (token.length) {
+        [BZRStorageManager sharedStorage].deviceToken = token;
+    }
+    
     NSLog(@"%@", deviceToken);
 }
 

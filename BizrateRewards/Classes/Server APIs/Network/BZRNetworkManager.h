@@ -17,5 +17,9 @@ typedef void(^UserProfileBlock)(BOOL success, BZRUserProfile *userProfile, NSErr
 
 //sign up/in
 - (void)signInWithUserName:(NSString *)userName password:(NSString *)password withResult:(UserProfileBlock)result;
+- (void)signUpWithUserName:(NSString *)userName password:(NSString *)password withResult:(UserProfileBlock)result;
+
+- (void)signInWithFacebookWithResult:(SuccessBlock)result;
+- (void)signUpWithFacebookWithResult:(UserProfileBlock)result;
 
 @end

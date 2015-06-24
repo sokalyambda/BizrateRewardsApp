@@ -11,6 +11,7 @@
 @interface BZRDataManager ()
 
 @property (strong, nonatomic) BZRNetworkManager *network;
+@property (strong, nonatomic) BZRStorageManager *storage;
 
 @end
 
@@ -36,6 +37,7 @@
     
     if (self) {
         _network = [BZRNetworkManager new];
+        _storage = [BZRStorageManager sharedStorage];
     }
     return self;
 }
@@ -44,8 +46,34 @@
 
 - (void)signInWithUserName:(NSString *)userName password:(NSString *)password withResult:(SuccessBlock)result
 {
+    WEAK_SELF;
     [self.network signInWithUserName:userName password:password withResult:^(BOOL success, BZRUserProfile *userProfile, NSError *error) {
-        _userProfile = userProfile;
+        weakSelf.storage.currentProfile = userProfile;
+        return result(success, error);
+    }];
+}
+
+- (void)signUpWithUserName:(NSString *)userName password:(NSString *)password withResult:(SuccessBlock)result
+{
+    WEAK_SELF;
+    [self.network signUpWithUserName:userName password:password withResult:^(BOOL success, BZRUserProfile *userProfile, NSError *error) {
+        weakSelf.storage.currentProfile = userProfile;
+        return result(success, error);
+    }];
+}
+
+- (void)signInWithFacebookWithResult:(SuccessBlock)result
+{
+    [self.network signInWithFacebookWithResult:^(BOOL success, NSError *error) {
+        result(success, error);
+    }];
+}
+
+- (void)signUpWithFacebookWithResult:(SuccessBlock)result
+{
+    WEAK_SELF;
+    [self.network signUpWithFacebookWithResult:^(BOOL success, BZRUserProfile *userProfile, NSError *error) {
+        weakSelf.storage.currentProfile = userProfile;
         return result(success, error);
     }];
 }

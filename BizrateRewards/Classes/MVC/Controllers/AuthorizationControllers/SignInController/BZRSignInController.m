@@ -8,14 +8,28 @@
 
 #import "BZRSignInController.h"
 
+#import "BZRDataManager.h"
+
 @interface BZRSignInController ()
 
 @property (weak, nonatomic) IBOutlet UITextField *userNameField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
 
+@property (strong, nonatomic) BZRDataManager *dataManager;
+
 @end
 
 @implementation BZRSignInController
+
+#pragma mark - Accessors
+
+- (BZRDataManager *)dataManager
+{
+    if (!_dataManager) {
+        _dataManager = [BZRDataManager sharedInstance];
+    }
+    return _dataManager;
+}
 
 #pragma mark - View Lifecycle
 
@@ -35,6 +49,11 @@
 //facebook
 - (IBAction)facebookLoginClick:(id)sender
 {
+
+    [self.dataManager signInWithFacebookWithResult:^(BOOL success, NSError *error) {
+        
+    }];
+    
 }
 
 //email
