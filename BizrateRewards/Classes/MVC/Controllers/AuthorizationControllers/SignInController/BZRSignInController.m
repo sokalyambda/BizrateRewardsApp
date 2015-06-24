@@ -10,6 +10,9 @@
 
 @interface BZRSignInController ()
 
+@property (weak, nonatomic) IBOutlet UITextField *userNameField;
+@property (weak, nonatomic) IBOutlet UITextField *passwordField;
+
 @end
 
 @implementation BZRSignInController
@@ -25,6 +28,22 @@
 {
     [super viewWillAppear:animated];
     [self.view layoutIfNeeded];
+}
+
+#pragma mark - Actions
+
+//facebook
+- (IBAction)facebookLoginClick:(id)sender
+{
+}
+
+//email
+- (IBAction)signInClick:(id)sender
+{
+}
+
+- (IBAction)rememberMeClick:(id)sender
+{
 }
 
 @end

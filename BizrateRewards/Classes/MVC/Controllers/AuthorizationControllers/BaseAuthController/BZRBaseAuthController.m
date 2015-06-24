@@ -6,7 +6,14 @@
 //  Copyright (c) 2015 ThinkMobiles. All rights reserved.
 //
 
+typedef enum : NSUInteger {
+    BZRConditionsTypePrivacyPolicy,
+    BZRConditionsTypeUserAgreement,
+    BZRConditionsTypeTermsAndConditions
+} BZRPrivacyAndTermsType;
+
 #import "BZRBaseAuthController.h"
+#import "BZRPrivacyAndTermsController.h"
 
 @interface BZRBaseAuthController ()<UITextFieldDelegate>
 
@@ -75,6 +82,48 @@
                                              selector:@selector(keyboardWillHide:)
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
+}
+
+- (void)showPrivacyAndTermsWithType:(BZRPrivacyAndTermsType)type
+{
+    BZRPrivacyAndTermsController *controller = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRPrivacyAndTermsController class])];
+    
+    NSString *currentURLString = [NSString string];
+    
+    switch (type) {
+        case BZRConditionsTypePrivacyPolicy:
+            currentURLString = @"urlForPrivacyPolicy";
+            break;
+        case BZRConditionsTypeTermsAndConditions:
+            currentURLString = @"urlForTermsAndConditions";
+            break;
+        case BZRConditionsTypeUserAgreement:
+            currentURLString = @"urlForUserAgreement";
+            break;
+            
+        default:
+            break;
+    }
+    
+    controller.currentURL = [NSURL URLWithString:currentURLString];
+    [self.navigationController pushViewController:controller animated:YES];
+}
+
+#pragma mark - IBActions
+
+- (IBAction)privacyPolicyClick:(id)sender
+{
+    [self showPrivacyAndTermsWithType:BZRConditionsTypePrivacyPolicy];
+}
+
+- (IBAction)userAgreementClick:(id)sender
+{
+    [self showPrivacyAndTermsWithType:BZRConditionsTypeUserAgreement];
+}
+
+- (IBAction)termsAndConditionsClick:(id)sender
+{
+    [self showPrivacyAndTermsWithType:BZRConditionsTypeTermsAndConditions];
 }
 
 #pragma mark - UITextFieldDelegate

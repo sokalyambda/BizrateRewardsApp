@@ -8,7 +8,7 @@
 
 #import "BZRPrivacyAndTermsController.h"
 
-@interface BZRPrivacyAndTermsController ()
+@interface BZRPrivacyAndTermsController ()<UIWebViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
 
@@ -30,6 +30,16 @@
 {
     NSURLRequest *currentRequest = [NSURLRequest requestWithURL:self.currentURL];
     [self.webView loadRequest:currentRequest];
+}
+
+#pragma mark - UIWebViewDelegate
+
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+{
+    //TODO: parse url here
+    NSURL *url = request.URL;
+    NSLog(@"url %@", url);
+    return YES;
 }
 
 @end

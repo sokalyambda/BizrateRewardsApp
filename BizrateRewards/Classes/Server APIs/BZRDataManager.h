@@ -12,6 +12,10 @@
 
 @interface BZRDataManager : NSObject
 
+@property (strong, atomic, readonly) BZRUserProfile *userProfile;
+
 + (BZRDataManager *)sharedInstance;
+
+- (void)signInWithUserName:(NSString *)userName password:(NSString *)password withResult:(SuccessBlock)result;
 
 @end

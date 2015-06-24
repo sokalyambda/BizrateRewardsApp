@@ -8,8 +8,14 @@
 
 #import <AFNetworking/AFNetworking.h>
 
+#import "BZRUserProfile.h"
+
 typedef void(^SuccessBlock)(BOOL success, NSError *error);
+typedef void(^UserProfileBlock)(BOOL success, BZRUserProfile *userProfile, NSError *error);
 
 @interface BZRNetworkManager : AFHTTPSessionManager
+
+//sign up/in
+- (void)signInWithUserName:(NSString *)userName password:(NSString *)password withResult:(UserProfileBlock)result;
 
 @end

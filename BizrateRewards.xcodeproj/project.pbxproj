@@ -30,6 +30,9 @@
 		58A0B22F1B3854CF003C100C /* BizrateRewardsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A0B22E1B3854CF003C100C /* BizrateRewardsTests.m */; };
 		58A91F2F1B3A80A80032607F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58A91F2E1B3A80A80032607F /* CoreLocation.framework */; };
 		58A91F331B3A823D0032607F /* BZRLocationObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A91F321B3A823D0032607F /* BZRLocationObserver.m */; };
+		58A91F381B3A91CA0032607F /* BZRUserProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A91F371B3A91CA0032607F /* BZRUserProfile.m */; };
+		58A91F3B1B3A91E20032607F /* BZRGiftCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A91F3A1B3A91E20032607F /* BZRGiftCard.m */; };
+		58A91F431B3A995F0032607F /* BZRRoundedImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A91F421B3A995F0032607F /* BZRRoundedImageView.m */; };
 		58ACC06A1B3937010081E546 /* BZRPageContentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ACC0691B3937010081E546 /* BZRPageContentController.m */; };
 		58ACC06D1B3937160081E546 /* BZRBaseTutorialController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ACC06C1B3937160081E546 /* BZRBaseTutorialController.m */; };
 		58ACC0721B3938CD0081E546 /* BZRPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ACC0711B3938CD0081E546 /* BZRPageViewController.m */; };
@@ -96,6 +99,13 @@
 		58A91F2E1B3A80A80032607F /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		58A91F311B3A823D0032607F /* BZRLocationObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRLocationObserver.h; path = Classes/LocationObserver/BZRLocationObserver.h; sourceTree = "<group>"; };
 		58A91F321B3A823D0032607F /* BZRLocationObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRLocationObserver.m; path = Classes/LocationObserver/BZRLocationObserver.m; sourceTree = "<group>"; };
+		58A91F361B3A91CA0032607F /* BZRUserProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRUserProfile.h; path = Classes/MVC/Models/Profile/BZRUserProfile.h; sourceTree = "<group>"; };
+		58A91F371B3A91CA0032607F /* BZRUserProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRUserProfile.m; path = Classes/MVC/Models/Profile/BZRUserProfile.m; sourceTree = "<group>"; };
+		58A91F391B3A91E20032607F /* BZRGiftCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRGiftCard.h; path = Classes/MVC/Models/GiftCard/BZRGiftCard.h; sourceTree = "<group>"; };
+		58A91F3A1B3A91E20032607F /* BZRGiftCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRGiftCard.m; path = Classes/MVC/Models/GiftCard/BZRGiftCard.m; sourceTree = "<group>"; };
+		58A91F3F1B3A937B0032607F /* BZRMappingProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRMappingProtocol.h; path = Classes/Protocols/Mapping/BZRMappingProtocol.h; sourceTree = "<group>"; };
+		58A91F411B3A995F0032607F /* BZRRoundedImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRRoundedImageView.h; path = Classes/MVC/Views/RoundedImageView/BZRRoundedImageView.h; sourceTree = "<group>"; };
+		58A91F421B3A995F0032607F /* BZRRoundedImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRRoundedImageView.m; path = Classes/MVC/Views/RoundedImageView/BZRRoundedImageView.m; sourceTree = "<group>"; };
 		58ACC0681B3937010081E546 /* BZRPageContentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRPageContentController.h; path = Classes/MVC/Controllers/TutorialViewControllers/PageContentController/BZRPageContentController.h; sourceTree = "<group>"; };
 		58ACC0691B3937010081E546 /* BZRPageContentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRPageContentController.m; path = Classes/MVC/Controllers/TutorialViewControllers/PageContentController/BZRPageContentController.m; sourceTree = "<group>"; };
 		58ACC06B1B3937160081E546 /* BZRBaseTutorialController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRBaseTutorialController.h; path = Classes/MVC/Controllers/TutorialViewControllers/BaseTutorialController/BZRBaseTutorialController.h; sourceTree = "<group>"; };
@@ -150,6 +160,7 @@
 		58219EDB1B38A06600A9541A /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				58A91F3D1B3A932F0032607F /* Protocols */,
 				58A91F301B3A821C0032607F /* LocationObserver */,
 				58219EE41B38A21F00A9541A /* Server APIs */,
 				58219EE31B38A21900A9541A /* Utilities */,
@@ -230,6 +241,8 @@
 		58219EE51B38A22F00A9541A /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				58A91F351B3A91980032607F /* GiftCard */,
+				58A91F341B3A918F0032607F /* Profile */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -237,6 +250,7 @@
 		58219EE61B38A23400A9541A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				58A91F401B3A99470032607F /* RoundedImageView */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -466,6 +480,49 @@
 				58A91F321B3A823D0032607F /* BZRLocationObserver.m */,
 			);
 			name = LocationObserver;
+			sourceTree = "<group>";
+		};
+		58A91F341B3A918F0032607F /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				58A91F361B3A91CA0032607F /* BZRUserProfile.h */,
+				58A91F371B3A91CA0032607F /* BZRUserProfile.m */,
+			);
+			name = Profile;
+			sourceTree = "<group>";
+		};
+		58A91F351B3A91980032607F /* GiftCard */ = {
+			isa = PBXGroup;
+			children = (
+				58A91F391B3A91E20032607F /* BZRGiftCard.h */,
+				58A91F3A1B3A91E20032607F /* BZRGiftCard.m */,
+			);
+			name = GiftCard;
+			sourceTree = "<group>";
+		};
+		58A91F3D1B3A932F0032607F /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				58A91F3E1B3A93400032607F /* Mapping */,
+			);
+			name = Protocols;
+			sourceTree = "<group>";
+		};
+		58A91F3E1B3A93400032607F /* Mapping */ = {
+			isa = PBXGroup;
+			children = (
+				58A91F3F1B3A937B0032607F /* BZRMappingProtocol.h */,
+			);
+			name = Mapping;
+			sourceTree = "<group>";
+		};
+		58A91F401B3A99470032607F /* RoundedImageView */ = {
+			isa = PBXGroup;
+			children = (
+				58A91F411B3A995F0032607F /* BZRRoundedImageView.h */,
+				58A91F421B3A995F0032607F /* BZRRoundedImageView.m */,
+			);
+			name = RoundedImageView;
 			sourceTree = "<group>";
 		};
 		58ACC05F1B3932840081E546 /* TutorialViewControllers */ = {
@@ -738,8 +795,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				58A91F3B1B3A91E20032607F /* BZRGiftCard.m in Sources */,
 				58ACC08F1B39AD490081E546 /* BZRDashboardController.m in Sources */,
+				58A91F431B3A995F0032607F /* BZRRoundedImageView.m in Sources */,
 				58219F0D1B38A38600A9541A /* UIView+MakeFromXib.m in Sources */,
+				58A91F381B3A91CA0032607F /* BZRUserProfile.m in Sources */,
 				58ACC0841B3968BF0081E546 /* BZRChooseSignUpTypeController.m in Sources */,
 				58B574E11B38AE200083A80A /* KeychainItemWrapper.m in Sources */,
 				58ACC06A1B3937010081E546 /* BZRPageContentController.m in Sources */,

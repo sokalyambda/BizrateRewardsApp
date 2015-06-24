@@ -16,6 +16,8 @@
 
 @implementation BZRDataManager
 
+#pragma mark - Lifecycle
+
 + (BZRDataManager *)sharedInstance
 {
     static BZRDataManager *singletonObject = nil;
@@ -36,6 +38,16 @@
         _network = [BZRNetworkManager new];
     }
     return self;
+}
+
+#pragma mark - Requests
+
+- (void)signInWithUserName:(NSString *)userName password:(NSString *)password withResult:(SuccessBlock)result
+{
+    [self.network signInWithUserName:userName password:password withResult:^(BOOL success, BZRUserProfile *userProfile, NSError *error) {
+        _userProfile = userProfile;
+        return result(success, error);
+    }];
 }
 
 @end

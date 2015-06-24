@@ -26,5 +26,16 @@ NSString *const baseURLString = @"http://mobileapp.vacs.hu.opel.dwt.carusselgrou
 
 #pragma mark - SignIn
 
+- (void)signInWithUserName:(NSString *)userName password:(NSString *)password withResult:(UserProfileBlock)result
+{
+    NSDictionary *parameter = @{@"" : userName,
+                                @"" : password};
+    [self POST:@"" parameters:parameter success:^(NSURLSessionDataTask *task, id responseObject) {
+        BZRUserProfile *userProfile = [[BZRUserProfile alloc] initWithServerResponse:responseObject];
+        return result(YES, userProfile, nil);
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        return result(NO, nil, error);
+    }];
+}
 
 @end
