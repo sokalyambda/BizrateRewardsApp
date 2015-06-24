@@ -266,7 +266,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nvt-6b-cVK" userLabel="User Data Holder">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                                 <subviews>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Im9-4f-eI7" userLabel="User Icon">
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Im9-4f-eI7" userLabel="User Icon" customClass="BZRRoundedImageView">
                                                         <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="80" id="K7g-69-qJo"/>
@@ -736,6 +736,9 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="400" height="850"/>
+                    <connections>
+                        <outlet property="userAvatar" destination="Im9-4f-eI7" id="T58-6A-IRH"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qgM-dU-fBi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -837,7 +840,6 @@
                                                 </variation>
                                                 <connections>
                                                     <action selector="signInClick:" destination="AFG-jK-mMj" eventType="touchUpInside" id="DB7-H2-xb2"/>
-                                                    <segue destination="8nJ-jh-bXm" kind="show" id="9ZY-Mu-AHS"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Wy-cA-C19" userLabel="SignIn with Facebook Button">
@@ -1221,6 +1223,7 @@
                         <outlet property="passwordField" destination="QPu-Yg-UNs" id="ePl-xC-cMC"/>
                         <outlet property="scrollView" destination="nrb-am-Wxi" id="dYW-at-S93"/>
                         <outlet property="userNameField" destination="CUZ-To-o88" id="gPx-hJ-yFh"/>
+                        <segue destination="8nJ-jh-bXm" kind="show" identifier="dashboardSegue" id="Q8N-sW-XsB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S2t-sY-Sxl" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1268,27 +1271,6 @@
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="First name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rHQ-H4-Bc3" userLabel="First name Field">
-                                                <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="50" id="cDH-XZ-UBS"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                                <variation key="default">
-                                                    <mask key="constraints">
-                                                        <exclude reference="cDH-XZ-UBS"/>
-                                                    </mask>
-                                                </variation>
-                                                <variation key="heightClass=regular-widthClass=compact">
-                                                    <mask key="constraints">
-                                                        <include reference="cDH-XZ-UBS"/>
-                                                    </mask>
-                                                </variation>
-                                                <connections>
-                                                    <outlet property="delegate" destination="25h-nv-K7N" id="boi-Ta-HbH"/>
-                                                </connections>
-                                            </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Last name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jNZ-QB-c6x" userLabel="Last name Field">
                                                 <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
                                                 <constraints>
@@ -1481,6 +1463,27 @@
                                                     <segue destination="91g-M1-rmL" kind="show" id="Sas-DR-K95"/>
                                                 </connections>
                                             </button>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="First name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rHQ-H4-Bc3" userLabel="First name Field">
+                                                <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="cDH-XZ-UBS"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                                <variation key="default">
+                                                    <mask key="constraints">
+                                                        <exclude reference="cDH-XZ-UBS"/>
+                                                    </mask>
+                                                </variation>
+                                                <variation key="heightClass=regular-widthClass=compact">
+                                                    <mask key="constraints">
+                                                        <include reference="cDH-XZ-UBS"/>
+                                                    </mask>
+                                                </variation>
+                                                <connections>
+                                                    <outlet property="delegate" destination="25h-nv-K7N" id="boi-Ta-HbH"/>
+                                                </connections>
+                                            </textField>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -1520,13 +1523,13 @@
                                             <mask key="subviews">
                                                 <exclude reference="jQt-ZF-fAe"/>
                                                 <exclude reference="C5Y-Zc-pOj"/>
-                                                <exclude reference="rHQ-H4-Bc3"/>
                                                 <exclude reference="jNZ-QB-c6x"/>
                                                 <exclude reference="m9D-Fh-S9F"/>
                                                 <exclude reference="HHf-8U-4hf"/>
                                                 <exclude reference="EUb-db-MYr"/>
                                                 <exclude reference="S0U-Tt-ZdX"/>
                                                 <exclude reference="rZC-O3-xp7"/>
+                                                <exclude reference="rHQ-H4-Bc3"/>
                                             </mask>
                                             <mask key="constraints">
                                                 <exclude reference="5oa-zr-Xmb"/>
@@ -1562,13 +1565,13 @@
                                             <mask key="subviews">
                                                 <include reference="jQt-ZF-fAe"/>
                                                 <include reference="C5Y-Zc-pOj"/>
-                                                <include reference="rHQ-H4-Bc3"/>
                                                 <include reference="jNZ-QB-c6x"/>
                                                 <include reference="m9D-Fh-S9F"/>
                                                 <include reference="HHf-8U-4hf"/>
                                                 <include reference="EUb-db-MYr"/>
                                                 <include reference="S0U-Tt-ZdX"/>
                                                 <include reference="rZC-O3-xp7"/>
+                                                <include reference="rHQ-H4-Bc3"/>
                                             </mask>
                                             <mask key="constraints">
                                                 <include reference="5oa-zr-Xmb"/>

@@ -57,7 +57,7 @@ NSString *const baseURLString = @"http://mobileapp.vacs.hu.opel.dwt.carusselgrou
     }];
 }
 
-- (void)signInWithFacebookWithResult:(SuccessBlock)result
+- (void)signInWithFacebookWithResult:(UserProfileBlock)result
 {
     [self.loginManager logInWithReadPermissions:@[@"public_profile", @"email"] handler:^(FBSDKLoginManagerLoginResult *resultBlock, NSError *error) {
         if (error) {
@@ -72,9 +72,21 @@ NSString *const baseURLString = @"http://mobileapp.vacs.hu.opel.dwt.carusselgrou
                 [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id response, NSError *error) {
                     if (error) {
                         //Error
-                        result(NO, error);
+                        result(NO, nil, error);
                     } else {
-                        result(YES, nil);
+                        NSDictionary *user = (NSDictionary *)response;
+                        NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithDictionary:@{@"facebook_id":[user valueForKey:@"id"], @"first_name":[user valueForKey:@"first_name"], @"last_name":[user valueForKey:@"last_name"]}];
+                        
+                        if ([BZRStorageManager sharedStorage].deviceToken) {
+                            [parameters setValue:[BZRStorageManager sharedStorage].deviceToken forKey:@"deviceToken"];
+                        }
+#warning for testing only!
+                        BZRUserProfile *userProfile = [[BZRUserProfile alloc] init];
+                        
+                        NSURL *userImageURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?width=200", [user valueForKey:@"id"]]];
+                        
+                        userProfile.avatarURL = userImageURL;
+                        return result(YES, userProfile, nil);
                     }
                 }];
             }
@@ -96,6 +108,7 @@ NSString *const baseURLString = @"http://mobileapp.vacs.hu.opel.dwt.carusselgrou
 
 - (void)signUpWithFacebookWithResult:(UserProfileBlock)result
 {
+    WEAK_SELF;
     [self.loginManager logInWithReadPermissions:@[@"public_profile", @"email"] handler:^(FBSDKLoginManagerLoginResult *resultBlock, NSError *error) {
         if (error) {
             // Process error
@@ -120,7 +133,18 @@ NSString *const baseURLString = @"http://mobileapp.vacs.hu.opel.dwt.carusselgrou
                         [self POST:@"" parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
                             BZRUserProfile *userProfile = [[BZRUserProfile alloc] initWithServerResponse:responseObject];
                             
-//                            NSString* avatarBase64 = [UIImage base64ImageFromURLString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?width=200", [user valueForKey:@"id"]]];
+                            NSURL *userImageURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?width=200", [user valueForKey:@"id"]]];
+                            
+                            userProfile.avatarURL = userImageURL;
+                            /*
+                            SDWebImageDownloader *downloader = [[SDWebImageDownloader alloc] init];
+                            
+                            [downloader downloadImageWithURL:userImageURL options:SDWebImageDownloaderHighPriority progress:nil completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
+                                [weakSelf postImage:image withID:[[user valueForKey:@"id"] integerValue] result:^(BOOL success, UIImage *image) {
+                                    
+                                }];
+                            }];
+                             */
                             
                             return result(YES, userProfile, nil);
                         } failure:^(NSURLSessionDataTask *task, NSError *error) {
@@ -130,6 +154,22 @@ NSString *const baseURLString = @"http://mobileapp.vacs.hu.opel.dwt.carusselgrou
                 }];
             }
         }
+    }];
+}
+
+//post image
+
+- (void)postImage:(UIImage *)image withID:(NSInteger)ID result:(ImageUserBlock)result
+{
+    NSDictionary *parameters = @{@"userId" : @(ID)};
+    NSData *imageData = UIImageJPEGRepresentation(image, 0.5);
+    
+    [self POST:@"" parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        [formData appendPartWithFileData:imageData name:@"file" fileName:@"photo.jpg" mimeType:@"image/jpeg"];
+    } success:^(NSURLSessionDataTask *task, id responseObject) {
+        return result(YES, responseObject);
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        return result(NO, nil);
     }];
 }
 

@@ -21,6 +21,16 @@ typedef enum : NSUInteger {
 
 @implementation BZRBaseAuthController
 
+#pragma mark - Accessors
+
+- (BZRValidator *)validator
+{
+    if (!_validator) {
+        _validator = [BZRValidator sharedValidator];
+    }
+    return _validator;
+}
+
 #pragma mark - View Lifecycle
 
 - (void)viewDidLoad

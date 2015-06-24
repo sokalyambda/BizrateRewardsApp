@@ -12,6 +12,7 @@
 
 typedef void(^SuccessBlock)(BOOL success, NSError *error);
 typedef void(^UserProfileBlock)(BOOL success, BZRUserProfile *userProfile, NSError *error);
+typedef void(^ImageUserBlock)(BOOL success, UIImage *image);
 
 @interface BZRNetworkManager : AFHTTPSessionManager
 
@@ -19,7 +20,10 @@ typedef void(^UserProfileBlock)(BOOL success, BZRUserProfile *userProfile, NSErr
 - (void)signInWithUserName:(NSString *)userName password:(NSString *)password withResult:(UserProfileBlock)result;
 - (void)signUpWithUserName:(NSString *)userName password:(NSString *)password withResult:(UserProfileBlock)result;
 
-- (void)signInWithFacebookWithResult:(SuccessBlock)result;
+- (void)signInWithFacebookWithResult:(UserProfileBlock)result;
 - (void)signUpWithFacebookWithResult:(UserProfileBlock)result;
+
+//post image
+- (void)postImage:(UIImage *)image withID:(NSInteger)ID result:(ImageUserBlock)result;
 
 @end

@@ -64,7 +64,9 @@
 
 - (void)signInWithFacebookWithResult:(SuccessBlock)result
 {
-    [self.network signInWithFacebookWithResult:^(BOOL success, NSError *error) {
+    WEAK_SELF;
+    [self.network signInWithFacebookWithResult:^(BOOL success, BZRUserProfile *userProfile, NSError *error) {
+        weakSelf.storage.currentProfile = userProfile;
         result(success, error);
     }];
 }
