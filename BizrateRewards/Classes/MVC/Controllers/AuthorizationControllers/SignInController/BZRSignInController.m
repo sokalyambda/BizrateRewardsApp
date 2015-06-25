@@ -86,4 +86,8 @@ static NSString *const kDashboardSegueIdentifier = @"dashboardSegue";
     
 }
 
+- (IBAction)forgotPasswordClick:(id)sender
+{
+}
+
 @end

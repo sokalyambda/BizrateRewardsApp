@@ -9,7 +9,7 @@
 #import "BZRNetworkManager.h"
 #import "BZRStorageManager.h"
 
-NSString *const baseURLString = @"http://mobileapp.vacs.hu.opel.dwt.carusselgroup.com";
+NSString *const baseURLString = @"https://api.bizraterewards.com/v1";
 
 @interface BZRNetworkManager ()
 
@@ -47,9 +47,9 @@ NSString *const baseURLString = @"http://mobileapp.vacs.hu.opel.dwt.carusselgrou
 
 - (void)signInWithUserName:(NSString *)userName password:(NSString *)password withResult:(UserProfileBlock)result
 {
-    NSDictionary *parameter = @{@"" : userName,
-                                @"" : password};
-    [self POST:@"" parameters:parameter success:^(NSURLSessionDataTask *task, id responseObject) {
+    NSDictionary *parameter = @{@"username" : userName,
+                                @"password" : password};
+    [self POST:@"/oauth2/token" parameters:parameter success:^(NSURLSessionDataTask *task, id responseObject) {
         BZRUserProfile *userProfile = [[BZRUserProfile alloc] initWithServerResponse:responseObject];
         return result(YES, userProfile, nil);
     } failure:^(NSURLSessionDataTask *task, NSError *error) {

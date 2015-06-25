@@ -8,6 +8,8 @@
 
 #import "BZRChooseSignUpTypeController.h"
 
+static NSString *const kSignUpWithEmailSegueIdentifier = @"signUpWithEmailSegue";
+
 @interface BZRChooseSignUpTypeController ()
 
 @end
@@ -19,6 +21,17 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+}
+
+#pragma mark - Actions
+
+- (IBAction)signUpWithFacebookClick:(id)sender
+{
+}
+
+- (IBAction)signUpWithEmailClick:(id)sender
+{
+    [self performSegueWithIdentifier:kSignUpWithEmailSegueIdentifier sender:self];
 }
 
 @end
