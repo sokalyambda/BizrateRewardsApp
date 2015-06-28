@@ -87,13 +87,6 @@ static NSString *const kClientSecretKey = @"8a9da763-9503-4093-82c2-6b22b8eb9a12
     }];
 }
 
-- (void)signInWithFacebookWithResult:(UserProfileBlock)result
-{
-    [self signUpWithFacebookWithResult:^(BOOL success, BZRUserProfile *userProfile, NSError *error) {
-        result(success, userProfile, error);
-    }];
-}
-
 - (void)signUpWithUserFirstName:(NSString *)firstName andUserLastName:(NSString *)lastName andEmail:(NSString *)email withResult:(SuccessBlock)result
 {
 //    NSDictionary *parameter = @{@"firstname" : firstName,
@@ -109,10 +102,10 @@ static NSString *const kClientSecretKey = @"8a9da763-9503-4093-82c2-6b22b8eb9a12
     }];
 }
 
-- (void)signUpWithFacebookWithResult:(UserProfileBlock)result
+- (void)authorizeWithFacebookWithResult:(UserProfileBlock)result
 {
     WEAK_SELF;
-    [self tryLoginWithSocialNetworksOnSuccess:^(BOOL success, NSDictionary *facebookProfile, NSString *faceBookAccessToken, NSError *error) {
+    [self tryLoginWithFacebookOnSuccess:^(BOOL success, NSDictionary *facebookProfile, NSString *faceBookAccessToken, NSError *error) {
         [weakSelf POST:@"user/facebook" parameters:@{@"fb_access_token" : faceBookAccessToken} success:^(NSURLSessionDataTask *task, id responseObject) {
             
             BZRUserProfile *userProfile = [[BZRUserProfile alloc] initWithServerResponse:responseObject];
@@ -138,7 +131,7 @@ static NSString *const kClientSecretKey = @"8a9da763-9503-4093-82c2-6b22b8eb9a12
     }];
 }
 
-- (void)tryLoginWithSocialNetworksOnSuccess:(FacebookProfileBlock)completion
+- (void)tryLoginWithFacebookOnSuccess:(FacebookProfileBlock)completion
 {
     WEAK_SELF;
     [self.loginManager logInWithReadPermissions:@[@"public_profile", @"email"] handler:^(FBSDKLoginManagerLoginResult *resultBlock, NSError *error) {

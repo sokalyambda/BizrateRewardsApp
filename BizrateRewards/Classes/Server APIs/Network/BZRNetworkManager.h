@@ -27,8 +27,7 @@ typedef void(^ImageUserBlock)(BOOL success, UIImage *image);
 - (void)signInWithUserName:(NSString *)userName password:(NSString *)password withResult:(SuccessTokenBlock)result;
 - (void)signUpWithUserFirstName:(NSString *)firstName andUserLastName:(NSString *)lastName andEmail:(NSString *)email withResult:(SuccessBlock)result;
 
-- (void)signInWithFacebookWithResult:(UserProfileBlock)result;
-- (void)signUpWithFacebookWithResult:(UserProfileBlock)result;
+- (void)authorizeWithFacebookWithResult:(UserProfileBlock)result;
 
 //post image
 - (void)postImage:(UIImage *)image withID:(NSInteger)ID result:(ImageUserBlock)result;

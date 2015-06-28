@@ -81,21 +81,12 @@
     }];
 }
 
-- (void)signInWithFacebookWithResult:(SuccessBlock)result
+- (void)authorizeWithFacebookWithResult:(SuccessBlock)result
 {
     WEAK_SELF;
-    [self.network signInWithFacebookWithResult:^(BOOL success, BZRUserProfile *userProfile, NSError *error) {
+    [self.network authorizeWithFacebookWithResult:^(BOOL success, BZRUserProfile *userProfile, NSError *error) {
         weakSelf.storage.currentProfile = userProfile;
         result(success, error);
-    }];
-}
-
-- (void)signUpWithFacebookWithResult:(SuccessBlock)result
-{
-    WEAK_SELF;
-    [self.network signUpWithFacebookWithResult:^(BOOL success, BZRUserProfile *userProfile, NSError *error) {
-        weakSelf.storage.currentProfile = userProfile;
-        return result(success, error);
     }];
 }
 
@@ -107,8 +98,6 @@
     
     [self.network.requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@", token.accessToken] forHTTPHeaderField:@"Authorization"];
 }
-
-#pragma mark - Public methods
 
 - (BOOL)isSessionValid
 {

@@ -53,7 +53,7 @@ static NSString *const kDashboardSegueIdentifier = @"dashboardSegue";
 {
     WEAK_SELF;
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [self.dataManager signInWithFacebookWithResult:^(BOOL success, NSError *error) {
+    [self.dataManager authorizeWithFacebookWithResult:^(BOOL success, NSError *error) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         if (success) {
             [weakSelf performSegueWithIdentifier:kDashboardSegueIdentifier sender:weakSelf];
