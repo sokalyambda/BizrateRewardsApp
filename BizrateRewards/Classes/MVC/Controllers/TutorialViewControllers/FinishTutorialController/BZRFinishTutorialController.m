@@ -1,26 +1,24 @@
 //
-//  BZRTutorialViewController.m
+//  BZRFinishTutorialController.m
 //  BizrateRewards
 //
-//  Created by Eugenity on 23.06.15.
+//  Created by Eugenity on 27.06.15.
 //  Copyright (c) 2015 ThinkMobiles. All rights reserved.
 //
 
-#import "BZRBaseTutorialController.h"
-#import "BZRStartTutorialController.h"
+#import "BZRFinishTutorialController.h"
 
-@interface BZRBaseTutorialController ()
+@interface BZRFinishTutorialController ()
 
 @end
 
-@implementation BZRBaseTutorialController
+@implementation BZRFinishTutorialController
 
 #pragma mark - View Lifecycle
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self performSegueWithIdentifier:@"startTutorialSegue" sender:self];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -32,9 +30,7 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-//    [self.navigationController setNavigationBarHidden:NO];
+    [self.navigationController setNavigationBarHidden:NO];
 }
-
-#pragma mark - Actions
 
 @end

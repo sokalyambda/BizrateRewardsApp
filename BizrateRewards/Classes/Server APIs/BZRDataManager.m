@@ -44,20 +44,39 @@
 
 #pragma mark - Requests
 
+- (void)getClientCredentialsOnSuccess:(SuccessBlock)completion
+{
+    WEAK_SELF;
+    if (![self isSessionValid]) {
+        [self.network getClientCredentialsOnCompletion:^(BOOL success, BZRToken *token, NSError *error) {
+            [weakSelf setupTokenAndAddAuthHeader:token];
+            if (success) {
+                completion(YES, nil);
+            } else {
+                completion(NO, error);
+            }
+        }];
+    } else {
+        
+    }
+    
+}
+
 - (void)signInWithUserName:(NSString *)userName password:(NSString *)password withResult:(SuccessBlock)result
 {
     WEAK_SELF;
-    [self.network signInWithUserName:userName password:password withResult:^(BOOL success, BZRUserProfile *userProfile, NSError *error) {
-        weakSelf.storage.currentProfile = userProfile;
+    [self.network signInWithUserName:userName password:password withResult:^(BOOL success, BZRToken *token, NSError *error) {
+        if (success) {
+            [weakSelf setupTokenAndAddAuthHeader:token];
+        }
         return result(success, error);
     }];
 }
 
-- (void)signUpWithUserName:(NSString *)userName password:(NSString *)password withResult:(SuccessBlock)result
+- (void)signUpWithUserFirstName:(NSString *)firstName andUserLastName:(NSString *)lastName andEmail:(NSString *)email withResult:(SuccessBlock)result
 {
     WEAK_SELF;
-    [self.network signUpWithUserName:userName password:password withResult:^(BOOL success, BZRUserProfile *userProfile, NSError *error) {
-        weakSelf.storage.currentProfile = userProfile;
+    [self.network signUpWithUserFirstName:firstName andUserLastName:lastName andEmail:email withResult:^(BOOL success, NSError *error) {
         return result(success, error);
     }];
 }
@@ -79,5 +98,28 @@
         return result(success, error);
     }];
 }
+
+#pragma mark - Private methods
+
+- (void)setupTokenAndAddAuthHeader:(BZRToken *)token
+{
+    self.storage.token = token;
+    
+    [self.network.requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@", token.accessToken] forHTTPHeaderField:@"Authorization"];
+}
+
+#pragma mark - Public methods
+
+- (BOOL)isSessionValid
+{
+    NSString *accessToken       = self.storage.token.accessToken;
+    NSDate *tokenExpirationDate = self.storage.token.expirationDate;
+    
+    if (accessToken.length && ([[NSDate date] compare:tokenExpirationDate] == NSOrderedAscending)) {
+        return YES;
+    }
+    return NO;
+}
+
 
 @end

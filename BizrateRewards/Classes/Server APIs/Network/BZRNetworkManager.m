@@ -9,7 +9,11 @@
 #import "BZRNetworkManager.h"
 #import "BZRStorageManager.h"
 
-NSString *const baseURLString = @"https://api.bizraterewards.com/v1";
+static NSString *const kBaseURLString = @"https://api.bizraterewards.com/v1/";
+
+static NSString *const kClientIdKey = @"92196543-9462-4b90-915a-738c9b4b558f";
+
+static NSString *const kClientSecretKey = @"8a9da763-9503-4093-82c2-6b22b8eb9a12";
 
 @interface BZRNetworkManager ()
 
@@ -33,7 +37,7 @@ NSString *const baseURLString = @"https://api.bizraterewards.com/v1";
 
 - (instancetype)init
 {
-    NSURL *baseURL = [NSURL URLWithString:baseURLString];
+    NSURL *baseURL = [NSURL URLWithString:kBaseURLString];
     self = [super initWithBaseURL:baseURL];
     if (self) {
         self.requestSerializer = [AFHTTPRequestSerializer serializer];
@@ -45,13 +49,39 @@ NSString *const baseURLString = @"https://api.bizraterewards.com/v1";
 
 #pragma mark - SignIn
 
-- (void)signInWithUserName:(NSString *)userName password:(NSString *)password withResult:(UserProfileBlock)result
+- (void)getClientCredentialsOnCompletion:(SuccessTokenBlock)completion
 {
-    NSDictionary *parameter = @{@"username" : userName,
-                                @"password" : password};
-    [self POST:@"/oauth2/token" parameters:parameter success:^(NSURLSessionDataTask *task, id responseObject) {
-        BZRUserProfile *userProfile = [[BZRUserProfile alloc] initWithServerResponse:responseObject];
-        return result(YES, userProfile, nil);
+    [self POST:@"oauth/token" parameters:@{@"grant_type" : GrantTypeClientCredentials,
+                                           
+                                           @"client_id" : kClientIdKey,
+                                           
+                                           @"client_secret" : kClientSecretKey
+                                           } success:^(NSURLSessionDataTask *task, id responseObject) {
+                                               
+                                               BZRToken *token = [[BZRToken alloc] initWithServerResponse:responseObject];
+                                               completion(YES, token, nil);
+                                               
+                                           } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                               NSData *errorData = error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey];
+                                               NSString *errorString = [[NSString alloc] initWithData:errorData encoding:NSUTF8StringEncoding];
+                                               NSLog(@"error %@", errorString);
+                                               completion(NO, nil, error);
+                                           }];
+}
+
+- (void)signInWithUserName:(NSString *)userName password:(NSString *)password withResult:(SuccessTokenBlock)result
+{
+
+    NSDictionary *parameter = @{@"username" : @"john.doe@mailinator.com",
+                                @"password" : @"12345",
+                                @"grant_type" : GrantTypePassword,
+                                @"client_id" : kClientIdKey,
+                                @"client_secret" : kClientSecretKey};
+    [self POST:@"oauth/token" parameters:parameter success:^(NSURLSessionDataTask *task, id responseObject) {
+        
+        BZRToken *token = [[BZRToken alloc] initWithServerResponse:responseObject];
+        
+        return result(YES, token, nil);
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         return result(NO, nil, error);
     }];
@@ -59,54 +89,56 @@ NSString *const baseURLString = @"https://api.bizraterewards.com/v1";
 
 - (void)signInWithFacebookWithResult:(UserProfileBlock)result
 {
-    [self.loginManager logInWithReadPermissions:@[@"public_profile", @"email"] handler:^(FBSDKLoginManagerLoginResult *resultBlock, NSError *error) {
-        if (error) {
-            // Process error
-        } else if (resultBlock.isCancelled) {
-            // Handle cancellations
-        } else {
-            // If you ask for multiple permissions at once, you
-            // should check if specific permissions missing
-            if ([resultBlock.grantedPermissions containsObject:@"email"] && [resultBlock.grantedPermissions containsObject:@"public_profile"]) {
-                FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:nil HTTPMethod:@"GET"];
-                [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id response, NSError *error) {
-                    if (error) {
-                        //Error
-                        result(NO, nil, error);
-                    } else {
-                        NSDictionary *user = (NSDictionary *)response;
-                        NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithDictionary:@{@"facebook_id":[user valueForKey:@"id"], @"first_name":[user valueForKey:@"first_name"], @"last_name":[user valueForKey:@"last_name"]}];
-                        
-                        if ([BZRStorageManager sharedStorage].deviceToken) {
-                            [parameters setValue:[BZRStorageManager sharedStorage].deviceToken forKey:@"deviceToken"];
-                        }
-#warning for testing only!
-                        BZRUserProfile *userProfile = [[BZRUserProfile alloc] init];
-                        
-                        NSURL *userImageURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?width=200", [user valueForKey:@"id"]]];
-                        
-                        userProfile.avatarURL = userImageURL;
-                        return result(YES, userProfile, nil);
-                    }
-                }];
-            }
-        }
+    [self signUpWithFacebookWithResult:^(BOOL success, BZRUserProfile *userProfile, NSError *error) {
+        result(success, userProfile, error);
     }];
 }
 
-- (void)signUpWithUserName:(NSString *)userName password:(NSString *)password withResult:(UserProfileBlock)result
+- (void)signUpWithUserFirstName:(NSString *)firstName andUserLastName:(NSString *)lastName andEmail:(NSString *)email withResult:(SuccessBlock)result
 {
-    NSDictionary *parameter = @{@"" : userName,
-                                @"" : password};
-    [self POST:@"" parameters:parameter success:^(NSURLSessionDataTask *task, id responseObject) {
-        BZRUserProfile *userProfile = [[BZRUserProfile alloc] initWithServerResponse:responseObject];
-        return result(YES, userProfile, nil);
+//    NSDictionary *parameter = @{@"firstname" : firstName,
+//                                @"lastName" : lastName,
+//                                @"email" : email};
+    
+    WEAK_SELF;
+    [weakSelf POST:@"user" parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        
+        return result(YES, nil);
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        return result(NO, nil, error);
+        return result(NO, error);
     }];
 }
 
 - (void)signUpWithFacebookWithResult:(UserProfileBlock)result
+{
+    WEAK_SELF;
+    [self tryLoginWithSocialNetworksOnSuccess:^(BOOL success, NSDictionary *facebookProfile, NSString *faceBookAccessToken, NSError *error) {
+        [weakSelf POST:@"user/facebook" parameters:@{@"fb_access_token" : faceBookAccessToken} success:^(NSURLSessionDataTask *task, id responseObject) {
+            
+            BZRUserProfile *userProfile = [[BZRUserProfile alloc] initWithServerResponse:responseObject];
+            
+            NSURL *userImageURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?width=200", [facebookProfile valueForKey:@"id"]]];
+            
+            userProfile.avatarURL = userImageURL;
+            
+            return result(YES, userProfile, nil);
+        } failure:^(NSURLSessionDataTask *task, NSError *error) {
+            return result(NO, nil, error);
+        }];
+    }];
+}
+
+- (void)getCurrentUserWithCompletion:(UserProfileBlock)completion
+{
+    [self GET:@"user/me" parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        BZRUserProfile *currentUserProfile = [[BZRUserProfile alloc] initWithServerResponse:responseObject];
+        completion(YES, currentUserProfile, nil);
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        completion(NO, nil, error);
+    }];
+}
+
+- (void)tryLoginWithSocialNetworksOnSuccess:(FacebookProfileBlock)completion
 {
     WEAK_SELF;
     [self.loginManager logInWithReadPermissions:@[@"public_profile", @"email"] handler:^(FBSDKLoginManagerLoginResult *resultBlock, NSError *error) {
@@ -121,35 +153,15 @@ NSString *const baseURLString = @"https://api.bizraterewards.com/v1";
                 FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:nil HTTPMethod:@"GET"];
                 [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id response, NSError *error) {
                     if (error) {
+                        completion(NO, nil, nil, error);
                         //Error
                     } else {
                         NSDictionary *user = (NSDictionary *)response;
-                        NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithDictionary:@{@"facebook_id":[user valueForKey:@"id"], @"first_name":[user valueForKey:@"first_name"], @"last_name":[user valueForKey:@"last_name"]}];
+//                        NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithDictionary:@{@"facebook_id":[user valueForKey:@"id"], @"first_name":[user valueForKey:@"first_name"], @"last_name":[user valueForKey:@"last_name"]}];
                         
-                        if ([BZRStorageManager sharedStorage].deviceToken) {
-                            [parameters setValue:[BZRStorageManager sharedStorage].deviceToken forKey:@"deviceToken"];
-                        }
-                        
-                        [self POST:@"" parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
-                            BZRUserProfile *userProfile = [[BZRUserProfile alloc] initWithServerResponse:responseObject];
-                            
-                            NSURL *userImageURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?width=200", [user valueForKey:@"id"]]];
-                            
-                            userProfile.avatarURL = userImageURL;
-                            /*
-                            SDWebImageDownloader *downloader = [[SDWebImageDownloader alloc] init];
-                            
-                            [downloader downloadImageWithURL:userImageURL options:SDWebImageDownloaderHighPriority progress:nil completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
-                                [weakSelf postImage:image withID:[[user valueForKey:@"id"] integerValue] result:^(BOOL success, UIImage *image) {
-                                    
-                                }];
-                            }];
-                             */
-                            
-                            return result(YES, userProfile, nil);
-                        } failure:^(NSURLSessionDataTask *task, NSError *error) {
-                            return result(NO, nil, error);
-                        }];
+                        NSString *fbAccessToken = [FBSDKAccessToken currentAccessToken].tokenString;
+                        completion(YES, user, fbAccessToken, nil);
+
                     }
                 }];
             }
@@ -172,5 +184,6 @@ NSString *const baseURLString = @"https://api.bizraterewards.com/v1";
         return result(NO, nil);
     }];
 }
+
 
 @end

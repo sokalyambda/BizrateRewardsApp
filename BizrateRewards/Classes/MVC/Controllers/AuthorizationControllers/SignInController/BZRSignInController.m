@@ -66,8 +66,9 @@ static NSString *const kDashboardSegueIdentifier = @"dashboardSegue";
 {
     WEAK_SELF;
     if ([self.validator validateEmailField:self.userNameField andPasswordField:self.passwordField]) {
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         [self.dataManager signInWithUserName:self.userNameField.text password:self.passwordField.text withResult:^(BOOL success, NSError *error) {
-            
+            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
             if (!success) {
                 ShowErrorAlert(error);
             } else {
@@ -78,12 +79,11 @@ static NSString *const kDashboardSegueIdentifier = @"dashboardSegue";
         ShowAlert(self.validator.validationErrorString);
         [self.validator cleanValidationErrorString];
     }
-    
 }
 
 - (IBAction)rememberMeClick:(id)sender
 {
-    
+
 }
 
 - (IBAction)forgotPasswordClick:(id)sender

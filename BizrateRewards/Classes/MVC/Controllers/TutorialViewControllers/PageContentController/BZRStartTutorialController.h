@@ -6,9 +6,6 @@
 //  Copyright (c) 2015 ThinkMobiles. All rights reserved.
 //
 
-@interface BZRPageContentController : UIViewController
-
-@property (assign, nonatomic) NSInteger index;
-@property (strong, nonatomic) NSString *imageName;
+@interface BZRStartTutorialController : UIViewController
 
 @end

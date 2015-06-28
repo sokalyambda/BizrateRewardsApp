@@ -6,7 +6,11 @@
 //  Copyright (c) 2015 ThinkMobiles. All rights reserved.
 //
 
-#ifndef CarusselSalesTool_BZRApiConstants_h
-#define CarusselSalesTool_BZRApiConstants_h
+#ifndef BizrateRewards_BZRApiConstants_h
+#define BizrateRewards_BZRApiConstants_h
+
+static NSString *const GrantTypePassword = @"password";
+
+static NSString *const GrantTypeClientCredentials = @"client_credentials";
 
 #endif
