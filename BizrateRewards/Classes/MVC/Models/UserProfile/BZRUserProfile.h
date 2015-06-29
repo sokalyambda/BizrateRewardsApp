@@ -21,5 +21,7 @@
 @property (assign, nonatomic, getter=isPushNotificationsEnabled) BOOL pushNotificationsEnabled;
 @property (assign, nonatomic, getter=isGeolocationEnabled) BOOL geolocationEnabled;
 
+- (void)setCityToDefaultsForKey:(NSString *)key;
++ (BZRUserProfile *)getUserProfileFromDefaultsForKey:(NSString *)key;
 
 @end

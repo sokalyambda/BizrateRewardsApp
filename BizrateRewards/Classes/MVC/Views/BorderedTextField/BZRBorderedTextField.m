@@ -16,6 +16,12 @@ static CGFloat kLeftViewWidth = 10.f;
 
 @implementation BZRBorderedTextField
 
+ - (void)drawRect:(CGRect)rect
+{
+    [self addTopBorder];
+    [self addBottomBorder];
+}
+
 #pragma mark - Lifecycle
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
@@ -38,8 +44,6 @@ static CGFloat kLeftViewWidth = 10.f;
 
 - (void)commonInit
 {
-    [self addTopBorder];
-    [self addBottomBorder];
     [self addLeftView];
 }
 
