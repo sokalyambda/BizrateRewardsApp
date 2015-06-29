@@ -133,7 +133,6 @@ static NSString *const kClientSecretKey = @"8a9da763-9503-4093-82c2-6b22b8eb9a12
 
 - (void)tryLoginWithFacebookOnSuccess:(FacebookProfileBlock)completion
 {
-    WEAK_SELF;
     [self.loginManager logInWithReadPermissions:@[@"public_profile", @"email"] handler:^(FBSDKLoginManagerLoginResult *resultBlock, NSError *error) {
         if (error) {
             // Process error
