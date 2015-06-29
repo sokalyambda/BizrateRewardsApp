@@ -59,7 +59,6 @@
     } else {
         
     }
-    
 }
 
 - (void)signInWithUserName:(NSString *)userName password:(NSString *)password withResult:(SuccessBlock)result

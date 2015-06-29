@@ -37,6 +37,10 @@
 		58A59E341B3EE96700A5F30C /* BZREditProfileController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A59E331B3EE96700A5F30C /* BZREditProfileController.m */; };
 		58A59E381B3EE99400A5F30C /* BZRGiftCardsListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A59E371B3EE99400A5F30C /* BZRGiftCardsListController.m */; };
 		58A59E3C1B3EE9E300A5F30C /* BZRSurveyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A59E3B1B3EE9E300A5F30C /* BZRSurveyViewController.m */; };
+		58A5BEBA1B414ADC00B2BC27 /* BZRLeftImageTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A5BEB91B414ADC00B2BC27 /* BZRLeftImageTextField.m */; };
+		58A5BEBD1B414B1800B2BC27 /* BZRBorderedTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A5BEBC1B414B1800B2BC27 /* BZRBorderedTextField.m */; };
+		58A5BEC01B415C2F00B2BC27 /* BZRCheckBoxButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A5BEBF1B415C2F00B2BC27 /* BZRCheckBoxButton.m */; };
+		58A5BEC41B415C7000B2BC27 /* BZRStarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A5BEC31B415C7000B2BC27 /* BZRStarView.m */; };
 		58A91F2F1B3A80A80032607F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58A91F2E1B3A80A80032607F /* CoreLocation.framework */; };
 		58A91F331B3A823D0032607F /* BZRLocationObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A91F321B3A823D0032607F /* BZRLocationObserver.m */; };
 		58A91F3B1B3A91E20032607F /* BZRGiftCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A91F3A1B3A91E20032607F /* BZRGiftCard.m */; };
@@ -123,6 +127,14 @@
 		58A59E371B3EE99400A5F30C /* BZRGiftCardsListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRGiftCardsListController.m; path = Classes/MVC/Controllers/GiftCardsListController/BZRGiftCardsListController.m; sourceTree = "<group>"; };
 		58A59E3A1B3EE9E300A5F30C /* BZRSurveyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRSurveyViewController.h; path = Classes/MVC/Controllers/SurveyViewController/BZRSurveyViewController.h; sourceTree = "<group>"; };
 		58A59E3B1B3EE9E300A5F30C /* BZRSurveyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRSurveyViewController.m; path = Classes/MVC/Controllers/SurveyViewController/BZRSurveyViewController.m; sourceTree = "<group>"; };
+		58A5BEB81B414ADC00B2BC27 /* BZRLeftImageTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRLeftImageTextField.h; path = Classes/MVC/Views/LeftImageTextField/BZRLeftImageTextField.h; sourceTree = "<group>"; };
+		58A5BEB91B414ADC00B2BC27 /* BZRLeftImageTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRLeftImageTextField.m; path = Classes/MVC/Views/LeftImageTextField/BZRLeftImageTextField.m; sourceTree = "<group>"; };
+		58A5BEBB1B414B1800B2BC27 /* BZRBorderedTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRBorderedTextField.h; path = Classes/MVC/Views/BorderedTextField/BZRBorderedTextField.h; sourceTree = "<group>"; };
+		58A5BEBC1B414B1800B2BC27 /* BZRBorderedTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRBorderedTextField.m; path = Classes/MVC/Views/BorderedTextField/BZRBorderedTextField.m; sourceTree = "<group>"; };
+		58A5BEBE1B415C2F00B2BC27 /* BZRCheckBoxButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRCheckBoxButton.h; path = Classes/MVC/Views/CheckBoxButton/BZRCheckBoxButton.h; sourceTree = "<group>"; };
+		58A5BEBF1B415C2F00B2BC27 /* BZRCheckBoxButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRCheckBoxButton.m; path = Classes/MVC/Views/CheckBoxButton/BZRCheckBoxButton.m; sourceTree = "<group>"; };
+		58A5BEC21B415C7000B2BC27 /* BZRStarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRStarView.h; path = Classes/MVC/Views/FiveStarView/BZRStarView.h; sourceTree = "<group>"; };
+		58A5BEC31B415C7000B2BC27 /* BZRStarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRStarView.m; path = Classes/MVC/Views/FiveStarView/BZRStarView.m; sourceTree = "<group>"; };
 		58A91F2E1B3A80A80032607F /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		58A91F311B3A823D0032607F /* BZRLocationObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRLocationObserver.h; path = Classes/LocationObserver/BZRLocationObserver.h; sourceTree = "<group>"; };
 		58A91F321B3A823D0032607F /* BZRLocationObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRLocationObserver.m; path = Classes/LocationObserver/BZRLocationObserver.m; sourceTree = "<group>"; };
@@ -280,6 +292,10 @@
 		58219EE61B38A23400A9541A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				58A5BEC11B415C4B00B2BC27 /* StarView */,
+				58A5BEB71B4133E000B2BC27 /* LeftImageTextField */,
+				58A5BEB61B4133D400B2BC27 /* BorderedTextField */,
+				58A5BEB51B4133CC00B2BC27 /* CheckboxButton */,
 				58A91F401B3A99470032607F /* RoundedImageView */,
 			);
 			name = Views;
@@ -586,6 +602,42 @@
 				58A59E3B1B3EE9E300A5F30C /* BZRSurveyViewController.m */,
 			);
 			name = SurveyViewController;
+			sourceTree = "<group>";
+		};
+		58A5BEB51B4133CC00B2BC27 /* CheckboxButton */ = {
+			isa = PBXGroup;
+			children = (
+				58A5BEBE1B415C2F00B2BC27 /* BZRCheckBoxButton.h */,
+				58A5BEBF1B415C2F00B2BC27 /* BZRCheckBoxButton.m */,
+			);
+			name = CheckboxButton;
+			sourceTree = "<group>";
+		};
+		58A5BEB61B4133D400B2BC27 /* BorderedTextField */ = {
+			isa = PBXGroup;
+			children = (
+				58A5BEBB1B414B1800B2BC27 /* BZRBorderedTextField.h */,
+				58A5BEBC1B414B1800B2BC27 /* BZRBorderedTextField.m */,
+			);
+			name = BorderedTextField;
+			sourceTree = "<group>";
+		};
+		58A5BEB71B4133E000B2BC27 /* LeftImageTextField */ = {
+			isa = PBXGroup;
+			children = (
+				58A5BEB81B414ADC00B2BC27 /* BZRLeftImageTextField.h */,
+				58A5BEB91B414ADC00B2BC27 /* BZRLeftImageTextField.m */,
+			);
+			name = LeftImageTextField;
+			sourceTree = "<group>";
+		};
+		58A5BEC11B415C4B00B2BC27 /* StarView */ = {
+			isa = PBXGroup;
+			children = (
+				58A5BEC21B415C7000B2BC27 /* BZRStarView.h */,
+				58A5BEC31B415C7000B2BC27 /* BZRStarView.m */,
+			);
+			name = StarView;
 			sourceTree = "<group>";
 		};
 		58A91F301B3A821C0032607F /* LocationObserver */ = {
@@ -935,6 +987,8 @@
 				58ACC06A1B3937010081E546 /* BZRStartTutorialController.m in Sources */,
 				58A91F481B3ABE6D0032607F /* BZRStorageManager.m in Sources */,
 				58ACC06D1B3937160081E546 /* BZRBaseTutorialController.m in Sources */,
+				58A5BEBA1B414ADC00B2BC27 /* BZRLeftImageTextField.m in Sources */,
+				58A5BEC01B415C2F00B2BC27 /* BZRCheckBoxButton.m in Sources */,
 				58ACC0761B395E6A0081E546 /* BZRPrivacyAndTermsController.m in Sources */,
 				58A91F331B3A823D0032607F /* BZRLocationObserver.m in Sources */,
 				58219EF51B38A2E000A9541A /* BZRNetworkManager.m in Sources */,
@@ -944,6 +998,7 @@
 				58219F111B38A3B200A9541A /* UIImagePickerController+fixOrientation.m in Sources */,
 				58ACC0811B39689F0081E546 /* BZRSignUpController.m in Sources */,
 				58219F191B38A3F600A9541A /* NSDictionary+JSONRepresentation.m in Sources */,
+				58A5BEBD1B414B1800B2BC27 /* BZRBorderedTextField.m in Sources */,
 				58219EF91B38A2EE00A9541A /* BZRDataManager.m in Sources */,
 				58ACC08B1B39A35D0081E546 /* BZRBaseAuthController.m in Sources */,
 				58219F051B38A33E00A9541A /* UIViewController+fixOrientation.m in Sources */,
@@ -952,6 +1007,7 @@
 				58219F151B38A3D700A9541A /* NSString+ContainsString.m in Sources */,
 				58219F0A1B38A37600A9541A /* UIView+Shaking.m in Sources */,
 				58ACC0871B3968DA0081E546 /* BZRGetStartedController.m in Sources */,
+				58A5BEC41B415C7000B2BC27 /* BZRStarView.m in Sources */,
 				585813AE1B3C23840087AEE2 /* BZRSurvey.m in Sources */,
 				58A0B2151B3854CF003C100C /* main.m in Sources */,
 				58A59E281B3EE00B00A5F30C /* BZRPushNotificationsAccessController.m in Sources */,

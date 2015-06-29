@@ -89,6 +89,7 @@
     } else {
         UIRemoteNotificationType myTypes = UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound;
         [application registerForRemoteNotificationTypes:myTypes];
+    
     }
 }
 

@@ -15,6 +15,8 @@
 
 @property (strong, nonatomic) BZRToken *token;
 @property (strong, nonatomic) BZRUserProfile *currentProfile;
+
 @property (strong, nonatomic) NSString *deviceToken;
+@property (strong, nonatomic) NSString *deviceUDID;
 
 @end
