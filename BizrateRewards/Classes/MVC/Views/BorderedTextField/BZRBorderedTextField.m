@@ -64,7 +64,7 @@ static CGFloat kLeftViewWidth = 10.f;
 - (void)addBottomBorder
 {
     CALayer *topBorderLayer = [CALayer layer];
-    topBorderLayer.frame = CGRectMake(0, CGRectGetMaxY(self.frame) - 0.5f, CGRectGetWidth(self.frame), 0.5f);
+    topBorderLayer.frame = CGRectMake(0, CGRectGetHeight(self.frame) - 0.5f, CGRectGetWidth(self.frame), 0.5f);
     topBorderLayer.backgroundColor = [UIColor lightGrayColor].CGColor;
     [self.layer addSublayer:topBorderLayer];
 }

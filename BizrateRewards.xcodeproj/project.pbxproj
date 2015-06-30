@@ -57,6 +57,7 @@
 		58ACC08B1B39A35D0081E546 /* BZRBaseAuthController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ACC08A1B39A35D0081E546 /* BZRBaseAuthController.m */; };
 		58ACC08F1B39AD490081E546 /* BZRDashboardController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ACC08E1B39AD490081E546 /* BZRDashboardController.m */; };
 		58B574E11B38AE200083A80A /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B574E01B38AE200083A80A /* KeychainItemWrapper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		58F49FC91B4197B7002F93EE /* BZRPushNotifiactionService.m in Sources */ = {isa = PBXBuildFile; fileRef = 58F49FC81B4197B7002F93EE /* BZRPushNotifiactionService.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -167,6 +168,8 @@
 		58ACC08E1B39AD490081E546 /* BZRDashboardController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRDashboardController.m; path = Classes/MVC/Controllers/DashboardController/BZRDashboardController.m; sourceTree = "<group>"; };
 		58B574DF1B38AE200083A80A /* KeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KeychainItemWrapper.h; path = Classes/Utilities/KeyChain/KeychainItemWrapper.h; sourceTree = "<group>"; };
 		58B574E01B38AE200083A80A /* KeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KeychainItemWrapper.m; path = Classes/Utilities/KeyChain/KeychainItemWrapper.m; sourceTree = "<group>"; };
+		58F49FC71B4197B7002F93EE /* BZRPushNotifiactionService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRPushNotifiactionService.h; path = Classes/PushNotificationsService/BZRPushNotifiactionService.h; sourceTree = "<group>"; };
+		58F49FC81B4197B7002F93EE /* BZRPushNotifiactionService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRPushNotifiactionService.m; path = Classes/PushNotificationsService/BZRPushNotifiactionService.m; sourceTree = "<group>"; };
 		7AF1FB2A8C4A8673EF3998F1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		E535AA4CB211EDDB654D82EC /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -199,6 +202,7 @@
 		58219EDB1B38A06600A9541A /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				58F49FBF1B417F06002F93EE /* PushNotificationsService */,
 				58A91F441B3ABE480032607F /* Managers */,
 				58A91F3D1B3A932F0032607F /* Protocols */,
 				58A91F301B3A821C0032607F /* LocationObserver */,
@@ -260,6 +264,7 @@
 		58219EE31B38A21900A9541A /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				58F49FC31B4181D2002F93EE /* GlobalConstants */,
 				58219EED1B38A28600A9541A /* Validator */,
 				58219EEC1B38A27F00A9541A /* KeyChain */,
 				58219EEB1B38A27700A9541A /* AlertMessageService */,
@@ -814,6 +819,22 @@
 			name = DashboardController;
 			sourceTree = "<group>";
 		};
+		58F49FBF1B417F06002F93EE /* PushNotificationsService */ = {
+			isa = PBXGroup;
+			children = (
+				58F49FC71B4197B7002F93EE /* BZRPushNotifiactionService.h */,
+				58F49FC81B4197B7002F93EE /* BZRPushNotifiactionService.m */,
+			);
+			name = PushNotificationsService;
+			sourceTree = "<group>";
+		};
+		58F49FC31B4181D2002F93EE /* GlobalConstants */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = GlobalConstants;
+			sourceTree = "<group>";
+		};
 		D31C9EB6CC9E9EA49476A0B1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1004,6 +1025,7 @@
 				58219F051B38A33E00A9541A /* UIViewController+fixOrientation.m in Sources */,
 				58219EFC1B38A30300A9541A /* BZRValidator.m in Sources */,
 				58ACC07E1B3968830081E546 /* BZRSignInController.m in Sources */,
+				58F49FC91B4197B7002F93EE /* BZRPushNotifiactionService.m in Sources */,
 				58219F151B38A3D700A9541A /* NSString+ContainsString.m in Sources */,
 				58219F0A1B38A37600A9541A /* UIView+Shaking.m in Sources */,
 				58ACC0871B3968DA0081E546 /* BZRGetStartedController.m in Sources */,
@@ -1134,7 +1156,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BizrateRewards/BizrateRewards-Prefix.pch";
 				INFOPLIST_FILE = BizrateRewards/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -1149,7 +1171,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BizrateRewards/BizrateRewards-Prefix.pch";
 				INFOPLIST_FILE = BizrateRewards/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
