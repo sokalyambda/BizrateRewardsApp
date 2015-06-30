@@ -14,13 +14,15 @@
 
 void ShowTitleErrorAlert(NSString *title, NSError *error)
 {
-    if (error == nil)
+    if (!error) {
         return;
+    }
     
     NSMutableString *errStr = [NSMutableString stringWithString: NSLocalizedString(@"Error", nil)];
     
-    if (error.code)
-        [errStr appendFormat:@": %ld", (long)error.code];
+    if (error.code) {
+       [errStr appendFormat:@": %ld", (long)error.code];
+    }
     
     // If the user info dictionary doesn’t contain a value for NSLocalizedDescriptionKey
     // error.localizedDescription is constructed from domain and code by default

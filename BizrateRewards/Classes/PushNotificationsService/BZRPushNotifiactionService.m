@@ -1,9 +1,9 @@
 //
-//  RMPushNotifiactionServer.m
-//  PocketGuard
+//  BZRPushNotifiactionService.m
+//  BizrateRewards
 //
-//  Created by Петровский Максим on 17.10.14.
-//  Copyright (c) 2014 realme. All rights reserved.
+//  Created by Eugenity on 17.10.14.
+//  Copyright (c) 2014 thinkmobiles. All rights reserved.
 //
 
 #import "BZRPushNotifiactionService.h"
@@ -34,11 +34,13 @@
     if (token.length) {
         [BZRStorageManager sharedStorage].deviceToken = token;
     }
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:PushNotificationServiceDidSuccessAuthorizeNotification object:nil];
 }
 
 + (void)failedToRegisterForPushNotificationsWithError:(NSError *)error
 {
-    
+    [[NSNotificationCenter defaultCenter] postNotificationName:PushNotificationServiceDidFailAuthorizeNotification object:error];
 }
 
 + (BOOL)pushNotificationsEnabled

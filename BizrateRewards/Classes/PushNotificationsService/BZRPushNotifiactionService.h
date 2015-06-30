@@ -12,6 +12,7 @@
 
 + (void)recivedPushNotification:(NSDictionary*)userInfo;
 + (void)sendPushToken:(NSData*)pushToken;
+
 + (void)registeredForPushNotificationsWithToken:(NSData *)deviceToken;
 + (void)failedToRegisterForPushNotificationsWithError:(NSError *)error;
 

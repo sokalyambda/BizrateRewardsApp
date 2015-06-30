@@ -19,7 +19,21 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self addSwipeGesture];
 }
 
+#pragma mark - Actions
+
+- (void)addSwipeGesture
+{
+    UISwipeGestureRecognizer *swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeGesture:)];
+    [swipe setDirection:UISwipeGestureRecognizerDirectionLeft];
+    [self.view addGestureRecognizer:swipe];
+}
+
+- (void)handleSwipeGesture:(UISwipeGestureRecognizer *)swipe
+{
+    [self performSegueWithIdentifier:@"geolocationAccessSegueIdentifier" sender:self];
+}
 
 @end

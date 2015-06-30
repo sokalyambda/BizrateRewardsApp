@@ -119,6 +119,7 @@
 		58A4BBCC1B4270C7008F4EA7 /* BZRDatePickerHolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRDatePickerHolder.h; path = Classes/MVC/Views/DatePickerHolder/BZRDatePickerHolder.h; sourceTree = "<group>"; };
 		58A4BBCD1B4270C7008F4EA7 /* BZRDatePickerHolder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRDatePickerHolder.m; path = Classes/MVC/Views/DatePickerHolder/BZRDatePickerHolder.m; sourceTree = "<group>"; };
 		58A4BBCF1B4270D7008F4EA7 /* BZRDatePickerHolder.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = BZRDatePickerHolder.xib; path = Classes/MVC/Views/DatePickerHolder/BZRDatePickerHolder.xib; sourceTree = "<group>"; };
+		58A4BBD21B42BA14008F4EA7 /* BZRGlobalConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BZRGlobalConstants.h; sourceTree = "<group>"; };
 		58A59E231B3EDFDC00A5F30C /* BZRGeolocationAccessController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRGeolocationAccessController.h; path = Classes/MVC/Controllers/TutorialViewControllers/GeolocationAccessController/BZRGeolocationAccessController.h; sourceTree = "<group>"; };
 		58A59E241B3EDFDC00A5F30C /* BZRGeolocationAccessController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRGeolocationAccessController.m; path = Classes/MVC/Controllers/TutorialViewControllers/GeolocationAccessController/BZRGeolocationAccessController.m; sourceTree = "<group>"; };
 		58A59E261B3EE00B00A5F30C /* BZRPushNotificationsAccessController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRPushNotificationsAccessController.h; path = Classes/MVC/Controllers/PushNotificationsAccessController/BZRPushNotificationsAccessController.h; sourceTree = "<group>"; };
@@ -847,6 +848,7 @@
 		58F49FC31B4181D2002F93EE /* GlobalConstants */ = {
 			isa = PBXGroup;
 			children = (
+				58A4BBD21B42BA14008F4EA7 /* BZRGlobalConstants.h */,
 			);
 			name = GlobalConstants;
 			sourceTree = "<group>";

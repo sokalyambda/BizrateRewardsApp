@@ -6,19 +6,25 @@
 //  Copyright (c) 2015 ThinkMobiles. All rights reserved.
 //
 
-#import <CoreLocation/CoreLocation.h>
-
 #import "BZRLocationObserver.h"
+
+#import <CoreLocation/CoreLocation.h>
 
 @interface BZRLocationObserver ()<CLLocationManagerDelegate>
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) CLLocation *updatedLocation;
-@property (assign, nonatomic, getter=isAuthorized) BOOL managerAuthorized;
 
 @end
 
 @implementation BZRLocationObserver
+
+#pragma mark - Accessors
+
+- (BOOL)isAuthorized
+{
+    return [CLLocationManager authorizationStatus] == (kCLAuthorizationStatusAuthorizedAlways);
+}
 
 #pragma mark - Lifecycle
 
@@ -42,13 +48,14 @@
         }
         
         _updatedLocation = nil;
-        [_locationManager startUpdatingLocation];
+//        [_locationManager startUpdatingLocation];
         
     }
     return self;
 }
 
-+ (BZRLocationObserver*)sharedObserver {
++ (BZRLocationObserver*)sharedObserver
+{
     static BZRLocationObserver *locationObserver = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -62,13 +69,26 @@
 
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
 {
-    self.managerAuthorized = (status == kCLAuthorizationStatusAuthorizedAlways || status == kCLAuthorizationStatusAuthorizedWhenInUse) ? YES : NO;
+    if (status == kCLAuthorizationStatusAuthorizedAlways) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:LocationManagerDidSuccessAuthorizeNotification object:nil];
+    }
+    
+    if (status == kCLAuthorizationStatusDenied) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:LocationManagerDidFailAuthorizeNotification object:nil];
+    }
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
     self.updatedLocation = manager.location;
     //[self.locationManager stopUpdatingLocation];
+}
+
+#pragma mark - Public methods
+
+- (void)startUpdatingLocation
+{
+    [self.locationManager startUpdatingLocation];
 }
 
 @end

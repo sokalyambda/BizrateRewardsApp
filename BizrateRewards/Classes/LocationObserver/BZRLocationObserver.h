@@ -6,10 +6,12 @@
 //  Copyright (c) 2015 ThinkMobiles. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 @interface BZRLocationObserver : NSObject
 
 + (BZRLocationObserver *)sharedObserver;
+
+@property (assign, nonatomic, getter=isAuthorized) BOOL managerAuthorized;
+
+- (void)startUpdatingLocation;
 
 @end

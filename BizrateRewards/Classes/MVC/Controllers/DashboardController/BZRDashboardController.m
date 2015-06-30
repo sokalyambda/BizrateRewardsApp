@@ -6,7 +6,6 @@
 //  Copyright (c) 2015 ThinkMobiles. All rights reserved.
 //
 
-#import "BZRLocationObserver.h"
 #import "BZRStorageManager.h"
 
 #import "BZRDashboardController.h"
@@ -38,7 +37,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [BZRLocationObserver sharedObserver];
     [self updateUserInformation];
 }
 
