@@ -32,7 +32,7 @@ static NSString *const kFinalTutorialControllerSegueIdentifier = @"finalTutorial
 
 - (IBAction)skipThisStepClick:(id)sender
 {
-    
+    [self performSegueWithIdentifier:kFinalTutorialControllerSegueIdentifier sender:self];
 }
 
 @end

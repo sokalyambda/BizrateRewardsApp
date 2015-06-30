@@ -32,7 +32,7 @@ static NSString *const kPushNotificationsAccessSegueIdentifier = @"pushNotificat
 
 - (IBAction)skipThisStepClick:(id)sender
 {
-    
+    [self performSegueWithIdentifier:kPushNotificationsAccessSegueIdentifier sender:self];
 }
 
 @end
