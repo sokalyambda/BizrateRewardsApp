@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="13F1077" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="wip-hv-JCF">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="wip-hv-JCF">
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -261,14 +260,20 @@
                                 <state key="normal" title="Enable Geo location">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="enableGeolocaionClick:" destination="UrH-d2-IET" eventType="touchUpInside" id="h0a-Gk-qCD"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="25e-Uh-b2t">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                 <state key="normal" title="Skip this step">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="154" y="698" width="94" height="30"/>
+                                </variation>
                                 <connections>
-                                    <segue destination="KWl-WB-68k" kind="show" id="xpR-5b-oag"/>
+                                    <action selector="skipThisStepClick:" destination="UrH-d2-IET" eventType="touchUpInside" id="xo7-fr-GWi"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aLg-Ie-wjN" userLabel="Logo Image View">
@@ -338,10 +343,13 @@
                             </mask>
                         </variation>
                     </view>
+                    <connections>
+                        <segue destination="KWl-WB-68k" kind="show" identifier="pushNotificationsAccessSegue" id="bTi-fs-XJT"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qm6-kL-1cm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2452.5" y="39.75"/>
+            <point key="canvasLocation" x="2392" y="39"/>
         </scene>
         <!--Push Notifications Access Controller-->
         <scene sceneID="nR5-eE-eEo">
@@ -360,6 +368,9 @@
                                 <state key="normal" title="Enable Push Notification">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="enablePushNotificationsClick:" destination="KWl-WB-68k" eventType="touchUpInside" id="kQu-jD-E2t"/>
+                                </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GEe-CU-1Kw" userLabel="Logo Image View">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
@@ -384,7 +395,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="Ejp-dg-SjH" kind="show" id="KT1-KF-oGv"/>
+                                    <action selector="skipThisStepClick:" destination="KWl-WB-68k" eventType="touchUpInside" id="rgq-rm-IXA"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -435,6 +446,9 @@
                             </mask>
                         </variation>
                     </view>
+                    <connections>
+                        <segue destination="Ejp-dg-SjH" kind="show" identifier="finalTutorialControllerSegue" id="RgL-8b-Bao"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4zd-hV-rWy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -475,8 +489,12 @@
                         <constraints>
                             <constraint firstItem="NUV-Ac-v4T" firstAttribute="top" secondItem="PGr-1N-Hnh" secondAttribute="bottom" constant="8" id="VVB-NN-hRS"/>
                             <constraint firstAttribute="centerX" secondItem="PGr-1N-Hnh" secondAttribute="centerX" constant="-0.5" id="cdk-jX-i77"/>
-                            <constraint firstItem="kIY-9L-hLA" firstAttribute="top" secondItem="NUV-Ac-v4T" secondAttribute="bottom" constant="20" id="jiC-gP-EyG"/>
-                            <constraint firstItem="NUV-Ac-v4T" firstAttribute="centerX" secondItem="PGr-1N-Hnh" secondAttribute="centerX" constant="-0.5" id="sux-0G-F4R"/>
+                            <constraint firstItem="kIY-9L-hLA" firstAttribute="top" secondItem="NUV-Ac-v4T" secondAttribute="bottom" constant="20" id="jiC-gP-EyG">
+                                <variation key="heightClass=regular-widthClass=compact" constant="8"/>
+                            </constraint>
+                            <constraint firstItem="NUV-Ac-v4T" firstAttribute="centerX" secondItem="PGr-1N-Hnh" secondAttribute="centerX" constant="-0.5" id="sux-0G-F4R">
+                                <variation key="heightClass=regular-widthClass=compact" constant="0.5"/>
+                            </constraint>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
@@ -985,7 +1003,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qgM-dU-fBi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="351" y="1429.5"/>
+            <point key="canvasLocation" x="351" y="1800"/>
         </scene>
         <!--Account Settings Controller-->
         <scene sceneID="Wmp-R7-d3B">
@@ -1003,7 +1021,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5eb-5g-2wm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1057.5" y="1410.75"/>
+            <point key="canvasLocation" x="1045" y="1775"/>
         </scene>
         <!--Gift Cards List Controller-->
         <scene sceneID="Cs3-0m-gYa">
@@ -1071,7 +1089,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="akr-ai-BA5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1741.5" y="1410.75"/>
+            <point key="canvasLocation" x="1741" y="1775"/>
         </scene>
         <!--Table View Controller-->
         <scene sceneID="Fe5-pk-xde">
@@ -1229,7 +1247,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="036-qj-yB7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2452.5" y="1410.75"/>
+            <point key="canvasLocation" x="2392" y="1775"/>
         </scene>
         <!--Privacy And Terms Controller-->
         <scene sceneID="abs-hp-5Zt">
@@ -1287,7 +1305,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dPi-aF-8Ew" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="351" y="705"/>
+            <point key="canvasLocation" x="351" y="910"/>
         </scene>
         <!--Sign In Controller-->
         <scene sceneID="mwS-co-Lqq">
@@ -1652,7 +1670,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S2t-sY-Sxl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1057.5" y="709.5"/>
+            <point key="canvasLocation" x="1057" y="910"/>
         </scene>
         <!--Get Started Controller-->
         <scene sceneID="Kf1-x7-iuL">
@@ -2116,11 +2134,11 @@
                                 <exclude reference="nVr-3b-WMG"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="i9R-QT-t5B"/>
                                 <exclude reference="1Zj-oo-OJ8"/>
                                 <exclude reference="34v-iS-K4W"/>
                                 <exclude reference="DEd-1g-lfS"/>
                                 <exclude reference="tf6-rF-Tl9"/>
-                                <exclude reference="i9R-QT-t5B"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -2128,11 +2146,11 @@
                                 <include reference="nVr-3b-WMG"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="i9R-QT-t5B"/>
                                 <include reference="1Zj-oo-OJ8"/>
                                 <include reference="34v-iS-K4W"/>
                                 <include reference="DEd-1g-lfS"/>
                                 <include reference="tf6-rF-Tl9"/>
-                                <include reference="i9R-QT-t5B"/>
                             </mask>
                         </variation>
                     </view>
@@ -2143,7 +2161,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NFs-hW-qXn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1732.5" y="723.75"/>
+            <point key="canvasLocation" x="1741" y="910"/>
         </scene>
         <!--Choose Sign Up Type Controller-->
         <scene sceneID="BY0-bN-hxm">
@@ -2456,10 +2474,10 @@
                                 <exclude reference="o7v-MI-NtL"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="N0m-qo-4d3"/>
                                 <exclude reference="34k-rk-c54"/>
                                 <exclude reference="HOz-sy-dTS"/>
                                 <exclude reference="Kxo-I9-4is"/>
-                                <exclude reference="N0m-qo-4d3"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -2467,10 +2485,10 @@
                                 <include reference="o7v-MI-NtL"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="N0m-qo-4d3"/>
                                 <include reference="34k-rk-c54"/>
                                 <include reference="HOz-sy-dTS"/>
                                 <include reference="Kxo-I9-4is"/>
-                                <include reference="N0m-qo-4d3"/>
                             </mask>
                         </variation>
                     </view>
@@ -2482,7 +2500,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="53c-wA-Fto" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2436" y="723.75"/>
+            <point key="canvasLocation" x="2392" y="910"/>
         </scene>
         <!--Sign Up Controller-->
         <scene sceneID="oyd-IK-YiT">
@@ -2949,7 +2967,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h10-WX-iDB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3114" y="723.75"/>
+            <point key="canvasLocation" x="3127" y="935"/>
         </scene>
     </scenes>
     <resources>

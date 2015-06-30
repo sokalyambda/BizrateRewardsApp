@@ -46,7 +46,7 @@
     if ([[UIApplication sharedApplication] respondsToSelector:@selector(isRegisteredForRemoteNotifications)]) {
         return [[UIApplication sharedApplication] currentUserNotificationSettings].types != UIUserNotificationTypeNone;
     } else {
-        return ([[UIApplication sharedApplication] enabledRemoteNotificationTypes] & UIRemoteNotificationTypeAlert);
+        return ([[UIApplication sharedApplication] isRegisteredForRemoteNotifications] & UIUserNotificationTypeAlert);
     }
 }
 
