@@ -7,16 +7,23 @@
 //
 
 #import "BZRStorageManager.h"
+#import "BZRDataManager.h"
 
 #import "BZRDashboardController.h"
 
 #import "BZRRoundedImageView.h"
 
+static NSString *const kAccountSettingsSegueIdentifier = @"accountSettingsSegueIdentifier";
+
 @interface BZRDashboardController ()
 
 @property (weak, nonatomic) IBOutlet BZRRoundedImageView *userAvatar;
+@property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
 
 @property (strong, nonatomic) BZRStorageManager *storageManager;
+@property (strong, nonatomic) BZRDataManager *dataManager;
+
+@property (strong, nonatomic) BZRUserProfile *currentProfile;
 
 @end
 
@@ -32,19 +39,58 @@
     return _storageManager;
 }
 
+- (BZRDataManager *)dataManager
+{
+    if (!_dataManager) {
+        _dataManager = [BZRDataManager sharedInstance];
+    }
+    return _dataManager;
+}
+
+- (BZRUserProfile *)currentProfile
+{
+    if (!_currentProfile) {
+        _currentProfile = [BZRStorageManager sharedStorage].currentProfile;
+    }
+    return _currentProfile;
+}
+
 #pragma mark - View Lifecycle
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self updateUserInformation];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self getCurrentUserProfile];
 }
 
 #pragma mark - Actions
 
+- (IBAction)accountSettingsClick:(id)sender
+{
+    [self performSegueWithIdentifier:kAccountSettingsSegueIdentifier sender:self];
+}
+
 - (void)updateUserInformation
 {
-    [self.userAvatar sd_setImageWithURL:self.storageManager.currentProfile.avatarURL];
+    [self.userAvatar sd_setImageWithURL:self.currentProfile.avatarURL placeholderImage:[UIImage imageNamed:@"user_icon_small"]];
+    self.userNameLabel.text = self.currentProfile.fullName;
+}
+
+- (void)getCurrentUserProfile
+{
+    WEAK_SELF;
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [self.dataManager getCurrentUserWithCompletion:^(BOOL success, NSError *error) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        if (success) {
+            [weakSelf updateUserInformation];
+        }
+    }];
 }
 
 @end

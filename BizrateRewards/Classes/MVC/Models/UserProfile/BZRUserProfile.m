@@ -8,26 +8,52 @@
 
 #import "BZRUserProfile.h"
 
-static NSString *const kFirstName               = @"firstName";
-static NSString *const kLastName                = @"lastName";
+#import "BZRCommonDateFormatter.h"
+
+static NSString *const kFirstName               = @"firstname";
+static NSString *const kLastName                = @"lastname";
 static NSString *const kEmail                   = @"email";
-static NSString *const kDateOfBirth             = @"dateOfBirth";
-static NSString *const kIsMale                  = @"gender";
+static NSString *const kDateOfBirth             = @"dob";
+static NSString *const kGender                  = @"gender";
+static NSString *const kIsMale                  = @"isMale";
+static NSString *const kPointsAmount            = @"points";
 static NSString *const kIsPushEnabled           = @"isPushEnabled";
 static NSString *const kIsGeolocationEnabled    = @"isGeolocationEnabled";
 
-
 @interface BZRUserProfile ()
+
+@property (strong, nonatomic) NSString *genderString;
 
 @end
 
 @implementation BZRUserProfile
 
+#pragma mark - Accessors
+
+- (BOOL)isMale
+{
+    _isMale = [self.genderString isEqualToString:@"M"] ? YES : NO;
+    return _isMale;
+}
+
+- (NSString *)fullName
+{
+    _fullName = [NSString stringWithFormat:@"%@ %@", self.firstName, self.lastName];
+    return _fullName;
+}
+
+#pragma mark - BZRMappingProtocol
+
 - (instancetype)initWithServerResponse:(NSDictionary *)response
 {
     self = [super init];
     if (self) {
-        
+        _firstName      = response[kFirstName];
+        _lastName       = response[kLastName];
+        _email          = response[kEmail];
+        _genderString   = response[kGender];
+        _dateOfBirth    = [[BZRCommonDateFormatter commonDateFormatter] dateFromString:response[kDateOfBirth]];
+        _pointsAmount   = [response[kPointsAmount] integerValue];
     }
     return self;
 }
@@ -50,20 +76,20 @@ static NSString *const kIsGeolocationEnabled    = @"isGeolocationEnabled";
 {
     if((self = [super init])) {
         //decode properties, other class vars
-        self.firstName      = [decoder decodeObjectForKey:kFirstName];
-        self.lastName       = [decoder decodeObjectForKey:kLastName];
-        self.email          = [decoder decodeObjectForKey:kEmail];
-        self.dateOfBirth    = [decoder decodeObjectForKey:kDateOfBirth];
-        self.isMale         = [[decoder decodeObjectForKey:kIsMale] boolValue];
-        self.pushNotificationsEnabled = [[decoder decodeObjectForKey:kIsPushEnabled] boolValue];
-        self.geolocationEnabled         = [[decoder decodeObjectForKey:kIsGeolocationEnabled] boolValue];
+        _firstName      = [decoder decodeObjectForKey:kFirstName];
+        _lastName       = [decoder decodeObjectForKey:kLastName];
+        _email          = [decoder decodeObjectForKey:kEmail];
+        _dateOfBirth    = [decoder decodeObjectForKey:kDateOfBirth];
+        _isMale         = [[decoder decodeObjectForKey:kIsMale] boolValue];
+        _pushNotificationsEnabled = [[decoder decodeObjectForKey:kIsPushEnabled] boolValue];
+        _geolocationEnabled         = [[decoder decodeObjectForKey:kIsGeolocationEnabled] boolValue];
     }
     return self;
 }
 
 #pragma mark - NSUserDefaults methods
 
-- (void)setCityToDefaultsForKey:(NSString *)key {
+- (void)setUserProfileToDefaultsForKey:(NSString *)key {
     NSData *encodedObject = [NSKeyedArchiver archivedDataWithRootObject:self];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:encodedObject forKey:key];

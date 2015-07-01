@@ -26,6 +26,7 @@
 		585813AA1B3BEDCC0087AEE2 /* BZRToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 585813A91B3BEDCC0087AEE2 /* BZRToken.m */; };
 		585813AE1B3C23840087AEE2 /* BZRSurvey.m in Sources */ = {isa = PBXBuildFile; fileRef = 585813AD1B3C23840087AEE2 /* BZRSurvey.m */; };
 		5878D3DD1B43F92100A917D0 /* BZRReachabilityHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5878D3DC1B43F92100A917D0 /* BZRReachabilityHelper.m */; };
+		5878D3E11B4426E000A917D0 /* BZRCommonDateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5878D3E01B4426DF00A917D0 /* BZRCommonDateFormatter.m */; };
 		58A0B2151B3854CF003C100C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A0B2141B3854CF003C100C /* main.m */; };
 		58A0B2181B3854CF003C100C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A0B2171B3854CF003C100C /* AppDelegate.m */; };
 		58A0B21E1B3854CF003C100C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 58A0B21C1B3854CF003C100C /* Main.storyboard */; };
@@ -109,6 +110,8 @@
 		585813AD1B3C23840087AEE2 /* BZRSurvey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRSurvey.m; path = Classes/MVC/Models/Survey/BZRSurvey.m; sourceTree = "<group>"; };
 		5878D3DB1B43F92100A917D0 /* BZRReachabilityHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRReachabilityHelper.h; path = Classes/Utilities/ReachabilityHelper/BZRReachabilityHelper.h; sourceTree = "<group>"; };
 		5878D3DC1B43F92100A917D0 /* BZRReachabilityHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRReachabilityHelper.m; path = Classes/Utilities/ReachabilityHelper/BZRReachabilityHelper.m; sourceTree = "<group>"; };
+		5878D3DF1B4426DF00A917D0 /* BZRCommonDateFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRCommonDateFormatter.h; path = Classes/Utilities/CommonDateFormatter/BZRCommonDateFormatter.h; sourceTree = "<group>"; };
+		5878D3E01B4426DF00A917D0 /* BZRCommonDateFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRCommonDateFormatter.m; path = Classes/Utilities/CommonDateFormatter/BZRCommonDateFormatter.m; sourceTree = "<group>"; };
 		58A0B20F1B3854CF003C100C /* BizrateRewards.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BizrateRewards.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		58A0B2131B3854CF003C100C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		58A0B2141B3854CF003C100C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -273,6 +276,7 @@
 		58219EE31B38A21900A9541A /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				5878D3DE1B4426A000A917D0 /* CommonDateFormatter */,
 				5878D3DA1B43F8D500A917D0 /* ReachabilityHelper */,
 				58F49FC31B4181D2002F93EE /* GlobalConstants */,
 				58219EED1B38A28600A9541A /* Validator */,
@@ -502,6 +506,15 @@
 				5878D3DC1B43F92100A917D0 /* BZRReachabilityHelper.m */,
 			);
 			name = ReachabilityHelper;
+			sourceTree = "<group>";
+		};
+		5878D3DE1B4426A000A917D0 /* CommonDateFormatter */ = {
+			isa = PBXGroup;
+			children = (
+				5878D3DF1B4426DF00A917D0 /* BZRCommonDateFormatter.h */,
+				5878D3E01B4426DF00A917D0 /* BZRCommonDateFormatter.m */,
+			);
+			name = CommonDateFormatter;
 			sourceTree = "<group>";
 		};
 		58A0B2061B3854CF003C100C = {
@@ -1049,6 +1062,7 @@
 				58A91F581B3AD83F0032607F /* BZRUserProfile.m in Sources */,
 				58219F021B38A32700A9541A /* BZRAlertMessageService.m in Sources */,
 				58219F111B38A3B200A9541A /* UIImagePickerController+fixOrientation.m in Sources */,
+				5878D3E11B4426E000A917D0 /* BZRCommonDateFormatter.m in Sources */,
 				58ACC0811B39689F0081E546 /* BZRSignUpController.m in Sources */,
 				58219F191B38A3F600A9541A /* NSDictionary+JSONRepresentation.m in Sources */,
 				58A5BEBD1B414B1800B2BC27 /* BZRBorderedTextField.m in Sources */,

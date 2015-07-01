@@ -98,6 +98,18 @@
     }];
 }
 
+//Get User
+- (void)getCurrentUserWithCompletion:(SuccessBlock)completion
+{
+    WEAK_SELF;
+    [self.network getCurrentUserWithCompletion:^(BOOL success, BZRUserProfile *userProfile, NSError *error) {
+        if (success) {
+            weakSelf.storage.currentProfile = userProfile;
+        }
+        completion(success, error);
+    }];
+}
+
 #pragma mark - Private methods
 
 - (void)setupTokenAndAddAuthHeader:(BZRToken *)token

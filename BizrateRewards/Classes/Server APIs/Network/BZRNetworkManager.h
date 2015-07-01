@@ -23,12 +23,17 @@ typedef void(^ImageUserBlock)(BOOL success, UIImage *image);
 
 @property (assign, nonatomic) AFNetworkReachabilityStatus reachabilityStatus;
 
-- (void)getClientCredentialsOnCompletion:(SuccessTokenBlock)completion;
 //sign up/in
+- (void)getClientCredentialsOnCompletion:(SuccessTokenBlock)completion;
+
 - (void)signInWithUserName:(NSString *)userName password:(NSString *)password withResult:(SuccessTokenBlock)result;
+
 - (void)signUpWithUserFirstName:(NSString *)firstName andUserLastName:(NSString *)lastName andEmail:(NSString *)email withResult:(SuccessBlock)result;
 
 - (void)authorizeWithFacebookWithResult:(UserProfileBlock)result;
+
+//getUser
+- (void)getCurrentUserWithCompletion:(UserProfileBlock)completion;
 
 //post image
 - (void)postImage:(UIImage *)image withID:(NSInteger)ID result:(ImageUserBlock)result;

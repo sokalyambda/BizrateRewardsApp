@@ -44,6 +44,8 @@ static NSString *const kClientSecretKey = @"8a9da763-9503-4093-82c2-6b22b8eb9a12
         self.requestSerializer = [AFHTTPRequestSerializer serializer];
         self.responseSerializer = [AFJSONResponseSerializer serializer];
         
+        [self.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"application/schema+json", @"application/json", @"application/x-www-form-urlencoded", nil]];
+        
         [[AFNetworkReachabilityManager sharedManager] startMonitoring];
         
         self.reachabilityStatus = [[AFNetworkReachabilityManager sharedManager] networkReachabilityStatus];
@@ -69,19 +71,15 @@ static NSString *const kClientSecretKey = @"8a9da763-9503-4093-82c2-6b22b8eb9a12
                                            } success:^(NSURLSessionDataTask *task, id responseObject) {
                                                
                                                BZRToken *token = [[BZRToken alloc] initWithServerResponse:responseObject];
-                                               completion(YES, token, nil);
                                                
+                                               completion(YES, token, nil);
                                            } failure:^(NSURLSessionDataTask *task, NSError *error) {
-                                               NSData *errorData = error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey];
-                                               NSString *errorString = [[NSString alloc] initWithData:errorData encoding:NSUTF8StringEncoding];
-                                               NSLog(@"error %@", errorString);
                                                completion(NO, nil, error);
                                            }];
 }
 
 - (void)signInWithUserName:(NSString *)userName password:(NSString *)password withResult:(SuccessTokenBlock)result
 {
-
     NSDictionary *parameter = @{@"username" : userName,
                                 @"password" : password,
                                 @"grant_type" : GrantTypePassword,
