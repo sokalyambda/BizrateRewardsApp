@@ -10,12 +10,14 @@
 
 #import "BZRDataManager.h"
 
+#import "BZRLeftImageTextField.h"
+
 static NSString *const kDashboardSegueIdentifier = @"dashboardSegue";
 
 @interface BZRSignInController ()
 
-@property (weak, nonatomic) IBOutlet UITextField *userNameField;
-@property (weak, nonatomic) IBOutlet UITextField *passwordField;
+@property (weak, nonatomic) IBOutlet BZRLeftImageTextField *userNameField;
+@property (weak, nonatomic) IBOutlet BZRLeftImageTextField *passwordField;
 
 @property (strong, nonatomic) BZRDataManager *dataManager;
 
@@ -44,6 +46,7 @@ static NSString *const kDashboardSegueIdentifier = @"dashboardSegue";
 {
     [super viewWillAppear:animated];
     [self.view layoutIfNeeded];
+    [self customizeFields];
 }
 
 #pragma mark - Actions
@@ -88,6 +91,13 @@ static NSString *const kDashboardSegueIdentifier = @"dashboardSegue";
 
 - (IBAction)forgotPasswordClick:(id)sender
 {
+    
+}
+
+- (void)customizeFields
+{
+    self.userNameField.imageName = @"email_icon";
+    self.passwordField.imageName = @"password_icon";
 }
 
 @end

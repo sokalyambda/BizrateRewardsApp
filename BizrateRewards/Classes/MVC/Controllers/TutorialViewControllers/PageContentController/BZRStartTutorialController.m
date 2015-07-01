@@ -8,6 +8,8 @@
 
 #import "BZRStartTutorialController.h"
 
+static NSString *const kGeolocationAccessSegueIdentifier = @"geolocationAccessSegueIdentifier";
+
 @interface BZRStartTutorialController ()
 
 @end
@@ -33,7 +35,7 @@
 
 - (void)handleSwipeGesture:(UISwipeGestureRecognizer *)swipe
 {
-    [self performSegueWithIdentifier:@"geolocationAccessSegueIdentifier" sender:self];
+    [self performSegueWithIdentifier:kGeolocationAccessSegueIdentifier sender:self];
 }
 
 @end

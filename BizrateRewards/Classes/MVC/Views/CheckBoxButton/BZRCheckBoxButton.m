@@ -10,8 +10,8 @@
 
 @interface BZRCheckBoxButton ()
 
-@property (strong, nonatomic) UIImage*	notSelectedImage;
-@property (strong, nonatomic) UIImage*	selectedImage;
+@property (strong, nonatomic) UIImage *notSelectedImage;
+@property (strong, nonatomic) UIImage *selectedImage;
 
 @property (strong, nonatomic) NSString *notSelectedImageName;
 @property (strong, nonatomic) NSString *selectedImageName;
@@ -24,8 +24,8 @@
 
 -(void)awakeFromNib
 {
-    [self setSelectedImageName:@"checked_checkbox"];
-    [self setNotSelectedImageName:@"unchecked_checkbox"];
+    [self setSelectedImageName:@"checkboxes_selected"];
+    [self setNotSelectedImageName:@"checkboxes_unselected"];
 }
 
 #pragma mark - Accessors

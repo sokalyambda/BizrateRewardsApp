@@ -10,7 +10,12 @@
 
 #import "BZRDataManager.h"
 
+#import "BZRLeftImageTextField.h"
+
 @interface BZRSignUpController ()
+
+@property (weak, nonatomic) IBOutlet BZRLeftImageTextField *userNameField;
+@property (weak, nonatomic) IBOutlet BZRLeftImageTextField *passwordField;
 
 @property (strong, nonatomic) BZRDataManager *dataManager;
 
@@ -35,6 +40,12 @@
     [super viewDidLoad];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self customizeFields];
+}
+
 #pragma mark - Actions
 
 - (IBAction)createAccountClick:(id)sender
@@ -49,6 +60,12 @@
             }];
         }
     }];
+}
+
+- (void)customizeFields
+{
+    self.userNameField.imageName = @"email_icon";
+    self.passwordField.imageName = @"password_icon";
 }
 
 
