@@ -82,8 +82,8 @@ static NSString *const kClientSecretKey = @"8a9da763-9503-4093-82c2-6b22b8eb9a12
 - (void)signInWithUserName:(NSString *)userName password:(NSString *)password withResult:(SuccessTokenBlock)result
 {
 
-    NSDictionary *parameter = @{@"username" : @"john.doe@mailinator.com",
-                                @"password" : @"12345",
+    NSDictionary *parameter = @{@"username" : userName,
+                                @"password" : password,
                                 @"grant_type" : GrantTypePassword,
                                 @"client_id" : kClientIdKey,
                                 @"client_secret" : kClientSecretKey};

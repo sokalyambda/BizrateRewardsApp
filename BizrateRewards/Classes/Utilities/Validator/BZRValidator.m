@@ -9,7 +9,7 @@
 #import "BZRValidator.h"
 #import "UIView+Shaking.h"
 
-static const NSInteger kMinPasswordSymbols = 8;
+static const NSInteger kMinPasswordSymbols = 5;
 
 @implementation BZRValidator
 
