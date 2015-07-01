@@ -25,6 +25,7 @@
 		58219F241B38A5A600A9541A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58219F231B38A5A600A9541A /* QuartzCore.framework */; };
 		585813AA1B3BEDCC0087AEE2 /* BZRToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 585813A91B3BEDCC0087AEE2 /* BZRToken.m */; };
 		585813AE1B3C23840087AEE2 /* BZRSurvey.m in Sources */ = {isa = PBXBuildFile; fileRef = 585813AD1B3C23840087AEE2 /* BZRSurvey.m */; };
+		5878D3DD1B43F92100A917D0 /* BZRReachabilityHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5878D3DC1B43F92100A917D0 /* BZRReachabilityHelper.m */; };
 		58A0B2151B3854CF003C100C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A0B2141B3854CF003C100C /* main.m */; };
 		58A0B2181B3854CF003C100C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A0B2171B3854CF003C100C /* AppDelegate.m */; };
 		58A0B21E1B3854CF003C100C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 58A0B21C1B3854CF003C100C /* Main.storyboard */; };
@@ -106,6 +107,8 @@
 		585813A91B3BEDCC0087AEE2 /* BZRToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRToken.m; path = Classes/MVC/Models/Token/BZRToken.m; sourceTree = "<group>"; };
 		585813AC1B3C23840087AEE2 /* BZRSurvey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRSurvey.h; path = Classes/MVC/Models/Survey/BZRSurvey.h; sourceTree = "<group>"; };
 		585813AD1B3C23840087AEE2 /* BZRSurvey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRSurvey.m; path = Classes/MVC/Models/Survey/BZRSurvey.m; sourceTree = "<group>"; };
+		5878D3DB1B43F92100A917D0 /* BZRReachabilityHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRReachabilityHelper.h; path = Classes/Utilities/ReachabilityHelper/BZRReachabilityHelper.h; sourceTree = "<group>"; };
+		5878D3DC1B43F92100A917D0 /* BZRReachabilityHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRReachabilityHelper.m; path = Classes/Utilities/ReachabilityHelper/BZRReachabilityHelper.m; sourceTree = "<group>"; };
 		58A0B20F1B3854CF003C100C /* BizrateRewards.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BizrateRewards.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		58A0B2131B3854CF003C100C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		58A0B2141B3854CF003C100C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -270,6 +273,7 @@
 		58219EE31B38A21900A9541A /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				5878D3DA1B43F8D500A917D0 /* ReachabilityHelper */,
 				58F49FC31B4181D2002F93EE /* GlobalConstants */,
 				58219EED1B38A28600A9541A /* Validator */,
 				58219EEC1B38A27F00A9541A /* KeyChain */,
@@ -489,6 +493,15 @@
 				585813AD1B3C23840087AEE2 /* BZRSurvey.m */,
 			);
 			name = Survey;
+			sourceTree = "<group>";
+		};
+		5878D3DA1B43F8D500A917D0 /* ReachabilityHelper */ = {
+			isa = PBXGroup;
+			children = (
+				5878D3DB1B43F92100A917D0 /* BZRReachabilityHelper.h */,
+				5878D3DC1B43F92100A917D0 /* BZRReachabilityHelper.m */,
+			);
+			name = ReachabilityHelper;
 			sourceTree = "<group>";
 		};
 		58A0B2061B3854CF003C100C = {
@@ -1048,6 +1061,7 @@
 				58F49FC91B4197B7002F93EE /* BZRPushNotifiactionService.m in Sources */,
 				58219F151B38A3D700A9541A /* NSString+ContainsString.m in Sources */,
 				58219F0A1B38A37600A9541A /* UIView+Shaking.m in Sources */,
+				5878D3DD1B43F92100A917D0 /* BZRReachabilityHelper.m in Sources */,
 				58ACC0871B3968DA0081E546 /* BZRGetStartedController.m in Sources */,
 				58A5BEC41B415C7000B2BC27 /* BZRStarView.m in Sources */,
 				585813AE1B3C23840087AEE2 /* BZRSurvey.m in Sources */,

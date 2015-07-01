@@ -40,8 +40,18 @@ static NSString *const kClientSecretKey = @"8a9da763-9503-4093-82c2-6b22b8eb9a12
     NSURL *baseURL = [NSURL URLWithString:kBaseURLString];
     self = [super initWithBaseURL:baseURL];
     if (self) {
+        
         self.requestSerializer = [AFHTTPRequestSerializer serializer];
         self.responseSerializer = [AFJSONResponseSerializer serializer];
+        
+        [[AFNetworkReachabilityManager sharedManager] startMonitoring];
+        
+        self.reachabilityStatus = [[AFNetworkReachabilityManager sharedManager] networkReachabilityStatus];
+        
+        WEAK_SELF;
+        [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+            weakSelf.reachabilityStatus = status;
+        }];
     }
     
     return self;
@@ -89,12 +99,12 @@ static NSString *const kClientSecretKey = @"8a9da763-9503-4093-82c2-6b22b8eb9a12
 
 - (void)signUpWithUserFirstName:(NSString *)firstName andUserLastName:(NSString *)lastName andEmail:(NSString *)email withResult:(SuccessBlock)result
 {
-//    NSDictionary *parameter = @{@"firstname" : firstName,
-//                                @"lastName" : lastName,
-//                                @"email" : email};
+    NSDictionary *parameters = @{@"firstname" : firstName,
+                                @"lastName" : lastName,
+                                @"email" : email};
     
     WEAK_SELF;
-    [weakSelf POST:@"user" parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+    [weakSelf POST:@"user" parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
         
         return result(YES, nil);
     } failure:^(NSURLSessionDataTask *task, NSError *error) {

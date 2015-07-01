@@ -13,6 +13,8 @@
 
 @interface BZRDataManager : NSObject
 
+@property (assign, nonatomic) BOOL isReachable;
+
 + (BZRDataManager *)sharedInstance;
 
 - (void)getClientCredentialsOnSuccess:(SuccessBlock)completion;

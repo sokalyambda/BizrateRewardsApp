@@ -21,6 +21,7 @@ typedef void(^ImageUserBlock)(BOOL success, UIImage *image);
 
 @interface BZRNetworkManager : AFHTTPSessionManager
 
+@property (assign, nonatomic) AFNetworkReachabilityStatus reachabilityStatus;
 
 - (void)getClientCredentialsOnCompletion:(SuccessTokenBlock)completion;
 //sign up/in

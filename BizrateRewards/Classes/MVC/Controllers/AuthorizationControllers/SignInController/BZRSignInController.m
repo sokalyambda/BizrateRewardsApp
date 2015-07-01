@@ -12,6 +12,8 @@
 
 #import "BZRLeftImageTextField.h"
 
+#import "BZRReachabilityHelper.h"
+
 static NSString *const kDashboardSegueIdentifier = @"dashboardSegue";
 
 @interface BZRSignInController ()
@@ -55,12 +57,16 @@ static NSString *const kDashboardSegueIdentifier = @"dashboardSegue";
 - (IBAction)facebookLoginClick:(id)sender
 {
     WEAK_SELF;
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [self.dataManager authorizeWithFacebookWithResult:^(BOOL success, NSError *error) {
-        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-        if (success) {
-            [weakSelf performSegueWithIdentifier:kDashboardSegueIdentifier sender:weakSelf];
-        }
+    [BZRReachabilityHelper checkConnectionOnSuccess:^{
+        [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
+        [weakSelf.dataManager authorizeWithFacebookWithResult:^(BOOL success, NSError *error) {
+            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+            if (success) {
+                [weakSelf performSegueWithIdentifier:kDashboardSegueIdentifier sender:weakSelf];
+            }
+        }];
+    } failure:^{
+        ShowAlert(@"Internet is not reachable");
     }];
 }
 
@@ -69,15 +75,20 @@ static NSString *const kDashboardSegueIdentifier = @"dashboardSegue";
 {
     WEAK_SELF;
     if ([self.validator validateEmailField:self.userNameField andPasswordField:self.passwordField]) {
-        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        [self.dataManager signInWithUserName:self.userNameField.text password:self.passwordField.text withResult:^(BOOL success, NSError *error) {
-            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-            if (!success) {
-                ShowErrorAlert(error);
-            } else {
-                [weakSelf performSegueWithIdentifier:kDashboardSegueIdentifier sender:weakSelf];
-            }
+        [BZRReachabilityHelper checkConnectionOnSuccess:^{
+            [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
+            [weakSelf.dataManager signInWithUserName:weakSelf.userNameField.text password:weakSelf.passwordField.text withResult:^(BOOL success, NSError *error) {
+                [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+                if (!success) {
+                    ShowErrorAlert(error);
+                } else {
+                    [weakSelf performSegueWithIdentifier:kDashboardSegueIdentifier sender:weakSelf];
+                }
+            }];
+        } failure:^{
+            ShowAlert(@"Internet is not reachable");
         }];
+        
     } else {
         ShowAlert(self.validator.validationErrorString);
         [self.validator cleanValidationErrorString];

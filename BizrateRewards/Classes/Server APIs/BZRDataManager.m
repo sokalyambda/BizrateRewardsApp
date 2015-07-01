@@ -17,6 +17,16 @@
 
 @implementation BZRDataManager
 
+#pragma mark - Accessors
+
+- (BOOL)isReachable
+{
+    if (self.network.reachabilityStatus == AFNetworkReachabilityStatusNotReachable) {
+        return NO;
+    }
+    return YES;
+}
+
 #pragma mark - Lifecycle
 
 + (BZRDataManager *)sharedInstance
