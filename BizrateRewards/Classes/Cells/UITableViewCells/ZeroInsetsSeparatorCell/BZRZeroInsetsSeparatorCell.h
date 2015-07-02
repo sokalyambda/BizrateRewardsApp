@@ -1,5 +1,5 @@
 //
-//  BZRProfileSettingsContainerController.h
+//  BZRZeroInsetsSeparatorCell.h
 //  BizrateRewards
 //
 //  Created by Eugenity on 02.07.15.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BZREditProfileContainerController : UITableViewController
+@interface BZRZeroInsetsSeparatorCell : UITableViewCell
 
 @end

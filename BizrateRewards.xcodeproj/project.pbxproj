@@ -29,13 +29,19 @@
 		5878D3E11B4426E000A917D0 /* BZRCommonDateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5878D3E01B4426DF00A917D0 /* BZRCommonDateFormatter.m */; };
 		5894208B1B450FF6004BAF48 /* BZRAccountSettingsContaiterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5894208A1B450FF6004BAF48 /* BZRAccountSettingsContaiterController.m */; };
 		5894208F1B45116B004BAF48 /* BZREditProfileContainerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5894208E1B45116B004BAF48 /* BZREditProfileContainerController.m */; };
-		58A0B2151B3854CF003C100C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A0B2141B3854CF003C100C /* main.m */; };
-		58A0B2181B3854CF003C100C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A0B2171B3854CF003C100C /* AppDelegate.m */; };
+		589420931B451D79004BAF48 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 589420921B451D79004BAF48 /* AppDelegate.m */; };
+		589420971B451D87004BAF48 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 589420951B451D87004BAF48 /* Info.plist */; };
+		589420981B451D87004BAF48 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 589420961B451D87004BAF48 /* main.m */; };
+		5894209D1B451E0F004BAF48 /* BZRBirthDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5894209B1B451E0F004BAF48 /* BZRBirthDatePickerView.m */; };
+		5894209E1B451E0F004BAF48 /* BZRBirthDatePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5894209C1B451E0F004BAF48 /* BZRBirthDatePickerView.xib */; };
+		589420A11B451E35004BAF48 /* BZRPickerHolder.m in Sources */ = {isa = PBXBuildFile; fileRef = 589420A01B451E35004BAF48 /* BZRPickerHolder.m */; };
+		589420A51B45278E004BAF48 /* BZRPickersHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 589420A41B45278E004BAF48 /* BZRPickersHelper.m */; };
+		589420A91B452813004BAF48 /* BZRCommonPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 589420A81B452813004BAF48 /* BZRCommonPickerView.m */; };
+		589420AB1B452827004BAF48 /* BZRCommonPickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 589420AA1B452827004BAF48 /* BZRCommonPickerView.xib */; };
+		589420AE1B4529C8004BAF48 /* BZRZeroInsetsSeparatorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 589420AD1B4529C8004BAF48 /* BZRZeroInsetsSeparatorCell.m */; };
 		58A0B21E1B3854CF003C100C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 58A0B21C1B3854CF003C100C /* Main.storyboard */; };
 		58A0B2201B3854CF003C100C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58A0B21F1B3854CF003C100C /* Images.xcassets */; };
 		58A0B22F1B3854CF003C100C /* BizrateRewardsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A0B22E1B3854CF003C100C /* BizrateRewardsTests.m */; };
-		58A4BBCE1B4270C7008F4EA7 /* BZRDatePickerHolder.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A4BBCD1B4270C7008F4EA7 /* BZRDatePickerHolder.m */; };
-		58A4BBD01B4270D7008F4EA7 /* BZRDatePickerHolder.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58A4BBCF1B4270D7008F4EA7 /* BZRDatePickerHolder.xib */; };
 		58A59E251B3EDFDC00A5F30C /* BZRGeolocationAccessController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A59E241B3EDFDC00A5F30C /* BZRGeolocationAccessController.m */; };
 		58A59E281B3EE00B00A5F30C /* BZRPushNotificationsAccessController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A59E271B3EE00B00A5F30C /* BZRPushNotificationsAccessController.m */; };
 		58A59E2C1B3EE91000A5F30C /* BZRFinishTutorialController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A59E2B1B3EE91000A5F30C /* BZRFinishTutorialController.m */; };
@@ -105,7 +111,6 @@
 		58219F1F1B38A59000A9541A /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		58219F211B38A59F00A9541A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		58219F231B38A5A600A9541A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		58219F251B38A62000A9541A /* BizrateRewards-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BizrateRewards-Prefix.pch"; sourceTree = "<group>"; };
 		585813A81B3BEDCC0087AEE2 /* BZRToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRToken.h; path = Classes/MVC/Models/Token/BZRToken.h; sourceTree = "<group>"; };
 		585813A91B3BEDCC0087AEE2 /* BZRToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRToken.m; path = Classes/MVC/Models/Token/BZRToken.m; sourceTree = "<group>"; };
 		585813AC1B3C23840087AEE2 /* BZRSurvey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRSurvey.h; path = Classes/MVC/Models/Survey/BZRSurvey.h; sourceTree = "<group>"; };
@@ -118,20 +123,30 @@
 		5894208A1B450FF6004BAF48 /* BZRAccountSettingsContaiterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRAccountSettingsContaiterController.m; path = Classes/MVC/Controllers/AccountSettingsController/SettingsContaiterController/BZRAccountSettingsContaiterController.m; sourceTree = "<group>"; };
 		5894208D1B45116B004BAF48 /* BZREditProfileContainerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZREditProfileContainerController.h; path = Classes/MVC/Controllers/ProfileSettingsController/ProfileSettingsContainerController/BZREditProfileContainerController.h; sourceTree = "<group>"; };
 		5894208E1B45116B004BAF48 /* BZREditProfileContainerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZREditProfileContainerController.m; path = Classes/MVC/Controllers/ProfileSettingsController/ProfileSettingsContainerController/BZREditProfileContainerController.m; sourceTree = "<group>"; };
+		589420911B451D79004BAF48 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Resources/AppDelegate.h; sourceTree = "<group>"; };
+		589420921B451D79004BAF48 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = Resources/AppDelegate.m; sourceTree = "<group>"; };
+		589420941B451D87004BAF48 /* BizrateRewards-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "BizrateRewards-Prefix.pch"; path = "Resources/BizrateRewards-Prefix.pch"; sourceTree = "<group>"; };
+		589420951B451D87004BAF48 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Resources/Info.plist; sourceTree = "<group>"; };
+		589420961B451D87004BAF48 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Resources/main.m; sourceTree = "<group>"; };
+		589420991B451DD2004BAF48 /* BZRGlobalConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRGlobalConstants.h; path = Resources/BZRGlobalConstants.h; sourceTree = "<group>"; };
+		5894209A1B451E0F004BAF48 /* BZRBirthDatePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRBirthDatePickerView.h; path = Classes/MVC/Views/BirthDatePicker/BZRBirthDatePickerView.h; sourceTree = "<group>"; };
+		5894209B1B451E0F004BAF48 /* BZRBirthDatePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRBirthDatePickerView.m; path = Classes/MVC/Views/BirthDatePicker/BZRBirthDatePickerView.m; sourceTree = "<group>"; };
+		5894209C1B451E0F004BAF48 /* BZRBirthDatePickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = BZRBirthDatePickerView.xib; path = Classes/MVC/Views/BirthDatePicker/BZRBirthDatePickerView.xib; sourceTree = "<group>"; };
+		5894209F1B451E35004BAF48 /* BZRPickerHolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRPickerHolder.h; path = Classes/Utilities/DatePickerHolder/BZRPickerHolder.h; sourceTree = "<group>"; };
+		589420A01B451E35004BAF48 /* BZRPickerHolder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRPickerHolder.m; path = Classes/Utilities/DatePickerHolder/BZRPickerHolder.m; sourceTree = "<group>"; };
+		589420A31B45278E004BAF48 /* BZRPickersHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRPickersHelper.h; path = Classes/Utilities/PickersHelper/BZRPickersHelper.h; sourceTree = "<group>"; };
+		589420A41B45278E004BAF48 /* BZRPickersHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRPickersHelper.m; path = Classes/Utilities/PickersHelper/BZRPickersHelper.m; sourceTree = "<group>"; };
+		589420A71B452813004BAF48 /* BZRCommonPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRCommonPickerView.h; path = Classes/MVC/Views/CommonPickerView/BZRCommonPickerView.h; sourceTree = "<group>"; };
+		589420A81B452813004BAF48 /* BZRCommonPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRCommonPickerView.m; path = Classes/MVC/Views/CommonPickerView/BZRCommonPickerView.m; sourceTree = "<group>"; };
+		589420AA1B452827004BAF48 /* BZRCommonPickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = BZRCommonPickerView.xib; path = Classes/MVC/Views/CommonPickerView/BZRCommonPickerView.xib; sourceTree = "<group>"; };
+		589420AC1B4529C7004BAF48 /* BZRZeroInsetsSeparatorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRZeroInsetsSeparatorCell.h; path = Classes/Cells/UITableViewCells/ZeroInsetsSeparatorCell/BZRZeroInsetsSeparatorCell.h; sourceTree = "<group>"; };
+		589420AD1B4529C8004BAF48 /* BZRZeroInsetsSeparatorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRZeroInsetsSeparatorCell.m; path = Classes/Cells/UITableViewCells/ZeroInsetsSeparatorCell/BZRZeroInsetsSeparatorCell.m; sourceTree = "<group>"; };
 		58A0B20F1B3854CF003C100C /* BizrateRewards.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BizrateRewards.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		58A0B2131B3854CF003C100C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		58A0B2141B3854CF003C100C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		58A0B2161B3854CF003C100C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		58A0B2171B3854CF003C100C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		58A0B21D1B3854CF003C100C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		58A0B21F1B3854CF003C100C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		58A0B2281B3854CF003C100C /* BizrateRewardsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BizrateRewardsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		58A0B22D1B3854CF003C100C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		58A0B22E1B3854CF003C100C /* BizrateRewardsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BizrateRewardsTests.m; sourceTree = "<group>"; };
-		58A4BBCC1B4270C7008F4EA7 /* BZRDatePickerHolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRDatePickerHolder.h; path = Classes/MVC/Views/DatePickerHolder/BZRDatePickerHolder.h; sourceTree = "<group>"; };
-		58A4BBCD1B4270C7008F4EA7 /* BZRDatePickerHolder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRDatePickerHolder.m; path = Classes/MVC/Views/DatePickerHolder/BZRDatePickerHolder.m; sourceTree = "<group>"; };
-		58A4BBCF1B4270D7008F4EA7 /* BZRDatePickerHolder.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = BZRDatePickerHolder.xib; path = Classes/MVC/Views/DatePickerHolder/BZRDatePickerHolder.xib; sourceTree = "<group>"; };
-		58A4BBD21B42BA14008F4EA7 /* BZRGlobalConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BZRGlobalConstants.h; sourceTree = "<group>"; };
 		58A59E231B3EDFDC00A5F30C /* BZRGeolocationAccessController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRGeolocationAccessController.h; path = Classes/MVC/Controllers/TutorialViewControllers/GeolocationAccessController/BZRGeolocationAccessController.h; sourceTree = "<group>"; };
 		58A59E241B3EDFDC00A5F30C /* BZRGeolocationAccessController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRGeolocationAccessController.m; path = Classes/MVC/Controllers/TutorialViewControllers/GeolocationAccessController/BZRGeolocationAccessController.m; sourceTree = "<group>"; };
 		58A59E261B3EE00B00A5F30C /* BZRPushNotificationsAccessController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRPushNotificationsAccessController.h; path = Classes/MVC/Controllers/PushNotificationsAccessController/BZRPushNotificationsAccessController.h; sourceTree = "<group>"; };
@@ -236,6 +251,11 @@
 		58219EDC1B38A06E00A9541A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				589420941B451D87004BAF48 /* BizrateRewards-Prefix.pch */,
+				589420951B451D87004BAF48 /* Info.plist */,
+				589420961B451D87004BAF48 /* main.m */,
+				589420911B451D79004BAF48 /* AppDelegate.h */,
+				589420921B451D79004BAF48 /* AppDelegate.m */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -282,6 +302,8 @@
 		58219EE31B38A21900A9541A /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				589420A21B452616004BAF48 /* PickersHelper */,
+				589420901B451B96004BAF48 /* DatePickerHolder */,
 				5878D3DE1B4426A000A917D0 /* CommonDateFormatter */,
 				5878D3DA1B43F8D500A917D0 /* ReachabilityHelper */,
 				58F49FC31B4181D2002F93EE /* GlobalConstants */,
@@ -317,7 +339,8 @@
 		58219EE61B38A23400A9541A /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				58A4BBCB1B42709E008F4EA7 /* DatePickerHolder */,
+				589420A61B4527F4004BAF48 /* CommonPickerView */,
+				58A4BBCB1B42709E008F4EA7 /* BirthDatePicker */,
 				58A5BEC11B415C4B00B2BC27 /* StarView */,
 				58A5BEB71B4133E000B2BC27 /* LeftImageTextField */,
 				58A5BEB61B4133D400B2BC27 /* BorderedTextField */,
@@ -345,6 +368,8 @@
 		58219EE81B38A24300A9541A /* UITableViewCells */ = {
 			isa = PBXGroup;
 			children = (
+				589420AC1B4529C7004BAF48 /* BZRZeroInsetsSeparatorCell.h */,
+				589420AD1B4529C8004BAF48 /* BZRZeroInsetsSeparatorCell.m */,
 			);
 			name = UITableViewCells;
 			sourceTree = "<group>";
@@ -541,6 +566,34 @@
 			name = ProfileSettingsContainerController;
 			sourceTree = "<group>";
 		};
+		589420901B451B96004BAF48 /* DatePickerHolder */ = {
+			isa = PBXGroup;
+			children = (
+				5894209F1B451E35004BAF48 /* BZRPickerHolder.h */,
+				589420A01B451E35004BAF48 /* BZRPickerHolder.m */,
+			);
+			name = DatePickerHolder;
+			sourceTree = "<group>";
+		};
+		589420A21B452616004BAF48 /* PickersHelper */ = {
+			isa = PBXGroup;
+			children = (
+				589420A31B45278E004BAF48 /* BZRPickersHelper.h */,
+				589420A41B45278E004BAF48 /* BZRPickersHelper.m */,
+			);
+			name = PickersHelper;
+			sourceTree = "<group>";
+		};
+		589420A61B4527F4004BAF48 /* CommonPickerView */ = {
+			isa = PBXGroup;
+			children = (
+				589420A71B452813004BAF48 /* BZRCommonPickerView.h */,
+				589420A81B452813004BAF48 /* BZRCommonPickerView.m */,
+				589420AA1B452827004BAF48 /* BZRCommonPickerView.xib */,
+			);
+			name = CommonPickerView;
+			sourceTree = "<group>";
+		};
 		58A0B2061B3854CF003C100C = {
 			isa = PBXGroup;
 			children = (
@@ -576,12 +629,7 @@
 			children = (
 				58219EDD1B38A08E00A9541A /* Macros */,
 				58219EDC1B38A06E00A9541A /* Resources */,
-				58A0B2161B3854CF003C100C /* AppDelegate.h */,
-				58A0B2171B3854CF003C100C /* AppDelegate.m */,
 				58A0B21C1B3854CF003C100C /* Main.storyboard */,
-				58A0B2131B3854CF003C100C /* Info.plist */,
-				58A0B2141B3854CF003C100C /* main.m */,
-				58219F251B38A62000A9541A /* BizrateRewards-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -603,14 +651,14 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		58A4BBCB1B42709E008F4EA7 /* DatePickerHolder */ = {
+		58A4BBCB1B42709E008F4EA7 /* BirthDatePicker */ = {
 			isa = PBXGroup;
 			children = (
-				58A4BBCC1B4270C7008F4EA7 /* BZRDatePickerHolder.h */,
-				58A4BBCD1B4270C7008F4EA7 /* BZRDatePickerHolder.m */,
-				58A4BBCF1B4270D7008F4EA7 /* BZRDatePickerHolder.xib */,
+				5894209A1B451E0F004BAF48 /* BZRBirthDatePickerView.h */,
+				5894209B1B451E0F004BAF48 /* BZRBirthDatePickerView.m */,
+				5894209C1B451E0F004BAF48 /* BZRBirthDatePickerView.xib */,
 			);
-			name = DatePickerHolder;
+			name = BirthDatePicker;
 			sourceTree = "<group>";
 		};
 		58A59E211B3EDB2200A5F30C /* GeolocationAccessController */ = {
@@ -900,7 +948,7 @@
 		58F49FC31B4181D2002F93EE /* GlobalConstants */ = {
 			isa = PBXGroup;
 			children = (
-				58A4BBD21B42BA14008F4EA7 /* BZRGlobalConstants.h */,
+				589420991B451DD2004BAF48 /* BZRGlobalConstants.h */,
 			);
 			name = GlobalConstants;
 			sourceTree = "<group>";
@@ -1011,9 +1059,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				589420AB1B452827004BAF48 /* BZRCommonPickerView.xib in Resources */,
+				589420971B451D87004BAF48 /* Info.plist in Resources */,
 				58A0B21E1B3854CF003C100C /* Main.storyboard in Resources */,
+				5894209E1B451E0F004BAF48 /* BZRBirthDatePickerView.xib in Resources */,
 				58A0B2201B3854CF003C100C /* Images.xcassets in Resources */,
-				58A4BBD01B4270D7008F4EA7 /* BZRDatePickerHolder.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1064,13 +1114,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				589420931B451D79004BAF48 /* AppDelegate.m in Sources */,
 				58A91F3B1B3A91E20032607F /* BZRGiftCard.m in Sources */,
 				58A59E301B3EE93F00A5F30C /* BZRAccountSettingsController.m in Sources */,
 				58ACC08F1B39AD490081E546 /* BZRDashboardController.m in Sources */,
+				589420A91B452813004BAF48 /* BZRCommonPickerView.m in Sources */,
 				58A59E251B3EDFDC00A5F30C /* BZRGeolocationAccessController.m in Sources */,
+				589420981B451D87004BAF48 /* main.m in Sources */,
 				58A91F431B3A995F0032607F /* BZRRoundedImageView.m in Sources */,
 				58219F0D1B38A38600A9541A /* UIView+MakeFromXib.m in Sources */,
 				58A59E381B3EE99400A5F30C /* BZRGiftCardsListController.m in Sources */,
+				589420AE1B4529C8004BAF48 /* BZRZeroInsetsSeparatorCell.m in Sources */,
 				58A59E3C1B3EE9E300A5F30C /* BZRSurveyViewController.m in Sources */,
 				58ACC0841B3968BF0081E546 /* BZRChooseSignUpTypeController.m in Sources */,
 				58A59E341B3EE96700A5F30C /* BZREditProfileController.m in Sources */,
@@ -1078,6 +1132,7 @@
 				5894208F1B45116B004BAF48 /* BZREditProfileContainerController.m in Sources */,
 				58B574E11B38AE200083A80A /* KeychainItemWrapper.m in Sources */,
 				58ACC06A1B3937010081E546 /* BZRStartTutorialController.m in Sources */,
+				589420A11B451E35004BAF48 /* BZRPickerHolder.m in Sources */,
 				58A91F481B3ABE6D0032607F /* BZRStorageManager.m in Sources */,
 				58ACC06D1B3937160081E546 /* BZRBaseTutorialController.m in Sources */,
 				58A5BEBA1B414ADC00B2BC27 /* BZRLeftImageTextField.m in Sources */,
@@ -1085,16 +1140,16 @@
 				58ACC0761B395E6A0081E546 /* BZRPrivacyAndTermsController.m in Sources */,
 				58A91F331B3A823D0032607F /* BZRLocationObserver.m in Sources */,
 				58219EF51B38A2E000A9541A /* BZRNetworkManager.m in Sources */,
-				58A0B2181B3854CF003C100C /* AppDelegate.m in Sources */,
 				58A91F581B3AD83F0032607F /* BZRUserProfile.m in Sources */,
+				5894209D1B451E0F004BAF48 /* BZRBirthDatePickerView.m in Sources */,
 				58219F021B38A32700A9541A /* BZRAlertMessageService.m in Sources */,
 				58219F111B38A3B200A9541A /* UIImagePickerController+fixOrientation.m in Sources */,
+				589420A51B45278E004BAF48 /* BZRPickersHelper.m in Sources */,
 				5878D3E11B4426E000A917D0 /* BZRCommonDateFormatter.m in Sources */,
 				58ACC0811B39689F0081E546 /* BZRSignUpController.m in Sources */,
 				58219F191B38A3F600A9541A /* NSDictionary+JSONRepresentation.m in Sources */,
 				58A5BEBD1B414B1800B2BC27 /* BZRBorderedTextField.m in Sources */,
 				58219EF91B38A2EE00A9541A /* BZRDataManager.m in Sources */,
-				58A4BBCE1B4270C7008F4EA7 /* BZRDatePickerHolder.m in Sources */,
 				58ACC08B1B39A35D0081E546 /* BZRBaseAuthController.m in Sources */,
 				58219F051B38A33E00A9541A /* UIViewController+fixOrientation.m in Sources */,
 				58219EFC1B38A30300A9541A /* BZRValidator.m in Sources */,
@@ -1107,7 +1162,6 @@
 				58ACC0871B3968DA0081E546 /* BZRGetStartedController.m in Sources */,
 				58A5BEC41B415C7000B2BC27 /* BZRStarView.m in Sources */,
 				585813AE1B3C23840087AEE2 /* BZRSurvey.m in Sources */,
-				58A0B2151B3854CF003C100C /* main.m in Sources */,
 				58A59E281B3EE00B00A5F30C /* BZRPushNotificationsAccessController.m in Sources */,
 				58A59E2C1B3EE91000A5F30C /* BZRFinishTutorialController.m in Sources */,
 			);
@@ -1230,8 +1284,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "BizrateRewards/BizrateRewards-Prefix.pch";
-				INFOPLIST_FILE = BizrateRewards/Info.plist;
+				GCC_PREFIX_HEADER = "BizrateRewards/Resources/BizrateRewards-Prefix.pch";
+				INFOPLIST_FILE = BizrateRewards/Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1245,8 +1299,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "BizrateRewards/BizrateRewards-Prefix.pch";
-				INFOPLIST_FILE = BizrateRewards/Info.plist;
+				GCC_PREFIX_HEADER = "BizrateRewards/Resources/BizrateRewards-Prefix.pch";
+				INFOPLIST_FILE = BizrateRewards/Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
