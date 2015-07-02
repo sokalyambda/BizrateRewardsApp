@@ -1,5 +1,5 @@
 //
-//  BZRProfileSettingsContainerController.m
+//  BZREditProfileContainerController.m
 //  BizrateRewards
 //
 //  Created by Eugenity on 02.07.15.
@@ -14,15 +14,16 @@
 
 @implementation BZREditProfileContainerController
 
-- (void)viewDidLoad {
+#pragma mark - View Lifecycle
+
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    
 }
 
+#pragma mark - UITableViewDelegate
 
-#pragma mark - TableView Delegate
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
 }

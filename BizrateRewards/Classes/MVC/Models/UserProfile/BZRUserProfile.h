@@ -19,6 +19,8 @@
 @property (strong, nonatomic) NSDate    *dateOfBirth;
 
 @property (assign, nonatomic) NSInteger pointsAmount;
+@property (assign, nonatomic) NSInteger pointsRequired;
+
 @property (assign, nonatomic) BOOL isMale;
 
 @property (assign, nonatomic, getter=isPushNotificationsEnabled) BOOL pushNotificationsEnabled;
