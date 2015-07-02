@@ -14,8 +14,8 @@
 
 - (IBAction)doneClick:(id)sender
 {
-    if ([self.delegate respondsToSelector:@selector(birthPickerViewWillDissmiss:)]) {
-        [self.delegate birthPickerViewWillDissmiss:self];
+    if ([self.delegate respondsToSelector:@selector(birthPickerViewWillDismiss:)]) {
+        [self.delegate birthPickerViewWillDismiss:self];
     } else {
         [self removeFromSuperview];
     }

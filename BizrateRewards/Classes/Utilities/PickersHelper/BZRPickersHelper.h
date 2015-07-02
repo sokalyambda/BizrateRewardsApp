@@ -11,7 +11,8 @@ typedef void(^AnimationCompletion)(void);
 
 @interface BZRPickersHelper : NSObject
 
-- (void)showCommonPickerViewInView:(UIView *)view withCompletion:(Completion)completion;
+- (void)showCommonPickerViewInView:(UIView *)view  withComponentsArray:(NSArray *)componentsArray withCompletion:(Completion)completion;
+
 - (void)showBirthDatePickerInView:(UIView *)view withCompletion:(Completion)completion;
 
 @end

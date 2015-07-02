@@ -24,7 +24,7 @@
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
-                                <action selector="doneClick:" destination="fWs-e6-77O" eventType="touchUpInside" id="6Bd-Bz-1lh"/>
+                                <action selector="doneClick:" destination="fWs-e6-77O" eventType="touchUpInside" id="8qi-Ag-rJK"/>
                             </connections>
                         </button>
                     </subviews>
@@ -38,6 +38,9 @@
                 </view>
                 <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TQ2-sr-FJN" customClass="BZRPickerHolder">
                     <rect key="frame" x="0.0" y="56" width="360" height="162"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="S9R-2o-LSi"/>
+                    </connections>
                 </pickerView>
             </subviews>
             <color key="backgroundColor" red="0.71076642339999996" green="0.70985401459999997" blue="0.71085196169999998" alpha="1" colorSpace="calibratedRGB"/>
@@ -54,6 +57,9 @@
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="pickerHolder" destination="TQ2-sr-FJN" id="d56-tl-Hqb"/>
+            </connections>
             <point key="canvasLocation" x="285" y="201"/>
         </view>
     </objects>

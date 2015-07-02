@@ -305,7 +305,7 @@
 			isa = PBXGroup;
 			children = (
 				589420A21B452616004BAF48 /* PickersHelper */,
-				589420901B451B96004BAF48 /* DatePickerHolder */,
+				589420901B451B96004BAF48 /* PickerHolder */,
 				5878D3DE1B4426A000A917D0 /* CommonDateFormatter */,
 				5878D3DA1B43F8D500A917D0 /* ReachabilityHelper */,
 				58F49FC31B4181D2002F93EE /* GlobalConstants */,
@@ -569,13 +569,13 @@
 			name = ProfileSettingsContainerController;
 			sourceTree = "<group>";
 		};
-		589420901B451B96004BAF48 /* DatePickerHolder */ = {
+		589420901B451B96004BAF48 /* PickerHolder */ = {
 			isa = PBXGroup;
 			children = (
 				5894209F1B451E35004BAF48 /* BZRPickerHolder.h */,
 				589420A01B451E35004BAF48 /* BZRPickerHolder.m */,
 			);
-			name = DatePickerHolder;
+			name = PickerHolder;
 			sourceTree = "<group>";
 		};
 		589420A21B452616004BAF48 /* PickersHelper */ = {

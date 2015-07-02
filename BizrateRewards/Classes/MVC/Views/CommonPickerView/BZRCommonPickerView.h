@@ -7,8 +7,11 @@
 //
 
 @protocol BZRCommonPickerViewDelegate;
+@class BZRPickerHolder;
 
 @interface BZRCommonPickerView : UIView
+
+@property (strong, nonatomic) NSArray *pickerComponentsArray;
 
 @property (weak, nonatomic) id<BZRCommonPickerViewDelegate> delegate;
 
@@ -17,6 +20,6 @@
 @protocol BZRCommonPickerViewDelegate <NSObject>
 
 @optional
-- (void)commonPickerViewWillDissmiss:(BZRCommonPickerView *)commonPickerView;
+- (void)commonPickerViewWillDismiss:(BZRCommonPickerView *)commonPickerView;
 
 @end

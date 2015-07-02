@@ -8,12 +8,31 @@
 
 #import "BZRCommonPickerView.h"
 
+#import "BZRPickerHolder.h"
+
+@interface BZRCommonPickerView ()
+
+@property (weak, nonatomic) IBOutlet BZRPickerHolder *pickerHolder;
+
+@end
+
 @implementation BZRCommonPickerView
+
+#pragma mark - Accessors
+
+- (void)setPickerComponentsArray:(NSArray *)pickerComponentsArray
+{
+    _pickerComponentsArray = pickerComponentsArray;
+    self.pickerHolder.componentsArray = _pickerComponentsArray;
+    [self.pickerHolder reloadAllComponents];
+}
+
+#pragma mark - Actions
 
 - (IBAction)doneClick:(id)sender
 {
-    if ([self.delegate respondsToSelector:@selector(commonPickerViewWillDissmiss:)]) {
-        [self.delegate commonPickerViewWillDissmiss:self];
+    if ([self.delegate respondsToSelector:@selector(commonPickerViewWillDismiss:)]) {
+        [self.delegate commonPickerViewWillDismiss:self];
     } else {
         [self removeFromSuperview];
     }
