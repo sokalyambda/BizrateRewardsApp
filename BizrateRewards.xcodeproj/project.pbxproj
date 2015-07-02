@@ -27,7 +27,8 @@
 		585813AE1B3C23840087AEE2 /* BZRSurvey.m in Sources */ = {isa = PBXBuildFile; fileRef = 585813AD1B3C23840087AEE2 /* BZRSurvey.m */; };
 		5878D3DD1B43F92100A917D0 /* BZRReachabilityHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5878D3DC1B43F92100A917D0 /* BZRReachabilityHelper.m */; };
 		5878D3E11B4426E000A917D0 /* BZRCommonDateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5878D3E01B4426DF00A917D0 /* BZRCommonDateFormatter.m */; };
-		5894208B1B450FF6004BAF48 /* BZRSettingsContaiterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5894208A1B450FF6004BAF48 /* BZRSettingsContaiterController.m */; };
+		5894208B1B450FF6004BAF48 /* BZRAccountSettingsContaiterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5894208A1B450FF6004BAF48 /* BZRAccountSettingsContaiterController.m */; };
+		5894208F1B45116B004BAF48 /* BZREditProfileContainerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5894208E1B45116B004BAF48 /* BZREditProfileContainerController.m */; };
 		58A0B2151B3854CF003C100C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A0B2141B3854CF003C100C /* main.m */; };
 		58A0B2181B3854CF003C100C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A0B2171B3854CF003C100C /* AppDelegate.m */; };
 		58A0B21E1B3854CF003C100C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 58A0B21C1B3854CF003C100C /* Main.storyboard */; };
@@ -113,8 +114,10 @@
 		5878D3DC1B43F92100A917D0 /* BZRReachabilityHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRReachabilityHelper.m; path = Classes/Utilities/ReachabilityHelper/BZRReachabilityHelper.m; sourceTree = "<group>"; };
 		5878D3DF1B4426DF00A917D0 /* BZRCommonDateFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRCommonDateFormatter.h; path = Classes/Utilities/CommonDateFormatter/BZRCommonDateFormatter.h; sourceTree = "<group>"; };
 		5878D3E01B4426DF00A917D0 /* BZRCommonDateFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRCommonDateFormatter.m; path = Classes/Utilities/CommonDateFormatter/BZRCommonDateFormatter.m; sourceTree = "<group>"; };
-		589420891B450FF6004BAF48 /* BZRSettingsContaiterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRSettingsContaiterController.h; path = Classes/MVC/Controllers/AccountSettingsController/SettingsContaiterController/BZRSettingsContaiterController.h; sourceTree = "<group>"; };
-		5894208A1B450FF6004BAF48 /* BZRSettingsContaiterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRSettingsContaiterController.m; path = Classes/MVC/Controllers/AccountSettingsController/SettingsContaiterController/BZRSettingsContaiterController.m; sourceTree = "<group>"; };
+		589420891B450FF6004BAF48 /* BZRAccountSettingsContaiterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRAccountSettingsContaiterController.h; path = Classes/MVC/Controllers/AccountSettingsController/SettingsContaiterController/BZRAccountSettingsContaiterController.h; sourceTree = "<group>"; };
+		5894208A1B450FF6004BAF48 /* BZRAccountSettingsContaiterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRAccountSettingsContaiterController.m; path = Classes/MVC/Controllers/AccountSettingsController/SettingsContaiterController/BZRAccountSettingsContaiterController.m; sourceTree = "<group>"; };
+		5894208D1B45116B004BAF48 /* BZREditProfileContainerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZREditProfileContainerController.h; path = Classes/MVC/Controllers/ProfileSettingsController/ProfileSettingsContainerController/BZREditProfileContainerController.h; sourceTree = "<group>"; };
+		5894208E1B45116B004BAF48 /* BZREditProfileContainerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZREditProfileContainerController.m; path = Classes/MVC/Controllers/ProfileSettingsController/ProfileSettingsContainerController/BZREditProfileContainerController.m; sourceTree = "<group>"; };
 		58A0B20F1B3854CF003C100C /* BizrateRewards.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BizrateRewards.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		58A0B2131B3854CF003C100C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		58A0B2141B3854CF003C100C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -523,10 +526,19 @@
 		589420881B450FC8004BAF48 /* SettingsContaiterController */ = {
 			isa = PBXGroup;
 			children = (
-				589420891B450FF6004BAF48 /* BZRSettingsContaiterController.h */,
-				5894208A1B450FF6004BAF48 /* BZRSettingsContaiterController.m */,
+				589420891B450FF6004BAF48 /* BZRAccountSettingsContaiterController.h */,
+				5894208A1B450FF6004BAF48 /* BZRAccountSettingsContaiterController.m */,
 			);
 			name = SettingsContaiterController;
+			sourceTree = "<group>";
+		};
+		5894208C1B45113B004BAF48 /* ProfileSettingsContainerController */ = {
+			isa = PBXGroup;
+			children = (
+				5894208D1B45116B004BAF48 /* BZREditProfileContainerController.h */,
+				5894208E1B45116B004BAF48 /* BZREditProfileContainerController.m */,
+			);
+			name = ProfileSettingsContainerController;
 			sourceTree = "<group>";
 		};
 		58A0B2061B3854CF003C100C = {
@@ -641,6 +653,7 @@
 		58A59E311B3EE94600A5F30C /* ProfileSettingsController */ = {
 			isa = PBXGroup;
 			children = (
+				5894208C1B45113B004BAF48 /* ProfileSettingsContainerController */,
 				58A59E321B3EE96700A5F30C /* BZREditProfileController.h */,
 				58A59E331B3EE96700A5F30C /* BZREditProfileController.m */,
 			);
@@ -1062,6 +1075,7 @@
 				58ACC0841B3968BF0081E546 /* BZRChooseSignUpTypeController.m in Sources */,
 				58A59E341B3EE96700A5F30C /* BZREditProfileController.m in Sources */,
 				585813AA1B3BEDCC0087AEE2 /* BZRToken.m in Sources */,
+				5894208F1B45116B004BAF48 /* BZREditProfileContainerController.m in Sources */,
 				58B574E11B38AE200083A80A /* KeychainItemWrapper.m in Sources */,
 				58ACC06A1B3937010081E546 /* BZRStartTutorialController.m in Sources */,
 				58A91F481B3ABE6D0032607F /* BZRStorageManager.m in Sources */,
@@ -1084,7 +1098,7 @@
 				58ACC08B1B39A35D0081E546 /* BZRBaseAuthController.m in Sources */,
 				58219F051B38A33E00A9541A /* UIViewController+fixOrientation.m in Sources */,
 				58219EFC1B38A30300A9541A /* BZRValidator.m in Sources */,
-				5894208B1B450FF6004BAF48 /* BZRSettingsContaiterController.m in Sources */,
+				5894208B1B450FF6004BAF48 /* BZRAccountSettingsContaiterController.m in Sources */,
 				58ACC07E1B3968830081E546 /* BZRSignInController.m in Sources */,
 				58F49FC91B4197B7002F93EE /* BZRPushNotifiactionService.m in Sources */,
 				58219F151B38A3D700A9541A /* NSString+ContainsString.m in Sources */,

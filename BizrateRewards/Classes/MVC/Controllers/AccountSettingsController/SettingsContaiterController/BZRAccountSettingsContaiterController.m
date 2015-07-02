@@ -6,13 +6,13 @@
 //  Copyright (c) 2015 ThinkMobiles. All rights reserved.
 //
 
-#import "BZRSettingsContaiterController.h"
+#import "BZRAccountSettingsContaiterController.h"
 
-@interface BZRSettingsContaiterController ()
+@interface BZRAccountSettingsContaiterController ()
 
 @end
 
-@implementation BZRSettingsContaiterController
+@implementation BZRAccountSettingsContaiterController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

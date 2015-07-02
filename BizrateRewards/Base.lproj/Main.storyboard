@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="13F1077" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="wip-hv-JCF">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="wip-hv-JCF">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -1608,10 +1608,10 @@
             </objects>
             <point key="canvasLocation" x="1080" y="1800"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Account Settings Contaiter Controller-->
         <scene sceneID="w0s-aZ-THh">
             <objects>
-                <tableViewController automaticallyAdjustsScrollViewInsets="NO" id="SZk-9F-HIA" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="BZRAccountSettingsContaiterController" automaticallyAdjustsScrollViewInsets="NO" id="SZk-9F-HIA" customClass="BZRAccountSettingsContaiterController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="41" sectionHeaderHeight="22" sectionFooterHeight="22" id="kVU-yi-hML">
                         <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1678,7 +1678,8 @@
                                                             <exclude reference="ra1-BJ-4jl"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="205" y="8" width="25" height="25"/>
                                                         <mask key="constraints">
                                                             <include reference="VCS-tA-unV"/>
                                                             <include reference="ra1-BJ-4jl"/>
@@ -1741,7 +1742,8 @@
                                                             <exclude reference="vza-yv-O92"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="207" y="10" width="23" height="21"/>
                                                         <mask key="constraints">
                                                             <include reference="1jy-5P-DdU"/>
                                                             <include reference="vza-yv-O92"/>
@@ -2010,10 +2012,27 @@
             </objects>
             <point key="canvasLocation" x="2529" y="1774.5"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Edit Profile Controller-->
+        <scene sceneID="opC-Ve-FAj">
+            <objects>
+                <viewController storyboardIdentifier="BZREditProfileController" id="xdw-Sw-7dh" customClass="BZREditProfileController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="iMU-zA-iiP"/>
+                        <viewControllerLayoutGuide type="bottom" id="kxg-Cx-v7w"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="3nq-3u-fPS">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="q0l-GF-tvc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3198" y="1774.5"/>
+        </scene>
+        <!--Edit Profile Container Controller-->
         <scene sceneID="Fe5-pk-xde">
             <objects>
-                <tableViewController storyboardIdentifier="BZREditProfileController" id="AKe-zY-Iin" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="BZREditProfileContainerController" id="AKe-zY-Iin" customClass="BZREditProfileContainerController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="iTk-K7-hAq">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2166,7 +2185,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="036-qj-yB7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3192" y="1774.5"/>
+            <point key="canvasLocation" x="3852" y="1774.5"/>
         </scene>
         <!--Privacy And Terms Controller-->
         <scene sceneID="abs-hp-5Zt">
