@@ -12,6 +12,7 @@
 #import "BZRDashboardController.h"
 
 #import "BZRRoundedImageView.h"
+#import "BZRProgressView.h"
 
 static NSString *const kAccountSettingsSegueIdentifier = @"accountSettingsSegueIdentifier";
 
@@ -24,6 +25,7 @@ static NSString *const kAccountSettingsSegueIdentifier = @"accountSettingsSegueI
 @property (strong, nonatomic) BZRDataManager *dataManager;
 
 @property (strong, nonatomic) BZRUserProfile *currentProfile;
+@property (weak, nonatomic) IBOutlet BZRProgressView *progressView;
 
 @end
 
@@ -64,7 +66,6 @@ static NSString *const kAccountSettingsSegueIdentifier = @"accountSettingsSegueI
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    [super viewDidAppear:animated];
     [self getCurrentUserProfile];
 }
 
@@ -79,6 +80,10 @@ static NSString *const kAccountSettingsSegueIdentifier = @"accountSettingsSegueI
 {
     [self.userAvatar sd_setImageWithURL:self.currentProfile.avatarURL placeholderImage:[UIImage imageNamed:@"user_icon_small"]];
     self.userNameLabel.text = self.currentProfile.fullName;
+#warning User Points
+    self.currentProfile.pointsAmount = 800;
+    self.currentProfile.pointsRequired = 2000;
+
 }
 
 - (void)getCurrentUserProfile
@@ -89,8 +94,17 @@ static NSString *const kAccountSettingsSegueIdentifier = @"accountSettingsSegueI
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         if (success) {
             [weakSelf updateUserInformation];
+            [weakSelf calculateProgress];
         }
     }];
+    
+}
+
+- (void)calculateProgress
+{
+     self.progressView.progress  = (CGFloat)self.currentProfile.pointsAmount * CGRectGetWidth(self.progressView.frame) / (CGFloat)self.currentProfile.pointsRequired;
+    [self.progressView setNeedsDisplay];
+    
 }
 
 @end

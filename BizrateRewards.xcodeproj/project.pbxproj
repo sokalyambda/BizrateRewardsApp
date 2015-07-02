@@ -69,6 +69,7 @@
 		58ACC08F1B39AD490081E546 /* BZRDashboardController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ACC08E1B39AD490081E546 /* BZRDashboardController.m */; };
 		58B574E11B38AE200083A80A /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B574E01B38AE200083A80A /* KeychainItemWrapper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		58F49FC91B4197B7002F93EE /* BZRPushNotifiactionService.m in Sources */ = {isa = PBXBuildFile; fileRef = 58F49FC81B4197B7002F93EE /* BZRPushNotifiactionService.m */; };
+		84AD3F011B4587DA00C294AE /* BZRProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AD3F001B4587DA00C294AE /* BZRProgressView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -203,6 +204,8 @@
 		58F49FC71B4197B7002F93EE /* BZRPushNotifiactionService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRPushNotifiactionService.h; path = Classes/PushNotificationsService/BZRPushNotifiactionService.h; sourceTree = "<group>"; };
 		58F49FC81B4197B7002F93EE /* BZRPushNotifiactionService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRPushNotifiactionService.m; path = Classes/PushNotificationsService/BZRPushNotifiactionService.m; sourceTree = "<group>"; };
 		7AF1FB2A8C4A8673EF3998F1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		84AD3EFF1B4587D900C294AE /* BZRProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRProgressView.h; path = Classes/MVC/Views/ProgressView/BZRProgressView.h; sourceTree = "<group>"; };
+		84AD3F001B4587DA00C294AE /* BZRProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRProgressView.m; path = Classes/MVC/Views/ProgressView/BZRProgressView.m; sourceTree = "<group>"; };
 		E535AA4CB211EDDB654D82EC /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -338,6 +341,7 @@
 		58219EE61B38A23400A9541A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				84AD3EFE1B4587B100C294AE /* ProgressView */,
 				589420A61B4527F4004BAF48 /* CommonPickerView */,
 				58A4BBCB1B42709E008F4EA7 /* BirthDatePicker */,
 				58A5BEC11B415C4B00B2BC27 /* StarView */,
@@ -952,6 +956,15 @@
 			name = GlobalConstants;
 			sourceTree = "<group>";
 		};
+		84AD3EFE1B4587B100C294AE /* ProgressView */ = {
+			isa = PBXGroup;
+			children = (
+				84AD3EFF1B4587D900C294AE /* BZRProgressView.h */,
+				84AD3F001B4587DA00C294AE /* BZRProgressView.m */,
+			);
+			name = ProgressView;
+			sourceTree = "<group>";
+		};
 		D31C9EB6CC9E9EA49476A0B1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1146,6 +1159,7 @@
 				5878D3E11B4426E000A917D0 /* BZRCommonDateFormatter.m in Sources */,
 				58ACC0811B39689F0081E546 /* BZRSignUpController.m in Sources */,
 				58219F191B38A3F600A9541A /* NSDictionary+JSONRepresentation.m in Sources */,
+				84AD3F011B4587DA00C294AE /* BZRProgressView.m in Sources */,
 				58A5BEBD1B414B1800B2BC27 /* BZRBorderedTextField.m in Sources */,
 				58219EF91B38A2EE00A9541A /* BZRDataManager.m in Sources */,
 				58ACC08B1B39A35D0081E546 /* BZRBaseAuthController.m in Sources */,

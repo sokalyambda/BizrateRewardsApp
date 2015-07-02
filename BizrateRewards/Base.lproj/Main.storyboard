@@ -1114,25 +1114,6 @@
                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VSs-f0-rwS" userLabel="Progress bar view" customClass="BZRProgressView">
-                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                                        <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="0.35000000000000003" colorSpace="calibratedRGB"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="15" id="oI9-jh-esH">
-                                                                <variation key="heightClass=regular-widthClass=compact" constant="10"/>
-                                                            </constraint>
-                                                        </constraints>
-                                                        <variation key="default">
-                                                            <mask key="constraints">
-                                                                <exclude reference="oI9-jh-esH"/>
-                                                            </mask>
-                                                        </variation>
-                                                        <variation key="heightClass=regular-widthClass=compact">
-                                                            <mask key="constraints">
-                                                                <include reference="oI9-jh-esH"/>
-                                                            </mask>
-                                                        </variation>
-                                                    </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="YOUR POINTS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yXp-XH-hFh">
                                                         <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -1158,6 +1139,25 @@
                                                             </mask>
                                                         </variation>
                                                     </label>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VSs-f0-rwS" userLabel="Progress bar view" customClass="BZRProgressView">
+                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                                        <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="0.35000000000000003" colorSpace="calibratedRGB"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="15" id="oI9-jh-esH">
+                                                                <variation key="heightClass=regular-widthClass=compact" constant="10"/>
+                                                            </constraint>
+                                                        </constraints>
+                                                        <variation key="default">
+                                                            <mask key="constraints">
+                                                                <exclude reference="oI9-jh-esH"/>
+                                                            </mask>
+                                                        </variation>
+                                                        <variation key="heightClass=regular-widthClass=compact">
+                                                            <mask key="constraints">
+                                                                <include reference="oI9-jh-esH"/>
+                                                            </mask>
+                                                        </variation>
+                                                    </view>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
@@ -1196,9 +1196,9 @@
                                                         <exclude reference="in4-2a-GxQ"/>
                                                         <exclude reference="Gjo-B0-UWy"/>
                                                         <exclude reference="bDh-Dk-8Fa"/>
-                                                        <exclude reference="VSs-f0-rwS"/>
                                                         <exclude reference="yXp-XH-hFh"/>
                                                         <exclude reference="3sa-3F-1Q0"/>
+                                                        <exclude reference="VSs-f0-rwS"/>
                                                     </mask>
                                                     <mask key="constraints">
                                                         <exclude reference="Rui-kt-rYE"/>
@@ -1229,9 +1229,9 @@
                                                         <include reference="in4-2a-GxQ"/>
                                                         <include reference="Gjo-B0-UWy"/>
                                                         <include reference="bDh-Dk-8Fa"/>
-                                                        <include reference="VSs-f0-rwS"/>
                                                         <include reference="yXp-XH-hFh"/>
                                                         <include reference="3sa-3F-1Q0"/>
+                                                        <include reference="VSs-f0-rwS"/>
                                                     </mask>
                                                     <mask key="constraints">
                                                         <include reference="Rui-kt-rYE"/>
@@ -1404,7 +1404,7 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="400" height="850"/>
                     <connections>
-                        <outlet property="progressView" destination="VSs-f0-rwS" id="OIX-xZ-1lD"/>
+                        <outlet property="progressView" destination="VSs-f0-rwS" id="3sz-8f-SGk"/>
                         <outlet property="userAvatar" destination="Im9-4f-eI7" id="T58-6A-IRH"/>
                         <outlet property="userNameLabel" destination="eu8-PG-E9q" id="PB3-TU-RYg"/>
                         <segue destination="hzP-9q-gyt" kind="show" identifier="accountSettingsSegueIdentifier" id="2w4-cx-jnE"/>
@@ -1679,7 +1679,8 @@
                                                             <exclude reference="ra1-BJ-4jl"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="205" y="8" width="25" height="25"/>
                                                         <mask key="constraints">
                                                             <include reference="VCS-tA-unV"/>
                                                             <include reference="ra1-BJ-4jl"/>
@@ -1742,7 +1743,8 @@
                                                             <exclude reference="vza-yv-O92"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="207" y="10" width="23" height="21"/>
                                                         <mask key="constraints">
                                                             <include reference="1jy-5P-DdU"/>
                                                             <include reference="vza-yv-O92"/>
@@ -2117,7 +2119,8 @@
                                                             <exclude reference="cWZ-w9-thK"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="0.0" y="0.0" width="240" height="1"/>
                                                         <mask key="constraints">
                                                             <include reference="cWZ-w9-thK"/>
                                                         </mask>
@@ -2127,6 +2130,9 @@
                                                     <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="15" y="11" width="210" height="18"/>
+                                                    </variation>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -2177,6 +2183,9 @@
                                                     <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="15" y="11" width="210" height="18"/>
+                                                    </variation>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -2215,6 +2224,9 @@
                                                     <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="15" y="11" width="210" height="18"/>
+                                                    </variation>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -2257,6 +2269,9 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="15" y="11" width="210" height="18"/>
+                                                    </variation>
                                                 </label>
                                             </subviews>
                                             <constraints>
@@ -2299,6 +2314,9 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="15" y="11" width="210" height="18"/>
+                                                    </variation>
                                                 </label>
                                             </subviews>
                                             <constraints>
