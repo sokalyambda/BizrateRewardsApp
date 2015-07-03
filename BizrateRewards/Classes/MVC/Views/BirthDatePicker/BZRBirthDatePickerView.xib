@@ -6,7 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BZRPickersHelper">
             <connections>
-                <outlet property="birthDatePicker" destination="0nJ-zJ-YCO" id="Hjg-65-jcN"/>
+                <outlet property="birthDatePicker" destination="0nJ-zJ-YCO" id="awI-82-t33"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -31,6 +31,7 @@
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z5S-Uy-luH" userLabel="Done Button">
                             <rect key="frame" x="275" y="7" width="37" height="30"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="15"/>
                             <state key="normal" title="Done">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
@@ -39,7 +40,7 @@
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" red="0.87058823529999996" green="0.87058823529999996" blue="0.87058823529999996" alpha="1" colorSpace="deviceRGB"/>
+                    <color key="backgroundColor" red="0.92156862750000001" green="0.92156862750000001" blue="0.92156862750000001" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="Z5S-Uy-luH" secondAttribute="bottom" constant="7" id="6BE-30-WSF"/>
                         <constraint firstItem="Z5S-Uy-luH" firstAttribute="top" secondItem="aEE-vD-8ID" secondAttribute="top" constant="7" id="EHs-Fm-Khz"/>
@@ -61,6 +62,9 @@
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="datePicker" destination="ZJg-jG-beC" id="9Yy-Kr-DdQ"/>
+            </connections>
             <point key="canvasLocation" x="725" y="83"/>
         </view>
     </objects>

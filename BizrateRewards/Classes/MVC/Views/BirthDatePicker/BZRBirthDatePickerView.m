@@ -8,14 +8,20 @@
 
 #import "BZRBirthDatePickerView.h"
 
+@interface BZRBirthDatePickerView ()
+
+@property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
+
+@end
+
 @implementation BZRBirthDatePickerView
 
 #pragma mark - Actions
 
 - (IBAction)doneClick:(id)sender
 {
-    if ([self.delegate respondsToSelector:@selector(birthPickerViewWillDismiss:)]) {
-        [self.delegate birthPickerViewWillDismiss:self];
+    if ([self.delegate respondsToSelector:@selector(birthPickerViewWillDismiss:withChosenDate:)]) {
+        [self.delegate birthPickerViewWillDismiss:self withChosenDate:self.datePicker.date];
     } else {
         [self removeFromSuperview];
     }

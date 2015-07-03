@@ -12,10 +12,6 @@
 
 @property (strong, nonatomic) NSArray *componentsArray;
 
-@property (strong, nonatomic) NSIndexPath *indexPath;
-
-@property (weak, nonatomic) id <BZRPickerHolderDelegate, UIPickerViewDelegate> pickerHolderDelegate;
-
 - (void)addComponentsItems:(NSArray*)items;
 - (void)setRowInComponent:(NSUInteger)component byValue:(id)value;
 
@@ -26,9 +22,3 @@
 
 @end
 
-@protocol BZRPickerHolderDelegate <NSObject>
-
-@optional
--(void)pickerHolderWillDismiss:(BZRPickerHolder *)pickerHolder;
-
-@end

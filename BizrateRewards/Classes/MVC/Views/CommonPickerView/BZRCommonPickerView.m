@@ -31,8 +31,8 @@
 
 - (IBAction)doneClick:(id)sender
 {
-    if ([self.delegate respondsToSelector:@selector(commonPickerViewWillDismiss:)]) {
-        [self.delegate commonPickerViewWillDismiss:self];
+    if ([self.delegate respondsToSelector:@selector(commonPickerViewWillDismiss:withChosenValue:)]) {
+        [self.delegate commonPickerViewWillDismiss:self withChosenValue:[self.pickerHolder selectedValueInComponent:0]];
     } else {
         [self removeFromSuperview];
     }

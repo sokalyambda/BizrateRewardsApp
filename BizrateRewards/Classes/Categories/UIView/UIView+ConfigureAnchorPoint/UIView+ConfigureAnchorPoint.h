@@ -1,11 +1,13 @@
 //
-//  BZREditProfileContainerController.h
+//  UIView+ConfigureAnchorPoint.h
 //  BizrateRewards
 //
 //  Created by Eugenity on 02.07.15.
 //  Copyright (c) 2015 ThinkMobiles. All rights reserved.
 //
 
-@interface BZREditProfileContainerController : UITableViewController
+@interface UIView (ConfigureAnchorPoint)
+
+- (void)setAnchorPoint:(CGPoint)anchorPoint;
 
 @end

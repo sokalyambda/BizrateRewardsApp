@@ -25,6 +25,7 @@
 		58219F241B38A5A600A9541A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58219F231B38A5A600A9541A /* QuartzCore.framework */; };
 		585813AA1B3BEDCC0087AEE2 /* BZRToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 585813A91B3BEDCC0087AEE2 /* BZRToken.m */; };
 		585813AE1B3C23840087AEE2 /* BZRSurvey.m in Sources */ = {isa = PBXBuildFile; fileRef = 585813AD1B3C23840087AEE2 /* BZRSurvey.m */; };
+		586ED0D11B46E8F500FEB250 /* UIView+SoftRemoving.m in Sources */ = {isa = PBXBuildFile; fileRef = 586ED0D01B46E8F500FEB250 /* UIView+SoftRemoving.m */; };
 		5878D3DD1B43F92100A917D0 /* BZRReachabilityHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5878D3DC1B43F92100A917D0 /* BZRReachabilityHelper.m */; };
 		5878D3E11B4426E000A917D0 /* BZRCommonDateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5878D3E01B4426DF00A917D0 /* BZRCommonDateFormatter.m */; };
 		5894208B1B450FF6004BAF48 /* BZRAccountSettingsContaiterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5894208A1B450FF6004BAF48 /* BZRAccountSettingsContaiterController.m */; };
@@ -52,6 +53,7 @@
 		58A5BEBD1B414B1800B2BC27 /* BZRBorderedTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A5BEBC1B414B1800B2BC27 /* BZRBorderedTextField.m */; };
 		58A5BEC01B415C2F00B2BC27 /* BZRCheckBoxButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A5BEBF1B415C2F00B2BC27 /* BZRCheckBoxButton.m */; };
 		58A5BEC41B415C7000B2BC27 /* BZRStarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A5BEC31B415C7000B2BC27 /* BZRStarView.m */; };
+		58A7E23A1B45A3A200A1489A /* UIView+ConfigureAnchorPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A7E2391B45A3A200A1489A /* UIView+ConfigureAnchorPoint.m */; };
 		58A91F2F1B3A80A80032607F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58A91F2E1B3A80A80032607F /* CoreLocation.framework */; };
 		58A91F331B3A823D0032607F /* BZRLocationObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A91F321B3A823D0032607F /* BZRLocationObserver.m */; };
 		58A91F3B1B3A91E20032607F /* BZRGiftCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A91F3A1B3A91E20032607F /* BZRGiftCard.m */; };
@@ -115,6 +117,8 @@
 		585813A91B3BEDCC0087AEE2 /* BZRToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRToken.m; path = Classes/MVC/Models/Token/BZRToken.m; sourceTree = "<group>"; };
 		585813AC1B3C23840087AEE2 /* BZRSurvey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRSurvey.h; path = Classes/MVC/Models/Survey/BZRSurvey.h; sourceTree = "<group>"; };
 		585813AD1B3C23840087AEE2 /* BZRSurvey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRSurvey.m; path = Classes/MVC/Models/Survey/BZRSurvey.m; sourceTree = "<group>"; };
+		586ED0CF1B46E8F500FEB250 /* UIView+SoftRemoving.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+SoftRemoving.h"; path = "Classes/Categories/UIView/UIView+SoftRemoving/UIView+SoftRemoving.h"; sourceTree = "<group>"; };
+		586ED0D01B46E8F500FEB250 /* UIView+SoftRemoving.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+SoftRemoving.m"; path = "Classes/Categories/UIView/UIView+SoftRemoving/UIView+SoftRemoving.m"; sourceTree = "<group>"; };
 		5878D3DB1B43F92100A917D0 /* BZRReachabilityHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRReachabilityHelper.h; path = Classes/Utilities/ReachabilityHelper/BZRReachabilityHelper.h; sourceTree = "<group>"; };
 		5878D3DC1B43F92100A917D0 /* BZRReachabilityHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRReachabilityHelper.m; path = Classes/Utilities/ReachabilityHelper/BZRReachabilityHelper.m; sourceTree = "<group>"; };
 		5878D3DF1B4426DF00A917D0 /* BZRCommonDateFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRCommonDateFormatter.h; path = Classes/Utilities/CommonDateFormatter/BZRCommonDateFormatter.h; sourceTree = "<group>"; };
@@ -169,6 +173,8 @@
 		58A5BEBF1B415C2F00B2BC27 /* BZRCheckBoxButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRCheckBoxButton.m; path = Classes/MVC/Views/CheckBoxButton/BZRCheckBoxButton.m; sourceTree = "<group>"; };
 		58A5BEC21B415C7000B2BC27 /* BZRStarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRStarView.h; path = Classes/MVC/Views/FiveStarView/BZRStarView.h; sourceTree = "<group>"; };
 		58A5BEC31B415C7000B2BC27 /* BZRStarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRStarView.m; path = Classes/MVC/Views/FiveStarView/BZRStarView.m; sourceTree = "<group>"; };
+		58A7E2381B45A3A200A1489A /* UIView+ConfigureAnchorPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+ConfigureAnchorPoint.h"; path = "Classes/Categories/UIView/UIView+ConfigureAnchorPoint/UIView+ConfigureAnchorPoint.h"; sourceTree = "<group>"; };
+		58A7E2391B45A3A200A1489A /* UIView+ConfigureAnchorPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+ConfigureAnchorPoint.m"; path = "Classes/Categories/UIView/UIView+ConfigureAnchorPoint/UIView+ConfigureAnchorPoint.m"; sourceTree = "<group>"; };
 		58A91F2E1B3A80A80032607F /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		58A91F311B3A823D0032607F /* BZRLocationObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRLocationObserver.h; path = Classes/LocationObserver/BZRLocationObserver.h; sourceTree = "<group>"; };
 		58A91F321B3A823D0032607F /* BZRLocationObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRLocationObserver.m; path = Classes/LocationObserver/BZRLocationObserver.m; sourceTree = "<group>"; };
@@ -447,6 +453,8 @@
 		58219EF11B38A2C300A9541A /* UIView */ = {
 			isa = PBXGroup;
 			children = (
+				586ED0CE1B46E8A900FEB250 /* UIView+SoftRemoving */,
+				58A7E2371B45A35800A1489A /* UIView+ConfigureAnchorPoint */,
 				58219F071B38A36300A9541A /* UIView+Shaking */,
 				58219F061B38A35800A9541A /* UIView+MakeFromXib */,
 			);
@@ -531,6 +539,15 @@
 				585813AD1B3C23840087AEE2 /* BZRSurvey.m */,
 			);
 			name = Survey;
+			sourceTree = "<group>";
+		};
+		586ED0CE1B46E8A900FEB250 /* UIView+SoftRemoving */ = {
+			isa = PBXGroup;
+			children = (
+				586ED0CF1B46E8F500FEB250 /* UIView+SoftRemoving.h */,
+				586ED0D01B46E8F500FEB250 /* UIView+SoftRemoving.m */,
+			);
+			name = "UIView+SoftRemoving";
 			sourceTree = "<group>";
 		};
 		5878D3DA1B43F8D500A917D0 /* ReachabilityHelper */ = {
@@ -763,6 +780,15 @@
 				58A5BEC31B415C7000B2BC27 /* BZRStarView.m */,
 			);
 			name = StarView;
+			sourceTree = "<group>";
+		};
+		58A7E2371B45A35800A1489A /* UIView+ConfigureAnchorPoint */ = {
+			isa = PBXGroup;
+			children = (
+				58A7E2381B45A3A200A1489A /* UIView+ConfigureAnchorPoint.h */,
+				58A7E2391B45A3A200A1489A /* UIView+ConfigureAnchorPoint.m */,
+			);
+			name = "UIView+ConfigureAnchorPoint";
 			sourceTree = "<group>";
 		};
 		58A91F301B3A821C0032607F /* LocationObserver */ = {
@@ -1136,6 +1162,7 @@
 				58219F0D1B38A38600A9541A /* UIView+MakeFromXib.m in Sources */,
 				58A59E381B3EE99400A5F30C /* BZRGiftCardsListController.m in Sources */,
 				589420AE1B4529C8004BAF48 /* BZRZeroInsetsSeparatorCell.m in Sources */,
+				586ED0D11B46E8F500FEB250 /* UIView+SoftRemoving.m in Sources */,
 				58A59E3C1B3EE9E300A5F30C /* BZRSurveyViewController.m in Sources */,
 				58ACC0841B3968BF0081E546 /* BZRChooseSignUpTypeController.m in Sources */,
 				58A59E341B3EE96700A5F30C /* BZREditProfileController.m in Sources */,
@@ -1144,6 +1171,7 @@
 				58B574E11B38AE200083A80A /* KeychainItemWrapper.m in Sources */,
 				58ACC06A1B3937010081E546 /* BZRStartTutorialController.m in Sources */,
 				589420A11B451E35004BAF48 /* BZRPickerHolder.m in Sources */,
+				58A7E23A1B45A3A200A1489A /* UIView+ConfigureAnchorPoint.m in Sources */,
 				58A91F481B3ABE6D0032607F /* BZRStorageManager.m in Sources */,
 				58ACC06D1B3937160081E546 /* BZRBaseTutorialController.m in Sources */,
 				58A5BEBA1B414ADC00B2BC27 /* BZRLeftImageTextField.m in Sources */,

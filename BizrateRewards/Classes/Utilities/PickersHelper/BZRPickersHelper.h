@@ -6,13 +6,16 @@
 //  Copyright (c) 2015 ThinkMobiles. All rights reserved.
 //
 
-typedef void(^Completion)(void);
-typedef void(^AnimationCompletion)(void);
+typedef void(^DateResult)(NSDate *dateOfBirth, BOOL isOlderThirteen);
+typedef void(^GenderResult)(BOOL isMale, NSString *genderString);
+
+typedef void(^AnimaionCompletionBlock)(BOOL isExpanded, UIView *pickerView);
 
 @interface BZRPickersHelper : NSObject
 
-- (void)showCommonPickerViewInView:(UIView *)view  withComponentsArray:(NSArray *)componentsArray withCompletion:(Completion)completion;
+- (instancetype)initWithParentView:(UIView *)parentView;
 
-- (void)showBirthDatePickerInView:(UIView *)view withCompletion:(Completion)completion;
+- (void)showGenderPickerWithResult:(GenderResult)result withAnimationCompletion:(AnimaionCompletionBlock)animationCompletion;
+- (void)showBirthDatePickerWithResult:(DateResult)result withAnimationCompletion:(AnimaionCompletionBlock)animationCompletion;
 
 @end

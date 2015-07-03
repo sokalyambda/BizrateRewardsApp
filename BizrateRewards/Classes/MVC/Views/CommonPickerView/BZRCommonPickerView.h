@@ -20,6 +20,6 @@
 @protocol BZRCommonPickerViewDelegate <NSObject>
 
 @optional
-- (void)commonPickerViewWillDismiss:(BZRCommonPickerView *)commonPickerView;
+- (void)commonPickerViewWillDismiss:(BZRCommonPickerView *)commonPickerView withChosenValue:(id)chosenValue;
 
 @end

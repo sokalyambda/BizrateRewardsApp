@@ -14,25 +14,22 @@
 #import "BZRBirthDatePickerView.h"
 
 #import "UIView+MakeFromXib.h"
+#import "UIView+ConfigureAnchorPoint.h"
+#import "UIView+SoftRemoving.h"
 
-static NSInteger const kPickerHeight = 218.f;
-static CGFloat const kAnitmationDuration = .5f;
-
-static NSString *const kAnimationName = @"animationName";
-static NSString *const kShowPickerAnimation = @"showPickerAnimation";
-static NSString *const kHidePickerAnimation = @"hidePickerAnimation";
+static NSInteger const kPickerHeight    = 218.f;
+static CGFloat const kAnimationDuration = .25f;
 
 @interface BZRPickersHelper ()<BZRBirthDatePickerDelegate, BZRCommonPickerViewDelegate, UIPickerViewDelegate>
 
-@property (strong, nonatomic) IBOutlet BZRCommonPickerView *commonPickerView;
-@property (strong, nonatomic) IBOutlet BZRBirthDatePickerView *birthDatePicker;
+@property (strong, nonatomic) IBOutlet BZRCommonPickerView      *commonPickerView;
+@property (strong, nonatomic) IBOutlet BZRBirthDatePickerView   *birthDatePicker;
 
-@property (strong, nonatomic) UIView *currentParentView;
+@property (strong, nonatomic) UIView *parentView;
 
-@property (assign, nonatomic) BOOL isPickerExpanded;
-
-@property (copy, nonatomic) Completion completion;
-@property (copy, nonatomic) AnimationCompletion animationCompletion;
+@property (copy, nonatomic) DateResult              dateResult;
+@property (copy, nonatomic) GenderResult            genderResult;
+@property (copy, nonatomic) AnimaionCompletionBlock animationCompletion;
 
 @end
 
@@ -40,10 +37,12 @@ static NSString *const kHidePickerAnimation = @"hidePickerAnimation";
 
 #pragma mark - Lifecycle
 
-- (instancetype)init
+- (instancetype)initWithParentView:(UIView *)parentView;
 {
     self = [super init];
     if (self) {
+        _parentView = parentView;
+        
         _commonPickerView = [BZRCommonPickerView makeFromXibWithFileOwner:self];
         _commonPickerView.delegate = self;
         
@@ -57,144 +56,125 @@ static NSString *const kHidePickerAnimation = @"hidePickerAnimation";
 
 #pragma mark  Public methods
 
-- (void)showCommonPickerViewInView:(UIView *)view  withComponentsArray:(NSArray *)componentsArray withCompletion:(Completion)completion
+- (void)showGenderPickerWithResult:(GenderResult)result withAnimationCompletion:(AnimaionCompletionBlock)animationCompletion
 {
-    self.currentParentView = view;
-    self.completion = completion;
+    self.genderResult = result;
     
-    if (componentsArray)
-        self.commonPickerView.pickerComponentsArray = @[componentsArray];
-
-    [self showCurrentPickerView:self.commonPickerView];
+    self.commonPickerView.pickerComponentsArray = @[@[@"Male", @"Female"]];
+    
+    if ([self isPickerExists:self.birthDatePicker]) {
+        [self.birthDatePicker softRemove];
+    }
+    
+    self.animationCompletion = animationCompletion;
+    [self showHidePickerView:self.commonPickerView];
 }
 
-- (void)showBirthDatePickerInView:(UIView *)view withCompletion:(Completion)completion
+- (void)showBirthDatePickerWithResult:(DateResult)result withAnimationCompletion:(AnimaionCompletionBlock)animationCompletion
 {
-    self.currentParentView = view;
-    self.completion = completion;
+    self.dateResult = result;
     
-    [self showCurrentPickerView:self.birthDatePicker];
+    if ([self isPickerExists:self.commonPickerView]) {
+        [self.commonPickerView softRemove];
+    }
+    
+    self.animationCompletion = animationCompletion;
+    [self showHidePickerView:self.birthDatePicker];
 }
 
 #pragma mark - Private methods
 
-- (void)showCurrentPickerView:(UIView *)currentPickerView
+- (void)showHidePickerView:(UIView *)currentPickerView
 {
-    [currentPickerView setFrame:CGRectMake(0, CGRectGetMaxY(self.currentParentView.bounds), CGRectGetWidth(self.currentParentView.frame), kPickerHeight)];
-    
-    if (![self.currentParentView.subviews containsObject:currentPickerView] && !self.isPickerExpanded) {
-        [self.currentParentView addSubview:currentPickerView];
-        [self showPickerView:currentPickerView inView:self.currentParentView];
+    WEAK_SELF;
+    if (![self isPickerExists:currentPickerView]) {
+        [currentPickerView setFrame:CGRectMake(0, CGRectGetMaxY(self.parentView.bounds), CGRectGetWidth(self.parentView.frame), kPickerHeight)];
+        
+        [self.parentView addSubview:currentPickerView];
+        
+        [UIView animateWithDuration:kAnimationDuration
+                              delay:0.1f
+                            options:UIViewAnimationOptionCurveEaseIn
+                         animations:^{
+                             [currentPickerView setFrame:CGRectMake(0, CGRectGetMaxY(weakSelf.parentView.bounds) - kPickerHeight, CGRectGetWidth(weakSelf.parentView.frame), kPickerHeight)];
+                         }
+                         completion:^(BOOL finished){
+                             if (finished && weakSelf.animationCompletion) {
+                                 weakSelf.animationCompletion(YES, currentPickerView);
+                             }
+                         }];
     } else {
-        [self hidePickerView:currentPickerView inView:self.currentParentView withCompletion:^{
-            [currentPickerView removeFromSuperview];
-        }];
+        [UIView animateWithDuration:kAnimationDuration
+                              delay:0.1f
+                            options:UIViewAnimationOptionCurveEaseOut
+                         animations:^{
+                             [currentPickerView setFrame:CGRectMake(0, CGRectGetMaxY(weakSelf.parentView.bounds), CGRectGetWidth(weakSelf.parentView.frame), kPickerHeight)];
+                             
+                             if (weakSelf.animationCompletion) {
+                                 weakSelf.animationCompletion(NO, currentPickerView);
+                             }
+                         }
+                         completion:^(BOOL finished){
+                             if (finished) {
+                                 [currentPickerView removeFromSuperview];
+                             }
+                         }];
     }
 }
 
-#pragma mark - CAAnimation
-
-- (void)showPickerView:(UIView *)pickerView inView:(UIView *)parentView
+- (BOOL)isPickerExists:(UIView *)pickerView
 {
-    CGPoint toPoint = CGPointMake(0, CGRectGetMaxY(parentView.bounds) - kPickerHeight);
-    
-    [self setAnchorPoint:CGPointZero forView:pickerView];
-
-    CABasicAnimation * animationPosition = [CABasicAnimation animationWithKeyPath:@"position"];
-    animationPosition.fromValue = [pickerView.layer valueForKey:@"position"];
-    animationPosition.toValue = [NSValue valueWithCGPoint:toPoint];
-    
-    animationPosition.duration = kAnitmationDuration;
-    animationPosition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-    
-    pickerView.layer.position = toPoint;
-    [pickerView.layer addAnimation:animationPosition forKey:kShowPickerAnimation];
-}
-
-- (void)hidePickerView:(UIView *)pickerView inView:(UIView *)parentView withCompletion:(AnimationCompletion)completion
-{
-    self.animationCompletion = completion;
-    
-    CGPoint toPoint = CGPointMake(0, CGRectGetMaxY(parentView.bounds));
-    
-    CABasicAnimation *hideAnimation = [CABasicAnimation animationWithKeyPath:@"position"];
-    hideAnimation.fromValue = [pickerView.layer valueForKey:@"position"];
-    hideAnimation.toValue = [NSValue valueWithCGPoint:toPoint];
-    
-    hideAnimation.duration = kAnitmationDuration;
-    hideAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-    
-    hideAnimation.delegate = self;
-    [hideAnimation setValue:kHidePickerAnimation forKey:kAnimationName];
-    
-    pickerView.layer.position = toPoint;
-    [pickerView.layer addAnimation:hideAnimation forKey:kHidePickerAnimation];
+    if (![self.parentView.subviews containsObject:pickerView]) {
+        return NO;
+    }
+    return YES;
 }
 
 #pragma mark - BZRBirthDatePickerDelegate
 
-- (void)birthPickerViewWillDismiss:(BZRBirthDatePickerView *)datePickerView
+- (void)birthPickerViewWillDismiss:(BZRBirthDatePickerView *)datePickerView withChosenDate:(NSDate *)birthDate
 {
-    WEAK_SELF;
-    [self hidePickerView:datePickerView inView:self.currentParentView withCompletion:^{
-        [datePickerView removeFromSuperview];
-        weakSelf.isPickerExpanded = NO;
-    }];
+    if (birthDate && self.dateResult) {
+        NSDate* now = [NSDate date];
+        NSDateComponents* ageComponents = [[NSCalendar currentCalendar]
+                                           components:NSCalendarUnitYear
+                                           fromDate:birthDate
+                                           toDate:now
+                                           options:0];
+        NSInteger age = [ageComponents year];
+        
+        self.dateResult(birthDate, age > 13.f);
+    }
+
+    [self showHidePickerView:datePickerView];
 }
 
 #pragma mark - BZRCommonPickerViewDelegate
 
-- (void)commonPickerViewWillDismiss:(BZRCommonPickerView *)commonPickerView
+- (void)commonPickerViewWillDismiss:(BZRCommonPickerView *)commonPickerView withChosenValue:(id)chosenValue
 {
-    WEAK_SELF;
-    [self hidePickerView:commonPickerView inView:self.currentParentView withCompletion:^{
-        [commonPickerView removeFromSuperview];
-        weakSelf.isPickerExpanded = NO;
-    }];
+    if ([chosenValue isKindOfClass:[NSString class]]) {
+        NSString *genderString = chosenValue;
+        BOOL isMale = [[genderString substringToIndex:1] isEqualToString:@"M"] ? YES : NO;
+        self.genderResult(isMale, genderString);
+    }
+    [self showHidePickerView:commonPickerView];
 }
 
 #pragma mark - UIPickerViewDelegate
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    id value =  [((BZRPickerHolder*)pickerView) valueForRow:row forComponent:component];
+    id value = [((BZRPickerHolder *)pickerView) valueForRow:row forComponent:component];
     if ([value isKindOfClass:[NSString class]]) {
         return value;
     }
     return nil;
 }
 
-#pragma mark - CAAnimationDelegate
-
-- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    if (self.animationCompletion) {
-        self.animationCompletion();
-    }
-}
-
-#pragma mark - CALayer
-
-- (void)setAnchorPoint:(CGPoint)anchorPoint forView:(UIView *)view
-{
-    CGPoint newPoint = CGPointMake(view.bounds.size.width * anchorPoint.x,
-                                   view.bounds.size.height * anchorPoint.y);
-    CGPoint oldPoint = CGPointMake(view.bounds.size.width * view.layer.anchorPoint.x,
-                                   view.bounds.size.height * view.layer.anchorPoint.y);
     
-    newPoint = CGPointApplyAffineTransform(newPoint, view.transform);
-    oldPoint = CGPointApplyAffineTransform(oldPoint, view.transform);
-    
-    CGPoint position = view.layer.position;
-    
-    position.x -= oldPoint.x;
-    position.x += newPoint.x;
-    
-    position.y -= oldPoint.y;
-    position.y += newPoint.y;
-    
-    view.layer.position = position;
-    view.layer.anchorPoint = anchorPoint;
 }
 
 @end

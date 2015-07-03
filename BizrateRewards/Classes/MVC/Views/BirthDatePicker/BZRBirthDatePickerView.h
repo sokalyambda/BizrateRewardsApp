@@ -17,6 +17,6 @@
 @protocol BZRBirthDatePickerDelegate <NSObject>
 
 @optional
-- (void)birthPickerViewWillDismiss:(BZRBirthDatePickerView *)datePickerView;
+- (void)birthPickerViewWillDismiss:(BZRBirthDatePickerView *)datePickerView withChosenDate:(NSDate *)date;
 
 @end
