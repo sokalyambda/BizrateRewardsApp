@@ -8,7 +8,7 @@
 
 #import "BZRGetStartedController.h"
 
-@interface BZRGetStartedController ()
+@interface BZRGetStartedController ()<UITextFieldDelegate>
 
 @end
 
