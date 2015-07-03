@@ -8,4 +8,6 @@
 
 @interface BZRBorderedTextField : UITextField
 
+- (void)addBottomBorder;
+
 @end

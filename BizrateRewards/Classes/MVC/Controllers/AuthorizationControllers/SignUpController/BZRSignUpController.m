@@ -40,9 +40,8 @@
     [super viewDidLoad];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
     [self customizeFields];
 }
 
@@ -71,6 +70,7 @@
 {
     self.userNameField.imageName = @"email_icon";
     self.passwordField.imageName = @"password_icon";
+    [self.passwordField addBottomBorder];
 }
 
 

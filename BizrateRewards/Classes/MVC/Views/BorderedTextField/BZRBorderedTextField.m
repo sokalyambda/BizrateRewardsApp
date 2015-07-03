@@ -19,7 +19,6 @@ static CGFloat kLeftViewWidth = 10.f;
  - (void)drawRect:(CGRect)rect
 {
     [self addTopBorder];
-    [self addBottomBorder];
 }
 
 #pragma mark - Lifecycle
