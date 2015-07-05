@@ -16,7 +16,7 @@
 
 static NSString *const kDashboardSegueIdentifier = @"dashboardSegue";
 
-@interface BZRSignInController ()
+@interface BZRSignInController ()<UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet BZRLeftImageTextField *userNameField;
 @property (weak, nonatomic) IBOutlet BZRLeftImageTextField *passwordField;
@@ -109,6 +109,18 @@ static NSString *const kDashboardSegueIdentifier = @"dashboardSegue";
 {
     self.userNameField.imageName = @"email_icon";
     self.passwordField.imageName = @"password_icon";
+}
+
+#pragma mark - UITextFieldDelegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if ([self.userNameField isFirstResponder]) {
+        [self.passwordField becomeFirstResponder];
+    } else if ([self.passwordField isFirstResponder]) {
+        [self.passwordField resignFirstResponder];
+    }
+    return YES;
 }
 
 @end

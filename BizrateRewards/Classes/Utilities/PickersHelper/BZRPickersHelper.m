@@ -37,6 +37,11 @@ static CGFloat const kAnimationDuration = .25f;
 
 #pragma mark - Lifecycle
 
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (instancetype)initWithParentView:(UIView *)parentView;
 {
     self = [super init];
@@ -48,6 +53,9 @@ static CGFloat const kAnimationDuration = .25f;
         
         _birthDatePicker = [BZRBirthDatePickerView makeFromXibWithFileOwner:self];
         _birthDatePicker.delegate = self;
+        
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShowNotification:) name:UIKeyboardWillShowNotification object:nil];
     }
     return self;
 }
@@ -175,6 +183,17 @@ static CGFloat const kAnimationDuration = .25f;
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
     
+}
+
+#pragma mark - Keyboard methods
+
+- (void)keyboardWillShowNotification:(NSNotification *)notification
+{
+    if ([self isPickerExists:self.commonPickerView]) {
+        [ self showHidePickerView:self.commonPickerView];
+    } else if ([self isPickerExists:self.birthDatePicker]) {
+        [self showHidePickerView:self.birthDatePicker];
+    }
 }
 
 @end

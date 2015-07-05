@@ -23,7 +23,7 @@ typedef enum : NSUInteger {
     BZREditableFieldTypeGender
 } BZREditableFieldType;
 
-@interface BZREditProfileContainerController ()
+@interface BZREditProfileContainerController ()<UITextFieldDelegate>
 
 @property (strong, nonatomic) BZRPickersHelper *pickersHelper;
 
@@ -36,6 +36,8 @@ typedef enum : NSUInteger {
 @property (weak, nonatomic) IBOutlet UITextField *emailField;
 @property (weak, nonatomic) IBOutlet UITextField *dateOfBirthField;
 @property (weak, nonatomic) IBOutlet UITextField *genderField;
+
+@property (strong, nonatomic) IBOutletCollection(UITextField) NSArray *textFields;
 
 @end
 
@@ -67,13 +69,6 @@ typedef enum : NSUInteger {
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-//    [self.view layoutIfNeeded];
-    NSLog(@"tableView.contentOffset %@", NSStringFromCGPoint(self.tableView.contentOffset));
-}
-
 #pragma mark - UITableViewDelegate
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -83,6 +78,9 @@ typedef enum : NSUInteger {
     WEAK_SELF;
     switch (fieldType) {
         case BZREditableFieldTypeDateOfBirth: {
+            
+            [self resignIfFirstResponder];
+            
             [self.pickersHelper showBirthDatePickerWithResult:^(NSDate *dateOfBirth, BOOL isOlderThirteen) {
                 
                 weakSelf.dateOfBirthField.text = [[BZRCommonDateFormatter commonDateFormatter] stringFromDate:dateOfBirth];
@@ -93,6 +91,9 @@ typedef enum : NSUInteger {
             break;
         }
         case BZREditableFieldTypeGender: {
+            
+            [self resignIfFirstResponder];
+            
             [self.pickersHelper showGenderPickerWithResult:^(BOOL isMale, NSString *genderString) {
                 
                 weakSelf.genderField.text = genderString;
@@ -139,6 +140,29 @@ typedef enum : NSUInteger {
 {
     self.isPickerPresented = NO;
     [self.tableView setContentOffset:CGPointZero animated:YES];
+}
+
+- (void)resignIfFirstResponder
+{
+    for (UITextField *field in self.textFields) {
+        if ([field isFirstResponder]) {
+            [field resignFirstResponder];
+        }
+    }
+}
+
+#pragma mark - UITextFieldDelegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if ([self.firstNameField isFirstResponder]) {
+        [self.lastNameField becomeFirstResponder];
+    } else if ([self.lastNameField isFirstResponder]) {
+        [self.emailField becomeFirstResponder];
+    } else if ([self.emailField isFirstResponder]) {
+        [self.emailField resignFirstResponder];
+    }
+    return YES;
 }
 
 @end

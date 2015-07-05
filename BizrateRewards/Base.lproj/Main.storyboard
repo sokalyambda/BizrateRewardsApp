@@ -991,12 +991,18 @@
                                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <nil key="highlightedColor"/>
+                                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                            <rect key="frame" x="83" y="41" width="313" height="17"/>
+                                                        </variation>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ralph" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eu8-PG-E9q">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eu8-PG-E9q">
                                                         <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <nil key="highlightedColor"/>
+                                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                            <rect key="frame" x="82" y="20" width="313" height="21"/>
+                                                        </variation>
                                                     </label>
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.0" green="0.54485059309999995" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -1966,7 +1972,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WHt-zn-00U" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1810.5" y="1630.5"/>
+            <point key="canvasLocation" x="1786.5" y="1630.5"/>
         </scene>
         <!--Gift Cards List Controller-->
         <scene sceneID="Cs3-0m-gYa">
@@ -2177,7 +2183,7 @@
                                                         <constraint firstAttribute="height" constant="30" id="RFZ-6t-j1H"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" returnKeyType="next"/>
                                                     <variation key="default">
                                                         <mask key="constraints">
                                                             <exclude reference="RFZ-6t-j1H"/>
@@ -2189,6 +2195,9 @@
                                                             <include reference="RFZ-6t-j1H"/>
                                                         </mask>
                                                     </variation>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="AKe-zY-Iin" id="J7w-tp-fQf"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -2243,7 +2252,7 @@
                                                         <constraint firstAttribute="height" constant="30" id="fVR-Nj-me8"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" returnKeyType="next"/>
                                                     <variation key="default">
                                                         <mask key="constraints">
                                                             <exclude reference="fVR-Nj-me8"/>
@@ -2255,6 +2264,9 @@
                                                             <include reference="fVR-Nj-me8"/>
                                                         </mask>
                                                     </variation>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="AKe-zY-Iin" id="b00-jo-Jxw"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -2297,7 +2309,7 @@
                                                         <constraint firstAttribute="height" constant="30" id="ubj-oz-wgE"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="done"/>
                                                     <variation key="default">
                                                         <mask key="constraints">
                                                             <exclude reference="ubj-oz-wgE"/>
@@ -2309,6 +2321,9 @@
                                                             <include reference="ubj-oz-wgE"/>
                                                         </mask>
                                                     </variation>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="AKe-zY-Iin" id="uhY-Wo-S2S"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -2466,6 +2481,11 @@
                         <outlet property="firstNameField" destination="z1F-fL-93d" id="fCn-PR-QjR"/>
                         <outlet property="genderField" destination="dMp-oh-XhE" id="bs0-fx-VII"/>
                         <outlet property="lastNameField" destination="ZXL-Hc-Cro" id="mXa-kO-3ph"/>
+                        <outletCollection property="textFields" destination="z1F-fL-93d" id="Y7Y-1r-X4z"/>
+                        <outletCollection property="textFields" destination="ZXL-Hc-Cro" id="lC6-vh-NxY"/>
+                        <outletCollection property="textFields" destination="MDT-MS-259" id="gJY-bx-6dY"/>
+                        <outletCollection property="textFields" destination="07e-LD-Pjy" id="ezI-h2-C43"/>
+                        <outletCollection property="textFields" destination="dMp-oh-XhE" id="JsN-5K-RlW"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="036-qj-yB7" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2671,7 +2691,7 @@
                                                     <constraint firstAttribute="height" constant="45" id="n4O-9m-dWN"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                                <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
                                                 <variation key="default">
                                                     <mask key="constraints">
                                                         <exclude reference="n4O-9m-dWN"/>
@@ -2692,7 +2712,7 @@
                                                     <constraint firstAttribute="height" constant="45" id="IWT-dU-70h"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next"/>
                                                 <variation key="default">
                                                     <mask key="constraints">
                                                         <exclude reference="IWT-dU-70h"/>
@@ -3874,7 +3894,7 @@
                                                     <constraint firstAttribute="height" constant="45" id="E9b-yy-nQ4"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next"/>
                                                 <variation key="default">
                                                     <mask key="constraints">
                                                         <exclude reference="E9b-yy-nQ4"/>
@@ -3919,7 +3939,7 @@
                                                     <constraint firstAttribute="height" constant="45" id="d9S-pQ-T0X"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
                                                 <variation key="default">
                                                     <mask key="constraints">
                                                         <exclude reference="d9S-pQ-T0X"/>
@@ -4116,6 +4136,6 @@
         <image name="user_icon_small" width="57" height="57"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="40s-fD-1f5"/>
+        <segue reference="tFB-NZ-4oZ"/>
     </inferredMetricsTieBreakers>
 </document>

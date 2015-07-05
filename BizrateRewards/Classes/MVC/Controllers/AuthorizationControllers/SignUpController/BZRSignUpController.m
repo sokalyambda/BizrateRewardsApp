@@ -12,7 +12,7 @@
 
 #import "BZRLeftImageTextField.h"
 
-@interface BZRSignUpController ()
+@interface BZRSignUpController ()<UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet BZRLeftImageTextField *userNameField;
 @property (weak, nonatomic) IBOutlet BZRLeftImageTextField *passwordField;
@@ -71,6 +71,18 @@
     self.userNameField.imageName = @"email_icon";
     self.passwordField.imageName = @"password_icon";
     [self.passwordField addBottomBorder];
+}
+
+#pragma mark - UITextFieldDelegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if ([self.userNameField isFirstResponder]) {
+        [self.passwordField becomeFirstResponder];
+    } else if ([self.passwordField isFirstResponder]) {
+        [self.passwordField resignFirstResponder];
+    }
+    return YES;
 }
 
 

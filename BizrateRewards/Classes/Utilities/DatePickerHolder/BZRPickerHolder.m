@@ -21,7 +21,7 @@ NSUInteger MIDDLE_POSITION = 2000 / 2;
 
 #pragma mark - Lifecycle
 
--(void)awakeFromNib
+- (void)awakeFromNib
 {
     [self commonInit];
 }
@@ -35,7 +35,7 @@ NSUInteger MIDDLE_POSITION = 2000 / 2;
     return self;
 }
 
--(void)commonInit
+- (void)commonInit
 {
     self.dataSource = self;
     self.internalArray = [NSMutableArray array];
@@ -67,7 +67,7 @@ NSUInteger MIDDLE_POSITION = 2000 / 2;
         [self.internalArray addObject:items];
 }
 
--(void)setRowInComponent:(NSUInteger)component byValue:(id)value
+- (void)setRowInComponent:(NSUInteger)component byValue:(id)value
 {
     if (component < self.internalArray.count) {
         NSArray *items = self.internalArray[component];
@@ -79,7 +79,7 @@ NSUInteger MIDDLE_POSITION = 2000 / 2;
     }
 }
 
--(NSInteger)selectedIndexComponent:(NSInteger)component
+- (NSInteger)selectedIndexComponent:(NSInteger)component
 {
     NSUInteger ind = [super selectedRowInComponent:component];
     
@@ -89,7 +89,7 @@ NSUInteger MIDDLE_POSITION = 2000 / 2;
     return ind;
 }
 
--(id)selectedValueInComponent:(NSInteger)component
+- (id)selectedValueInComponent:(NSInteger)component
 {
     if (component < self.internalArray.count) {
         NSUInteger ind = [self selectedIndexComponent:component];
@@ -98,7 +98,7 @@ NSUInteger MIDDLE_POSITION = 2000 / 2;
     return nil;
 }
 
--(id)valueForRow:(NSInteger)row forComponent:(NSInteger)component
+- (id)valueForRow:(NSInteger)row forComponent:(NSInteger)component
 {
     if (component < self.internalArray.count) {
         NSUInteger ind = row;

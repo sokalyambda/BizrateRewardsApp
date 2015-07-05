@@ -15,7 +15,4 @@ static NSString *const LocationManagerDidFailAuthorizeNotification = @"LocationM
 static NSString *const PushNotificationServiceDidSuccessAuthorizeNotification = @"PushNotificationServiceDidSuccessAuthorizeNotification";
 static NSString *const PushNotificationServiceDidFailAuthorizeNotification = @"PushNotificationServiceDidFailAuthorizeNotification";
 
-//static NSString *const PickerDidShowNotification = @"PickerDidShowNotification";
-//static NSString *const PickerDidHideNotification = @"PickerDidHideNotification";
-
 #endif

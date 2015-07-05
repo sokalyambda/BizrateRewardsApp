@@ -20,7 +20,7 @@
 
 @implementation BZRCheckBoxButton
 
-#pragma mark - Init
+#pragma mark - Lifecycle
 
 -(void)awakeFromNib
 {
