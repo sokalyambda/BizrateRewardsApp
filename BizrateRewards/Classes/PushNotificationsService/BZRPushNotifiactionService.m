@@ -12,35 +12,31 @@
 
 @implementation BZRPushNotifiactionService
 
-+ (void)recivedPushNotification:(NSDictionary*)userInfo
-{
-    
-}
-
-+ (void)sendPushToken:(NSData*)pushToken
-{
-    BOOL enabled = [self pushNotificationsEnabled];
-    if (!enabled) {
-        pushToken = nil;
-    }
-}
-
 + (void)registeredForPushNotificationsWithToken:(NSData *)deviceToken
 {
     NSString *token = [[[deviceToken.description
                          stringByReplacingOccurrencesOfString:@"<" withString:@""]
                         stringByReplacingOccurrencesOfString:@">" withString:@""]
                        stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSString *deviceId = [UIDevice currentDevice].identifierForVendor.UUIDString;
     if (token.length) {
+        //MARK: set device token
         [BZRStorageManager sharedStorage].deviceToken = token;
+        [BZRStorageManager sharedStorage].deviceUDID = deviceId;
     }
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:PushNotificationServiceDidSuccessAuthorizeNotification object:nil];
 }
 
 + (void)failedToRegisterForPushNotificationsWithError:(NSError *)error
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:PushNotificationServiceDidFailAuthorizeNotification object:error];
+}
+
++ (void)registerApplicationForPushNotifications:(UIApplication *)application
+{
+    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge
+                                                                                         |UIUserNotificationTypeSound
+                                                                                         |UIUserNotificationTypeAlert) categories:nil];
+    [application registerUserNotificationSettings:settings];
 }
 
 + (BOOL)pushNotificationsEnabled
@@ -52,13 +48,17 @@
     }
 }
 
-+ (void)registerApplicationForPushNotifications:(UIApplication *)application
++ (void)recivedPushNotification:(NSDictionary*)userInfo
 {
-    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge
-                                                                                         |UIUserNotificationTypeSound
-                                                                                         |UIUserNotificationTypeAlert) categories:nil];
-    [application registerUserNotificationSettings:settings];
-//    [application registerForRemoteNotifications];
+    
+}
+
++ (void)sendPushToken:(NSData*)pushToken
+{
+    BOOL enabled = [self pushNotificationsEnabled];
+    if (!enabled) {
+        pushToken = nil;
+    }
 }
 
 @end

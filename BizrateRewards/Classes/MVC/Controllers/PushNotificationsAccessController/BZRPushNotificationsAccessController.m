@@ -69,7 +69,6 @@ static NSString *const kFinalTutorialControllerSegueIdentifier = @"finalTutorial
 - (void)pushNotificationServiceDidFailAuthorizeNotification:(NSNotification *)notification
 {
     NSError *error = notification.object;
-//    ShowErrorAlert(error);
     [self showAlertControllerWithError:error];
 }
 
@@ -77,9 +76,12 @@ static NSString *const kFinalTutorialControllerSegueIdentifier = @"finalTutorial
 
 - (void)showAlertControllerWithError:(NSError *)error
 {
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:error.localizedDescription message:@"Something wrong...You can modify push notifications settings in settings app." preferredStyle:UIAlertControllerStyleAlert];
+    WEAK_SELF;
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"" message:@"Do you want to enable push-notifications from settings?" preferredStyle:UIAlertControllerStyleAlert];
     
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+        [weakSelf performSegueWithIdentifier:kFinalTutorialControllerSegueIdentifier sender:weakSelf];
+    }];
 
     UIAlertAction *settingsAction = [UIAlertAction actionWithTitle:@"Open Settings" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
