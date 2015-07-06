@@ -50,20 +50,30 @@
 - (IBAction)createAccountClick:(id)sender
 {
     WEAK_SELF;
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [self.dataManager getClientCredentialsOnSuccess:^(BOOL success, NSError *error) {
-        if (success) {
-            [weakSelf.dataManager signUpWithUserFirstName:@"firstNameTest" andUserLastName:@"lastNameTest" andEmail:@"qweqweqwe@gmail.com" withResult:^(BOOL success, NSError *error) {
-                [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-                if (!success) {
-                    ShowErrorAlert(error);
+    if ([self.validator validateEmailField:self.userNameField andPasswordField:self.passwordField]) {
+        [BZRReachabilityHelper checkConnectionOnSuccess:^{
+            [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            [self.dataManager getClientCredentialsOnSuccess:^(BOOL success, NSError *error) {
+                if (success) {
+                    [weakSelf.dataManager signUpWithUserFirstName:@"firstNameTest" andUserLastName:@"lastNameTest" andEmail:@"qweqweqwe@gmail.com" withResult:^(BOOL success, NSError *error) {
+                        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+                        if (!success) {
+                            ShowErrorAlert(error);
+                        }
+                    }];
+                } else {
+                    [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
                 }
-                NSData *errorData = error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey];
-                NSString *errorString = [[NSString alloc] initWithData:errorData encoding:NSUTF8StringEncoding];
-                NSLog(@"error %@", errorString);
             }];
-        }
-    }];
+        } failure:^{
+            
+        }];
+    } else {
+        ShowAlert(self.validator.validationErrorString);
+        [self.validator cleanValidationErrorString];
+    }
+    
+   
 }
 
 - (void)customizeFields

@@ -1,27 +1,27 @@
 //
-//  BZRToken.m
+//  BZRApplicationToken.m
 //  BizrateRewards
 //
-//  Created by Eugenity on 25.06.15.
+//  Created by Eugenity on 06.07.15.
 //  Copyright (c) 2015 ThinkMobiles. All rights reserved.
 //
 
-#import "BZRToken.h"
+#import "BZRApplicationToken.h"
 
 static NSString *const kAccessTokenKey  = @"access_token";
-static NSString *const kRefreshTokenKey = @"refresh_token";
 static NSString *const kExpiresInKey    = @"expires_in";
 static NSString *const kScopeTokenKey   = @"scope";
 static NSString *const kTypeTokenKey    = @"token_type";
 
-@implementation BZRToken
+@implementation BZRApplicationToken
+
+#pragma mark - BZRMappingProtocol
 
 - (instancetype)initWithServerResponse:(NSDictionary *)response
 {
     self = [super init];
     if (self) {
         _accessToken    = response[kAccessTokenKey];
-        _refreshToken   = response[kRefreshTokenKey];
         _scope          = response[kScopeTokenKey];
         _tokenType      = response[kTypeTokenKey];
         

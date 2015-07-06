@@ -89,14 +89,19 @@ static NSString *const kAccountSettingsSegueIdentifier = @"accountSettingsSegueI
 - (void)getCurrentUserProfile
 {
     WEAK_SELF;
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [self.dataManager getCurrentUserWithCompletion:^(BOOL success, NSError *error) {
-        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-        if (success) {
-            [weakSelf updateUserInformation];
-            [weakSelf calculateProgress];
-        }
+    [BZRReachabilityHelper checkConnectionOnSuccess:^{
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [weakSelf.dataManager getCurrentUserWithCompletion:^(BOOL success, NSError *error) {
+            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+            if (success) {
+                [weakSelf updateUserInformation];
+                [weakSelf calculateProgress];
+            }
+        }];
+    } failure:^{
+        ShowAlert(InternetIsNotReachableString);
     }];
+    
     
 }
 

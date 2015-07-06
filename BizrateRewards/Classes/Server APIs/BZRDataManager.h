@@ -29,4 +29,7 @@
 //get User
 - (void)getCurrentUserWithCompletion:(SuccessBlock)completion;
 
+//send device token
+- (void)sendDeviceAPNSTokenAndDeviceIdentifierWithResult:(SuccessBlock)result;
+
 @end
