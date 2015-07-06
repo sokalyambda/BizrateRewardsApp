@@ -8,14 +8,20 @@
 
 #import "BZRGetStartedController.h"
 #import "BZRPrivacyAndTermsController.h"
+#import "BZREditProfileContainerController.h"
+
 
 typedef enum : NSUInteger {
     BZRConditionsTypePrivacyPolicy,
     BZRConditionsTypeTermsAndConditions
 } BZRPrivacyAndTermsType;
 
+static NSString *const kEditProfileContainerSegueIdentifier = @"editProfileContainerSegue";
+static NSString *const kChooseSignUpTypeSegueIdentifier = @"сhooseSignUpTypeSegue";
+
 @interface BZRGetStartedController ()<UITextFieldDelegate>
 
+@property (weak, nonatomic) BZREditProfileContainerController *editProfileTableViewController;
 @end
 
 @implementation BZRGetStartedController
@@ -31,6 +37,18 @@ typedef enum : NSUInteger {
 {
     [super viewWillAppear:animated];
     [self.view layoutIfNeeded];
+}
+
+#pragma mark - Actions
+
+- (IBAction)privacyPolicyClick:(id)sender
+{
+    [self showPrivacyAndTermsWithType:BZRConditionsTypePrivacyPolicy];
+}
+
+- (IBAction)termsAndConditionsClick:(id)sender
+{
+    [self showPrivacyAndTermsWithType:BZRConditionsTypeTermsAndConditions];
 }
 
 - (void)showPrivacyAndTermsWithType:(BZRPrivacyAndTermsType)type
@@ -55,16 +73,28 @@ typedef enum : NSUInteger {
     [self.navigationController pushViewController:controller animated:YES];
 }
 
-#pragma mark - IBActions
-
-- (IBAction)privacyPolicyClick:(id)sender
-{
-    [self showPrivacyAndTermsWithType:BZRConditionsTypePrivacyPolicy];
+- (IBAction)submitButtonClick:(id)sender {
+    
+    if([self.validator validateFirstNameField:self.editProfileTableViewController.firstNameField
+                                lastNameField:self.editProfileTableViewController.lastNameField
+                                   emailField:self.editProfileTableViewController.emailField
+                             dateOfBirthField:self.editProfileTableViewController.dateOfBirthField
+                                  genderField:self.editProfileTableViewController.genderField]) {
+        [self performSegueWithIdentifier:kChooseSignUpTypeSegueIdentifier sender:self];
+        
+    } else {
+        ShowAlert(self.validator.validationErrorString);
+        [self.validator cleanValidationErrorString];
+    }
 }
 
-- (IBAction)termsAndConditionsClick:(id)sender
+#pragma mark - Navigation
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    [self showPrivacyAndTermsWithType:BZRConditionsTypeTermsAndConditions];
+    if ([segue.identifier isEqualToString:kEditProfileContainerSegueIdentifier]) {
+        self.editProfileTableViewController = segue.destinationViewController;
+    }
 }
 
 @end

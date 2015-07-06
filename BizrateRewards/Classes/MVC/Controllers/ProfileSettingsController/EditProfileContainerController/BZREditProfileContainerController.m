@@ -31,12 +31,6 @@ typedef enum : NSUInteger {
 
 @property (assign, nonatomic) BOOL isPickerPresented;
 
-@property (weak, nonatomic) IBOutlet UITextField *firstNameField;
-@property (weak, nonatomic) IBOutlet UITextField *lastNameField;
-@property (weak, nonatomic) IBOutlet UITextField *emailField;
-@property (weak, nonatomic) IBOutlet UITextField *dateOfBirthField;
-@property (weak, nonatomic) IBOutlet UITextField *genderField;
-
 @property (strong, nonatomic) IBOutletCollection(UITextField) NSArray *textFields;
 
 @end

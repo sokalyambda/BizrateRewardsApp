@@ -14,6 +14,7 @@
 
 - (BOOL)validateEmailField:(UITextField *)emailField;
 - (BOOL)validateEmailField:(UITextField *)emailField andPasswordField:(UITextField *)passwordField;
+- (BOOL)validateFirstNameField:(UITextField *)firstNameField lastNameField:(UITextField *)lastNameField emailField:(UITextField *)emailField dateOfBirthField: (UITextField *)dateOfBirthField genderField: (UITextField *)genderField;
 - (void)cleanValidationErrorString;
 
 @end

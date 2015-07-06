@@ -8,4 +8,10 @@
 
 @interface BZREditProfileContainerController : UITableViewController
 
+@property (weak, nonatomic) IBOutlet UITextField *firstNameField;
+@property (weak, nonatomic) IBOutlet UITextField *lastNameField;
+@property (weak, nonatomic) IBOutlet UITextField *emailField;
+@property (weak, nonatomic) IBOutlet UITextField *dateOfBirthField;
+@property (weak, nonatomic) IBOutlet UITextField *genderField;
+
 @end
