@@ -7,6 +7,7 @@
 //
 
 #import "BZRAccountSettingsController.h"
+#import "BZRSignInController.h"
 
 @interface BZRAccountSettingsController ()
 
@@ -19,6 +20,18 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self.navigationController setNavigationBarHidden:YES];
+}
+
+#pragma mark - Actions
+
+- (IBAction)exitClick:(id)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+- (IBAction)signOutAction:(id)sender
+{
+    
 }
 
 @end

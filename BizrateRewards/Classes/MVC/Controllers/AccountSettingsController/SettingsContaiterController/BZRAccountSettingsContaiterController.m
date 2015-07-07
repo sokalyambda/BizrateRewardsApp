@@ -40,7 +40,7 @@ static NSString *const kEditProfileSegueIdentifier = @"editProfileSegue";
     BZRSettingsCellType cellType = indexPath.row;
     switch (cellType) {
         case BZRSettingsCellPersonalInfo:
-            [self performSegueWithIdentifier:kEditProfileSegueIdentifier sender:self];
+            [self.parentViewController performSegueWithIdentifier:kEditProfileSegueIdentifier sender:self];
             break;
         case BZRSettingsCellGeoLocation:
             break;
