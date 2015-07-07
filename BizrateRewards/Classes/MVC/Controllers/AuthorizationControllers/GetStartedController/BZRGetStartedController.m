@@ -36,7 +36,8 @@ static NSString *const kChooseSignUpTypeSegueIdentifier = @"сhooseSignUpTypeSeg
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.view layoutIfNeeded];
+//    [self.navigationController setNavigationBarHidden:NO];
+//    [self.view layoutIfNeeded];
 }
 
 #pragma mark - Actions

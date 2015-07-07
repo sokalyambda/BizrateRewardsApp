@@ -8,6 +8,8 @@
 
 #import "BZRFinishTutorialController.h"
 
+static NSString *const kSignInSegueIdentifier = @"signInSegueIdentifier";
+
 @interface BZRFinishTutorialController ()
 
 @end
@@ -24,13 +26,24 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:YES];
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [self.navigationController setNavigationBarHidden:NO];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+}
+
+#pragma mark - Actions
+
+- (IBAction)signInClick:(id)sender
+{
+    [self performSegueWithIdentifier:kSignInSegueIdentifier sender:self];
+}
+
+- (IBAction)getStartedClick:(id)sender
+{
 }
 
 @end

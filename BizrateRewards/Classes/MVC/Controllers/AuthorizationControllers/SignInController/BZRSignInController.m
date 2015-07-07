@@ -54,43 +54,43 @@ static NSString *const kDashboardSegueIdentifier = @"dashboardSegue";
 //facebook
 - (IBAction)facebookLoginClick:(id)sender
 {
-    WEAK_SELF;
-    [BZRReachabilityHelper checkConnectionOnSuccess:^{
-        [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
-        [weakSelf.dataManager authorizeWithFacebookWithResult:^(BOOL success, NSError *error) {
-            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-            if (success) {
-                [weakSelf performSegueWithIdentifier:kDashboardSegueIdentifier sender:weakSelf];
-            }
-        }];
-    } failure:^{
-        ShowAlert(InternetIsNotReachableString);
-    }];
+//    WEAK_SELF;
+//    [BZRReachabilityHelper checkConnectionOnSuccess:^{
+//        [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
+//        [weakSelf.dataManager authorizeWithFacebookWithResult:^(BOOL success, NSError *error) {
+//            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+//            if (success) {
+//                [weakSelf performSegueWithIdentifier:kDashboardSegueIdentifier sender:weakSelf];
+//            }
+//        }];
+//    } failure:^{
+//        ShowAlert(InternetIsNotReachableString);
+//    }];
 }
 
 //email
 - (IBAction)signInClick:(id)sender
 {
-    WEAK_SELF;
-    if ([self.validator validateEmailField:self.userNameField andPasswordField:self.passwordField]) {
-        [BZRReachabilityHelper checkConnectionOnSuccess:^{
-            [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
-            [weakSelf.dataManager signInWithUserName:weakSelf.userNameField.text password:weakSelf.passwordField.text withResult:^(BOOL success, NSError *error) {
-                [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-                if (!success) {
-                    ShowErrorAlert(error);
-                } else {
-                    [weakSelf performSegueWithIdentifier:kDashboardSegueIdentifier sender:weakSelf];
-                }
-            }];
-        } failure:^{
-            ShowAlert(InternetIsNotReachableString);
-        }];
-        
-    } else {
-        ShowAlert(self.validator.validationErrorString);
-        [self.validator cleanValidationErrorString];
-    }
+//    WEAK_SELF;
+//    if ([self.validator validateEmailField:self.userNameField andPasswordField:self.passwordField]) {
+//        [BZRReachabilityHelper checkConnectionOnSuccess:^{
+//            [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
+//            [weakSelf.dataManager signInWithUserName:weakSelf.userNameField.text password:weakSelf.passwordField.text withResult:^(BOOL success, NSError *error) {
+//                [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+//                if (!success) {
+//                    ShowErrorAlert(error);
+//                } else {
+//                    [weakSelf performSegueWithIdentifier:kDashboardSegueIdentifier sender:weakSelf];
+//                }
+//            }];
+//        } failure:^{
+//            ShowAlert(InternetIsNotReachableString);
+//        }];
+//        
+//    } else {
+//        ShowAlert(self.validator.validationErrorString);
+//        [self.validator cleanValidationErrorString];
+//    }
 }
 
 - (IBAction)rememberMeClick:(id)sender
