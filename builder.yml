@@ -1,0 +1,48 @@
+queue:
+    - xcode
+    - clean
+    - bump_version
+    - build
+    - pack_ipa
+    - pack_dsym
+    - hockeyapp
+
+default: &default
+    platform:       ios
+    using_pods:     true
+    project_dir:    "."
+    xcode:
+        enabled: true
+        version: v6
+    profile:
+        file:       "~/Dropbox/buildProfiles/BizrateRewards/Bizrate_Rewards_AdHoc.mobileprovision"
+        identity:   "iPhone Distribution: Shopzilla, Inc. (27U87D64G8)"
+    bump_version:
+        enabled:    true
+        push:       true
+        up_mver:    false
+        simple:     true
+    build:
+        configuration:  AdHoc
+        sdk:            iphoneos
+        doclean:        true
+        workspace:
+            name:       BizrateRewards
+            scheme:     BizrateRewards
+    pack_ipa:
+        enabled:    true
+        naming:
+            prefix:         BizrateRewards
+            append_version: true
+    pack_dsym:
+        enabled:    true
+        copy:       false
+        output_dir: "~/Dropbox/<your_project_dir>"
+    hockeyapp:
+        enabled:    true
+        token:      37a60103edc74f6d965e17df99c50972
+        app_id:     bf52cc6c526a07761d1b50a4078b6d67
+        notify:     true
+        download:   true
+adhoc:
+    <<: *default
