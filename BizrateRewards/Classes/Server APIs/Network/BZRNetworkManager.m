@@ -115,32 +115,47 @@ static NSString *const kClientSecretKey = @"8a9da763-9503-4093-82c2-6b22b8eb9a12
 {
     WEAK_SELF;
     [self tryLoginWithFacebookOnSuccess:^(BOOL success, NSDictionary *facebookProfile, NSString *faceBookAccessToken, NSError *error) {
-        [weakSelf POST:@"user/facebook" parameters:@{@"fb_access_token" : faceBookAccessToken} success:^(NSURLSessionDataTask *task, id responseObject) {
-            
-            BZRUserProfile *userProfile = [[BZRUserProfile alloc] initWithServerResponse:responseObject];
-            
-            NSURL *userImageURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?width=200", [facebookProfile valueForKey:@"id"]]];
-            
-            userProfile.avatarURL = userImageURL;
-            
-            return result(YES, userProfile, nil);
-        } failure:^(NSURLSessionDataTask *task, NSError *error) {
-            return result(NO, nil, error);
-        }];
+        if (success) {
+            [weakSelf POST:@"user/facebook" parameters:@{@"fb_access_token" : faceBookAccessToken} success:^(NSURLSessionDataTask *task, id responseObject) {
+                
+                BZRUserProfile *userProfile = [[BZRUserProfile alloc] initWithServerResponse:responseObject];
+                
+                NSURL *userImageURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?width=200", [facebookProfile valueForKey:@"id"]]];
+                
+                userProfile.avatarURL = userImageURL;
+                
+                result(YES, userProfile, nil);
+            } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                result(NO, nil, error);
+            }];
+        } else {
+            result(NO, nil, error);
+        }
     }];
 }
 
 - (void)tryLoginWithFacebookOnSuccess:(FacebookProfileBlock)completion
 {
-    [self.loginManager logInWithReadPermissions:@[@"public_profile", @"email"] handler:^(FBSDKLoginManagerLoginResult *resultBlock, NSError *error) {
+    BOOL isFBinstalled = [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"fb://"]];
+    
+    if (isFBinstalled) {
+        self.loginManager.loginBehavior = FBSDKLoginBehaviorNative;
+    } else {
+        self.loginManager.loginBehavior = FBSDKLoginBehaviorWeb;
+    }
+    
+    [self.loginManager logInWithReadPermissions:@[@"public_profile", @"email"] handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+        BOOL success = YES;
         if (error) {
-            // Process error
-        } else if (resultBlock.isCancelled) {
-            // Handle cancellations
+            success = NO;
+            completion(success, nil, nil, error);
+        } else if (result.isCancelled) {
+            success = NO;
+            completion(success, nil, nil, error);
         } else {
-            // If you ask for multiple permissions at once, you
-            // should check if specific permissions missing
-            if ([resultBlock.grantedPermissions containsObject:@"email"] && [resultBlock.grantedPermissions containsObject:@"public_profile"]) {
+            success = YES;
+
+            if ([result.grantedPermissions containsObject:@"email"] && [result.grantedPermissions containsObject:@"public_profile"]) {
                 FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:nil HTTPMethod:@"GET"];
                 [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id response, NSError *error) {
                     if (error) {
