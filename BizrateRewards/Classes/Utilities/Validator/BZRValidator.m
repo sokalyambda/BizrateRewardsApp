@@ -73,31 +73,30 @@ static const NSInteger kMinPasswordSymbols = 5;
 
 - (BOOL)validateFirstNameField:(UITextField *)firstNameField lastNameField:(UITextField *)lastNameField emailField:(UITextField *)emailField dateOfBirthField: (UITextField *)dateOfBirthField genderField: (UITextField *)genderField
 {
-    BOOL isValid = YES;
     if (!firstNameField.text.length) {
         [firstNameField shakeView];
         [self.validationErrorString appendString:NSLocalizedString(@"Enter your first name\n", nil)];
-        isValid = NO;
+        return NO;
     }
     if (!lastNameField.text.length) {
         [lastNameField shakeView];
         [self.validationErrorString appendString:NSLocalizedString(@"Enter your last name\n", nil)];
-        isValid = NO;
+        return NO;
     }
     if (![self validateEmailField:emailField]) {
-        isValid = NO;
+        return NO;
     }
     if (!dateOfBirthField.text.length) {
         [dateOfBirthField shakeView];
         [self.validationErrorString appendString:NSLocalizedString(@"Select your date of birth\n", nil)];
-        isValid = NO;
+        return NO;
     }
     if (!genderField.text.length) {
         [genderField shakeView];
         [self.validationErrorString appendString:NSLocalizedString(@"Select your gender\n", nil)];
-        isValid = NO;
+        return NO;
     }
-    return isValid;
+    return YES;
 }
 
 #pragma mark - Other actions

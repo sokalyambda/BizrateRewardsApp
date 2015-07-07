@@ -6,6 +6,11 @@
 //  Copyright (c) 2015 ThinkMobiles. All rights reserved.
 //
 
+typedef enum : NSUInteger {
+    BZRSessionTypeApplication,
+    BZRSessionTypeUser
+} BZRSessionType;
+
 #import "BZRDataManager.h"
 
 @interface BZRDataManager ()
@@ -57,33 +62,37 @@
 - (void)getClientCredentialsOnSuccess:(SuccessBlock)completion
 {
     WEAK_SELF;
-    if (![self isSessionValid]) {
-        [self.network getClientCredentialsOnCompletion:^(BOOL success, BZRToken *token, NSError *error) {
-            [weakSelf setupTokenAndAddAuthHeader:token];
+    if (![self isSessionValidWithType:BZRSessionTypeApplication]) {
+        [self.network getClientCredentialsOnCompletion:^(BOOL success, BZRApplicationToken *token, NSError *error) {
+            
             if (success) {
-                completion(YES, nil);
-            } else {
-                completion(NO, error);
+                weakSelf.storage.applicationToken = token;
             }
+            completion(success, error);
         }];
     } else {
-        
+        completion (YES, nil);
     }
 }
 
 - (void)signInWithUserName:(NSString *)userName password:(NSString *)password withResult:(SuccessBlock)result
 {
     WEAK_SELF;
-    [self.network signInWithUserName:userName password:password withResult:^(BOOL success, BZRToken *token, NSError *error) {
-        if (success) {
-            [weakSelf setupTokenAndAddAuthHeader:token];
-        }
-        return result(success, error);
-    }];
+    if (![self isSessionValidWithType:BZRSessionTypeUser]) {
+        [self.network signInWithUserName:userName password:password withResult:^(BOOL success, BZRUserToken *token, NSError *error) {
+            if (success) {
+                weakSelf.storage.userToken = token;
+            }
+            result(success, error);
+        }];
+    } else {
+        result(YES, nil);
+    }
 }
 
 - (void)signUpWithUserFirstName:(NSString *)firstName andUserLastName:(NSString *)lastName andEmail:(NSString *)email withResult:(SuccessBlock)result
 {
+    [self addAuthHeaderWithToken:self.storage.applicationToken];
     [self.network signUpWithUserFirstName:firstName andUserLastName:lastName andEmail:email withResult:^(BOOL success, NSError *error) {
         return result(success, error);
     }];
@@ -101,6 +110,7 @@
 //Get User
 - (void)getCurrentUserWithCompletion:(SuccessBlock)completion
 {
+    [self addAuthHeaderWithToken:self.storage.userToken];
     WEAK_SELF;
     [self.network getCurrentUserWithCompletion:^(BOOL success, BZRUserProfile *userProfile, NSError *error) {
         if (success) {
@@ -110,19 +120,47 @@
     }];
 }
 
+//send device token
+- (void)sendDeviceAPNSTokenAndDeviceIdentifierWithResult:(SuccessBlock)result
+{
+    NSString *deviceToken = self.storage.deviceToken;
+    NSString *deviceIdentifier = self.storage.deviceUDID;
+    
+    if (deviceToken.length && deviceIdentifier.length) {
+        [self.network sendDeviceAPNSToken:deviceToken andDeviceIdentifier:deviceIdentifier withResult:^(BOOL success, NSError *error) {
+            result(success, error);
+        }];
+    } else {
+        result(NO, nil);
+    }
+}
+
 #pragma mark - Private methods
 
-- (void)setupTokenAndAddAuthHeader:(BZRToken *)token
+- (void)addAuthHeaderWithToken:(BZRApplicationToken *)token
 {
-    self.storage.token = token;
-    
     [self.network.requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@", token.accessToken] forHTTPHeaderField:@"Authorization"];
 }
 
-- (BOOL)isSessionValid
+- (BOOL)isSessionValidWithType:(BZRSessionType)type
 {
-    NSString *accessToken       = self.storage.token.accessToken;
-    NSDate *tokenExpirationDate = self.storage.token.expirationDate;
+    NSString *accessToken;
+    NSDate *tokenExpirationDate;
+    
+    switch (type) {
+        case BZRSessionTypeApplication: {
+            accessToken = self.storage.applicationToken.accessToken;
+            tokenExpirationDate = self.storage.applicationToken.expirationDate;
+            break;
+        }
+        case BZRSessionTypeUser: {
+            accessToken = self.storage.userToken.accessToken;
+            tokenExpirationDate = self.storage.userToken.expirationDate;
+            break;
+        }
+        default:
+            break;
+    }
     
     if (accessToken.length && ([[NSDate date] compare:tokenExpirationDate] == NSOrderedAscending)) {
         return YES;

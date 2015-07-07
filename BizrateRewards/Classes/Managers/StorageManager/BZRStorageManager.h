@@ -7,13 +7,14 @@
 //
 
 #import "BZRUserProfile.h"
-#import "BZRToken.h"
+#import "BZRUserToken.h"
 
 @interface BZRStorageManager : NSObject
 
 + (instancetype)sharedStorage;
 
-@property (strong, nonatomic) BZRToken *token;
+@property (strong, nonatomic) BZRApplicationToken *applicationToken;
+@property (strong, nonatomic) BZRUserToken *userToken;
 @property (strong, nonatomic) BZRUserProfile *currentProfile;
 
 @property (strong, nonatomic) NSString *deviceToken;

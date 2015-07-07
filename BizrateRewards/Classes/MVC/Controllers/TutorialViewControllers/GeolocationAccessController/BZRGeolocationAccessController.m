@@ -71,7 +71,7 @@ static NSString *const kPushNotificationsAccessSegueIdentifier = @"pushNotificat
 
 - (void)showErrorAlertController
 {
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"" message:@"You have denied the geolocation access. For correctly working you have to give the location permissions. Do you want to do it now?" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"" message:@"Do you want to enable geolocation from settings?" preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"NO" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
         [self performSegueWithIdentifier:kPushNotificationsAccessSegueIdentifier sender:self];

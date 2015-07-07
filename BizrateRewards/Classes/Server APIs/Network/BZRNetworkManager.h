@@ -9,12 +9,16 @@
 #import <AFNetworking/AFNetworking.h>
 
 #import "BZRUserProfile.h"
-#import "BZRToken.h"
+#import "BZRUserToken.h"
 
 #import "BZRApiConstants.h"
 
 typedef void(^SuccessBlock)(BOOL success, NSError *error);
-typedef void(^SuccessTokenBlock)(BOOL success, BZRToken *token, NSError *error);
+
+
+typedef void(^SuccessUserTokenBlock)(BOOL success, BZRUserToken *userToken, NSError *error);
+typedef void(^SuccessApplicationTokenBlock)(BOOL success, BZRApplicationToken *appToken, NSError *error);
+
 typedef void(^UserProfileBlock)(BOOL success, BZRUserProfile *userProfile, NSError *error);
 typedef void(^FacebookProfileBlock)(BOOL success, NSDictionary *facebookProfile, NSString *faceBookAccessToken, NSError *error);
 typedef void(^ImageUserBlock)(BOOL success, UIImage *image);
@@ -24,9 +28,9 @@ typedef void(^ImageUserBlock)(BOOL success, UIImage *image);
 @property (assign, nonatomic) AFNetworkReachabilityStatus reachabilityStatus;
 
 //sign up/in
-- (void)getClientCredentialsOnCompletion:(SuccessTokenBlock)completion;
+- (void)getClientCredentialsOnCompletion:(SuccessApplicationTokenBlock)completion;
 
-- (void)signInWithUserName:(NSString *)userName password:(NSString *)password withResult:(SuccessTokenBlock)result;
+- (void)signInWithUserName:(NSString *)userName password:(NSString *)password withResult:(SuccessUserTokenBlock)result;
 
 - (void)signUpWithUserFirstName:(NSString *)firstName andUserLastName:(NSString *)lastName andEmail:(NSString *)email withResult:(SuccessBlock)result;
 
@@ -34,6 +38,9 @@ typedef void(^ImageUserBlock)(BOOL success, UIImage *image);
 
 //getUser
 - (void)getCurrentUserWithCompletion:(UserProfileBlock)completion;
+
+//send device token
+- (void)sendDeviceAPNSToken:(NSString *)token andDeviceIdentifier:(NSString *)udid withResult:(SuccessBlock)result;
 
 //post image
 - (void)postImage:(UIImage *)image withID:(NSInteger)ID result:(ImageUserBlock)result;

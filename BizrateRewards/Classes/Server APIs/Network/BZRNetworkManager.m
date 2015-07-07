@@ -46,6 +46,7 @@ static NSString *const kClientSecretKey = @"8a9da763-9503-4093-82c2-6b22b8eb9a12
         
         [self.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"application/schema+json", @"application/json", @"application/x-www-form-urlencoded", nil]];
         
+        //reachability
         [[AFNetworkReachabilityManager sharedManager] startMonitoring];
         
         self.reachabilityStatus = [[AFNetworkReachabilityManager sharedManager] networkReachabilityStatus];
@@ -61,7 +62,7 @@ static NSString *const kClientSecretKey = @"8a9da763-9503-4093-82c2-6b22b8eb9a12
 
 #pragma mark - SignIn
 
-- (void)getClientCredentialsOnCompletion:(SuccessTokenBlock)completion
+- (void)getClientCredentialsOnCompletion:(SuccessApplicationTokenBlock)completion
 {
     [self POST:@"oauth/token" parameters:@{@"grant_type" : GrantTypeClientCredentials,
                                            
@@ -70,7 +71,7 @@ static NSString *const kClientSecretKey = @"8a9da763-9503-4093-82c2-6b22b8eb9a12
                                            @"client_secret" : kClientSecretKey
                                            } success:^(NSURLSessionDataTask *task, id responseObject) {
                                                
-                                               BZRToken *token = [[BZRToken alloc] initWithServerResponse:responseObject];
+                                               BZRApplicationToken *token = [[BZRApplicationToken alloc] initWithServerResponse:responseObject];
                                                
                                                completion(YES, token, nil);
                                            } failure:^(NSURLSessionDataTask *task, NSError *error) {
@@ -78,7 +79,7 @@ static NSString *const kClientSecretKey = @"8a9da763-9503-4093-82c2-6b22b8eb9a12
                                            }];
 }
 
-- (void)signInWithUserName:(NSString *)userName password:(NSString *)password withResult:(SuccessTokenBlock)result
+- (void)signInWithUserName:(NSString *)userName password:(NSString *)password withResult:(SuccessUserTokenBlock)result
 {
     NSDictionary *parameter = @{@"username" : userName,
                                 @"password" : password,
@@ -87,7 +88,7 @@ static NSString *const kClientSecretKey = @"8a9da763-9503-4093-82c2-6b22b8eb9a12
                                 @"client_secret" : kClientSecretKey};
     [self POST:@"oauth/token" parameters:parameter success:^(NSURLSessionDataTask *task, id responseObject) {
         
-        BZRToken *token = [[BZRToken alloc] initWithServerResponse:responseObject];
+        BZRUserToken *token = [[BZRUserToken alloc] initWithServerResponse:responseObject];
         
         return result(YES, token, nil);
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
@@ -129,16 +130,6 @@ static NSString *const kClientSecretKey = @"8a9da763-9503-4093-82c2-6b22b8eb9a12
     }];
 }
 
-- (void)getCurrentUserWithCompletion:(UserProfileBlock)completion
-{
-    [self GET:@"user/me" parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-        BZRUserProfile *currentUserProfile = [[BZRUserProfile alloc] initWithServerResponse:responseObject];
-        completion(YES, currentUserProfile, nil);
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        completion(NO, nil, error);
-    }];
-}
-
 - (void)tryLoginWithFacebookOnSuccess:(FacebookProfileBlock)completion
 {
     [self.loginManager logInWithReadPermissions:@[@"public_profile", @"email"] handler:^(FBSDKLoginManagerLoginResult *resultBlock, NSError *error) {
@@ -157,15 +148,37 @@ static NSString *const kClientSecretKey = @"8a9da763-9503-4093-82c2-6b22b8eb9a12
                         //Error
                     } else {
                         NSDictionary *user = (NSDictionary *)response;
-//                        NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithDictionary:@{@"facebook_id":[user valueForKey:@"id"], @"first_name":[user valueForKey:@"first_name"], @"last_name":[user valueForKey:@"last_name"]}];
+                        //                        NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithDictionary:@{@"facebook_id":[user valueForKey:@"id"], @"first_name":[user valueForKey:@"first_name"], @"last_name":[user valueForKey:@"last_name"]}];
                         
                         NSString *fbAccessToken = [FBSDKAccessToken currentAccessToken].tokenString;
                         completion(YES, user, fbAccessToken, nil);
-
                     }
                 }];
             }
         }
+    }];
+}
+
+//get user
+- (void)getCurrentUserWithCompletion:(UserProfileBlock)completion
+{
+    [self GET:@"user/me" parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        BZRUserProfile *currentUserProfile = [[BZRUserProfile alloc] initWithServerResponse:responseObject];
+        completion(YES, currentUserProfile, nil);
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        completion(NO, nil, error);
+    }];
+}
+
+//send device token
+- (void)sendDeviceAPNSToken:(NSString *)token andDeviceIdentifier:(NSString *)udid withResult:(SuccessBlock)result
+{
+    NSDictionary *parameters = @{@"device_id" : udid, @"notification_token" : token};
+    
+    [self POST:@"user/device" parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
+        result(YES, nil);
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        result(NO, error);
     }];
 }
 

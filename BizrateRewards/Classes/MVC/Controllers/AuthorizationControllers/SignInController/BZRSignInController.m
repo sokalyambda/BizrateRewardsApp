@@ -12,8 +12,6 @@
 
 #import "BZRLeftImageTextField.h"
 
-#import "BZRReachabilityHelper.h"
-
 static NSString *const kDashboardSegueIdentifier = @"dashboardSegue";
 
 @interface BZRSignInController ()<UITextFieldDelegate>
@@ -66,7 +64,7 @@ static NSString *const kDashboardSegueIdentifier = @"dashboardSegue";
             }
         }];
     } failure:^{
-        ShowAlert(@"Internet is not reachable");
+        ShowAlert(InternetIsNotReachableString);
     }];
 }
 
@@ -86,7 +84,7 @@ static NSString *const kDashboardSegueIdentifier = @"dashboardSegue";
                 }
             }];
         } failure:^{
-            ShowAlert(@"Internet is not reachable");
+            ShowAlert(InternetIsNotReachableString);
         }];
         
     } else {

@@ -9,10 +9,17 @@
 #ifndef BizrateRewards_BZRGlobalConstants_h
 #define BizrateRewards_BZRGlobalConstants_h
 
+
+//Notifications
+
 static NSString *const LocationManagerDidSuccessAuthorizeNotification = @"LocationManagerDidSuccessAuthorizeNotification";
 static NSString *const LocationManagerDidFailAuthorizeNotification = @"LocationManagerDidFailAuthorizeNotification";
 
 static NSString *const PushNotificationServiceDidSuccessAuthorizeNotification = @"PushNotificationServiceDidSuccessAuthorizeNotification";
 static NSString *const PushNotificationServiceDidFailAuthorizeNotification = @"PushNotificationServiceDidFailAuthorizeNotification";
+
+//Strings
+
+static NSString *const InternetIsNotReachableString = @"Internet is not reachable.";
 
 #endif

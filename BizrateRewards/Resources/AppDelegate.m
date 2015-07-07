@@ -11,6 +11,10 @@
 #import "BZRStorageManager.h"
 #import "BZRPushNotifiactionService.h"
 
+@import HockeySDK;
+
+static NSString *const kHockeyAppIdentifier = @"bf52cc6c526a07761d1b50a4078b6d67";
+
 @interface AppDelegate ()
 
 @end
@@ -19,6 +23,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:kHockeyAppIdentifier];
+    [[BITHockeyManager sharedHockeyManager].authenticator authenticateInstallation];
+    [[BITHockeyManager sharedHockeyManager] startManager];
+    
     return [[FBSDKApplicationDelegate sharedInstance] application:application
                                     didFinishLaunchingWithOptions:launchOptions];
 }
@@ -26,6 +34,12 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     [FBSDKAppEvents activateApp];
+    
+    if (![BZRPushNotifiactionService pushNotificationsEnabled]) {
+        [BZRPushNotifiactionService failedToRegisterForPushNotificationsWithError:nil];
+    } else {
+        [[NSNotificationCenter defaultCenter] postNotificationName:PushNotificationServiceDidSuccessAuthorizeNotification object:nil];
+    }
 }
 
 - (BOOL)application:(UIApplication *)application
