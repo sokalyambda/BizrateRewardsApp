@@ -64,6 +64,13 @@ static NSString *const kAccountSettingsSegueIdentifier = @"accountSettingsSegueI
     [super viewDidLoad];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.view layoutIfNeeded];
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+}
+
 - (void)viewDidAppear:(BOOL)animated
 {
     [self getCurrentUserProfile];
