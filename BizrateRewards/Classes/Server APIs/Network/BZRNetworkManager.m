@@ -153,7 +153,7 @@ static NSString *const kClientSecretKey = @"8a9da763-9503-4093-82c2-6b22b8eb9a12
             success = NO;
             completion(success, nil, nil, error);
         } else {
-            success = YES;
+            //success = YES;
 
             if ([result.grantedPermissions containsObject:@"email"] && [result.grantedPermissions containsObject:@"public_profile"]) {
                 FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:nil HTTPMethod:@"GET"];

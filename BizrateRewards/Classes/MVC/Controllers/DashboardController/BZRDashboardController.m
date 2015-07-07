@@ -73,6 +73,7 @@ static NSString *const kAccountSettingsSegueIdentifier = @"accountSettingsSegueI
 
 - (void)viewDidAppear:(BOOL)animated
 {
+    [super viewDidAppear:animated];
     [self getCurrentUserProfile];
 }
 

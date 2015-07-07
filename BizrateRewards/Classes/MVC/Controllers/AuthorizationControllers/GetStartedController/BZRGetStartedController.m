@@ -49,7 +49,7 @@ static NSString *const kChooseSignUpTypeSegueIdentifier = @"сhooseSignUpTypeSeg
 {
     BZRPrivacyAndTermsController *controller = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRPrivacyAndTermsController class])];
     
-    NSString *currentURLString = [NSString string];
+    NSString *currentURLString;
     
     switch (type) {
         case BZRConditionsTypePrivacyPolicy:

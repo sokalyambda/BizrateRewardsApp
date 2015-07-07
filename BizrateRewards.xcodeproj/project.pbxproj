@@ -73,6 +73,16 @@
 		58ADC0E41B4BDCC200DF849F /* BZRFinishSurveyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ADC0E31B4BDCC200DF849F /* BZRFinishSurveyController.m */; };
 		58ADC0E81B4BDCE400DF849F /* BZRSecondTutorialController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ADC0E71B4BDCE400DF849F /* BZRSecondTutorialController.m */; };
 		58B574E11B38AE200083A80A /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B574E01B38AE200083A80A /* KeychainItemWrapper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		58E512431B4C70AF00865694 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 58E512391B4C70AF00865694 /* OpenSans-Bold.ttf */; };
+		58E512441B4C70AF00865694 /* OpenSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 58E5123A1B4C70AF00865694 /* OpenSans-BoldItalic.ttf */; };
+		58E512451B4C70AF00865694 /* OpenSans-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 58E5123B1B4C70AF00865694 /* OpenSans-ExtraBold.ttf */; };
+		58E512461B4C70AF00865694 /* OpenSans-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 58E5123C1B4C70AF00865694 /* OpenSans-ExtraBoldItalic.ttf */; };
+		58E512471B4C70AF00865694 /* OpenSans-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 58E5123D1B4C70AF00865694 /* OpenSans-Italic.ttf */; };
+		58E512481B4C70AF00865694 /* OpenSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 58E5123E1B4C70AF00865694 /* OpenSans-Light.ttf */; };
+		58E512491B4C70AF00865694 /* OpenSans-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 58E5123F1B4C70AF00865694 /* OpenSans-LightItalic.ttf */; };
+		58E5124A1B4C70AF00865694 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 58E512401B4C70AF00865694 /* OpenSans-Regular.ttf */; };
+		58E5124B1B4C70AF00865694 /* OpenSans-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 58E512411B4C70AF00865694 /* OpenSans-Semibold.ttf */; };
+		58E5124C1B4C70AF00865694 /* OpenSans-SemiboldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 58E512421B4C70AF00865694 /* OpenSans-SemiboldItalic.ttf */; };
 		58F49FC91B4197B7002F93EE /* BZRPushNotifiactionService.m in Sources */ = {isa = PBXBuildFile; fileRef = 58F49FC81B4197B7002F93EE /* BZRPushNotifiactionService.m */; };
 		84AD3F011B4587DA00C294AE /* BZRProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AD3F001B4587DA00C294AE /* BZRProgressView.m */; };
 /* End PBXBuildFile section */
@@ -216,6 +226,16 @@
 		58ADC0E71B4BDCE400DF849F /* BZRSecondTutorialController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRSecondTutorialController.m; path = Classes/MVC/Controllers/TutorialViewControllers/SecondTutorialController/BZRSecondTutorialController.m; sourceTree = "<group>"; };
 		58B574DF1B38AE200083A80A /* KeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KeychainItemWrapper.h; path = Classes/Utilities/KeyChain/KeychainItemWrapper.h; sourceTree = "<group>"; };
 		58B574E01B38AE200083A80A /* KeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KeychainItemWrapper.m; path = Classes/Utilities/KeyChain/KeychainItemWrapper.m; sourceTree = "<group>"; };
+		58E512391B4C70AF00865694 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-Bold.ttf"; path = "Resources/Fonts/OpenSans-Bold.ttf"; sourceTree = "<group>"; };
+		58E5123A1B4C70AF00865694 /* OpenSans-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-BoldItalic.ttf"; path = "Resources/Fonts/OpenSans-BoldItalic.ttf"; sourceTree = "<group>"; };
+		58E5123B1B4C70AF00865694 /* OpenSans-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-ExtraBold.ttf"; path = "Resources/Fonts/OpenSans-ExtraBold.ttf"; sourceTree = "<group>"; };
+		58E5123C1B4C70AF00865694 /* OpenSans-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-ExtraBoldItalic.ttf"; path = "Resources/Fonts/OpenSans-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
+		58E5123D1B4C70AF00865694 /* OpenSans-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-Italic.ttf"; path = "Resources/Fonts/OpenSans-Italic.ttf"; sourceTree = "<group>"; };
+		58E5123E1B4C70AF00865694 /* OpenSans-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-Light.ttf"; path = "Resources/Fonts/OpenSans-Light.ttf"; sourceTree = "<group>"; };
+		58E5123F1B4C70AF00865694 /* OpenSans-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-LightItalic.ttf"; path = "Resources/Fonts/OpenSans-LightItalic.ttf"; sourceTree = "<group>"; };
+		58E512401B4C70AF00865694 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-Regular.ttf"; path = "Resources/Fonts/OpenSans-Regular.ttf"; sourceTree = "<group>"; };
+		58E512411B4C70AF00865694 /* OpenSans-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-Semibold.ttf"; path = "Resources/Fonts/OpenSans-Semibold.ttf"; sourceTree = "<group>"; };
+		58E512421B4C70AF00865694 /* OpenSans-SemiboldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-SemiboldItalic.ttf"; path = "Resources/Fonts/OpenSans-SemiboldItalic.ttf"; sourceTree = "<group>"; };
 		58F49FC71B4197B7002F93EE /* BZRPushNotifiactionService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRPushNotifiactionService.h; path = Classes/PushNotificationsService/BZRPushNotifiactionService.h; sourceTree = "<group>"; };
 		58F49FC81B4197B7002F93EE /* BZRPushNotifiactionService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRPushNotifiactionService.m; path = Classes/PushNotificationsService/BZRPushNotifiactionService.m; sourceTree = "<group>"; };
 		7AF1FB2A8C4A8673EF3998F1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -268,6 +288,7 @@
 		58219EDC1B38A06E00A9541A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				58E512241B4C6DFE00865694 /* Fonts */,
 				589420941B451D87004BAF48 /* BizrateRewards-Prefix.pch */,
 				589420951B451D87004BAF48 /* Info.plist */,
 				589420961B451D87004BAF48 /* main.m */,
@@ -1020,6 +1041,23 @@
 			name = SecondTutorialController;
 			sourceTree = "<group>";
 		};
+		58E512241B4C6DFE00865694 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				58E512391B4C70AF00865694 /* OpenSans-Bold.ttf */,
+				58E5123A1B4C70AF00865694 /* OpenSans-BoldItalic.ttf */,
+				58E5123B1B4C70AF00865694 /* OpenSans-ExtraBold.ttf */,
+				58E5123C1B4C70AF00865694 /* OpenSans-ExtraBoldItalic.ttf */,
+				58E5123D1B4C70AF00865694 /* OpenSans-Italic.ttf */,
+				58E5123E1B4C70AF00865694 /* OpenSans-Light.ttf */,
+				58E5123F1B4C70AF00865694 /* OpenSans-LightItalic.ttf */,
+				58E512401B4C70AF00865694 /* OpenSans-Regular.ttf */,
+				58E512411B4C70AF00865694 /* OpenSans-Semibold.ttf */,
+				58E512421B4C70AF00865694 /* OpenSans-SemiboldItalic.ttf */,
+			);
+			name = Fonts;
+			sourceTree = "<group>";
+		};
 		58F49FBF1B417F06002F93EE /* PushNotificationsService */ = {
 			isa = PBXGroup;
 			children = (
@@ -1152,10 +1190,20 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				58E512471B4C70AF00865694 /* OpenSans-Italic.ttf in Resources */,
+				58E512441B4C70AF00865694 /* OpenSans-BoldItalic.ttf in Resources */,
 				589420AB1B452827004BAF48 /* BZRCommonPickerView.xib in Resources */,
+				58E5124B1B4C70AF00865694 /* OpenSans-Semibold.ttf in Resources */,
+				58E512451B4C70AF00865694 /* OpenSans-ExtraBold.ttf in Resources */,
 				58A0B21E1B3854CF003C100C /* Main.storyboard in Resources */,
+				58E512491B4C70AF00865694 /* OpenSans-LightItalic.ttf in Resources */,
 				5894209E1B451E0F004BAF48 /* BZRBirthDatePickerView.xib in Resources */,
+				58E512431B4C70AF00865694 /* OpenSans-Bold.ttf in Resources */,
 				58A0B2201B3854CF003C100C /* Images.xcassets in Resources */,
+				58E5124C1B4C70AF00865694 /* OpenSans-SemiboldItalic.ttf in Resources */,
+				58E512481B4C70AF00865694 /* OpenSans-Light.ttf in Resources */,
+				58E5124A1B4C70AF00865694 /* OpenSans-Regular.ttf in Resources */,
+				58E512461B4C70AF00865694 /* OpenSans-ExtraBoldItalic.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1381,8 +1429,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CURRENT_PROJECT_VERSION = 6;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1391,6 +1439,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "78f94da2-5d5a-4ede-8501-93bbb4eea4ae";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1401,8 +1450,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CURRENT_PROJECT_VERSION = 6;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1411,6 +1460,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "78f94da2-5d5a-4ede-8501-93bbb4eea4ae";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
@@ -1492,8 +1542,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CURRENT_PROJECT_VERSION = 6;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1502,6 +1552,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "78f94da2-5d5a-4ede-8501-93bbb4eea4ae";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = AdHoc;

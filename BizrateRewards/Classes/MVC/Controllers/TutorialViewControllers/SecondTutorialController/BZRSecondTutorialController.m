@@ -16,7 +16,10 @@ static NSString *const kGeolocationAccessSegueIdentifier = @"geolocationAccessSe
 
 @implementation BZRSecondTutorialController
 
-- (void)viewDidLoad {
+#pragma mark - View Lifecycle
+
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     [self addSwipeGesture];
 }
@@ -25,14 +28,24 @@ static NSString *const kGeolocationAccessSegueIdentifier = @"geolocationAccessSe
 
 - (void)addSwipeGesture
 {
-    UISwipeGestureRecognizer *swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeGesture:)];
-    [swipe setDirection:UISwipeGestureRecognizerDirectionLeft];
-    [self.view addGestureRecognizer:swipe];
+    UISwipeGestureRecognizer *leftSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleLeftSwipeGesture:)];
+    [leftSwipe setDirection:UISwipeGestureRecognizerDirectionLeft];
+    
+    UISwipeGestureRecognizer *rightSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleRightSwipeGesture:)];
+    [rightSwipe setDirection:UISwipeGestureRecognizerDirectionRight];
+    
+    [self.view addGestureRecognizer:leftSwipe];
+    [self.view addGestureRecognizer:rightSwipe];
 }
 
-- (void)handleSwipeGesture:(UISwipeGestureRecognizer *)swipe
+- (void)handleLeftSwipeGesture:(UISwipeGestureRecognizer *)swipe
 {
     [self performSegueWithIdentifier:kGeolocationAccessSegueIdentifier sender:self];
+}
+
+- (void)handleRightSwipeGesture:(UISwipeGestureRecognizer *)swipe
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end
