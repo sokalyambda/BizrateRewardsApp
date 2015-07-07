@@ -8,6 +8,8 @@
 
 #import "BZRSecondTutorialController.h"
 
+static NSString *const kGeolocationAccessSegueIdentifier = @"geolocationAccessSegueIdentifier";
+
 @interface BZRSecondTutorialController ()
 
 @end
@@ -16,22 +18,21 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    [self addSwipeGesture];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#pragma mark - Actions
+
+- (void)addSwipeGesture
+{
+    UISwipeGestureRecognizer *swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeGesture:)];
+    [swipe setDirection:UISwipeGestureRecognizerDirectionLeft];
+    [self.view addGestureRecognizer:swipe];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)handleSwipeGesture:(UISwipeGestureRecognizer *)swipe
+{
+    [self performSegueWithIdentifier:kGeolocationAccessSegueIdentifier sender:self];
 }
-*/
 
 @end
