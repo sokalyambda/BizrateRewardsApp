@@ -24,6 +24,7 @@
         [BZRStorageManager sharedStorage].deviceToken = token;
         [BZRStorageManager sharedStorage].deviceUDID = deviceId;
     }
+    [[NSNotificationCenter defaultCenter] postNotificationName:PushNotificationServiceDidSuccessAuthorizeNotification object:nil];
 }
 
 + (void)failedToRegisterForPushNotificationsWithError:(NSError *)error
@@ -43,8 +44,9 @@
 {
     if ([[UIApplication sharedApplication] respondsToSelector:@selector(isRegisteredForRemoteNotifications)]) {
         return [[UIApplication sharedApplication] currentUserNotificationSettings].types != UIUserNotificationTypeNone;
-    } else {
-        return ([[UIApplication sharedApplication] isRegisteredForRemoteNotifications] & UIUserNotificationTypeAlert);
+    }
+    else {
+        return ([[UIApplication sharedApplication] enabledRemoteNotificationTypes] & UIRemoteNotificationTypeAlert);
     }
 }
 

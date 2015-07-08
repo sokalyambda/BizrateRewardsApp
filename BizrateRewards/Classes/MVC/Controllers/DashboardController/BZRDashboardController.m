@@ -15,6 +15,7 @@
 #import "BZRProgressView.h"
 
 static NSString *const kAccountSettingsSegueIdentifier = @"accountSettingsSegueIdentifier";
+static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
 
 @interface BZRDashboardController ()
 
@@ -74,14 +75,18 @@ static NSString *const kAccountSettingsSegueIdentifier = @"accountSettingsSegueI
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [self getCurrentUserProfile];
 }
 
 #pragma mark - Actions
 
+- (IBAction)seeAllGiftCardsClick:(id)sender
+{
+    
+}
+
 - (IBAction)accountSettingsClick:(id)sender
 {
-    [self performSegueWithIdentifier:kAccountSettingsSegueIdentifier sender:self];
+    
 }
 
 - (void)updateUserInformation
@@ -91,7 +96,6 @@ static NSString *const kAccountSettingsSegueIdentifier = @"accountSettingsSegueI
 #warning User Points
     self.currentProfile.pointsAmount = 800;
     self.currentProfile.pointsRequired = 2000;
-
 }
 
 - (void)getCurrentUserProfile
@@ -109,15 +113,12 @@ static NSString *const kAccountSettingsSegueIdentifier = @"accountSettingsSegueI
     } failure:^{
         ShowAlert(InternetIsNotReachableString);
     }];
-    
-    
 }
 
 - (void)calculateProgress
 {
      self.progressView.progress  = (CGFloat)self.currentProfile.pointsAmount * CGRectGetWidth(self.progressView.frame) / (CGFloat)self.currentProfile.pointsRequired;
     [self.progressView setNeedsDisplay];
-    
 }
 
 @end

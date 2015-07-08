@@ -41,11 +41,7 @@ static NSString *const kFinalTutorialControllerSegueIdentifier = @"finalTutorial
 
 - (IBAction)enablePushNotificationsClick:(id)sender
 {
-    if (![BZRPushNotifiactionService pushNotificationsEnabled]) {
-        [BZRPushNotifiactionService registerApplicationForPushNotifications:[UIApplication sharedApplication]];
-    } else {
-        [self performSegueWithIdentifier:kFinalTutorialControllerSegueIdentifier sender:self];
-    }
+    [BZRPushNotifiactionService registerApplicationForPushNotifications:[UIApplication sharedApplication]];
 }
 
 - (IBAction)skipThisStepClick:(id)sender

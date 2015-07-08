@@ -55,7 +55,11 @@ static NSString *const kHockeyAppIdentifier = @"bf52cc6c526a07761d1b50a4078b6d67
 
 - (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
 {
-    [application registerForRemoteNotifications];
+    if (notificationSettings.types != UIUserNotificationTypeNone) {
+        [application registerForRemoteNotifications];
+    } else {
+        [BZRPushNotifiactionService failedToRegisterForPushNotificationsWithError:nil];
+    }
 }
 
 - (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forRemoteNotification:(NSDictionary *)userInfo completionHandler:(void(^)())completionHandler
