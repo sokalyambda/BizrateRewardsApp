@@ -23,6 +23,18 @@ static NSString *const kSignUpWithEmailSegueIdentifier = @"signUpWithEmailSegue"
     [super viewDidLoad];
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES];
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self.navigationController setNavigationBarHidden:NO];
+}
+
 #pragma mark - Actions
 
 - (IBAction)signUpWithFacebookClick:(id)sender

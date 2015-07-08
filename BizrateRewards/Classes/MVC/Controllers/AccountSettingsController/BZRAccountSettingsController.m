@@ -20,9 +20,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+}
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES];
 }
-
 #pragma mark - Actions
 
 - (IBAction)exitClick:(id)sender
