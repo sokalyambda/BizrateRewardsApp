@@ -13,7 +13,7 @@
 - (void)drawRect:(CGRect)rect
 {
     CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSetFillColorWithColor(context, UIColorFromRGB(0x179B40).CGColor);
+    CGContextSetFillColorWithColor(context, UIColorFromRGB(0x19cb86).CGColor);
     UIRectFill(CGRectMake(0.f, 0.f, self.progress, CGRectGetHeight(self.frame)));
 }
 
