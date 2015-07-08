@@ -197,6 +197,16 @@ static NSString *const kClientSecretKey = @"8a9da763-9503-4093-82c2-6b22b8eb9a12
     }];
 }
 
+- (void)getSurveyWithResult:(SurveyBlock)result
+{
+    [self POST:@"user/survey" parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        BZRSurvey *survey = [[BZRSurvey alloc] initWithServerResponse:responseObject];
+        result(YES, survey, nil);
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        result(NO, nil, error);
+    }];
+}
+
 //post image
 
 - (void)postImage:(UIImage *)image withID:(NSInteger)ID result:(ImageUserBlock)result

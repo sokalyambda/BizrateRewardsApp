@@ -135,6 +135,15 @@ typedef enum : NSUInteger {
     }
 }
 
+//getSurvey
+- (void)getSurveyWithResult:(SurveyBlock)result
+{
+    [self addAuthHeaderWithToken:self.storage.applicationToken];
+    [self.network getSurveyWithResult:^(BOOL success, BZRSurvey *survey, NSError *error) {
+        result(success, survey, error);
+    }];
+}
+
 #pragma mark - Private methods
 
 - (void)addAuthHeaderWithToken:(BZRApplicationToken *)token

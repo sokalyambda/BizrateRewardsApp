@@ -6,6 +6,11 @@
 //  Copyright (c) 2015 ThinkMobiles. All rights reserved.
 //
 
-@interface BZRSurvey : NSObject
+#import "BZRMappingProtocol.h"
+
+@interface BZRSurvey : NSObject<BZRMappingProtocol>
+
+@property (strong, nonatomic) NSString *surveyId;
+@property (strong, nonatomic) NSURL *surveyLink;
 
 @end

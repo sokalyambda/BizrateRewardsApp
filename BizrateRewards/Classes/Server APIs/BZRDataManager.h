@@ -32,4 +32,7 @@
 //send device token
 - (void)sendDeviceAPNSTokenAndDeviceIdentifierWithResult:(SuccessBlock)result;
 
+//getSurvey
+- (void)getSurveyWithResult:(SurveyBlock)result;
+
 @end

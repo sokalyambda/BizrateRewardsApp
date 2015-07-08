@@ -10,11 +10,11 @@
 
 #import "BZRUserProfile.h"
 #import "BZRUserToken.h"
+#import "BZRSurvey.h"
 
 #import "BZRApiConstants.h"
 
 typedef void(^SuccessBlock)(BOOL success, NSError *error);
-
 
 typedef void(^SuccessUserTokenBlock)(BOOL success, BZRUserToken *userToken, NSError *error);
 typedef void(^SuccessApplicationTokenBlock)(BOOL success, BZRApplicationToken *appToken, NSError *error);
@@ -22,6 +22,8 @@ typedef void(^SuccessApplicationTokenBlock)(BOOL success, BZRApplicationToken *a
 typedef void(^UserProfileBlock)(BOOL success, BZRUserProfile *userProfile, NSError *error);
 typedef void(^FacebookProfileBlock)(BOOL success, NSDictionary *facebookProfile, NSString *faceBookAccessToken, NSError *error);
 typedef void(^ImageUserBlock)(BOOL success, UIImage *image);
+
+typedef void(^SurveyBlock)(BOOL success, BZRSurvey *survey, NSError *error);
 
 @interface BZRNetworkManager : AFHTTPSessionManager
 
@@ -41,6 +43,9 @@ typedef void(^ImageUserBlock)(BOOL success, UIImage *image);
 
 //send device token
 - (void)sendDeviceAPNSToken:(NSString *)token andDeviceIdentifier:(NSString *)udid withResult:(SuccessBlock)result;
+
+//getSurvey
+- (void)getSurveyWithResult:(SurveyBlock)result;
 
 //post image
 - (void)postImage:(UIImage *)image withID:(NSInteger)ID result:(ImageUserBlock)result;
