@@ -8,10 +8,14 @@
 
 #import "BZRSignInController.h"
 #import "BZRGetStartedController.h"
+#import "KeychainItemWrapper.h"
 
 #import "BZRDataManager.h"
 
 static NSString *const kDashboardSegueIdentifier = @"dashboardSegue";
+
+static NSString *const kIsRememberMe = @"isRememberMe";
+static NSString *const kUserCredentials = @"UserCredentials";
 
 //const for auth error code
 //static NSInteger const kNotAuthorizedErrorCode = 401.f;
@@ -20,11 +24,19 @@ static NSString *const kDashboardSegueIdentifier = @"dashboardSegue";
 
 @property (weak, nonatomic) IBOutlet UIView *incorrectEmailView;
 
+@property (weak, nonatomic) IBOutlet UISwitch *rememberMeSwitch;
+
 @property (strong, nonatomic) BZRDataManager *dataManager;
+
+@property (assign, nonatomic, getter=isRememberMe) BOOL rememberMe;
+
+@property (strong, nonatomic) NSUserDefaults *defaults;
 
 @end
 
 @implementation BZRSignInController
+
+@synthesize rememberMe = _rememberMe;
 
 #pragma mark - Accessors
 
@@ -36,11 +48,34 @@ static NSString *const kDashboardSegueIdentifier = @"dashboardSegue";
     return _dataManager;
 }
 
+- (BOOL)isRememberMe
+{
+    return [self.defaults boolForKey:kIsRememberMe];
+}
+
+- (void)setRememberMe:(BOOL)rememberMe
+{
+    _rememberMe = rememberMe;
+    [self.defaults setBool:_rememberMe forKey:kIsRememberMe];
+    [self.defaults synchronize];
+}
+
+- (NSUserDefaults *)defaults
+{
+    if (!_defaults) {
+        _defaults = [NSUserDefaults standardUserDefaults];
+    }
+    return _defaults;
+}
+
 #pragma mark - View Lifecycle
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self getUserDataFromKeychain];
+
+    [self.rememberMeSwitch setOn:self.isRememberMe];
 }
 
 #pragma mark - Actions
@@ -69,6 +104,9 @@ static NSString *const kDashboardSegueIdentifier = @"dashboardSegue";
                     weakSelf.userNameField.errorImageName = kEmailErrorIconName;
 //                    }
                 } else {
+                    if(weakSelf.isRememberMe) {
+                        [weakSelf saveUserDataToKeychain];
+                    }
                     [weakSelf performSegueWithIdentifier:kDashboardSegueIdentifier sender:weakSelf];
                 }
             }];
@@ -82,11 +120,6 @@ static NSString *const kDashboardSegueIdentifier = @"dashboardSegue";
     }
 }
 
-- (IBAction)rememberMeClick:(id)sender
-{
-
-}
-
 - (IBAction)forgotPasswordClick:(id)sender
 {
     
@@ -98,12 +131,33 @@ static NSString *const kDashboardSegueIdentifier = @"dashboardSegue";
 //    [self.navigationController pushViewController:controller animated:YES];
 }
 
+- (IBAction)rememberMeValueChanget:(id)sender
+{
+    self.rememberMe = !self.isRememberMe;
+}
+
 - (void)customizeFields
 {
     [super customizeFields];
     if (!self.incorrectEmailView.isHidden) {
         self.incorrectEmailView.hidden = YES;
     }
+}
+
+#pragma mark - Private methods
+
+- (void)saveUserDataToKeychain
+{
+    KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] initWithIdentifier:kUserCredentials accessGroup:nil];
+    [wrapper setObject:self.passwordField.text forKey:(__bridge id)(kSecValueData)];
+    [wrapper setObject:self.userNameField.text forKey:(__bridge id)(kSecAttrAccount)];
+}
+
+- (void)getUserDataFromKeychain
+{
+    KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] initWithIdentifier:kUserCredentials accessGroup:nil];
+    self.passwordField.text = [wrapper objectForKey:(__bridge id)(kSecValueData)];
+    self.userNameField.text = [wrapper objectForKey:(__bridge id)(kSecAttrAccount)];
 }
 
 #pragma mark - UITextFieldDelegate
