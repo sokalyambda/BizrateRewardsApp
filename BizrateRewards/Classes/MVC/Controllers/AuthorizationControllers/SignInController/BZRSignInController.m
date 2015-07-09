@@ -18,7 +18,7 @@ static NSString *const kIsRememberMe = @"isRememberMe";
 static NSString *const kUserCredentials = @"UserCredentials";
 
 //const for auth error code
-//static NSInteger const kNotAuthorizedErrorCode = 401.f;
+static NSInteger const kNotAuthorizedErrorCode = 400.f;
 
 @interface BZRSignInController ()
 
@@ -94,15 +94,15 @@ static NSString *const kUserCredentials = @"UserCredentials";
     if ([self.validator validateEmailField:self.userNameField andPasswordField:self.passwordField]) {
         [BZRReachabilityHelper checkConnectionOnSuccess:^{
             [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
-            [weakSelf.dataManager signInWithUserName:weakSelf.userNameField.text password:weakSelf.passwordField.text withResult:^(BOOL success, NSError *error) {
+            [weakSelf.dataManager signInWithUserName:weakSelf.userNameField.text password:weakSelf.passwordField.text withResult:^(BOOL success, NSError *error, NSInteger responseStatusCode) {
                 [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
                 if (!success) {
-//                    ShowErrorAlert(error);
-#warning need to detect if an error indeed relative to auth
-//                    if (error.code == 400) {
-                    [weakSelf.incorrectEmailView setHidden:NO];
-                    weakSelf.userNameField.errorImageName = kEmailErrorIconName;
-//                    }
+                    if (responseStatusCode == kNotAuthorizedErrorCode) {
+                        [weakSelf.incorrectEmailView setHidden:NO];
+                        weakSelf.userNameField.errorImageName = kEmailErrorIconName;
+                    } else {
+                        ShowErrorAlert(error);
+                    }
                 } else {
                     if(weakSelf.isRememberMe) {
                         [weakSelf saveUserDataToKeychain];

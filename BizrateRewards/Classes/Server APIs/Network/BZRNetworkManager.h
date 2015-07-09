@@ -14,9 +14,9 @@
 
 #import "BZRApiConstants.h"
 
-typedef void(^SuccessBlock)(BOOL success, NSError *error);
+typedef void(^SuccessBlock)(BOOL success, NSError *error, NSInteger responseStatusCode);
 
-typedef void(^SuccessUserTokenBlock)(BOOL success, BZRUserToken *userToken, NSError *error);
+typedef void(^SuccessUserTokenBlock)(BOOL success, BZRUserToken *userToken, NSError *error, NSInteger responseStatusCode);
 typedef void(^SuccessApplicationTokenBlock)(BOOL success, BZRApplicationToken *appToken, NSError *error);
 
 typedef void(^UserProfileBlock)(BOOL success, BZRUserProfile *userProfile, NSError *error);

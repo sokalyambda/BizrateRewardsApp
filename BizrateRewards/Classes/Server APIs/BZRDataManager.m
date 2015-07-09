@@ -68,10 +68,10 @@ typedef enum : NSUInteger {
             if (success) {
                 weakSelf.storage.applicationToken = token;
             }
-            completion(success, error);
+            completion(success, error, 0);
         }];
     } else {
-        completion (YES, nil);
+        completion (YES, nil, 0);
     }
 }
 
@@ -79,22 +79,22 @@ typedef enum : NSUInteger {
 {
     WEAK_SELF;
     if (![self isSessionValidWithType:BZRSessionTypeUser]) {
-        [self.network signInWithUserName:userName password:password withResult:^(BOOL success, BZRUserToken *token, NSError *error) {
+        [self.network signInWithUserName:userName password:password withResult:^(BOOL success, BZRUserToken *token, NSError *error, NSInteger responseStatusCode) {
             if (success) {
                 weakSelf.storage.userToken = token;
             }
-            result(success, error);
+            result(success, error, responseStatusCode);
         }];
     } else {
-        result(YES, nil);
+        result(YES, nil, 0);
     }
 }
 
 - (void)signUpWithUserFirstName:(NSString *)firstName andUserLastName:(NSString *)lastName andEmail:(NSString *)email withResult:(SuccessBlock)result
 {
     [self addAuthHeaderWithToken:self.storage.applicationToken];
-    [self.network signUpWithUserFirstName:firstName andUserLastName:lastName andEmail:email withResult:^(BOOL success, NSError *error) {
-        return result(success, error);
+    [self.network signUpWithUserFirstName:firstName andUserLastName:lastName andEmail:email withResult:^(BOOL success, NSError *error, NSInteger responseStatusCode) {
+        return result(success, error, responseStatusCode);
     }];
 }
 
@@ -103,7 +103,7 @@ typedef enum : NSUInteger {
     WEAK_SELF;
     [self.network authorizeWithFacebookWithResult:^(BOOL success, BZRUserProfile *userProfile, NSError *error) {
         weakSelf.storage.currentProfile = userProfile;
-        result(success, error);
+        result(success, error, 0);
     }];
 }
 
@@ -116,7 +116,7 @@ typedef enum : NSUInteger {
         if (success) {
             weakSelf.storage.currentProfile = userProfile;
         }
-        completion(success, error);
+        completion(success, error, 0);
     }];
 }
 
@@ -127,11 +127,11 @@ typedef enum : NSUInteger {
     NSString *deviceIdentifier = self.storage.deviceUDID;
     
     if (deviceToken.length && deviceIdentifier.length) {
-        [self.network sendDeviceAPNSToken:deviceToken andDeviceIdentifier:deviceIdentifier withResult:^(BOOL success, NSError *error) {
-            result(success, error);
+        [self.network sendDeviceAPNSToken:deviceToken andDeviceIdentifier:deviceIdentifier withResult:^(BOOL success, NSError *error, NSInteger responseStatusCode) {
+            result(success, error, responseStatusCode);
         }];
     } else {
-        result(NO, nil);
+        result(NO, nil, 0);
     }
 }
 

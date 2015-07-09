@@ -49,7 +49,7 @@
     WEAK_SELF;
     [BZRReachabilityHelper checkConnectionOnSuccess:^{
         [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
-        [weakSelf.dataManager getClientCredentialsOnSuccess:^(BOOL success, NSError *error) {
+        [weakSelf.dataManager getClientCredentialsOnSuccess:^(BOOL success, NSError *error, NSInteger responseStatusCode) {
             if (success) {
                 [weakSelf.dataManager getSurveyWithResult:^(BOOL success, BZRSurvey *survey, NSError *error) {
                     [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];

@@ -88,11 +88,14 @@ static NSString *const kClientSecretKey = @"8a9da763-9503-4093-82c2-6b22b8eb9a12
                                 @"client_secret" : kClientSecretKey};
     [self POST:@"oauth/token" parameters:parameter success:^(NSURLSessionDataTask *task, id responseObject) {
         
+        NSHTTPURLResponse *response = (NSHTTPURLResponse*)task.response;
+        
         BZRUserToken *token = [[BZRUserToken alloc] initWithServerResponse:responseObject];
         
-        return result(YES, token, nil);
+        return result(YES, token, nil, response.statusCode);
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        return result(NO, nil, error);
+        NSHTTPURLResponse *response = (NSHTTPURLResponse*)task.response;
+        return result(NO, nil, error, response.statusCode);
     }];
 }
 
@@ -105,9 +108,9 @@ static NSString *const kClientSecretKey = @"8a9da763-9503-4093-82c2-6b22b8eb9a12
     WEAK_SELF;
     [weakSelf POST:@"user" parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
         
-        return result(YES, nil);
+        return result(YES, nil, 0);
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        return result(NO, error);
+        return result(NO, error, 0);
     }];
 }
 
@@ -191,9 +194,9 @@ static NSString *const kClientSecretKey = @"8a9da763-9503-4093-82c2-6b22b8eb9a12
     NSDictionary *parameters = @{@"device_id" : udid, @"notification_token" : token};
     
     [self POST:@"user/device" parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
-        result(YES, nil);
+        result(YES, nil, 0);
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        result(NO, error);
+        result(NO, error, 0);
     }];
 }
 

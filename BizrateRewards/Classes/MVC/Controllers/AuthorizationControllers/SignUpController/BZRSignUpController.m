@@ -50,9 +50,9 @@
     if ([self.validator validateEmailField:self.userNameField andPasswordField:self.passwordField]) {
         [BZRReachabilityHelper checkConnectionOnSuccess:^{
             [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-            [self.dataManager getClientCredentialsOnSuccess:^(BOOL success, NSError *error) {
+            [self.dataManager getClientCredentialsOnSuccess:^(BOOL success, NSError *error, NSInteger responseStatusCode) {
                 if (success) {
-                    [weakSelf.dataManager signUpWithUserFirstName:@"firstNameTest" andUserLastName:@"lastNameTest" andEmail:@"qweqweqwe@gmail.com" withResult:^(BOOL success, NSError *error) {
+                    [weakSelf.dataManager signUpWithUserFirstName:@"firstNameTest" andUserLastName:@"lastNameTest" andEmail:@"qweqweqwe@gmail.com" withResult:^(BOOL success, NSError *error, NSInteger responseStatusCode) {
                         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
                         if (!success) {
                             ShowErrorAlert(error);
@@ -66,7 +66,7 @@
             
         }];
     } else {
-        ShowAlert(self.validator.validationErrorString);
+//        ShowAlert(self.validator.validationErrorString);
         [self.validator cleanValidationErrorString];
     }
 }
