@@ -158,12 +158,12 @@ typedef enum : NSUInteger {
     
     switch (type) {
         case BZRSessionTypeApplication: {
-            accessToken = self.storage.applicationToken.accessToken;
+            accessToken         = self.storage.applicationToken.accessToken;
             tokenExpirationDate = self.storage.applicationToken.expirationDate;
             break;
         }
         case BZRSessionTypeUser: {
-            accessToken = self.storage.userToken.accessToken;
+            accessToken         = self.storage.userToken.accessToken;
             tokenExpirationDate = self.storage.userToken.expirationDate;
             break;
         }

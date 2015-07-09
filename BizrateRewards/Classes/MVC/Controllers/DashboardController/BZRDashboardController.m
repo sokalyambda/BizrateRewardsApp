@@ -10,6 +10,7 @@
 #import "BZRDataManager.h"
 
 #import "BZRDashboardController.h"
+#import "BZRSurveyViewController.h"
 
 #import "BZRRoundedImageView.h"
 #import "BZRProgressView.h"
@@ -75,18 +76,23 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+//    [self getCurrentUserProfile];
 }
 
 #pragma mark - Actions
 
+- (IBAction)takeSurveyClick:(id)sender
+{
+//    BZRSurveyViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRSurveyViewController class])];
+//    [self.navigationController pushViewController:controller animated:YES];
+}
+
 - (IBAction)seeAllGiftCardsClick:(id)sender
 {
-    
 }
 
 - (IBAction)accountSettingsClick:(id)sender
 {
-    
 }
 
 - (void)updateUserInformation
@@ -103,7 +109,7 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
     WEAK_SELF;
     [BZRReachabilityHelper checkConnectionOnSuccess:^{
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        [weakSelf.dataManager getCurrentUserWithCompletion:^(BOOL success, NSError *error) {
+        [weakSelf.dataManager getCurrentUserWithCompletion:^(BOOL success, NSError *error, NSInteger responseStatusCode) {
             [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
             if (success) {
                 [weakSelf updateUserInformation];
