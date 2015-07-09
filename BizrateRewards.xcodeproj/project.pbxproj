@@ -85,6 +85,7 @@
 		58E5124B1B4C70AF00865694 /* OpenSans-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 58E512411B4C70AF00865694 /* OpenSans-Semibold.ttf */; };
 		58E5124C1B4C70AF00865694 /* OpenSans-SemiboldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 58E512421B4C70AF00865694 /* OpenSans-SemiboldItalic.ttf */; };
 		58F49FC91B4197B7002F93EE /* BZRPushNotifiactionService.m in Sources */ = {isa = PBXBuildFile; fileRef = 58F49FC81B4197B7002F93EE /* BZRPushNotifiactionService.m */; };
+		843C38411B4EAF38005E85CF /* BZRCiftcardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 843C38401B4EAF38005E85CF /* BZRCiftcardCell.m */; };
 		84AD3F011B4587DA00C294AE /* BZRProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AD3F001B4587DA00C294AE /* BZRProgressView.m */; };
 /* End PBXBuildFile section */
 
@@ -242,6 +243,8 @@
 		58F49FC71B4197B7002F93EE /* BZRPushNotifiactionService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRPushNotifiactionService.h; path = Classes/PushNotificationsService/BZRPushNotifiactionService.h; sourceTree = "<group>"; };
 		58F49FC81B4197B7002F93EE /* BZRPushNotifiactionService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRPushNotifiactionService.m; path = Classes/PushNotificationsService/BZRPushNotifiactionService.m; sourceTree = "<group>"; };
 		7AF1FB2A8C4A8673EF3998F1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		843C383F1B4EAF38005E85CF /* BZRCiftcardCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRCiftcardCell.h; path = Classes/Cells/GiftcardCell/BZRCiftcardCell.h; sourceTree = "<group>"; };
+		843C38401B4EAF38005E85CF /* BZRCiftcardCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRCiftcardCell.m; path = Classes/Cells/GiftcardCell/BZRCiftcardCell.m; sourceTree = "<group>"; };
 		84AD3EFF1B4587D900C294AE /* BZRProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRProgressView.h; path = Classes/MVC/Views/ProgressView/BZRProgressView.h; sourceTree = "<group>"; };
 		84AD3F001B4587DA00C294AE /* BZRProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRProgressView.m; path = Classes/MVC/Views/ProgressView/BZRProgressView.m; sourceTree = "<group>"; };
 		E535AA4CB211EDDB654D82EC /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -420,6 +423,7 @@
 		58219EE91B38A24B00A9541A /* UICollectionViewCells */ = {
 			isa = PBXGroup;
 			children = (
+				843C383E1B4EAEFA005E85CF /* CiftcardCell */,
 			);
 			name = UICollectionViewCells;
 			sourceTree = "<group>";
@@ -1088,6 +1092,15 @@
 			name = GlobalConstants;
 			sourceTree = "<group>";
 		};
+		843C383E1B4EAEFA005E85CF /* CiftcardCell */ = {
+			isa = PBXGroup;
+			children = (
+				843C383F1B4EAF38005E85CF /* BZRCiftcardCell.h */,
+				843C38401B4EAF38005E85CF /* BZRCiftcardCell.m */,
+			);
+			name = CiftcardCell;
+			sourceTree = "<group>";
+		};
 		84AD3EFE1B4587B100C294AE /* ProgressView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1295,6 +1308,7 @@
 				58ACC0761B395E6A0081E546 /* BZRPrivacyAndTermsController.m in Sources */,
 				58A91F331B3A823D0032607F /* BZRLocationObserver.m in Sources */,
 				58219EF51B38A2E000A9541A /* BZRNetworkManager.m in Sources */,
+				843C38411B4EAF38005E85CF /* BZRCiftcardCell.m in Sources */,
 				58A91F581B3AD83F0032607F /* BZRUserProfile.m in Sources */,
 				5899D2541B4AB94200565F11 /* BZRApplicationToken.m in Sources */,
 				5894209D1B451E0F004BAF48 /* BZRBirthDatePickerView.m in Sources */,

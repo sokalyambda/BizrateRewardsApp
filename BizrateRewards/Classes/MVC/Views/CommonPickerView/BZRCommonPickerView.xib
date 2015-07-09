@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="13F1077" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="OpenSans-Regular.ttf">
+            <string>OpenSans</string>
+        </mutableArray>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BZRPickersHelper">
             <connections>
@@ -15,12 +20,13 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r9f-po-8P7" userLabel="Tool Bar View">
-                    <rect key="frame" x="0.0" y="0.0" width="360" height="48"/>
+                    <rect key="frame" x="0.0" y="0.0" width="360" height="56"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f19-4q-KFH">
-                            <rect key="frame" x="315" y="7" width="37" height="34"/>
-                            <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="15"/>
+                            <rect key="frame" x="309" y="7" width="43" height="42"/>
+                            <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="17"/>
                             <state key="normal" title="Done">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
@@ -28,7 +34,7 @@
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" red="0.92156862750000001" green="0.92156862750000001" blue="0.92156862750000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.070588235294117646" green="0.66274509803921566" blue="0.83921568627450982" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="f19-4q-KFH" secondAttribute="trailing" constant="8" id="RJD-sT-B7L"/>
                         <constraint firstAttribute="centerY" secondItem="f19-4q-KFH" secondAttribute="centerY" id="S3b-Nf-Wku"/>
@@ -38,6 +44,7 @@
                 </view>
                 <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TQ2-sr-FJN" customClass="BZRPickerHolder">
                     <rect key="frame" x="0.0" y="56" width="360" height="162"/>
+                    <color key="backgroundColor" red="0.94117647058823528" green="0.94117647058823528" blue="0.94117647058823528" alpha="1" colorSpace="calibratedRGB"/>
                     <connections>
                         <outlet property="delegate" destination="-1" id="S9R-2o-LSi"/>
                     </connections>
@@ -49,7 +56,7 @@
                 <constraint firstItem="r9f-po-8P7" firstAttribute="top" secondItem="fWs-e6-77O" secondAttribute="top" id="C2f-Pz-jYS"/>
                 <constraint firstItem="TQ2-sr-FJN" firstAttribute="leading" secondItem="fWs-e6-77O" secondAttribute="leading" id="N67-OT-har"/>
                 <constraint firstAttribute="centerX" secondItem="TQ2-sr-FJN" secondAttribute="centerX" id="Pfg-zo-48y"/>
-                <constraint firstItem="TQ2-sr-FJN" firstAttribute="top" secondItem="r9f-po-8P7" secondAttribute="bottom" constant="8" id="RYY-ko-qu7"/>
+                <constraint firstItem="TQ2-sr-FJN" firstAttribute="top" secondItem="r9f-po-8P7" secondAttribute="bottom" id="RYY-ko-qu7"/>
                 <constraint firstAttribute="trailing" secondItem="r9f-po-8P7" secondAttribute="trailing" id="cFU-bc-6iG"/>
                 <constraint firstAttribute="trailing" secondItem="TQ2-sr-FJN" secondAttribute="trailing" id="cQS-Vo-es6"/>
                 <constraint firstAttribute="centerY" secondItem="TQ2-sr-FJN" secondAttribute="centerY" constant="-28" id="mnk-VO-ojo"/>
