@@ -9,6 +9,7 @@
 #import "BZRFinishTutorialController.h"
 
 static NSString *const kSignInSegueIdentifier = @"signInSegueIdentifier";
+static NSString *const kGetStartedSegueIdentifier = @"getStartedSegueIdentifier";
 
 @interface BZRFinishTutorialController ()
 

@@ -7,17 +7,18 @@
 //
 
 #import "BZRSignInController.h"
+#import "BZRGetStartedController.h"
 
 #import "BZRDataManager.h"
 
-#import "BZRLeftImageTextField.h"
-
 static NSString *const kDashboardSegueIdentifier = @"dashboardSegue";
 
-@interface BZRSignInController ()<UITextFieldDelegate>
+//const for auth error code
+//static NSInteger const kNotAuthorizedErrorCode = 401.f;
 
-@property (weak, nonatomic) IBOutlet BZRLeftImageTextField *userNameField;
-@property (weak, nonatomic) IBOutlet BZRLeftImageTextField *passwordField;
+@interface BZRSignInController ()
+
+@property (weak, nonatomic) IBOutlet UIView *incorrectEmailView;
 
 @property (strong, nonatomic) BZRDataManager *dataManager;
 
@@ -42,13 +43,6 @@ static NSString *const kDashboardSegueIdentifier = @"dashboardSegue";
     [super viewDidLoad];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    [self.view layoutIfNeeded];
-    [self customizeFields];
-}
-
 #pragma mark - Actions
 
 //facebook
@@ -60,6 +54,7 @@ static NSString *const kDashboardSegueIdentifier = @"dashboardSegue";
 //email
 - (IBAction)signInClick:(id)sender
 {
+    [self.incorrectEmailView setHidden:YES];
     WEAK_SELF;
     if ([self.validator validateEmailField:self.userNameField andPasswordField:self.passwordField]) {
         [BZRReachabilityHelper checkConnectionOnSuccess:^{
@@ -67,7 +62,12 @@ static NSString *const kDashboardSegueIdentifier = @"dashboardSegue";
             [weakSelf.dataManager signInWithUserName:weakSelf.userNameField.text password:weakSelf.passwordField.text withResult:^(BOOL success, NSError *error) {
                 [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
                 if (!success) {
-                    ShowErrorAlert(error);
+//                    ShowErrorAlert(error);
+#warning need to detect if an error indeed relative to auth
+//                    if (error.code == 400) {
+                    [weakSelf.incorrectEmailView setHidden:NO];
+                    weakSelf.userNameField.errorImageName = kEmailErrorIconName;
+//                    }
                 } else {
                     [weakSelf performSegueWithIdentifier:kDashboardSegueIdentifier sender:weakSelf];
                 }
@@ -77,7 +77,7 @@ static NSString *const kDashboardSegueIdentifier = @"dashboardSegue";
         }];
         
     } else {
-        ShowAlert(self.validator.validationErrorString);
+//        ShowAlert(self.validator.validationErrorString);
         [self.validator cleanValidationErrorString];
     }
 }
@@ -92,10 +92,18 @@ static NSString *const kDashboardSegueIdentifier = @"dashboardSegue";
     
 }
 
+- (IBAction)goToCreateNewAccountClick:(id)sender
+{
+//    BZRGetStartedController *controller = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRGetStartedController class])];
+//    [self.navigationController pushViewController:controller animated:YES];
+}
+
 - (void)customizeFields
 {
-    self.userNameField.imageName = @"email_icon";
-    self.passwordField.imageName = @"password_icon";
+    [super customizeFields];
+    if (!self.incorrectEmailView.isHidden) {
+        self.incorrectEmailView.hidden = YES;
+    }
 }
 
 #pragma mark - UITextFieldDelegate

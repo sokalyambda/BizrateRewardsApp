@@ -8,12 +8,19 @@
 
 #import "BZRValidator.h"
 
-@interface BZRBaseAuthController : UIViewController
+#import "BZRAuthorizationField.h"
 
-@property (strong, nonatomic) UITextField *activeField;
+static NSString *const kEmailErrorIconName = @"email_icon_error";
 
+@interface BZRBaseAuthController : UIViewController<UITextFieldDelegate>
+
+@property (weak, nonatomic) IBOutlet BZRAuthorizationField *userNameField;
+@property (weak, nonatomic) IBOutlet BZRAuthorizationField *passwordField;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
+@property (strong, nonatomic) UITextField *activeField;
 @property (strong, nonatomic) BZRValidator *validator;
+
+- (void)customizeFields;
 
 @end

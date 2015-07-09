@@ -10,7 +10,6 @@
 #import "BZRPrivacyAndTermsController.h"
 #import "BZREditProfileContainerController.h"
 
-
 typedef enum : NSUInteger {
     BZRConditionsTypePrivacyPolicy,
     BZRConditionsTypeTermsAndConditions
@@ -22,6 +21,7 @@ static NSString *const kChooseSignUpTypeSegueIdentifier = @"сhooseSignUpTypeSeg
 @interface BZRGetStartedController ()<UITextFieldDelegate>
 
 @property (weak, nonatomic) BZREditProfileContainerController *editProfileTableViewController;
+
 @end
 
 @implementation BZRGetStartedController
@@ -87,7 +87,7 @@ static NSString *const kChooseSignUpTypeSegueIdentifier = @"сhooseSignUpTypeSeg
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:kEditProfileContainerSegueIdentifier]) {
-        self.editProfileTableViewController = segue.destinationViewController;
+        self.editProfileTableViewController = (BZREditProfileContainerController *)segue.destinationViewController;
     }
 }
 

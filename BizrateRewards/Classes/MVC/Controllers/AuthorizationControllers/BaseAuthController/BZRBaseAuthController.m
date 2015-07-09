@@ -9,7 +9,12 @@
 
 #import "BZRBaseAuthController.h"
 
-@interface BZRBaseAuthController ()<UITextFieldDelegate>
+static NSString *const kEmailActiveIconName         = @"email_icon_prepop";
+static NSString *const kEmailNotActiveIconName      = @"email_icon";
+static NSString *const kPasswordActiveIconName      = @"password_icon_prepop";
+static NSString *const kPasswordNotActiveIconName   = @"password_icon";
+
+@interface BZRBaseAuthController ()
 
 @end
 
@@ -36,6 +41,8 @@
 {
     [super viewWillAppear:animated];
     [self handleKeyboardNotifications];
+    [self.view layoutIfNeeded];
+    [self customizeFields];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -86,6 +93,15 @@
                                              selector:@selector(keyboardWillHide:)
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
+}
+
+- (void)customizeFields
+{
+    self.userNameField.activeImageName      = kEmailActiveIconName;
+    self.userNameField.notActiveImageName   = kEmailNotActiveIconName;
+    
+    self.passwordField.activeImageName      = kPasswordActiveIconName;
+    self.passwordField.notActiveImageName   = kPasswordNotActiveIconName;
 }
 
 #pragma mark - UITextFieldDelegate

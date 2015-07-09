@@ -7,9 +7,15 @@
 //
 
 #import "BZRValidator.h"
+
 #import "UIView+Shaking.h"
 
+#import "BZRAuthorizationField.h"
+
 static const NSInteger kMinPasswordSymbols = 5;
+
+static NSString *const kEmailErrorImageName = @"email_icon_error";
+static NSString *const kPasswordErrorImageName = @"password_icon_error";
 
 @implementation BZRValidator
 
@@ -48,6 +54,11 @@ static const NSInteger kMinPasswordSymbols = 5;
     } else {
         [self.validationErrorString appendString:NSLocalizedString(@"Email is incorrect. Check it\n", nil)];
         [emailField shakeView];
+        
+        if ([emailField isKindOfClass:[BZRAuthorizationField class]]) {
+            ((BZRAuthorizationField *)emailField).errorImageName = kEmailErrorImageName;
+        }
+        
         return NO;
     }
 }
@@ -59,7 +70,12 @@ static const NSInteger kMinPasswordSymbols = 5;
         isValid = YES;
     } else {
         [passwordField shakeView];
-        [self.validationErrorString appendString:NSLocalizedString(@"Password is incorrect. Min length - 8 symbols\n", nil)];
+        
+        if ([passwordField isKindOfClass:[BZRAuthorizationField class]]) {
+            ((BZRAuthorizationField *)passwordField).errorImageName = kPasswordErrorImageName;
+        }
+        
+        [self.validationErrorString appendString:NSLocalizedString(@"Password is incorrect. Min length - 5 symbols\n", nil)];
     }
     return isValid;
 }

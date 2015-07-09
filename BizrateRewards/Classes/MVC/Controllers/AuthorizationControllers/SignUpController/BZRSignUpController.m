@@ -10,12 +10,7 @@
 
 #import "BZRDataManager.h"
 
-#import "BZRLeftImageTextField.h"
-
-@interface BZRSignUpController ()<UITextFieldDelegate>
-
-@property (weak, nonatomic) IBOutlet BZRLeftImageTextField *userNameField;
-@property (weak, nonatomic) IBOutlet BZRLeftImageTextField *passwordField;
+@interface BZRSignUpController ()
 
 @property (strong, nonatomic) BZRDataManager *dataManager;
 
@@ -40,8 +35,10 @@
     [super viewDidLoad];
 }
 
-- (void)viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.view layoutIfNeeded];
     [self customizeFields];
 }
 
@@ -72,14 +69,11 @@
         ShowAlert(self.validator.validationErrorString);
         [self.validator cleanValidationErrorString];
     }
-    
-   
 }
 
 - (void)customizeFields
 {
-    self.userNameField.imageName = @"email_icon";
-    self.passwordField.imageName = @"password_icon";
+    [super customizeFields];
     [self.passwordField addBottomBorder];
 }
 
@@ -94,6 +88,5 @@
     }
     return YES;
 }
-
 
 @end
