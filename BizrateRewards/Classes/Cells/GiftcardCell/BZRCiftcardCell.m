@@ -10,7 +10,6 @@
 
 @interface BZRCiftcardCell ()
 
-
 @end
 
 @implementation BZRCiftcardCell
