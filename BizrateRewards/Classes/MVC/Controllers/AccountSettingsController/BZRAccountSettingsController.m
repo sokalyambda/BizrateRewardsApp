@@ -8,6 +8,7 @@
 
 #import "BZRAccountSettingsController.h"
 #import "BZRSignInController.h"
+#import "BZRDashboardController.h"
 
 @interface BZRAccountSettingsController ()
 
@@ -34,7 +35,8 @@
 }
 - (IBAction)signOutAction:(id)sender
 {
-    
+    BZRDashboardController *dashboard = (BZRDashboardController *)[self.navigationController.presentingViewController.childViewControllers lastObject];
+    [self dismissViewControllerAnimated:YES completion:nil];
+    [dashboard.navigationController popViewControllerAnimated:NO];
 }
-
 @end
