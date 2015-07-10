@@ -82,6 +82,7 @@ typedef enum : NSUInteger {
             [self.pickersHelper showBirthDatePickerWithResult:^(NSDate *dateOfBirth, BOOL isOlderThirteen) {
                 
                 weakSelf.dateOfBirthField.text = [[BZRCommonDateFormatter commonDateFormatter] stringFromDate:dateOfBirth];
+                [tableView deselectRowAtIndexPath:indexPath animated:YES];
             }];
             break;
         }
@@ -92,6 +93,7 @@ typedef enum : NSUInteger {
             [self.pickersHelper showGenderPickerWithResult:^(BOOL isMale, NSString *genderString) {
                 
                 weakSelf.genderField.text = genderString;
+                [tableView deselectRowAtIndexPath:indexPath animated:YES];
                 
             }];
             break;

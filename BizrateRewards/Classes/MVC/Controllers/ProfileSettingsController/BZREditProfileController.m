@@ -10,6 +10,8 @@
 
 @interface BZREditProfileController ()
 
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *doneBarButton;
+
 @end
 
 @implementation BZREditProfileController
@@ -19,12 +21,27 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self customizeNavigationItem];
 }
 
-- (void)viewWillAppear:(BOOL)animated
+//- (void)viewWillAppear:(BOOL)animated
+//{
+//    [super viewWillAppear:animated];
+//    
+//}
+
+#pragma mark - Actions
+
+- (IBAction)doneClick:(id)sender
 {
-    [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:NO];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)customizeNavigationItem
+{
+    self.navigationItem.title = NSLocalizedString(@"Profile", nil);
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    self.navigationItem.rightBarButtonItem = self.doneBarButton;
 }
 
 @end

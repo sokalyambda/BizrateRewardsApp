@@ -51,27 +51,27 @@ static NSString *const kChooseSignUpTypeSegueIdentifier = @"сhooseSignUpTypeSeg
 
 - (IBAction)privacyPolicyClick:(id)sender
 {
-    [self showPrivacyAndTermsWithType:BZRConditionsTypePrivacyPolicy];
+//    [self showPrivacyAndTermsWithType:BZRConditionsTypePrivacyPolicy];
 }
 
 - (IBAction)termsAndConditionsClick:(id)sender
 {
-    [self showPrivacyAndTermsWithType:BZRConditionsTypeTermsAndConditions];
+//    [self showPrivacyAndTermsWithType:BZRConditionsTypeTermsAndConditions];
 }
 
 - (IBAction)submitButtonClick:(id)sender
 {
-    if([self.validator validateFirstNameField:self.editProfileTableViewController.firstNameField
-                                lastNameField:self.editProfileTableViewController.lastNameField
-                                   emailField:self.editProfileTableViewController.emailField
-                             dateOfBirthField:self.editProfileTableViewController.dateOfBirthField
-                                  genderField:self.editProfileTableViewController.genderField]) {
-        [self performSegueWithIdentifier:kChooseSignUpTypeSegueIdentifier sender:self];
-        
-    } else {
-        ShowAlert(self.validator.validationErrorString);
-        [self.validator cleanValidationErrorString];
-    }
+//    if ([self.validator validateFirstNameField:self.editProfileTableViewController.firstNameField
+//                                lastNameField:self.editProfileTableViewController.lastNameField
+//                                   emailField:self.editProfileTableViewController.emailField
+//                             dateOfBirthField:self.editProfileTableViewController.dateOfBirthField
+//                                  genderField:self.editProfileTableViewController.genderField]) {
+//        [self performSegueWithIdentifier:kChooseSignUpTypeSegueIdentifier sender:self];
+//        
+//    } else {
+//        ShowAlert(self.validator.validationErrorString);
+//        [self.validator cleanValidationErrorString];
+//    }
 }
 
 - (void)showPrivacyAndTermsWithType:(BZRPrivacyAndTermsType)type

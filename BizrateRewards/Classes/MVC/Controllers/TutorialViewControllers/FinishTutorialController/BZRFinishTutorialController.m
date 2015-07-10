@@ -45,6 +45,7 @@ static NSString *const kGetStartedSegueIdentifier = @"getStartedSegueIdentifier"
 
 - (IBAction)getStartedClick:(id)sender
 {
+    [self performSegueWithIdentifier:kGetStartedSegueIdentifier sender:self];
 }
 
 @end

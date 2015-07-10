@@ -73,9 +73,14 @@ static NSInteger const kNotAuthorizedErrorCode = 400.f;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self getUserDataFromKeychain];
-
+//    [self getUserDataFromKeychain];
     [self.rememberMeSwitch setOn:self.isRememberMe];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
 #pragma mark - Actions
@@ -89,6 +94,7 @@ static NSInteger const kNotAuthorizedErrorCode = 400.f;
 //email
 - (IBAction)signInClick:(id)sender
 {
+//    [self performSegueWithIdentifier:kDashboardSegueIdentifier sender:self];
     [self.incorrectEmailView setHidden:YES];
     WEAK_SELF;
     if ([self.validator validateEmailField:self.userNameField andPasswordField:self.passwordField]) {
@@ -104,7 +110,7 @@ static NSInteger const kNotAuthorizedErrorCode = 400.f;
                         ShowErrorAlert(error);
                     }
                 } else {
-                    if(weakSelf.isRememberMe) {
+                    if (weakSelf.isRememberMe) {
                         [weakSelf saveUserDataToKeychain];
                     }
                     [weakSelf performSegueWithIdentifier:kDashboardSegueIdentifier sender:weakSelf];
@@ -131,7 +137,7 @@ static NSInteger const kNotAuthorizedErrorCode = 400.f;
 //    [self.navigationController pushViewController:controller animated:YES];
 }
 
-- (IBAction)rememberMeValueChanget:(id)sender
+- (IBAction)rememberMeValueChanged:(id)sender
 {
     self.rememberMe = !self.isRememberMe;
 }

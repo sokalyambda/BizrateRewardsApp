@@ -22,21 +22,25 @@
 {
     [super viewDidLoad];
 }
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:YES];
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
+
 #pragma mark - Actions
 
 - (IBAction)exitClick:(id)sender
 {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
 - (IBAction)signOutAction:(id)sender
 {
     BZRDashboardController *dashboard = (BZRDashboardController *)[self.navigationController.presentingViewController.childViewControllers lastObject];
     [self dismissViewControllerAnimated:YES completion:nil];
     [dashboard.navigationController popViewControllerAnimated:NO];
 }
+
 @end

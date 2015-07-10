@@ -18,6 +18,8 @@ static NSString *const LocationManagerDidFailAuthorizeNotification = @"LocationM
 static NSString *const PushNotificationServiceDidSuccessAuthorizeNotification = @"PushNotificationServiceDidSuccessAuthorizeNotification";
 static NSString *const PushNotificationServiceDidFailAuthorizeNotification = @"PushNotificationServiceDidFailAuthorizeNotification";
 
+static NSString *const ApplicationDidBecomeActiveNotification = @"ApplicationDidBecomeActiveNotification";
+
 //Strings
 
 static NSString *const InternetIsNotReachableString = @"Internet is not reachable.";

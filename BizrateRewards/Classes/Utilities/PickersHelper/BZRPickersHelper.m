@@ -204,10 +204,8 @@ static NSInteger const kValidAge = 13.f;
 - (CGRect)getKeyboardFrameFromUserInfo:(NSDictionary *)userInfo
 {
     CGRect keyBoardFrame = [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    
     keyBoardFrame = [self.parentView convertRect:keyBoardFrame fromView:nil];
     return keyBoardFrame;
 }
-
 
 @end

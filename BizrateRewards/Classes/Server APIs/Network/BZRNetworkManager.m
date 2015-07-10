@@ -93,6 +93,10 @@ static NSString *const kClientSecretKey = @"8a9da763-9503-4093-82c2-6b22b8eb9a12
         
         return result(YES, token, nil, response.statusCode);
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
+        NSData *errData = error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey];
+        NSString* newStr = [[NSString alloc] initWithData:errData encoding:NSUTF8StringEncoding];
+        
         NSHTTPURLResponse *response = (NSHTTPURLResponse*)task.response;
         return result(NO, nil, error, response.statusCode);
     }];
