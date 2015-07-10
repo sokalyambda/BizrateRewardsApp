@@ -37,17 +37,11 @@ typedef enum : NSUInteger {
 
 @end
 
-@implementation BZREditProfileContainerController
+@implementation BZREditProfileContainerController {
+    CGRect savedKeyboardRect;
+}
 
 #pragma mark - Accessors
-
-- (BZRPickersHelper *)pickersHelper
-{
-    if (!_pickersHelper) {
-        _pickersHelper = [[BZRPickersHelper alloc] initWithParentView:self.parentViewController.view andContainerController:self];
-    }
-    return _pickersHelper;
-}
 
 - (BZRUserProfile *)currentProfile
 {
@@ -65,9 +59,10 @@ typedef enum : NSUInteger {
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 }
 
-- (void)viewWillAppear:(BOOL)animated
+- (void)viewDidAppear:(BOOL)animated
 {
-    [super viewWillAppear:animated];
+    [super viewDidAppear:animated];
+    self.pickersHelper = [[BZRPickersHelper alloc] initWithParentView:self.parentViewController.view andContainerController:self];
 }
 
 #pragma mark - UITableViewDelegate
@@ -110,6 +105,8 @@ typedef enum : NSUInteger {
 
 - (void)adjustTableViewInsetsWithPresentedRect:(CGRect)rect
 {
+    savedKeyboardRect = rect;
+    
     CGRect tableViewFrame = self.tableView.frame;
     tableViewFrame = [self.parentViewController.view convertRect:tableViewFrame fromView:self.tableView];
     
@@ -118,8 +115,8 @@ typedef enum : NSUInteger {
     UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.f, 0.f, CGRectGetHeight(intersection), 0.f);
     self.tableView.contentInset = contentInsets;
     self.tableView.scrollIndicatorInsets = contentInsets;
-    
-    [self.tableView scrollToRowAtIndexPath:[self.tableView indexPathForCell:self.activeCell] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+
+    [self checkForMovement];
 }
 
 - (void)resignIfFirstResponder
@@ -128,6 +125,16 @@ typedef enum : NSUInteger {
         if ([field isFirstResponder]) {
             [field resignFirstResponder];
         }
+    }
+}
+
+- (void)checkForMovement
+{
+    CGRect activeCellFrame = self.activeCell.frame;
+    activeCellFrame = [self.parentViewController.view convertRect:activeCellFrame fromView:self.tableView];
+    
+    if (CGRectIntersectsRect(savedKeyboardRect, activeCellFrame)) {
+        [self.tableView scrollToRowAtIndexPath:[self.tableView indexPathForCell:self.activeCell] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
     }
 }
 
@@ -142,9 +149,16 @@ typedef enum : NSUInteger {
     } else if ([self.emailField isFirstResponder]) {
         [self.emailField resignFirstResponder];
     }
+    
+    [self checkForMovement];
+    
     return YES;
 }
 
-
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    self.activeCell = ((UITableViewCell *)textField.superview.superview);
+    return YES;
+}
 
 @end

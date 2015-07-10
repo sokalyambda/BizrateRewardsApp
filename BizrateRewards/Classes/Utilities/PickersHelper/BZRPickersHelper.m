@@ -59,6 +59,7 @@ static NSInteger const kValidAge = 13.f;
         _birthDatePicker.delegate = self;
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShowNotification:) name:UIKeyboardWillShowNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHideNotification:) name:UIKeyboardWillHideNotification object:nil];
     }
     return self;
 }
@@ -185,6 +186,28 @@ static NSInteger const kValidAge = 13.f;
     } else if ([self isPickerExists:self.birthDatePicker]) {
         [self showHidePickerView:self.birthDatePicker];
     }
+    
+    NSDictionary* info = [notification userInfo];
+    CGRect keyBoardFrame = [self getKeyboardFrameFromUserInfo:info];
+    
+    [self.containerController adjustTableViewInsetsWithPresentedRect:keyBoardFrame];
 }
+
+- (void)keyboardWillHideNotification:(NSNotification*) notification
+{
+    NSDictionary* info = [notification userInfo];
+    CGRect keyBoardFrame = [self getKeyboardFrameFromUserInfo:info];
+    
+    [self.containerController adjustTableViewInsetsWithPresentedRect:keyBoardFrame];
+}
+
+- (CGRect)getKeyboardFrameFromUserInfo:(NSDictionary *)userInfo
+{
+    CGRect keyBoardFrame = [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    
+    keyBoardFrame = [self.parentView convertRect:keyBoardFrame fromView:nil];
+    return keyBoardFrame;
+}
+
 
 @end

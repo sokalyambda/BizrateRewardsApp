@@ -10,6 +10,8 @@
 #import "BZRPrivacyAndTermsController.h"
 #import "BZREditProfileContainerController.h"
 
+#import "BZRValidator.h"
+
 typedef enum : NSUInteger {
     BZRConditionsTypePrivacyPolicy,
     BZRConditionsTypeTermsAndConditions
@@ -22,9 +24,21 @@ static NSString *const kChooseSignUpTypeSegueIdentifier = @"сhooseSignUpTypeSeg
 
 @property (weak, nonatomic) BZREditProfileContainerController *editProfileTableViewController;
 
+@property (strong, nonatomic) BZRValidator *validator;
+
 @end
 
 @implementation BZRGetStartedController
+
+#pragma mark - Accessors
+
+- (BZRValidator *)validator
+{
+    if (!_validator) {
+        _validator = [BZRValidator sharedValidator];
+    }
+    return _validator;
+}
 
 #pragma mark - View Lifecycle
 
@@ -89,32 +103,6 @@ static NSString *const kChooseSignUpTypeSegueIdentifier = @"сhooseSignUpTypeSeg
     if ([segue.identifier isEqualToString:kEditProfileContainerSegueIdentifier]) {
         self.editProfileTableViewController = (BZREditProfileContainerController *)segue.destinationViewController;
     }
-}
-
-#pragma mark - Keyboard methods
-
-- (void)keyboardWillShow:(NSNotification*) notification
-{
-    NSDictionary* info = [notification userInfo];
-    CGRect keyBoardFrame = [self getKeyboardFrameFromUserInfo:info];
-    
-//    [self.editProfileTableViewController adjustTableViewInsetsWithPresentedRect:keyBoardFrame];
-}
-
-- (void)keyboardWillHide:(NSNotification*) notification
-{
-    NSDictionary* info = [notification userInfo];
-    CGRect keyBoardFrame = [self getKeyboardFrameFromUserInfo:info];
-    
-//    [self.editProfileTableViewController adjustTableViewInsetsWithPresentedRect:keyBoardFrame];
-}
-
-- (CGRect)getKeyboardFrameFromUserInfo:(NSDictionary *)userInfo
-{
-    CGRect keyBoardFrame = [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    
-    keyBoardFrame = [self.view convertRect:keyBoardFrame fromView:nil];
-    return keyBoardFrame;
 }
 
 @end

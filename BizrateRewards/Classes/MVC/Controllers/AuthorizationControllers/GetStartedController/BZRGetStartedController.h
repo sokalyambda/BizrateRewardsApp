@@ -6,8 +6,6 @@
 //  Copyright (c) 2015 ThinkMobiles. All rights reserved.
 //
 
-#import "BZRBaseAuthController.h"
-
-@interface BZRGetStartedController : BZRBaseAuthController
+@interface BZRGetStartedController : UIViewController
 
 @end
