@@ -11,6 +11,7 @@
 
 #import "BZRDashboardController.h"
 #import "BZRSurveyViewController.h"
+#import "BZRAccountSettingsController.h"
 
 #import "BZRRoundedImageView.h"
 #import "BZRProgressView.h"
@@ -93,6 +94,9 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
 
 - (IBAction)accountSettingsClick:(id)sender
 {
+    BZRAccountSettingsController *accountController = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRAccountSettingsController class])];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:accountController];
+    [self presentViewController:navigationController animated:YES completion:nil];
 }
 
 - (void)updateUserInformation
