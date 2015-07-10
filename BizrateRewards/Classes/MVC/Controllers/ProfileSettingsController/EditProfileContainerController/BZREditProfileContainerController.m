@@ -33,6 +33,8 @@ typedef enum : NSUInteger {
 
 @property (strong, nonatomic) IBOutletCollection(UITextField) NSArray *textFields;
 
+@property (strong, nonatomic) UITableViewCell *activeCell;
+
 @end
 
 @implementation BZREditProfileContainerController
@@ -42,7 +44,7 @@ typedef enum : NSUInteger {
 - (BZRPickersHelper *)pickersHelper
 {
     if (!_pickersHelper) {
-        _pickersHelper = [[BZRPickersHelper alloc] initWithParentView:self.parentViewController.view];
+        _pickersHelper = [[BZRPickersHelper alloc] initWithParentView:self.parentViewController.view andContainerController:self];
     }
     return _pickersHelper;
 }
@@ -74,6 +76,8 @@ typedef enum : NSUInteger {
 {
     BZREditableFieldType fieldType = indexPath.row;
     
+    self.activeCell = [tableView cellForRowAtIndexPath:indexPath];
+    
     WEAK_SELF;
     switch (fieldType) {
         case BZREditableFieldTypeDateOfBirth: {
@@ -83,9 +87,6 @@ typedef enum : NSUInteger {
             [self.pickersHelper showBirthDatePickerWithResult:^(NSDate *dateOfBirth, BOOL isOlderThirteen) {
                 
                 weakSelf.dateOfBirthField.text = [[BZRCommonDateFormatter commonDateFormatter] stringFromDate:dateOfBirth];
-                
-            } withAnimationCompletion:^(BOOL isExpanded, UIView *pickerView) {
-                [weakSelf adjustPicker:pickerView withExpanding:isExpanded];
             }];
             break;
         }
@@ -97,8 +98,6 @@ typedef enum : NSUInteger {
                 
                 weakSelf.genderField.text = genderString;
                 
-            } withAnimationCompletion:^(BOOL isExpanded, UIView *pickerView) {
-                [weakSelf adjustPicker:pickerView withExpanding:isExpanded];
             }];
             break;
         }
@@ -109,36 +108,18 @@ typedef enum : NSUInteger {
 
 #pragma mark - Private methods
 
-- (void)adjustPicker:(UIView *)picker withExpanding:(BOOL)isExpanded
+- (void)adjustTableViewInsetsWithPresentedRect:(CGRect)rect
 {
-    if (isExpanded) {
-        [self pickerDidShow:picker];
-    } else {
-        [self pickerDidHide:picker];
-    }
-}
-
-- (void)pickerDidShow:(UIView *)picker
-{
-    if (!self.isPickerPresented) {
-        self.isPickerPresented = YES;
-        
-        CGRect pickerFrame = picker.frame;
-        
-        CGRect tableViewFrame = self.tableView.frame;
-        
-        tableViewFrame = [self.parentViewController.view convertRect:tableViewFrame fromView:self.view];
-        
-        CGRect intersection = CGRectIntersection(tableViewFrame, pickerFrame);
-        
-        [self.tableView setContentOffset:CGPointMake(0, CGRectGetHeight(intersection)) animated:YES];
-    }
-}
-
-- (void)pickerDidHide:(UIView *)picker
-{
-    self.isPickerPresented = NO;
-    [self.tableView setContentOffset:CGPointZero animated:YES];
+    CGRect tableViewFrame = self.tableView.frame;
+    tableViewFrame = [self.parentViewController.view convertRect:tableViewFrame fromView:self.tableView];
+    
+    CGRect intersection = CGRectIntersection(rect, tableViewFrame);
+    
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.f, 0.f, CGRectGetHeight(intersection), 0.f);
+    self.tableView.contentInset = contentInsets;
+    self.tableView.scrollIndicatorInsets = contentInsets;
+    
+    [self.tableView scrollToRowAtIndexPath:[self.tableView indexPathForCell:self.activeCell] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 }
 
 - (void)resignIfFirstResponder
@@ -163,5 +144,7 @@ typedef enum : NSUInteger {
     }
     return YES;
 }
+
+
 
 @end

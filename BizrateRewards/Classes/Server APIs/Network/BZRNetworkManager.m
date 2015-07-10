@@ -43,9 +43,8 @@ static NSString *const kClientSecretKey = @"8a9da763-9503-4093-82c2-6b22b8eb9a12
         
         self.requestSerializer = [AFHTTPRequestSerializer serializer];
         self.responseSerializer = [AFJSONResponseSerializer serializer];
-        
         [self.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"application/schema+json", @"application/json", @"application/x-www-form-urlencoded", nil]];
-        
+
         //reachability
         [[AFNetworkReachabilityManager sharedManager] startMonitoring];
         

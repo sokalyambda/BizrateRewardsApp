@@ -9,13 +9,13 @@
 typedef void(^DateResult)(NSDate *dateOfBirth, BOOL isOlderThirteen);
 typedef void(^GenderResult)(BOOL isMale, NSString *genderString);
 
-typedef void(^AnimaionCompletionBlock)(BOOL isExpanded, UIView *pickerView);
+@class BZREditProfileContainerController;
 
 @interface BZRPickersHelper : NSObject
 
-- (instancetype)initWithParentView:(UIView *)parentView;
+- (instancetype)initWithParentView:(UIView *)parentView andContainerController:(BZREditProfileContainerController *)container;
 
-- (void)showGenderPickerWithResult:(GenderResult)result withAnimationCompletion:(AnimaionCompletionBlock)animationCompletion;
-- (void)showBirthDatePickerWithResult:(DateResult)result withAnimationCompletion:(AnimaionCompletionBlock)animationCompletion;
+- (void)showGenderPickerWithResult:(GenderResult)result;
+- (void)showBirthDatePickerWithResult:(DateResult)result;
 
 @end

@@ -45,6 +45,21 @@ static NSString *const kChooseSignUpTypeSegueIdentifier = @"сhooseSignUpTypeSeg
     [self showPrivacyAndTermsWithType:BZRConditionsTypeTermsAndConditions];
 }
 
+- (IBAction)submitButtonClick:(id)sender
+{
+    if([self.validator validateFirstNameField:self.editProfileTableViewController.firstNameField
+                                lastNameField:self.editProfileTableViewController.lastNameField
+                                   emailField:self.editProfileTableViewController.emailField
+                             dateOfBirthField:self.editProfileTableViewController.dateOfBirthField
+                                  genderField:self.editProfileTableViewController.genderField]) {
+        [self performSegueWithIdentifier:kChooseSignUpTypeSegueIdentifier sender:self];
+        
+    } else {
+        ShowAlert(self.validator.validationErrorString);
+        [self.validator cleanValidationErrorString];
+    }
+}
+
 - (void)showPrivacyAndTermsWithType:(BZRPrivacyAndTermsType)type
 {
     BZRPrivacyAndTermsController *controller = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRPrivacyAndTermsController class])];
@@ -67,21 +82,6 @@ static NSString *const kChooseSignUpTypeSegueIdentifier = @"сhooseSignUpTypeSeg
     [self.navigationController pushViewController:controller animated:YES];
 }
 
-- (IBAction)submitButtonClick:(id)sender {
-    
-    if([self.validator validateFirstNameField:self.editProfileTableViewController.firstNameField
-                                lastNameField:self.editProfileTableViewController.lastNameField
-                                   emailField:self.editProfileTableViewController.emailField
-                             dateOfBirthField:self.editProfileTableViewController.dateOfBirthField
-                                  genderField:self.editProfileTableViewController.genderField]) {
-        [self performSegueWithIdentifier:kChooseSignUpTypeSegueIdentifier sender:self];
-        
-    } else {
-        ShowAlert(self.validator.validationErrorString);
-        [self.validator cleanValidationErrorString];
-    }
-}
-
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -89,6 +89,32 @@ static NSString *const kChooseSignUpTypeSegueIdentifier = @"сhooseSignUpTypeSeg
     if ([segue.identifier isEqualToString:kEditProfileContainerSegueIdentifier]) {
         self.editProfileTableViewController = (BZREditProfileContainerController *)segue.destinationViewController;
     }
+}
+
+#pragma mark - Keyboard methods
+
+- (void)keyboardWillShow:(NSNotification*) notification
+{
+    NSDictionary* info = [notification userInfo];
+    CGRect keyBoardFrame = [self getKeyboardFrameFromUserInfo:info];
+    
+//    [self.editProfileTableViewController adjustTableViewInsetsWithPresentedRect:keyBoardFrame];
+}
+
+- (void)keyboardWillHide:(NSNotification*) notification
+{
+    NSDictionary* info = [notification userInfo];
+    CGRect keyBoardFrame = [self getKeyboardFrameFromUserInfo:info];
+    
+//    [self.editProfileTableViewController adjustTableViewInsetsWithPresentedRect:keyBoardFrame];
+}
+
+- (CGRect)getKeyboardFrameFromUserInfo:(NSDictionary *)userInfo
+{
+    CGRect keyBoardFrame = [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    
+    keyBoardFrame = [self.view convertRect:keyBoardFrame fromView:nil];
+    return keyBoardFrame;
 }
 
 @end

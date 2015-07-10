@@ -17,19 +17,22 @@
 #import "UIView+ConfigureAnchorPoint.h"
 #import "UIView+SoftRemoving.h"
 
-static NSInteger const kPickerHeight    = 218.f;
+#import "BZREditProfileContainerController.h"
+
+static NSInteger const kPickerHeight = 218.f;
 static CGFloat const kAnimationDuration = .25f;
+static NSInteger const kValidAge = 13.f;
 
 @interface BZRPickersHelper ()<BZRBirthDatePickerDelegate, BZRCommonPickerViewDelegate, UIPickerViewDelegate>
 
-@property (strong, nonatomic) IBOutlet BZRCommonPickerView      *commonPickerView;
-@property (strong, nonatomic) IBOutlet BZRBirthDatePickerView   *birthDatePicker;
+@property (strong, nonatomic) IBOutlet BZRCommonPickerView    *commonPickerView;
+@property (strong, nonatomic) IBOutlet BZRBirthDatePickerView *birthDatePicker;
 
 @property (strong, nonatomic) UIView *parentView;
+@property (weak, nonatomic) BZREditProfileContainerController *containerController;
 
-@property (copy, nonatomic) DateResult              dateResult;
-@property (copy, nonatomic) GenderResult            genderResult;
-@property (copy, nonatomic) AnimaionCompletionBlock animationCompletion;
+@property (copy, nonatomic) DateResult   dateResult;
+@property (copy, nonatomic) GenderResult genderResult;
 
 @end
 
@@ -42,18 +45,18 @@ static CGFloat const kAnimationDuration = .25f;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (instancetype)initWithParentView:(UIView *)parentView;
+- (instancetype)initWithParentView:(UIView *)parentView andContainerController:(BZREditProfileContainerController *)container;
 {
     self = [super init];
     if (self) {
         _parentView = parentView;
+        _containerController = container;
         
         _commonPickerView = [BZRCommonPickerView makeFromXibWithFileOwner:self];
         _commonPickerView.delegate = self;
         
         _birthDatePicker = [BZRBirthDatePickerView makeFromXibWithFileOwner:self];
         _birthDatePicker.delegate = self;
-        
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShowNotification:) name:UIKeyboardWillShowNotification object:nil];
     }
@@ -64,29 +67,25 @@ static CGFloat const kAnimationDuration = .25f;
 
 #pragma mark  Public methods
 
-- (void)showGenderPickerWithResult:(GenderResult)result withAnimationCompletion:(AnimaionCompletionBlock)animationCompletion
+- (void)showGenderPickerWithResult:(GenderResult)result
 {
     self.genderResult = result;
     
     self.commonPickerView.pickerComponentsArray = @[@[@"Male", @"Female"]];
     
     if ([self isPickerExists:self.birthDatePicker]) {
-        [self.birthDatePicker softRemove];
+        [self showHidePickerView:self.birthDatePicker];
     }
-    
-    self.animationCompletion = animationCompletion;
     [self showHidePickerView:self.commonPickerView];
 }
 
-- (void)showBirthDatePickerWithResult:(DateResult)result withAnimationCompletion:(AnimaionCompletionBlock)animationCompletion
+- (void)showBirthDatePickerWithResult:(DateResult)result
 {
     self.dateResult = result;
     
     if ([self isPickerExists:self.commonPickerView]) {
-        [self.commonPickerView softRemove];
+        [self showHidePickerView:self.commonPickerView];
     }
-    
-    self.animationCompletion = animationCompletion;
     [self showHidePickerView:self.birthDatePicker];
 }
 
@@ -101,28 +100,23 @@ static CGFloat const kAnimationDuration = .25f;
         [self.parentView addSubview:currentPickerView];
         
         [UIView animateWithDuration:kAnimationDuration
-                              delay:0.1f
+                              delay:0.f
                             options:UIViewAnimationOptionCurveEaseIn
                          animations:^{
                              [currentPickerView setFrame:CGRectMake(0, CGRectGetMaxY(weakSelf.parentView.bounds) - kPickerHeight, CGRectGetWidth(weakSelf.parentView.frame), kPickerHeight)];
+                             [weakSelf.containerController adjustTableViewInsetsWithPresentedRect:currentPickerView.frame];
                          }
-                         completion:^(BOOL finished){
-                             if (finished && weakSelf.animationCompletion) {
-                                 weakSelf.animationCompletion(YES, currentPickerView);
-                             }
-                         }];
+                         completion:nil];
     } else {
         [UIView animateWithDuration:kAnimationDuration
-                              delay:0.1f
+                              delay:0.f
                             options:UIViewAnimationOptionCurveEaseOut
                          animations:^{
                              [currentPickerView setFrame:CGRectMake(0, CGRectGetMaxY(weakSelf.parentView.bounds), CGRectGetWidth(weakSelf.parentView.frame), kPickerHeight)];
                              
-                             if (weakSelf.animationCompletion) {
-                                 weakSelf.animationCompletion(NO, currentPickerView);
-                             }
+                             [weakSelf.containerController adjustTableViewInsetsWithPresentedRect:currentPickerView.frame];
                          }
-                         completion:^(BOOL finished){
+                         completion:^(BOOL finished) {
                              if (finished) {
                                  [currentPickerView removeFromSuperview];
                              }
@@ -132,10 +126,7 @@ static CGFloat const kAnimationDuration = .25f;
 
 - (BOOL)isPickerExists:(UIView *)pickerView
 {
-    if (![self.parentView.subviews containsObject:pickerView]) {
-        return NO;
-    }
-    return YES;
+    return [self.parentView.subviews containsObject:pickerView];
 }
 
 #pragma mark - BZRBirthDatePickerDelegate
@@ -151,7 +142,7 @@ static CGFloat const kAnimationDuration = .25f;
                                            options:0];
         NSInteger age = [ageComponents year];
         
-        self.dateResult(birthDate, age > 13.f);
+        self.dateResult(birthDate, age > kValidAge);
     }
 
     [self showHidePickerView:datePickerView];
@@ -190,7 +181,7 @@ static CGFloat const kAnimationDuration = .25f;
 - (void)keyboardWillShowNotification:(NSNotification *)notification
 {
     if ([self isPickerExists:self.commonPickerView]) {
-        [ self showHidePickerView:self.commonPickerView];
+        [self showHidePickerView:self.commonPickerView];
     } else if ([self isPickerExists:self.birthDatePicker]) {
         [self showHidePickerView:self.birthDatePicker];
     }

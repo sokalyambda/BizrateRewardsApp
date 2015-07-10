@@ -14,4 +14,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *dateOfBirthField;
 @property (weak, nonatomic) IBOutlet UITextField *genderField;
 
+- (void)adjustTableViewInsetsWithPresentedRect:(CGRect)rect;
+
 @end
