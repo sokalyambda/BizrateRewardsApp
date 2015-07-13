@@ -15,6 +15,8 @@
 
 #import "BZRUserProfile.h"
 
+static CGFloat const kAnimationDuration = .25f;
+
 typedef enum : NSUInteger {
     BZREditableFieldTypeFirstName,
     BZREditableFieldTypeLastName,
@@ -29,17 +31,13 @@ typedef enum : NSUInteger {
 
 @property (strong, nonatomic) BZRUserProfile *currentProfile;
 
-@property (assign, nonatomic) BOOL isPickerPresented;
-
 @property (strong, nonatomic) IBOutletCollection(UITextField) NSArray *textFields;
 
 @property (strong, nonatomic) UITableViewCell *activeCell;
 
 @end
 
-@implementation BZREditProfileContainerController {
-    CGRect savedKeyboardRect;
-}
+@implementation BZREditProfileContainerController
 
 #pragma mark - Accessors
 
@@ -65,6 +63,11 @@ typedef enum : NSUInteger {
     self.pickersHelper = [[BZRPickersHelper alloc] initWithParentView:self.parentViewController.view andContainerController:self];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
+}
+
 #pragma mark - UITableViewDelegate
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -72,6 +75,7 @@ typedef enum : NSUInteger {
     BZREditableFieldType fieldType = indexPath.row;
     
     self.activeCell = [tableView cellForRowAtIndexPath:indexPath];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     WEAK_SELF;
     switch (fieldType) {
@@ -82,7 +86,7 @@ typedef enum : NSUInteger {
             [self.pickersHelper showBirthDatePickerWithResult:^(NSDate *dateOfBirth, BOOL isOlderThirteen) {
                 
                 weakSelf.dateOfBirthField.text = [[BZRCommonDateFormatter commonDateFormatter] stringFromDate:dateOfBirth];
-                [tableView deselectRowAtIndexPath:indexPath animated:YES];
+//                [tableView deselectRowAtIndexPath:indexPath animated:YES];
             }];
             break;
         }
@@ -93,7 +97,7 @@ typedef enum : NSUInteger {
             [self.pickersHelper showGenderPickerWithResult:^(BOOL isMale, NSString *genderString) {
                 
                 weakSelf.genderField.text = genderString;
-                [tableView deselectRowAtIndexPath:indexPath animated:YES];
+//                [tableView deselectRowAtIndexPath:indexPath animated:YES];
                 
             }];
             break;
@@ -103,11 +107,11 @@ typedef enum : NSUInteger {
     }
 }
 
-#pragma mark - Private methods
+#pragma mark - Actions
 
 - (void)adjustTableViewInsetsWithPresentedRect:(CGRect)rect
 {
-    savedKeyboardRect = rect;
+    self.savedKeyboardRect = rect;
     
     CGRect tableViewFrame = self.tableView.frame;
     tableViewFrame = [self.parentViewController.view convertRect:tableViewFrame fromView:self.tableView];
@@ -115,11 +119,16 @@ typedef enum : NSUInteger {
     CGRect intersection = CGRectIntersection(rect, tableViewFrame);
     
     UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.f, 0.f, CGRectGetHeight(intersection), 0.f);
-    self.tableView.contentInset = contentInsets;
-    self.tableView.scrollIndicatorInsets = contentInsets;
+    
+    [UIView animateWithDuration:kAnimationDuration animations:^{
+        self.tableView.contentInset = contentInsets;
+        self.tableView.scrollIndicatorInsets = contentInsets;
+    }];
 
     [self checkForMovement];
 }
+
+#pragma mark - Private methods
 
 - (void)resignIfFirstResponder
 {
@@ -134,8 +143,8 @@ typedef enum : NSUInteger {
 {
     CGRect activeCellFrame = self.activeCell.frame;
     activeCellFrame = [self.parentViewController.view convertRect:activeCellFrame fromView:self.tableView];
-    
-    if (CGRectIntersectsRect(savedKeyboardRect, activeCellFrame)) {
+
+    if (CGRectIntersectsRect(self.savedKeyboardRect, activeCellFrame)) {
         [self.tableView scrollToRowAtIndexPath:[self.tableView indexPathForCell:self.activeCell] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
     }
 }
@@ -152,14 +161,17 @@ typedef enum : NSUInteger {
         [self.emailField resignFirstResponder];
     }
     
-    [self checkForMovement];
-    
     return YES;
 }
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
-    self.activeCell = ((UITableViewCell *)textField.superview.superview);
+    CGPoint p = [textField convertPoint:CGPointZero toView:self.tableView];
+    NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:p];
+    self.activeCell = [self.tableView cellForRowAtIndexPath:indexPath];
+    
+    [self checkForMovement];
+    
     return YES;
 }
 

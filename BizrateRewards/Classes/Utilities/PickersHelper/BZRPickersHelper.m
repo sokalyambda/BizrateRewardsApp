@@ -16,12 +16,19 @@
 #import "UIView+MakeFromXib.h"
 #import "UIView+ConfigureAnchorPoint.h"
 #import "UIView+SoftRemoving.h"
+#import "UIView+ConfigureAnchorPoint.h"
 
 #import "BZREditProfileContainerController.h"
 
-static NSInteger const kPickerHeight = 218.f;
+static NSInteger const kPickerHeight    = 218.f;
 static CGFloat const kAnimationDuration = .25f;
-static NSInteger const kValidAge = 13.f;
+static NSInteger const kValidAge        = 13.f;
+
+static NSString *const kHidePickerAnimation = @"hidePickerAnimation";
+static NSString *const kShowPickerAnimation = @"showPickerAnimation";
+
+static NSString *const kAnimationName = @"animationName";
+static NSString *const kCurrentPicker = @"currentPicker";
 
 @interface BZRPickersHelper ()<BZRBirthDatePickerDelegate, BZRCommonPickerViewDelegate, UIPickerViewDelegate>
 
@@ -75,9 +82,9 @@ static NSInteger const kValidAge = 13.f;
     self.commonPickerView.pickerComponentsArray = @[@[@"Male", @"Female"]];
     
     if ([self isPickerExists:self.birthDatePicker]) {
-        [self showHidePickerView:self.birthDatePicker];
+        [self showHidePickerViewWithAnimation:self.birthDatePicker];
     }
-    [self showHidePickerView:self.commonPickerView];
+    [self showHidePickerViewWithAnimation:self.commonPickerView];
 }
 
 - (void)showBirthDatePickerWithResult:(DateResult)result
@@ -85,49 +92,84 @@ static NSInteger const kValidAge = 13.f;
     self.dateResult = result;
     
     if ([self isPickerExists:self.commonPickerView]) {
-        [self showHidePickerView:self.commonPickerView];
+        [self showHidePickerViewWithAnimation:self.commonPickerView];
     }
-    [self showHidePickerView:self.birthDatePicker];
+    [self showHidePickerViewWithAnimation:self.birthDatePicker];
 }
 
 #pragma mark - Private methods
 
-- (void)showHidePickerView:(UIView *)currentPickerView
-{
-    WEAK_SELF;
-    if (![self isPickerExists:currentPickerView]) {
-        [currentPickerView setFrame:CGRectMake(0, CGRectGetMaxY(self.parentView.bounds), CGRectGetWidth(self.parentView.frame), kPickerHeight)];
-        
-        [self.parentView addSubview:currentPickerView];
-        
-        [UIView animateWithDuration:kAnimationDuration
-                              delay:0.f
-                            options:UIViewAnimationOptionCurveEaseIn
-                         animations:^{
-                             [currentPickerView setFrame:CGRectMake(0, CGRectGetMaxY(weakSelf.parentView.bounds) - kPickerHeight, CGRectGetWidth(weakSelf.parentView.frame), kPickerHeight)];
-                             [weakSelf.containerController adjustTableViewInsetsWithPresentedRect:currentPickerView.frame];
-                         }
-                         completion:nil];
-    } else {
-        [UIView animateWithDuration:kAnimationDuration
-                              delay:0.f
-                            options:UIViewAnimationOptionCurveEaseOut
-                         animations:^{
-                             [currentPickerView setFrame:CGRectMake(0, CGRectGetMaxY(weakSelf.parentView.bounds), CGRectGetWidth(weakSelf.parentView.frame), kPickerHeight)];
-                             
-                             [weakSelf.containerController adjustTableViewInsetsWithPresentedRect:currentPickerView.frame];
-                         }
-                         completion:^(BOOL finished) {
-                             if (finished) {
-                                 [currentPickerView removeFromSuperview];
-                             }
-                         }];
-    }
-}
-
 - (BOOL)isPickerExists:(UIView *)pickerView
 {
     return [self.parentView.subviews containsObject:pickerView];
+}
+
+#pragma mark - CAAnimation
+
+- (void)showHidePickerViewWithAnimation:(UIView *)pickerView
+{
+    if (![self isPickerExists:pickerView]) {
+        
+        [pickerView setFrame:CGRectMake(0, CGRectGetMaxY(self.parentView.bounds), CGRectGetWidth(self.parentView.frame), kPickerHeight)];
+        [self.parentView addSubview:pickerView];
+        
+        CGPoint toPoint = CGPointMake(0, CGRectGetMaxY(self.parentView.bounds) - kPickerHeight);
+        
+        [pickerView setAnchorPoint:CGPointZero];
+        
+        CABasicAnimation * animationPosition = [CABasicAnimation animationWithKeyPath:@"position"];
+        animationPosition.fromValue = [pickerView.layer valueForKey:@"position"];
+        animationPosition.toValue = [NSValue valueWithCGPoint:toPoint];
+        
+        animationPosition.duration = kAnimationDuration;
+        animationPosition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+        
+        pickerView.layer.position = toPoint;
+        
+        [pickerView.layer addAnimation:animationPosition forKey:kShowPickerAnimation];
+    } else {
+        CGPoint toPoint = CGPointMake(0.f, CGRectGetMaxY(self.parentView.bounds));
+        
+        CABasicAnimation *hideAnimation = [CABasicAnimation animationWithKeyPath:@"position"];
+        hideAnimation.fromValue = [pickerView.layer valueForKey:@"position"];
+        hideAnimation.toValue = [NSValue valueWithCGPoint:CGPointMake(0.f, CGRectGetMaxY(self.parentView.bounds))];
+        
+        hideAnimation.duration = kAnimationDuration;
+        hideAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+        
+        hideAnimation.delegate = self;
+        [hideAnimation setValue:kHidePickerAnimation forKey:kAnimationName];
+        [hideAnimation setValue:pickerView forKey:kCurrentPicker];
+        
+        pickerView.layer.position = toPoint;
+        [pickerView.layer addAnimation:hideAnimation forKey:kHidePickerAnimation];
+    }
+    
+    [self.containerController adjustTableViewInsetsWithPresentedRect:pickerView.frame];
+}
+
+- (void)removeExistedPicker
+{
+    if ([self isPickerExists:self.commonPickerView]) {
+        [self showHidePickerViewWithAnimation:self.commonPickerView];
+    } else if ([self isPickerExists:self.birthDatePicker]) {
+        [self showHidePickerViewWithAnimation:self.birthDatePicker];
+    }
+}
+
+#pragma mark - CAAnimationDelegate
+
+- (void)animationDidStart:(CAAnimation *)anim
+{
+    
+}
+
+- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
+{
+    if ([[anim valueForKey:kAnimationName] isEqualToString:kHidePickerAnimation]) {
+        UIView *picker = [anim valueForKey:kCurrentPicker];
+        [picker softRemove];
+    }
 }
 
 #pragma mark - BZRBirthDatePickerDelegate
@@ -140,13 +182,13 @@ static NSInteger const kValidAge = 13.f;
                                            components:NSCalendarUnitYear
                                            fromDate:birthDate
                                            toDate:now
-                                           options:0];
+                                           options:0.f];
         NSInteger age = [ageComponents year];
         
         self.dateResult(birthDate, age > kValidAge);
     }
 
-    [self showHidePickerView:datePickerView];
+    [self showHidePickerViewWithAnimation:datePickerView];
 }
 
 #pragma mark - BZRCommonPickerViewDelegate
@@ -155,10 +197,11 @@ static NSInteger const kValidAge = 13.f;
 {
     if ([chosenValue isKindOfClass:[NSString class]]) {
         NSString *genderString = chosenValue;
+        //get first letter of gender string and detect the gender
         BOOL isMale = [[genderString substringToIndex:1] isEqualToString:@"M"] ? YES : NO;
         self.genderResult(isMale, genderString);
     }
-    [self showHidePickerView:commonPickerView];
+    [self showHidePickerViewWithAnimation:commonPickerView];
 }
 
 #pragma mark - UIPickerViewDelegate
@@ -181,30 +224,21 @@ static NSInteger const kValidAge = 13.f;
 
 - (void)keyboardWillShowNotification:(NSNotification *)notification
 {
-    if ([self isPickerExists:self.commonPickerView]) {
-        [self showHidePickerView:self.commonPickerView];
-    } else if ([self isPickerExists:self.birthDatePicker]) {
-        [self showHidePickerView:self.birthDatePicker];
-    }
-    
-    NSDictionary* info = [notification userInfo];
-    CGRect keyBoardFrame = [self getKeyboardFrameFromUserInfo:info];
-    
-    [self.containerController adjustTableViewInsetsWithPresentedRect:keyBoardFrame];
+    [self removeExistedPicker];
+    self.containerController.savedKeyboardRect = [self getKeyboardFrameFromNotification:notification];
 }
 
-- (void)keyboardWillHideNotification:(NSNotification*) notification
+- (void)keyboardWillHideNotification:(NSNotification *)notification
 {
-    NSDictionary* info = [notification userInfo];
-    CGRect keyBoardFrame = [self getKeyboardFrameFromUserInfo:info];
-    
-    [self.containerController adjustTableViewInsetsWithPresentedRect:keyBoardFrame];
+    self.containerController.savedKeyboardRect = [self getKeyboardFrameFromNotification:notification];
 }
 
-- (CGRect)getKeyboardFrameFromUserInfo:(NSDictionary *)userInfo
+- (CGRect)getKeyboardFrameFromNotification:(NSNotification *)notification
 {
+    NSDictionary *userInfo = [notification userInfo];
     CGRect keyBoardFrame = [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
     keyBoardFrame = [self.parentView convertRect:keyBoardFrame fromView:nil];
+    
     return keyBoardFrame;
 }
 

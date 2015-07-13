@@ -51,12 +51,12 @@ static NSString *const kChooseSignUpTypeSegueIdentifier = @"сhooseSignUpTypeSeg
 
 - (IBAction)privacyPolicyClick:(id)sender
 {
-//    [self showPrivacyAndTermsWithType:BZRConditionsTypePrivacyPolicy];
+    [self showPrivacyAndTermsWithType:BZRConditionsTypePrivacyPolicy];
 }
 
 - (IBAction)termsAndConditionsClick:(id)sender
 {
-//    [self showPrivacyAndTermsWithType:BZRConditionsTypeTermsAndConditions];
+    [self showPrivacyAndTermsWithType:BZRConditionsTypeTermsAndConditions];
 }
 
 - (IBAction)submitButtonClick:(id)sender
@@ -102,6 +102,7 @@ static NSString *const kChooseSignUpTypeSegueIdentifier = @"сhooseSignUpTypeSeg
 {
     if ([segue.identifier isEqualToString:kEditProfileContainerSegueIdentifier]) {
         self.editProfileTableViewController = (BZREditProfileContainerController *)segue.destinationViewController;
+        [self.editProfileTableViewController viewWillAppear:YES];
     }
 }
 
