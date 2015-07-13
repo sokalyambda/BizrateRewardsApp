@@ -6,12 +6,12 @@
 //  Copyright (c) 2015 ThinkMobiles. All rights reserved.
 //
 
-#import "BZRCiftcardCell.h"
+#import "BZRGiftcardCell.h"
 
-@interface BZRCiftcardCell ()
+@interface BZRGiftcardCell ()
 
 @end
 
-@implementation BZRCiftcardCell
+@implementation BZRGiftcardCell
 
 @end

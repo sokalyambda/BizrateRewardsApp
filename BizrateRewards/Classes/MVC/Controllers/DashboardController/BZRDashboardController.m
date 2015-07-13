@@ -92,6 +92,7 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
 
 - (IBAction)seeAllGiftCardsClick:(id)sender
 {
+    [self performSegueWithIdentifier:kAllGiftCardsSegueIdentifier sender:self];
 }
 
 - (IBAction)accountSettingsClick:(id)sender

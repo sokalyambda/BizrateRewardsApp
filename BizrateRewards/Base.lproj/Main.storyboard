@@ -3044,6 +3044,7 @@
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="k3C-eE-iRs" userLabel="Gift Cards Collection View">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" red="0.92156862750000001" green="0.92156862750000001" blue="0.92156862750000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="5" id="a4N-RH-E6j">
                                     <size key="itemSize" width="197" height="100"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -3051,14 +3052,14 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="BZRCiftcardCell" id="F8Q-NU-rGP" customClass="BZRCiftcardCell">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="BZRCiftcardCell" id="F8Q-NU-rGP" customClass="BZRGiftcardCell">
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="197" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ar9-kq-DPC">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ar9-kq-DPC" userLabel="Gift Card Image">
                                                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                                 </imageView>
                                             </subviews>
@@ -3097,9 +3098,10 @@
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="0.0" y="76" width="400" height="660"/>
-                                </variation>
+                                <connections>
+                                    <outlet property="dataSource" destination="r0U-fc-af4" id="DS0-yc-fdu"/>
+                                    <outlet property="delegate" destination="r0U-fc-af4" id="FZW-bt-yXE"/>
+                                </connections>
                             </collectionView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ABOUT POINTS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ReX-Rr-SdX">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -3114,8 +3116,7 @@
                                         <exclude reference="liu-k7-OcG"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="143" y="20" width="114" height="19"/>
+                                <variation key="heightClass=regular-widthClass=compact">
                                     <mask key="constraints">
                                         <include reference="liu-k7-OcG"/>
                                     </mask>
@@ -3123,23 +3124,9 @@
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Earned points can be exchanget for giftcards at these stores" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uGX-co-iD3">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="335" id="oCy-DT-8zK"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="12"/>
+                                <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="10"/>
                                 <color key="textColor" red="0.035294117649999998" green="0.1176470588" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="oCy-DT-8zK"/>
-                                    </mask>
-                                </variation>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="33" y="44" width="335" height="14"/>
-                                    <mask key="constraints">
-                                        <include reference="oCy-DT-8zK"/>
-                                    </mask>
-                                </variation>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -3151,7 +3138,9 @@
                             <constraint firstItem="uGX-co-iD3" firstAttribute="top" secondItem="ReX-Rr-SdX" secondAttribute="bottom" constant="5" id="Zjv-96-Y8G">
                                 <variation key="heightClass=regular-widthClass=compact" constant="5"/>
                             </constraint>
-                            <constraint firstItem="k3C-eE-iRs" firstAttribute="top" secondItem="uGX-co-iD3" secondAttribute="bottom" constant="18" id="byl-wG-50T"/>
+                            <constraint firstItem="k3C-eE-iRs" firstAttribute="top" secondItem="uGX-co-iD3" secondAttribute="bottom" constant="18" id="byl-wG-50T">
+                                <variation key="heightClass=regular-widthClass=compact" constant="21"/>
+                            </constraint>
                             <constraint firstAttribute="centerX" secondItem="ReX-Rr-SdX" secondAttribute="centerX" constant="-5.5" id="oIq-Ud-KZc">
                                 <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                             </constraint>
@@ -3166,14 +3155,14 @@
                                 <exclude reference="uGX-co-iD3"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="oIq-Ud-KZc"/>
-                                <exclude reference="uPC-jg-FJn"/>
-                                <exclude reference="89K-Bh-R1a"/>
                                 <exclude reference="WXA-pL-5l9"/>
                                 <exclude reference="Zjv-96-Y8G"/>
                                 <exclude reference="LcP-3c-j2A"/>
                                 <exclude reference="RHv-Fo-kSK"/>
                                 <exclude reference="byl-wG-50T"/>
+                                <exclude reference="oIq-Ud-KZc"/>
+                                <exclude reference="uPC-jg-FJn"/>
+                                <exclude reference="89K-Bh-R1a"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -3183,17 +3172,20 @@
                                 <include reference="uGX-co-iD3"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="oIq-Ud-KZc"/>
-                                <include reference="uPC-jg-FJn"/>
-                                <include reference="89K-Bh-R1a"/>
                                 <include reference="WXA-pL-5l9"/>
                                 <include reference="Zjv-96-Y8G"/>
                                 <include reference="LcP-3c-j2A"/>
                                 <include reference="RHv-Fo-kSK"/>
                                 <include reference="byl-wG-50T"/>
+                                <include reference="oIq-Ud-KZc"/>
+                                <include reference="uPC-jg-FJn"/>
+                                <include reference="89K-Bh-R1a"/>
                             </mask>
                         </variation>
                     </view>
+                    <connections>
+                        <outlet property="giftCardsCollectionView" destination="k3C-eE-iRs" id="S4u-yj-XPN"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="akr-ai-BA5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -3303,8 +3295,7 @@
                                                             <exclude reference="cWZ-w9-thK"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="0.0" y="0.0" width="240" height="1"/>
+                                                    <variation key="heightClass=regular-widthClass=compact">
                                                         <mask key="constraints">
                                                             <include reference="cWZ-w9-thK"/>
                                                         </mask>
@@ -3325,8 +3316,7 @@
                                                             <exclude reference="RFZ-6t-j1H"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="10" y="1" width="230" height="39"/>
+                                                    <variation key="heightClass=regular-widthClass=compact">
                                                         <mask key="constraints">
                                                             <include reference="RFZ-6t-j1H"/>
                                                         </mask>
@@ -3401,8 +3391,7 @@
                                                             <exclude reference="fVR-Nj-me8"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="10" y="0.0" width="230" height="40"/>
+                                                    <variation key="heightClass=regular-widthClass=compact">
                                                         <mask key="constraints">
                                                             <include reference="fVR-Nj-me8"/>
                                                         </mask>
@@ -3465,8 +3454,7 @@
                                                             <exclude reference="ubj-oz-wgE"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="10" y="0.0" width="230" height="40"/>
+                                                    <variation key="heightClass=regular-widthClass=compact">
                                                         <mask key="constraints">
                                                             <include reference="ubj-oz-wgE"/>
                                                         </mask>
@@ -3530,8 +3518,7 @@
                                                             <exclude reference="fTO-Rw-xcT"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="10" y="0.0" width="230" height="40"/>
+                                                    <variation key="heightClass=regular-widthClass=compact">
                                                         <mask key="constraints">
                                                             <include reference="fTO-Rw-xcT"/>
                                                         </mask>
@@ -3586,8 +3573,7 @@
                                                             <exclude reference="Cmo-5U-38c"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="10" y="0.0" width="230" height="40"/>
+                                                    <variation key="heightClass=regular-widthClass=compact">
                                                         <mask key="constraints">
                                                             <include reference="Cmo-5U-38c"/>
                                                         </mask>

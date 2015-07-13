@@ -10,4 +10,6 @@
 
 @interface BZRGiftCard : NSObject<BZRMappingProtocol>
 
+@property (strong, nonatomic) NSURL *iconURL;
+
 @end

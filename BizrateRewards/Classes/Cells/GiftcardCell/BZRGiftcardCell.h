@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 ThinkMobiles. All rights reserved.
 //
 
-@interface BZRCiftcardCell : UICollectionViewCell
+@interface BZRGiftcardCell : UICollectionViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *giftcardImageView;
 

@@ -8,9 +8,15 @@
 
 #import "BZRGiftCardsListController.h"
 
-@interface BZRGiftCardsListController ()
+#import "BZRGiftcardCell.h"
+
+#import "BZRGiftCard.h"
+
+@interface BZRGiftCardsListController ()<UICollectionViewDataSource, UICollectionViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *giftCardsCollectionView;
+
+@property (strong, nonatomic) NSArray *giftCards;
 
 @end
 
@@ -21,8 +27,27 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.navigationController setNavigationBarHidden:NO];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
+#pragma mark - UICollectionViewDataSource
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return [self.giftCards count];
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *cellIdentifier = @"giftCardCell";
+    
+    BZRGiftCard *currentGiftCard = self.giftCards[indexPath.row];
+    
+    BZRGiftcardCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
+    
+    [cell.giftcardImageView sd_setImageWithURL:currentGiftCard.iconURL];
+    
+    return cell;
+}
 
 @end
