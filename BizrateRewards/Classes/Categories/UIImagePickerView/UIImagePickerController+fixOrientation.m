@@ -10,16 +10,19 @@
 
 @implementation UIImagePickerController (fixOrientation)
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
-    return UIInterfaceOrientationIsLandscape(toInterfaceOrientation);
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+{
+    return UIInterfaceOrientationIsPortrait(toInterfaceOrientation);
 }
 
-- (BOOL)shouldAutorotate {
+- (BOOL)shouldAutorotate
+{
     return YES;
 }
 
-- (NSUInteger)supportedInterfaceOrientations {
-    return UIInterfaceOrientationMaskLandscape;
+- (NSUInteger)supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskPortrait;
 }
 
 @end

@@ -1960,7 +1960,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n5x-oL-v3k" userLabel="User Data Holder">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blue_bg" translatesAutoresizingMaskIntoConstraints="NO" id="UMZ-QV-Vfc">
+                                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blue_bg" translatesAutoresizingMaskIntoConstraints="NO" id="UMZ-QV-Vfc">
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="160" id="1Gl-HE-qfI"/>
@@ -1995,21 +1995,27 @@
                                             </mask>
                                         </variation>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user_icon_large" translatesAutoresizingMaskIntoConstraints="NO" id="sBi-NG-xXa">
+                                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user_icon_large" translatesAutoresizingMaskIntoConstraints="NO" id="sBi-NG-xXa" customClass="BZRRoundedImageView">
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                         <constraints>
+                                            <constraint firstAttribute="width" constant="75" id="bk9-gK-WIU"/>
                                             <constraint firstAttribute="height" constant="75" id="oPJ-6J-Zdm"/>
                                         </constraints>
                                         <variation key="default">
                                             <mask key="constraints">
+                                                <exclude reference="bk9-gK-WIU"/>
                                                 <exclude reference="oPJ-6J-Zdm"/>
                                             </mask>
                                         </variation>
                                         <variation key="heightClass=regular-widthClass=compact">
                                             <mask key="constraints">
+                                                <include reference="bk9-gK-WIU"/>
                                                 <include reference="oPJ-6J-Zdm"/>
                                             </mask>
                                         </variation>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="8Gh-vd-A1M" appends="YES" id="1tQ-Au-bTs"/>
+                                        </connections>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pH6-wU-Ocf" userLabel="Exit Button">
                                         <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -2114,7 +2120,7 @@
                                     </mask>
                                 </variation>
                                 <connections>
-                                    <segue destination="SZk-9F-HIA" kind="embed" identifier="" id="N20-F2-eWR"/>
+                                    <segue destination="SZk-9F-HIA" kind="embed" identifier="accountSettingsContainerSegue" id="N20-F2-eWR"/>
                                 </connections>
                             </containerView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rsu-LF-wCC" userLabel="Gray View">
@@ -2231,10 +2237,17 @@
                     <navigationItem key="navigationItem" id="sCN-So-UzU"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
+                        <outlet property="userFullNameLabel" destination="ZwT-xq-ec6" id="RwM-IY-ykY"/>
+                        <outlet property="userIcon" destination="sBi-NG-xXa" id="gfy-Et-FFk"/>
                         <segue destination="xdw-Sw-7dh" kind="show" identifier="editProfileSegue" id="daZ-Qz-qqb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5eb-5g-2wm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="8Gh-vd-A1M">
+                    <connections>
+                        <action selector="changeIconClick:" destination="hzP-9q-gyt" id="LTM-W4-mhr"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="984" y="1800"/>
         </scene>
@@ -2320,7 +2333,8 @@
                                                             <exclude reference="eAT-WQ-O1c"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="15" y="11" width="86" height="17"/>
                                                         <mask key="constraints">
                                                             <include reference="eAT-WQ-O1c"/>
                                                         </mask>
@@ -2338,7 +2352,8 @@
                                                             <exclude reference="ra1-BJ-4jl"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="207" y="8" width="25" height="25"/>
                                                         <mask key="constraints">
                                                             <include reference="VCS-tA-unV"/>
                                                             <include reference="ra1-BJ-4jl"/>
@@ -2401,7 +2416,8 @@
                                                             <exclude reference="vza-yv-O92"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="207" y="8" width="25" height="25"/>
                                                         <mask key="constraints">
                                                             <include reference="1jy-5P-DdU"/>
                                                             <include reference="vza-yv-O92"/>
@@ -2422,7 +2438,8 @@
                                                             <exclude reference="9la-ut-C9i"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="15" y="11" width="112" height="17"/>
                                                         <mask key="constraints">
                                                             <include reference="9la-ut-C9i"/>
                                                         </mask>
@@ -3286,7 +3303,8 @@
                                                             <exclude reference="cWZ-w9-thK"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="0.0" y="0.0" width="240" height="1"/>
                                                         <mask key="constraints">
                                                             <include reference="cWZ-w9-thK"/>
                                                         </mask>
@@ -3307,7 +3325,8 @@
                                                             <exclude reference="RFZ-6t-j1H"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="10" y="1" width="230" height="39"/>
                                                         <mask key="constraints">
                                                             <include reference="RFZ-6t-j1H"/>
                                                         </mask>
@@ -3382,7 +3401,8 @@
                                                             <exclude reference="fVR-Nj-me8"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="10" y="0.0" width="230" height="40"/>
                                                         <mask key="constraints">
                                                             <include reference="fVR-Nj-me8"/>
                                                         </mask>
@@ -3445,7 +3465,8 @@
                                                             <exclude reference="ubj-oz-wgE"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="10" y="0.0" width="230" height="40"/>
                                                         <mask key="constraints">
                                                             <include reference="ubj-oz-wgE"/>
                                                         </mask>
@@ -3509,7 +3530,8 @@
                                                             <exclude reference="fTO-Rw-xcT"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="10" y="0.0" width="230" height="40"/>
                                                         <mask key="constraints">
                                                             <include reference="fTO-Rw-xcT"/>
                                                         </mask>
@@ -3564,7 +3586,8 @@
                                                             <exclude reference="Cmo-5U-38c"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="10" y="0.0" width="230" height="40"/>
                                                         <mask key="constraints">
                                                             <include reference="Cmo-5U-38c"/>
                                                         </mask>
@@ -5437,6 +5460,6 @@
         <image name="user_icon_small" width="57" height="57"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="tFB-NZ-4oZ"/>
+        <segue reference="OSk-AB-fqd"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -63,6 +63,9 @@
 		58A91F431B3A995F0032607F /* BZRRoundedImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A91F421B3A995F0032607F /* BZRRoundedImageView.m */; };
 		58A91F481B3ABE6D0032607F /* BZRStorageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A91F471B3ABE6D0032607F /* BZRStorageManager.m */; };
 		58A91F581B3AD83F0032607F /* BZRUserProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A91F571B3AD83F0032607F /* BZRUserProfile.m */; };
+		58A9FE8F1B53A52A00DBE379 /* BZRTermsAndConditionsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A9FE8E1B53A52A00DBE379 /* BZRTermsAndConditionsHelper.m */; };
+		58A9FE911B53AC0200DBE379 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58A9FE901B53AC0200DBE379 /* MobileCoreServices.framework */; };
+		58A9FE931B53AF4600DBE379 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58A9FE921B53AF4600DBE379 /* AssetsLibrary.framework */; };
 		58ACC06A1B3937010081E546 /* BZRStartTutorialController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ACC0691B3937010081E546 /* BZRStartTutorialController.m */; };
 		58ACC06D1B3937160081E546 /* BZRBaseTutorialController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ACC06C1B3937160081E546 /* BZRBaseTutorialController.m */; };
 		58ACC0761B395E6A0081E546 /* BZRPrivacyAndTermsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ACC0751B395E6A0081E546 /* BZRPrivacyAndTermsController.m */; };
@@ -209,6 +212,10 @@
 		58A91F471B3ABE6D0032607F /* BZRStorageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRStorageManager.m; path = Classes/Managers/StorageManager/BZRStorageManager.m; sourceTree = "<group>"; };
 		58A91F561B3AD83F0032607F /* BZRUserProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRUserProfile.h; path = Classes/MVC/Models/UserProfile/BZRUserProfile.h; sourceTree = "<group>"; };
 		58A91F571B3AD83F0032607F /* BZRUserProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRUserProfile.m; path = Classes/MVC/Models/UserProfile/BZRUserProfile.m; sourceTree = "<group>"; };
+		58A9FE8D1B53A52A00DBE379 /* BZRTermsAndConditionsHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRTermsAndConditionsHelper.h; path = Classes/Utilities/TermsAndConditionsHelper/BZRTermsAndConditionsHelper.h; sourceTree = "<group>"; };
+		58A9FE8E1B53A52A00DBE379 /* BZRTermsAndConditionsHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRTermsAndConditionsHelper.m; path = Classes/Utilities/TermsAndConditionsHelper/BZRTermsAndConditionsHelper.m; sourceTree = "<group>"; };
+		58A9FE901B53AC0200DBE379 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		58A9FE921B53AF4600DBE379 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		58ACC0681B3937010081E546 /* BZRStartTutorialController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRStartTutorialController.h; path = Classes/MVC/Controllers/TutorialViewControllers/PageContentController/BZRStartTutorialController.h; sourceTree = "<group>"; };
 		58ACC0691B3937010081E546 /* BZRStartTutorialController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRStartTutorialController.m; path = Classes/MVC/Controllers/TutorialViewControllers/PageContentController/BZRStartTutorialController.m; sourceTree = "<group>"; };
 		58ACC06B1B3937160081E546 /* BZRBaseTutorialController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRBaseTutorialController.h; path = Classes/MVC/Controllers/TutorialViewControllers/BaseTutorialController/BZRBaseTutorialController.h; sourceTree = "<group>"; };
@@ -258,6 +265,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				58A9FE931B53AF4600DBE379 /* AssetsLibrary.framework in Frameworks */,
+				58A9FE911B53AC0200DBE379 /* MobileCoreServices.framework in Frameworks */,
 				58A91F2F1B3A80A80032607F /* CoreLocation.framework in Frameworks */,
 				58219F241B38A5A600A9541A /* QuartzCore.framework in Frameworks */,
 				58219F221B38A59F00A9541A /* CoreGraphics.framework in Frameworks */,
@@ -349,6 +358,7 @@
 		58219EE31B38A21900A9541A /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				58A9FE8C1B53A4FB00DBE379 /* TermsAndConditionsHelper */,
 				589420A21B452616004BAF48 /* PickersHelper */,
 				589420901B451B96004BAF48 /* PickerHolder */,
 				5878D3DE1B4426A000A917D0 /* CommonDateFormatter */,
@@ -938,6 +948,15 @@
 			name = UserProfile;
 			sourceTree = "<group>";
 		};
+		58A9FE8C1B53A4FB00DBE379 /* TermsAndConditionsHelper */ = {
+			isa = PBXGroup;
+			children = (
+				58A9FE8D1B53A52A00DBE379 /* BZRTermsAndConditionsHelper.h */,
+				58A9FE8E1B53A52A00DBE379 /* BZRTermsAndConditionsHelper.m */,
+			);
+			name = TermsAndConditionsHelper;
+			sourceTree = "<group>";
+		};
 		58ACC05F1B3932840081E546 /* TutorialViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -1126,6 +1145,8 @@
 		D31C9EB6CC9E9EA49476A0B1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				58A9FE921B53AF4600DBE379 /* AssetsLibrary.framework */,
+				58A9FE901B53AC0200DBE379 /* MobileCoreServices.framework */,
 				58A91F2E1B3A80A80032607F /* CoreLocation.framework */,
 				58219F231B38A5A600A9541A /* QuartzCore.framework */,
 				58219F211B38A59F00A9541A /* CoreGraphics.framework */,
@@ -1299,6 +1320,7 @@
 				58ACC08F1B39AD490081E546 /* BZRDashboardController.m in Sources */,
 				589420A91B452813004BAF48 /* BZRCommonPickerView.m in Sources */,
 				58A59E251B3EDFDC00A5F30C /* BZRGeolocationAccessController.m in Sources */,
+				58A9FE8F1B53A52A00DBE379 /* BZRTermsAndConditionsHelper.m in Sources */,
 				589420981B451D87004BAF48 /* main.m in Sources */,
 				58A91F431B3A995F0032607F /* BZRRoundedImageView.m in Sources */,
 				58219F0D1B38A38600A9541A /* UIView+MakeFromXib.m in Sources */,

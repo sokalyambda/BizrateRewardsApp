@@ -11,11 +11,6 @@ typedef enum : NSUInteger {
     BZRAccessTypePushNotifications
 } BZRAccessType;
 
-#import "BZRAccountSettingsContaiterController.h"
-
-#import "BZRPushNotifiactionService.h"
-#import "BZRLocationObserver.h"
-
 typedef enum : NSUInteger {
     BZRSettingsCellPersonalInfo,
     BZRSettingsCellGeoLocation,
@@ -25,6 +20,12 @@ typedef enum : NSUInteger {
     BZRSettingsCellPrivacyPolicy,
     BZRSettingsCellContactSupport
 } BZRSettingsCellType;
+
+#import "BZRAccountSettingsContaiterController.h"
+
+#import "BZRPushNotifiactionService.h"
+#import "BZRLocationObserver.h"
+#import "BZRTermsAndConditionsHelper.h"
 
 static NSString *const kEditProfileSegueIdentifier = @"editProfileSegue";
 
@@ -44,9 +45,9 @@ static NSString *const kEditProfileSegueIdentifier = @"editProfileSegue";
     [super viewDidLoad];
 }
 
-- (void)viewDidAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
-    [super viewDidAppear:animated];
+    [super viewWillAppear:animated];
     [self handleNotifications];
     [self updateAccessIcons];
 }
@@ -80,14 +81,17 @@ static NSString *const kEditProfileSegueIdentifier = @"editProfileSegue";
         }
             
         case BZRSettingsCellTermsOfService: {
+            [BZRTermsAndConditionsHelper showPrivacyAndTermsWithType:BZRConditionsTypeTermsAndConditions andWithNavigationController:self.navigationController];
             break;
         }
             
         case BZRSettingsCellUserAgreement: {
+            [BZRTermsAndConditionsHelper showPrivacyAndTermsWithType:BZRConditionsTypeUserAgreement andWithNavigationController:self.navigationController];
             break;
         }
             
         case BZRSettingsCellPrivacyPolicy: {
+            [BZRTermsAndConditionsHelper showPrivacyAndTermsWithType:BZRConditionsTypePrivacyPolicy andWithNavigationController:self.navigationController];
             break;
         }
             
@@ -100,7 +104,7 @@ static NSString *const kEditProfileSegueIdentifier = @"editProfileSegue";
 
 #pragma mark - Actions
 
-- (void)setUserInformationData
+- (void)updateUserData
 {
     
 }

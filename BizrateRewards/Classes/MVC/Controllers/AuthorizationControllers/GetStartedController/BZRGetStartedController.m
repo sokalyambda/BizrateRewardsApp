@@ -11,11 +11,7 @@
 #import "BZREditProfileContainerController.h"
 
 #import "BZRValidator.h"
-
-typedef enum : NSUInteger {
-    BZRConditionsTypePrivacyPolicy,
-    BZRConditionsTypeTermsAndConditions
-} BZRPrivacyAndTermsType;
+#import "BZRTermsAndConditionsHelper.h"
 
 static NSString *const kEditProfileContainerSegueIdentifier = @"editProfileContainerSegue";
 static NSString *const kChooseSignUpTypeSegueIdentifier = @"сhooseSignUpTypeSegue";
@@ -51,12 +47,12 @@ static NSString *const kChooseSignUpTypeSegueIdentifier = @"сhooseSignUpTypeSeg
 
 - (IBAction)privacyPolicyClick:(id)sender
 {
-    [self showPrivacyAndTermsWithType:BZRConditionsTypePrivacyPolicy];
+    [BZRTermsAndConditionsHelper showPrivacyAndTermsWithType:BZRConditionsTypePrivacyPolicy andWithNavigationController:self.navigationController];
 }
 
 - (IBAction)termsAndConditionsClick:(id)sender
 {
-    [self showPrivacyAndTermsWithType:BZRConditionsTypeTermsAndConditions];
+    [BZRTermsAndConditionsHelper showPrivacyAndTermsWithType:BZRConditionsTypeTermsAndConditions andWithNavigationController:self.navigationController];
 }
 
 - (IBAction)submitButtonClick:(id)sender
@@ -72,28 +68,6 @@ static NSString *const kChooseSignUpTypeSegueIdentifier = @"сhooseSignUpTypeSeg
 //        ShowAlert(self.validator.validationErrorString);
 //        [self.validator cleanValidationErrorString];
 //    }
-}
-
-- (void)showPrivacyAndTermsWithType:(BZRPrivacyAndTermsType)type
-{
-    BZRPrivacyAndTermsController *controller = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRPrivacyAndTermsController class])];
-    
-    NSString *currentURLString;
-    
-    switch (type) {
-        case BZRConditionsTypePrivacyPolicy:
-            currentURLString = @"urlForPrivacyPolicy";
-            break;
-        case BZRConditionsTypeTermsAndConditions:
-            currentURLString = @"urlForTermsAndConditions";
-            break;
-            
-        default:
-            break;
-    }
-    
-    controller.currentURL = [NSURL URLWithString:currentURLString];
-    [self.navigationController pushViewController:controller animated:YES];
 }
 
 #pragma mark - Navigation

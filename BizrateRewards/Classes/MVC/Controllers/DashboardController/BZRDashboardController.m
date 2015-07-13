@@ -85,8 +85,8 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
 
 - (IBAction)takeSurveyClick:(id)sender
 {
-//    BZRSurveyViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRSurveyViewController class])];
-//    [self.navigationController pushViewController:controller animated:YES];
+    BZRSurveyViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRSurveyViewController class])];
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 - (IBAction)seeAllGiftCardsClick:(id)sender
@@ -95,9 +95,9 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
 
 - (IBAction)accountSettingsClick:(id)sender
 {
-//    BZRAccountSettingsController *accountController = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRAccountSettingsController class])];
-//    BZRBaseNavigationController *navigationController = [[BZRBaseNavigationController alloc] initWithRootViewController:accountController];
-//    [self presentViewController:navigationController animated:YES completion:nil];
+    BZRAccountSettingsController *accountController = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRAccountSettingsController class])];
+    BZRBaseNavigationController *navigationController = [[BZRBaseNavigationController alloc] initWithRootViewController:accountController];
+    [self presentViewController:navigationController animated:YES completion:nil];
 }
 
 - (void)updateUserInformation
