@@ -42,7 +42,6 @@
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
-    //TODO: parse url here
     NSURL *url = request.URL;
     NSLog(@"url %@", url);
     return YES;

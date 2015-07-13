@@ -10,7 +10,8 @@
 
 @interface BZRUserProfile : NSObject<BZRMappingProtocol>
 
-@property (strong, nonatomic) NSURL *avatarURL;
+@property (strong, nonatomic) NSURL     *avatarURL;
+@property (strong, nonatomic) UIImage   *avatarImage;
 
 @property (strong, nonatomic) NSString  *firstName;
 @property (strong, nonatomic) NSString  *lastName;

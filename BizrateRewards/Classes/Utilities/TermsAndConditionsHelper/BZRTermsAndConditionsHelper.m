@@ -24,12 +24,15 @@ static NSString *const kStoryboardName = @"Main";
     
     switch (type) {
         case BZRConditionsTypePrivacyPolicy:
+            controller.navigationItem.title = NSLocalizedString(@"Privacy Policy", nil);
             currentURLString = @"urlForPrivacyPolicy";
             break;
         case BZRConditionsTypeTermsAndConditions:
+            controller.navigationItem.title = NSLocalizedString(@"Terms and Conditions", nil);
             currentURLString = @"urlForTermsAndConditions";
             break;
         case BZRConditionsTypeUserAgreement:
+            controller.navigationItem.title = NSLocalizedString(@"User Agreement", nil);
             currentURLString = @"urlForUserAgreement";
             break;
             

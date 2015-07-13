@@ -24,16 +24,11 @@
     [self customizeNavigationItem];
 }
 
-//- (void)viewWillAppear:(BOOL)animated
-//{
-//    [super viewWillAppear:animated];
-//    
-//}
-
 #pragma mark - Actions
 
 - (IBAction)doneClick:(id)sender
 {
+    //TODO: update user
     [self.navigationController popViewControllerAnimated:YES];
 }
 

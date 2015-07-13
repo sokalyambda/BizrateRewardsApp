@@ -13,6 +13,9 @@
 #import "BZRDashboardController.h"
 #import "BZRAccountSettingsContaiterController.h"
 
+#import "BZRUserProfile.h"
+#import "BZRStorageManager.h"
+
 static NSString *const kAccountSettingsContainerSegueIdentifier = @"accountSettingsContainerSegue";
 
 @interface BZRAccountSettingsController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate>
@@ -22,9 +25,23 @@ static NSString *const kAccountSettingsContainerSegueIdentifier = @"accountSetti
 @property (weak, nonatomic) IBOutlet UIImageView *userIcon;
 @property (weak, nonatomic) IBOutlet UILabel *userFullNameLabel;
 
+@property (strong, nonatomic) BZRUserProfile *currentProfile;
+
 @end
 
 @implementation BZRAccountSettingsController
+
+#pragma mark - Accessors
+
+- (BZRUserProfile *)currentProfile
+{
+#warning temporary!
+    if (!_currentProfile) {
+//        _currentProfile = [BZRStorageManager sharedStorage].currentProfile;
+        _currentProfile = [[BZRUserProfile alloc] init];
+    }
+    return _currentProfile;
+}
 
 #pragma mark - View Lifecycle
 
@@ -37,6 +54,7 @@ static NSString *const kAccountSettingsContainerSegueIdentifier = @"accountSetti
 {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:YES];
+    [self updateUserData];
 }
 
 #pragma mark - Actions
@@ -48,14 +66,38 @@ static NSString *const kAccountSettingsContainerSegueIdentifier = @"accountSetti
 
 - (IBAction)signOutAction:(id)sender
 {
-    BZRDashboardController *dashboard = (BZRDashboardController *)[self.navigationController.presentingViewController.childViewControllers lastObject];
-    [self dismissViewControllerAnimated:YES completion:nil];
-    [dashboard.navigationController popViewControllerAnimated:NO];
+    [self showSignOutActionSheet];
 }
 
 - (IBAction)changeIconClick:(id)sender
 {
     [self setupChangePhotoActionSheet];
+}
+
+- (void)showSignOutActionSheet
+{
+    UIAlertController *signOutController = [UIAlertController alertControllerWithTitle:@"" message:NSLocalizedString(@"Do you want to sign out?", nil) preferredStyle:UIAlertControllerStyleActionSheet];
+ 
+    WEAK_SELF;
+    UIAlertAction *signOutAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Sign Out", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+        BZRDashboardController *dashboard = (BZRDashboardController *)[weakSelf.navigationController.presentingViewController.childViewControllers lastObject];
+        [weakSelf dismissViewControllerAnimated:YES completion:nil];
+        [dashboard.navigationController popViewControllerAnimated:NO];
+    }];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", nil) style:UIAlertActionStyleCancel handler:nil];
+    
+    [signOutController addAction:signOutAction];
+    [signOutController addAction:cancelAction];
+    
+    [self presentViewController:signOutController animated:YES completion:nil];
+}
+
+- (void)updateUserData
+{
+    self.userFullNameLabel.text = self.currentProfile.fullName;
+#warning temporary!
+    self.userIcon.image = self.currentProfile.avatarImage;
 }
 
 #pragma mark - Change photo actions
@@ -65,17 +107,15 @@ static NSString *const kAccountSettingsContainerSegueIdentifier = @"accountSetti
     WEAK_SELF;
     UIAlertController *changePhotoActionSheet = [UIAlertController alertControllerWithTitle:@"" message:NSLocalizedString(@"Change your photo", nil) preferredStyle:UIAlertControllerStyleActionSheet];
     
-    UIAlertAction *cameraAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Take photo", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    UIAlertAction *cameraAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Take photo", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
         [weakSelf takeNewPhotoFromCamera];
     }];
     
-    UIAlertAction *galleryAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Select from gallery", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    UIAlertAction *galleryAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Select from gallery", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
         [weakSelf choosePhotoFromExistingImages];
     }];
     
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-        
-    }];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", nil) style:UIAlertActionStyleCancel handler:nil];
     
     [changePhotoActionSheet addAction:cameraAction];
     [changePhotoActionSheet addAction:galleryAction];
@@ -89,25 +129,24 @@ static NSString *const kAccountSettingsContainerSegueIdentifier = @"accountSetti
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         ShowAlert(NSLocalizedString(@"Camera is not available", nil));
         return;
+    } else {
+        [self showImagePickerWithType:UIImagePickerControllerSourceTypeCamera];
     }
-    
-    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-    picker.delegate = self;
-    picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-    picker.mediaTypes = @[(NSString*)kUTTypeImage];
-    picker.modalPresentationStyle = UIModalPresentationFullScreen;
-    
-    [self presentViewController:picker animated:YES completion:nil];
 }
 
 - (void)choosePhotoFromExistingImages
 {
-    UIImagePickerController * picker = [[UIImagePickerController alloc] init];
+    [self showImagePickerWithType:UIImagePickerControllerSourceTypePhotoLibrary];
+}
+
+- (void)showImagePickerWithType:(UIImagePickerControllerSourceType)type
+{
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.modalPresentationStyle = UIModalPresentationCurrentContext;
     picker.delegate = self;
-    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    picker.sourceType = type;
     picker.mediaTypes = @[(NSString*)kUTTypeImage];
-    
-    [self presentViewController:picker animated:YES completion:nil];
+    [self presentViewController:picker animated:YES completion:NULL];
 }
 
 #pragma mark - UIImagePickerControllerDelegate methods
@@ -136,10 +175,12 @@ static NSString *const kAccountSettingsContainerSegueIdentifier = @"accountSetti
         UIGraphicsEndImageContext();
         
         self.userIcon.image = thumbImage;
+        self.currentProfile.avatarImage = thumbImage;
     }
-    //TODO: send photo
-    [picker dismissViewControllerAnimated:YES completion:nil];
 
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    //TODO: send photo
+    
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker

@@ -104,11 +104,6 @@ static NSString *const kEditProfileSegueIdentifier = @"editProfileSegue";
 
 #pragma mark - Actions
 
-- (void)updateUserData
-{
-    
-}
-
 - (void)updateAccessIcons
 {
     NSString *currentLocationImageName;

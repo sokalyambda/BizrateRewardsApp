@@ -86,6 +86,7 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
 - (IBAction)takeSurveyClick:(id)sender
 {
     BZRSurveyViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRSurveyViewController class])];
+    controller.navigationItem.title = NSLocalizedString(@"Survey", nil);
     [self.navigationController pushViewController:controller animated:YES];
 }
 

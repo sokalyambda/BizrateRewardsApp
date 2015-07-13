@@ -42,6 +42,12 @@
     [self getSurvey];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+}
+
 #pragma mark - Actions
 
 - (void)getSurvey
@@ -73,6 +79,12 @@
 
 #pragma mark - UIWebViewDelegate
 
-
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+{
+    //TODO: parse url here
+    NSURL *url = request.URL;
+    NSLog(@"url %@", url);
+    return YES;
+}
 
 @end
