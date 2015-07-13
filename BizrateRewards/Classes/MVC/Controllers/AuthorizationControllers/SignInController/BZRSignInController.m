@@ -73,7 +73,7 @@ static NSInteger const kNotAuthorizedErrorCode = 400.f;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//    [self getUserDataFromKeychain];
+    [self getUserDataFromKeychain];
     [self.rememberMeSwitch setOn:self.isRememberMe];
 }
 
@@ -105,7 +105,6 @@ static NSInteger const kNotAuthorizedErrorCode = 400.f;
 //email
 - (IBAction)signInClick:(id)sender
 {
-//    [self performSegueWithIdentifier:kDashboardSegueIdentifier sender:self];
     [self.incorrectEmailView setHidden:YES];
     WEAK_SELF;
     if ([self.validator validateEmailField:self.userNameField andPasswordField:self.passwordField]) {
@@ -144,8 +143,8 @@ static NSInteger const kNotAuthorizedErrorCode = 400.f;
 
 - (IBAction)goToCreateNewAccountClick:(id)sender
 {
-//    BZRGetStartedController *controller = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRGetStartedController class])];
-//    [self.navigationController pushViewController:controller animated:YES];
+    BZRGetStartedController *controller = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRGetStartedController class])];
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 - (IBAction)rememberMeValueChanged:(id)sender
@@ -186,6 +185,7 @@ static NSInteger const kNotAuthorizedErrorCode = 400.f;
     } else if ([self.passwordField isFirstResponder]) {
         [self.passwordField resignFirstResponder];
     }
+
     return YES;
 }
 

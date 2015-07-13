@@ -7,10 +7,15 @@
 //
 
 #import "BZREditProfileController.h"
+#import "BZREditProfileContainerController.h"
+
+static NSString *const kEditProfileContainerSegueIdentifier = @"editProfileContainerSegue";
 
 @interface BZREditProfileController ()
 
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *doneBarButton;
+
+@property (weak, nonatomic) BZREditProfileContainerController *container;
 
 @end
 
@@ -37,6 +42,16 @@
     self.navigationItem.title = NSLocalizedString(@"Profile", nil);
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     self.navigationItem.rightBarButtonItem = self.doneBarButton;
+}
+
+#pragma mark - Navigation
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:kEditProfileContainerSegueIdentifier]) {
+        self.container = (BZREditProfileContainerController *)segue.destinationViewController;
+        [self.container viewWillAppear:YES];
+    }
 }
 
 @end

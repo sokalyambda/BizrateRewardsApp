@@ -12,6 +12,8 @@
 
 #import "BZRGiftCard.h"
 
+static NSString *const kGiftCardCell = @"giftCardCell";
+
 @interface BZRGiftCardsListController ()<UICollectionViewDataSource, UICollectionViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *giftCardsCollectionView;
@@ -39,11 +41,9 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *cellIdentifier = @"giftCardCell";
-    
     BZRGiftCard *currentGiftCard = self.giftCards[indexPath.row];
     
-    BZRGiftcardCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
+    BZRGiftcardCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kGiftCardCell forIndexPath:indexPath];
     
     [cell.giftcardImageView sd_setImageWithURL:currentGiftCard.iconURL];
     

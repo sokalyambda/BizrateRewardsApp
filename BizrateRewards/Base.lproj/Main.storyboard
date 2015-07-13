@@ -94,9 +94,43 @@
                     <view key="view" contentMode="scaleToFill" id="wcg-ul-wDZ">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SplashImage" translatesAutoresizingMaskIntoConstraints="NO" id="VTA-sj-xNb" userLabel="Splash Image">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="VTA-sj-xNb" firstAttribute="top" secondItem="wcg-ul-wDZ" secondAttribute="topMargin" id="5Tw-Ph-MVc"/>
+                            <constraint firstAttribute="trailing" secondItem="VTA-sj-xNb" secondAttribute="trailing" id="9PO-3n-NYf"/>
+                            <constraint firstItem="VTA-sj-xNb" firstAttribute="leading" secondItem="wcg-ul-wDZ" secondAttribute="leading" id="cjh-Qr-XS8"/>
+                            <constraint firstItem="1LU-W4-KtG" firstAttribute="top" secondItem="VTA-sj-xNb" secondAttribute="bottom" id="j74-g9-QYk"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="VTA-sj-xNb"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="5Tw-Ph-MVc"/>
+                                <exclude reference="9PO-3n-NYf"/>
+                                <exclude reference="cjh-Qr-XS8"/>
+                                <exclude reference="j74-g9-QYk"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="VTA-sj-xNb"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="5Tw-Ph-MVc"/>
+                                <include reference="9PO-3n-NYf"/>
+                                <include reference="cjh-Qr-XS8"/>
+                                <include reference="j74-g9-QYk"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="ht1-5j-UOy"/>
+                    <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <segue destination="Uxw-Ss-2YG" kind="show" identifier="startTutorialSegue" id="lNp-os-dlN"/>
                     </connections>
@@ -3221,7 +3255,7 @@
                                     </mask>
                                 </variation>
                                 <connections>
-                                    <segue destination="AKe-zY-Iin" kind="embed" id="tFB-NZ-4oZ"/>
+                                    <segue destination="AKe-zY-Iin" kind="embed" identifier="editProfileContainerSegue" id="tFB-NZ-4oZ"/>
                                 </connections>
                             </containerView>
                         </subviews>
@@ -3764,7 +3798,7 @@
                                                     </mask>
                                                 </variation>
                                             </view>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="12345" placeholder="Your password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QPu-Yg-UNs" userLabel="Password Field" customClass="BZRAuthorizationField">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Abc12345" placeholder="Your password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QPu-Yg-UNs" userLabel="Password Field" customClass="BZRAuthorizationField">
                                                 <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="45" id="n4O-9m-dWN"/>
@@ -5429,6 +5463,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="SplashImage" width="414" height="736"/>
         <image name="bizrate_rewards_logo" width="252" height="59"/>
         <image name="blue_bg" width="640" height="397"/>
         <image name="checkboxes_unselected" width="23" height="23"/>
@@ -5446,6 +5481,6 @@
         <image name="user_icon_small" width="57" height="57"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="OSk-AB-fqd"/>
+        <segue reference="tFB-NZ-4oZ"/>
     </inferredMetricsTieBreakers>
 </document>

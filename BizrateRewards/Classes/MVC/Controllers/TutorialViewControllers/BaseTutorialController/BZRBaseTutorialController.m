@@ -32,6 +32,9 @@ static NSString *const kStartTutorialSegueIdentirier = @"startTutorialSegue";
 {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES];
+    
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithCustomView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"back_arrow"]]];
+    self.navigationItem.backBarButtonItem = backButton;
 }
 
 #pragma mark - Actions

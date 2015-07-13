@@ -19,6 +19,8 @@
 @property (strong, nonatomic) NSString  *email;
 @property (strong, nonatomic) NSDate    *dateOfBirth;
 
+@property (strong, nonatomic) NSString *genderString;
+
 @property (assign, nonatomic) NSInteger pointsAmount;
 @property (assign, nonatomic) NSInteger pointsRequired;
 
