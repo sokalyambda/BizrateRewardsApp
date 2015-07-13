@@ -88,53 +88,53 @@ static NSInteger const kNotAuthorizedErrorCode = 400.f;
 //facebook
 - (IBAction)facebookLoginClick:(id)sender
 {
-    WEAK_SELF;
-    [BZRReachabilityHelper checkConnectionOnSuccess:^{
-        [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
-        [weakSelf.dataManager authorizeWithFacebookWithResult:^(BOOL success, NSError *error, NSInteger responseStatusCode) {
-            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-            if (success) {
-                [weakSelf performSegueWithIdentifier:kDashboardSegueIdentifier sender:weakSelf];
-            }
-        }];
-    } failure:^{
-        ShowAlert(InternetIsNotReachableString);
-    }];
+//    WEAK_SELF;
+//    [BZRReachabilityHelper checkConnectionOnSuccess:^{
+//        [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
+//        [weakSelf.dataManager authorizeWithFacebookWithResult:^(BOOL success, NSError *error, NSInteger responseStatusCode) {
+//            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+//            if (success) {
+//                [weakSelf performSegueWithIdentifier:kDashboardSegueIdentifier sender:weakSelf];
+//            }
+//        }];
+//    } failure:^{
+//        ShowAlert(InternetIsNotReachableString);
+//    }];
 }
 
 //email
 - (IBAction)signInClick:(id)sender
 {
-    [self performSegueWithIdentifier:kDashboardSegueIdentifier sender:self];
-//    [self.incorrectEmailView setHidden:YES];
-//    WEAK_SELF;
-//    if ([self.validator validateEmailField:self.userNameField andPasswordField:self.passwordField]) {
-//        [BZRReachabilityHelper checkConnectionOnSuccess:^{
-//            [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
-//            [weakSelf.dataManager signInWithUserName:weakSelf.userNameField.text password:weakSelf.passwordField.text withResult:^(BOOL success, NSError *error, NSInteger responseStatusCode) {
-//                [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-//                if (!success) {
-//                    if (responseStatusCode == kNotAuthorizedErrorCode) {
-//                        [weakSelf.incorrectEmailView setHidden:NO];
-//                        weakSelf.userNameField.errorImageName = kEmailErrorIconName;
-//                    } else {
-//                        ShowErrorAlert(error);
-//                    }
-//                } else {
-//                    if (weakSelf.isRememberMe) {
-//                        [weakSelf saveUserDataToKeychain];
-//                    }
-//                    [weakSelf performSegueWithIdentifier:kDashboardSegueIdentifier sender:weakSelf];
-//                }
-//            }];
-//        } failure:^{
-//            ShowAlert(InternetIsNotReachableString);
-//        }];
-//        
-//    } else {
-////        ShowAlert(self.validator.validationErrorString);
-//        [self.validator cleanValidationErrorString];
-//    }
+//    [self performSegueWithIdentifier:kDashboardSegueIdentifier sender:self];
+    [self.incorrectEmailView setHidden:YES];
+    WEAK_SELF;
+    if ([self.validator validateEmailField:self.userNameField andPasswordField:self.passwordField]) {
+        [BZRReachabilityHelper checkConnectionOnSuccess:^{
+            [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
+            [weakSelf.dataManager signInWithUserName:weakSelf.userNameField.text password:weakSelf.passwordField.text withResult:^(BOOL success, NSError *error, NSInteger responseStatusCode) {
+                [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+                if (!success) {
+                    if (responseStatusCode == kNotAuthorizedErrorCode) {
+                        [weakSelf.incorrectEmailView setHidden:NO];
+                        weakSelf.userNameField.errorImageName = kEmailErrorIconName;
+                    } else {
+                        ShowErrorAlert(error);
+                    }
+                } else {
+                    if (weakSelf.isRememberMe) {
+                        [weakSelf saveUserDataToKeychain];
+                    }
+                    [weakSelf performSegueWithIdentifier:kDashboardSegueIdentifier sender:weakSelf];
+                }
+            }];
+        } failure:^{
+            ShowAlert(InternetIsNotReachableString);
+        }];
+        
+    } else {
+//        ShowAlert(self.validator.validationErrorString);
+        [self.validator cleanValidationErrorString];
+    }
 }
 
 - (IBAction)forgotPasswordClick:(id)sender
