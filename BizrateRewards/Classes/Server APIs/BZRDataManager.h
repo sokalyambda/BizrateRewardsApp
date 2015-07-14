@@ -29,6 +29,9 @@
 //get user
 - (void)getCurrentUserWithCompletion:(SuccessBlock)completion;
 
+//getSurvey
+- (void)getSurveysListWithResult:(SurveysBlock)result;
+
 //update user
 - (void)updateCurrentUserWithFirstName:(NSString *)firstName
                            andLastName:(NSString *)lastName
@@ -38,8 +41,5 @@
 
 //send device token
 - (void)sendDeviceAPNSTokenAndDeviceIdentifierWithResult:(SuccessBlock)result;
-
-//getSurvey
-- (void)getSurveyWithResult:(SurveyBlock)result;
 
 @end

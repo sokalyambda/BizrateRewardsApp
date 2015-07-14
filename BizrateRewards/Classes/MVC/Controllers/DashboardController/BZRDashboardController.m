@@ -82,9 +82,27 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
 
 - (IBAction)takeSurveyClick:(id)sender
 {
-    BZRSurveyViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRSurveyViewController class])];
-    controller.navigationItem.title = NSLocalizedString(@"Survey", nil);
-    [self.navigationController pushViewController:controller animated:YES];
+//    WEAK_SELF;
+//    [BZRReachabilityHelper checkConnectionOnSuccess:^{
+//        [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
+//        [weakSelf.dataManager getSurveysListWithResult:^(BOOL success, NSArray *surveysList, NSError *error) {
+//            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+//            if (!success) {
+//                ShowErrorAlert(error);
+//            } else {
+//                BZRSurveyViewController *controller = [weakSelf.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRSurveyViewController class])];
+//                if (surveysList.count) {
+//                    controller.currentSurvey = [surveysList firstObject];
+//                    [weakSelf.navigationController pushViewController:controller animated:YES];
+//                } else {
+//                    ShowAlert(NSLocalizedString(@"There are no surveys for you", nil));
+//                    return;
+//                }
+//            }
+//        }];
+//    } failure:^{
+//        ShowAlert(InternetIsNotReachableString);
+//    }];
 }
 
 - (IBAction)seeAllGiftCardsClick:(id)sender
@@ -105,7 +123,6 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
     self.userNameLabel.text = self.currentProfile.fullName;
     
 #warning User Points
-    self.currentProfile.pointsAmount = 800;
     self.currentProfile.pointsRequired = 2000;
 }
 

@@ -7,69 +7,39 @@
 //
 
 #import "BZRSurveyViewController.h"
+#import "BZRFinishSurveyController.h"
 
 #import "BZRDataManager.h"
 
 #import "BZRSurvey.h"
 
+#import "NSString+ContainsString.h"
+
+static NSString *const kFinishSurveyString = @"SaveButton";
+
 @interface BZRSurveyViewController ()<UIWebViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIWebView *surveyWebView;
 
-@property (strong, nonatomic) BZRSurvey *currentSurvey;
-
-@property (strong, nonatomic) BZRDataManager *dataManager;
-
 @end
 
 @implementation BZRSurveyViewController
-
-#pragma mark - Accessors
-
-- (BZRDataManager *)dataManager
-{
-    if (!_dataManager) {
-        _dataManager = [BZRDataManager sharedInstance];
-    }
-    return _dataManager;
-}
 
 #pragma mark - View Lifecycle
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self getSurvey];
+    [self loadSurveyInWebView];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    [self setupNavigationBar];
 }
 
 #pragma mark - Actions
-
-- (void)getSurvey
-{
-    WEAK_SELF;
-    [BZRReachabilityHelper checkConnectionOnSuccess:^{
-        [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
-        [weakSelf.dataManager getClientCredentialsOnSuccess:^(BOOL success, NSError *error, NSInteger responseStatusCode) {
-            if (success) {
-                [weakSelf.dataManager getSurveyWithResult:^(BOOL success, BZRSurvey *survey, NSError *error) {
-                    [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-                    weakSelf.currentSurvey = survey;
-                    [weakSelf loadSurveyInWebView];
-                }];
-            } else {
-                [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-            }
-        }];
-    } failure:^{
-        ShowAlert(InternetIsNotReachableString);
-    }];
-}
 
 - (void)loadSurveyInWebView
 {
@@ -77,14 +47,38 @@
     [self.surveyWebView loadRequest:surveyRequest];
 }
 
+- (void)setupNavigationBar
+{
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    self.navigationItem.title = NSLocalizedString(self.currentSurvey.surveyName, nil);
+    self.navigationItem.hidesBackButton = YES;
+}
+
 #pragma mark - UIWebViewDelegate
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
     //TODO: parse url here
+    NSString *urlString = request.URL.absoluteString;
+    
+    if ([urlString containsString:kFinishSurveyString]) {
+        BZRFinishSurveyController *controller = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRFinishSurveyController class])];
+        [self.navigationController pushViewController:controller animated:YES];
+    }
+    
     NSURL *url = request.URL;
     NSLog(@"url %@", url);
     return YES;
+}
+
+- (void)webViewDidStartLoad:(UIWebView *)webView
+{
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
 }
 
 @end

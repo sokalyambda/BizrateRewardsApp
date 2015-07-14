@@ -10,6 +10,8 @@
 
 @interface BZRSurvey : NSObject<BZRMappingProtocol>
 
+@property (strong, nonatomic) NSString *surveyName;
+@property (strong, nonatomic) NSString *refSurveyId;
 @property (strong, nonatomic) NSString *surveyId;
 @property (strong, nonatomic) NSURL *surveyLink;
 

@@ -8,8 +8,10 @@
 
 #import "BZRSurvey.h"
 
-static NSString *const kSurveyId = @"id";
-static NSString *const kSurveyLink = @"link";
+static NSString *const kSurveyId    = @"surveyId";
+static NSString *const kSurveyLink  = @"url";
+static NSString *const kRefSurveyId = @"refSurveyId";
+static NSString *const kSurveyName  = @"name";
 
 @implementation BZRSurvey
 
@@ -19,8 +21,10 @@ static NSString *const kSurveyLink = @"link";
 {
     self = [super init];
     if (self) {
-        _surveyId   = response[kSurveyId];
-        _surveyLink = response[kSurveyLink];
+        _surveyId       = response[kSurveyId];
+        _surveyLink     = [NSURL URLWithString:response[kSurveyLink]];
+        _surveyName     = response[kSurveyName];
+        _refSurveyId    = response[kRefSurveyId];
     }
     return self;
 }

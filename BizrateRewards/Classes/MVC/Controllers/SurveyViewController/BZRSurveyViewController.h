@@ -6,6 +6,10 @@
 //  Copyright (c) 2015 Connexity. All rights reserved.
 //
 
+@class BZRSurvey;
+
 @interface BZRSurveyViewController : UIViewController
+
+@property (strong, nonatomic) BZRSurvey *currentSurvey;
 
 @end

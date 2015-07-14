@@ -107,7 +107,6 @@ static NSInteger const kNotRegisteredErrorCode = 400.f;
 //email
 - (IBAction)signInClick:(id)sender
 {
-   [self performSegueWithIdentifier:kDashboardSegueIdentifier sender:self];
     [self.incorrectEmailView setHidden:YES];
     WEAK_SELF;
     if ([self.validator validateEmailField:self.userNameField andPasswordField:self.passwordField]) {

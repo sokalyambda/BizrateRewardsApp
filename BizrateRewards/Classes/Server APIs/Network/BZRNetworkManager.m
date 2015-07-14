@@ -179,7 +179,8 @@ static NSString *const kClientSecretKey = @"8a9da763-9503-4093-82c2-6b22b8eb9a12
     }];
 }
 
-#pragma mark - GET current user
+#pragma mark - GET
+#pragma mark - Current User
 
 - (void)getCurrentUserWithCompletion:(UserProfileBlock)completion
 {
@@ -188,6 +189,25 @@ static NSString *const kClientSecretKey = @"8a9da763-9503-4093-82c2-6b22b8eb9a12
         completion(YES, currentUserProfile, nil);
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         completion(NO, nil, error);
+    }];
+}
+
+#pragma mark - Surveys
+
+- (void)getSurveysListWithResult:(SurveysBlock)result
+{
+    [self GET:@"user/survey/eligible" parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        
+        NSMutableArray *surveys = [NSMutableArray array];
+        if ([responseObject isKindOfClass:[NSArray class]]) {
+            for (NSDictionary *responseDict in responseObject) {
+                BZRSurvey *survey = [[BZRSurvey alloc] initWithServerResponse:responseDict];
+                [surveys addObject:survey];
+            }
+        }
+        result(YES, surveys, nil);
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        result(NO, nil, error);
     }];
 }
 
@@ -224,18 +244,6 @@ static NSString *const kClientSecretKey = @"8a9da763-9503-4093-82c2-6b22b8eb9a12
         result(YES, nil, 0);
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         result(NO, error, 0);
-    }];
-}
-
-#pragma mark - GET survey
-
-- (void)getSurveyWithResult:(SurveyBlock)result
-{
-    [self POST:@"user/survey" parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-        BZRSurvey *survey = [[BZRSurvey alloc] initWithServerResponse:responseObject];
-        result(YES, survey, nil);
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        result(NO, nil, error);
     }];
 }
 

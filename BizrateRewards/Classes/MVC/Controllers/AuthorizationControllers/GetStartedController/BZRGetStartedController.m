@@ -20,6 +20,7 @@ static NSString *const kChooseSignUpTypeSegueIdentifier = @"сhooseSignUpTypeSeg
 @interface BZRGetStartedController ()<UITextFieldDelegate>
 
 @property (weak, nonatomic) BZREditProfileContainerController *editProfileTableViewController;
+
 @property (weak, nonatomic) IBOutlet BZRCheckBoxButton *privacyPolicyCheckBox;
 @property (weak, nonatomic) IBOutlet BZRCheckBoxButton *termsCheckBox;
 @property (weak, nonatomic) IBOutlet BZRCheckBoxButton *yearsCheckBox;
@@ -79,7 +80,7 @@ static NSString *const kChooseSignUpTypeSegueIdentifier = @"сhooseSignUpTypeSeg
     if (self.privacyPolicyCheckBox.selected && self.termsCheckBox.selected && self.yearsCheckBox.selected) {
         return YES;
     } else {
-        [self.validator.validationErrorString appendString:NSLocalizedString(@"All checkbox must be checked\n", nil)];
+        [self.validator.validationErrorString appendString:NSLocalizedString(@"All checkboxes have to be checked\n", nil)];
         return NO;
     }
 }

@@ -16,7 +16,7 @@ static NSString *const kEmail                   = @"email";
 static NSString *const kDateOfBirth             = @"dob";
 static NSString *const kGender                  = @"gender";
 static NSString *const kIsMale                  = @"isMale";
-static NSString *const kPointsAmount            = @"points";
+static NSString *const kPointsAmount            = @"points_awarded";
 static NSString *const kIsPushEnabled           = @"isPushEnabled";
 static NSString *const kIsGeolocationEnabled    = @"isGeolocationEnabled";
 

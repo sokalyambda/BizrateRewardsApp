@@ -66,6 +66,19 @@ static NSString *const kEditProfileContainerSegueIdentifier = @"editProfileConta
 
 - (IBAction)doneClick:(id)sender
 {
+//    [self updateUser];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)customizeNavigationItem
+{
+    self.navigationItem.title = NSLocalizedString(@"Profile", nil);
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    self.navigationItem.rightBarButtonItem = self.doneBarButton;
+}
+
+- (void)updateUser
+{
     WEAK_SELF;
     if ([self.validator validateFirstNameField:self.container.firstNameField
                                  lastNameField:self.container.lastNameField
@@ -92,13 +105,6 @@ static NSString *const kEditProfileContainerSegueIdentifier = @"editProfileConta
         ShowAlert(self.validator.validationErrorString);
         [self.validator cleanValidationErrorString];
     }
-}
-
-- (void)customizeNavigationItem
-{
-    self.navigationItem.title = NSLocalizedString(@"Profile", nil);
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
-    self.navigationItem.rightBarButtonItem = self.doneBarButton;
 }
 
 #pragma mark - Navigation

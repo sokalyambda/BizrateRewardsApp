@@ -126,7 +126,9 @@ typedef enum : NSUInteger {
     }];
 }
 
-#pragma mark - GET current user
+#pragma mark - GET
+
+#pragma mark Current User
 
 - (void)getCurrentUserWithCompletion:(SuccessBlock)completion
 {
@@ -139,6 +141,18 @@ typedef enum : NSUInteger {
             weakSelf.storage.currentProfile = userProfile;
         }
         completion(success, error, 0);
+    }];
+}
+
+#pragma mark Survey
+
+- (void)getSurveysListWithResult:(SurveysBlock)result
+{
+    [self addAuthHeaderWithToken:self.storage.userToken];
+    self.network.requestSerializer = self.httpRequestSerializer;
+    
+    [self.network getSurveysListWithResult:^(BOOL success, NSArray *surveysList, NSError *error) {
+        result (success, surveysList, error);
     }];
 }
 
@@ -180,18 +194,6 @@ typedef enum : NSUInteger {
     } else {
         result(NO, nil, 0);
     }
-}
-
-#pragma mark - GET survey
-
-- (void)getSurveyWithResult:(SurveyBlock)result
-{
-    [self addAuthHeaderWithToken:self.storage.applicationToken];
-    self.network.requestSerializer = self.httpRequestSerializer;
-    
-    [self.network getSurveyWithResult:^(BOOL success, BZRSurvey *survey, NSError *error) {
-        result(success, survey, error);
-    }];
 }
 
 #pragma mark - Private methods

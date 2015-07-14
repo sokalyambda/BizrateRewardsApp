@@ -23,7 +23,7 @@ typedef void(^UserProfileBlock)(BOOL success, BZRUserProfile *userProfile, NSErr
 typedef void(^FacebookProfileBlock)(BOOL success, NSDictionary *facebookProfile, NSString *faceBookAccessToken, NSError *error);
 typedef void(^ImageUserBlock)(BOOL success, UIImage *image);
 
-typedef void(^SurveyBlock)(BOOL success, BZRSurvey *survey, NSError *error);
+typedef void(^SurveysBlock)(BOOL success, NSArray *surveysList, NSError *error);
 
 @interface BZRNetworkManager : AFHTTPSessionManager
 
@@ -41,6 +41,9 @@ typedef void(^SurveyBlock)(BOOL success, BZRSurvey *survey, NSError *error);
 //get user
 - (void)getCurrentUserWithCompletion:(UserProfileBlock)completion;
 
+//getSurvey
+- (void)getSurveysListWithResult:(SurveysBlock)result;
+
 //update user
 - (void)updateCurrentUserWithFirstName:(NSString *)firstName
                            andLastName:(NSString *)lastName
@@ -50,9 +53,6 @@ typedef void(^SurveyBlock)(BOOL success, BZRSurvey *survey, NSError *error);
 
 //send device token
 - (void)sendDeviceAPNSToken:(NSString *)token andDeviceIdentifier:(NSString *)udid withResult:(SuccessBlock)result;
-
-//getSurvey
-- (void)getSurveyWithResult:(SurveyBlock)result;
 
 //post image
 - (void)postImage:(UIImage *)image withID:(NSInteger)ID result:(ImageUserBlock)result;
