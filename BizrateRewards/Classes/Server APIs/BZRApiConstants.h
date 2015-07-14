@@ -3,7 +3,7 @@
 //  CarusselSalesTool
 //
 //  Created by AnatoliyDalekorey on 08.06.15.
-//  Copyright (c) 2015 ThinkMobiles. All rights reserved.
+//  Copyright (c) 2015 Connexity. All rights reserved.
 //
 
 #ifndef BizrateRewards_BZRApiConstants_h

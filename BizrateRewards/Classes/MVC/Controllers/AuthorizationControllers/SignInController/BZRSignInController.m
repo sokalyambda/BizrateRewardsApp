@@ -3,7 +3,7 @@
 //  BizrateRewards
 //
 //  Created by Eugenity on 23.06.15.
-//  Copyright (c) 2015 ThinkMobiles. All rights reserved.
+//  Copyright (c) 2015 Connexity. All rights reserved.
 //
 
 #import "BZRSignInController.h"
@@ -105,7 +105,7 @@ static NSInteger const kNotAuthorizedErrorCode = 400.f;
 //email
 - (IBAction)signInClick:(id)sender
 {
-//    [self performSegueWithIdentifier:kDashboardSegueIdentifier sender:self];
+   [self performSegueWithIdentifier:kDashboardSegueIdentifier sender:self];
     [self.incorrectEmailView setHidden:YES];
     WEAK_SELF;
     if ([self.validator validateEmailField:self.userNameField andPasswordField:self.passwordField]) {

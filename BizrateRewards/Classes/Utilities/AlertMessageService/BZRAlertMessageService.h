@@ -3,7 +3,7 @@
 //  Pseudo
 //
 //  Created by Eugenity on 20.05.15.
-//  Copyright (c) 2015 ThinkMobiles. All rights reserved.
+//  Copyright (c) 2015 Connexity. All rights reserved.
 //
 
 @interface BZRAlertMessageService : NSObject

@@ -3,7 +3,7 @@
 //  CarusselSalesTool
 //
 //  Created by Eugenity on 05.06.15.
-//  Copyright (c) 2015 ThinkMobiles. All rights reserved.
+//  Copyright (c) 2015 Connexity. All rights reserved.
 //
 
 #import "BZRCheckBoxButton.h"

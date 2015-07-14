@@ -3,7 +3,7 @@
 //  BizrateRewards
 //
 //  Created by Eugenity on 23.06.15.
-//  Copyright (c) 2015 ThinkMobiles. All rights reserved.
+//  Copyright (c) 2015 Connexity. All rights reserved.
 //
 
 #import "BZRStorageManager.h"
@@ -85,21 +85,21 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
 
 - (IBAction)takeSurveyClick:(id)sender
 {
-//    BZRSurveyViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRSurveyViewController class])];
-//    controller.navigationItem.title = NSLocalizedString(@"Survey", nil);
-//    [self.navigationController pushViewController:controller animated:YES];
+    BZRSurveyViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRSurveyViewController class])];
+    controller.navigationItem.title = NSLocalizedString(@"Survey", nil);
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 - (IBAction)seeAllGiftCardsClick:(id)sender
 {
-//    [self performSegueWithIdentifier:kAllGiftCardsSegueIdentifier sender:self];
+    [self performSegueWithIdentifier:kAllGiftCardsSegueIdentifier sender:self];
 }
 
 - (IBAction)accountSettingsClick:(id)sender
 {
-//    BZRAccountSettingsController *accountController = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRAccountSettingsController class])];
-//    BZRBaseNavigationController *navigationController = [[BZRBaseNavigationController alloc] initWithRootViewController:accountController];
-//    [self presentViewController:navigationController animated:YES completion:nil];
+    BZRAccountSettingsController *accountController = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRAccountSettingsController class])];
+    BZRBaseNavigationController *navigationController = [[BZRBaseNavigationController alloc] initWithRootViewController:accountController];
+    [self presentViewController:navigationController animated:YES completion:nil];
 }
 
 - (void)updateUserInformation
