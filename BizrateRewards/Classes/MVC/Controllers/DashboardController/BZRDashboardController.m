@@ -13,6 +13,7 @@
 #import "BZRSurveyViewController.h"
 #import "BZRAccountSettingsController.h"
 #import "BZRBaseNavigationController.h"
+#import "BZRGiftCardsListController.h"
 
 #import "BZRRoundedImageView.h"
 #import "BZRProgressView.h"
@@ -22,6 +23,7 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
 
 @interface BZRDashboardController ()
 
+@property (weak, nonatomic) IBOutlet BZRProgressView *progressView;
 @property (weak, nonatomic) IBOutlet BZRRoundedImageView *userAvatar;
 @property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
 
@@ -29,7 +31,6 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
 @property (strong, nonatomic) BZRDataManager *dataManager;
 
 @property (strong, nonatomic) BZRUserProfile *currentProfile;
-@property (weak, nonatomic) IBOutlet BZRProgressView *progressView;
 
 @end
 
@@ -55,10 +56,7 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
 
 - (BZRUserProfile *)currentProfile
 {
-    if (!_currentProfile) {
-        _currentProfile = [BZRStorageManager sharedStorage].currentProfile;
-    }
-    return _currentProfile;
+    return [BZRStorageManager sharedStorage].currentProfile;;
 }
 
 #pragma mark - View Lifecycle
@@ -73,12 +71,11 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
     [super viewWillAppear:animated];
     [self.view layoutIfNeeded];
     [self.navigationController setNavigationBarHidden:YES animated:YES];
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-//    [self getCurrentUserProfile];
+    [self updateUserInformation];
+    
+    if (self.isUpdateNeeded) {
+        [self getCurrentUserProfile];
+    }
 }
 
 #pragma mark - Actions
@@ -106,6 +103,7 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
 {
     [self.userAvatar sd_setImageWithURL:self.currentProfile.avatarURL placeholderImage:[UIImage imageNamed:@"user_icon_small"]];
     self.userNameLabel.text = self.currentProfile.fullName;
+    
 #warning User Points
     self.currentProfile.pointsAmount = 800;
     self.currentProfile.pointsRequired = 2000;
@@ -121,6 +119,7 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
             if (success) {
                 [weakSelf updateUserInformation];
                 [weakSelf calculateProgress];
+                weakSelf.updateNeeded = NO;
             }
         }];
     } failure:^{
@@ -132,6 +131,16 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
 {
      self.progressView.progress  = (CGFloat)self.currentProfile.pointsAmount * CGRectGetWidth(self.progressView.frame) / (CGFloat)self.currentProfile.pointsRequired;
     [self.progressView setNeedsDisplay];
+}
+
+#pragma mark - Navigation
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:kAllGiftCardsSegueIdentifier]) {
+        BZRGiftCardsListController *controller = (BZRGiftCardsListController *)segue.destinationViewController;
+        controller.navigationItem.title = NSLocalizedString(@"Rewards", nil);
+    }
 }
 
 @end

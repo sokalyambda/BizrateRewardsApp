@@ -22,8 +22,6 @@ static NSString *const kIsGeolocationEnabled    = @"isGeolocationEnabled";
 
 @interface BZRUserProfile ()
 
-@property (strong, nonatomic) NSString *genderString;
-
 @end
 
 @implementation BZRUserProfile

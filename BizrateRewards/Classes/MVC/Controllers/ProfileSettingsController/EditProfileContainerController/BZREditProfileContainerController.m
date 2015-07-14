@@ -43,10 +43,7 @@ typedef enum : NSUInteger {
 
 - (BZRUserProfile *)currentProfile
 {
-    if (!_currentProfile) {
-        _currentProfile = [BZRStorageManager sharedStorage].currentProfile;
-    }
-    return _currentProfile;
+    return [BZRStorageManager sharedStorage].currentProfile;;
 }
 
 #pragma mark - View Lifecycle
@@ -66,6 +63,7 @@ typedef enum : NSUInteger {
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
+    [self setupUserData];
 }
 
 #pragma mark - UITableViewDelegate
@@ -108,6 +106,15 @@ typedef enum : NSUInteger {
 }
 
 #pragma mark - Actions
+
+- (void)setupUserData
+{
+    self.firstNameField.text    = self.currentProfile.firstName;
+    self.lastNameField.text     = self.currentProfile.lastName;
+    self.emailField.text        = self.currentProfile.email;
+    self.dateOfBirthField.text  = [[BZRCommonDateFormatter commonDateFormatter] stringFromDate:self.currentProfile.dateOfBirth];
+    self.genderField.text       = self.currentProfile.genderString;
+}
 
 - (void)adjustTableViewInsetsWithPresentedRect:(CGRect)rect
 {

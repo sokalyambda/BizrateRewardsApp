@@ -35,12 +35,7 @@ static NSString *const kAccountSettingsContainerSegueIdentifier = @"accountSetti
 
 - (BZRUserProfile *)currentProfile
 {
-#warning temporary!
-    if (!_currentProfile) {
-//        _currentProfile = [BZRStorageManager sharedStorage].currentProfile;
-        _currentProfile = [[BZRUserProfile alloc] init];
-    }
-    return _currentProfile;
+    return [BZRStorageManager sharedStorage].currentProfile;;
 }
 
 #pragma mark - View Lifecycle
@@ -81,6 +76,9 @@ static NSString *const kAccountSettingsContainerSegueIdentifier = @"accountSetti
     WEAK_SELF;
     UIAlertAction *signOutAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Sign Out", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
         BZRDashboardController *dashboard = (BZRDashboardController *)[weakSelf.navigationController.presentingViewController.childViewControllers lastObject];
+        
+        weakSelf.currentProfile = nil;
+        
         [weakSelf dismissViewControllerAnimated:YES completion:nil];
         [dashboard.navigationController popViewControllerAnimated:NO];
     }];

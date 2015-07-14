@@ -8,4 +8,6 @@
 
 @interface BZRDashboardController : UIViewController
 
+@property (assign, nonatomic, getter=isUpdateNeeded) BOOL updateNeeded;
+
 @end

@@ -26,8 +26,15 @@
 
 - (void)authorizeWithFacebookWithResult:(SuccessBlock)result;
 
-//get User
+//get user
 - (void)getCurrentUserWithCompletion:(SuccessBlock)completion;
+
+//update user
+- (void)updateCurrentUserWithFirstName:(NSString *)firstName
+                           andLastName:(NSString *)lastName
+                        andDateOfBirth:(NSString *)dateOfBirth
+                             andGender:(NSString *)gender
+                        withCompletion:(SuccessBlock)completion;
 
 //send device token
 - (void)sendDeviceAPNSTokenAndDeviceIdentifierWithResult:(SuccessBlock)result;

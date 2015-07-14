@@ -8,6 +8,8 @@
 
 #import "BZRSignInController.h"
 #import "BZRGetStartedController.h"
+#import "BZRDashboardController.h"
+
 #import "KeychainItemWrapper.h"
 
 #import "BZRDataManager.h"
@@ -18,7 +20,7 @@ static NSString *const kIsRememberMe = @"isRememberMe";
 static NSString *const kUserCredentials = @"UserCredentials";
 
 //const for auth error code
-static NSInteger const kNotAuthorizedErrorCode = 400.f;
+static NSInteger const kNotRegisteredErrorCode = 400.f;
 
 @interface BZRSignInController ()
 
@@ -73,8 +75,8 @@ static NSInteger const kNotAuthorizedErrorCode = 400.f;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//    [self getUserDataFromKeychain];
     [self.rememberMeSwitch setOn:self.isRememberMe];
+    [self getUserDataFromKeychain];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -114,7 +116,7 @@ static NSInteger const kNotAuthorizedErrorCode = 400.f;
             [weakSelf.dataManager signInWithUserName:weakSelf.userNameField.text password:weakSelf.passwordField.text withResult:^(BOOL success, NSError *error, NSInteger responseStatusCode) {
                 [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
                 if (!success) {
-                    if (responseStatusCode == kNotAuthorizedErrorCode) {
+                    if (responseStatusCode == kNotRegisteredErrorCode) {
                         [weakSelf.incorrectEmailView setHidden:NO];
                         weakSelf.userNameField.errorImageName = kEmailErrorIconName;
                     } else {
@@ -144,8 +146,8 @@ static NSInteger const kNotAuthorizedErrorCode = 400.f;
 
 - (IBAction)goToCreateNewAccountClick:(id)sender
 {
-//    BZRGetStartedController *controller = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRGetStartedController class])];
-//    [self.navigationController pushViewController:controller animated:YES];
+    BZRGetStartedController *controller = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRGetStartedController class])];
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 - (IBAction)rememberMeValueChanged:(id)sender
@@ -172,9 +174,11 @@ static NSInteger const kNotAuthorizedErrorCode = 400.f;
 
 - (void)getUserDataFromKeychain
 {
-    KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] initWithIdentifier:kUserCredentials accessGroup:nil];
-    self.passwordField.text = [wrapper objectForKey:(__bridge id)(kSecValueData)];
-    self.userNameField.text = [wrapper objectForKey:(__bridge id)(kSecAttrAccount)];
+    if (self.isRememberMe) {
+        KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] initWithIdentifier:kUserCredentials accessGroup:nil];
+        self.passwordField.text = [wrapper objectForKey:(__bridge id)(kSecValueData)];
+        self.userNameField.text = [wrapper objectForKey:(__bridge id)(kSecAttrAccount)];
+    }
 }
 
 #pragma mark - UITextFieldDelegate
@@ -186,7 +190,18 @@ static NSInteger const kNotAuthorizedErrorCode = 400.f;
     } else if ([self.passwordField isFirstResponder]) {
         [self.passwordField resignFirstResponder];
     }
+
     return YES;
+}
+
+#pragma mark - Navigation
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:kDashboardSegueIdentifier]) {
+        BZRDashboardController *controller = (BZRDashboardController *)segue.destinationViewController;
+        controller.updateNeeded = YES;
+    }
 }
 
 @end

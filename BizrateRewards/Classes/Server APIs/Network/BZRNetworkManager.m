@@ -7,7 +7,10 @@
 //
 
 #import "BZRNetworkManager.h"
-#import "BZRStorageManager.h"
+
+#import "BZRCommonDateFormatter.h"
+
+#import "NSDictionary+JSONRepresentation.h"
 
 static NSString *const kBaseURLString = @"https://api.bizraterewards.com/v1/";
 
@@ -40,7 +43,6 @@ static NSString *const kClientSecretKey = @"8a9da763-9503-4093-82c2-6b22b8eb9a12
     NSURL *baseURL = [NSURL URLWithString:kBaseURLString];
     self = [super initWithBaseURL:baseURL];
     if (self) {
-        
         self.requestSerializer = [AFHTTPRequestSerializer serializer];
         self.responseSerializer = [AFJSONResponseSerializer serializer];
         [self.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"application/schema+json", @"application/json", @"application/x-www-form-urlencoded", nil]];
@@ -48,7 +50,7 @@ static NSString *const kClientSecretKey = @"8a9da763-9503-4093-82c2-6b22b8eb9a12
         //reachability
         [[AFNetworkReachabilityManager sharedManager] startMonitoring];
         
-        self.reachabilityStatus = [[AFNetworkReachabilityManager sharedManager] networkReachabilityStatus];
+        _reachabilityStatus = [[AFNetworkReachabilityManager sharedManager] networkReachabilityStatus];
         
         WEAK_SELF;
         [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
@@ -93,9 +95,6 @@ static NSString *const kClientSecretKey = @"8a9da763-9503-4093-82c2-6b22b8eb9a12
         
         return result(YES, token, nil, response.statusCode);
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        
-        NSData *errData = error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey];
-        NSString* newStr = [[NSString alloc] initWithData:errData encoding:NSUTF8StringEncoding];
         
         NSHTTPURLResponse *response = (NSHTTPURLResponse*)task.response;
         return result(NO, nil, error, response.statusCode);
@@ -180,7 +179,8 @@ static NSString *const kClientSecretKey = @"8a9da763-9503-4093-82c2-6b22b8eb9a12
     }];
 }
 
-//get user
+#pragma mark - GET current user
+
 - (void)getCurrentUserWithCompletion:(UserProfileBlock)completion
 {
     [self GET:@"user/me" parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
@@ -191,7 +191,31 @@ static NSString *const kClientSecretKey = @"8a9da763-9503-4093-82c2-6b22b8eb9a12
     }];
 }
 
-//send device token
+#pragma mark - PUT update user
+
+- (void)updateCurrentUserWithFirstName:(NSString *)firstName
+                           andLastName:(NSString *)lastName
+                        andDateOfBirth:(NSString *)dateOfBirth
+                             andGender:(NSString *)gender
+                        withCompletion:(UserProfileBlock)completion
+{
+    NSDictionary *parameters = @{@"firstname": firstName,
+                                 @"lastname": lastName,
+                                 @"dob": dateOfBirth,
+                                 @"gender": gender};
+    
+    [self PUT:@"user/me" parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
+        BZRUserProfile *updatedProfile = [[BZRUserProfile alloc] initWithServerResponse:responseObject];
+        completion(YES, updatedProfile, nil);
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+//        NSData *errData = error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey];
+//        NSString *errString = [[NSString alloc] initWithData:errData encoding:NSUTF8StringEncoding];
+        completion(NO, nil, error);
+    }];
+}
+
+#pragma mark - POST send device token
+
 - (void)sendDeviceAPNSToken:(NSString *)token andDeviceIdentifier:(NSString *)udid withResult:(SuccessBlock)result
 {
     NSDictionary *parameters = @{@"device_id" : udid, @"notification_token" : token};
@@ -203,6 +227,8 @@ static NSString *const kClientSecretKey = @"8a9da763-9503-4093-82c2-6b22b8eb9a12
     }];
 }
 
+#pragma mark - GET survey
+
 - (void)getSurveyWithResult:(SurveyBlock)result
 {
     [self POST:@"user/survey" parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
@@ -213,7 +239,7 @@ static NSString *const kClientSecretKey = @"8a9da763-9503-4093-82c2-6b22b8eb9a12
     }];
 }
 
-//post image
+#pragma mark - POST image
 
 - (void)postImage:(UIImage *)image withID:(NSInteger)ID result:(ImageUserBlock)result
 {
@@ -228,6 +254,5 @@ static NSString *const kClientSecretKey = @"8a9da763-9503-4093-82c2-6b22b8eb9a12
         return result(NO, nil);
     }];
 }
-
 
 @end

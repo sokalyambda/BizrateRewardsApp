@@ -18,11 +18,30 @@ typedef enum : NSUInteger {
 @property (strong, nonatomic) BZRNetworkManager *network;
 @property (strong, nonatomic) BZRStorageManager *storage;
 
+@property (strong, nonatomic) AFJSONRequestSerializer *jsonRequestSerializer;
+@property (strong, nonatomic) AFHTTPRequestSerializer *httpRequestSerializer;
+
 @end
 
 @implementation BZRDataManager
 
 #pragma mark - Accessors
+
+- (AFJSONRequestSerializer *)jsonRequestSerializer
+{
+    if (!_jsonRequestSerializer) {
+        _jsonRequestSerializer = [AFJSONRequestSerializer serializer];
+    }
+    return _jsonRequestSerializer;
+}
+
+- (AFHTTPRequestSerializer *)httpRequestSerializer
+{
+    if (!_httpRequestSerializer) {
+        _httpRequestSerializer = [AFHTTPRequestSerializer serializer];
+    }
+    return _httpRequestSerializer;
+}
 
 - (BOOL)isReachable
 {
@@ -59,12 +78,13 @@ typedef enum : NSUInteger {
 
 #pragma mark - Requests
 
+#pragma mark - Auth
+
 - (void)getClientCredentialsOnSuccess:(SuccessBlock)completion
 {
     WEAK_SELF;
     if (![self isSessionValidWithType:BZRSessionTypeApplication]) {
         [self.network getClientCredentialsOnCompletion:^(BOOL success, BZRApplicationToken *token, NSError *error) {
-            
             if (success) {
                 weakSelf.storage.applicationToken = token;
             }
@@ -77,22 +97,21 @@ typedef enum : NSUInteger {
 
 - (void)signInWithUserName:(NSString *)userName password:(NSString *)password withResult:(SuccessBlock)result
 {
+    self.network.requestSerializer = self.httpRequestSerializer;
     WEAK_SELF;
-    if (![self isSessionValidWithType:BZRSessionTypeUser]) {
-        [self.network signInWithUserName:userName password:password withResult:^(BOOL success, BZRUserToken *token, NSError *error, NSInteger responseStatusCode) {
-            if (success) {
-                weakSelf.storage.userToken = token;
-            }
-            result(success, error, responseStatusCode);
-        }];
-    } else {
-        result(YES, nil, 0);
-    }
+    [self.network signInWithUserName:userName password:password withResult:^(BOOL success, BZRUserToken *token, NSError *error, NSInteger responseStatusCode) {
+        if (success) {
+            weakSelf.storage.userToken = token;
+        }
+        result(success, error, responseStatusCode);
+    }];
 }
 
 - (void)signUpWithUserFirstName:(NSString *)firstName andUserLastName:(NSString *)lastName andEmail:(NSString *)email withResult:(SuccessBlock)result
 {
+    self.network.requestSerializer = self.httpRequestSerializer;
     [self addAuthHeaderWithToken:self.storage.applicationToken];
+    
     [self.network signUpWithUserFirstName:firstName andUserLastName:lastName andEmail:email withResult:^(BOOL success, NSError *error, NSInteger responseStatusCode) {
         return result(success, error, responseStatusCode);
     }];
@@ -107,10 +126,13 @@ typedef enum : NSUInteger {
     }];
 }
 
-//Get User
+#pragma mark - GET current user
+
 - (void)getCurrentUserWithCompletion:(SuccessBlock)completion
 {
+    self.network.requestSerializer = self.httpRequestSerializer;
     [self addAuthHeaderWithToken:self.storage.userToken];
+    
     WEAK_SELF;
     [self.network getCurrentUserWithCompletion:^(BOOL success, BZRUserProfile *userProfile, NSError *error) {
         if (success) {
@@ -120,7 +142,32 @@ typedef enum : NSUInteger {
     }];
 }
 
-//send device token
+#pragma mark - PUT update user
+
+- (void)updateCurrentUserWithFirstName:(NSString *)firstName
+                           andLastName:(NSString *)lastName
+                        andDateOfBirth:(NSString *)dateOfBirth
+                             andGender:(NSString *)gender
+                        withCompletion:(SuccessBlock)completion
+{
+    self.network.requestSerializer = self.jsonRequestSerializer;
+    [self addAuthHeaderWithToken:self.storage.userToken];
+    
+    WEAK_SELF;
+    [self.network updateCurrentUserWithFirstName:firstName
+                                     andLastName:lastName
+                                  andDateOfBirth:dateOfBirth
+                                       andGender:gender
+                                  withCompletion:^(BOOL success, BZRUserProfile *userProfile, NSError *error) {
+                                      if (success) {
+                                          weakSelf.storage.currentProfile = userProfile;
+                                      }
+                                      completion(success, error, 0);
+    }];
+}
+
+#pragma mark - POST send device token
+
 - (void)sendDeviceAPNSTokenAndDeviceIdentifierWithResult:(SuccessBlock)result
 {
     NSString *deviceToken = self.storage.deviceToken;
@@ -135,10 +182,13 @@ typedef enum : NSUInteger {
     }
 }
 
-//getSurvey
+#pragma mark - GET survey
+
 - (void)getSurveyWithResult:(SurveyBlock)result
 {
     [self addAuthHeaderWithToken:self.storage.applicationToken];
+    self.network.requestSerializer = self.httpRequestSerializer;
+    
     [self.network getSurveyWithResult:^(BOOL success, BZRSurvey *survey, NSError *error) {
         result(success, survey, error);
     }];
@@ -148,7 +198,8 @@ typedef enum : NSUInteger {
 
 - (void)addAuthHeaderWithToken:(BZRApplicationToken *)token
 {
-    [self.network.requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@", token.accessToken] forHTTPHeaderField:@"Authorization"];
+    [self.jsonRequestSerializer setValue:[NSString stringWithFormat:@"Bearer %@", token.accessToken] forHTTPHeaderField:@"Authorization"];
+    [self.httpRequestSerializer setValue:[NSString stringWithFormat:@"Bearer %@", token.accessToken] forHTTPHeaderField:@"Authorization"];
 }
 
 - (BOOL)isSessionValidWithType:(BZRSessionType)type
@@ -176,6 +227,5 @@ typedef enum : NSUInteger {
     }
     return NO;
 }
-
 
 @end
