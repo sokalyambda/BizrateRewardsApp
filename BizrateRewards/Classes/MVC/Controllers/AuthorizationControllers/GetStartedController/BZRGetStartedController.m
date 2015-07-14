@@ -12,6 +12,7 @@
 
 #import "BZRValidator.h"
 #import "BZRTermsAndConditionsHelper.h"
+#import "BZRCheckBoxButton.h"
 
 static NSString *const kEditProfileContainerSegueIdentifier = @"editProfileContainerSegue";
 static NSString *const kChooseSignUpTypeSegueIdentifier = @"сhooseSignUpTypeSegue";
@@ -19,6 +20,9 @@ static NSString *const kChooseSignUpTypeSegueIdentifier = @"сhooseSignUpTypeSeg
 @interface BZRGetStartedController ()<UITextFieldDelegate>
 
 @property (weak, nonatomic) BZREditProfileContainerController *editProfileTableViewController;
+@property (weak, nonatomic) IBOutlet BZRCheckBoxButton *privacyPolicyCheckBox;
+@property (weak, nonatomic) IBOutlet BZRCheckBoxButton *termsCheckBox;
+@property (weak, nonatomic) IBOutlet BZRCheckBoxButton *yearsCheckBox;
 
 @property (strong, nonatomic) BZRValidator *validator;
 
@@ -61,13 +65,23 @@ static NSString *const kChooseSignUpTypeSegueIdentifier = @"сhooseSignUpTypeSeg
 //                                lastNameField:self.editProfileTableViewController.lastNameField
 //                                   emailField:self.editProfileTableViewController.emailField
 //                             dateOfBirthField:self.editProfileTableViewController.dateOfBirthField
-//                                  genderField:self.editProfileTableViewController.genderField]) {
+//                                  genderField:self.editProfileTableViewController.genderField] && [self checkBoxValidation]) {
 //        [self performSegueWithIdentifier:kChooseSignUpTypeSegueIdentifier sender:self];
 //        
 //    } else {
 //        ShowAlert(self.validator.validationErrorString);
 //        [self.validator cleanValidationErrorString];
 //    }
+}
+
+- (BOOL)checkBoxValidation
+{
+    if (self.privacyPolicyCheckBox.selected && self.termsCheckBox.selected && self.yearsCheckBox.selected) {
+        return YES;
+    } else {
+        [self.validator.validationErrorString appendString:NSLocalizedString(@"All checkbox must be checked\n", nil)];
+        return NO;
+    }
 }
 
 #pragma mark - Navigation
