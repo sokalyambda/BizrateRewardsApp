@@ -10,13 +10,16 @@
 
 @implementation BZRCommonDateFormatter
 
-+ (NSDateFormatter *)commonDateFormatter {
++ (NSDateFormatter *)commonDateFormatter
+{
     static NSDateFormatter *commonDateFormatter = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         commonDateFormatter = [[NSDateFormatter alloc] init];
+        
         [commonDateFormatter setDateStyle:NSDateFormatterShortStyle];
         [commonDateFormatter setTimeStyle:NSDateFormatterNoStyle];
+        [commonDateFormatter setDateFormat:@"MM/dd/yyyy"];
     });
     
     return commonDateFormatter;

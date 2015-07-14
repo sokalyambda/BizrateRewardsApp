@@ -38,8 +38,15 @@ typedef void(^SurveyBlock)(BOOL success, BZRSurvey *survey, NSError *error);
 
 - (void)authorizeWithFacebookWithResult:(UserProfileBlock)result;
 
-//getUser
+//get user
 - (void)getCurrentUserWithCompletion:(UserProfileBlock)completion;
+
+//update user
+- (void)updateCurrentUserWithFirstName:(NSString *)firstName
+                           andLastName:(NSString *)lastName
+                        andDateOfBirth:(NSString *)dateOfBirth
+                             andGender:(NSString *)gender
+                        withCompletion:(UserProfileBlock)completion;
 
 //send device token
 - (void)sendDeviceAPNSToken:(NSString *)token andDeviceIdentifier:(NSString *)udid withResult:(SuccessBlock)result;

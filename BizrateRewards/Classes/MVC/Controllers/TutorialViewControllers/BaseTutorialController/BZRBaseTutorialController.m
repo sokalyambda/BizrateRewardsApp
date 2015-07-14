@@ -25,16 +25,18 @@ static NSString *const kStartTutorialSegueIdentirier = @"startTutorialSegue";
 {
     [super viewDidLoad];
     [BZRDataManager sharedInstance];
-    [self performSegueWithIdentifier:kStartTutorialSegueIdentirier sender:self];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES];
-    
-    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithCustomView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"back_arrow"]]];
-    self.navigationItem.backBarButtonItem = backButton;
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self performSegueWithIdentifier:kStartTutorialSegueIdentirier sender:self];
 }
 
 #pragma mark - Actions

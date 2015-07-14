@@ -43,10 +43,7 @@ typedef enum : NSUInteger {
 
 - (BZRUserProfile *)currentProfile
 {
-    if (!_currentProfile) {
-        _currentProfile = [BZRStorageManager sharedStorage].currentProfile;
-    }
-    return _currentProfile;
+    return [BZRStorageManager sharedStorage].currentProfile;;
 }
 
 #pragma mark - View Lifecycle
