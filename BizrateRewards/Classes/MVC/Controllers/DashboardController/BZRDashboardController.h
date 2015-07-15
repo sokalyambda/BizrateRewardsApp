@@ -6,7 +6,9 @@
 //  Copyright (c) 2015 Connexity. All rights reserved.
 //
 
-@interface BZRDashboardController : UIViewController
+#import "BZRBaseViewController.h"
+
+@interface BZRDashboardController : BZRBaseViewController
 
 @property (assign, nonatomic, getter=isUpdateNeeded) BOOL updateNeeded;
 

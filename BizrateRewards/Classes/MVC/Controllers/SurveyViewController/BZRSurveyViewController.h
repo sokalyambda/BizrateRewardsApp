@@ -6,9 +6,11 @@
 //  Copyright (c) 2015 Connexity. All rights reserved.
 //
 
+#import "BZRBaseViewController.h"
+
 @class BZRSurvey;
 
-@interface BZRSurveyViewController : UIViewController
+@interface BZRSurveyViewController : BZRBaseViewController
 
 @property (strong, nonatomic) BZRSurvey *currentSurvey;
 

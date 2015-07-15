@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 Connexity. All rights reserved.
 //
 
-@interface BZRStartTutorialController : UIViewController
+#import "BZRBaseViewController.h"
+
+@interface BZRStartTutorialController : BZRBaseViewController
 
 @end

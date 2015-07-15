@@ -8,11 +8,23 @@
 
 #import "BZRBaseNavigationController.h"
 
+#import "BZRSerialViewConstructor.h"
+
 @interface BZRBaseNavigationController ()
 
 @end
 
 @implementation BZRBaseNavigationController
+
+#pragma mark - Accessors
+
+- (UIBarButtonItem *)customBackButton
+{
+    if (!_customBackButton) {
+        _customBackButton = [BZRSerialViewConstructor backButtonForController:self];
+    }
+    return _customBackButton;
+}
 
 #pragma mark - View Lifecycle
 

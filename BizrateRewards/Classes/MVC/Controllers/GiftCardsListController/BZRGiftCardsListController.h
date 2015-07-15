@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 Connexity. All rights reserved.
 //
 
-@interface BZRGiftCardsListController : UIViewController
+#import "BZRBaseViewController.h"
+
+@interface BZRGiftCardsListController : BZRBaseViewController
 
 @end

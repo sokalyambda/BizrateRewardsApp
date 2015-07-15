@@ -6,7 +6,9 @@
 //  Copyright (c) 2015 Connexity. All rights reserved.
 //
 
-@interface BZRPrivacyAndTermsController : UIViewController
+#import "BZRBaseViewController.h"
+
+@interface BZRPrivacyAndTermsController : BZRBaseViewController
 
 @property (strong, nonatomic) NSURL *currentURL;
 
