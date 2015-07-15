@@ -44,6 +44,8 @@
 		5899D2541B4AB94200565F11 /* BZRApplicationToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 5899D2531B4AB94200565F11 /* BZRApplicationToken.m */; };
 		589BCCD91B565E0400D49056 /* BZRSerialViewConstructor.m in Sources */ = {isa = PBXBuildFile; fileRef = 589BCCD81B565E0400D49056 /* BZRSerialViewConstructor.m */; };
 		589BCCDC1B565E7D00D49056 /* BZRBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 589BCCDB1B565E7D00D49056 /* BZRBaseViewController.m */; };
+		589BCCE01B56717200D49056 /* BZREditProfileField.m in Sources */ = {isa = PBXBuildFile; fileRef = 589BCCDF1B56717200D49056 /* BZREditProfileField.m */; };
+		589BCCE51B569BB800D49056 /* UIView+Flashable.m in Sources */ = {isa = PBXBuildFile; fileRef = 589BCCE41B569BB800D49056 /* UIView+Flashable.m */; };
 		58A0B21E1B3854CF003C100C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 58A0B21C1B3854CF003C100C /* Main.storyboard */; };
 		58A0B2201B3854CF003C100C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58A0B21F1B3854CF003C100C /* Images.xcassets */; };
 		58A0B22F1B3854CF003C100C /* BizrateRewardsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A0B22E1B3854CF003C100C /* BizrateRewardsTests.m */; };
@@ -176,6 +178,10 @@
 		589BCCD81B565E0400D49056 /* BZRSerialViewConstructor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRSerialViewConstructor.m; path = Classes/Utilities/SerialViewConstructor/BZRSerialViewConstructor.m; sourceTree = "<group>"; };
 		589BCCDA1B565E7D00D49056 /* BZRBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRBaseViewController.h; path = Classes/MVC/Controllers/BaseViewController/BZRBaseViewController.h; sourceTree = "<group>"; };
 		589BCCDB1B565E7D00D49056 /* BZRBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRBaseViewController.m; path = Classes/MVC/Controllers/BaseViewController/BZRBaseViewController.m; sourceTree = "<group>"; };
+		589BCCDE1B56717200D49056 /* BZREditProfileField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZREditProfileField.h; path = Classes/MVC/Views/EditProfileFIeld/BZREditProfileField.h; sourceTree = "<group>"; };
+		589BCCDF1B56717200D49056 /* BZREditProfileField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZREditProfileField.m; path = Classes/MVC/Views/EditProfileFIeld/BZREditProfileField.m; sourceTree = "<group>"; };
+		589BCCE31B569BB800D49056 /* UIView+Flashable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+Flashable.h"; path = "Classes/Categories/Flashable/UIView+Flashable.h"; sourceTree = "<group>"; };
+		589BCCE41B569BB800D49056 /* UIView+Flashable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+Flashable.m"; path = "Classes/Categories/Flashable/UIView+Flashable.m"; sourceTree = "<group>"; };
 		58A0B20F1B3854CF003C100C /* BizrateRewards.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BizrateRewards.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		58A0B21D1B3854CF003C100C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		58A0B21F1B3854CF003C100C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -403,6 +409,7 @@
 		58219EE61B38A23400A9541A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				589BCCDD1B56715100D49056 /* EditProfileFIeld */,
 				585641B31B4DA57E007E7368 /* AuthorizationField */,
 				84AD3EFE1B4587B100C294AE /* ProgressView */,
 				589420A61B4527F4004BAF48 /* CommonPickerView */,
@@ -512,6 +519,7 @@
 		58219EF11B38A2C300A9541A /* UIView */ = {
 			isa = PBXGroup;
 			children = (
+				589BCCE21B569B8E00D49056 /* UIView+Flashable */,
 				586ED0CE1B46E8A900FEB250 /* UIView+SoftRemoving */,
 				58A7E2371B45A35800A1489A /* UIView+ConfigureAnchorPoint */,
 				58219F071B38A36300A9541A /* UIView+Shaking */,
@@ -725,6 +733,24 @@
 				589BCCD81B565E0400D49056 /* BZRSerialViewConstructor.m */,
 			);
 			name = SerialViewConstructor;
+			sourceTree = "<group>";
+		};
+		589BCCDD1B56715100D49056 /* EditProfileFIeld */ = {
+			isa = PBXGroup;
+			children = (
+				589BCCDE1B56717200D49056 /* BZREditProfileField.h */,
+				589BCCDF1B56717200D49056 /* BZREditProfileField.m */,
+			);
+			name = EditProfileFIeld;
+			sourceTree = "<group>";
+		};
+		589BCCE21B569B8E00D49056 /* UIView+Flashable */ = {
+			isa = PBXGroup;
+			children = (
+				589BCCE31B569BB800D49056 /* UIView+Flashable.h */,
+				589BCCE41B569BB800D49056 /* UIView+Flashable.m */,
+			);
+			name = "UIView+Flashable";
 			sourceTree = "<group>";
 		};
 		58A0B2061B3854CF003C100C = {
@@ -1356,6 +1382,7 @@
 				58A59E251B3EDFDC00A5F30C /* BZRGeolocationAccessController.m in Sources */,
 				58A9FE8F1B53A52A00DBE379 /* BZRTermsAndConditionsHelper.m in Sources */,
 				589420981B451D87004BAF48 /* main.m in Sources */,
+				589BCCE01B56717200D49056 /* BZREditProfileField.m in Sources */,
 				58A91F431B3A995F0032607F /* BZRRoundedImageView.m in Sources */,
 				58219F0D1B38A38600A9541A /* UIView+MakeFromXib.m in Sources */,
 				58A59E381B3EE99400A5F30C /* BZRGiftCardsListController.m in Sources */,
@@ -1366,6 +1393,7 @@
 				58ACC0841B3968BF0081E546 /* BZRChooseSignUpTypeController.m in Sources */,
 				58A59E341B3EE96700A5F30C /* BZREditProfileController.m in Sources */,
 				589420B11B4567B2004BAF48 /* BZREditProfileContainerController.m in Sources */,
+				589BCCE51B569BB800D49056 /* UIView+Flashable.m in Sources */,
 				585813AA1B3BEDCC0087AEE2 /* BZRUserToken.m in Sources */,
 				58B574E11B38AE200083A80A /* KeychainItemWrapper.m in Sources */,
 				58ACC06A1B3937010081E546 /* BZRStartTutorialController.m in Sources */,

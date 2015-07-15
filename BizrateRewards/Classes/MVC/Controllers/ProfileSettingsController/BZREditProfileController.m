@@ -10,8 +10,11 @@
 #import "BZREditProfileContainerController.h"
 
 #import "BZRValidator.h"
+#import "BZRCommonDateFormatter.h"
 
 #import "BZRDataManager.h"
+
+#import "BZREditProfileField.h"
 
 static NSString *const kEditProfileContainerSegueIdentifier = @"editProfileContainerSegue";
 
@@ -25,7 +28,7 @@ static NSString *const kEditProfileContainerSegueIdentifier = @"editProfileConta
 
 @property (strong, nonatomic) BZRValidator *validator;
 
-@property (strong, nonatomic) BZRUserProfile *currentProfile;
+@property (strong, nonatomic) BZRUserProfile *currentUserProfile;
 
 @end
 
@@ -49,9 +52,9 @@ static NSString *const kEditProfileContainerSegueIdentifier = @"editProfileConta
     return _validator;
 }
 
-- (BZRUserProfile *)currentProfile
+- (BZRUserProfile *)currentUserProfile
 {
-    return [BZRStorageManager sharedStorage].currentProfile;;
+    return [BZRStorageManager sharedStorage].currentProfile;
 }
 
 #pragma mark - View Lifecycle
@@ -59,6 +62,7 @@ static NSString *const kEditProfileContainerSegueIdentifier = @"editProfileConta
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self setupFieldsValueFromProfile];
     [self customizeNavigationItem];
 }
 
@@ -92,7 +96,7 @@ static NSString *const kEditProfileContainerSegueIdentifier = @"editProfileConta
                                                   andDateOfBirth:self.container.dateOfBirthField.text andGender:[self.container.genderField.text substringToIndex:1] withCompletion:^(BOOL success, NSError *error, NSInteger responseStatusCode) {
                                                       [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
                                                       if (!success) {
-                                                          ShowErrorAlert(error);
+                                                          ShowFailureResponseAlertWithError(error);
                                                       } else {
                                                           [weakSelf.navigationController popViewControllerAnimated:YES];
                                                       }
@@ -105,6 +109,15 @@ static NSString *const kEditProfileContainerSegueIdentifier = @"editProfileConta
         ShowAlert(self.validator.validationErrorString);
         [self.validator cleanValidationErrorString];
     }
+}
+
+- (void)setupFieldsValueFromProfile
+{
+    self.container.firstNameField.text = self.currentUserProfile.firstName;
+    self.container.lastNameField.text = self.currentUserProfile.lastName;
+    self.container.emailField.text = self.currentUserProfile.email;
+    self.container.genderField.text = self.currentUserProfile.genderString;
+    self.container.dateOfBirthField.text = [[BZRCommonDateFormatter commonDateFormatter] stringFromDate:self.currentUserProfile.dateOfBirth];
 }
 
 #pragma mark - Navigation

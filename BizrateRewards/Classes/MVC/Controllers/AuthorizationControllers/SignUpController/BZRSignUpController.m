@@ -78,14 +78,9 @@
                                                        withResult:^(BOOL success, NSError *error, NSInteger responseStatusCode) {
                                                            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
                                                            if (!success) {
-                                                               ShowErrorAlert(error);
-                                                               
-                                                               NSData *errData = error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey];
-                                                               NSString *errString = [[NSString alloc] initWithData:errData encoding:NSUTF8StringEncoding];
-                                                               NSLog(@"errString: %@", errString);
-                                                               
+                                                               ShowFailureResponseAlertWithError(error);
                                                            } else {
-                                                               NSLog(@"profile has been created");
+                                                               [weakSelf deleteTemporaryProfileFromDefaults];
                                                                BZRDashboardController *controller = [weakSelf.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRDashboardController class])];
                                                                controller.updateNeeded = YES;
                                                                [weakSelf.navigationController pushViewController:controller animated:YES];
@@ -93,12 +88,12 @@
                     }];
                     
                 } else {
-                    ShowErrorAlert(error);
+                    ShowFailureResponseAlertWithError(error);
                     [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
                 }
             }];
         } failure:^{
-            
+            ShowAlert(InternetIsNotReachableString);
         }];
     } else {
 //        ShowAlert(self.validator.validationErrorString);
@@ -115,6 +110,15 @@
 - (void)setupUserDataToFields
 {
     self.userNameField.text = self.currentUserProfile.email;
+}
+
+- (void)deleteTemporaryProfileFromDefaults
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    if ([defaults.dictionaryRepresentation.allKeys containsObject:CurrentProfileKey]) {
+        [defaults removeObjectForKey:CurrentProfileKey];
+    }
 }
 
 #pragma mark - UITextFieldDelegate

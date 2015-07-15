@@ -15,6 +15,8 @@
 
 #import "BZRUserProfile.h"
 
+#import "BZREditProfileField.h"
+
 static CGFloat const kAnimationDuration = .25f;
 
 typedef enum : NSUInteger {
@@ -63,7 +65,6 @@ typedef enum : NSUInteger {
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
-    [self setupUserData];
 }
 
 #pragma mark - UITableViewDelegate
@@ -81,10 +82,12 @@ typedef enum : NSUInteger {
             
             [self resignIfFirstResponder];
             
+            self.dateOfBirthField.validationFailed = NO;
+            
             [self.pickersHelper showBirthDatePickerWithResult:^(NSDate *dateOfBirth, BOOL isOlderThirteen) {
                 
                 weakSelf.dateOfBirthField.text = [[BZRCommonDateFormatter commonDateFormatter] stringFromDate:dateOfBirth];
-//                [tableView deselectRowAtIndexPath:indexPath animated:YES];
+
             }];
             break;
         }
@@ -92,10 +95,11 @@ typedef enum : NSUInteger {
             
             [self resignIfFirstResponder];
             
+            self.genderField.validationFailed = NO;
+            
             [self.pickersHelper showGenderPickerWithResult:^(BOOL isMale, NSString *genderString) {
                 
                 weakSelf.genderField.text = genderString;
-//                [tableView deselectRowAtIndexPath:indexPath animated:YES];
                 
             }];
             break;
@@ -107,14 +111,14 @@ typedef enum : NSUInteger {
 
 #pragma mark - Actions
 
-- (void)setupUserData
-{
-    self.firstNameField.text    = self.currentProfile.firstName;
-    self.lastNameField.text     = self.currentProfile.lastName;
-    self.emailField.text        = self.currentProfile.email;
-    self.dateOfBirthField.text  = [[BZRCommonDateFormatter commonDateFormatter] stringFromDate:self.currentProfile.dateOfBirth];
-    self.genderField.text       = self.currentProfile.genderString;
-}
+//- (void)setupUserData
+//{
+//    self.firstNameField.text    = self.currentProfile.firstName;
+//    self.lastNameField.text     = self.currentProfile.lastName;
+//    self.emailField.text        = self.currentProfile.email;
+//    self.dateOfBirthField.text  = [[BZRCommonDateFormatter commonDateFormatter] stringFromDate:self.currentProfile.dateOfBirth];
+//    self.genderField.text       = self.currentProfile.genderString;
+//}
 
 - (void)adjustTableViewInsetsWithPresentedRect:(CGRect)rect
 {

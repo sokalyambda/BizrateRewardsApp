@@ -82,6 +82,7 @@ static NSInteger const kNotRegisteredErrorCode = 400.f;
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    self.navigationItem.title = NSLocalizedString(@"Login", nil);
     [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
@@ -119,7 +120,7 @@ static NSInteger const kNotRegisteredErrorCode = 400.f;
                         [weakSelf.incorrectEmailView setHidden:NO];
                         weakSelf.userNameField.errorImageName = kEmailErrorIconName;
                     } else {
-                        ShowErrorAlert(error);
+                        ShowFailureResponseAlertWithError(error);
                     }
                 } else {
                     if (weakSelf.isRememberMe) {

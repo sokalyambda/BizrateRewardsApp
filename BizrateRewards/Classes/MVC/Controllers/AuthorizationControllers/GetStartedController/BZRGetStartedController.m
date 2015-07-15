@@ -16,8 +16,11 @@
 #import "BZRCommonDateFormatter.h"
 
 #import "BZRCheckBoxButton.h"
+#import "BZREditProfileField.h"
 
 #import "BZRUserProfile.h"
+
+#import "UIView+Flashable.h"
 
 static NSString *const kEditProfileContainerSegueIdentifier = @"editProfileContainerSegue";
 static NSString *const kChooseSignUpTypeSegueIdentifier = @"сhooseSignUpTypeSegue";
@@ -61,12 +64,13 @@ static NSString *const kChooseSignUpTypeSegueIdentifier = @"сhooseSignUpTypeSeg
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self setupFieldsValueFromProfile];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self setupFieldsValueFromProfile];
+    self.navigationItem.title = NSLocalizedString(@"Get Started", nil);
 }
 
 #pragma mark - Actions
@@ -81,20 +85,20 @@ static NSString *const kChooseSignUpTypeSegueIdentifier = @"сhooseSignUpTypeSeg
     [BZRTermsAndConditionsHelper showPrivacyAndTermsWithType:BZRConditionsTypeTermsAndConditions andWithNavigationController:self.navigationController];
 }
 
-- (IBAction)submitButtonClick:(id)sender
+- (IBAction)submitButtonClick:(UIButton *)sender
 {
     if ([self.validator validateFirstNameField:self.editProfileTableViewController.firstNameField
                                 lastNameField:self.editProfileTableViewController.lastNameField
                                    emailField:self.editProfileTableViewController.emailField
                              dateOfBirthField:self.editProfileTableViewController.dateOfBirthField
-                                  genderField:self.editProfileTableViewController.genderField] && [self checkBoxValidation]) {
+                                   genderField:self.editProfileTableViewController.genderField] && [self.validator validateCheckboxes:@[self.privacyPolicyCheckBox, self.termsCheckBox, self.yearsCheckBox]]) {
         
         [self createNewProfile];
         
         [self performSegueWithIdentifier:kChooseSignUpTypeSegueIdentifier sender:self];
         
     } else {
-        ShowAlert(self.validator.validationErrorString);
+//        ShowAlert(self.validator.validationErrorString);
         [self.validator cleanValidationErrorString];
     }
 }
@@ -120,16 +124,6 @@ static NSString *const kChooseSignUpTypeSegueIdentifier = @"сhooseSignUpTypeSeg
     self.editProfileTableViewController.emailField.text = self.currentUserProfile.email;
     self.editProfileTableViewController.genderField.text = self.currentUserProfile.genderString;
     self.editProfileTableViewController.dateOfBirthField.text = [[BZRCommonDateFormatter commonDateFormatter] stringFromDate:self.currentUserProfile.dateOfBirth];
-}
-
-- (BOOL)checkBoxValidation
-{
-    if (self.privacyPolicyCheckBox.selected && self.termsCheckBox.selected && self.yearsCheckBox.selected) {
-        return YES;
-    } else {
-        [self.validator.validationErrorString appendString:NSLocalizedString(@"All checkboxes have to be checked\n", nil)];
-        return NO;
-    }
 }
 
 #pragma mark - Navigation

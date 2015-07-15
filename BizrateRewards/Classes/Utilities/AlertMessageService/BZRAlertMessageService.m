@@ -8,6 +8,8 @@
 
 #import "BZRAlertMessageService.h"
 
+#import <AFNetworking/AFNetworking.h>
+
 @implementation BZRAlertMessageService
 
 #pragma mark - Alerts
@@ -54,6 +56,32 @@ void ShowAlert(NSString *message)
 {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:message delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil];
     [alert show];
+}
+
+void ShowFailureResponseAlertWithError(NSError *error)
+{
+    NSData *errData = error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey];
+    NSString *jsonErrorString = [[NSString alloc] initWithData:errData encoding:NSUTF8StringEncoding];
+    
+    NSError *jsonError;
+    NSData *objectData = [jsonErrorString dataUsingEncoding:NSUTF8StringEncoding];
+    NSDictionary *jsonErrorDict = [NSJSONSerialization JSONObjectWithData:objectData
+                                                         options:NSJSONReadingMutableContainers
+                                                           error:&jsonError];
+    
+    NSArray *errors = jsonErrorDict[@"errors"];
+    
+    NSMutableString *outputErrorString = [NSMutableString string];
+    
+    for (NSDictionary *currentErrorDict in errors) {
+        [outputErrorString appendFormat:@"%@\n", currentErrorDict[@"error_message"]];
+    }
+    
+    if (outputErrorString.length) {
+        ShowAlert(outputErrorString);
+    } else {
+        ShowErrorAlert(error);
+    }
 }
 
 @end

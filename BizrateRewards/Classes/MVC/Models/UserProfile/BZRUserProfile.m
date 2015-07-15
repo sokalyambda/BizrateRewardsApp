@@ -94,6 +94,11 @@ static NSString *const kPointsAmount            = @"points_awarded";
 + (BZRUserProfile *)userProfileFromDefaultsForKey:(NSString *)key
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    if (![defaults.dictionaryRepresentation.allKeys containsObject:key]) {
+        return nil;
+    }
+    
     NSData *encodedObject = [defaults objectForKey:key];
     BZRUserProfile *userProfile = [NSKeyedUnarchiver unarchiveObjectWithData:encodedObject];
     return userProfile;

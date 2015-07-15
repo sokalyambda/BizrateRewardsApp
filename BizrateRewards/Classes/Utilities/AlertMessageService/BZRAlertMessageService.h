@@ -11,6 +11,8 @@
 void ShowTitleErrorAlert(NSString *title, NSError *error);
 void ShowErrorAlert(NSError *error);
 
+void ShowFailureResponseAlertWithError(NSError *error);
+
 void ShowTitleAlert(NSString *title, NSString *message);
 void ShowAlert(NSString *message);
 

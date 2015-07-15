@@ -7,10 +7,13 @@
 //
 
 #import "BZRValidator.h"
+#import "BZRCommonDateFormatter.h"
 
 #import "UIView+Shaking.h"
+#import "UIView+Flashable.h"
 
 #import "BZRAuthorizationField.h"
+#import "BZREditProfileField.h"
 
 static const NSInteger kMinPasswordSymbols = 8.f;
 static const NSInteger kMaxPasswordSymbols = 16.f;
@@ -58,6 +61,8 @@ static NSString *const kPasswordErrorImageName = @"password_icon_error";
         
         if ([emailField isKindOfClass:[BZRAuthorizationField class]]) {
             ((BZRAuthorizationField *)emailField).errorImageName = kEmailErrorImageName;
+        } else if ([emailField isKindOfClass:[BZREditProfileField class]]) {
+            ((BZREditProfileField *)emailField).validationFailed = YES;
         }
         
         return NO;
@@ -74,6 +79,8 @@ static NSString *const kPasswordErrorImageName = @"password_icon_error";
         
         if ([passwordField isKindOfClass:[BZRAuthorizationField class]]) {
             ((BZRAuthorizationField *)passwordField).errorImageName = kPasswordErrorImageName;
+        } else if ([passwordField isKindOfClass:[BZREditProfileField class]]) {
+            ((BZREditProfileField *)passwordField).validationFailed = YES;
         }
         
         [self.validationErrorString appendString:NSLocalizedString(@"Invalid password. Password must consist of 8 to 16 characters\n", nil)];
@@ -88,32 +95,106 @@ static NSString *const kPasswordErrorImageName = @"password_icon_error";
     return isValid;
 }
 
-- (BOOL)validateFirstNameField:(UITextField *)firstNameField lastNameField:(UITextField *)lastNameField emailField:(UITextField *)emailField dateOfBirthField: (UITextField *)dateOfBirthField genderField: (UITextField *)genderField
+- (BOOL)validateFirstNameField:(UITextField *)firstNameField
+                 lastNameField:(UITextField *)lastNameField
+                    emailField:(UITextField *)emailField
+              dateOfBirthField: (UITextField *)dateOfBirthField
+                   genderField: (UITextField *)genderField
 {
-    if (!firstNameField.text.length) {
+    NSCharacterSet *alphaSet = [NSCharacterSet alphanumericCharacterSet];
+    
+    BOOL isFirstNameValid = [[firstNameField.text stringByTrimmingCharactersInSet:alphaSet] isEqualToString:@""] && firstNameField.text.length;
+    
+    BOOL isLastNameValid = [[lastNameField.text stringByTrimmingCharactersInSet:alphaSet] isEqualToString:@""] && lastNameField.text.length;
+    
+//    NSDate *now = [NSDate date];
+//    NSDate *birthDate = [[BZRCommonDateFormatter commonDateFormatter] dateFromString:dateOfBirthField.text];
+//
+//    NSDateComponents* ageComponents = [[NSCalendar currentCalendar]
+//                                       components:NSCalendarUnitYear
+//                                       fromDate:birthDate
+//                                       toDate:now
+//                                       options:0.f];
+//    NSInteger age = [ageComponents year];
+//    
+//    BOOL isBirthDateValid = age > 13.f && dateOfBirthField.text.length;
+    
+    if (!isFirstNameValid) {
         [firstNameField shakeView];
-        [self.validationErrorString appendString:NSLocalizedString(@"Enter your first name\n", nil)];
+        
+        if ([firstNameField isKindOfClass:[BZREditProfileField class]]) {
+            ((BZREditProfileField *)firstNameField).validationFailed = YES;
+        }
+        
+        [self.validationErrorString appendString:NSLocalizedString(@"First name can only contain alphanumeric characters.\n", nil)];
         return NO;
     }
-    if (!lastNameField.text.length) {
+    if (!isLastNameValid) {
         [lastNameField shakeView];
-        [self.validationErrorString appendString:NSLocalizedString(@"Enter your last name\n", nil)];
+        
+        if ([lastNameField isKindOfClass:[BZREditProfileField class]]) {
+            ((BZREditProfileField *)lastNameField).validationFailed = YES;
+        }
+        
+        [self.validationErrorString appendString:NSLocalizedString(@"Last name can only contain alphanumeric characters.\n", nil)];
         return NO;
     }
     if (![self validateEmailField:emailField]) {
         return NO;
     }
-    if (!dateOfBirthField.text.length) {
+    if (![self isBirthDateFromFieldValid:dateOfBirthField]) {
         [dateOfBirthField shakeView];
-        [self.validationErrorString appendString:NSLocalizedString(@"Select your date of birth\n", nil)];
+        
+        if ([dateOfBirthField isKindOfClass:[BZREditProfileField class]]) {
+            ((BZREditProfileField *)dateOfBirthField).validationFailed = YES;
+        }
+        
+        [self.validationErrorString appendString:NSLocalizedString(@"You must be of age 13 or older to register\n", nil)];
         return NO;
     }
     if (!genderField.text.length) {
         [genderField shakeView];
+        
+        if ([genderField isKindOfClass:[BZREditProfileField class]]) {
+            ((BZREditProfileField *)genderField).validationFailed = YES;
+        }
+        
         [self.validationErrorString appendString:NSLocalizedString(@"Select your gender\n", nil)];
         return NO;
     }
     return YES;
+}
+
+- (BOOL)validateCheckboxes:(NSArray *)checkboxes
+{
+    BOOL isValid = YES;
+    for (UIButton *checkbox in checkboxes) {
+        if (!checkbox.selected) {
+            [checkbox flashing];
+            isValid = NO;
+        }
+    }
+    
+    return isValid;
+}
+
+- (BOOL)isBirthDateFromFieldValid:(UITextField *)dateField
+{
+    NSDate *now = [NSDate date];
+    NSDate *birthDate = [[BZRCommonDateFormatter commonDateFormatter] dateFromString:dateField.text];
+    
+    if (!birthDate) {
+        return NO;
+    }
+    
+    NSDateComponents* ageComponents = [[NSCalendar currentCalendar]
+                                       components:NSCalendarUnitYear
+                                       fromDate:birthDate
+                                       toDate:now
+                                       options:0.f];
+    NSInteger age = [ageComponents year];
+    
+    return age > 13.f;
 }
 
 #pragma mark - Other actions

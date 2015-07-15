@@ -17,4 +17,6 @@
 - (BOOL)validateFirstNameField:(UITextField *)firstNameField lastNameField:(UITextField *)lastNameField emailField:(UITextField *)emailField dateOfBirthField: (UITextField *)dateOfBirthField genderField: (UITextField *)genderField;
 - (void)cleanValidationErrorString;
 
+- (BOOL)validateCheckboxes:(NSArray *)checkboxes;
+
 @end
