@@ -12,7 +12,8 @@
 
 #import "BZRAuthorizationField.h"
 
-static const NSInteger kMinPasswordSymbols = 5;
+static const NSInteger kMinPasswordSymbols = 8.f;
+static const NSInteger kMaxPasswordSymbols = 16.f;
 
 static NSString *const kEmailErrorImageName = @"email_icon_error";
 static NSString *const kPasswordErrorImageName = @"password_icon_error";
@@ -66,7 +67,7 @@ static NSString *const kPasswordErrorImageName = @"password_icon_error";
 - (BOOL)validatePasswordField:(UITextField *)passwordField
 {
     BOOL isValid = NO;
-    if (passwordField.text.length && passwordField.text.length >= kMinPasswordSymbols) {
+    if (passwordField.text.length && passwordField.text.length >= kMinPasswordSymbols && passwordField.text.length <= kMaxPasswordSymbols) {
         isValid = YES;
     } else {
         [passwordField shakeView];
@@ -75,7 +76,7 @@ static NSString *const kPasswordErrorImageName = @"password_icon_error";
             ((BZRAuthorizationField *)passwordField).errorImageName = kPasswordErrorImageName;
         }
         
-        [self.validationErrorString appendString:NSLocalizedString(@"Password is incorrect. Min length - 5 symbols\n", nil)];
+        [self.validationErrorString appendString:NSLocalizedString(@"Invalid password. Password must consist of 8 to 16 characters\n", nil)];
     }
     return isValid;
 }

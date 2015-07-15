@@ -107,13 +107,29 @@ typedef enum : NSUInteger {
     }];
 }
 
-- (void)signUpWithUserFirstName:(NSString *)firstName andUserLastName:(NSString *)lastName andEmail:(NSString *)email withResult:(SuccessBlock)result
+- (void)signUpWithUserFirstName:(NSString *)firstName
+                andUserLastName:(NSString *)lastName
+                       andEmail:(NSString *)email
+                    andPassword:(NSString *)password
+                 andDateOfBirth:(NSString *)birthDate
+                      andGender:(NSString *)gender
+                     withResult:(SuccessBlock)result
 {
-    self.network.requestSerializer = self.httpRequestSerializer;
+    self.network.requestSerializer = self.jsonRequestSerializer;
     [self addAuthHeaderWithToken:self.storage.applicationToken];
     
-    [self.network signUpWithUserFirstName:firstName andUserLastName:lastName andEmail:email withResult:^(BOOL success, NSError *error, NSInteger responseStatusCode) {
-        return result(success, error, responseStatusCode);
+    WEAK_SELF;
+    [self.network signUpWithUserFirstName:firstName
+                          andUserLastName:lastName
+                                 andEmail:email
+                              andPassword:password
+                           andDateOfBirth:birthDate
+                                andGender:gender
+                               withResult:^(BOOL success, BZRUserToken *userToken, NSError *error, NSInteger responseStatusCode) {
+        if (success) {
+            weakSelf.storage.userToken = userToken;
+        }
+        result(success, error, responseStatusCode);
     }];
 }
 

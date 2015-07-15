@@ -27,6 +27,8 @@ static NSString *const kHockeyAppIdentifier = @"bf52cc6c526a07761d1b50a4078b6d67
     [[BITHockeyManager sharedHockeyManager].authenticator authenticateInstallation];
     [[BITHockeyManager sharedHockeyManager] startManager];
 
+    [[BITHockeyManager sharedHockeyManager] setDisableUpdateManager: YES];
+    
     return [[FBSDKApplicationDelegate sharedInstance] application:application
                                     didFinishLaunchingWithOptions:launchOptions];
 }

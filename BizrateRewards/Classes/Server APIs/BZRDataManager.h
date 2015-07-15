@@ -22,7 +22,13 @@
 
 - (void)signInWithUserName:(NSString *)userName password:(NSString *)password withResult:(SuccessBlock)result;
 
-- (void)signUpWithUserFirstName:(NSString *)firstName andUserLastName:(NSString *)lastName andEmail:(NSString *)email withResult:(SuccessBlock)result;
+- (void)signUpWithUserFirstName:(NSString *)firstName
+                andUserLastName:(NSString *)lastName
+                       andEmail:(NSString *)email
+                    andPassword:(NSString *)password
+                 andDateOfBirth:(NSString *)birthDate
+                      andGender:(NSString *)gender
+                     withResult:(SuccessBlock)result;
 
 - (void)authorizeWithFacebookWithResult:(SuccessBlock)result;
 

@@ -34,7 +34,13 @@ typedef void(^SurveysBlock)(BOOL success, NSArray *surveysList, NSError *error);
 
 - (void)signInWithUserName:(NSString *)userName password:(NSString *)password withResult:(SuccessUserTokenBlock)result;
 
-- (void)signUpWithUserFirstName:(NSString *)firstName andUserLastName:(NSString *)lastName andEmail:(NSString *)email withResult:(SuccessBlock)result;
+- (void)signUpWithUserFirstName:(NSString *)firstName
+                andUserLastName:(NSString *)lastName
+                       andEmail:(NSString *)email
+                    andPassword:(NSString *)password
+                 andDateOfBirth:(NSString *)birthDate
+                      andGender:(NSString *)gender
+                     withResult:(SuccessUserTokenBlock)result;
 
 - (void)authorizeWithFacebookWithResult:(UserProfileBlock)result;
 
