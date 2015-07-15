@@ -42,6 +42,8 @@
 		589420AE1B4529C8004BAF48 /* BZRZeroInsetsSeparatorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 589420AD1B4529C8004BAF48 /* BZRZeroInsetsSeparatorCell.m */; };
 		589420B11B4567B2004BAF48 /* BZREditProfileContainerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 589420B01B4567B2004BAF48 /* BZREditProfileContainerController.m */; };
 		5899D2541B4AB94200565F11 /* BZRApplicationToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 5899D2531B4AB94200565F11 /* BZRApplicationToken.m */; };
+		589BCCD91B565E0400D49056 /* BZRSerialViewConstructor.m in Sources */ = {isa = PBXBuildFile; fileRef = 589BCCD81B565E0400D49056 /* BZRSerialViewConstructor.m */; };
+		589BCCDC1B565E7D00D49056 /* BZRBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 589BCCDB1B565E7D00D49056 /* BZRBaseViewController.m */; };
 		58A0B21E1B3854CF003C100C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 58A0B21C1B3854CF003C100C /* Main.storyboard */; };
 		58A0B2201B3854CF003C100C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58A0B21F1B3854CF003C100C /* Images.xcassets */; };
 		58A0B22F1B3854CF003C100C /* BizrateRewardsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A0B22E1B3854CF003C100C /* BizrateRewardsTests.m */; };
@@ -170,6 +172,10 @@
 		589420B01B4567B2004BAF48 /* BZREditProfileContainerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZREditProfileContainerController.m; path = Classes/MVC/Controllers/ProfileSettingsController/EditProfileContainerController/BZREditProfileContainerController.m; sourceTree = "<group>"; };
 		5899D2521B4AB94200565F11 /* BZRApplicationToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRApplicationToken.h; path = Classes/MVC/Models/Token/ApplicationToken/BZRApplicationToken.h; sourceTree = "<group>"; };
 		5899D2531B4AB94200565F11 /* BZRApplicationToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRApplicationToken.m; path = Classes/MVC/Models/Token/ApplicationToken/BZRApplicationToken.m; sourceTree = "<group>"; };
+		589BCCD71B565E0400D49056 /* BZRSerialViewConstructor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRSerialViewConstructor.h; path = Classes/Utilities/SerialViewConstructor/BZRSerialViewConstructor.h; sourceTree = "<group>"; };
+		589BCCD81B565E0400D49056 /* BZRSerialViewConstructor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRSerialViewConstructor.m; path = Classes/Utilities/SerialViewConstructor/BZRSerialViewConstructor.m; sourceTree = "<group>"; };
+		589BCCDA1B565E7D00D49056 /* BZRBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRBaseViewController.h; path = Classes/MVC/Controllers/BaseViewController/BZRBaseViewController.h; sourceTree = "<group>"; };
+		589BCCDB1B565E7D00D49056 /* BZRBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRBaseViewController.m; path = Classes/MVC/Controllers/BaseViewController/BZRBaseViewController.m; sourceTree = "<group>"; };
 		58A0B20F1B3854CF003C100C /* BizrateRewards.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BizrateRewards.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		58A0B21D1B3854CF003C100C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		58A0B21F1B3854CF003C100C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -358,6 +364,7 @@
 		58219EE31B38A21900A9541A /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				589BCCD61B565DC800D49056 /* SerialViewConstructor */,
 				58A9FE8C1B53A4FB00DBE379 /* TermsAndConditionsHelper */,
 				589420A21B452616004BAF48 /* PickersHelper */,
 				589420901B451B96004BAF48 /* PickerHolder */,
@@ -412,6 +419,7 @@
 		58219EE71B38A23A00A9541A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				589BCCD51B565DB700D49056 /* BaseViewController */,
 				58901CF11B500DEB00D4A16B /* BaseNavigationController */,
 				58A59E391B3EE9C100A5F30C /* SurveyViewController */,
 				58A59E351B3EE97100A5F30C /* GiftCardsListController */,
@@ -699,6 +707,24 @@
 				5899D2531B4AB94200565F11 /* BZRApplicationToken.m */,
 			);
 			name = AppToken;
+			sourceTree = "<group>";
+		};
+		589BCCD51B565DB700D49056 /* BaseViewController */ = {
+			isa = PBXGroup;
+			children = (
+				589BCCDA1B565E7D00D49056 /* BZRBaseViewController.h */,
+				589BCCDB1B565E7D00D49056 /* BZRBaseViewController.m */,
+			);
+			name = BaseViewController;
+			sourceTree = "<group>";
+		};
+		589BCCD61B565DC800D49056 /* SerialViewConstructor */ = {
+			isa = PBXGroup;
+			children = (
+				589BCCD71B565E0400D49056 /* BZRSerialViewConstructor.h */,
+				589BCCD81B565E0400D49056 /* BZRSerialViewConstructor.m */,
+			);
+			name = SerialViewConstructor;
 			sourceTree = "<group>";
 		};
 		58A0B2061B3854CF003C100C = {
@@ -1336,6 +1362,7 @@
 				589420AE1B4529C8004BAF48 /* BZRZeroInsetsSeparatorCell.m in Sources */,
 				586ED0D11B46E8F500FEB250 /* UIView+SoftRemoving.m in Sources */,
 				58A59E3C1B3EE9E300A5F30C /* BZRSurveyViewController.m in Sources */,
+				589BCCD91B565E0400D49056 /* BZRSerialViewConstructor.m in Sources */,
 				58ACC0841B3968BF0081E546 /* BZRChooseSignUpTypeController.m in Sources */,
 				58A59E341B3EE96700A5F30C /* BZREditProfileController.m in Sources */,
 				589420B11B4567B2004BAF48 /* BZREditProfileContainerController.m in Sources */,
@@ -1371,6 +1398,7 @@
 				58ACC08B1B39A35D0081E546 /* BZRBaseAuthController.m in Sources */,
 				58219F051B38A33E00A9541A /* UIViewController+fixOrientation.m in Sources */,
 				58219EFC1B38A30300A9541A /* BZRValidator.m in Sources */,
+				589BCCDC1B565E7D00D49056 /* BZRBaseViewController.m in Sources */,
 				5894208B1B450FF6004BAF48 /* BZRAccountSettingsContaiterController.m in Sources */,
 				58ACC07E1B3968830081E546 /* BZRSignInController.m in Sources */,
 				58F49FC91B4197B7002F93EE /* BZRPushNotifiactionService.m in Sources */,

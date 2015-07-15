@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 Connexity. All rights reserved.
 //
 
-@interface BZREditProfileController : UIViewController
+#import "BZRBaseViewController.h"
+
+@interface BZREditProfileController : BZRBaseViewController
 
 @end

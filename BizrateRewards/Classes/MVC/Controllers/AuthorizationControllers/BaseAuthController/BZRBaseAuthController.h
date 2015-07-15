@@ -10,9 +10,11 @@
 
 #import "BZRAuthorizationField.h"
 
+#import "BZRBaseViewController.h"
+
 static NSString *const kEmailErrorIconName = @"email_icon_error";
 
-@interface BZRBaseAuthController : UIViewController<UITextFieldDelegate>
+@interface BZRBaseAuthController : BZRBaseViewController<UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet BZRAuthorizationField *userNameField;
 @property (weak, nonatomic) IBOutlet BZRAuthorizationField *passwordField;

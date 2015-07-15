@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 Connexity. All rights reserved.
 //
 
-@interface BZRAccountSettingsController : UIViewController
+#import "BZRBaseViewController.h"
+
+@interface BZRAccountSettingsController : BZRBaseViewController
 
 @end

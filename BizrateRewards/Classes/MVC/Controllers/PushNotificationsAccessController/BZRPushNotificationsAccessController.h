@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 Connexity. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "BZRBaseViewController.h"
 
-@interface BZRPushNotificationsAccessController : UIViewController
+@interface BZRPushNotificationsAccessController : BZRBaseViewController
 
 @end
