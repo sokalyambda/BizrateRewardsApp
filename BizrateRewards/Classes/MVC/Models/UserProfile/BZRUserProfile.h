@@ -26,10 +26,7 @@
 
 @property (assign, nonatomic) BOOL isMale;
 
-@property (assign, nonatomic, getter=isPushNotificationsEnabled) BOOL pushNotificationsEnabled;
-@property (assign, nonatomic, getter=isGeolocationEnabled) BOOL geolocationEnabled;
-
 - (void)setUserProfileToDefaultsForKey:(NSString *)key;
-+ (BZRUserProfile *)getUserProfileFromDefaultsForKey:(NSString *)key;
++ (BZRUserProfile *)userProfileFromDefaultsForKey:(NSString *)key;
 
 @end

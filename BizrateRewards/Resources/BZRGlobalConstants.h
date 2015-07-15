@@ -24,4 +24,8 @@ static NSString *const ApplicationDidBecomeActiveNotification = @"ApplicationDid
 
 static NSString *const InternetIsNotReachableString = @"Internet is not reachable.";
 
+//User
+
+static NSString *const CurrentProfileKey = @"CurrentProfileKey";
+
 #endif

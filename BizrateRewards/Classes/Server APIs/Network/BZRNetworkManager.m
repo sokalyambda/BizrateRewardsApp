@@ -61,7 +61,7 @@ static NSString *const kClientSecretKey = @"8a9da763-9503-4093-82c2-6b22b8eb9a12
     return self;
 }
 
-#pragma mark - SignIn
+#pragma mark - Authorization
 
 - (void)getClientCredentialsOnCompletion:(SuccessApplicationTokenBlock)completion
 {
@@ -101,18 +101,30 @@ static NSString *const kClientSecretKey = @"8a9da763-9503-4093-82c2-6b22b8eb9a12
     }];
 }
 
-- (void)signUpWithUserFirstName:(NSString *)firstName andUserLastName:(NSString *)lastName andEmail:(NSString *)email withResult:(SuccessBlock)result
+- (void)signUpWithUserFirstName:(NSString *)firstName
+                andUserLastName:(NSString *)lastName
+                       andEmail:(NSString *)email
+                    andPassword:(NSString *)password
+                 andDateOfBirth:(NSString *)birthDate
+                      andGender:(NSString *)gender
+                     withResult:(SuccessUserTokenBlock)result
 {
-    NSDictionary *parameters = @{@"firstname" : firstName,
-                                @"lastName" : lastName,
-                                @"email" : email};
+    NSDictionary *parameters = @{@"firstname": firstName,
+                                @"lastname": lastName,
+                                @"email": email,
+                                 @"password": password,
+                                 @"gender": gender,
+                                 @"dob": birthDate,
+                                 @"is_test_user": @YES};
     
     WEAK_SELF;
-    [weakSelf POST:@"user" parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
+    [weakSelf POST:@"user/create" parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
         
-        return result(YES, nil, 0);
+        BZRUserToken *token = [[BZRUserToken alloc] initWithServerResponse:responseObject];
+        
+        return result(YES, token, nil, 0);
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        return result(NO, error, 0);
+        return result(NO, nil, error, 0);
     }];
 }
 
@@ -211,7 +223,9 @@ static NSString *const kClientSecretKey = @"8a9da763-9503-4093-82c2-6b22b8eb9a12
     }];
 }
 
-#pragma mark - PUT update user
+#pragma mark - PUT 
+
+#pragma mark Update user
 
 - (void)updateCurrentUserWithFirstName:(NSString *)firstName
                            andLastName:(NSString *)lastName
@@ -234,7 +248,9 @@ static NSString *const kClientSecretKey = @"8a9da763-9503-4093-82c2-6b22b8eb9a12
     }];
 }
 
-#pragma mark - POST send device token
+#pragma mark - POST 
+
+#pragma mark Send device token
 
 - (void)sendDeviceAPNSToken:(NSString *)token andDeviceIdentifier:(NSString *)udid withResult:(SuccessBlock)result
 {
@@ -247,7 +263,7 @@ static NSString *const kClientSecretKey = @"8a9da763-9503-4093-82c2-6b22b8eb9a12
     }];
 }
 
-#pragma mark - POST image
+#pragma mark Image
 
 - (void)postImage:(UIImage *)image withID:(NSInteger)ID result:(ImageUserBlock)result
 {

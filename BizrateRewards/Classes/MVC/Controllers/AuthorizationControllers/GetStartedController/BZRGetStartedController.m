@@ -11,8 +11,13 @@
 #import "BZREditProfileContainerController.h"
 
 #import "BZRValidator.h"
+#import "BZRStorageManager.h"
 #import "BZRTermsAndConditionsHelper.h"
+#import "BZRCommonDateFormatter.h"
+
 #import "BZRCheckBoxButton.h"
+
+#import "BZRUserProfile.h"
 
 static NSString *const kEditProfileContainerSegueIdentifier = @"editProfileContainerSegue";
 static NSString *const kChooseSignUpTypeSegueIdentifier = @"сhooseSignUpTypeSegue";
@@ -26,6 +31,7 @@ static NSString *const kChooseSignUpTypeSegueIdentifier = @"сhooseSignUpTypeSeg
 @property (weak, nonatomic) IBOutlet BZRCheckBoxButton *yearsCheckBox;
 
 @property (strong, nonatomic) BZRValidator *validator;
+@property (strong, nonatomic) BZRUserProfile *currentUserProfile;
 
 @end
 
@@ -41,11 +47,26 @@ static NSString *const kChooseSignUpTypeSegueIdentifier = @"сhooseSignUpTypeSeg
     return _validator;
 }
 
+- (BZRUserProfile *)currentUserProfile
+{
+    if (!_currentUserProfile) {
+        _currentUserProfile = [BZRUserProfile userProfileFromDefaultsForKey:CurrentProfileKey];
+    }
+    
+    return _currentUserProfile;
+}
+
 #pragma mark - View Lifecycle
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self setupFieldsValueFromProfile];
 }
 
 #pragma mark - Actions
@@ -62,17 +83,43 @@ static NSString *const kChooseSignUpTypeSegueIdentifier = @"сhooseSignUpTypeSeg
 
 - (IBAction)submitButtonClick:(id)sender
 {
-//    if ([self.validator validateFirstNameField:self.editProfileTableViewController.firstNameField
-//                                lastNameField:self.editProfileTableViewController.lastNameField
-//                                   emailField:self.editProfileTableViewController.emailField
-//                             dateOfBirthField:self.editProfileTableViewController.dateOfBirthField
-//                                  genderField:self.editProfileTableViewController.genderField] && [self checkBoxValidation]) {
-//        [self performSegueWithIdentifier:kChooseSignUpTypeSegueIdentifier sender:self];
-//        
-//    } else {
-//        ShowAlert(self.validator.validationErrorString);
-//        [self.validator cleanValidationErrorString];
-//    }
+    if ([self.validator validateFirstNameField:self.editProfileTableViewController.firstNameField
+                                lastNameField:self.editProfileTableViewController.lastNameField
+                                   emailField:self.editProfileTableViewController.emailField
+                             dateOfBirthField:self.editProfileTableViewController.dateOfBirthField
+                                  genderField:self.editProfileTableViewController.genderField] && [self checkBoxValidation]) {
+        
+        [self createNewProfile];
+        
+        [self performSegueWithIdentifier:kChooseSignUpTypeSegueIdentifier sender:self];
+        
+    } else {
+        ShowAlert(self.validator.validationErrorString);
+        [self.validator cleanValidationErrorString];
+    }
+}
+
+- (void)createNewProfile
+{
+    //first step in user creation
+    self.currentUserProfile = [[BZRUserProfile alloc] init];
+    
+    self.currentUserProfile.firstName = self.editProfileTableViewController.firstNameField.text;
+    self.currentUserProfile.lastName = self.editProfileTableViewController.lastNameField.text;
+    self.currentUserProfile.genderString = self.editProfileTableViewController.genderField.text;
+    self.currentUserProfile.email = self.editProfileTableViewController.emailField.text;
+    self.currentUserProfile.dateOfBirth = [[BZRCommonDateFormatter commonDateFormatter] dateFromString:self.editProfileTableViewController.dateOfBirthField.text];
+    
+    [self.currentUserProfile setUserProfileToDefaultsForKey:CurrentProfileKey];
+}
+
+- (void)setupFieldsValueFromProfile
+{
+    self.editProfileTableViewController.firstNameField.text = self.currentUserProfile.firstName;
+    self.editProfileTableViewController.lastNameField.text = self.currentUserProfile.lastName;
+    self.editProfileTableViewController.emailField.text = self.currentUserProfile.email;
+    self.editProfileTableViewController.genderField.text = self.currentUserProfile.genderString;
+    self.editProfileTableViewController.dateOfBirthField.text = [[BZRCommonDateFormatter commonDateFormatter] stringFromDate:self.currentUserProfile.dateOfBirth];
 }
 
 - (BOOL)checkBoxValidation

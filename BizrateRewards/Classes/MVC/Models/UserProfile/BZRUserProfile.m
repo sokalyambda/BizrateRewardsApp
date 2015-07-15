@@ -17,10 +17,8 @@ static NSString *const kDateOfBirth             = @"dob";
 static NSString *const kGender                  = @"gender";
 static NSString *const kIsMale                  = @"isMale";
 static NSString *const kPointsAmount            = @"points_awarded";
-static NSString *const kIsPushEnabled           = @"isPushEnabled";
-static NSString *const kIsGeolocationEnabled    = @"isGeolocationEnabled";
 
-@interface BZRUserProfile ()
+@interface BZRUserProfile ()<NSCoding>
 
 @end
 
@@ -66,8 +64,7 @@ static NSString *const kIsGeolocationEnabled    = @"isGeolocationEnabled";
     [encoder encodeObject:self.email forKey:kEmail];
     [encoder encodeObject:self.dateOfBirth forKey:kDateOfBirth];
     [encoder encodeObject:@(self.isMale) forKey:kIsMale];
-    [encoder encodeObject:@(self.isPushNotificationsEnabled) forKey:kIsPushEnabled];
-    [encoder encodeObject:@(self.isGeolocationEnabled) forKey:kIsGeolocationEnabled];
+    [encoder encodeObject:self.genderString forKey:kGender];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder
@@ -79,27 +76,27 @@ static NSString *const kIsGeolocationEnabled    = @"isGeolocationEnabled";
         _email          = [decoder decodeObjectForKey:kEmail];
         _dateOfBirth    = [decoder decodeObjectForKey:kDateOfBirth];
         _isMale         = [[decoder decodeObjectForKey:kIsMale] boolValue];
-        _pushNotificationsEnabled = [[decoder decodeObjectForKey:kIsPushEnabled] boolValue];
-        _geolocationEnabled         = [[decoder decodeObjectForKey:kIsGeolocationEnabled] boolValue];
+        _genderString   = [decoder decodeObjectForKey:kGender];
     }
     return self;
 }
 
 #pragma mark - NSUserDefaults methods
 
-- (void)setUserProfileToDefaultsForKey:(NSString *)key {
+- (void)setUserProfileToDefaultsForKey:(NSString *)key
+{
     NSData *encodedObject = [NSKeyedArchiver archivedDataWithRootObject:self];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:encodedObject forKey:key];
     [defaults synchronize];
 }
 
-+ (BZRUserProfile *)getUserProfileFromDefaultsForKey:(NSString *)key {
++ (BZRUserProfile *)userProfileFromDefaultsForKey:(NSString *)key
+{
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSData *encodedObject = [defaults objectForKey:key];
     BZRUserProfile *userProfile = [NSKeyedUnarchiver unarchiveObjectWithData:encodedObject];
     return userProfile;
 }
-
 
 @end
