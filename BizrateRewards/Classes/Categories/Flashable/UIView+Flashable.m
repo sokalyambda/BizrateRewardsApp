@@ -17,22 +17,22 @@
     UIColor *fromColor = UIColorFromRGB(0xf15364);
     UIColor *toColor = self.backgroundColor;
     CABasicAnimation *colorAnimation = [CABasicAnimation animationWithKeyPath:@"backgroundColor"];
-    colorAnimation.duration = 0.2f;
-    [colorAnimation setRepeatCount:3.f];
+    colorAnimation.duration = 0.4f;
+    [colorAnimation setRepeatCount:2.f];
     [colorAnimation setAutoreverses:YES];
     colorAnimation.fromValue = (id)fromColor.CGColor;
     colorAnimation.toValue = (id)toColor.CGColor;
     
     CABasicAnimation *flash = [CABasicAnimation animationWithKeyPath:@"opacity"];
-    [flash setDuration:0.2f];
-    [flash setRepeatCount:3.f];
+    [flash setDuration:0.4f];
+    [flash setRepeatCount:2.f];
     [flash setAutoreverses:YES];
     [flash setFromValue:@(self.layer.opacity)];
     [flash setToValue:@0];
     
     CAAnimationGroup *animationGroup = [CAAnimationGroup animation];
     animationGroup.animations = @[colorAnimation, flash];
-    animationGroup.duration = 3.f;
+    animationGroup.duration = 1.f;
     
     CALayer *roundedLayer = [CALayer layer];
     roundedLayer.frame = self.bounds;

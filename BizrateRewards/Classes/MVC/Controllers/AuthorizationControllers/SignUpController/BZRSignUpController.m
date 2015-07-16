@@ -54,6 +54,8 @@
 {
     [super viewWillAppear:animated];
     [self.view layoutIfNeeded];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    self.navigationItem.title = NSLocalizedString(@"Create Account with Email", nil);
     [self customizeFields];
     [self setupUserDataToFields];
 }

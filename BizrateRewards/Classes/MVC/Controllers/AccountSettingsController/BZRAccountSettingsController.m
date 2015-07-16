@@ -80,7 +80,7 @@ static NSString *const kAccountSettingsContainerSegueIdentifier = @"accountSetti
 
 - (IBAction)signOutAction:(id)sender
 {
-//    [self showSignOutActionSheet];
+    [self showSignOutActionSheet];
 }
 
 - (IBAction)changeIconClick:(id)sender

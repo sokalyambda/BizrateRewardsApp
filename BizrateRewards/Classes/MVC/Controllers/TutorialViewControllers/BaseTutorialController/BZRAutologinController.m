@@ -86,15 +86,9 @@ static NSString *const kStartTutorialSegueIdentirier = @"startTutorialSegue";
 
 - (void)checkForRedirection
 {
-//    if ([self isAutologinNeeded]) {
-//        [self autologin];
-//    } else if (self.isTutorialPassed) {
-//        [self goToFinishTutorialController];
-//    } else {
-//        [self performSegueWithIdentifier:kStartTutorialSegueIdentirier sender:self];
-//    }
-    
-    if (self.isTutorialPassed) {
+    if ([self isAutologinNeeded]) {
+        [self autologin];
+    } else if (self.isTutorialPassed) {
         [self goToFinishTutorialController];
     } else {
         [self performSegueWithIdentifier:kStartTutorialSegueIdentirier sender:self];

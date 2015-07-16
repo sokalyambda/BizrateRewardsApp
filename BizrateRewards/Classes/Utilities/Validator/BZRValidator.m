@@ -107,17 +107,7 @@ static NSString *const kPasswordErrorImageName = @"password_icon_error";
     
     BOOL isLastNameValid = [[lastNameField.text stringByTrimmingCharactersInSet:alphaSet] isEqualToString:@""] && lastNameField.text.length;
     
-//    NSDate *now = [NSDate date];
-//    NSDate *birthDate = [[BZRCommonDateFormatter commonDateFormatter] dateFromString:dateOfBirthField.text];
-//
-//    NSDateComponents* ageComponents = [[NSCalendar currentCalendar]
-//                                       components:NSCalendarUnitYear
-//                                       fromDate:birthDate
-//                                       toDate:now
-//                                       options:0.f];
-//    NSInteger age = [ageComponents year];
-//    
-//    BOOL isBirthDateValid = age > 13.f && dateOfBirthField.text.length;
+    BOOL isValid = YES;
     
     if (!isFirstNameValid) {
         [firstNameField shakeView];
@@ -127,7 +117,7 @@ static NSString *const kPasswordErrorImageName = @"password_icon_error";
         }
         
         [self.validationErrorString appendString:NSLocalizedString(@"First name can only contain alphanumeric characters.\n", nil)];
-        return NO;
+        isValid = NO;
     }
     if (!isLastNameValid) {
         [lastNameField shakeView];
@@ -137,10 +127,10 @@ static NSString *const kPasswordErrorImageName = @"password_icon_error";
         }
         
         [self.validationErrorString appendString:NSLocalizedString(@"Last name can only contain alphanumeric characters.\n", nil)];
-        return NO;
+        isValid = NO;
     }
     if (![self validateEmailField:emailField]) {
-        return NO;
+        isValid = NO;
     }
     if (![self isBirthDateFromFieldValid:dateOfBirthField]) {
         [dateOfBirthField shakeView];
@@ -150,7 +140,7 @@ static NSString *const kPasswordErrorImageName = @"password_icon_error";
         }
         
         [self.validationErrorString appendString:NSLocalizedString(@"You must be of age 13 or older to register\n", nil)];
-        return NO;
+        isValid = NO;
     }
     if (!genderField.text.length) {
         [genderField shakeView];
@@ -160,9 +150,9 @@ static NSString *const kPasswordErrorImageName = @"password_icon_error";
         }
         
         [self.validationErrorString appendString:NSLocalizedString(@"Select your gender\n", nil)];
-        return NO;
+        isValid = NO;
     }
-    return YES;
+    return isValid;
 }
 
 - (BOOL)validateCheckboxes:(NSArray *)checkboxes

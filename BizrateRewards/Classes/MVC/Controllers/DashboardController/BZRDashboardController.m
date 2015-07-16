@@ -26,6 +26,7 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
 @property (weak, nonatomic) IBOutlet BZRProgressView *progressView;
 @property (weak, nonatomic) IBOutlet BZRRoundedImageView *userAvatar;
 @property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *earnedPointsLabel;
 
 @property (strong, nonatomic) BZRStorageManager *storageManager;
 @property (strong, nonatomic) BZRDataManager *dataManager;
@@ -129,6 +130,7 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
     }
     
     self.userNameLabel.text = self.currentProfile.fullName;
+    self.earnedPointsLabel.text = [NSString stringWithFormat:@"%d", self.currentProfile.pointsAmount];
     
 #warning User Points
     self.currentProfile.pointsRequired = 2000;
