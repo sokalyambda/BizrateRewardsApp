@@ -28,7 +28,7 @@ static NSString *const kEditProfileContainerSegueIdentifier = @"editProfileConta
 
 @property (strong, nonatomic) BZRValidator *validator;
 
-@property (strong, nonatomic) BZRUserProfile *currentUserProfile;
+@property (strong, nonatomic) BZRUserProfile *currentProfile;
 
 @end
 
@@ -52,9 +52,10 @@ static NSString *const kEditProfileContainerSegueIdentifier = @"editProfileConta
     return _validator;
 }
 
-- (BZRUserProfile *)currentUserProfile
+- (BZRUserProfile *)currentProfile
 {
-    return [BZRStorageManager sharedStorage].currentProfile;
+    _currentProfile = [BZRStorageManager sharedStorage].currentProfile;
+    return _currentProfile;
 }
 
 #pragma mark - View Lifecycle
@@ -113,11 +114,11 @@ static NSString *const kEditProfileContainerSegueIdentifier = @"editProfileConta
 
 - (void)setupFieldsValueFromProfile
 {
-    self.container.firstNameField.text = self.currentUserProfile.firstName;
-    self.container.lastNameField.text = self.currentUserProfile.lastName;
-    self.container.emailField.text = self.currentUserProfile.email;
-    self.container.genderField.text = self.currentUserProfile.genderString;
-    self.container.dateOfBirthField.text = [[BZRCommonDateFormatter commonDateFormatter] stringFromDate:self.currentUserProfile.dateOfBirth];
+    self.container.firstNameField.text = self.currentProfile.firstName;
+    self.container.lastNameField.text = self.currentProfile.lastName;
+    self.container.emailField.text = self.currentProfile.email;
+    self.container.genderField.text = self.currentProfile.genderString;
+    self.container.dateOfBirthField.text = [[BZRCommonDateFormatter commonDateFormatter] stringFromDate:self.currentProfile.dateOfBirth];
 }
 
 #pragma mark - Navigation

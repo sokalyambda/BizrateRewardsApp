@@ -56,7 +56,8 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
 
 - (BZRUserProfile *)currentProfile
 {
-    return [BZRStorageManager sharedStorage].currentProfile;;
+    _currentProfile = [BZRStorageManager sharedStorage].currentProfile;
+    return _currentProfile;
 }
 
 #pragma mark - View Lifecycle
@@ -119,7 +120,14 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
 
 - (void)updateUserInformation
 {
-    [self.userAvatar sd_setImageWithURL:self.currentProfile.avatarURL placeholderImage:[UIImage imageNamed:@"user_icon_small"]];
+//    [self.userAvatar sd_setImageWithURL:self.currentProfile.avatarURL placeholderImage:[UIImage imageNamed:@"user_icon_small"]];
+#warning temporary
+    if (!self.currentProfile.avatarImage) {
+        self.userAvatar.image = [UIImage imageNamed:@"user_icon_small"];
+    } else {
+        self.userAvatar.image = self.currentProfile.avatarImage;
+    }
+    
     self.userNameLabel.text = self.currentProfile.fullName;
     
 #warning User Points

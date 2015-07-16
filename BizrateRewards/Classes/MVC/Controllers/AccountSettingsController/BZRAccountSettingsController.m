@@ -39,7 +39,8 @@ static NSString *const kAccountSettingsContainerSegueIdentifier = @"accountSetti
 
 - (BZRUserProfile *)currentProfile
 {
-    return [BZRStorageManager sharedStorage].currentProfile;;
+    _currentProfile = [BZRStorageManager sharedStorage].currentProfile;
+    return _currentProfile;
 }
 
 - (void)setCurrentProfile:(BZRUserProfile *)currentProfile
@@ -121,7 +122,11 @@ static NSString *const kAccountSettingsContainerSegueIdentifier = @"accountSetti
 {
     self.userFullNameLabel.text = self.currentProfile.fullName;
 #warning temporary!
-    self.userIcon.image = self.currentProfile.avatarImage;
+    if (!self.currentProfile.avatarImage) {
+        self.userIcon.image = [UIImage imageNamed:@"user_icon_large"];
+    } else {
+        self.userIcon.image = self.currentProfile.avatarImage;
+    }
 }
 
 #pragma mark - Change photo actions
