@@ -13,6 +13,8 @@ typedef enum : NSUInteger {
 
 #import "BZRDataManager.h"
 
+#import "BZRKeychainHandler.h"
+
 @interface BZRDataManager ()
 
 @property (strong, nonatomic) BZRNetworkManager *network;
@@ -140,6 +142,20 @@ typedef enum : NSUInteger {
         weakSelf.storage.currentProfile = userProfile;
         result(success, error, 0);
     }];
+}
+
+- (void)signOutOnSuccess:(SuccessBlock)result
+{
+    
+    [BZRStorageManager sharedStorage].currentProfile = nil;
+    [BZRStorageManager sharedStorage].applicationToken = nil;
+    [BZRStorageManager sharedStorage].userToken = nil;
+    
+//    [BZRKeychainHandler resetKeychain];
+    
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:RememberMeKey];
+    
+    result(YES, nil, 0);
 }
 
 #pragma mark - GET

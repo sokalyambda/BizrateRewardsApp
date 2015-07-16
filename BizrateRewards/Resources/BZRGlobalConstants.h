@@ -18,8 +18,6 @@ static NSString *const LocationManagerDidFailAuthorizeNotification = @"LocationM
 static NSString *const PushNotificationServiceDidSuccessAuthorizeNotification = @"PushNotificationServiceDidSuccessAuthorizeNotification";
 static NSString *const PushNotificationServiceDidFailAuthorizeNotification = @"PushNotificationServiceDidFailAuthorizeNotification";
 
-static NSString *const ApplicationDidBecomeActiveNotification = @"ApplicationDidBecomeActiveNotification";
-
 //Strings
 
 static NSString *const InternetIsNotReachableString = @"Internet is not reachable.";
@@ -27,5 +25,11 @@ static NSString *const InternetIsNotReachableString = @"Internet is not reachabl
 //User
 
 static NSString *const CurrentProfileKey = @"CurrentProfileKey";
+
+static NSString *const IsTutorialPassed = @"IsTutorialPassed";
+static NSString *const RememberMeKey = @"RememberMeKey";
+
+static NSString *const UserNameKey = @"UsernameKey";
+static NSString *const PasswordKey = @"PasswordKey";
 
 #endif

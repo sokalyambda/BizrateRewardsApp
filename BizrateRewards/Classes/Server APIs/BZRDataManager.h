@@ -17,7 +17,7 @@
 
 + (BZRDataManager *)sharedInstance;
 
-//signIn/Up
+//Authorization
 - (void)getClientCredentialsOnSuccess:(SuccessBlock)completion;
 
 - (void)signInWithUserName:(NSString *)userName password:(NSString *)password withResult:(SuccessBlock)result;
@@ -31,6 +31,8 @@
                      withResult:(SuccessBlock)result;
 
 - (void)authorizeWithFacebookWithResult:(SuccessBlock)result;
+
+- (void)signOutOnSuccess:(SuccessBlock)result;
 
 //get user
 - (void)getCurrentUserWithCompletion:(SuccessBlock)completion;

@@ -48,7 +48,7 @@ static NSString *const kEditProfileSegueIdentifier = @"editProfileSegue";
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self handleNotifications];
+    [self registerForNotifications];
     [self updateAccessIcons];
 }
 
@@ -151,9 +151,9 @@ static NSString *const kEditProfileSegueIdentifier = @"editProfileSegue";
 
 #pragma mark - Notifications
 
-- (void)handleNotifications
+- (void)registerForNotifications
 {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActiveNotification:) name:ApplicationDidBecomeActiveNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActiveNotification:) name:UIApplicationDidBecomeActiveNotification object:nil];
 }
 
 - (void)applicationDidBecomeActiveNotification:(NSNotification *)notification

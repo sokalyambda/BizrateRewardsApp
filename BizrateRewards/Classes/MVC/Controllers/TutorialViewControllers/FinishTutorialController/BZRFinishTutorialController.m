@@ -30,6 +30,12 @@ static NSString *const kGetStartedSegueIdentifier = @"getStartedSegueIdentifier"
     [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self setTutorialPassed];
+}
+
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
@@ -46,6 +52,19 @@ static NSString *const kGetStartedSegueIdentifier = @"getStartedSegueIdentifier"
 - (IBAction)getStartedClick:(id)sender
 {
     [self performSegueWithIdentifier:kGetStartedSegueIdentifier sender:self];
+}
+
+- (void)setTutorialPassed
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    BOOL isTutorialPassed = [defaults boolForKey:IsTutorialPassed];
+    
+    if (isTutorialPassed) {
+        return;
+    } else {
+        [defaults setBool:YES forKey:IsTutorialPassed];
+        [defaults synchronize];
+    }
 }
 
 @end

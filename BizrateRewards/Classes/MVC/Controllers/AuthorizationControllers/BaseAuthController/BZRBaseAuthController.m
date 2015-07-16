@@ -40,7 +40,7 @@ static NSString *const kPasswordNotActiveIconName   = @"password_icon";
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self handleKeyboardNotifications];
+    [self registerForKeyboardNotifications];
     [self.view layoutIfNeeded];
     [self customizeFields];
 }
@@ -82,7 +82,7 @@ static NSString *const kPasswordNotActiveIconName   = @"password_icon";
 
 #pragma mark - Actions
 
-- (void)handleKeyboardNotifications
+- (void)registerForKeyboardNotifications
 {
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillShow:)

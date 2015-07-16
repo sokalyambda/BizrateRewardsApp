@@ -8,6 +8,6 @@
 
 #import "BZRBaseViewController.h"
 
-@interface BZRBaseTutorialController : BZRBaseViewController
+@interface BZRAutologinController : BZRBaseViewController
 
 @end

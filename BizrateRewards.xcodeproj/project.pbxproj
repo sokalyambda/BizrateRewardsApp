@@ -23,6 +23,7 @@
 		58219F201B38A59000A9541A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58219F1F1B38A59000A9541A /* Security.framework */; };
 		58219F221B38A59F00A9541A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58219F211B38A59F00A9541A /* CoreGraphics.framework */; };
 		58219F241B38A5A600A9541A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58219F231B38A5A600A9541A /* QuartzCore.framework */; };
+		583681711B579C6200D541A4 /* BZRKeychainHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 583681701B579C6200D541A4 /* BZRKeychainHandler.m */; };
 		585641B61B4DA5AA007E7368 /* BZRAuthorizationField.m in Sources */ = {isa = PBXBuildFile; fileRef = 585641B51B4DA5AA007E7368 /* BZRAuthorizationField.m */; };
 		585813AA1B3BEDCC0087AEE2 /* BZRUserToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 585813A91B3BEDCC0087AEE2 /* BZRUserToken.m */; };
 		585813AE1B3C23840087AEE2 /* BZRSurvey.m in Sources */ = {isa = PBXBuildFile; fileRef = 585813AD1B3C23840087AEE2 /* BZRSurvey.m */; };
@@ -71,7 +72,7 @@
 		58A9FE911B53AC0200DBE379 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58A9FE901B53AC0200DBE379 /* MobileCoreServices.framework */; };
 		58A9FE931B53AF4600DBE379 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58A9FE921B53AF4600DBE379 /* AssetsLibrary.framework */; };
 		58ACC06A1B3937010081E546 /* BZRStartTutorialController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ACC0691B3937010081E546 /* BZRStartTutorialController.m */; };
-		58ACC06D1B3937160081E546 /* BZRBaseTutorialController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ACC06C1B3937160081E546 /* BZRBaseTutorialController.m */; };
+		58ACC06D1B3937160081E546 /* BZRAutologinController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ACC06C1B3937160081E546 /* BZRAutologinController.m */; };
 		58ACC0761B395E6A0081E546 /* BZRPrivacyAndTermsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ACC0751B395E6A0081E546 /* BZRPrivacyAndTermsController.m */; };
 		58ACC07E1B3968830081E546 /* BZRSignInController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ACC07D1B3968830081E546 /* BZRSignInController.m */; };
 		58ACC0811B39689F0081E546 /* BZRSignUpController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ACC0801B39689F0081E546 /* BZRSignUpController.m */; };
@@ -136,6 +137,8 @@
 		58219F1F1B38A59000A9541A /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		58219F211B38A59F00A9541A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		58219F231B38A5A600A9541A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		5836816F1B579C6200D541A4 /* BZRKeychainHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRKeychainHandler.h; path = Classes/Utilities/KeyChain/KeychainHandler/BZRKeychainHandler.h; sourceTree = "<group>"; };
+		583681701B579C6200D541A4 /* BZRKeychainHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRKeychainHandler.m; path = Classes/Utilities/KeyChain/KeychainHandler/BZRKeychainHandler.m; sourceTree = "<group>"; };
 		585641B41B4DA5AA007E7368 /* BZRAuthorizationField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRAuthorizationField.h; path = Classes/MVC/Views/AuthorizationField/BZRAuthorizationField.h; sourceTree = "<group>"; };
 		585641B51B4DA5AA007E7368 /* BZRAuthorizationField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRAuthorizationField.m; path = Classes/MVC/Views/AuthorizationField/BZRAuthorizationField.m; sourceTree = "<group>"; };
 		585813A81B3BEDCC0087AEE2 /* BZRUserToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRUserToken.h; path = Classes/MVC/Models/Token/BZRUserToken.h; sourceTree = "<group>"; };
@@ -230,8 +233,8 @@
 		58A9FE921B53AF4600DBE379 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		58ACC0681B3937010081E546 /* BZRStartTutorialController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRStartTutorialController.h; path = Classes/MVC/Controllers/TutorialViewControllers/PageContentController/BZRStartTutorialController.h; sourceTree = "<group>"; };
 		58ACC0691B3937010081E546 /* BZRStartTutorialController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRStartTutorialController.m; path = Classes/MVC/Controllers/TutorialViewControllers/PageContentController/BZRStartTutorialController.m; sourceTree = "<group>"; };
-		58ACC06B1B3937160081E546 /* BZRBaseTutorialController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRBaseTutorialController.h; path = Classes/MVC/Controllers/TutorialViewControllers/BaseTutorialController/BZRBaseTutorialController.h; sourceTree = "<group>"; };
-		58ACC06C1B3937160081E546 /* BZRBaseTutorialController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRBaseTutorialController.m; path = Classes/MVC/Controllers/TutorialViewControllers/BaseTutorialController/BZRBaseTutorialController.m; sourceTree = "<group>"; };
+		58ACC06B1B3937160081E546 /* BZRAutologinController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRAutologinController.h; path = Classes/MVC/Controllers/TutorialViewControllers/BaseTutorialController/BZRAutologinController.h; sourceTree = "<group>"; };
+		58ACC06C1B3937160081E546 /* BZRAutologinController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRAutologinController.m; path = Classes/MVC/Controllers/TutorialViewControllers/BaseTutorialController/BZRAutologinController.m; sourceTree = "<group>"; };
 		58ACC0741B395E6A0081E546 /* BZRPrivacyAndTermsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRPrivacyAndTermsController.h; path = Classes/MVC/Controllers/PrivacyAndTermsController/BZRPrivacyAndTermsController.h; sourceTree = "<group>"; };
 		58ACC0751B395E6A0081E546 /* BZRPrivacyAndTermsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRPrivacyAndTermsController.m; path = Classes/MVC/Controllers/PrivacyAndTermsController/BZRPrivacyAndTermsController.m; sourceTree = "<group>"; };
 		58ACC07C1B3968830081E546 /* BZRSignInController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRSignInController.h; path = Classes/MVC/Controllers/AuthorizationControllers/SignInController/BZRSignInController.h; sourceTree = "<group>"; };
@@ -477,6 +480,7 @@
 		58219EEC1B38A27F00A9541A /* KeyChain */ = {
 			isa = PBXGroup;
 			children = (
+				5836816E1B579C1700D541A4 /* KeychainHandler */,
 				58B574DF1B38AE200083A80A /* KeychainItemWrapper.h */,
 				58B574E01B38AE200083A80A /* KeychainItemWrapper.m */,
 			);
@@ -588,6 +592,15 @@
 				58219F181B38A3F600A9541A /* NSDictionary+JSONRepresentation.m */,
 			);
 			name = "NSDictionary+JSONRepresentation";
+			sourceTree = "<group>";
+		};
+		5836816E1B579C1700D541A4 /* KeychainHandler */ = {
+			isa = PBXGroup;
+			children = (
+				5836816F1B579C6200D541A4 /* BZRKeychainHandler.h */,
+				583681701B579C6200D541A4 /* BZRKeychainHandler.m */,
+			);
+			name = KeychainHandler;
 			sourceTree = "<group>";
 		};
 		585641B31B4DA57E007E7368 /* AuthorizationField */ = {
@@ -1033,8 +1046,8 @@
 		58ACC0631B3936340081E546 /* BaseTutorialController */ = {
 			isa = PBXGroup;
 			children = (
-				58ACC06B1B3937160081E546 /* BZRBaseTutorialController.h */,
-				58ACC06C1B3937160081E546 /* BZRBaseTutorialController.m */,
+				58ACC06B1B3937160081E546 /* BZRAutologinController.h */,
+				58ACC06C1B3937160081E546 /* BZRAutologinController.m */,
 			);
 			name = BaseTutorialController;
 			sourceTree = "<group>";
@@ -1400,7 +1413,7 @@
 				589420A11B451E35004BAF48 /* BZRPickerHolder.m in Sources */,
 				58A7E23A1B45A3A200A1489A /* UIView+ConfigureAnchorPoint.m in Sources */,
 				58A91F481B3ABE6D0032607F /* BZRStorageManager.m in Sources */,
-				58ACC06D1B3937160081E546 /* BZRBaseTutorialController.m in Sources */,
+				58ACC06D1B3937160081E546 /* BZRAutologinController.m in Sources */,
 				58A5BEBA1B414ADC00B2BC27 /* BZRLeftImageTextField.m in Sources */,
 				58A5BEC01B415C2F00B2BC27 /* BZRCheckBoxButton.m in Sources */,
 				58ACC0761B395E6A0081E546 /* BZRPrivacyAndTermsController.m in Sources */,
@@ -1431,6 +1444,7 @@
 				58ACC07E1B3968830081E546 /* BZRSignInController.m in Sources */,
 				58F49FC91B4197B7002F93EE /* BZRPushNotifiactionService.m in Sources */,
 				58219F151B38A3D700A9541A /* NSString+ContainsString.m in Sources */,
+				583681711B579C6200D541A4 /* BZRKeychainHandler.m in Sources */,
 				58219F0A1B38A37600A9541A /* UIView+Shaking.m in Sources */,
 				5878D3DD1B43F92100A917D0 /* BZRReachabilityHelper.m in Sources */,
 				58ACC0871B3968DA0081E546 /* BZRGetStartedController.m in Sources */,

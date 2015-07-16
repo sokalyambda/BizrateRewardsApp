@@ -10,11 +10,12 @@
 
 #import "BZRAccountSettingsController.h"
 #import "BZRSignInController.h"
-#import "BZRDashboardController.h"
 #import "BZRAccountSettingsContaiterController.h"
+#import "BZRBaseNavigationController.h"
 
 #import "BZRUserProfile.h"
 #import "BZRStorageManager.h"
+#import "BZRDataManager.h"
 
 static NSString *const kAccountSettingsContainerSegueIdentifier = @"accountSettingsContainerSegue";
 
@@ -26,16 +27,33 @@ static NSString *const kAccountSettingsContainerSegueIdentifier = @"accountSetti
 @property (weak, nonatomic) IBOutlet UILabel *userFullNameLabel;
 
 @property (strong, nonatomic) BZRUserProfile *currentProfile;
+@property (strong, nonatomic) BZRDataManager *dataManager;
 
 @end
 
 @implementation BZRAccountSettingsController
+
+@synthesize currentProfile = _currentProfile;
 
 #pragma mark - Accessors
 
 - (BZRUserProfile *)currentProfile
 {
     return [BZRStorageManager sharedStorage].currentProfile;;
+}
+
+- (void)setCurrentProfile:(BZRUserProfile *)currentProfile
+{
+    _currentProfile = currentProfile;
+    [BZRStorageManager sharedStorage].currentProfile = _currentProfile;
+}
+
+- (BZRDataManager *)dataManager
+{
+    if (!_dataManager) {
+        _dataManager = [BZRDataManager sharedInstance];
+    }
+    return _dataManager;
 }
 
 #pragma mark - View Lifecycle
@@ -75,12 +93,7 @@ static NSString *const kAccountSettingsContainerSegueIdentifier = @"accountSetti
  
     WEAK_SELF;
     UIAlertAction *signOutAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Sign Out", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-        BZRDashboardController *dashboard = (BZRDashboardController *)[weakSelf.navigationController.presentingViewController.childViewControllers lastObject];
-        
-        weakSelf.currentProfile = nil;
-        
-        [weakSelf dismissViewControllerAnimated:YES completion:nil];
-        [dashboard.navigationController popViewControllerAnimated:NO];
+        [weakSelf signOut];
     }];
     
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", nil) style:UIAlertActionStyleCancel handler:nil];
@@ -89,6 +102,19 @@ static NSString *const kAccountSettingsContainerSegueIdentifier = @"accountSetti
     [signOutController addAction:cancelAction];
     
     [self presentViewController:signOutController animated:YES completion:nil];
+}
+
+- (void)signOut
+{
+    WEAK_SELF;
+    [self.dataManager signOutOnSuccess:^(BOOL success, NSError *error, NSInteger responseStatusCode) {
+        if (success) {
+            BZRBaseNavigationController *navigationController = (BZRBaseNavigationController *)weakSelf.presentingViewController;
+            
+            [navigationController popToRootViewControllerAnimated:YES];
+            [weakSelf dismissViewControllerAnimated:YES completion:nil];
+        }
+    }];
 }
 
 - (void)updateUserData
@@ -178,7 +204,6 @@ static NSString *const kAccountSettingsContainerSegueIdentifier = @"accountSetti
 
     [picker dismissViewControllerAnimated:YES completion:nil];
     //TODO: send photo
-    
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker

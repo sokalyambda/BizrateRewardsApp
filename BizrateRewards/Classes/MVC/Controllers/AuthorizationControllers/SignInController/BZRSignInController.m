@@ -10,14 +10,11 @@
 #import "BZRGetStartedController.h"
 #import "BZRDashboardController.h"
 
-#import "KeychainItemWrapper.h"
+#import "BZRKeychainHandler.h"
 
 #import "BZRDataManager.h"
 
 static NSString *const kDashboardSegueIdentifier = @"dashboardSegue";
-
-static NSString *const kIsRememberMe = @"isRememberMe";
-static NSString *const kUserCredentials = @"UserCredentials";
 
 //const for auth error code
 static NSInteger const kNotRegisteredErrorCode = 400.f;
@@ -52,13 +49,13 @@ static NSInteger const kNotRegisteredErrorCode = 400.f;
 
 - (BOOL)isRememberMe
 {
-    return [self.defaults boolForKey:kIsRememberMe];
+    return [self.defaults boolForKey:RememberMeKey];
 }
 
 - (void)setRememberMe:(BOOL)rememberMe
 {
     _rememberMe = rememberMe;
-    [self.defaults setBool:_rememberMe forKey:kIsRememberMe];
+    [self.defaults setBool:_rememberMe forKey:RememberMeKey];
     [self.defaults synchronize];
 }
 
@@ -124,7 +121,7 @@ static NSInteger const kNotRegisteredErrorCode = 400.f;
                     }
                 } else {
                     if (weakSelf.isRememberMe) {
-                        [weakSelf saveUserDataToKeychain];
+                        [BZRKeychainHandler storeCredentialsWithUsername:weakSelf.userNameField.text andPassword:weakSelf.passwordField.text];
                     }
                     [weakSelf performSegueWithIdentifier:kDashboardSegueIdentifier sender:weakSelf];
                 }
@@ -165,19 +162,12 @@ static NSInteger const kNotRegisteredErrorCode = 400.f;
 
 #pragma mark - Private methods
 
-- (void)saveUserDataToKeychain
-{
-    KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] initWithIdentifier:kUserCredentials accessGroup:nil];
-    [wrapper setObject:self.passwordField.text forKey:(__bridge id)(kSecValueData)];
-    [wrapper setObject:self.userNameField.text forKey:(__bridge id)(kSecAttrAccount)];
-}
-
 - (void)getUserDataFromKeychain
 {
     if (self.isRememberMe) {
-        KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] initWithIdentifier:kUserCredentials accessGroup:nil];
-        self.passwordField.text = [wrapper objectForKey:(__bridge id)(kSecValueData)];
-        self.userNameField.text = [wrapper objectForKey:(__bridge id)(kSecAttrAccount)];
+        NSDictionary *userCredentials = [BZRKeychainHandler getStoredCredentials];
+        self.userNameField.text = userCredentials[UserNameKey];
+        self.passwordField.text = userCredentials[PasswordKey];
     }
 }
 
