@@ -94,7 +94,11 @@ static NSString *const kStartTutorialSegueIdentirier = @"startTutorialSegue";
 //        [self performSegueWithIdentifier:kStartTutorialSegueIdentirier sender:self];
 //    }
     
-    [self performSegueWithIdentifier:kStartTutorialSegueIdentirier sender:self];
+    if (self.isTutorialPassed) {
+        [self goToFinishTutorialController];
+    } else {
+        [self performSegueWithIdentifier:kStartTutorialSegueIdentirier sender:self];
+    }
 }
 
 - (BOOL)isAutologinNeeded
