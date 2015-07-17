@@ -26,7 +26,7 @@
     }
 }
 
-+(BOOL)checkConnectionShowingErrorInViewController:(UIViewController*)errorController
++ (BOOL)checkConnectionShowingErrorInViewController:(UIViewController*)errorController
 {
     BOOL isInternet = [self isInternetAvaliable];
     
