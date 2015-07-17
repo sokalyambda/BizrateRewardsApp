@@ -20,11 +20,35 @@ static NSString *const kPointsAmount            = @"points_awarded";
 
 @interface BZRUserProfile ()<NSCoding>
 
+@property (strong, nonatomic) NSUserDefaults *defaults;
+
 @end
 
 @implementation BZRUserProfile
 
+@synthesize avatarURL = _avatarURL;
+
 #pragma mark - Accessors
+
+- (NSUserDefaults *)defaults
+{
+    if (!_defaults) {
+        _defaults = [NSUserDefaults standardUserDefaults];
+    }
+    return _defaults;
+}
+
+- (NSURL *)avatarURL
+{
+    _avatarURL = [self.defaults URLForKey:self.email];
+    return _avatarURL;
+}
+
+- (void)setAvatarURL:(NSURL *)avatarURL
+{
+    [self.defaults setURL:avatarURL forKey:self.email];
+    _avatarURL = avatarURL;
+}
 
 - (BOOL)isMale
 {

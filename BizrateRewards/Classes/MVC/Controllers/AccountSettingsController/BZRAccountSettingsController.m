@@ -6,16 +6,19 @@
 //  Copyright (c) 2015 Connexity. All rights reserved.
 //
 
-#import <AssetsLibrary/AssetsLibrary.h>
-
 #import "BZRAccountSettingsController.h"
 #import "BZRSignInController.h"
 #import "BZRAccountSettingsContaiterController.h"
 #import "BZRBaseNavigationController.h"
 
 #import "BZRUserProfile.h"
+
 #import "BZRStorageManager.h"
 #import "BZRDataManager.h"
+
+#import "BZRAssetsHelper.h"
+
+@import Photos;
 
 static NSString *const kAccountSettingsContainerSegueIdentifier = @"accountSettingsContainerSegue";
 
@@ -120,13 +123,14 @@ static NSString *const kAccountSettingsContainerSegueIdentifier = @"accountSetti
 
 - (void)updateUserData
 {
-    self.userFullNameLabel.text = self.currentProfile.fullName;
-#warning temporary!
-    if (!self.currentProfile.avatarImage) {
-        self.userIcon.image = [UIImage imageNamed:@"user_icon_large"];
-    } else {
-        self.userIcon.image = self.currentProfile.avatarImage;
+    if (self.currentProfile.avatarURL) {
+        WEAK_SELF;
+        [BZRAssetsHelper imageFromAssetURL:self.currentProfile.avatarURL withCompletion:^(UIImage *image, NSDictionary *info) {
+            weakSelf.userIcon.image = image ? image : [UIImage imageNamed:@"user_icon_large"];
+        }];
     }
+    
+    self.userFullNameLabel.text = self.currentProfile.fullName;
 }
 
 #pragma mark - Change photo actions
@@ -191,24 +195,31 @@ static NSString *const kAccountSettingsContainerSegueIdentifier = @"accountSetti
         CGRect thumbRect = self.userIcon.bounds;
         
         // adjust to aspect fit
-        CGFloat k = image.size.width/image.size.height;
-        if (k > 1.f) {
-            thumbRect.size.height = ceilf(thumbRect.size.width/k);
-        } else if (k < 1.f) {
-            thumbRect.size.width = ceilf(thumbRect.size.height*k);
+//        CGFloat k = image.size.width/image.size.height;
+//        if (k > 1.f) {
+//            thumbRect.size.height = ceilf(thumbRect.size.width/k);
+//        } else if (k < 1.f) {
+//            thumbRect.size.width = ceilf(thumbRect.size.height*k);
+//        }
+//        
+//        UIGraphicsBeginImageContextWithOptions(thumbRect.size, YES, [UIScreen mainScreen].scale);
+//        [image drawInRect:thumbRect];
+//        UIImage *thumbImage = UIGraphicsGetImageFromCurrentImageContext();
+//        UIGraphicsEndImageContext();
+        
+        //save photo to disk
+        WEAK_SELF;
+        NSURL *imagePath = [info objectForKey:UIImagePickerControllerReferenceURL];
+        if (!imagePath) {
+            [BZRAssetsHelper writeImage:image withMediaInfo:info toPhotoAlbumWithCompletion:^(NSURL *assetURL, NSError *error) {
+                weakSelf.currentProfile.avatarURL = assetURL;
+                [picker dismissViewControllerAnimated:YES completion:nil];
+            }];
+        } else {
+            self.currentProfile.avatarURL = imagePath;
+            [picker dismissViewControllerAnimated:YES completion:nil];
         }
-        
-        UIGraphicsBeginImageContextWithOptions(thumbRect.size, YES, 0);
-        [image drawInRect:thumbRect];
-        UIImage *thumbImage = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
-        
-        self.userIcon.image = thumbImage;
-        self.currentProfile.avatarImage = thumbImage;
     }
-
-    [picker dismissViewControllerAnimated:YES completion:nil];
-    //TODO: send photo
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker

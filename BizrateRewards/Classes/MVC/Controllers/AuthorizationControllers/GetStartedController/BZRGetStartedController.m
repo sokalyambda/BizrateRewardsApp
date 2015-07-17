@@ -9,6 +9,7 @@
 #import "BZRGetStartedController.h"
 #import "BZRPrivacyAndTermsController.h"
 #import "BZREditProfileContainerController.h"
+#import "BZRChooseSignUpTypeController.h"
 
 #import "BZRValidator.h"
 #import "BZRStorageManager.h"
@@ -34,7 +35,8 @@ static NSString *const kChooseSignUpTypeSegueIdentifier = @"сhooseSignUpTypeSeg
 @property (weak, nonatomic) IBOutlet BZRCheckBoxButton *yearsCheckBox;
 
 @property (strong, nonatomic) BZRValidator *validator;
-@property (strong, nonatomic) BZRUserProfile *currentUserProfile;
+
+@property (strong, nonatomic) BZRUserProfile *temporaryProfile;
 
 @end
 
@@ -50,21 +52,11 @@ static NSString *const kChooseSignUpTypeSegueIdentifier = @"сhooseSignUpTypeSeg
     return _validator;
 }
 
-- (BZRUserProfile *)currentUserProfile
-{
-    if (!_currentUserProfile) {
-        _currentUserProfile = [BZRUserProfile userProfileFromDefaultsForKey:CurrentProfileKey];
-    }
-    
-    return _currentUserProfile;
-}
-
 #pragma mark - View Lifecycle
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self setupFieldsValueFromProfile];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -106,24 +98,13 @@ static NSString *const kChooseSignUpTypeSegueIdentifier = @"сhooseSignUpTypeSeg
 - (void)createNewProfile
 {
     //first step in user creation
-    self.currentUserProfile = [[BZRUserProfile alloc] init];
+    self.temporaryProfile = [[BZRUserProfile alloc] init];
     
-    self.currentUserProfile.firstName = self.editProfileTableViewController.firstNameField.text;
-    self.currentUserProfile.lastName = self.editProfileTableViewController.lastNameField.text;
-    self.currentUserProfile.genderString = self.editProfileTableViewController.genderField.text;
-    self.currentUserProfile.email = self.editProfileTableViewController.emailField.text;
-    self.currentUserProfile.dateOfBirth = [[BZRCommonDateFormatter commonDateFormatter] dateFromString:self.editProfileTableViewController.dateOfBirthField.text];
-    
-    [self.currentUserProfile setUserProfileToDefaultsForKey:CurrentProfileKey];
-}
-
-- (void)setupFieldsValueFromProfile
-{
-    self.editProfileTableViewController.firstNameField.text = self.currentUserProfile.firstName;
-    self.editProfileTableViewController.lastNameField.text = self.currentUserProfile.lastName;
-    self.editProfileTableViewController.emailField.text = self.currentUserProfile.email;
-    self.editProfileTableViewController.genderField.text = self.currentUserProfile.genderString;
-    self.editProfileTableViewController.dateOfBirthField.text = [[BZRCommonDateFormatter commonDateFormatter] stringFromDate:self.currentUserProfile.dateOfBirth];
+    self.temporaryProfile.firstName = self.editProfileTableViewController.firstNameField.text;
+    self.temporaryProfile.lastName = self.editProfileTableViewController.lastNameField.text;
+    self.temporaryProfile.genderString = self.editProfileTableViewController.genderField.text;
+    self.temporaryProfile.email = self.editProfileTableViewController.emailField.text;
+    self.temporaryProfile.dateOfBirth = [[BZRCommonDateFormatter commonDateFormatter] dateFromString:self.editProfileTableViewController.dateOfBirthField.text];
 }
 
 #pragma mark - Navigation
@@ -133,6 +114,9 @@ static NSString *const kChooseSignUpTypeSegueIdentifier = @"сhooseSignUpTypeSeg
     if ([segue.identifier isEqualToString:kEditProfileContainerSegueIdentifier]) {
         self.editProfileTableViewController = (BZREditProfileContainerController *)segue.destinationViewController;
         [self.editProfileTableViewController viewWillAppear:YES];
+    } else if ([segue.identifier isEqualToString:kChooseSignUpTypeSegueIdentifier]) {
+        BZRChooseSignUpTypeController *controller = (BZRChooseSignUpTypeController *)segue.destinationViewController;
+        controller.temporaryProfile = self.temporaryProfile;
     }
 }
 

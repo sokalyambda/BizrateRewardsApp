@@ -8,6 +8,10 @@
 
 #import "BZRBaseAuthController.h"
 
+@class BZRUserProfile;
+
 @interface BZRChooseSignUpTypeController : BZRBaseAuthController
+
+@property (strong, nonatomic) BZRUserProfile *temporaryProfile;
 
 @end

@@ -26,8 +26,8 @@
 {
     self.layer.cornerRadius = CGRectGetHeight(self.bounds) / 2.f;
     self.layer.masksToBounds = YES;
-    self.layer.borderColor = self.borderColor ? self.borderColor.CGColor : [UIColor lightGrayColor].CGColor;
-    self.layer.borderWidth =  self.layer.borderWidth ?: 1.f;
+//    self.layer.borderColor = self.borderColor ? self.borderColor.CGColor : [UIColor lightGrayColor].CGColor;
+//    self.layer.borderWidth =  self.layer.borderWidth ?: 1.f;
 }
 
 - (void)setBorderColor:(UIColor *)borderColor

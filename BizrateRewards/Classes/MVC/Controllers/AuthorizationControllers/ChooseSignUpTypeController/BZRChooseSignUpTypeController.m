@@ -7,6 +7,7 @@
 //
 
 #import "BZRChooseSignUpTypeController.h"
+#import "BZRSignUpController.h"
 
 static NSString *const kSignUpWithEmailSegueIdentifier = @"signUpWithEmailSegue";
 
@@ -38,6 +39,16 @@ static NSString *const kSignUpWithEmailSegueIdentifier = @"signUpWithEmailSegue"
 - (IBAction)signUpWithEmailClick:(id)sender
 {
     [self performSegueWithIdentifier:kSignUpWithEmailSegueIdentifier sender:self];
+}
+
+#pragma mark - Navigation
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:kSignUpWithEmailSegueIdentifier]) {
+        BZRSignUpController *controller = (BZRSignUpController *)segue.destinationViewController;
+        controller.temporaryProfile = self.temporaryProfile;
+    }
 }
 
 @end

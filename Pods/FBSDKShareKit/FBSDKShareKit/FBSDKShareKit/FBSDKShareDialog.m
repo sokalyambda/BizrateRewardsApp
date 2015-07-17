@@ -41,6 +41,7 @@
 #define FBSDK_SHARE_METHOD_OG_IMAGE_MIN_VERSION @"20130410"
 #define FBSDK_SHARE_METHOD_PHOTOS_MIN_VERSION @"20140116"
 #define FBSDK_SHARE_METHOD_VIDEO_MIN_VERSION @"20150313"
+#define FBSDK_SHARE_METHOD_ATTRIBUTED_SHARE_SHEET_MIN_VERSION @"20150629"
 
 @interface FBSDKShareDialog () <FBSDKWebDialogDelegate>
 @end
@@ -102,40 +103,43 @@
 {
   BOOL didShow = NO;
   NSError *error = nil;
-  switch (self.mode) {
-    case FBSDKShareDialogModeAutomatic:{
-      // use the first validation error that fails, ignore canShow errors
-      didShow = ([self _showNativeWithCanShowError:NULL validationError:&error] ||
-                 [self _showShareSheetWithCanShowError:NULL validationError:&error] ||
-                 [self _showFeedBrowser:&error] ||
-                 [self _showFeedWeb:&error] ||
-                 [self _showBrowser:&error] ||
-                 [self _showWeb:&error]);
-      break;
-    }
-    case FBSDKShareDialogModeBrowser:{
-      didShow = [self _showBrowser:&error];
-      break;
-    }
-    case FBSDKShareDialogModeFeedBrowser:{
-      didShow = [self _showFeedBrowser:&error];
-      break;
-    }
-    case FBSDKShareDialogModeFeedWeb:{
-      didShow = [self _showFeedWeb:&error];
-      break;
-    }
-    case FBSDKShareDialogModeNative:{
-      didShow = [self _showNativeWithCanShowError:&error validationError:&error];
-      break;
-    }
-    case FBSDKShareDialogModeShareSheet:{
-      didShow = [self _showShareSheetWithCanShowError:&error validationError:&error];
-      break;
-    }
-    case FBSDKShareDialogModeWeb:{
-      didShow = [self _showWeb:&error];
-      break;
+
+  if ([self validateWithError:&error]) {
+    switch (self.mode) {
+      case FBSDKShareDialogModeAutomatic:{
+        // use the first validation error that fails, ignore canShow errors
+        didShow = ([self _showNativeWithCanShowError:NULL validationError:&error] ||
+                   [self _showShareSheetWithCanShowError:NULL validationError:&error] ||
+                   [self _showFeedBrowser:&error] ||
+                   [self _showFeedWeb:&error] ||
+                   [self _showBrowser:&error] ||
+                   [self _showWeb:&error]);
+        break;
+      }
+      case FBSDKShareDialogModeBrowser:{
+        didShow = [self _showBrowser:&error];
+        break;
+      }
+      case FBSDKShareDialogModeFeedBrowser:{
+        didShow = [self _showFeedBrowser:&error];
+        break;
+      }
+      case FBSDKShareDialogModeFeedWeb:{
+        didShow = [self _showFeedWeb:&error];
+        break;
+      }
+      case FBSDKShareDialogModeNative:{
+        didShow = [self _showNativeWithCanShowError:&error validationError:&error];
+        break;
+      }
+      case FBSDKShareDialogModeShareSheet:{
+        didShow = [self _showShareSheetWithCanShowError:&error validationError:&error];
+        break;
+      }
+      case FBSDKShareDialogModeWeb:{
+        didShow = [self _showWeb:&error];
+        break;
+      }
     }
   }
   if (!didShow) {
@@ -294,6 +298,18 @@
     return NO;
   }
   return YES;
+}
+
+- (BOOL)_canAttributeThroughShareSheet
+{
+  NSOperatingSystemVersion iOS8Version = { .majorVersion = 8, .minorVersion = 0, .patchVersion = 0 };
+  if (![FBSDKInternalUtility isOSRunTimeVersionAtLeast:iOS8Version]) {
+    return NO;
+  }
+  NSString *scheme = FBSDK_SHARE_DIALOG_APP_SCHEME;
+  NSString *minimumVersion = FBSDK_SHARE_METHOD_ATTRIBUTED_SHARE_SHEET_MIN_VERSION;
+  NSURL *URL = [[NSURL alloc] initWithScheme:[scheme stringByAppendingString:minimumVersion] host:nil path:@"/"];
+  return [[UIApplication sharedApplication] canOpenURL:URL];
 }
 
 - (void)_cleanUpWebDialog
@@ -487,6 +503,10 @@
                                                 message:@"Error creating SLComposeViewController."];
     }
     return NO;
+  }
+  if ([self _canAttributeThroughShareSheet]) {
+    NSString *attributionToken = [NSString stringWithFormat:@"fb-app-id:%@", [FBSDKSettings appID]];
+    [composeViewController setInitialText:attributionToken];
   }
   for (UIImage *image in images) {
     [composeViewController addImage:image];

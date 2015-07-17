@@ -146,13 +146,11 @@ typedef enum : NSUInteger {
 
 - (void)signOutOnSuccess:(SuccessBlock)result
 {
-    
     [BZRStorageManager sharedStorage].currentProfile = nil;
     [BZRStorageManager sharedStorage].applicationToken = nil;
     [BZRStorageManager sharedStorage].userToken = nil;
     
-//    [BZRKeychainHandler resetKeychain];
-    
+    [BZRKeychainHandler resetKeychain];
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:RememberMeKey];
     
     result(YES, nil, 0);

@@ -31,8 +31,6 @@ typedef enum : NSUInteger {
 
 @property (strong, nonatomic) BZRPickersHelper *pickersHelper;
 
-@property (strong, nonatomic) BZRUserProfile *currentProfile;
-
 @property (strong, nonatomic) IBOutletCollection(UITextField) NSArray *textFields;
 
 @property (strong, nonatomic) UITableViewCell *activeCell;
@@ -40,14 +38,6 @@ typedef enum : NSUInteger {
 @end
 
 @implementation BZREditProfileContainerController
-
-#pragma mark - Accessors
-
-- (BZRUserProfile *)currentProfile
-{
-    _currentProfile = [BZRStorageManager sharedStorage].currentProfile;
-    return _currentProfile;
-}
 
 #pragma mark - View Lifecycle
 
@@ -112,15 +102,6 @@ typedef enum : NSUInteger {
 
 #pragma mark - Actions
 
-//- (void)setupUserData
-//{
-//    self.firstNameField.text    = self.currentProfile.firstName;
-//    self.lastNameField.text     = self.currentProfile.lastName;
-//    self.emailField.text        = self.currentProfile.email;
-//    self.dateOfBirthField.text  = [[BZRCommonDateFormatter commonDateFormatter] stringFromDate:self.currentProfile.dateOfBirth];
-//    self.genderField.text       = self.currentProfile.genderString;
-//}
-
 - (void)adjustTableViewInsetsWithPresentedRect:(CGRect)rect
 {
     self.savedKeyboardRect = rect;
@@ -172,8 +153,14 @@ typedef enum : NSUInteger {
     } else if ([self.emailField isFirstResponder]) {
         [self.emailField resignFirstResponder];
     }
-    
+
     return YES;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    //trim whitespaces
+    textField.text = [textField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
 }
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField

@@ -19,7 +19,7 @@
 
 @property (strong, nonatomic) BZRDataManager *dataManager;
 
-@property (strong, nonatomic) BZRUserProfile *currentUserProfile;
+//@property (strong, nonatomic) BZRUserProfile *currentUserProfile;
 
 @end
 
@@ -35,13 +35,13 @@
     return _dataManager;
 }
 
-- (BZRUserProfile *)currentUserProfile
-{
-    if (!_currentUserProfile) {
-        _currentUserProfile = [BZRUserProfile userProfileFromDefaultsForKey:CurrentProfileKey];
-    }
-    return _currentUserProfile;
-}
+//- (BZRUserProfile *)currentUserProfile
+//{
+//    if (!_currentUserProfile) {
+//        _currentUserProfile = [BZRUserProfile userProfileFromDefaultsForKey:CurrentProfileKey];
+//    }
+//    return _currentUserProfile;
+//}
 
 #pragma mark - View Lifecycle
 
@@ -71,12 +71,12 @@
             [weakSelf.dataManager getClientCredentialsOnSuccess:^(BOOL success, NSError *error, NSInteger responseStatusCode) {
                 if (success) {
                     
-                    [weakSelf.dataManager signUpWithUserFirstName:weakSelf.currentUserProfile.firstName
-                                                  andUserLastName:weakSelf.currentUserProfile.lastName
-                                                         andEmail:weakSelf.currentUserProfile.email
+                    [weakSelf.dataManager signUpWithUserFirstName:weakSelf.temporaryProfile.firstName
+                                                  andUserLastName:weakSelf.temporaryProfile.lastName
+                                                         andEmail:weakSelf.temporaryProfile.email
                                                       andPassword:weakSelf.passwordField.text
-                                                   andDateOfBirth:[[BZRCommonDateFormatter commonDateFormatter] stringFromDate:weakSelf.currentUserProfile.dateOfBirth]
-                                                        andGender:[weakSelf.currentUserProfile.genderString substringToIndex:1]
+                                                   andDateOfBirth:[[BZRCommonDateFormatter commonDateFormatter] stringFromDate:weakSelf.temporaryProfile.dateOfBirth]
+                                                        andGender:[weakSelf.temporaryProfile.genderString substringToIndex:1]
                                                        withResult:^(BOOL success, NSError *error, NSInteger responseStatusCode) {
                                                            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
                                                            if (!success) {
@@ -111,7 +111,7 @@
 
 - (void)setupUserDataToFields
 {
-    self.userNameField.text = self.currentUserProfile.email;
+    self.userNameField.text = self.temporaryProfile.email;
 }
 
 - (void)deleteTemporaryProfileFromDefaults

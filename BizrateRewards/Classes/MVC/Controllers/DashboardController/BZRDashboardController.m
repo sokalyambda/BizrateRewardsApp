@@ -9,6 +9,8 @@
 #import "BZRStorageManager.h"
 #import "BZRDataManager.h"
 
+#import "BZRAssetsHelper.h"
+
 #import "BZRDashboardController.h"
 #import "BZRSurveyViewController.h"
 #import "BZRAccountSettingsController.h"
@@ -121,13 +123,10 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
 
 - (void)updateUserInformation
 {
-//    [self.userAvatar sd_setImageWithURL:self.currentProfile.avatarURL placeholderImage:[UIImage imageNamed:@"user_icon_small"]];
-#warning temporary
-    if (!self.currentProfile.avatarImage) {
-        self.userAvatar.image = [UIImage imageNamed:@"user_icon_small"];
-    } else {
-        self.userAvatar.image = self.currentProfile.avatarImage;
-    }
+    WEAK_SELF;
+    [BZRAssetsHelper imageFromAssetURL:self.currentProfile.avatarURL withCompletion:^(UIImage *image, NSDictionary *info) {
+        weakSelf.userAvatar.image = image ? image : [UIImage imageNamed:@"user_icon_small"];
+    }];
     
     self.userNameLabel.text = self.currentProfile.fullName;
     self.earnedPointsLabel.text = [NSString stringWithFormat:@"%d", self.currentProfile.pointsAmount];
