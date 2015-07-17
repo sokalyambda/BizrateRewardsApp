@@ -19,7 +19,7 @@
 
 @property (strong, nonatomic) BZRDataManager *dataManager;
 
-//@property (strong, nonatomic) BZRUserProfile *currentUserProfile;
+@property (weak, nonatomic) IBOutlet BZRAuthorizationField *confirmPasswordField;
 
 @end
 
@@ -34,14 +34,6 @@
     }
     return _dataManager;
 }
-
-//- (BZRUserProfile *)currentUserProfile
-//{
-//    if (!_currentUserProfile) {
-//        _currentUserProfile = [BZRUserProfile userProfileFromDefaultsForKey:CurrentProfileKey];
-//    }
-//    return _currentUserProfile;
-//}
 
 #pragma mark - View Lifecycle
 
@@ -65,12 +57,11 @@
 - (IBAction)createAccountClick:(id)sender
 {
     WEAK_SELF;
-    if ([self.validator validateEmailField:self.userNameField andPasswordField:self.passwordField]) {
+    if ([self.validator validateEmailField:self.userNameField andPasswordField:self.passwordField andConfirmPasswordField:self.confirmPasswordField]) {
         [BZRReachabilityHelper checkConnectionOnSuccess:^{
             [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
             [weakSelf.dataManager getClientCredentialsOnSuccess:^(BOOL success, NSError *error, NSInteger responseStatusCode) {
                 if (success) {
-                    
                     [weakSelf.dataManager signUpWithUserFirstName:weakSelf.temporaryProfile.firstName
                                                   andUserLastName:weakSelf.temporaryProfile.lastName
                                                          andEmail:weakSelf.temporaryProfile.email
@@ -82,7 +73,6 @@
                                                            if (!success) {
                                                                ShowFailureResponseAlertWithError(error);
                                                            } else {
-                                                               [weakSelf deleteTemporaryProfileFromDefaults];
                                                                BZRDashboardController *controller = [weakSelf.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRDashboardController class])];
                                                                controller.updateNeeded = YES;
                                                                [weakSelf.navigationController pushViewController:controller animated:YES];
@@ -106,21 +96,14 @@
 - (void)customizeFields
 {
     [super customizeFields];
-    [self.passwordField addBottomBorder];
+    [self.confirmPasswordField addBottomBorder];
+    self.confirmPasswordField.activeImageName      = @"password_icon_prepop";
+    self.confirmPasswordField.notActiveImageName   = @"password_icon";
 }
 
 - (void)setupUserDataToFields
 {
     self.userNameField.text = self.temporaryProfile.email;
-}
-
-- (void)deleteTemporaryProfileFromDefaults
-{
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
-    if ([defaults.dictionaryRepresentation.allKeys containsObject:CurrentProfileKey]) {
-        [defaults removeObjectForKey:CurrentProfileKey];
-    }
 }
 
 #pragma mark - UITextFieldDelegate
@@ -130,7 +113,9 @@
     if ([self.userNameField isFirstResponder]) {
         [self.passwordField becomeFirstResponder];
     } else if ([self.passwordField isFirstResponder]) {
-        [self.passwordField resignFirstResponder];
+        [self.confirmPasswordField becomeFirstResponder];
+    } else if ([self.confirmPasswordField isFirstResponder]) {
+        [self.confirmPasswordField resignFirstResponder];
     }
     return YES;
 }

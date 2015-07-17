@@ -95,6 +95,23 @@ static NSString *const kPasswordErrorImageName = @"password_icon_error";
     return isValid;
 }
 
+- (BOOL)validateEmailField:(UITextField *)emailField andPasswordField:(UITextField *)passwordField andConfirmPasswordField:(UITextField *)confirmPassword
+{
+    BOOL isValid = NO;
+    
+    isValid = [self validateEmailField:emailField andPasswordField:passwordField];
+    
+    if (![passwordField.text isEqualToString:confirmPassword.text]) {
+        isValid = NO;
+        [confirmPassword shakeView];
+        if ([confirmPassword isKindOfClass:[BZRAuthorizationField class]]) {
+            ((BZRAuthorizationField *)confirmPassword).errorImageName = kPasswordErrorImageName;
+        }
+    }
+    
+    return isValid;
+}
+
 - (BOOL)validateFirstNameField:(UITextField *)firstNameField
                  lastNameField:(UITextField *)lastNameField
                     emailField:(UITextField *)emailField
