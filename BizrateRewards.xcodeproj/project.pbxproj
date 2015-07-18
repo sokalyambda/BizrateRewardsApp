@@ -84,6 +84,7 @@
 		58ADC0E81B4BDCE400DF849F /* BZRSecondTutorialController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ADC0E71B4BDCE400DF849F /* BZRSecondTutorialController.m */; };
 		58B574E11B38AE200083A80A /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B574E01B38AE200083A80A /* KeychainItemWrapper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		58DF1AE81B584CD000D28951 /* BZRAssetsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 58DF1AE71B584CD000D28951 /* BZRAssetsHelper.m */; };
+		58E238A41B5AA0B8007F8664 /* UIFont+Styles.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E238A31B5AA0B8007F8664 /* UIFont+Styles.m */; };
 		58E512431B4C70AF00865694 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 58E512391B4C70AF00865694 /* OpenSans-Bold.ttf */; };
 		58E512441B4C70AF00865694 /* OpenSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 58E5123A1B4C70AF00865694 /* OpenSans-BoldItalic.ttf */; };
 		58E512451B4C70AF00865694 /* OpenSans-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 58E5123B1B4C70AF00865694 /* OpenSans-ExtraBold.ttf */; };
@@ -258,6 +259,8 @@
 		58B574E01B38AE200083A80A /* KeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KeychainItemWrapper.m; path = Classes/Utilities/KeyChain/KeychainItemWrapper.m; sourceTree = "<group>"; };
 		58DF1AE61B584CD000D28951 /* BZRAssetsHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRAssetsHelper.h; path = Classes/Utilities/AssetsHelper/BZRAssetsHelper.h; sourceTree = "<group>"; };
 		58DF1AE71B584CD000D28951 /* BZRAssetsHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRAssetsHelper.m; path = Classes/Utilities/AssetsHelper/BZRAssetsHelper.m; sourceTree = "<group>"; };
+		58E238A21B5AA0B8007F8664 /* UIFont+Styles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIFont+Styles.h"; path = "Classes/Categories/UIFont/UIFont+Styles/UIFont+Styles.h"; sourceTree = "<group>"; };
+		58E238A31B5AA0B8007F8664 /* UIFont+Styles.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIFont+Styles.m"; path = "Classes/Categories/UIFont/UIFont+Styles/UIFont+Styles.m"; sourceTree = "<group>"; };
 		58E512391B4C70AF00865694 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-Bold.ttf"; path = "Resources/Fonts/OpenSans-Bold.ttf"; sourceTree = "<group>"; };
 		58E5123A1B4C70AF00865694 /* OpenSans-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-BoldItalic.ttf"; path = "Resources/Fonts/OpenSans-BoldItalic.ttf"; sourceTree = "<group>"; };
 		58E5123B1B4C70AF00865694 /* OpenSans-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-ExtraBold.ttf"; path = "Resources/Fonts/OpenSans-ExtraBold.ttf"; sourceTree = "<group>"; };
@@ -364,6 +367,7 @@
 		58219EE11B38A1F300A9541A /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				58E238A01B5AA078007F8664 /* UIFont */,
 				58219EF21B38A2CA00A9541A /* UIViewController */,
 				58219EF11B38A2C300A9541A /* UIView */,
 				58219EF01B38A2AA00A9541A /* UIImagePickerController */,
@@ -1176,6 +1180,23 @@
 			name = AssetsHelper;
 			sourceTree = "<group>";
 		};
+		58E238A01B5AA078007F8664 /* UIFont */ = {
+			isa = PBXGroup;
+			children = (
+				58E238A11B5AA082007F8664 /* UIFont+Styles */,
+			);
+			name = UIFont;
+			sourceTree = "<group>";
+		};
+		58E238A11B5AA082007F8664 /* UIFont+Styles */ = {
+			isa = PBXGroup;
+			children = (
+				58E238A21B5AA0B8007F8664 /* UIFont+Styles.h */,
+				58E238A31B5AA0B8007F8664 /* UIFont+Styles.m */,
+			);
+			name = "UIFont+Styles";
+			sourceTree = "<group>";
+		};
 		58E512241B4C6DFE00865694 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -1435,6 +1456,7 @@
 				843C38411B4EAF38005E85CF /* BZRGiftcardCell.m in Sources */,
 				58DF1AE81B584CD000D28951 /* BZRAssetsHelper.m in Sources */,
 				58A91F581B3AD83F0032607F /* BZRUserProfile.m in Sources */,
+				58E238A41B5AA0B8007F8664 /* UIFont+Styles.m in Sources */,
 				5899D2541B4AB94200565F11 /* BZRApplicationToken.m in Sources */,
 				5894209D1B451E0F004BAF48 /* BZRBirthDatePickerView.m in Sources */,
 				58219F021B38A32700A9541A /* BZRAlertMessageService.m in Sources */,
