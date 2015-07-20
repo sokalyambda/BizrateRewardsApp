@@ -14,5 +14,6 @@
 @property (strong, nonatomic) NSString *refSurveyId;
 @property (strong, nonatomic) NSString *surveyId;
 @property (strong, nonatomic) NSURL *surveyLink;
+@property (assign, nonatomic) NSInteger surveyPoints;
 
 @end

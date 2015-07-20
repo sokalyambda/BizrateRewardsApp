@@ -8,6 +8,10 @@
 
 #import "BZRBaseViewController.h"
 
+@class BZRSurvey;
+
 @interface BZRFinishSurveyController : BZRBaseViewController
+
+@property (strong, nonatomic) BZRSurvey *passedSurvey;
 
 @end

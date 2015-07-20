@@ -58,16 +58,16 @@ static NSString *const kFinishSurveyString = @"SaveButton";
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
-    //TODO: parse url here
+
     NSString *urlString = request.URL.absoluteString;
     
     if ([urlString containsString:kFinishSurveyString]) {
+        
         BZRFinishSurveyController *controller = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRFinishSurveyController class])];
+        controller.passedSurvey = self.currentSurvey;
         [self.navigationController pushViewController:controller animated:YES];
     }
     
-    NSURL *url = request.URL;
-    NSLog(@"url %@", url);
     return YES;
 }
 

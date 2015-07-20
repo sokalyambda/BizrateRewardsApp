@@ -10,6 +10,7 @@
 #import "BZRDataManager.h"
 
 #import "BZRAssetsHelper.h"
+#import "BZRCommonNumberFormatter.h"
 
 #import "BZRDashboardController.h"
 #import "BZRSurveyViewController.h"
@@ -86,27 +87,27 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
 
 - (IBAction)takeSurveyClick:(id)sender
 {
-//    WEAK_SELF;
-//    [BZRReachabilityHelper checkConnectionOnSuccess:^{
-//        [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
-//        [weakSelf.dataManager getSurveysListWithResult:^(BOOL success, NSArray *surveysList, NSError *error) {
-//            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-//            if (!success) {
-//                ShowErrorAlert(error);
-//            } else {
-//                BZRSurveyViewController *controller = [weakSelf.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRSurveyViewController class])];
-//                if (surveysList.count) {
-//                    controller.currentSurvey = [surveysList firstObject];
-//                    [weakSelf.navigationController pushViewController:controller animated:YES];
-//                } else {
-//                    ShowAlert(NSLocalizedString(@"There are no surveys for you", nil));
-//                    return;
-//                }
-//            }
-//        }];
-//    } failure:^{
-//        ShowAlert(InternetIsNotReachableString);
-//    }];
+    WEAK_SELF;
+    [BZRReachabilityHelper checkConnectionOnSuccess:^{
+        [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
+        [weakSelf.dataManager getSurveysListWithResult:^(BOOL success, NSArray *surveysList, NSError *error) {
+            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+            if (!success) {
+                ShowErrorAlert(error);
+            } else {
+                BZRSurveyViewController *controller = [weakSelf.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRSurveyViewController class])];
+                if (surveysList.count) {
+                    controller.currentSurvey = [surveysList firstObject];
+                    [weakSelf.navigationController pushViewController:controller animated:YES];
+                } else {
+                    ShowAlert(NSLocalizedString(@"There are no surveys for you", nil));
+                    return;
+                }
+            }
+        }];
+    } failure:^{
+        ShowAlert(InternetIsNotReachableString);
+    }];
 }
 
 - (IBAction)seeAllGiftCardsClick:(id)sender
@@ -127,9 +128,9 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
     [BZRAssetsHelper imageFromAssetURL:self.currentProfile.avatarURL withCompletion:^(UIImage *image, NSDictionary *info) {
         weakSelf.userAvatar.image = image ? image : [UIImage imageNamed:@"user_icon_small"];
     }];
-    
+
     self.userNameLabel.text = self.currentProfile.fullName;
-    self.earnedPointsLabel.text = [NSString stringWithFormat:@"%ld", (long)self.currentProfile.pointsAmount];
+    self.earnedPointsLabel.text = [NSString stringWithFormat:@"%@ %@", [[BZRCommonNumberFormatter commonNumberFormatter] stringFromNumber:@((long)self.currentProfile.pointsAmount)], NSLocalizedString(@"pts", nil)];
     
 #warning User Points
     self.currentProfile.pointsRequired = 2000;

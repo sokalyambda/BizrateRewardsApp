@@ -12,6 +12,7 @@ static NSString *const kSurveyId    = @"surveyId";
 static NSString *const kSurveyLink  = @"url";
 static NSString *const kRefSurveyId = @"refSurveyId";
 static NSString *const kSurveyName  = @"name";
+static NSString *const kPoints      = @"points";
 
 @implementation BZRSurvey
 
@@ -25,6 +26,7 @@ static NSString *const kSurveyName  = @"name";
         _surveyLink     = [NSURL URLWithString:response[kSurveyLink]];
         _surveyName     = response[kSurveyName];
         _refSurveyId    = response[kRefSurveyId];
+        _surveyPoints   = [response[kPoints] integerValue];
     }
     return self;
 }
