@@ -7,9 +7,13 @@
 //
 
 #import "BZRSerialViewConstructor.h"
+
 #import "BZRBaseNavigationController.h"
 
+static NSString *const kDoneButtonImageName = @"done_btn";
 static NSString *const kBackArrowImageName = @"back_arrow";
+
+static CGFloat const kDoneFontSize = 14.f;
 
 @implementation BZRSerialViewConstructor
 
@@ -17,6 +21,27 @@ static NSString *const kBackArrowImageName = @"back_arrow";
 {
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:kBackArrowImageName] style:UIBarButtonItemStylePlain target:controller action:@selector(popViewControllerAnimated:)];
     return backButton;
+}
+
++ (UIBarButtonItem *)customDoneButtonForController:(UIViewController *)controller withAction:(SEL)action
+{
+    UIImage *backgroundImage = [UIImage imageNamed:kDoneButtonImageName];
+    
+    UIButton *doneButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [doneButton setFrame:CGRectMake(0.0f, 0.0f, backgroundImage.size.width, backgroundImage.size.height)];
+    
+    [doneButton setBackgroundImage:backgroundImage forState:UIControlStateNormal];
+    [doneButton setTitle:NSLocalizedString(@"Done", nil) forState:UIControlStateNormal];
+    
+    doneButton.titleLabel.font = [UIFont fontWithName:@"OpenSans" size:kDoneFontSize];
+    
+    [doneButton setTitleColor:UIColorFromRGB(0x091e40) forState:UIControlStateNormal];
+    
+    [doneButton addTarget:controller action:action forControlEvents:UIControlEventTouchUpInside];
+
+    UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
+    
+    return doneBarButton;
 }
 
 @end

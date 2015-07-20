@@ -116,8 +116,12 @@ static NSString *const kAccountSettingsContainerSegueIdentifier = @"accountSetti
         if (success) {
             BZRBaseNavigationController *navigationController = (BZRBaseNavigationController *)weakSelf.presentingViewController;
             
-            [navigationController popToRootViewControllerAnimated:YES];
-            [weakSelf dismissViewControllerAnimated:YES completion:nil];
+            [CATransaction begin];
+            [CATransaction setCompletionBlock:^{
+                [weakSelf dismissViewControllerAnimated:YES completion:nil];
+            }];
+            [navigationController popToRootViewControllerAnimated:YES];;
+            [CATransaction commit];
         }
     }];
 }
@@ -194,21 +198,6 @@ static NSString *const kAccountSettingsContainerSegueIdentifier = @"accountSetti
     }
     
     if (image) {
-//        CGRect thumbRect = self.userIcon.bounds;
-        
-        // adjust to aspect fit
-//        CGFloat k = image.size.width/image.size.height;
-//        if (k > 1.f) {
-//            thumbRect.size.height = ceilf(thumbRect.size.width/k);
-//        } else if (k < 1.f) {
-//            thumbRect.size.width = ceilf(thumbRect.size.height*k);
-//        }
-//        
-//        UIGraphicsBeginImageContextWithOptions(thumbRect.size, YES, [UIScreen mainScreen].scale);
-//        [image drawInRect:thumbRect];
-//        UIImage *thumbImage = UIGraphicsGetImageFromCurrentImageContext();
-//        UIGraphicsEndImageContext();
-        
         //save photo to disk
         WEAK_SELF;
         NSURL *imagePath = [info objectForKey:UIImagePickerControllerReferenceURL];

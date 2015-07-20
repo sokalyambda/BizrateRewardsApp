@@ -8,6 +8,9 @@
 
 #import "BZRStatusBarManager.h"
 
+static CGFloat const kHideAnimationDuration = 1.f;
+static CGFloat const kShowAnimationDuration = .5f;
+
 @interface BZRStatusBarManager ()
 
 @property (strong, nonatomic) UIView *statusBarView;
@@ -62,15 +65,15 @@
 
 - (void)hideCustomStatusBarView
 {
-    [UIView animateWithDuration:0.3f animations:^{
-        [self.statusBarView setHidden:YES];
+    [UIView animateWithDuration:kHideAnimationDuration animations:^{
+        self.statusBarView.alpha = 0.f;
     }];
 }
 
 - (void)showCustomStatusBarView
 {
-    [UIView animateWithDuration:0.3f animations:^{
-        [self.statusBarView setHidden:NO];
+    [UIView animateWithDuration:kShowAnimationDuration animations:^{
+        self.statusBarView.alpha = 1.f;
     }];
 }
 

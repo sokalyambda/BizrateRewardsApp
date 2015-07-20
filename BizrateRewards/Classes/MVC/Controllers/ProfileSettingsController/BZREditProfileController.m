@@ -11,6 +11,7 @@
 
 #import "BZRValidator.h"
 #import "BZRCommonDateFormatter.h"
+#import "BZRSerialViewConstructor.h"
 
 #import "BZRDataManager.h"
 
@@ -19,8 +20,6 @@
 static NSString *const kEditProfileContainerSegueIdentifier = @"editProfileContainerSegue";
 
 @interface BZREditProfileController ()
-
-@property (strong, nonatomic) IBOutlet UIBarButtonItem *doneBarButton;
 
 @property (weak, nonatomic) BZREditProfileContainerController *container;
 
@@ -69,17 +68,17 @@ static NSString *const kEditProfileContainerSegueIdentifier = @"editProfileConta
 
 #pragma mark - Actions
 
-- (IBAction)doneClick:(id)sender
+- (void)doneClick:(id)sender
 {
-//    [self updateUser];
-    [self.navigationController popViewControllerAnimated:YES];
+    [self updateUser];
 }
 
 - (void)customizeNavigationItem
 {
     self.navigationItem.title = NSLocalizedString(@"Profile", nil);
     [self.navigationController setNavigationBarHidden:NO animated:YES];
-    self.navigationItem.rightBarButtonItem = self.doneBarButton;
+    
+    self.navigationItem.rightBarButtonItem = [BZRSerialViewConstructor customDoneButtonForController:self withAction:@selector(doneClick:)];
 }
 
 - (void)updateUser
@@ -114,11 +113,13 @@ static NSString *const kEditProfileContainerSegueIdentifier = @"editProfileConta
 
 - (void)setupFieldsValueFromProfile
 {
-    self.container.firstNameField.text = self.currentProfile.firstName;
-    self.container.lastNameField.text = self.currentProfile.lastName;
-    self.container.emailField.text = self.currentProfile.email;
-    self.container.genderField.text = self.currentProfile.genderString;
+    self.container.firstNameField.text  = self.currentProfile.firstName;
+    self.container.lastNameField.text   = self.currentProfile.lastName;
+    self.container.emailField.text      = self.currentProfile.email;
+    self.container.genderField.text     = self.currentProfile.genderString;
     self.container.dateOfBirthField.text = [[BZRCommonDateFormatter commonDateFormatter] stringFromDate:self.currentProfile.dateOfBirth];
+    
+    self.container.emailField.userInteractionEnabled = NO;
 }
 
 #pragma mark - Navigation
@@ -127,6 +128,7 @@ static NSString *const kEditProfileContainerSegueIdentifier = @"editProfileConta
 {
     if ([segue.identifier isEqualToString:kEditProfileContainerSegueIdentifier]) {
         self.container = (BZREditProfileContainerController *)segue.destinationViewController;
+        self.container.scrollNeeded = NO;
         [self.container viewWillAppear:YES];
     }
 }

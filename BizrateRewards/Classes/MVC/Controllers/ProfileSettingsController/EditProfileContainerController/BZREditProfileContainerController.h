@@ -16,7 +16,8 @@
 @property (weak, nonatomic) IBOutlet BZREditProfileField *dateOfBirthField;
 @property (weak, nonatomic) IBOutlet BZREditProfileField *genderField;
 
-@property (assign, nonatomic) CGRect savedKeyboardRect;
+//set this bool for enabling/disabling scroll possibility while editing
+@property (assign, nonatomic) BOOL scrollNeeded;
 
 - (void)adjustTableViewInsetsWithPresentedRect:(CGRect)rect;
 

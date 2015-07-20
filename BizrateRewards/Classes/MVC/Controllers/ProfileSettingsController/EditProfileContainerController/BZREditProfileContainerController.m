@@ -33,7 +33,9 @@ typedef enum : NSUInteger {
 
 @property (strong, nonatomic) IBOutletCollection(UITextField) NSArray *textFields;
 
-@property (strong, nonatomic) UITableViewCell *activeCell;
+@property (strong, nonatomic) NSIndexPath *editedIndexPath;
+
+@property (assign, nonatomic) CGRect savedKeyboardRect;
 
 @end
 
@@ -55,7 +57,7 @@ typedef enum : NSUInteger {
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [super viewWillAppear:YES];
+    //Don't call [super viewWillAppear:YES] to avoid auto keyboard handling, provided by table view controller. Keyboard handles manually from BZRPickersHelper class.
 }
 
 #pragma mark - UITableViewDelegate
@@ -64,14 +66,14 @@ typedef enum : NSUInteger {
 {
     BZREditableFieldType fieldType = indexPath.row;
     
-    self.activeCell = [tableView cellForRowAtIndexPath:indexPath];
+    self.editedIndexPath = indexPath;
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    [self resignIfFirstResponder];
     
     WEAK_SELF;
     switch (fieldType) {
         case BZREditableFieldTypeDateOfBirth: {
-            
-            [self resignIfFirstResponder];
             
             self.dateOfBirthField.validationFailed = NO;
             
@@ -83,8 +85,6 @@ typedef enum : NSUInteger {
             break;
         }
         case BZREditableFieldTypeGender: {
-            
-            [self resignIfFirstResponder];
             
             self.genderField.validationFailed = NO;
             
@@ -112,13 +112,12 @@ typedef enum : NSUInteger {
     CGRect intersection = CGRectIntersection(rect, tableViewFrame);
     
     UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.f, 0.f, CGRectGetHeight(intersection), 0.f);
-    
+
     [UIView animateWithDuration:kAnimationDuration animations:^{
         self.tableView.contentInset = contentInsets;
         self.tableView.scrollIndicatorInsets = contentInsets;
+        [self checkForMovement];
     }];
-
-    [self checkForMovement];
 }
 
 #pragma mark - Private methods
@@ -134,11 +133,12 @@ typedef enum : NSUInteger {
 
 - (void)checkForMovement
 {
-    CGRect activeCellFrame = self.activeCell.frame;
+    UITableViewCell *editedCell = [self.tableView cellForRowAtIndexPath:self.editedIndexPath];
+    CGRect activeCellFrame = editedCell.frame;
     activeCellFrame = [self.parentViewController.view convertRect:activeCellFrame fromView:self.tableView];
 
     if (CGRectIntersectsRect(self.savedKeyboardRect, activeCellFrame)) {
-        [self.tableView scrollToRowAtIndexPath:[self.tableView indexPathForCell:self.activeCell] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        [self.tableView scrollToRowAtIndexPath:self.editedIndexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
     }
 }
 
@@ -149,7 +149,7 @@ typedef enum : NSUInteger {
     if ([self.firstNameField isFirstResponder]) {
         [self.lastNameField becomeFirstResponder];
     } else if ([self.lastNameField isFirstResponder]) {
-        [self.emailField becomeFirstResponder];
+        self.emailField.userInteractionEnabled ? [self.emailField becomeFirstResponder] : [self.lastNameField resignFirstResponder];
     } else if ([self.emailField isFirstResponder]) {
         [self.emailField resignFirstResponder];
     }
@@ -166,8 +166,7 @@ typedef enum : NSUInteger {
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
     CGPoint p = [textField convertPoint:CGPointZero toView:self.tableView];
-    NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:p];
-    self.activeCell = [self.tableView cellForRowAtIndexPath:indexPath];
+    self.editedIndexPath = [self.tableView indexPathForRowAtPoint:p];
     
     [self checkForMovement];
     

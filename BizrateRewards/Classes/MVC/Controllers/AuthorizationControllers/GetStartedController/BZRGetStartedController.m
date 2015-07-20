@@ -113,6 +113,7 @@ static NSString *const kChooseSignUpTypeSegueIdentifier = @"сhooseSignUpTypeSeg
 {
     if ([segue.identifier isEqualToString:kEditProfileContainerSegueIdentifier]) {
         self.editProfileTableViewController = (BZREditProfileContainerController *)segue.destinationViewController;
+        self.editProfileTableViewController.scrollNeeded = YES;
         [self.editProfileTableViewController viewWillAppear:YES];
     } else if ([segue.identifier isEqualToString:kChooseSignUpTypeSegueIdentifier]) {
         BZRChooseSignUpTypeController *controller = (BZRChooseSignUpTypeController *)segue.destinationViewController;

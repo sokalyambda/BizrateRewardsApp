@@ -109,6 +109,10 @@ static NSString *const kCurrentPicker = @"currentPicker";
 - (void)showHidePickerViewWithAnimation:(UIView *)pickerView
 {
     if (![self isPickerExists:pickerView]) {
+        //enable table scrolling when picker exists (if needed)
+        if (self.containerController.scrollNeeded) {
+            [self.containerController.tableView setScrollEnabled:YES];
+        }
         
         [pickerView setFrame:CGRectMake(0, CGRectGetMaxY(self.parentView.bounds), CGRectGetWidth(self.parentView.frame), kPickerHeight)];
         [self.parentView addSubview:pickerView];
@@ -124,10 +128,21 @@ static NSString *const kCurrentPicker = @"currentPicker";
         animationPosition.duration = kAnimationDuration;
         animationPosition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
         
+        animationPosition.delegate = self;
+        [animationPosition setValue:kShowPickerAnimation forKey:kAnimationName];
+        [animationPosition setValue:pickerView forKey:kCurrentPicker];
+        
+        animationPosition.removedOnCompletion = YES;
+        
         pickerView.layer.position = toPoint;
         
         [pickerView.layer addAnimation:animationPosition forKey:kShowPickerAnimation];
     } else {
+        //disable table scrolling when picker doesn't exist (if needed)
+        if (self.containerController.scrollNeeded) {
+            [self.containerController.tableView setScrollEnabled:NO];
+        }
+        
         CGPoint toPoint = CGPointMake(0.f, CGRectGetMaxY(self.parentView.bounds));
         
         CABasicAnimation *hideAnimation = [CABasicAnimation animationWithKeyPath:@"position"];
@@ -140,6 +155,8 @@ static NSString *const kCurrentPicker = @"currentPicker";
         hideAnimation.delegate = self;
         [hideAnimation setValue:kHidePickerAnimation forKey:kAnimationName];
         [hideAnimation setValue:pickerView forKey:kCurrentPicker];
+        
+        hideAnimation.removedOnCompletion = YES;
         
         pickerView.layer.position = toPoint;
         [pickerView.layer addAnimation:hideAnimation forKey:kHidePickerAnimation];
@@ -161,7 +178,6 @@ static NSString *const kCurrentPicker = @"currentPicker";
 
 - (void)animationDidStart:(CAAnimation *)anim
 {
-    
 }
 
 - (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
@@ -225,12 +241,22 @@ static NSString *const kCurrentPicker = @"currentPicker";
 - (void)keyboardWillShowNotification:(NSNotification *)notification
 {
     [self removeExistedPicker];
-    self.containerController.savedKeyboardRect = [self getKeyboardFrameFromNotification:notification];
+    [self.containerController adjustTableViewInsetsWithPresentedRect:[self getKeyboardFrameFromNotification:notification]];
+    
+    //enable table view scrolling when keyboard exists (if needed)
+    if (self.containerController.scrollNeeded) {
+        [self.containerController.tableView setScrollEnabled:YES];
+    }
 }
 
 - (void)keyboardWillHideNotification:(NSNotification *)notification
 {
-    self.containerController.savedKeyboardRect = [self getKeyboardFrameFromNotification:notification];
+    [self.containerController adjustTableViewInsetsWithPresentedRect:[self getKeyboardFrameFromNotification:notification]];
+    
+    //disable table view scrolling when keyboard doesn't exist (if needed)
+    if (self.containerController.scrollNeeded) {
+        [self.containerController.tableView setScrollEnabled:NO];
+    }
 }
 
 - (CGRect)getKeyboardFrameFromNotification:(NSNotification *)notification
