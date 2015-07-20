@@ -11,4 +11,9 @@
 + (UIFont *)tutorialTitleFont;
 + (UIFont *)tutorialDesciptionFont;
 
++ (UIFont *)surveyPointsInscriptionFont;
++ (UIFont *)surveyPointsValueFont;
++ (UIFont *)surveyCongratsFont;
++ (UIFont *)surveyRemarkFont;
+
 @end
