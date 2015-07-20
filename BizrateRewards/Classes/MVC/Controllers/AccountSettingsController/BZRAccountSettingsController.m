@@ -192,7 +192,7 @@ static NSString *const kAccountSettingsContainerSegueIdentifier = @"accountSetti
     }
     
     if (image) {
-        CGRect thumbRect = self.userIcon.bounds;
+//        CGRect thumbRect = self.userIcon.bounds;
         
         // adjust to aspect fit
 //        CGFloat k = image.size.width/image.size.height;

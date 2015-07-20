@@ -129,7 +129,7 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
     }];
     
     self.userNameLabel.text = self.currentProfile.fullName;
-    self.earnedPointsLabel.text = [NSString stringWithFormat:@"%d", self.currentProfile.pointsAmount];
+    self.earnedPointsLabel.text = [NSString stringWithFormat:@"%ld", (long)self.currentProfile.pointsAmount];
     
 #warning User Points
     self.currentProfile.pointsRequired = 2000;
