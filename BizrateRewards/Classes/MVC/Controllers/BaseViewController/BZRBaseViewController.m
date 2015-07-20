@@ -9,11 +9,13 @@
 #import "BZRBaseViewController.h"
 #import "BZRBaseNavigationController.h"
 
-#import "AppDelegate.h"
+#import "BZRStatusBarManager.h"
 
 @interface BZRBaseViewController ()
 
 @property (weak, nonatomic) BZRBaseNavigationController *baseNavigationController;
+
+@property (weak, nonatomic) UIWindow *mainWindow;
 
 @end
 
@@ -55,13 +57,7 @@
 
 - (void)setupStatusBarAppearance
 {
-    UIWindow *mainWindow = ((AppDelegate *)[UIApplication
-                                         sharedApplication].delegate).window;
-    NSInteger statusBarHeight = CGRectGetHeight([UIApplication sharedApplication].statusBarFrame);
-
-    UIView *statusBarView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(mainWindow.frame), statusBarHeight)];
-    statusBarView.backgroundColor = [UIColor blackColor];
-    [mainWindow addSubview:statusBarView];
+    [[BZRStatusBarManager sharedManager] addCustomStatusBarView];
 }
 
 @end

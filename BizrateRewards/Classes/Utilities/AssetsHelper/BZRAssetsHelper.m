@@ -26,12 +26,21 @@
 
 + (void)imageFromAssetURL:(NSURL *)url withCompletion:(AssetsRetrievingCompletion)completion
 {
-    PHImageRequestOptions *option = [PHImageRequestOptions new];
-    option.resizeMode = PHImageRequestOptionsResizeModeExact;
-    option.deliveryMode = PHImageRequestOptionsDeliveryModeHighQualityFormat;
     if (url) {
-        PHFetchResult *result = [PHAsset fetchAssetsWithALAssetURLs:@[url] options:nil];
-        [[PHImageManager defaultManager] requestImageDataForAsset:result.firstObject options:option resultHandler:^(NSData *imageData, NSString *dataUTI, UIImageOrientation orientation, NSDictionary *info) {
+        PHImageRequestOptions *imageRequestOptions = [PHImageRequestOptions new];
+        
+        imageRequestOptions.resizeMode = PHImageRequestOptionsResizeModeExact;
+        imageRequestOptions.networkAccessAllowed = YES;
+        imageRequestOptions.synchronous = YES;
+        imageRequestOptions.version = PHImageRequestOptionsVersionOriginal;
+        
+        PHFetchOptions *fetchOptions = [[PHFetchOptions alloc] init];
+        fetchOptions.includeAllBurstAssets = YES;
+        fetchOptions.includeHiddenAssets = YES;
+        
+        PHFetchResult *result = [PHAsset fetchAssetsWithALAssetURLs:@[url] options:fetchOptions];
+        [[PHImageManager defaultManager] requestImageDataForAsset:result.firstObject options:imageRequestOptions resultHandler:^(NSData *imageData, NSString *dataUTI, UIImageOrientation orientation, NSDictionary *info) {
+            
             UIImage *image = [UIImage imageWithData:imageData];
             completion(image, info);
         }];

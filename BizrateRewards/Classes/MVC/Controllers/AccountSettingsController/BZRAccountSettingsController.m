@@ -15,6 +15,7 @@
 
 #import "BZRStorageManager.h"
 #import "BZRDataManager.h"
+#import "BZRStatusBarManager.h"
 
 #import "BZRAssetsHelper.h"
 
@@ -164,12 +165,13 @@ static NSString *const kAccountSettingsContainerSegueIdentifier = @"accountSetti
         return;
     } else {
         [self showImagePickerWithType:UIImagePickerControllerSourceTypeCamera];
+        [[BZRStatusBarManager sharedManager] hideCustomStatusBarView];
     }
 }
 
 - (void)choosePhotoFromExistingImages
 {
-    [self showImagePickerWithType:UIImagePickerControllerSourceTypePhotoLibrary];
+    [self showImagePickerWithType:UIImagePickerControllerSourceTypeSavedPhotosAlbum];
 }
 
 - (void)showImagePickerWithType:(UIImagePickerControllerSourceType)type
@@ -179,7 +181,7 @@ static NSString *const kAccountSettingsContainerSegueIdentifier = @"accountSetti
     picker.delegate = self;
     picker.sourceType = type;
     picker.mediaTypes = @[(NSString*)kUTTypeImage];
-    [self presentViewController:picker animated:YES completion:NULL];
+    [self presentViewController:picker animated:YES completion:nil];
 }
 
 #pragma mark - UIImagePickerControllerDelegate methods
@@ -214,10 +216,12 @@ static NSString *const kAccountSettingsContainerSegueIdentifier = @"accountSetti
             [BZRAssetsHelper writeImage:image withMediaInfo:info toPhotoAlbumWithCompletion:^(NSURL *assetURL, NSError *error) {
                 weakSelf.currentProfile.avatarURL = assetURL;
                 [picker dismissViewControllerAnimated:YES completion:nil];
+                [[BZRStatusBarManager sharedManager] showCustomStatusBarView];
             }];
         } else {
             self.currentProfile.avatarURL = imagePath;
             [picker dismissViewControllerAnimated:YES completion:nil];
+            [[BZRStatusBarManager sharedManager] showCustomStatusBarView];
         }
     }
 }
@@ -225,6 +229,7 @@ static NSString *const kAccountSettingsContainerSegueIdentifier = @"accountSetti
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
     [picker dismissViewControllerAnimated:YES completion:nil];
+    [[BZRStatusBarManager sharedManager] showCustomStatusBarView];
 }
 
 #pragma mark - Navigation

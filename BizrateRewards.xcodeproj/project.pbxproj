@@ -82,7 +82,11 @@
 		58ACC08F1B39AD490081E546 /* BZRDashboardController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ACC08E1B39AD490081E546 /* BZRDashboardController.m */; };
 		58ADC0E41B4BDCC200DF849F /* BZRFinishSurveyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ADC0E31B4BDCC200DF849F /* BZRFinishSurveyController.m */; };
 		58ADC0E81B4BDCE400DF849F /* BZRSecondTutorialController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ADC0E71B4BDCE400DF849F /* BZRSecondTutorialController.m */; };
+		58AF4AF01B5BB6F10052C7E5 /* UIImagePickerController+AdjustStatusBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AF4AEF1B5BB6F10052C7E5 /* UIImagePickerController+AdjustStatusBar.m */; };
+		58AF4AF41B5C13A30052C7E5 /* BZRStatusBarManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AF4AF31B5C13A30052C7E5 /* BZRStatusBarManager.m */; };
 		58B574E11B38AE200083A80A /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B574E01B38AE200083A80A /* KeychainItemWrapper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		58C770E01B5CD07400E9031F /* BZRTutorialTitleLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C770DF1B5CD07400E9031F /* BZRTutorialTitleLabel.m */; };
+		58C770E31B5CD08E00E9031F /* BZRTutorialDescriptionLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C770E21B5CD08E00E9031F /* BZRTutorialDescriptionLabel.m */; };
 		58DF1AE81B584CD000D28951 /* BZRAssetsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 58DF1AE71B584CD000D28951 /* BZRAssetsHelper.m */; };
 		58E238A41B5AA0B8007F8664 /* UIFont+Styles.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E238A31B5AA0B8007F8664 /* UIFont+Styles.m */; };
 		58E512431B4C70AF00865694 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 58E512391B4C70AF00865694 /* OpenSans-Bold.ttf */; };
@@ -255,8 +259,16 @@
 		58ADC0E31B4BDCC200DF849F /* BZRFinishSurveyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRFinishSurveyController.m; path = Classes/MVC/Controllers/SurveyViewController/FinishSurveyController/BZRFinishSurveyController.m; sourceTree = "<group>"; };
 		58ADC0E61B4BDCE400DF849F /* BZRSecondTutorialController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRSecondTutorialController.h; path = Classes/MVC/Controllers/TutorialViewControllers/SecondTutorialController/BZRSecondTutorialController.h; sourceTree = "<group>"; };
 		58ADC0E71B4BDCE400DF849F /* BZRSecondTutorialController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRSecondTutorialController.m; path = Classes/MVC/Controllers/TutorialViewControllers/SecondTutorialController/BZRSecondTutorialController.m; sourceTree = "<group>"; };
+		58AF4AEE1B5BB6F10052C7E5 /* UIImagePickerController+AdjustStatusBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImagePickerController+AdjustStatusBar.h"; path = "Classes/Categories/UIImagePickerView/AdjustStatusBar/UIImagePickerController+AdjustStatusBar.h"; sourceTree = "<group>"; };
+		58AF4AEF1B5BB6F10052C7E5 /* UIImagePickerController+AdjustStatusBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImagePickerController+AdjustStatusBar.m"; path = "Classes/Categories/UIImagePickerView/AdjustStatusBar/UIImagePickerController+AdjustStatusBar.m"; sourceTree = "<group>"; };
+		58AF4AF21B5C13A30052C7E5 /* BZRStatusBarManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRStatusBarManager.h; path = Classes/Utilities/StatusBarHandler/BZRStatusBarManager.h; sourceTree = "<group>"; };
+		58AF4AF31B5C13A30052C7E5 /* BZRStatusBarManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRStatusBarManager.m; path = Classes/Utilities/StatusBarHandler/BZRStatusBarManager.m; sourceTree = "<group>"; };
 		58B574DF1B38AE200083A80A /* KeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KeychainItemWrapper.h; path = Classes/Utilities/KeyChain/KeychainItemWrapper.h; sourceTree = "<group>"; };
 		58B574E01B38AE200083A80A /* KeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KeychainItemWrapper.m; path = Classes/Utilities/KeyChain/KeychainItemWrapper.m; sourceTree = "<group>"; };
+		58C770DE1B5CD07400E9031F /* BZRTutorialTitleLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRTutorialTitleLabel.h; path = Classes/MVC/Views/Styles/TutorialStyleLabels/TutorialTitleLabel/BZRTutorialTitleLabel.h; sourceTree = "<group>"; };
+		58C770DF1B5CD07400E9031F /* BZRTutorialTitleLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRTutorialTitleLabel.m; path = Classes/MVC/Views/Styles/TutorialStyleLabels/TutorialTitleLabel/BZRTutorialTitleLabel.m; sourceTree = "<group>"; };
+		58C770E11B5CD08E00E9031F /* BZRTutorialDescriptionLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRTutorialDescriptionLabel.h; path = Classes/MVC/Views/Styles/TutorialStyleLabels/TutorialDescriptionLabel/BZRTutorialDescriptionLabel.h; sourceTree = "<group>"; };
+		58C770E21B5CD08E00E9031F /* BZRTutorialDescriptionLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRTutorialDescriptionLabel.m; path = Classes/MVC/Views/Styles/TutorialStyleLabels/TutorialDescriptionLabel/BZRTutorialDescriptionLabel.m; sourceTree = "<group>"; };
 		58DF1AE61B584CD000D28951 /* BZRAssetsHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRAssetsHelper.h; path = Classes/Utilities/AssetsHelper/BZRAssetsHelper.h; sourceTree = "<group>"; };
 		58DF1AE71B584CD000D28951 /* BZRAssetsHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRAssetsHelper.m; path = Classes/Utilities/AssetsHelper/BZRAssetsHelper.m; sourceTree = "<group>"; };
 		58E238A21B5AA0B8007F8664 /* UIFont+Styles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIFont+Styles.h"; path = "Classes/Categories/UIFont/UIFont+Styles/UIFont+Styles.h"; sourceTree = "<group>"; };
@@ -311,10 +323,9 @@
 		58219EDB1B38A06600A9541A /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				58F49FBF1B417F06002F93EE /* PushNotificationsService */,
+				58C770D91B5CCF6000E9031F /* Services */,
 				58A91F441B3ABE480032607F /* Managers */,
 				58A91F3D1B3A932F0032607F /* Protocols */,
-				58A91F301B3A821C0032607F /* LocationObserver */,
 				58219EE41B38A21F00A9541A /* Server APIs */,
 				58219EE31B38A21900A9541A /* Utilities */,
 				58219EE11B38A1F300A9541A /* Categories */,
@@ -380,13 +391,9 @@
 		58219EE31B38A21900A9541A /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				58DF1AE51B584CA800D28951 /* AssetsHelper */,
-				589BCCD61B565DC800D49056 /* SerialViewConstructor */,
-				58A9FE8C1B53A4FB00DBE379 /* TermsAndConditionsHelper */,
 				589420A21B452616004BAF48 /* PickersHelper */,
-				589420901B451B96004BAF48 /* PickerHolder */,
+				589BCCD61B565DC800D49056 /* SerialViewConstructor */,
 				5878D3DE1B4426A000A917D0 /* CommonDateFormatter */,
-				5878D3DA1B43F8D500A917D0 /* ReachabilityHelper */,
 				58F49FC31B4181D2002F93EE /* GlobalConstants */,
 				58219EED1B38A28600A9541A /* Validator */,
 				58219EEC1B38A27F00A9541A /* KeyChain */,
@@ -420,6 +427,8 @@
 		58219EE61B38A23400A9541A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				58C770DA1B5CCFF400E9031F /* Styles */,
+				589420901B451B96004BAF48 /* PickerHolder */,
 				589BCCDD1B56715100D49056 /* EditProfileFIeld */,
 				585641B31B4DA57E007E7368 /* AuthorizationField */,
 				84AD3EFE1B4587B100C294AE /* ProgressView */,
@@ -523,6 +532,7 @@
 		58219EF01B38A2AA00A9541A /* UIImagePickerController */ = {
 			isa = PBXGroup;
 			children = (
+				58AF4AED1B5BB6BE0052C7E5 /* AdjustStatusBar */,
 				58219F121B38A3B600A9541A /* UIImagePickerController+FixOrientation */,
 			);
 			name = UIImagePickerController;
@@ -997,6 +1007,8 @@
 		58A91F441B3ABE480032607F /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				58AF4AF11B5C137E0052C7E5 /* StatusBarManager */,
+				58A91F301B3A821C0032607F /* LocationObserver */,
 				58A91F451B3ABE500032607F /* StorageManager */,
 			);
 			name = Managers;
@@ -1169,6 +1181,70 @@
 				58ADC0E71B4BDCE400DF849F /* BZRSecondTutorialController.m */,
 			);
 			name = SecondTutorialController;
+			sourceTree = "<group>";
+		};
+		58AF4AED1B5BB6BE0052C7E5 /* AdjustStatusBar */ = {
+			isa = PBXGroup;
+			children = (
+				58AF4AEE1B5BB6F10052C7E5 /* UIImagePickerController+AdjustStatusBar.h */,
+				58AF4AEF1B5BB6F10052C7E5 /* UIImagePickerController+AdjustStatusBar.m */,
+			);
+			name = AdjustStatusBar;
+			sourceTree = "<group>";
+		};
+		58AF4AF11B5C137E0052C7E5 /* StatusBarManager */ = {
+			isa = PBXGroup;
+			children = (
+				58AF4AF21B5C13A30052C7E5 /* BZRStatusBarManager.h */,
+				58AF4AF31B5C13A30052C7E5 /* BZRStatusBarManager.m */,
+			);
+			name = StatusBarManager;
+			sourceTree = "<group>";
+		};
+		58C770D91B5CCF6000E9031F /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				5878D3DA1B43F8D500A917D0 /* ReachabilityHelper */,
+				58A9FE8C1B53A4FB00DBE379 /* TermsAndConditionsHelper */,
+				58DF1AE51B584CA800D28951 /* AssetsHelper */,
+				58F49FBF1B417F06002F93EE /* PushNotificationsService */,
+			);
+			name = Services;
+			sourceTree = "<group>";
+		};
+		58C770DA1B5CCFF400E9031F /* Styles */ = {
+			isa = PBXGroup;
+			children = (
+				58C770DB1B5CCFFF00E9031F /* TutorialStyleLabels */,
+			);
+			name = Styles;
+			sourceTree = "<group>";
+		};
+		58C770DB1B5CCFFF00E9031F /* TutorialStyleLabels */ = {
+			isa = PBXGroup;
+			children = (
+				58C770DD1B5CD01300E9031F /* TutorialTitleLabel */,
+				58C770DC1B5CD00A00E9031F /* TutorialDescriptionLabel */,
+			);
+			name = TutorialStyleLabels;
+			sourceTree = "<group>";
+		};
+		58C770DC1B5CD00A00E9031F /* TutorialDescriptionLabel */ = {
+			isa = PBXGroup;
+			children = (
+				58C770E11B5CD08E00E9031F /* BZRTutorialDescriptionLabel.h */,
+				58C770E21B5CD08E00E9031F /* BZRTutorialDescriptionLabel.m */,
+			);
+			name = TutorialDescriptionLabel;
+			sourceTree = "<group>";
+		};
+		58C770DD1B5CD01300E9031F /* TutorialTitleLabel */ = {
+			isa = PBXGroup;
+			children = (
+				58C770DE1B5CD07400E9031F /* BZRTutorialTitleLabel.h */,
+				58C770DF1B5CD07400E9031F /* BZRTutorialTitleLabel.m */,
+			);
+			name = TutorialTitleLabel;
 			sourceTree = "<group>";
 		};
 		58DF1AE51B584CA800D28951 /* AssetsHelper */ = {
@@ -1434,6 +1510,7 @@
 				58219F0D1B38A38600A9541A /* UIView+MakeFromXib.m in Sources */,
 				58A59E381B3EE99400A5F30C /* BZRGiftCardsListController.m in Sources */,
 				589420AE1B4529C8004BAF48 /* BZRZeroInsetsSeparatorCell.m in Sources */,
+				58AF4AF41B5C13A30052C7E5 /* BZRStatusBarManager.m in Sources */,
 				586ED0D11B46E8F500FEB250 /* UIView+SoftRemoving.m in Sources */,
 				58A59E3C1B3EE9E300A5F30C /* BZRSurveyViewController.m in Sources */,
 				589BCCD91B565E0400D49056 /* BZRSerialViewConstructor.m in Sources */,
@@ -1467,6 +1544,7 @@
 				5878D3E11B4426E000A917D0 /* BZRCommonDateFormatter.m in Sources */,
 				58ACC0811B39689F0081E546 /* BZRSignUpController.m in Sources */,
 				585641B61B4DA5AA007E7368 /* BZRAuthorizationField.m in Sources */,
+				58AF4AF01B5BB6F10052C7E5 /* UIImagePickerController+AdjustStatusBar.m in Sources */,
 				58901CF41B500E1B00D4A16B /* BZRBaseNavigationController.m in Sources */,
 				58219F191B38A3F600A9541A /* NSDictionary+JSONRepresentation.m in Sources */,
 				84AD3F011B4587DA00C294AE /* BZRProgressView.m in Sources */,
@@ -1475,6 +1553,7 @@
 				58ACC08B1B39A35D0081E546 /* BZRBaseAuthController.m in Sources */,
 				58219F051B38A33E00A9541A /* UIViewController+fixOrientation.m in Sources */,
 				58219EFC1B38A30300A9541A /* BZRValidator.m in Sources */,
+				58C770E01B5CD07400E9031F /* BZRTutorialTitleLabel.m in Sources */,
 				589BCCDC1B565E7D00D49056 /* BZRBaseViewController.m in Sources */,
 				5894208B1B450FF6004BAF48 /* BZRAccountSettingsContaiterController.m in Sources */,
 				58ACC07E1B3968830081E546 /* BZRSignInController.m in Sources */,
@@ -1486,6 +1565,7 @@
 				58ACC0871B3968DA0081E546 /* BZRGetStartedController.m in Sources */,
 				58A5BEC41B415C7000B2BC27 /* BZRStarView.m in Sources */,
 				585813AE1B3C23840087AEE2 /* BZRSurvey.m in Sources */,
+				58C770E31B5CD08E00E9031F /* BZRTutorialDescriptionLabel.m in Sources */,
 				58A59E281B3EE00B00A5F30C /* BZRPushNotificationsAccessController.m in Sources */,
 				58A59E2C1B3EE91000A5F30C /* BZRFinishTutorialController.m in Sources */,
 			);
