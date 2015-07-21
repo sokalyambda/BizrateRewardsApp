@@ -112,17 +112,18 @@ static NSString *const kAccountSettingsContainerSegueIdentifier = @"accountSetti
 - (void)signOut
 {
     WEAK_SELF;
-    [self.dataManager signOutOnSuccess:^(BOOL success, NSError *error, NSInteger responseStatusCode) {
-        if (success) {
-            BZRBaseNavigationController *navigationController = (BZRBaseNavigationController *)weakSelf.presentingViewController;
-            
-            [CATransaction begin];
-            [CATransaction setCompletionBlock:^{
-                [weakSelf dismissViewControllerAnimated:YES completion:nil];
-            }];
-            [navigationController popToRootViewControllerAnimated:YES];;
-            [CATransaction commit];
-        }
+    [self.dataManager signOutOnSuccess:^(id responseObject) {
+        BZRBaseNavigationController *navigationController = (BZRBaseNavigationController *)weakSelf.presentingViewController;
+        
+        [CATransaction begin];
+        [CATransaction setCompletionBlock:^{
+            [weakSelf dismissViewControllerAnimated:YES completion:nil];
+        }];
+        [navigationController popToRootViewControllerAnimated:YES];;
+        [CATransaction commit];
+        
+    } onFailure:^(NSError *error) {
+        
     }];
 }
 

@@ -9,31 +9,20 @@
 #import "BZRSignUpController.h"
 #import "BZRDashboardController.h"
 
-#import "BZRDataManager.h"
 #import "BZRStorageManager.h"
 #import "BZRCommonDateFormatter.h"
 
 #import "BZRUserProfile.h"
 
-@interface BZRSignUpController ()
+#import "BZRAuthorizationService.h"
 
-@property (strong, nonatomic) BZRDataManager *dataManager;
+@interface BZRSignUpController ()
 
 @property (weak, nonatomic) IBOutlet BZRAuthorizationField *confirmPasswordField;
 
 @end
 
 @implementation BZRSignUpController
-
-#pragma mark - Accessors
-
-- (BZRDataManager *)dataManager
-{
-    if (!_dataManager) {
-        _dataManager = [BZRDataManager sharedInstance];
-    }
-    return _dataManager;
-}
 
 #pragma mark - View Lifecycle
 
@@ -58,35 +47,24 @@
 {
     WEAK_SELF;
     if ([self.validator validateEmailField:self.userNameField andPasswordField:self.passwordField andConfirmPasswordField:self.confirmPasswordField]) {
-        [BZRReachabilityHelper checkConnectionOnSuccess:^{
-            [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
-            [weakSelf.dataManager getClientCredentialsOnSuccess:^(BOOL success, NSError *error, NSInteger responseStatusCode) {
-                if (success) {
-                    [weakSelf.dataManager signUpWithUserFirstName:weakSelf.temporaryProfile.firstName
-                                                  andUserLastName:weakSelf.temporaryProfile.lastName
-                                                         andEmail:weakSelf.temporaryProfile.email
-                                                      andPassword:weakSelf.passwordField.text
-                                                   andDateOfBirth:[[BZRCommonDateFormatter commonDateFormatter] stringFromDate:weakSelf.temporaryProfile.dateOfBirth]
-                                                        andGender:[weakSelf.temporaryProfile.genderString substringToIndex:1]
-                                                       withResult:^(BOOL success, NSError *error, NSInteger responseStatusCode) {
-                                                           [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-                                                           if (!success) {
-                                                               ShowFailureResponseAlertWithError(error);
-                                                           } else {
-                                                               BZRDashboardController *controller = [weakSelf.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRDashboardController class])];
-                                                               controller.updateNeeded = YES;
-                                                               [weakSelf.navigationController pushViewController:controller animated:YES];
-                                                           }
-                    }];
-                    
-                } else {
-                    ShowFailureResponseAlertWithError(error);
-                    [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-                }
-            }];
-        } failure:^{
-            ShowAlert(InternetIsNotReachableString);
-        }];
+        
+        self.temporaryProfile.email = self.userNameField.text;
+        
+        [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
+        [BZRAuthorizationService signUpWithUserFirstName:weakSelf.temporaryProfile.firstName
+                                         andUserLastName:weakSelf.temporaryProfile.lastName
+                                                andEmail:weakSelf.temporaryProfile.email
+                                             andPassword:self.passwordField.text
+                                          andDateOfBirth:[[BZRCommonDateFormatter commonDateFormatter] stringFromDate:weakSelf.temporaryProfile.dateOfBirth]
+                                               andGender:[weakSelf.temporaryProfile.genderString substringToIndex:1] onSuccess:^(BZRApplicationToken *token) {
+                                                   [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+                                                   BZRDashboardController *controller = [weakSelf.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRDashboardController class])];
+                                                   controller.updateNeeded = YES;
+                                                   [weakSelf.navigationController pushViewController:controller animated:YES];
+                                               } onFailure:^(NSError *error) {
+                                                   ShowFailureResponseAlertWithError(error);
+                                                   [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+                                               }];
     } else {
 //        ShowAlert(self.validator.validationErrorString);
         [self.validator cleanValidationErrorString];

@@ -7,10 +7,12 @@
 //
 
 #import "BZRStorageManager.h"
-#import "BZRDataManager.h"
 
 #import "BZRAssetsHelper.h"
 #import "BZRCommonNumberFormatter.h"
+
+#import "BZRSurveysService.h"
+#import "BZRUserProfileService.h"
 
 #import "BZRDashboardController.h"
 #import "BZRSurveyViewController.h"
@@ -32,7 +34,6 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
 @property (weak, nonatomic) IBOutlet UILabel *earnedPointsLabel;
 
 @property (strong, nonatomic) BZRStorageManager *storageManager;
-@property (strong, nonatomic) BZRDataManager *dataManager;
 
 @property (strong, nonatomic) BZRUserProfile *currentProfile;
 
@@ -48,14 +49,6 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
         _storageManager = [BZRStorageManager sharedStorage];
     }
     return _storageManager;
-}
-
-- (BZRDataManager *)dataManager
-{
-    if (!_dataManager) {
-        _dataManager = [BZRDataManager sharedInstance];
-    }
-    return _dataManager;
 }
 
 - (BZRUserProfile *)currentProfile
@@ -88,25 +81,22 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
 - (IBAction)takeSurveyClick:(id)sender
 {
     WEAK_SELF;
-    [BZRReachabilityHelper checkConnectionOnSuccess:^{
-        [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
-        [weakSelf.dataManager getSurveysListWithResult:^(BOOL success, NSArray *surveysList, NSError *error) {
-            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-            if (!success) {
-                ShowErrorAlert(error);
-            } else {
-                BZRSurveyViewController *controller = [weakSelf.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRSurveyViewController class])];
-                if (surveysList.count) {
-                    controller.currentSurvey = [surveysList firstObject];
-                    [weakSelf.navigationController pushViewController:controller animated:YES];
-                } else {
-                    ShowAlert(NSLocalizedString(@"There are no surveys for you", nil));
-                    return;
-                }
-            }
-        }];
-    } failure:^{
-        ShowAlert(InternetIsNotReachableString);
+    
+    [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
+    
+    [BZRSurveysService getSurveysListOnSuccess:^(NSArray *surveys) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        BZRSurveyViewController *controller = [weakSelf.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRSurveyViewController class])];
+        if (surveys.count) {
+            controller.currentSurvey = [surveys firstObject];
+            [weakSelf.navigationController pushViewController:controller animated:YES];
+        } else {
+            ShowAlert(NSLocalizedString(@"There are no surveys for you", nil));
+            return;
+        }
+    } onFailure:^(NSError *error) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        ShowFailureResponseAlertWithError(error);
     }];
 }
 
@@ -139,18 +129,15 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
 - (void)getCurrentUserProfile
 {
     WEAK_SELF;
-    [BZRReachabilityHelper checkConnectionOnSuccess:^{
-        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        [weakSelf.dataManager getCurrentUserWithCompletion:^(BOOL success, NSError *error, NSInteger responseStatusCode) {
-            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-            if (success) {
-                [weakSelf updateUserInformation];
-                [weakSelf calculateProgress];
-                weakSelf.updateNeeded = NO;
-            }
-        }];
-    } failure:^{
-        ShowAlert(InternetIsNotReachableString);
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [BZRUserProfileService getCurrentUserOnSuccess:^(BZRUserProfile *userProfile) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        [weakSelf updateUserInformation];
+        [weakSelf calculateProgress];
+        weakSelf.updateNeeded = NO;
+    } onFailure:^(NSError *error) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        ShowFailureResponseAlertWithError(error);
     }];
 }
 

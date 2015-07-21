@@ -23,6 +23,8 @@
 @property (assign, nonatomic) NSInteger pointsAmount;
 @property (assign, nonatomic) NSInteger pointsRequired;
 
+@property (strong, nonatomic) NSArray *eligibleSurveys;
+
 @property (assign, nonatomic) BOOL isMale;
 
 - (void)setUserProfileToDefaultsForKey:(NSString *)key;

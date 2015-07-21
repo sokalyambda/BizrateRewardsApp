@@ -13,7 +13,9 @@
 #import "BZRCommonDateFormatter.h"
 #import "BZRSerialViewConstructor.h"
 
-#import "BZRDataManager.h"
+#import "BZRStorageManager.h"
+
+#import "BZRUserProfileService.h"
 
 #import "BZREditProfileField.h"
 
@@ -22,8 +24,6 @@ static NSString *const kEditProfileContainerSegueIdentifier = @"editProfileConta
 @interface BZREditProfileController ()
 
 @property (weak, nonatomic) BZREditProfileContainerController *container;
-
-@property (strong, nonatomic) BZRDataManager *dataManager;
 
 @property (strong, nonatomic) BZRValidator *validator;
 
@@ -34,14 +34,6 @@ static NSString *const kEditProfileContainerSegueIdentifier = @"editProfileConta
 @implementation BZREditProfileController
 
 #pragma mark - Accessors
-
-- (BZRDataManager *)dataManager
-{
-    if (!_dataManager) {
-        _dataManager = [BZRDataManager sharedInstance];
-    }
-    return _dataManager;
-}
 
 - (BZRValidator *)validator
 {
@@ -89,24 +81,16 @@ static NSString *const kEditProfileContainerSegueIdentifier = @"editProfileConta
                                     emailField:self.container.emailField
                               dateOfBirthField:self.container.dateOfBirthField
                                    genderField:self.container.genderField]) {
-        [BZRReachabilityHelper checkConnectionOnSuccess:^{
-            [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
-            [weakSelf.dataManager updateCurrentUserWithFirstName:self.container.firstNameField.text
-                                                     andLastName:self.container.lastNameField.text
-                                                  andDateOfBirth:self.container.dateOfBirthField.text andGender:[self.container.genderField.text substringToIndex:1] withCompletion:^(BOOL success, NSError *error, NSInteger responseStatusCode) {
-                                                      [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-                                                      if (!success) {
-                                                          ShowFailureResponseAlertWithError(error);
-                                                      } else {
-                                                          [weakSelf.navigationController popViewControllerAnimated:YES];
-                                                      }
-                                                      
-                                                  }];
-        } failure:^{
-            ShowAlert(InternetIsNotReachableString);
+        [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
+        [BZRUserProfileService updateCurrentUserWithFirstName:self.container.firstNameField.text andLastName:self.container.lastNameField.text andDateOfBirth:self.container.dateOfBirthField.text andGender:[self.container.genderField.text substringToIndex:1] onSuccess:^(BZRUserProfile *userProfile) {
+            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+            [weakSelf.navigationController popViewControllerAnimated:YES];
+        } onFailure:^(NSError *error) {
+            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+            ShowFailureResponseAlertWithError(error);
         }];
     } else {
-        ShowAlert(self.validator.validationErrorString);
+//        ShowAlert(self.validator.validationErrorString);
         [self.validator cleanValidationErrorString];
     }
 }

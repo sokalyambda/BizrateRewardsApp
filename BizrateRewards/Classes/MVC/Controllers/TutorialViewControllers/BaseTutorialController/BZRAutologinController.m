@@ -11,7 +11,7 @@
 #import "BZRFinishTutorialController.h"
 #import "BZRDashboardController.h"
 
-#import "BZRDataManager.h"
+#import "BZRAuthorizationService.h"
 
 #import "BZRKeychainHandler.h"
 
@@ -26,8 +26,6 @@ static NSString *const kStartTutorialSegueIdentirier = @"startTutorialSegue";
 
 @property (strong, nonatomic) NSString *savedPassword;
 @property (strong, nonatomic) NSString *savedUsername;
-
-@property (strong, nonatomic) BZRDataManager *dataManager;
 
 @end
 
@@ -53,20 +51,11 @@ static NSString *const kStartTutorialSegueIdentirier = @"startTutorialSegue";
     return _defaults;
 }
 
-- (BZRDataManager *)dataManager
-{
-    if (!_dataManager) {
-        _dataManager = [BZRDataManager sharedInstance];
-    }
-    return _dataManager;
-}
-
 #pragma mark - View Lifecycle
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//    [BZRDataManager sharedInstance];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -118,20 +107,15 @@ static NSString *const kStartTutorialSegueIdentirier = @"startTutorialSegue";
 - (void)autologin
 {
     WEAK_SELF;
-    [BZRReachabilityHelper checkConnectionOnSuccess:^{
-        [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
-        [weakSelf.dataManager signInWithUserName:weakSelf.savedUsername password:weakSelf.savedPassword withResult:^(BOOL success, NSError *error, NSInteger responseStatusCode) {
-            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-            if (!success) {
-                ShowFailureResponseAlertWithError(error);
-                [weakSelf goToFinishTutorialController];
-            } else {
-                [weakSelf goToDashboardController];
-            }
-        }];
-    } failure:^{
-        ShowAlert(InternetIsNotReachableString);
+    [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
+    [BZRAuthorizationService signInWithUserName:weakSelf.savedUsername password:weakSelf.savedPassword onSuccess:^(BZRApplicationToken *token) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        [weakSelf goToDashboardController];
+    } onFailure:^(NSError *error) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        ShowFailureResponseAlertWithError(error);
         [weakSelf goToFinishTutorialController];
+        
     }];
 }
 

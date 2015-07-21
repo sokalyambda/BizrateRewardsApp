@@ -10,7 +10,9 @@
 
 #import <CoreLocation/CoreLocation.h>
 
-@interface BZRLocationObserver ()<CLLocationManagerDelegate>
+#import "OB_Services.h"
+
+@interface BZRLocationObserver ()<CLLocationManagerDelegate, OB_LocationServicesDelegate>
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) CLLocation *updatedLocation;
@@ -48,7 +50,9 @@
         }
         
         _updatedLocation = nil;
-//        [_locationManager startUpdatingLocation];
+        [_locationManager startUpdatingLocation];
+        
+//        [self authorizeOfferBeamObserver];
         
     }
     return self;
@@ -89,6 +93,47 @@
 - (void)startUpdatingLocation
 {
     [self.locationManager startUpdatingLocation];
+//    [[OB_LocationServices sharedInstance].locationManager startUpdatingLocation];
+}
+
+#pragma mark - Private methods
+
+- (void)authorizeOfferBeamObserver
+{
+    [[OB_Services sharedInstance] requestAlwaysAuthorization];
+    [OB_Services setLocationDelegate:self];
+}
+
+#pragma mark - OB_LocationServicesDelegate
+
+- (void)OB_receivedOnEnter:(NSDictionary *)data
+{
+    NSLog(@"received on enter %@", data);
+}
+
+- (void)OB_receivedOnExit:(NSDictionary *)data
+{
+    NSLog(@"received on exit %@", data);
+}
+
+- (void)send_message:(NSString *)str
+{
+    
+}
+
+- (void)OB_receivedOnBKEnter:(NSString *)beacon
+{
+    
+}
+
+-(void)OB_didEnterRegion:(CLRegion *)region
+{
+    
+}
+
+- (void)OB_didExitRegion:(CLRegion *)region
+{
+    
 }
 
 @end

@@ -8,31 +8,21 @@
 
 #import <AFNetworking/AFNetworking.h>
 
-#import "BZRUserProfile.h"
-#import "BZRUserToken.h"
-#import "BZRSurvey.h"
-
 #import "BZRApiConstants.h"
 
-typedef void(^SuccessBlock)(BOOL success, NSError *error, NSInteger responseStatusCode);
-
-typedef void(^SuccessUserTokenBlock)(BOOL success, BZRUserToken *userToken, NSError *error, NSInteger responseStatusCode);
-typedef void(^SuccessApplicationTokenBlock)(BOOL success, BZRApplicationToken *appToken, NSError *error);
-
-typedef void(^UserProfileBlock)(BOOL success, BZRUserProfile *userProfile, NSError *error);
 typedef void(^FacebookProfileBlock)(BOOL success, NSDictionary *facebookProfile, NSString *faceBookAccessToken, NSError *error);
-typedef void(^ImageUserBlock)(BOOL success, UIImage *image);
 
-typedef void(^SurveysBlock)(BOOL success, NSArray *surveysList, NSError *error);
+typedef void(^SuccessBlock)(id responseObject);
+typedef void(^FailureBlock)(NSError *error);
 
 @interface BZRNetworkManager : AFHTTPSessionManager
 
 @property (assign, nonatomic) AFNetworkReachabilityStatus reachabilityStatus;
 
 //sign up/in
-- (void)getClientCredentialsOnCompletion:(SuccessApplicationTokenBlock)completion;
+- (void)getClientCredentialsOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure;
 
-- (void)signInWithUserName:(NSString *)userName password:(NSString *)password withResult:(SuccessUserTokenBlock)result;
+- (void)signInWithUserName:(NSString *)userName password:(NSString *)password onSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure;
 
 - (void)signUpWithUserFirstName:(NSString *)firstName
                 andUserLastName:(NSString *)lastName
@@ -40,27 +30,27 @@ typedef void(^SurveysBlock)(BOOL success, NSArray *surveysList, NSError *error);
                     andPassword:(NSString *)password
                  andDateOfBirth:(NSString *)birthDate
                       andGender:(NSString *)gender
-                     withResult:(SuccessUserTokenBlock)result;
+                     onSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure;
 
-- (void)authorizeWithFacebookWithResult:(UserProfileBlock)result;
+- (void)authorizeWithFacebookOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure;
 
 //get user
-- (void)getCurrentUserWithCompletion:(UserProfileBlock)completion;
+- (void)getCurrentUserOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure;
 
 //getSurvey
-- (void)getSurveysListWithResult:(SurveysBlock)result;
+- (void)getSurveysListOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure;
 
 //update user
 - (void)updateCurrentUserWithFirstName:(NSString *)firstName
                            andLastName:(NSString *)lastName
                         andDateOfBirth:(NSString *)dateOfBirth
                              andGender:(NSString *)gender
-                        withCompletion:(UserProfileBlock)completion;
+                        onSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure;
 
 //send device token
-- (void)sendDeviceAPNSToken:(NSString *)token andDeviceIdentifier:(NSString *)udid withResult:(SuccessBlock)result;
+- (void)sendDeviceAPNSToken:(NSString *)token andDeviceIdentifier:(NSString *)udid onSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure;
 
 //post image
-- (void)postImage:(UIImage *)image withID:(NSInteger)ID result:(ImageUserBlock)result;
+- (void)postImage:(UIImage *)image withID:(NSInteger)ID onSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure;
 
 @end

@@ -60,6 +60,10 @@ void ShowAlert(NSString *message)
 
 void ShowFailureResponseAlertWithError(NSError *error)
 {
+    if (!error) {
+        return;
+    }
+    
     NSData *errData = error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey];
     NSString *jsonErrorString = [[NSString alloc] initWithData:errData encoding:NSUTF8StringEncoding];
     

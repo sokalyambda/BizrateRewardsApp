@@ -12,7 +12,7 @@
 
 #import "BZRKeychainHandler.h"
 
-#import "BZRDataManager.h"
+#import "BZRAuthorizationService.h"
 
 static NSString *const kDashboardSegueIdentifier = @"dashboardSegue";
 
@@ -25,8 +25,6 @@ static NSInteger const kNotRegisteredErrorCode = 400.f;
 
 @property (weak, nonatomic) IBOutlet UISwitch *rememberMeSwitch;
 
-@property (strong, nonatomic) BZRDataManager *dataManager;
-
 @property (assign, nonatomic, getter=isRememberMe) BOOL rememberMe;
 
 @property (strong, nonatomic) NSUserDefaults *defaults;
@@ -38,14 +36,6 @@ static NSInteger const kNotRegisteredErrorCode = 400.f;
 @synthesize rememberMe = _rememberMe;
 
 #pragma mark - Accessors
-
-- (BZRDataManager *)dataManager
-{
-    if (!_dataManager) {
-        _dataManager = [BZRDataManager sharedInstance];
-    }
-    return _dataManager;
-}
 
 - (BOOL)isRememberMe
 {
@@ -108,28 +98,23 @@ static NSInteger const kNotRegisteredErrorCode = 400.f;
     [self.incorrectEmailView setHidden:YES];
     WEAK_SELF;
     if ([self.validator validateEmailField:self.userNameField andPasswordField:self.passwordField]) {
-        [BZRReachabilityHelper checkConnectionOnSuccess:^{
-            [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
-            [weakSelf.dataManager signInWithUserName:weakSelf.userNameField.text password:weakSelf.passwordField.text withResult:^(BOOL success, NSError *error, NSInteger responseStatusCode) {
-                [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-                if (!success) {
-                    if (responseStatusCode == kNotRegisteredErrorCode) {
-                        [weakSelf.incorrectEmailView setHidden:NO];
-                        weakSelf.userNameField.errorImageName = kEmailErrorIconName;
-                    } else {
-                        ShowFailureResponseAlertWithError(error);
-                    }
-                } else {
-                    if (weakSelf.isRememberMe) {
-                        [BZRKeychainHandler storeCredentialsWithUsername:weakSelf.userNameField.text andPassword:weakSelf.passwordField.text];
-                    }
-                    [weakSelf performSegueWithIdentifier:kDashboardSegueIdentifier sender:weakSelf];
-                }
-            }];
-        } failure:^{
-            ShowAlert(InternetIsNotReachableString);
+        [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
+        [BZRAuthorizationService signInWithUserName:self.userNameField.text password:self.passwordField.text onSuccess:^(BZRApplicationToken *token) {
+            
+            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+            
+            if (weakSelf.isRememberMe) {
+                [BZRKeychainHandler storeCredentialsWithUsername:weakSelf.userNameField.text andPassword:weakSelf.passwordField.text];
+            }
+            [weakSelf performSegueWithIdentifier:kDashboardSegueIdentifier sender:weakSelf];
+            
+        } onFailure:^(NSError *error) {
+            
+            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+            
+            [weakSelf.incorrectEmailView setHidden:NO];
+            weakSelf.userNameField.errorImageName = kEmailErrorIconName;
         }];
-        
     } else {
 //        ShowAlert(self.validator.validationErrorString);
         [self.validator cleanValidationErrorString];

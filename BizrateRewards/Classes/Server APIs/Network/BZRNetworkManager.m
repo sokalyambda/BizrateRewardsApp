@@ -63,24 +63,21 @@ static NSString *const kClientSecretKey = @"8a9da763-9503-4093-82c2-6b22b8eb9a12
 
 #pragma mark - Authorization
 
-- (void)getClientCredentialsOnCompletion:(SuccessApplicationTokenBlock)completion
+- (void)getClientCredentialsOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure
 {
-    [self POST:@"oauth/token" parameters:@{@"grant_type" : GrantTypeClientCredentials,
+    [self POST:@"oauth/token" parameters:@{@"grant_type": GrantTypeClientCredentials,
                                            
-                                           @"client_id" : kClientIdKey,
+                                           @"client_id": kClientIdKey,
                                            
-                                           @"client_secret" : kClientSecretKey
+                                           @"client_secret": kClientSecretKey
                                            } success:^(NSURLSessionDataTask *task, id responseObject) {
-                                               
-                                               BZRApplicationToken *token = [[BZRApplicationToken alloc] initWithServerResponse:responseObject];
-                                               
-                                               completion(YES, token, nil);
+                                               success(responseObject);
                                            } failure:^(NSURLSessionDataTask *task, NSError *error) {
-                                               completion(NO, nil, error);
+                                               failure(error);
                                            }];
 }
 
-- (void)signInWithUserName:(NSString *)userName password:(NSString *)password withResult:(SuccessUserTokenBlock)result
+- (void)signInWithUserName:(NSString *)userName password:(NSString *)password onSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure
 {
     NSDictionary *parameter = @{@"username" : userName,
                                 @"password" : password,
@@ -88,16 +85,9 @@ static NSString *const kClientSecretKey = @"8a9da763-9503-4093-82c2-6b22b8eb9a12
                                 @"client_id" : kClientIdKey,
                                 @"client_secret" : kClientSecretKey};
     [self POST:@"oauth/token" parameters:parameter success:^(NSURLSessionDataTask *task, id responseObject) {
-        
-        NSHTTPURLResponse *response = (NSHTTPURLResponse*)task.response;
-        
-        BZRUserToken *token = [[BZRUserToken alloc] initWithServerResponse:responseObject];
-        
-        return result(YES, token, nil, response.statusCode);
+        success(responseObject);
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        
-        NSHTTPURLResponse *response = (NSHTTPURLResponse*)task.response;
-        return result(NO, nil, error, response.statusCode);
+        failure(error);
     }];
 }
 
@@ -107,7 +97,7 @@ static NSString *const kClientSecretKey = @"8a9da763-9503-4093-82c2-6b22b8eb9a12
                     andPassword:(NSString *)password
                  andDateOfBirth:(NSString *)birthDate
                       andGender:(NSString *)gender
-                     withResult:(SuccessUserTokenBlock)result
+                      onSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure
 {
     NSDictionary *parameters = @{@"firstname": firstName,
                                 @"lastname": lastName,
@@ -119,34 +109,36 @@ static NSString *const kClientSecretKey = @"8a9da763-9503-4093-82c2-6b22b8eb9a12
     
     WEAK_SELF;
     [weakSelf POST:@"user/create" parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
-        
-        BZRUserToken *token = [[BZRUserToken alloc] initWithServerResponse:responseObject];
-        
-        return result(YES, token, nil, 0);
+        success(responseObject);
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        return result(NO, nil, error, 0);
+        failure(error);
     }];
 }
 
-- (void)authorizeWithFacebookWithResult:(UserProfileBlock)result
+- (void)authorizeWithFacebookOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure
 {
     WEAK_SELF;
-    [self tryLoginWithFacebookOnSuccess:^(BOOL success, NSDictionary *facebookProfile, NSString *faceBookAccessToken, NSError *error) {
+    [self tryLoginWithFacebookOnSuccess:^(BOOL isSuccess, NSDictionary *facebookProfile, NSString *faceBookAccessToken, NSError *error) {
         if (success) {
             [weakSelf POST:@"user/facebook" parameters:@{@"fb_access_token" : faceBookAccessToken} success:^(NSURLSessionDataTask *task, id responseObject) {
                 
-                BZRUserProfile *userProfile = [[BZRUserProfile alloc] initWithServerResponse:responseObject];
+//                BZRUserProfile *userProfile = [[BZRUserProfile alloc] initWithServerResponse:responseObject];
+//                
+//                NSURL *userImageURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?width=200", [facebookProfile valueForKey:@"id"]]];
+//                
+//                userProfile.avatarURL = userImageURL;
+//                
+//                result(YES, userProfile, nil);
                 
-                NSURL *userImageURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?width=200", [facebookProfile valueForKey:@"id"]]];
+                success(responseObject);
                 
-                userProfile.avatarURL = userImageURL;
-                
-                result(YES, userProfile, nil);
             } failure:^(NSURLSessionDataTask *task, NSError *error) {
-                result(NO, nil, error);
+//                result(NO, nil, error);
+                failure(error);
             }];
         } else {
-            result(NO, nil, error);
+            failure(error);
+//            result(NO, nil, error);
         }
     }];
 }
@@ -194,32 +186,23 @@ static NSString *const kClientSecretKey = @"8a9da763-9503-4093-82c2-6b22b8eb9a12
 #pragma mark - GET
 #pragma mark - Current User
 
-- (void)getCurrentUserWithCompletion:(UserProfileBlock)completion
+- (void)getCurrentUserOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure
 {
     [self GET:@"user/me" parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-        BZRUserProfile *currentUserProfile = [[BZRUserProfile alloc] initWithServerResponse:responseObject];
-        completion(YES, currentUserProfile, nil);
+        success(responseObject);
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        completion(NO, nil, error);
+        failure(error);
     }];
 }
 
 #pragma mark - Surveys
 
-- (void)getSurveysListWithResult:(SurveysBlock)result
+- (void)getSurveysListOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure;
 {
     [self GET:@"user/survey/eligible" parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-        
-        NSMutableArray *surveys = [NSMutableArray array];
-        if ([responseObject isKindOfClass:[NSArray class]]) {
-            for (NSDictionary *responseDict in responseObject) {
-                BZRSurvey *survey = [[BZRSurvey alloc] initWithServerResponse:responseDict];
-                [surveys addObject:survey];
-            }
-        }
-        result(YES, surveys, nil);
+        success(responseObject);
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        result(NO, nil, error);
+        failure(error);
     }];
 }
 
@@ -231,7 +214,7 @@ static NSString *const kClientSecretKey = @"8a9da763-9503-4093-82c2-6b22b8eb9a12
                            andLastName:(NSString *)lastName
                         andDateOfBirth:(NSString *)dateOfBirth
                              andGender:(NSString *)gender
-                        withCompletion:(UserProfileBlock)completion
+                             onSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure
 {
     NSDictionary *parameters = @{@"firstname": firstName,
                                  @"lastname": lastName,
@@ -239,12 +222,9 @@ static NSString *const kClientSecretKey = @"8a9da763-9503-4093-82c2-6b22b8eb9a12
                                  @"gender": gender};
     
     [self PUT:@"user/me" parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
-        BZRUserProfile *updatedProfile = [[BZRUserProfile alloc] initWithServerResponse:responseObject];
-        completion(YES, updatedProfile, nil);
+        success(responseObject);
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
-//        NSData *errData = error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey];
-//        NSString *errString = [[NSString alloc] initWithData:errData encoding:NSUTF8StringEncoding];
-        completion(NO, nil, error);
+        failure(error);
     }];
 }
 
@@ -252,20 +232,20 @@ static NSString *const kClientSecretKey = @"8a9da763-9503-4093-82c2-6b22b8eb9a12
 
 #pragma mark Send device token
 
-- (void)sendDeviceAPNSToken:(NSString *)token andDeviceIdentifier:(NSString *)udid withResult:(SuccessBlock)result
+- (void)sendDeviceAPNSToken:(NSString *)token andDeviceIdentifier:(NSString *)udid onSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure
 {
     NSDictionary *parameters = @{@"device_id" : udid, @"notification_token" : token};
     
     [self POST:@"user/device" parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
-        result(YES, nil, 0);
+        success(responseObject);
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        result(NO, error, 0);
+        failure(error);
     }];
 }
 
 #pragma mark Image
 
-- (void)postImage:(UIImage *)image withID:(NSInteger)ID result:(ImageUserBlock)result
+- (void)postImage:(UIImage *)image withID:(NSInteger)ID onSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure
 {
     NSDictionary *parameters = @{@"userId" : @(ID)};
     NSData *imageData = UIImageJPEGRepresentation(image, 0.5);
@@ -273,9 +253,9 @@ static NSString *const kClientSecretKey = @"8a9da763-9503-4093-82c2-6b22b8eb9a12
     [self POST:@"" parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         [formData appendPartWithFileData:imageData name:@"file" fileName:@"photo.jpg" mimeType:@"image/jpeg"];
     } success:^(NSURLSessionDataTask *task, id responseObject) {
-        return result(YES, responseObject);
+        success(responseObject);
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        return result(NO, nil);
+        failure(error);
     }];
 }
 

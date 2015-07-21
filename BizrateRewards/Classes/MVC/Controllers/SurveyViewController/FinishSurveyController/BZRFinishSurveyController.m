@@ -65,7 +65,7 @@
 
 - (void)setupObtainedPointsText
 {
-    self.obtainedPointsLabel.text = [NSString stringWithFormat:@"%i %@", self.passedSurvey.surveyPoints, self.obtainedPointsText];
+    self.obtainedPointsLabel.text = [NSString stringWithFormat:@"%li %@", (long)self.passedSurvey.surveyPoints, self.obtainedPointsText];
 }
 
 @end

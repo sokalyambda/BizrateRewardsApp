@@ -11,9 +11,12 @@
 #import "BZRStorageManager.h"
 #import "BZRPushNotifiactionService.h"
 
+#import "OB_Services.h"
+
 @import HockeySDK;
 
 static NSString *const kHockeyAppIdentifier = @"bf52cc6c526a07761d1b50a4078b6d67";
+static NSString *const kOfferBeamRetailerID = @"64134A39-EA9A-4261-963A-D05E33484844";
 
 @interface AppDelegate ()
 
@@ -26,6 +29,9 @@ static NSString *const kHockeyAppIdentifier = @"bf52cc6c526a07761d1b50a4078b6d67
     [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:kHockeyAppIdentifier];
     [[BITHockeyManager sharedHockeyManager].authenticator authenticateInstallation];
     [[BITHockeyManager sharedHockeyManager] startManager];
+    
+//    [OB_Services start];
+//    [OB_Services setRetailerID:kOfferBeamRetailerID];
     
     return [[FBSDKApplicationDelegate sharedInstance] application:application
                                     didFinishLaunchingWithOptions:launchOptions];

@@ -6,11 +6,6 @@
 //  Copyright (c) 2015 Connexity. All rights reserved.
 //
 
-typedef enum : NSUInteger {
-    BZRSessionTypeApplication,
-    BZRSessionTypeUser
-} BZRSessionType;
-
 #import "BZRDataManager.h"
 
 #import "BZRKeychainHandler.h"
@@ -82,30 +77,22 @@ typedef enum : NSUInteger {
 
 #pragma mark - Auth
 
-- (void)getClientCredentialsOnSuccess:(SuccessBlock)completion
+- (void)getClientCredentialsOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure
 {
-    WEAK_SELF;
-    if (![self isSessionValidWithType:BZRSessionTypeApplication]) {
-        [self.network getClientCredentialsOnCompletion:^(BOOL success, BZRApplicationToken *token, NSError *error) {
-            if (success) {
-                weakSelf.storage.applicationToken = token;
-            }
-            completion(success, error, 0);
-        }];
-    } else {
-        completion (YES, nil, 0);
-    }
+    [self.network getClientCredentialsOnSuccess:^(id responseObject) {
+        success(responseObject);
+    } onFailure:^(NSError *error) {
+        failure(error);
+    }];
 }
 
-- (void)signInWithUserName:(NSString *)userName password:(NSString *)password withResult:(SuccessBlock)result
+- (void)signInWithUserName:(NSString *)userName password:(NSString *)password onSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure
 {
     self.network.requestSerializer = self.httpRequestSerializer;
-    WEAK_SELF;
-    [self.network signInWithUserName:userName password:password withResult:^(BOOL success, BZRUserToken *token, NSError *error, NSInteger responseStatusCode) {
-        if (success) {
-            weakSelf.storage.userToken = token;
-        }
-        result(success, error, responseStatusCode);
+    [self.network signInWithUserName:userName password:password onSuccess:^(id responseObject) {
+        success(responseObject);
+    } onFailure:^(NSError *error) {
+        failure(error);
     }];
 }
 
@@ -115,36 +102,34 @@ typedef enum : NSUInteger {
                     andPassword:(NSString *)password
                  andDateOfBirth:(NSString *)birthDate
                       andGender:(NSString *)gender
-                     withResult:(SuccessBlock)result
+                      onSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure
 {
     self.network.requestSerializer = self.jsonRequestSerializer;
     [self addAuthHeaderWithToken:self.storage.applicationToken];
     
-    WEAK_SELF;
-    [self.network signUpWithUserFirstName:firstName
-                          andUserLastName:lastName
-                                 andEmail:email
-                              andPassword:password
-                           andDateOfBirth:birthDate
-                                andGender:gender
-                               withResult:^(BOOL success, BZRUserToken *userToken, NSError *error, NSInteger responseStatusCode) {
-        if (success) {
-            weakSelf.storage.userToken = userToken;
-        }
-        result(success, error, responseStatusCode);
+    [self.network signUpWithUserFirstName:firstName andUserLastName:lastName andEmail:email andPassword:password andDateOfBirth:birthDate andGender:gender onSuccess:^(id responseObject) {
+        success(responseObject);
+    } onFailure:^(NSError *error) {
+        failure(error);
     }];
 }
 
-- (void)authorizeWithFacebookWithResult:(SuccessBlock)result
+- (void)authorizeWithFacebookOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure
 {
-    WEAK_SELF;
-    [self.network authorizeWithFacebookWithResult:^(BOOL success, BZRUserProfile *userProfile, NSError *error) {
-        weakSelf.storage.currentProfile = userProfile;
-        result(success, error, 0);
+    [self.network authorizeWithFacebookOnSuccess:^(id responseObject) {
+        BZRUserProfile *userProfile = [[BZRUserProfile alloc] initWithServerResponse:responseObject];
+        
+//        NSURL *userImageURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?width=200", [facebookProfile valueForKey:@"id"]]];
+//        
+//        userProfile.avatarURL = userImageURL;
+        success(responseObject);
+
+    } onFailure:^(NSError *error) {
+        failure(error);
     }];
 }
 
-- (void)signOutOnSuccess:(SuccessBlock)result
+- (void)signOutOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure
 {
     [BZRStorageManager sharedStorage].currentProfile = nil;
     [BZRStorageManager sharedStorage].applicationToken = nil;
@@ -153,36 +138,36 @@ typedef enum : NSUInteger {
     [BZRKeychainHandler resetKeychain];
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:RememberMeKey];
     
-    result(YES, nil, 0);
+    success(nil);
 }
 
 #pragma mark - GET
 
 #pragma mark Current User
 
-- (void)getCurrentUserWithCompletion:(SuccessBlock)completion
+- (void)getCurrentUserOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure
 {
     self.network.requestSerializer = self.httpRequestSerializer;
     [self addAuthHeaderWithToken:self.storage.userToken];
     
-    WEAK_SELF;
-    [self.network getCurrentUserWithCompletion:^(BOOL success, BZRUserProfile *userProfile, NSError *error) {
-        if (success) {
-            weakSelf.storage.currentProfile = userProfile;
-        }
-        completion(success, error, 0);
+    [self.network getCurrentUserOnSuccess:^(id responseObject) {
+        success(responseObject);
+    } onFailure:^(NSError *error) {
+        failure(error);
     }];
 }
 
 #pragma mark Survey
 
-- (void)getSurveysListWithResult:(SurveysBlock)result
+- (void)getSurveysListOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure
 {
     [self addAuthHeaderWithToken:self.storage.userToken];
     self.network.requestSerializer = self.httpRequestSerializer;
-    
-    [self.network getSurveysListWithResult:^(BOOL success, NSArray *surveysList, NSError *error) {
-        result (success, surveysList, error);
+
+    [self.network getSurveysListOnSuccess:^(id responseObject) {
+        success(responseObject);
+    } onFailure:^(NSError *error) {
+        failure(error);
     }];
 }
 
@@ -192,47 +177,37 @@ typedef enum : NSUInteger {
                            andLastName:(NSString *)lastName
                         andDateOfBirth:(NSString *)dateOfBirth
                              andGender:(NSString *)gender
-                        withCompletion:(SuccessBlock)completion
+                             onSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure
 {
     self.network.requestSerializer = self.jsonRequestSerializer;
     [self addAuthHeaderWithToken:self.storage.userToken];
     
-    WEAK_SELF;
-    [self.network updateCurrentUserWithFirstName:firstName
-                                     andLastName:lastName
-                                  andDateOfBirth:dateOfBirth
-                                       andGender:gender
-                                  withCompletion:^(BOOL success, BZRUserProfile *userProfile, NSError *error) {
-                                      if (success) {
-                                          weakSelf.storage.currentProfile = userProfile;
-                                      }
-                                      completion(success, error, 0);
+    [self.network updateCurrentUserWithFirstName:firstName andLastName:lastName andDateOfBirth:dateOfBirth andGender:gender onSuccess:^(id responseObject) {
+        success(responseObject);
+    } onFailure:^(NSError *error) {
+        failure(error);
     }];
 }
 
 #pragma mark - POST send device token
 
-- (void)sendDeviceAPNSTokenAndDeviceIdentifierWithResult:(SuccessBlock)result
+- (void)sendDeviceAPNSTokenAndDeviceIdentifierOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure
 {
     NSString *deviceToken = self.storage.deviceToken;
     NSString *deviceIdentifier = self.storage.deviceUDID;
     
     if (deviceToken.length && deviceIdentifier.length) {
-        [self.network sendDeviceAPNSToken:deviceToken andDeviceIdentifier:deviceIdentifier withResult:^(BOOL success, NSError *error, NSInteger responseStatusCode) {
-            result(success, error, responseStatusCode);
+        [self.network sendDeviceAPNSToken:deviceToken andDeviceIdentifier:deviceIdentifier onSuccess:^(id responseObject) {
+            success(responseObject);
+        } onFailure:^(NSError *error) {
+            failure(error);
         }];
     } else {
-        result(NO, nil, 0);
+
     }
 }
 
-#pragma mark - Private methods
-
-- (void)addAuthHeaderWithToken:(BZRApplicationToken *)token
-{
-    [self.jsonRequestSerializer setValue:[NSString stringWithFormat:@"Bearer %@", token.accessToken] forHTTPHeaderField:@"Authorization"];
-    [self.httpRequestSerializer setValue:[NSString stringWithFormat:@"Bearer %@", token.accessToken] forHTTPHeaderField:@"Authorization"];
-}
+#pragma mark - Public mehods
 
 - (BOOL)isSessionValidWithType:(BZRSessionType)type
 {
@@ -258,6 +233,14 @@ typedef enum : NSUInteger {
         return YES;
     }
     return NO;
+}
+
+#pragma mark - Private methods
+
+- (void)addAuthHeaderWithToken:(BZRApplicationToken *)token
+{
+    [self.jsonRequestSerializer setValue:[NSString stringWithFormat:@"Bearer %@", token.accessToken] forHTTPHeaderField:@"Authorization"];
+    [self.httpRequestSerializer setValue:[NSString stringWithFormat:@"Bearer %@", token.accessToken] forHTTPHeaderField:@"Authorization"];
 }
 
 @end

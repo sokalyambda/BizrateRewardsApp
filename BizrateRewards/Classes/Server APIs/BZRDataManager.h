@@ -6,6 +6,11 @@
 //  Copyright (c) 2015 Connexity. All rights reserved.
 //
 
+typedef enum : NSUInteger {
+    BZRSessionTypeApplication,
+    BZRSessionTypeUser
+} BZRSessionType;
+
 #import "BZRNetworkManager.h"
 #import "BZRStorageManager.h"
 
@@ -18,9 +23,9 @@
 + (BZRDataManager *)sharedInstance;
 
 //Authorization
-- (void)getClientCredentialsOnSuccess:(SuccessBlock)completion;
+- (void)getClientCredentialsOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure;
 
-- (void)signInWithUserName:(NSString *)userName password:(NSString *)password withResult:(SuccessBlock)result;
+- (void)signInWithUserName:(NSString *)userName password:(NSString *)password onSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure;
 
 - (void)signUpWithUserFirstName:(NSString *)firstName
                 andUserLastName:(NSString *)lastName
@@ -28,26 +33,28 @@
                     andPassword:(NSString *)password
                  andDateOfBirth:(NSString *)birthDate
                       andGender:(NSString *)gender
-                     withResult:(SuccessBlock)result;
+                     onSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure;
 
-- (void)authorizeWithFacebookWithResult:(SuccessBlock)result;
+- (void)authorizeWithFacebookOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure;
 
-- (void)signOutOnSuccess:(SuccessBlock)result;
+- (void)signOutOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure;
 
 //get user
-- (void)getCurrentUserWithCompletion:(SuccessBlock)completion;
+- (void)getCurrentUserOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure;
 
 //getSurvey
-- (void)getSurveysListWithResult:(SurveysBlock)result;
+- (void)getSurveysListOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure;
 
 //update user
 - (void)updateCurrentUserWithFirstName:(NSString *)firstName
                            andLastName:(NSString *)lastName
                         andDateOfBirth:(NSString *)dateOfBirth
                              andGender:(NSString *)gender
-                        withCompletion:(SuccessBlock)completion;
+                        onSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure;
 
 //send device token
-- (void)sendDeviceAPNSTokenAndDeviceIdentifierWithResult:(SuccessBlock)result;
+- (void)sendDeviceAPNSTokenAndDeviceIdentifierOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure;
+
+- (BOOL)isSessionValidWithType:(BZRSessionType)type;
 
 @end
