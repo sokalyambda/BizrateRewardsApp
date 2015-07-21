@@ -42,7 +42,6 @@
         ShowAlert(InternetIsNotReachableString);
         failure(nil);
     }];
-    
 }
 
 @end

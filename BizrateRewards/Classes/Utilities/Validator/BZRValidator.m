@@ -118,7 +118,7 @@ static NSString *const kPasswordErrorImageName = @"password_icon_error";
               dateOfBirthField: (UITextField *)dateOfBirthField
                    genderField: (UITextField *)genderField
 {
-    NSCharacterSet *alphaSet = [NSCharacterSet alphanumericCharacterSet];
+    NSCharacterSet *alphaSet = [NSCharacterSet letterCharacterSet];
     
     BOOL isFirstNameValid = [[firstNameField.text stringByTrimmingCharactersInSet:alphaSet] isEqualToString:@""] && firstNameField.text.length;
     

@@ -6,7 +6,6 @@
 //  Copyright (c) 2015 Connexity. All rights reserved.
 //
 
-
 #import "BZRBaseAuthController.h"
 
 static NSString *const kEmailActiveIconName         = @"email_icon_prepop";
