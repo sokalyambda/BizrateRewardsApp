@@ -12,17 +12,31 @@
 
 @property (strong, nonatomic) UIColor *savedBackgroundColor;
 
+@property (strong, nonatomic) CALayer *highlightedLayer;
+
 @end
 
 @implementation BZRHighlightedButton
 
 #pragma mark - Accessors
 
+- (CALayer *)highlightedLayer
+{
+    if (!_highlightedLayer) {
+        _highlightedLayer = [CALayer layer];
+        _highlightedLayer.frame = self.bounds;
+        _highlightedLayer.backgroundColor = [UIColor colorWithWhite:.6f alpha:0.6f].CGColor;
+    }
+    return _highlightedLayer;
+}
+
 - (void)setHighlighted:(BOOL)highlighted
 {
-    [UIView animateWithDuration:0.1f animations:^{
-        self.backgroundColor = highlighted ? [UIColor colorWithWhite:.6f alpha:0.4f] : self.savedBackgroundColor;
-    }];
+    if (highlighted) {
+        [self.layer addSublayer:self.highlightedLayer];
+    } else {
+        [self.highlightedLayer removeFromSuperlayer];
+    }
 }
 
 #pragma mark - Lifecycle
