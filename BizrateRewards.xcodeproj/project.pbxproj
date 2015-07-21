@@ -103,6 +103,7 @@
 		58E5124C1B4C70AF00865694 /* OpenSans-SemiboldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 58E512421B4C70AF00865694 /* OpenSans-SemiboldItalic.ttf */; };
 		58F49FC91B4197B7002F93EE /* BZRPushNotifiactionService.m in Sources */ = {isa = PBXBuildFile; fileRef = 58F49FC81B4197B7002F93EE /* BZRPushNotifiactionService.m */; };
 		843C38411B4EAF38005E85CF /* BZRGiftcardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 843C38401B4EAF38005E85CF /* BZRGiftcardCell.m */; };
+		84A6124E1B5E3137005E01A7 /* BZRMixpanelService.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A6124D1B5E3137005E01A7 /* BZRMixpanelService.m */; };
 		84AD3F011B4587DA00C294AE /* BZRProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AD3F001B4587DA00C294AE /* BZRProgressView.m */; };
 		84BE35CC1B5D0A4F001B99E2 /* BZRSurveyPointsInscriptionLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BE35CB1B5D0A4F001B99E2 /* BZRSurveyPointsInscriptionLabel.m */; };
 		84BE35D11B5D0AE0001B99E2 /* BZRSurveyPointsValueLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BE35D01B5D0AE0001B99E2 /* BZRSurveyPointsValueLabel.m */; };
@@ -298,6 +299,8 @@
 		7AF1FB2A8C4A8673EF3998F1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		843C383F1B4EAF38005E85CF /* BZRGiftcardCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRGiftcardCell.h; path = Classes/Cells/GiftcardCell/BZRGiftcardCell.h; sourceTree = "<group>"; };
 		843C38401B4EAF38005E85CF /* BZRGiftcardCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRGiftcardCell.m; path = Classes/Cells/GiftcardCell/BZRGiftcardCell.m; sourceTree = "<group>"; };
+		84A6124C1B5E3137005E01A7 /* BZRMixpanelService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRMixpanelService.h; path = Classes/MixpanelService/BZRMixpanelService.h; sourceTree = "<group>"; };
+		84A6124D1B5E3137005E01A7 /* BZRMixpanelService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = BZRMixpanelService.m; path = Classes/MixpanelService/BZRMixpanelService.m; sourceTree = "<group>"; };
 		84AD3EFF1B4587D900C294AE /* BZRProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRProgressView.h; path = Classes/MVC/Views/ProgressView/BZRProgressView.h; sourceTree = "<group>"; };
 		84AD3F001B4587DA00C294AE /* BZRProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRProgressView.m; path = Classes/MVC/Views/ProgressView/BZRProgressView.m; sourceTree = "<group>"; };
 		84BE35CA1B5D0A4F001B99E2 /* BZRSurveyPointsInscriptionLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRSurveyPointsInscriptionLabel.h; path = Classes/MVC/Views/Styles/SurveyStyleLabels/SurveyPointsInscriptionLabel/BZRSurveyPointsInscriptionLabel.h; sourceTree = "<group>"; };
@@ -1233,6 +1236,7 @@
 		58C770D91B5CCF6000E9031F /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				84A6124B1B5E30E6005E01A7 /* MixpanelService */,
 				5878D3DA1B43F8D500A917D0 /* ReachabilityHelper */,
 				58A9FE8C1B53A4FB00DBE379 /* TermsAndConditionsHelper */,
 				58DF1AE51B584CA800D28951 /* AssetsHelper */,
@@ -1353,6 +1357,15 @@
 				843C38401B4EAF38005E85CF /* BZRGiftcardCell.m */,
 			);
 			name = CiftcardCell;
+			sourceTree = "<group>";
+		};
+		84A6124B1B5E30E6005E01A7 /* MixpanelService */ = {
+			isa = PBXGroup;
+			children = (
+				84A6124C1B5E3137005E01A7 /* BZRMixpanelService.h */,
+				84A6124D1B5E3137005E01A7 /* BZRMixpanelService.m */,
+			);
+			name = MixpanelService;
 			sourceTree = "<group>";
 		};
 		84AD3EFE1B4587B100C294AE /* ProgressView */ = {
@@ -1609,6 +1622,7 @@
 				589BCCE51B569BB800D49056 /* UIView+Flashable.m in Sources */,
 				585813AA1B3BEDCC0087AEE2 /* BZRUserToken.m in Sources */,
 				58B574E11B38AE200083A80A /* KeychainItemWrapper.m in Sources */,
+				84A6124E1B5E3137005E01A7 /* BZRMixpanelService.m in Sources */,
 				58ACC06A1B3937010081E546 /* BZRStartTutorialController.m in Sources */,
 				589420A11B451E35004BAF48 /* BZRPickerHolder.m in Sources */,
 				58A7E23A1B45A3A200A1489A /* UIView+ConfigureAnchorPoint.m in Sources */,

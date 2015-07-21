@@ -23,6 +23,9 @@ static NSString *const kHockeyAppIdentifier = @"bf52cc6c526a07761d1b50a4078b6d67
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [BZRMixpanelService setupMixpanel];
+    [BZRMixpanelService trackEventWithType:BZRMixpanelEventOpenApp properties:nil];
+    
     [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:kHockeyAppIdentifier];
     [[BITHockeyManager sharedHockeyManager].authenticator authenticateInstallation];
     [[BITHockeyManager sharedHockeyManager] startManager];
