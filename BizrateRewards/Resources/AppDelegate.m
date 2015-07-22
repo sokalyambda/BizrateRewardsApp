@@ -26,6 +26,9 @@ static NSString *const kOfferBeamRetailerID = @"64134A39-EA9A-4261-963A-D05E3348
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [BZRMixpanelService setupMixpanel];
+    [BZRMixpanelService trackEventWithType:BZRMixpanelEventOpenApp properties:nil];
+    
     [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:kHockeyAppIdentifier];
     [[BITHockeyManager sharedHockeyManager].authenticator authenticateInstallation];
     [[BITHockeyManager sharedHockeyManager] startManager];

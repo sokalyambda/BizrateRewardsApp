@@ -9,7 +9,6 @@
 #ifndef BizrateRewards_BZRGlobalConstants_h
 #define BizrateRewards_BZRGlobalConstants_h
 
-
 //Notifications
 
 static NSString *const LocationManagerDidSuccessAuthorizeNotification = @"LocationManagerDidSuccessAuthorizeNotification";
@@ -31,5 +30,19 @@ static NSString *const RememberMeKey = @"RememberMeKey";
 
 static NSString *const UserNameKey = @"UsernameKey";
 static NSString *const PasswordKey = @"PasswordKey";
+
+static NSString *const MixpanelUUID = @"MixpanelUUID";
+
+// Mixpanel Events
+
+static NSString *const OpenApp = @"App is opened";
+static NSString *const SurveyViewed = @"Survey is opened";
+static NSString *const SurveyCompleted = @"Survey is completed";
+static NSString *const CreateAccountPage = @"Create account page";
+static NSString *const RegistrationSuccessful = @"Registration successful";
+static NSString *const LoginSuccessful = @"Login successful";
+static NSString *const PushNotificationPermission = @"Push notification permission";
+static NSString *const LocationPermission = @"Location Permission";
+static NSString *const GeofenceActivity = @"Geofence activity";
 
 #endif
