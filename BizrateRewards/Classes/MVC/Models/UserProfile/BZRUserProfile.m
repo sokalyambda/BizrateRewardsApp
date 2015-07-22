@@ -68,6 +68,8 @@ static NSString *const kPointsAmount            = @"points_awarded";
         _genderString = NSLocalizedString(@"Male", nil);
     } else if ([genderString isEqualToString:@"F"]) {
         _genderString = NSLocalizedString(@"Female", nil);
+    } else {
+        _genderString = genderString;
     }
 }
 
