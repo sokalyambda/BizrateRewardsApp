@@ -10,14 +10,23 @@
 #import "BZRDashboardController.h"
 
 #import "BZRTutorialDescriptionLabel.h"
+#import "BZRProgressView.h"
+
+#import "BZRUserProfileService.h"
+#import "BZRStorageManager.h"
 
 #import "BZRSurvey.h"
+#import "BZRUserProfile.h"
 
 @interface BZRFinishSurveyController ()
 
 @property (weak, nonatomic) IBOutlet BZRTutorialDescriptionLabel *obtainedPointsLabel;
+@property (weak, nonatomic) IBOutlet BZRProgressView *progressView;
+
+@property (strong, nonatomic) BZRStorageManager *storageManager;
 
 @property (strong, nonatomic) NSString *obtainedPointsText;
+@property (strong, nonatomic) BZRUserProfile *currentProfile;
 
 @end
 
@@ -33,6 +42,20 @@
     return _obtainedPointsText;
 }
 
+- (BZRStorageManager *)storageManager
+{
+    if (!_storageManager) {
+        _storageManager = [BZRStorageManager sharedStorage];
+    }
+    return _storageManager;
+}
+
+- (BZRUserProfile *)currentProfile
+{
+    _currentProfile = [BZRStorageManager sharedStorage].currentProfile;
+    return _currentProfile;
+}
+
 #pragma mark - View Lifecycle
 
 - (void)viewDidLoad
@@ -46,7 +69,9 @@
 {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:YES];
+    [self calculateProgress];
     [self setupObtainedPointsText];
+
 }
 
 #pragma mark - Actions
@@ -68,6 +93,13 @@
 - (void)setupObtainedPointsText
 {
     self.obtainedPointsLabel.text = [NSString stringWithFormat:@"%li %@", (long)self.passedSurvey.surveyPoints, self.obtainedPointsText];
+}
+
+- (void)calculateProgress
+{
+    NSInteger updatedPoints = self.currentProfile.pointsAmount + self.passedSurvey.surveyPoints;
+    self.progressView.progress  = (CGFloat)updatedPoints * CGRectGetWidth(self.progressView.frame) / (CGFloat)self.currentProfile.pointsRequired;
+    [self.progressView setNeedsDisplay];
 }
 
 @end
