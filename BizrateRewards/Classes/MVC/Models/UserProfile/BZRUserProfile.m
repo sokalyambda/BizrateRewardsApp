@@ -52,7 +52,7 @@ static NSString *const kPointsAmount            = @"points_awarded";
 
 - (BOOL)isMale
 {
-    _isMale = [self.genderString isEqualToString:@"M"] ? YES : NO;
+    _isMale = [[self.genderString substringToIndex:1] isEqualToString:@"M"] ? YES : NO;
     return _isMale;
 }
 
@@ -60,6 +60,15 @@ static NSString *const kPointsAmount            = @"points_awarded";
 {
     _fullName = [NSString stringWithFormat:@"%@ %@", self.firstName, self.lastName];
     return _fullName;
+}
+
+- (void)setGenderString:(NSString *)genderString
+{
+    if ([genderString isEqualToString:@"M"]) {
+        _genderString = NSLocalizedString(@"Male", nil);
+    } else if ([genderString isEqualToString:@"F"]) {
+        _genderString = NSLocalizedString(@"Female", nil);
+    }
 }
 
 #pragma mark - BZRMappingProtocol
@@ -71,9 +80,10 @@ static NSString *const kPointsAmount            = @"points_awarded";
         _firstName      = response[kFirstName];
         _lastName       = response[kLastName];
         _email          = response[kEmail];
-        _genderString   = response[kGender];
         _dateOfBirth    = [[BZRCommonDateFormatter commonDateFormatter] dateFromString:response[kDateOfBirth]];
         _pointsAmount   = [response[kPointsAmount] integerValue];
+        
+        self.genderString   = response[kGender];
     }
     return self;
 }

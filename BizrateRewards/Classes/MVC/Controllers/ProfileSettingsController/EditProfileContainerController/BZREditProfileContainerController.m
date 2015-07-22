@@ -113,10 +113,11 @@ typedef enum : NSUInteger {
     
     UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.f, 0.f, CGRectGetHeight(intersection), 0.f);
 
+    WEAK_SELF;
     [UIView animateWithDuration:kAnimationDuration animations:^{
-        self.tableView.contentInset = contentInsets;
-        self.tableView.scrollIndicatorInsets = contentInsets;
-        [self checkForMovement];
+        weakSelf.tableView.contentInset = contentInsets;
+        weakSelf.tableView.scrollIndicatorInsets = contentInsets;
+        [weakSelf checkForMovement];
     }];
 }
 

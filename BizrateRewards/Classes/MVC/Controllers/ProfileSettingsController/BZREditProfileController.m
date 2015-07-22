@@ -65,25 +65,30 @@ static NSString *const kEditProfileContainerSegueIdentifier = @"editProfileConta
 - (void)updateUser
 {
     WEAK_SELF;
-    [BZRValidator validateFirstNameField:self.container.firstNameField
-                           lastNameField:self.container.lastNameField
-                              emailField:self.container.emailField
-                        dateOfBirthField:self.container.dateOfBirthField
-                             genderField:self.container.genderField
-                           andCheckboxes:nil onSuccess:^{
-                               
-                               [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
-                               [BZRUserProfileService updateCurrentUserWithFirstName:self.container.firstNameField.text andLastName:self.container.lastNameField.text andDateOfBirth:self.container.dateOfBirthField.text andGender:[self.container.genderField.text substringToIndex:1] onSuccess:^(BZRUserProfile *userProfile) {
-                                   [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-                                   [weakSelf.navigationController popViewControllerAnimated:YES];
-                               } onFailure:^(NSError *error) {
-                                   [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-                                   ShowFailureResponseAlertWithError(error);
+    if ([self profileHasChanges]) {
+        [BZRValidator validateFirstNameField:self.container.firstNameField
+                               lastNameField:self.container.lastNameField
+                                  emailField:self.container.emailField
+                            dateOfBirthField:self.container.dateOfBirthField
+                                 genderField:self.container.genderField
+                               andCheckboxes:nil onSuccess:^{
+                                   
+                                   [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
+                                   [BZRUserProfileService updateCurrentUserWithFirstName:self.container.firstNameField.text andLastName:self.container.lastNameField.text andDateOfBirth:self.container.dateOfBirthField.text andGender:[self.container.genderField.text substringToIndex:1] onSuccess:^(BZRUserProfile *userProfile) {
+                                       [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+                                       [weakSelf.navigationController popViewControllerAnimated:YES];
+                                   } onFailure:^(NSError *error) {
+                                       [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+                                       ShowFailureResponseAlertWithError(error);
+                                   }];
+                                   
+                               } onFailure:^(NSString *errorString) {
+                                   [BZRValidator cleanValidationErrorString];
                                }];
-                               
-                           } onFailure:^(NSString *errorString) {
-                               [BZRValidator cleanValidationErrorString];
-                           }];
+    } else {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    
 }
 
 - (void)setupFieldsValueFromProfile
@@ -95,6 +100,17 @@ static NSString *const kEditProfileContainerSegueIdentifier = @"editProfileConta
     self.container.dateOfBirthField.text = [[BZRCommonDateFormatter commonDateFormatter] stringFromDate:self.currentProfile.dateOfBirth];
     
     self.container.emailField.userInteractionEnabled = NO;
+}
+
+- (BOOL)profileHasChanges
+{
+    if (![self.container.firstNameField.text isEqualToString:self.currentProfile.firstName] ||
+        ![self.container.lastNameField.text isEqualToString:self.currentProfile.lastName] ||
+        ![self.container.genderField.text isEqualToString:self.currentProfile.genderString] ||
+        ![self.container.dateOfBirthField.text isEqualToString:[[BZRCommonDateFormatter commonDateFormatter] stringFromDate:self.currentProfile.dateOfBirth]]) {
+        return YES;
+    }
+    return NO;
 }
 
 #pragma mark - Navigation
