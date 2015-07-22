@@ -192,15 +192,7 @@ static NSString *const kCurrentPicker = @"currentPicker";
 - (void)birthPickerViewWillDismiss:(BZRBirthDatePickerView *)datePickerView withChosenDate:(NSDate *)birthDate
 {
     if (birthDate && self.dateResult) {
-        NSDate* now = [NSDate date];
-        NSDateComponents* ageComponents = [[NSCalendar currentCalendar]
-                                           components:NSCalendarUnitYear
-                                           fromDate:birthDate
-                                           toDate:now
-                                           options:0.f];
-        NSInteger age = [ageComponents year];
-        
-        self.dateResult(birthDate, age > kValidAge);
+        self.dateResult(birthDate);
     }
 
     [self showHidePickerViewWithAnimation:datePickerView];
@@ -212,9 +204,7 @@ static NSString *const kCurrentPicker = @"currentPicker";
 {
     if ([chosenValue isKindOfClass:[NSString class]]) {
         NSString *genderString = chosenValue;
-        //get first letter of gender string and detect the gender
-        BOOL isMale = [[genderString substringToIndex:1] isEqualToString:@"M"] ? YES : NO;
-        self.genderResult(isMale, genderString);
+        self.genderResult(genderString);
     }
     [self showHidePickerViewWithAnimation:commonPickerView];
 }
@@ -232,7 +222,6 @@ static NSString *const kCurrentPicker = @"currentPicker";
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    
 }
 
 #pragma mark - Keyboard methods

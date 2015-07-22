@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 Connexity. All rights reserved.
 //
 
-typedef void(^DateResult)(NSDate *dateOfBirth, BOOL isOlderThirteen);
-typedef void(^GenderResult)(BOOL isMale, NSString *genderString);
+typedef void(^DateResult)(NSDate *dateOfBirth);
+typedef void(^GenderResult)(NSString *genderString);
 
 @class BZREditProfileContainerController;
 

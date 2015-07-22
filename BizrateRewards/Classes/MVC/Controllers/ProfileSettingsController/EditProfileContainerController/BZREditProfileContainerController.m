@@ -62,7 +62,7 @@ typedef enum : NSUInteger {
 
 #pragma mark - UITableViewDelegate
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     BZREditableFieldType fieldType = indexPath.row;
     
@@ -77,7 +77,7 @@ typedef enum : NSUInteger {
             
             self.dateOfBirthField.validationFailed = NO;
             
-            [self.pickersHelper showBirthDatePickerWithResult:^(NSDate *dateOfBirth, BOOL isOlderThirteen) {
+            [self.pickersHelper showBirthDatePickerWithResult:^(NSDate *dateOfBirth) {
                 
                 weakSelf.dateOfBirthField.text = [[BZRCommonDateFormatter commonDateFormatter] stringFromDate:dateOfBirth];
 
@@ -88,7 +88,7 @@ typedef enum : NSUInteger {
             
             self.genderField.validationFailed = NO;
             
-            [self.pickersHelper showGenderPickerWithResult:^(BOOL isMale, NSString *genderString) {
+            [self.pickersHelper showGenderPickerWithResult:^(NSString *genderString) {
                 
                 weakSelf.genderField.text = genderString;
                 
