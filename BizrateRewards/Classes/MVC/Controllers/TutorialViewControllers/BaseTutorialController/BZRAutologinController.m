@@ -109,6 +109,9 @@ static NSString *const kStartTutorialSegueIdentirier = @"startTutorialSegue";
     WEAK_SELF;
     [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
     [BZRAuthorizationService signInWithUserName:weakSelf.savedUsername password:weakSelf.savedPassword onSuccess:^(BZRApplicationToken *token) {
+        
+        [BZRMixpanelService trackEventWithType:BZRMixpanelEventLoginSuccessful properties:nil];
+        
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         [weakSelf goToDashboardController];
     } onFailure:^(NSError *error) {

@@ -14,6 +14,7 @@
 
 static NSString *const kGeolocationPermissionsLastState = @"geolocationPermissionsLastState";
 
+
 @interface BZRLocationObserver ()<CLLocationManagerDelegate, OB_LocationServicesDelegate>
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
@@ -125,7 +126,7 @@ static NSString *const kGeolocationPermissionsLastState = @"geolocationPermissio
     if (isPermissionsChanged) {
         [defaults setBool:isGeolocationEnable forKey:kGeolocationPermissionsLastState];
         
-        [BZRMixpanelService trackEventWithType:BZRMixpanelEventLocationPermission properties:@{@"Access Granted" : isGeolocationEnable ? @"YES" : @"NO"}];;
+        [BZRMixpanelService trackEventWithType:BZRMixpanelEventLocationPermission properties:@{AccessGranted : isGeolocationEnable ? Yes : No}];;
     }
 }
 

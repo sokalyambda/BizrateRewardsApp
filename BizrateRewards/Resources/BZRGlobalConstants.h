@@ -45,4 +45,8 @@ static NSString *const PushNotificationPermission = @"Push notifications permiss
 static NSString *const LocationPermission = @"Location permissions";
 static NSString *const GeofenceActivity = @"Geofence activity";
 
+static NSString *const AccessGranted = @"Access Granted";
+static NSString *const Yes = @"YES";
+static NSString *const No = @"NO";
+
 #endif
