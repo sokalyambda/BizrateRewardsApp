@@ -41,8 +41,8 @@ static NSString *const SurveyCompleted = @"Survey is completed";
 static NSString *const CreateAccountPage = @"Create account page";
 static NSString *const RegistrationSuccessful = @"Registration successful";
 static NSString *const LoginSuccessful = @"Login successful";
-static NSString *const PushNotificationPermission = @"Push notification permission";
-static NSString *const LocationPermission = @"Location Permission";
+static NSString *const PushNotificationPermission = @"Push notifications permissions";
+static NSString *const LocationPermission = @"Location permissions";
 static NSString *const GeofenceActivity = @"Geofence activity";
 
 #endif

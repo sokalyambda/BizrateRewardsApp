@@ -12,6 +12,8 @@
 
 #import "OB_Services.h"
 
+static NSString *const kGeolocationPermissionsLastState = @"geolocationPermissionsLastState";
+
 @interface BZRLocationObserver ()<CLLocationManagerDelegate, OB_LocationServicesDelegate>
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
@@ -73,16 +75,19 @@
 
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
 {
+    BOOL isGeolocationEnable = NO;
     if (status == kCLAuthorizationStatusAuthorizedAlways) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:LocationManagerDidSuccessAuthorizeNotification object:nil];
-        
-        [BZRMixpanelService trackEventWithType:BZRMixpanelEventLocationPermission properties:@{@"Access Granted" : @"YES"}];
+        isGeolocationEnable = YES;
+    } else if (status == kCLAuthorizationStatusDenied) {
+        isGeolocationEnable = NO;
     }
     
-    if (status == kCLAuthorizationStatusDenied) {
+    [self checkForPermissionsChangingWithGeolocationEnabled:isGeolocationEnable];
+    
+    if (isGeolocationEnable) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:LocationManagerDidSuccessAuthorizeNotification object:nil];
+    } else {
         [[NSNotificationCenter defaultCenter] postNotificationName:LocationManagerDidFailAuthorizeNotification object:nil];
-        
-        [BZRMixpanelService trackEventWithType:BZRMixpanelEventLocationPermission properties:@{@"Access Granted" : @"NO"}];
     }
 }
 
@@ -98,6 +103,30 @@
 {
     [self.locationManager startUpdatingLocation];
 //    [[OB_LocationServices sharedInstance].locationManager startUpdatingLocation];
+}
+
+#pragma mark - Private methods
+
+- (void)checkForPermissionsChangingWithGeolocationEnabled:(BOOL)isGeolocationEnable
+{
+    BOOL permissionsLastState = NO;
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    if (![defaults.dictionaryRepresentation.allKeys containsObject:kGeolocationPermissionsLastState]) {
+        permissionsLastState = isGeolocationEnable;
+        [defaults setBool:permissionsLastState forKey:kGeolocationPermissionsLastState];
+    } else {
+        permissionsLastState = [defaults boolForKey:kGeolocationPermissionsLastState];
+    }
+    
+    BOOL isPermissionsChanged = permissionsLastState == isGeolocationEnable ? NO : YES;
+    
+    if (isPermissionsChanged) {
+        [defaults setBool:isGeolocationEnable forKey:kGeolocationPermissionsLastState];
+        
+        [BZRMixpanelService trackEventWithType:BZRMixpanelEventLocationPermission properties:@{@"Access Granted" : isGeolocationEnable ? @"YES" : @"NO"}];;
+    }
 }
 
 #pragma mark - Private methods

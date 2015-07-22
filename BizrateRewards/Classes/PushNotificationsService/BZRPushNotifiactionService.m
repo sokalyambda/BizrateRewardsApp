@@ -10,6 +10,8 @@
 
 #import "BZRStorageManager.h"
 
+static NSString *const kPushPermissionsLastState = @"pushPermissionLastState";
+
 @implementation BZRPushNotifiactionService
 
 + (void)registeredForPushNotificationsWithToken:(NSData *)deviceToken
@@ -41,13 +43,12 @@
 }
 
 + (BOOL)pushNotificationsEnabled
-{
-    if ([[UIApplication sharedApplication] respondsToSelector:@selector(isRegisteredForRemoteNotifications)]) {
-        return [[UIApplication sharedApplication] currentUserNotificationSettings].types != UIUserNotificationTypeNone;
-    }
-    else {
-        return ([[UIApplication sharedApplication] enabledRemoteNotificationTypes] & UIRemoteNotificationTypeAlert);
-    }
+{ 
+    BOOL isPushesEnabled = [[UIApplication sharedApplication] currentUserNotificationSettings].types != UIUserNotificationTypeNone;
+    
+    [self checkForPermissionsChangingWithPushesEnabled:isPushesEnabled];
+    
+    return isPushesEnabled;
 }
 
 + (void)recivedPushNotification:(NSDictionary*)userInfo
@@ -60,6 +61,30 @@
     BOOL enabled = [self pushNotificationsEnabled];
     if (!enabled) {
         pushToken = nil;
+    }
+}
+
+#pragma mark - Private methods
+
++ (void)checkForPermissionsChangingWithPushesEnabled:(BOOL)isPushesEnabled
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    BOOL permissionsLastState = NO;
+    
+    if (![defaults.dictionaryRepresentation.allKeys containsObject:kPushPermissionsLastState]) {
+        permissionsLastState = isPushesEnabled;
+        [defaults setBool:permissionsLastState forKey:kPushPermissionsLastState];
+    } else {
+        permissionsLastState = [defaults boolForKey:kPushPermissionsLastState];
+    }
+    
+    BOOL isPermissionsChanged = permissionsLastState == isPushesEnabled ? NO : YES;
+    
+    if (isPermissionsChanged) {
+        [defaults setBool:isPushesEnabled forKey:kPushPermissionsLastState];
+        
+        [BZRMixpanelService trackEventWithType:BZRMixpanelEventPushNotificationPermission properties:@{@"Access Granted": isPushesEnabled ? @"YES" : @"NO"}];
     }
 }
 
