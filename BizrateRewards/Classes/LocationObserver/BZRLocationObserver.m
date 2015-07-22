@@ -75,10 +75,14 @@
 {
     if (status == kCLAuthorizationStatusAuthorizedAlways) {
         [[NSNotificationCenter defaultCenter] postNotificationName:LocationManagerDidSuccessAuthorizeNotification object:nil];
+        
+        [BZRMixpanelService trackEventWithType:BZRMixpanelEventLocationPermission properties:@{@"Access Granted" : @"YES"}];
     }
     
     if (status == kCLAuthorizationStatusDenied) {
         [[NSNotificationCenter defaultCenter] postNotificationName:LocationManagerDidFailAuthorizeNotification object:nil];
+        
+        [BZRMixpanelService trackEventWithType:BZRMixpanelEventLocationPermission properties:@{@"Access Granted" : @"NO"}];
     }
 }
 

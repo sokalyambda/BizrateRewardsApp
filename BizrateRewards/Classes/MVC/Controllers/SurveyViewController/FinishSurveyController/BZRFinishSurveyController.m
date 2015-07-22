@@ -38,6 +38,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [BZRMixpanelService trackEventWithType:BZRMixpanelEventSurveyCompeted properties:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated

@@ -105,6 +105,8 @@ static NSInteger const kNotRegisteredErrorCode = 400.f;
                                [BZRAuthorizationService signInWithUserName:self.userNameField.text
                                                                   password:self.passwordField.text
                                                                  onSuccess:^(BZRApplicationToken *token) {
+                                                                     
+                                   [BZRMixpanelService trackEventWithType:BZRMixpanelEventLoginSuccessful properties:nil];
                                    
                                    [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
                                    

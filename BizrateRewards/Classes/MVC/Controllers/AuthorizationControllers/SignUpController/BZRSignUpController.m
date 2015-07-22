@@ -29,6 +29,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [BZRMixpanelService trackEventWithType:BZRMixpanelEventCreateAccountPage properties:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -60,6 +62,8 @@
                                                                     andPassword:weakSelf.passwordField.text
                                                                  andDateOfBirth:[[BZRCommonDateFormatter commonDateFormatter] stringFromDate:weakSelf.temporaryProfile.dateOfBirth]
                                                                       andGender:[weakSelf.temporaryProfile.genderString substringToIndex:1] onSuccess:^(BZRApplicationToken *token) {
+                                                                          
+                                                                          [BZRMixpanelService trackEventWithType:BZRMixpanelEventRegistrationSuccessful properties:nil];
                                                                           
                                                                           [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
                                                                           
