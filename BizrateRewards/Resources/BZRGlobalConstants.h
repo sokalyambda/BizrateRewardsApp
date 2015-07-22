@@ -21,6 +21,8 @@ static NSString *const PushNotificationServiceDidFailAuthorizeNotification = @"P
 
 static NSString *const InternetIsNotReachableString = @"Internet is not reachable.";
 
+static NSString *const AccessGrantedKey = @"Access Granted";
+
 //User
 
 static NSString *const CurrentProfileKey = @"CurrentProfileKey";
@@ -44,9 +46,5 @@ static NSString *const LoginSuccessful = @"Login successful";
 static NSString *const PushNotificationPermission = @"Push notifications permissions";
 static NSString *const LocationPermission = @"Location permissions";
 static NSString *const GeofenceActivity = @"Geofence activity";
-
-static NSString *const AccessGranted = @"Access Granted";
-static NSString *const Yes = @"YES";
-static NSString *const No = @"NO";
 
 #endif
