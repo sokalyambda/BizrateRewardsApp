@@ -6,8 +6,6 @@
 //  Copyright (c) 2015 Connexity. All rights reserved.
 //
 
-#import "BZRValidator.h"
-
 #import "BZRAuthorizationField.h"
 
 #import "BZRBaseViewController.h"
@@ -21,7 +19,6 @@ static NSString *const kEmailErrorIconName = @"email_icon_error";
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
 @property (strong, nonatomic) UITextField *activeField;
-@property (strong, nonatomic) BZRValidator *validator;
 
 - (void)customizeFields;
 

@@ -6,7 +6,6 @@
 //  Copyright (c) 2015 Connexity. All rights reserved.
 //
 
-#import "BZRValidator.h"
 #import "BZRCommonDateFormatter.h"
 
 #import "UIView+Shaking.h"
@@ -17,46 +16,44 @@
 
 static const NSInteger kMinPasswordSymbols = 8.f;
 static const NSInteger kMaxPasswordSymbols = 16.f;
+static const NSInteger kMinValidAge = 13.f;
 
 static NSString *const kEmailErrorImageName = @"email_icon_error";
 static NSString *const kPasswordErrorImageName = @"password_icon_error";
 
 @implementation BZRValidator
 
-#pragma mark - Init & Lifecycle
+static NSMutableString *_errorString;
 
-+ (BZRValidator *)sharedValidator
-{
-    static BZRValidator *validator = nil;
-    
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        validator = [[self alloc] init];
-    });
-    
-    return validator;
-}
+#pragma mark - Accessors
 
-- (instancetype)init
++ (NSMutableString *)validationErrorString
 {
-    self = [super init];
-    if (self) {
-        self.validationErrorString = [NSMutableString string];
+    @synchronized(self) {
+        if (!_errorString) {
+            _errorString = [NSMutableString string];
+        }
+        return _errorString;
     }
-    return self;
 }
 
-#pragma mark - Validation auth actions
++ (void)setValidationErrorString:(NSMutableString *)validationErrorString
+{
+    @synchronized(self) {
+        _errorString = validationErrorString;
+    }
+}
 
-- (BOOL)validateEmailField:(UITextField *)emailField
+#pragma mark - Private methods
+
++ (BOOL)validateEmailField:(UITextField *)emailField
 {
     NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}";
     NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
     
-    if ([emailTest evaluateWithObject:emailField.text]) {
-        return YES;
-    } else {
-        [self.validationErrorString appendString:NSLocalizedString(@"Email is incorrect. Check it\n", nil)];
+    if (![emailTest evaluateWithObject:emailField.text]) {
+        [[self validationErrorString] appendString:NSLocalizedString(@"Email is incorrect. Check it\n", nil)];
+        
         [emailField shakeView];
         
         if ([emailField isKindOfClass:[BZRAuthorizationField class]]) {
@@ -67,14 +64,16 @@ static NSString *const kPasswordErrorImageName = @"password_icon_error";
         
         return NO;
     }
+    
+    return YES;
 }
 
-- (BOOL)validatePasswordField:(UITextField *)passwordField
++ (BOOL)validatePasswordField:(UITextField *)passwordField
 {
-    BOOL isValid = NO;
-    if (passwordField.text.length && passwordField.text.length >= kMinPasswordSymbols && passwordField.text.length <= kMaxPasswordSymbols) {
-        isValid = YES;
-    } else {
+    if (!(passwordField.text.length >= kMinPasswordSymbols && passwordField.text.length <= kMaxPasswordSymbols)) {
+        
+        [[self validationErrorString] appendString:NSLocalizedString(@"Invalid password. Password must consist of 8 to 16 characters\n", nil)];
+        
         [passwordField shakeView];
         
         if ([passwordField isKindOfClass:[BZRAuthorizationField class]]) {
@@ -83,96 +82,37 @@ static NSString *const kPasswordErrorImageName = @"password_icon_error";
             ((BZREditProfileField *)passwordField).validationFailed = YES;
         }
         
-        [self.validationErrorString appendString:NSLocalizedString(@"Invalid password. Password must consist of 8 to 16 characters\n", nil)];
-    }
-    return isValid;
-}
-
-- (BOOL)validateEmailField:(UITextField *)emailField andPasswordField:(UITextField *)passwordField
-{
-    BOOL isValid = NO;
-    isValid = [self validateEmailField:emailField] && [self validatePasswordField:passwordField];
-    return isValid;
-}
-
-- (BOOL)validateEmailField:(UITextField *)emailField andPasswordField:(UITextField *)passwordField andConfirmPasswordField:(UITextField *)confirmPassword
-{
-    BOOL isValid = NO;
-    
-    isValid = [self validateEmailField:emailField andPasswordField:passwordField];
-    
-    if (![passwordField.text isEqualToString:confirmPassword.text]) {
-        isValid = NO;
-        [confirmPassword shakeView];
-        if ([confirmPassword isKindOfClass:[BZRAuthorizationField class]]) {
-            ((BZRAuthorizationField *)confirmPassword).errorImageName = kPasswordErrorImageName;
-        }
+        return NO;
     }
     
-    return isValid;
+    return YES;
 }
 
-- (BOOL)validateFirstNameField:(UITextField *)firstNameField
-                 lastNameField:(UITextField *)lastNameField
-                    emailField:(UITextField *)emailField
-              dateOfBirthField: (UITextField *)dateOfBirthField
-                   genderField: (UITextField *)genderField
++ (BOOL)validatePasswordField:(UITextField *)passwordField andConfirmPasswordField:(UITextField *)confirmPasswordField
 {
-    NSCharacterSet *alphaSet = [NSCharacterSet letterCharacterSet];
-    
-    BOOL isFirstNameValid = [[firstNameField.text stringByTrimmingCharactersInSet:alphaSet] isEqualToString:@""] && firstNameField.text.length;
-    
-    BOOL isLastNameValid = [[lastNameField.text stringByTrimmingCharactersInSet:alphaSet] isEqualToString:@""] && lastNameField.text.length;
-    
     BOOL isValid = YES;
     
-    if (!isFirstNameValid) {
-        [firstNameField shakeView];
+    if (![self validatePasswordField:passwordField]) {
+        return NO;
+    }
+    
+    if (![passwordField.text isEqualToString:confirmPasswordField.text]) {
+
+        [[self validationErrorString] appendString:NSLocalizedString(@"Password does not match the confirm password\n", nil)];
         
-        if ([firstNameField isKindOfClass:[BZREditProfileField class]]) {
-            ((BZREditProfileField *)firstNameField).validationFailed = YES;
+        [confirmPasswordField shakeView];
+        
+        if ([confirmPasswordField isKindOfClass:[BZRAuthorizationField class]]) {
+            ((BZRAuthorizationField *)confirmPasswordField).errorImageName = kPasswordErrorImageName;
         }
         
-        [self.validationErrorString appendString:NSLocalizedString(@"First name can only contain alphanumeric characters.\n", nil)];
         isValid = NO;
     }
-    if (!isLastNameValid) {
-        [lastNameField shakeView];
-        
-        if ([lastNameField isKindOfClass:[BZREditProfileField class]]) {
-            ((BZREditProfileField *)lastNameField).validationFailed = YES;
-        }
-        
-        [self.validationErrorString appendString:NSLocalizedString(@"Last name can only contain alphanumeric characters.\n", nil)];
-        isValid = NO;
-    }
-    if (![self validateEmailField:emailField]) {
-        isValid = NO;
-    }
-    if (![self isBirthDateFromFieldValid:dateOfBirthField]) {
-        [dateOfBirthField shakeView];
-        
-        if ([dateOfBirthField isKindOfClass:[BZREditProfileField class]]) {
-            ((BZREditProfileField *)dateOfBirthField).validationFailed = YES;
-        }
-        
-        [self.validationErrorString appendString:NSLocalizedString(@"You must be of age 13 or older to register\n", nil)];
-        isValid = NO;
-    }
-    if (!genderField.text.length) {
-        [genderField shakeView];
-        
-        if ([genderField isKindOfClass:[BZREditProfileField class]]) {
-            ((BZREditProfileField *)genderField).validationFailed = YES;
-        }
-        
-        [self.validationErrorString appendString:NSLocalizedString(@"Select your gender\n", nil)];
-        isValid = NO;
-    }
+    
     return isValid;
 }
 
-- (BOOL)validateCheckboxes:(NSArray *)checkboxes
++ (BOOL)validateCheckboxes:(NSArray *)checkboxes
 {
     BOOL isValid = YES;
     for (UIButton *checkbox in checkboxes) {
@@ -185,12 +125,60 @@ static NSString *const kPasswordErrorImageName = @"password_icon_error";
     return isValid;
 }
 
-- (BOOL)isBirthDateFromFieldValid:(UITextField *)dateField
++ (BOOL)validateFirstNameField:(UITextField *)firstNameField andLastNameField:(UITextField *)lastNameField
+{
+    NSCharacterSet *alphaSet = [NSCharacterSet letterCharacterSet];
+    
+    BOOL isFirstNameValid = [[firstNameField.text stringByTrimmingCharactersInSet:alphaSet] isEqualToString:@""] && firstNameField.text.length;
+    
+    BOOL isLastNameValid = [[lastNameField.text stringByTrimmingCharactersInSet:alphaSet] isEqualToString:@""] && lastNameField.text.length;
+    
+    BOOL isValid = YES;
+    
+    if (!isFirstNameValid) {
+        
+        [[self validationErrorString] appendString:NSLocalizedString(@"First name can only contain letters\n", nil)];
+        
+        [firstNameField shakeView];
+        
+        if ([firstNameField isKindOfClass:[BZREditProfileField class]]) {
+            ((BZREditProfileField *)firstNameField).validationFailed = YES;
+        }
+
+        isValid = NO;
+    }
+    
+    if (!isLastNameValid) {
+        
+        [[self validationErrorString] appendString:NSLocalizedString(@"Last name can only contain letters\n", nil)];
+        
+        [lastNameField shakeView];
+        
+        if ([lastNameField isKindOfClass:[BZREditProfileField class]]) {
+            ((BZREditProfileField *)lastNameField).validationFailed = YES;
+        }
+        
+        isValid = NO;
+    }
+    
+    return isValid;
+}
+
++ (BOOL)validateBirthDateField:(UITextField *)dateField
 {
     NSDate *now = [NSDate date];
     NSDate *birthDate = [[BZRCommonDateFormatter commonDateFormatter] dateFromString:dateField.text];
     
     if (!birthDate) {
+        
+        [dateField shakeView];
+        
+        [[self validationErrorString] appendString:NSLocalizedString(@"Date is empty\n", nil)];
+        
+        if ([dateField isKindOfClass:[BZREditProfileField class]]) {
+            ((BZREditProfileField *)dateField).validationFailed = YES;
+        }
+        
         return NO;
     }
     
@@ -201,14 +189,139 @@ static NSString *const kPasswordErrorImageName = @"password_icon_error";
                                        options:0.f];
     NSInteger age = [ageComponents year];
     
-    return age > 13.f;
+    if (age < kMinValidAge) {
+        
+        [dateField shakeView];
+        
+        if ([dateField isKindOfClass:[BZREditProfileField class]]) {
+            ((BZREditProfileField *)dateField).validationFailed = YES;
+        }
+        
+        [[self validationErrorString] appendString:NSLocalizedString(@"You must be of age 13 or older to register\n", nil)];
+        return NO;
+        
+    }
+    return YES;
+}
+
++ (BOOL)validateGenderField:(UITextField *)genderField
+{
+    if (!genderField.text.length) {
+        
+        [[self validationErrorString] appendString:NSLocalizedString(@"Gender field is empty\n", nil)];
+        
+        [genderField shakeView];
+        
+        if ([genderField isKindOfClass:[BZREditProfileField class]]) {
+            ((BZREditProfileField *)genderField).validationFailed = YES;
+        }
+        
+        return NO;
+    }
+    return YES;
+}
+
+#pragma mark - Public methods
+
++ (void)validateEmailField:(UITextField *)emailField
+                 onSuccess:(ValidationSuccessBlock)success
+                 onFailure:(ValidationFailureBlock)failure
+{
+    if (![self validateEmailField:emailField]) {
+
+        failure([self validationErrorString]);
+        
+    } else {
+        success();
+    }
+}
+
++ (void)validateEmailField:(UITextField *)emailField
+          andPasswordField:(UITextField *)passwordField
+                 onSuccess:(ValidationSuccessBlock)success
+                 onFailure:(ValidationFailureBlock)failure
+{
+    BOOL isValid = YES;
+    
+    if (![self validateEmailField:emailField]) {
+        isValid = NO;
+    }
+    
+    if (![self validatePasswordField:passwordField]) {
+        isValid = NO;
+    }
+    
+    if (!isValid) {
+        failure([self validationErrorString]);
+    } else {
+        success();
+    }
+}
+
++ (void)validateEmailField:(UITextField *)emailField
+          andPasswordField:(UITextField *)passwordField
+   andConfirmPasswordField:(UITextField *)confirmPassword
+                 onSuccess:(ValidationSuccessBlock)success
+                 onFailure:(ValidationFailureBlock)failure
+{
+    BOOL isValid = YES;
+    
+    if (![self validateEmailField:emailField]) {
+        isValid = NO;
+    }
+    if (![self validatePasswordField:passwordField andConfirmPasswordField:confirmPassword]) {
+        isValid = NO;
+    }
+    
+    if (!isValid) {
+        failure([self validationErrorString]);
+    } else {
+        success();
+    }
+}
+
++ (void)validateFirstNameField:(UITextField *)firstNameField
+                 lastNameField:(UITextField *)lastNameField
+                    emailField:(UITextField *)emailField
+              dateOfBirthField: (UITextField *)dateOfBirthField
+                   genderField: (UITextField *)genderField
+                 andCheckboxes:(NSArray *)checkboxes
+                     onSuccess:(ValidationSuccessBlock)success
+                     onFailure:(ValidationFailureBlock)failure
+{
+    BOOL isValid = YES;
+    
+    if (![self validateFirstNameField:firstNameField andLastNameField:lastNameField]) {
+        isValid = NO;
+    }
+    if (![self validateEmailField:emailField]) {
+        isValid = NO;
+    }
+    if (![self validateBirthDateField:dateOfBirthField]) {
+        isValid = NO;
+    }
+    if (![self validateGenderField:genderField]) {
+        isValid = NO;
+    }
+    if (checkboxes) {
+        if (![self validateCheckboxes:checkboxes]) {
+            isValid = NO;
+        }
+    }
+    
+    if (!isValid) {
+        failure([self validationErrorString]);
+    } else {
+        success();
+    }
+    
 }
 
 #pragma mark - Other actions
 
-- (void)cleanValidationErrorString
++ (void)cleanValidationErrorString
 {
-    self.validationErrorString = [@"" mutableCopy];
+    [self setValidationErrorString:[@"" mutableCopy]];
 }
 
 @end

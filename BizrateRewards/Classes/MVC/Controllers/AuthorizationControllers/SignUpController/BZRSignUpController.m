@@ -46,29 +46,36 @@
 - (IBAction)createAccountClick:(id)sender
 {
     WEAK_SELF;
-    if ([self.validator validateEmailField:self.userNameField andPasswordField:self.passwordField andConfirmPasswordField:self.confirmPasswordField]) {
-        
-        self.temporaryProfile.email = self.userNameField.text;
-        
-        [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
-        [BZRAuthorizationService signUpWithUserFirstName:weakSelf.temporaryProfile.firstName
-                                         andUserLastName:weakSelf.temporaryProfile.lastName
-                                                andEmail:weakSelf.temporaryProfile.email
-                                             andPassword:self.passwordField.text
-                                          andDateOfBirth:[[BZRCommonDateFormatter commonDateFormatter] stringFromDate:weakSelf.temporaryProfile.dateOfBirth]
-                                               andGender:[weakSelf.temporaryProfile.genderString substringToIndex:1] onSuccess:^(BZRApplicationToken *token) {
-                                                   [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-                                                   BZRDashboardController *controller = [weakSelf.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRDashboardController class])];
-                                                   controller.updateNeeded = YES;
-                                                   [weakSelf.navigationController pushViewController:controller animated:YES];
-                                               } onFailure:^(NSError *error) {
-                                                   ShowFailureResponseAlertWithError(error);
-                                                   [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-                                               }];
-    } else {
-//        ShowAlert(self.validator.validationErrorString);
-        [self.validator cleanValidationErrorString];
-    }
+    [BZRValidator validateEmailField:self.userNameField
+                    andPasswordField:self.passwordField
+             andConfirmPasswordField:self.confirmPasswordField
+                           onSuccess:^{
+                               
+                               weakSelf.temporaryProfile.email = weakSelf.userNameField.text;
+                               
+                               [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
+                               [BZRAuthorizationService signUpWithUserFirstName:weakSelf.temporaryProfile.firstName
+                                                                andUserLastName:weakSelf.temporaryProfile.lastName
+                                                                       andEmail:weakSelf.temporaryProfile.email
+                                                                    andPassword:weakSelf.passwordField.text
+                                                                 andDateOfBirth:[[BZRCommonDateFormatter commonDateFormatter] stringFromDate:weakSelf.temporaryProfile.dateOfBirth]
+                                                                      andGender:[weakSelf.temporaryProfile.genderString substringToIndex:1] onSuccess:^(BZRApplicationToken *token) {
+                                                                          
+                                                                          [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+                                                                          
+                                                                          BZRDashboardController *controller = [weakSelf.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRDashboardController class])];
+                                                                          controller.updateNeeded = YES;
+                                                                          [weakSelf.navigationController pushViewController:controller animated:YES];
+                                                                          
+                                                                      } onFailure:^(NSError *error) {
+                                                                          ShowFailureResponseAlertWithError(error);
+                                                                          [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+                                                                      }];
+                               
+                           }
+                           onFailure:^(NSString *errorString) {
+                               [BZRValidator cleanValidationErrorString];
+                           }];
 }
 
 - (void)customizeFields

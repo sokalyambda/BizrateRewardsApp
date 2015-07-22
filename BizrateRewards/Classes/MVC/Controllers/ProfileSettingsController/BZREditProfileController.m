@@ -9,7 +9,6 @@
 #import "BZREditProfileController.h"
 #import "BZREditProfileContainerController.h"
 
-#import "BZRValidator.h"
 #import "BZRCommonDateFormatter.h"
 #import "BZRSerialViewConstructor.h"
 
@@ -25,8 +24,6 @@ static NSString *const kEditProfileContainerSegueIdentifier = @"editProfileConta
 
 @property (weak, nonatomic) BZREditProfileContainerController *container;
 
-@property (strong, nonatomic) BZRValidator *validator;
-
 @property (strong, nonatomic) BZRUserProfile *currentProfile;
 
 @end
@@ -34,14 +31,6 @@ static NSString *const kEditProfileContainerSegueIdentifier = @"editProfileConta
 @implementation BZREditProfileController
 
 #pragma mark - Accessors
-
-- (BZRValidator *)validator
-{
-    if (!_validator) {
-        _validator = [BZRValidator sharedValidator];
-    }
-    return _validator;
-}
 
 - (BZRUserProfile *)currentProfile
 {
@@ -76,23 +65,25 @@ static NSString *const kEditProfileContainerSegueIdentifier = @"editProfileConta
 - (void)updateUser
 {
     WEAK_SELF;
-    if ([self.validator validateFirstNameField:self.container.firstNameField
-                                 lastNameField:self.container.lastNameField
-                                    emailField:self.container.emailField
-                              dateOfBirthField:self.container.dateOfBirthField
-                                   genderField:self.container.genderField]) {
-        [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
-        [BZRUserProfileService updateCurrentUserWithFirstName:self.container.firstNameField.text andLastName:self.container.lastNameField.text andDateOfBirth:self.container.dateOfBirthField.text andGender:[self.container.genderField.text substringToIndex:1] onSuccess:^(BZRUserProfile *userProfile) {
-            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-            [weakSelf.navigationController popViewControllerAnimated:YES];
-        } onFailure:^(NSError *error) {
-            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-            ShowFailureResponseAlertWithError(error);
-        }];
-    } else {
-//        ShowAlert(self.validator.validationErrorString);
-        [self.validator cleanValidationErrorString];
-    }
+    [BZRValidator validateFirstNameField:self.container.firstNameField
+                           lastNameField:self.container.lastNameField
+                              emailField:self.container.emailField
+                        dateOfBirthField:self.container.dateOfBirthField
+                             genderField:self.container.genderField
+                           andCheckboxes:nil onSuccess:^{
+                               
+                               [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
+                               [BZRUserProfileService updateCurrentUserWithFirstName:self.container.firstNameField.text andLastName:self.container.lastNameField.text andDateOfBirth:self.container.dateOfBirthField.text andGender:[self.container.genderField.text substringToIndex:1] onSuccess:^(BZRUserProfile *userProfile) {
+                                   [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+                                   [weakSelf.navigationController popViewControllerAnimated:YES];
+                               } onFailure:^(NSError *error) {
+                                   [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+                                   ShowFailureResponseAlertWithError(error);
+                               }];
+                               
+                           } onFailure:^(NSString *errorString) {
+                               [BZRValidator cleanValidationErrorString];
+                           }];
 }
 
 - (void)setupFieldsValueFromProfile

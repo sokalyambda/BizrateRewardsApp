@@ -19,16 +19,6 @@ static NSString *const kPasswordNotActiveIconName   = @"password_icon";
 
 @implementation BZRBaseAuthController
 
-#pragma mark - Accessors
-
-- (BZRValidator *)validator
-{
-    if (!_validator) {
-        _validator = [BZRValidator sharedValidator];
-    }
-    return _validator;
-}
-
 #pragma mark - View Lifecycle
 
 - (void)viewDidLoad
@@ -77,6 +67,8 @@ static NSString *const kPasswordNotActiveIconName   = @"password_icon";
     UIEdgeInsets contentInsets = UIEdgeInsetsZero;
     self.scrollView.contentInset = contentInsets;
     self.scrollView.scrollIndicatorInsets = contentInsets;
+    
+    [self.scrollView setContentOffset:CGPointZero animated:YES];
 }
 
 #pragma mark - Actions

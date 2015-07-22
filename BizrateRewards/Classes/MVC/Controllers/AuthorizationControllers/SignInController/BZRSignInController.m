@@ -96,29 +96,35 @@ static NSInteger const kNotRegisteredErrorCode = 400.f;
 - (IBAction)signInClick:(id)sender
 {
     [self.incorrectEmailView setHidden:YES];
+    
     WEAK_SELF;
-    if ([self.validator validateEmailField:self.userNameField andPasswordField:self.passwordField]) {
-        [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
-        [BZRAuthorizationService signInWithUserName:self.userNameField.text password:self.passwordField.text onSuccess:^(BZRApplicationToken *token) {
-            
-            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-            
-            if (weakSelf.isRememberMe) {
-                [BZRKeychainHandler storeCredentialsWithUsername:weakSelf.userNameField.text andPassword:weakSelf.passwordField.text];
-            }
-            [weakSelf performSegueWithIdentifier:kDashboardSegueIdentifier sender:weakSelf];
-            
-        } onFailure:^(NSError *error) {
-            
-            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-            
-            [weakSelf.incorrectEmailView setHidden:NO];
-            weakSelf.userNameField.errorImageName = kEmailErrorIconName;
-        }];
-    } else {
-//        ShowAlert(self.validator.validationErrorString);
-        [self.validator cleanValidationErrorString];
-    }
+    [BZRValidator validateEmailField:self.userNameField
+                    andPasswordField:self.passwordField
+                           onSuccess:^{
+                               [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
+                               [BZRAuthorizationService signInWithUserName:self.userNameField.text
+                                                                  password:self.passwordField.text
+                                                                 onSuccess:^(BZRApplicationToken *token) {
+                                   
+                                   [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+                                   
+                                   if (weakSelf.isRememberMe) {
+                                       [BZRKeychainHandler storeCredentialsWithUsername:weakSelf.userNameField.text andPassword:weakSelf.passwordField.text];
+                                   }
+                                   [weakSelf performSegueWithIdentifier:kDashboardSegueIdentifier sender:weakSelf];
+                               }
+                                                                 onFailure:^(NSError *error) {
+                                   
+                                   [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+                                   
+#warning check if email is not registered
+                                   [weakSelf.incorrectEmailView setHidden:NO];
+                                   weakSelf.userNameField.errorImageName = kEmailErrorIconName;
+                               }];
+                           }
+                           onFailure:^(NSString *errorString) {
+                               [BZRValidator cleanValidationErrorString];
+                           }];
 }
 
 - (IBAction)forgotPasswordClick:(id)sender

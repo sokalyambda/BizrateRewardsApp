@@ -11,7 +11,6 @@
 #import "BZREditProfileContainerController.h"
 #import "BZRChooseSignUpTypeController.h"
 
-#import "BZRValidator.h"
 #import "BZRStorageManager.h"
 #import "BZRTermsAndConditionsHelper.h"
 #import "BZRCommonDateFormatter.h"
@@ -34,23 +33,11 @@ static NSString *const kChooseSignUpTypeSegueIdentifier = @"сhooseSignUpTypeSeg
 @property (weak, nonatomic) IBOutlet BZRCheckBoxButton *termsCheckBox;
 @property (weak, nonatomic) IBOutlet BZRCheckBoxButton *yearsCheckBox;
 
-@property (strong, nonatomic) BZRValidator *validator;
-
 @property (strong, nonatomic) BZRUserProfile *temporaryProfile;
 
 @end
 
 @implementation BZRGetStartedController
-
-#pragma mark - Accessors
-
-- (BZRValidator *)validator
-{
-    if (!_validator) {
-        _validator = [BZRValidator sharedValidator];
-    }
-    return _validator;
-}
 
 #pragma mark - View Lifecycle
 
@@ -79,23 +66,26 @@ static NSString *const kChooseSignUpTypeSegueIdentifier = @"сhooseSignUpTypeSeg
 
 - (IBAction)submitButtonClick:(UIButton *)sender
 {
-    if ([self.validator validateFirstNameField:self.editProfileTableViewController.firstNameField
-                                lastNameField:self.editProfileTableViewController.lastNameField
-                                   emailField:self.editProfileTableViewController.emailField
-                             dateOfBirthField:self.editProfileTableViewController.dateOfBirthField
-                                   genderField:self.editProfileTableViewController.genderField] && [self.validator validateCheckboxes:@[self.privacyPolicyCheckBox, self.termsCheckBox, self.yearsCheckBox]]) {
+    WEAK_SELF;
+    [BZRValidator validateFirstNameField:self.editProfileTableViewController.firstNameField
+                           lastNameField:self.editProfileTableViewController.lastNameField
+                              emailField:self.editProfileTableViewController.emailField
+                        dateOfBirthField:self.editProfileTableViewController.dateOfBirthField
+                             genderField:self.editProfileTableViewController.genderField
+                           andCheckboxes:@[self.privacyPolicyCheckBox, self.termsCheckBox, self.yearsCheckBox]
+                               onSuccess:^{
+                                   
+                                   [weakSelf createNewTemporaryProfile];
+                                   
+                                   [weakSelf performSegueWithIdentifier:kChooseSignUpTypeSegueIdentifier sender:weakSelf];
         
-        [self createNewProfile];
-        
-        [self performSegueWithIdentifier:kChooseSignUpTypeSegueIdentifier sender:self];
-        
-    } else {
-//        ShowAlert(self.validator.validationErrorString);
-        [self.validator cleanValidationErrorString];
     }
+                               onFailure:^(NSString *errorString) {
+                                   [BZRValidator cleanValidationErrorString];
+    }];
 }
 
-- (void)createNewProfile
+- (void)createNewTemporaryProfile
 {
     //first step in user creation
     self.temporaryProfile = [[BZRUserProfile alloc] init];

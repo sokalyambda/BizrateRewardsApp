@@ -84,4 +84,9 @@
     }];
 }
 
+//+ (void)signInWithUserName:(NSString *)userName password:(NSString *)password onSuccess:(AuthorizationSuccessBlock)success onFailure:(AuthorizationFailureBlock)failure
+//{
+//    
+//}
+
 @end
