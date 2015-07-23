@@ -10,8 +10,6 @@
 
 #import "BZRApiConstants.h"
 
-typedef void(^FacebookProfileBlock)(BOOL success, NSDictionary *facebookProfile, NSString *faceBookAccessToken, NSError *error);
-
 typedef void(^SuccessBlock)(id responseObject);
 typedef void(^FailureBlock)(NSError *error);
 
@@ -28,7 +26,7 @@ typedef void(^FailureBlock)(NSError *error);
 
 - (void)signUpWithParameters:(NSDictionary *)parameters onSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure;
 
-- (void)authorizeWithFacebookOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure;
+- (void)authorizeWithFacebookWithParameters:(NSDictionary *)parameters onSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure;
 
 //get user
 - (void)getCurrentUserOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure;

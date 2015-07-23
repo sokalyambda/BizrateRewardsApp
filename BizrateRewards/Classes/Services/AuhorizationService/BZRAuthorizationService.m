@@ -70,9 +70,10 @@
                       onSuccess:(AuthorizationSuccessBlock)success
                       onFailure:(AuthorizationFailureBlock)failure
 {
+    WEAK_SELF;
     [BZRReachabilityHelper checkConnectionOnSuccess:^{
         
-        [self getClientCredentialsOnSuccess:^(BZRApplicationToken *token) {
+        [weakSelf getClientCredentialsOnSuccess:^(BZRApplicationToken *token) {
             
             [[BZRDataManager sharedInstance] signUpWithUserFirstName:firstName andUserLastName:lastName andEmail:email andPassword:password andDateOfBirth:birthDate andGender:gender onSuccess:^(id responseObject) {
                 BZRUserToken *token = [[BZRUserToken alloc] initWithServerResponse:responseObject];
@@ -82,6 +83,25 @@
             } onFailure:^(NSError *error) {
                 failure(error);
             }];
+            
+        } onFailure:^(NSError *error) {
+            failure(error);
+        }];
+    } failure:^{
+        ShowAlert(InternetIsNotReachableString);
+        failure(nil);
+    }];
+}
+
++ (void)authorizeWithFacebookAccountOnSuccess:(AuthorizationSuccessBlock)success onFailure:(AuthorizationFailureBlock)failure
+{
+    [BZRReachabilityHelper checkConnectionOnSuccess:^{
+        [[BZRDataManager sharedInstance] authorizeWithFacebookOnSuccess:^(id responseObject) {
+            
+            BZRUserToken *token = [[BZRUserToken alloc] initWithServerResponse:responseObject];
+            [BZRStorageManager sharedStorage].userToken = token;
+            
+            success(token);
             
         } onFailure:^(NSError *error) {
             failure(error);

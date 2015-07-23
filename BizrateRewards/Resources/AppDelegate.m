@@ -18,7 +18,7 @@
 @import HockeySDK;
 
 static NSString *const kHockeyAppIdentifier = @"bf52cc6c526a07761d1b50a4078b6d67";
-static NSString *const kOfferBeamRetailerID = @"64134A39-EA9A-4261-963A-D05E33484844";
+static NSString *const kOfferBeamRetailerID = @"A27C65B0-DB22-11E4-8830-0800200C9A66";
 
 @interface AppDelegate ()
 

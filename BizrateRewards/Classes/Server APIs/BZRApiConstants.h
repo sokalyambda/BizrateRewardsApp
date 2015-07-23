@@ -18,5 +18,6 @@ static NSString *const CreateUserKey        = @"user/create";
 static NSString *const UserMeKey            = @"user/me";
 static NSString *const EligibleSurveysKey   = @"user/survey/eligible";
 static NSString *const DeviceKey            = @"user/device";
+static NSString *const UserFacebook         = @"user/facebook";
 
 #endif

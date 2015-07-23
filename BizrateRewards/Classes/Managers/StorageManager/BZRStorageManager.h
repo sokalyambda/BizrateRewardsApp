@@ -15,6 +15,8 @@
 
 @property (strong, nonatomic) BZRApplicationToken *applicationToken;
 @property (strong, nonatomic) BZRUserToken *userToken;
+@property (strong, nonatomic) FBSDKAccessToken *facebookToken;
+
 @property (strong, nonatomic) BZRUserProfile *currentProfile;
 
 @property (strong, nonatomic) NSString *deviceToken;

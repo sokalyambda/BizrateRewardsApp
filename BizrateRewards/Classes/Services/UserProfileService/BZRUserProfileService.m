@@ -70,4 +70,13 @@
     }];
 }
 
++ (void)getFacebookUserProfileOnSuccess:(UserProfileSuccessBlock)success onFailure:(UserProfileFailureBlock)failure
+{
+    [BZRReachabilityHelper checkConnectionOnSuccess:^{
+        
+    } failure:^{
+        
+    }];
+}
+
 @end

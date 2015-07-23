@@ -20,7 +20,6 @@ static NSString *const kClientIdKey                 = @"92196543-9462-4b90-915a-
 static NSString *const kClientSecretKey             = @"8a9da763-9503-4093-82c2-6b22b8eb9a12";
 
 //parameters keys
-
 static NSString *const kGrantType           = @"grant_type";
 static NSString *const kClientId            = @"client_id";
 static NSString *const kClientSecret        = @"client_secret";
@@ -40,10 +39,17 @@ static NSString *const kIsTestUser          = @"is_test_user";
 static NSString *const kDeviceId            = @"device_id";
 static NSString *const kNotificationToken   = @"notification_token";
 
+static NSString *const kFBAccessToken       = @"fb_access_token";
+
+//Facebook keys
+static NSString *const kFBPublicProfile = @"public_profile";
+static NSString *const kFBEmail         = @"email";
+static NSString *const kFBUserMe        = @"me";
 
 @interface BZRDataManager ()
 
 @property (strong, nonatomic) BZRNetworkManager *network;
+@property (strong, nonatomic) FBSDKLoginManager *loginManager;
 @property (strong, nonatomic) BZRStorageManager *storage;
 
 @property (strong, nonatomic) AFJSONRequestSerializer *jsonRequestSerializer;
@@ -54,6 +60,14 @@ static NSString *const kNotificationToken   = @"notification_token";
 @implementation BZRDataManager
 
 #pragma mark - Accessors
+
+- (FBSDKLoginManager *)loginManager
+{
+    if (!_loginManager) {
+        _loginManager = [[FBSDKLoginManager alloc] init];
+    }
+    return _loginManager;
+}
 
 - (AFJSONRequestSerializer *)jsonRequestSerializer
 {
@@ -73,10 +87,7 @@ static NSString *const kNotificationToken   = @"notification_token";
 
 - (BOOL)isReachable
 {
-    if (!self.network.reachabilityManager.isReachable) {
-        return NO;
-    }
-    return YES;
+    return self.network.reachabilityManager.isReachable;
 }
 
 #pragma mark - Lifecycle
@@ -118,6 +129,7 @@ static NSString *const kNotificationToken   = @"notification_token";
                                  kRefreshToken : refreshToken};
     
     [self.network renewSessionTokenWithParameters:parameters onSuccess:^(id responseObject) {
+        
         BZRUserToken *token = [[BZRUserToken alloc] initWithServerResponse:responseObject];
         [BZRStorageManager sharedStorage].userToken = token;
         success(responseObject);
@@ -184,20 +196,81 @@ static NSString *const kNotificationToken   = @"notification_token";
     }];
 }
 
+/******* FaceBook *******/
+
 - (void)authorizeWithFacebookOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure
 {
-    [self.network authorizeWithFacebookOnSuccess:^(id responseObject) {
-        BZRUserProfile *userProfile = [[BZRUserProfile alloc] initWithServerResponse:responseObject];
+    WEAK_SELF;
+    [self tryLoginWithFacebookOnSuccess:^(FBSDKLoginManagerLoginResult *loginResult) {
         
+        NSString *facebookToken = loginResult.token.tokenString;
+        
+        [weakSelf.network authorizeWithFacebookWithParameters:@{kFBAccessToken: facebookToken} onSuccess:^(id responseObject) {
+            
+            //MARK: We have to get user token here
+            
 //        NSURL *userImageURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?width=200", [facebookProfile valueForKey:@"id"]]];
-//        
-//        userProfile.avatarURL = userImageURL;
-        success(responseObject);
-
+            
+            success(responseObject);
+            
+        } onFailure:^(NSError *error) {
+            failure(error);
+        }];
     } onFailure:^(NSError *error) {
         failure(error);
     }];
 }
+
+- (void)tryLoginWithFacebookOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure
+{
+    BOOL isFBinstalled = [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"fb://"]];
+    
+    if (isFBinstalled) {
+        self.loginManager.loginBehavior = FBSDKLoginBehaviorNative;
+    } else {
+        self.loginManager.loginBehavior = FBSDKLoginBehaviorWeb;
+    }
+    
+    [self.loginManager logInWithReadPermissions:@[kFBPublicProfile, kFBEmail] handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+        
+        if (error) {
+            failure(error);
+        } else if (result.isCancelled) {
+            failure(error);
+        } else {
+            if ([result.grantedPermissions containsObject:kFBEmail] && [result.grantedPermissions containsObject:kFBPublicProfile]) {
+                
+//                [weakSelf getFacebookUserProfileOnSuccess:^(id responseObject) {
+//                    success(responseObject);
+//                } onFailure:^(NSError *error) {
+//                    failure(error);
+//                }];
+                
+//                NSString *facebookToken = result.token.tokenString;
+                success(result);
+            }
+        }
+    }];
+}
+
+- (void)getFacebookUserProfileOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure
+{
+    FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:kFBUserMe parameters:nil HTTPMethod:@"GET"];
+    
+    [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id response, NSError *error) {
+        if (error) {
+            failure(error);
+        } else {
+//            NSDictionary *user = (NSDictionary *)response;
+//            NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithDictionary:@{@"facebook_id":[user valueForKey:@"id"], @"first_name":[user valueForKey:@"first_name"], @"last_name":[user valueForKey:@"last_name"]}];
+//            
+//            NSString *fbAccessToken = [FBSDKAccessToken currentAccessToken].tokenString;
+            success(response);
+        }
+    }];
+}
+
+/******* FaceBook *******/
 
 - (void)signOutOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure
 {

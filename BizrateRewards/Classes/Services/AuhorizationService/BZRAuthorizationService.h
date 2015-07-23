@@ -13,7 +13,11 @@ typedef void(^AuthorizationFailureBlock)(NSError *error);
 
 @interface BZRAuthorizationService : NSObject
 
-+ (void)signInWithUserName:(NSString *)userName password:(NSString *)password onSuccess:(AuthorizationSuccessBlock)success onFailure:(AuthorizationFailureBlock)failure;
++ (void)signInWithUserName:(NSString *)userName
+                  password:(NSString *)password
+                 onSuccess:(AuthorizationSuccessBlock)success
+                 onFailure:(AuthorizationFailureBlock)failure;
+
 + (void)signUpWithUserFirstName:(NSString *)firstName
                 andUserLastName:(NSString *)lastName
                        andEmail:(NSString *)email
@@ -22,5 +26,8 @@ typedef void(^AuthorizationFailureBlock)(NSError *error);
                       andGender:(NSString *)gender
                       onSuccess:(AuthorizationSuccessBlock)success
                       onFailure:(AuthorizationFailureBlock)failure;
+
++ (void)authorizeWithFacebookAccountOnSuccess:(AuthorizationSuccessBlock)success
+                                    onFailure:(AuthorizationFailureBlock)failure;
 
 @end

@@ -13,11 +13,16 @@ typedef void(^UserProfileFailureBlock)(NSError *error);
 
 @interface BZRUserProfileService : NSObject
 
-+ (void)getCurrentUserOnSuccess:(UserProfileSuccessBlock)success onFailure:(UserProfileFailureBlock)failure;
++ (void)getCurrentUserOnSuccess:(UserProfileSuccessBlock)success
+                      onFailure:(UserProfileFailureBlock)failure;
+
 + (void)updateCurrentUserWithFirstName:(NSString *)firstName
                            andLastName:(NSString *)lastName
                         andDateOfBirth:(NSString *)dateOfBirth
                              andGender:(NSString *)gender
                              onSuccess:(UserProfileSuccessBlock)success onFailure:(UserProfileFailureBlock)failure;
+
++ (void)getFacebookUserProfileOnSuccess:(UserProfileSuccessBlock)success
+                              onFailure:(UserProfileFailureBlock)failure;
 
 @end
