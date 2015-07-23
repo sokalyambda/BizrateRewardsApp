@@ -84,7 +84,7 @@ static NSString *const kPushPermissionsLastState = @"pushPermissionLastState";
     if (isPermissionsChanged) {
         [defaults setBool:isPushesEnabled forKey:kPushPermissionsLastState];
         
-        [BZRMixpanelService trackEventWithType:BZRMixpanelEventPushNotificationPermission properties:@{AccessGrantedKey : @(isPushesEnabled)}];
+        [BZRMixpanelService trackEventWithType:BZRMixpanelEventPushNotificationPermission properties:@{AccessGrantedKey : isPushesEnabled? Yes : No}];
     }
 }
 

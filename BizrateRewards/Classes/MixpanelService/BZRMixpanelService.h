@@ -10,12 +10,15 @@ typedef enum : NSUInteger {
     BZRMixpanelEventOpenApp,
     BZRMixpanelEventSurveyViewed,
     BZRMixpanelEventSurveyCompeted,
+    BZRMixpanelEventSignupPage,
     BZRMixpanelEventCreateAccountPage,
+    BZRMixpanelEventCreateAcountClicked,
     BZRMixpanelEventRegistrationSuccessful,
     BZRMixpanelEventLoginSuccessful,
     BZRMixpanelEventPushNotificationPermission,
     BZRMixpanelEventLocationPermission,
-    BZRMixpanelEventGeofenceActivity
+    BZRMixpanelEventGeofenceEnter,
+    BZRMixpanelEventGeofenceExit
 }BZRMixpanelEventType;
 
 @interface BZRMixpanelService : NSObject

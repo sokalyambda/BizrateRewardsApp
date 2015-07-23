@@ -84,6 +84,9 @@ static NSInteger const kNotRegisteredErrorCode = 400.f;
 //        [weakSelf.dataManager authorizeWithFacebookWithResult:^(BOOL success, NSError *error, NSInteger responseStatusCode) {
 //            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
 //            if (success) {
+    
+//                  [BZRMixpanelService trackEventWithType:BZRMixpanelEventLoginSuccessful properties:@{Type : Facebook}];
+    
 //                [weakSelf performSegueWithIdentifier:kDashboardSegueIdentifier sender:weakSelf];
 //            }
 //        }];
@@ -106,7 +109,7 @@ static NSInteger const kNotRegisteredErrorCode = 400.f;
                                                                   password:self.passwordField.text
                                                                  onSuccess:^(BZRApplicationToken *token) {
                                                                      
-                                   [BZRMixpanelService trackEventWithType:BZRMixpanelEventLoginSuccessful properties:nil];
+                                                                     [BZRMixpanelService trackEventWithType:BZRMixpanelEventLoginSuccessful properties:@{Type : Email}];
                                    
                                    [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
                                    

@@ -30,7 +30,7 @@
 {
     [super viewDidLoad];
     
-    [BZRMixpanelService trackEventWithType:BZRMixpanelEventCreateAccountPage properties:nil];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -63,7 +63,7 @@
                                                                  andDateOfBirth:[[BZRCommonDateFormatter commonDateFormatter] stringFromDate:weakSelf.temporaryProfile.dateOfBirth]
                                                                       andGender:[weakSelf.temporaryProfile.genderString substringToIndex:1] onSuccess:^(BZRApplicationToken *token) {
                                                                           
-                                                                          [BZRMixpanelService trackEventWithType:BZRMixpanelEventRegistrationSuccessful properties:nil];
+                                                                          [BZRMixpanelService trackEventWithType:BZRMixpanelEventRegistrationSuccessful properties:@{Type : Email}];
                                                                           
                                                                           [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
                                                                           

@@ -126,7 +126,7 @@ static NSString *const kGeolocationPermissionsLastState = @"geolocationPermissio
     if (isPermissionsChanged) {
         [defaults setBool:isGeolocationEnable forKey:kGeolocationPermissionsLastState];
         
-        [BZRMixpanelService trackEventWithType:BZRMixpanelEventLocationPermission properties:@{AccessGrantedKey : @(isGeolocationEnable)}];;
+        [BZRMixpanelService trackEventWithType:BZRMixpanelEventLocationPermission properties:@{AccessGrantedKey : isGeolocationEnable? Yes : No}];;
     }
 }
 

@@ -21,8 +21,6 @@ static NSString *const PushNotificationServiceDidFailAuthorizeNotification = @"P
 
 static NSString *const InternetIsNotReachableString = @"Internet is not reachable.";
 
-static NSString *const AccessGrantedKey = @"Access Granted";
-
 //User
 
 static NSString *const CurrentProfileKey = @"CurrentProfileKey";
@@ -37,14 +35,33 @@ static NSString *const MixpanelUUID = @"MixpanelUUID";
 
 // Mixpanel Events
 
-static NSString *const OpenApp = @"App is opened";
-static NSString *const SurveyViewed = @"Survey is opened";
-static NSString *const SurveyCompleted = @"Survey is completed";
-static NSString *const CreateAccountPage = @"Create account page";
-static NSString *const RegistrationSuccessful = @"Registration successful";
-static NSString *const LoginSuccessful = @"Login successful";
-static NSString *const PushNotificationPermission = @"Push notifications permissions";
-static NSString *const LocationPermission = @"Location permissions";
-static NSString *const GeofenceActivity = @"Geofence activity";
+static NSString *const OpenApp = @"Open App";
+static NSString *const SurveyViewed = @"Survey viewed";
+static NSString *const SurveyCompleted = @"Survey completed";
+static NSString *const SignupPage = @"View Signup Page";
+static NSString *const CreateAccountPage = @"View Create Account Page";
+static NSString *const CreateAcountClicked = @"Create Acount Clicked";
+static NSString *const RegistrationSuccessful = @"Registration Successful";
+static NSString *const LoginSuccessful = @"Login Successful";
+static NSString *const PushNotificationPermission = @"Push Notification Permission";
+static NSString *const LocationPermission = @"Location Permission";
+static NSString *const GeofenceEnter = @"Geofence Enter";
+static NSString *const GeofenceExit = @"Geofence Exit";
+
+// Mixpanel Parameters
+
+static NSString *const Type = @"Type";
+static NSString *const Email = @"Email";
+static NSString *const Facebook = @"Facebook";
+static NSString *const AccessGrantedKey = @"Access Granted";
+static NSString *const Yes = @"YES";
+static NSString *const No = @"NO";
+
+//Mixpanel People Properties
+
+static NSString *const PushNotificationsEnabled = @"Push Notifications Enabled";
+static NSString *const GeoLocationEnabled = @"Geo Location Enabled";
+static NSString *const FirstName = @"First Name";
+static NSString *const LastName = @"Last Name";
 
 #endif

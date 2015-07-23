@@ -17,7 +17,7 @@
 
 static NSString *const kFinishSurveyString = @"SaveButton";
 
-static NSString *const kSurveyUrl = @"Survey Url";
+static NSString *const kSurveyID = @"Survey ID";
 
 @interface BZRSurveyViewController ()<UIWebViewDelegate>
 
@@ -48,7 +48,7 @@ static NSString *const kSurveyUrl = @"Survey Url";
     NSURLRequest *surveyRequest = [NSURLRequest requestWithURL:self.currentSurvey.surveyLink];
     [self.surveyWebView loadRequest:surveyRequest];
     
-    [BZRMixpanelService trackEventWithType:BZRMixpanelEventSurveyViewed properties:@{kSurveyUrl : self.currentSurvey.surveyLink}];
+    [BZRMixpanelService trackEventWithType:BZRMixpanelEventSurveyViewed properties:@{kSurveyID : self.currentSurvey.surveyId}];
 }
 
 - (void)setupNavigationBar

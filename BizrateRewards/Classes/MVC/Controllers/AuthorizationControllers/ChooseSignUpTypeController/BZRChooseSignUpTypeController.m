@@ -22,6 +22,7 @@ static NSString *const kSignUpWithEmailSegueIdentifier = @"signUpWithEmailSegue"
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [BZRMixpanelService trackEventWithType:BZRMixpanelEventCreateAccountPage properties:nil];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -34,11 +35,14 @@ static NSString *const kSignUpWithEmailSegueIdentifier = @"signUpWithEmailSegue"
 
 - (IBAction)signUpWithFacebookClick:(id)sender
 {
+    [BZRMixpanelService trackEventWithType:BZRMixpanelEventCreateAcountClicked properties:@{Type : Facebook}];
 }
 
 - (IBAction)signUpWithEmailClick:(id)sender
 {
+    [BZRMixpanelService trackEventWithType:BZRMixpanelEventCreateAcountClicked properties: @{Type : Email}];
     [self performSegueWithIdentifier:kSignUpWithEmailSegueIdentifier sender:self];
+
 }
 
 #pragma mark - Navigation

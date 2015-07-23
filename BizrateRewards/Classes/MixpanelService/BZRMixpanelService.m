@@ -10,7 +10,7 @@
 
 #import <Mixpanel.h>
 
-static NSString *const kMixpanelToken = @"f818411581cc210c670fe3351a46debe";
+static NSString *const kMixpanelToken = @"aae3e2388125817b27b8afcf99093d97";
 
 @implementation BZRMixpanelService
 
@@ -44,8 +44,16 @@ static NSString *const kMixpanelToken = @"f818411581cc210c670fe3351a46debe";
             event = SurveyCompleted;
             break;
         }
+        case BZRMixpanelEventSignupPage: {
+            event = SignupPage;
+            break;
+        }
         case BZRMixpanelEventCreateAccountPage: {
             event = CreateAccountPage;
+            break;
+        }
+        case BZRMixpanelEventCreateAcountClicked: {
+            event = CreateAcountClicked;
             break;
         }
         case BZRMixpanelEventRegistrationSuccessful: {
@@ -64,16 +72,28 @@ static NSString *const kMixpanelToken = @"f818411581cc210c670fe3351a46debe";
             event = LocationPermission;
             break;
         }
-        case BZRMixpanelEventGeofenceActivity: {
-            event = GeofenceActivity;
+        case BZRMixpanelEventGeofenceEnter: {
+            event = GeofenceEnter;
             break;
         }
+        case BZRMixpanelEventGeofenceExit: {
+            event = GeofenceExit;
+            break;
+        }
+
     }
     if (properties) {
         [mixpanel track:event properties:properties];
     } else {
         [mixpanel track:event];
     }
+}
+
++ (void)setPeopleWithProperties:(NSDictionary *)properties
+{
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    [mixpanel.people set:properties];
+    
 }
 
 @end
