@@ -8,7 +8,7 @@
 
 #import "BZRAlertMessageService.h"
 
-#import <AFNetworking/AFNetworking.h>
+#import "BZRErrorHandler.h"
 
 @implementation BZRAlertMessageService
 
@@ -63,29 +63,8 @@ void ShowFailureResponseAlertWithError(NSError *error)
     if (!error) {
         return;
     }
-    
-    NSData *errData = error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey];
-    NSString *jsonErrorString = [[NSString alloc] initWithData:errData encoding:NSUTF8StringEncoding];
-    
-    NSError *jsonError;
-    NSData *objectData = [jsonErrorString dataUsingEncoding:NSUTF8StringEncoding];
-    NSDictionary *jsonErrorDict = [NSJSONSerialization JSONObjectWithData:objectData
-                                                         options:NSJSONReadingMutableContainers
-                                                           error:&jsonError];
-    
-    NSArray *errors = jsonErrorDict[@"errors"];
-    
-    NSMutableString *outputErrorString = [NSMutableString string];
-    
-    for (NSDictionary *currentErrorDict in errors) {
-        [outputErrorString appendFormat:@"%@\n", currentErrorDict[@"error_message"]];
-    }
-    
-    if (outputErrorString.length) {
-        ShowAlert(outputErrorString);
-    } else {
-        ShowErrorAlert(error);
-    }
+    NSString *errorString = [BZRErrorHandler stringFromNetworkError:error];
+    ShowAlert(errorString);
 }
 
 @end

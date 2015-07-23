@@ -24,15 +24,37 @@
         self.responseSerializer = [AFJSONResponseSerializer serializer];
         [self.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"application/schema+json", @"application/json", @"application/x-www-form-urlencoded", nil]];
 
+        
+
         //reachability
-        [[AFNetworkReachabilityManager sharedManager] startMonitoring];
+        
         
         _reachabilityStatus = [[AFNetworkReachabilityManager sharedManager] networkReachabilityStatus];
         
         WEAK_SELF;
         [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+            
+            switch (status) {
+                case AFNetworkReachabilityStatusNotReachable:
+                    break;
+                    
+                case AFNetworkReachabilityStatusUnknown:
+                    break;
+                    
+                case AFNetworkReachabilityStatusReachableViaWiFi:
+                    break;
+                    
+                case AFNetworkReachabilityStatusReachableViaWWAN:
+                    break;
+                    
+                default:
+                    break;
+            }
+            
             weakSelf.reachabilityStatus = status;
         }];
+        
+        [[AFNetworkReachabilityManager sharedManager] startMonitoring];
     }
     
     return self;
