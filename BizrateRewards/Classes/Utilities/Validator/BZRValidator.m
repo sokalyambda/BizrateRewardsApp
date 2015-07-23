@@ -127,11 +127,14 @@ static NSMutableString *_errorString;
 
 + (BOOL)validateFirstNameField:(UITextField *)firstNameField andLastNameField:(UITextField *)lastNameField
 {
-    NSCharacterSet *alphaSet = [NSCharacterSet letterCharacterSet];
+//    NSCharacterSet *alphaSet = [NSCharacterSet letterCharacterSet];
     
-    BOOL isFirstNameValid = [[firstNameField.text stringByTrimmingCharactersInSet:alphaSet] isEqualToString:@""] && firstNameField.text.length;
+    NSString *lettersRegex = @"^[A-Za-z]*";
+    NSPredicate *lettersPredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", lettersRegex];
     
-    BOOL isLastNameValid = [[lastNameField.text stringByTrimmingCharactersInSet:alphaSet] isEqualToString:@""] && lastNameField.text.length;
+    BOOL isFirstNameValid = [lettersPredicate evaluateWithObject:firstNameField.text] && firstNameField.text.length;
+    
+    BOOL isLastNameValid = [lettersPredicate evaluateWithObject:lastNameField.text] && lastNameField.text.length;
     
     BOOL isValid = YES;
     

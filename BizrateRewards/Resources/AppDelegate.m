@@ -13,6 +13,8 @@
 
 #import "OB_Services.h"
 
+#import "BZRDataManager.h"
+
 @import HockeySDK;
 
 static NSString *const kHockeyAppIdentifier = @"bf52cc6c526a07761d1b50a4078b6d67";
@@ -26,6 +28,8 @@ static NSString *const kOfferBeamRetailerID = @"64134A39-EA9A-4261-963A-D05E3348
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [BZRDataManager sharedInstance];
+    
     [BZRMixpanelService setupMixpanel];
     [BZRMixpanelService trackEventWithType:BZRMixpanelEventOpenApp properties:nil];
     

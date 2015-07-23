@@ -14,24 +14,32 @@
 
 + (void)getClientCredentialsOnSuccess:(AuthorizationSuccessBlock)success onFailure:(AuthorizationFailureBlock)failure
 {
-    if (![[BZRDataManager sharedInstance] isSessionValidWithType:BZRSessionTypeApplication]) {
-        [BZRReachabilityHelper checkConnectionOnSuccess:^{
-            [[BZRDataManager sharedInstance] getClientCredentialsOnSuccess:^(id responseObject) {
-                
-                BZRApplicationToken *token = [[BZRApplicationToken alloc] initWithServerResponse:responseObject];
-                [BZRStorageManager sharedStorage].applicationToken = token;
-                success(token);
-                
-            } onFailure:^(NSError *error) {
-                failure(error);
+    [[BZRDataManager sharedInstance] validateSessionWithType:BZRSessionTypeApplication withCompletion:^(BOOL isValid, NSError *error) {
+        
+        if (error) {
+            return failure(error);
+        }
+        
+        if (!isValid) {
+            [BZRReachabilityHelper checkConnectionOnSuccess:^{
+                [[BZRDataManager sharedInstance] getClientCredentialsOnSuccess:^(id responseObject) {
+                    
+                    BZRApplicationToken *token = [[BZRApplicationToken alloc] initWithServerResponse:responseObject];
+                    [BZRStorageManager sharedStorage].applicationToken = token;
+                    success(token);
+                    
+                } onFailure:^(NSError *error) {
+                    failure(error);
+                }];
+            } failure:^{
+                ShowAlert(InternetIsNotReachableString);
+                failure(nil);
             }];
-        } failure:^{
-            ShowAlert(InternetIsNotReachableString);
-            failure(nil);
-        }];
-    } else {
-        success([BZRStorageManager sharedStorage].applicationToken);
-    }
+        } else {
+            success([BZRStorageManager sharedStorage].applicationToken);
+        }
+        
+    }];
 }
 
 + (void)signInWithUserName:(NSString *)userName password:(NSString *)password onSuccess:(AuthorizationSuccessBlock)success onFailure:(AuthorizationFailureBlock)failure
@@ -83,10 +91,5 @@
         failure(nil);
     }];
 }
-
-//+ (void)signInWithUserName:(NSString *)userName password:(NSString *)password onSuccess:(AuthorizationSuccessBlock)success onFailure:(AuthorizationFailureBlock)failure
-//{
-//    
-//}
 
 @end

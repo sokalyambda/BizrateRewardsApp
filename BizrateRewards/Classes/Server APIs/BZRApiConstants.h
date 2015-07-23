@@ -9,8 +9,14 @@
 #ifndef BizrateRewards_BZRApiConstants_h
 #define BizrateRewards_BZRApiConstants_h
 
-static NSString *const GrantTypePassword = @"password";
+//parameters keys
 
-static NSString *const GrantTypeClientCredentials = @"client_credentials";
+//API actions
+
+static NSString *const AuthActionKey        = @"oauth/token";
+static NSString *const CreateUserKey        = @"user/create";
+static NSString *const UserMeKey            = @"user/me";
+static NSString *const EligibleSurveysKey   = @"user/survey/eligible";
+static NSString *const DeviceKey            = @"user/device";
 
 #endif

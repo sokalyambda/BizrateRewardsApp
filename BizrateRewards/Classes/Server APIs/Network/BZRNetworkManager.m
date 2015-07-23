@@ -8,16 +8,6 @@
 
 #import "BZRNetworkManager.h"
 
-#import "BZRCommonDateFormatter.h"
-
-#import "NSDictionary+JSONRepresentation.h"
-
-static NSString *const kBaseURLString = @"https://api.bizraterewards.com/v1/";
-
-static NSString *const kClientIdKey = @"92196543-9462-4b90-915a-738c9b4b558f";
-
-static NSString *const kClientSecretKey = @"8a9da763-9503-4093-82c2-6b22b8eb9a12";
-
 @interface BZRNetworkManager ()
 
 @property (strong, nonatomic) FBSDKLoginManager *loginManager;
@@ -38,9 +28,8 @@ static NSString *const kClientSecretKey = @"8a9da763-9503-4093-82c2-6b22b8eb9a12
 
 #pragma mark - Lifecycle
 
-- (instancetype)init
+- (instancetype)initWithBaseURL:(NSURL *)baseURL
 {
-    NSURL *baseURL = [NSURL URLWithString:kBaseURLString];
     self = [super initWithBaseURL:baseURL];
     if (self) {
         self.requestSerializer = [AFHTTPRequestSerializer serializer];
@@ -63,52 +52,37 @@ static NSString *const kClientSecretKey = @"8a9da763-9503-4093-82c2-6b22b8eb9a12
 
 #pragma mark - Authorization
 
-- (void)getClientCredentialsOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure
+- (void)renewSessionTokenWithParameters:(NSDictionary *)parameters onSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure
 {
-    [self POST:@"oauth/token" parameters:@{@"grant_type": GrantTypeClientCredentials,
-                                           
-                                           @"client_id": kClientIdKey,
-                                           
-                                           @"client_secret": kClientSecretKey
-                                           } success:^(NSURLSessionDataTask *task, id responseObject) {
-                                               success(responseObject);
-                                           } failure:^(NSURLSessionDataTask *task, NSError *error) {
-                                               failure(error);
-                                           }];
-}
-
-- (void)signInWithUserName:(NSString *)userName password:(NSString *)password onSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure
-{
-    NSDictionary *parameter = @{@"username" : userName,
-                                @"password" : password,
-                                @"grant_type" : GrantTypePassword,
-                                @"client_id" : kClientIdKey,
-                                @"client_secret" : kClientSecretKey};
-    [self POST:@"oauth/token" parameters:parameter success:^(NSURLSessionDataTask *task, id responseObject) {
+    [self POST:AuthActionKey parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
         success(responseObject);
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         failure(error);
     }];
 }
 
-- (void)signUpWithUserFirstName:(NSString *)firstName
-                andUserLastName:(NSString *)lastName
-                       andEmail:(NSString *)email
-                    andPassword:(NSString *)password
-                 andDateOfBirth:(NSString *)birthDate
-                      andGender:(NSString *)gender
-                      onSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure
+- (void)getClientCredentialsWithParameters:(NSDictionary *)parameters onSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure
 {
-    NSDictionary *parameters = @{@"firstname": firstName,
-                                @"lastname": lastName,
-                                @"email": email,
-                                 @"password": password,
-                                 @"gender": gender,
-                                 @"dob": birthDate,
-                                 @"is_test_user": @YES};
-    
+    [self POST:AuthActionKey parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
+                                               success(responseObject);
+                                           } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                               failure(error);
+                                           }];
+}
+
+- (void)signInWithParameters:(NSDictionary *)parameters onSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure
+{
+    [self POST:AuthActionKey parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
+        success(responseObject);
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        failure(error);
+    }];
+}
+
+- (void)signUpWithParameters:(NSDictionary *)parameters onSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure
+{
     WEAK_SELF;
-    [weakSelf POST:@"user/create" parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
+    [weakSelf POST:CreateUserKey parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
         success(responseObject);
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         failure(error);
@@ -188,7 +162,7 @@ static NSString *const kClientSecretKey = @"8a9da763-9503-4093-82c2-6b22b8eb9a12
 
 - (void)getCurrentUserOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure
 {
-    [self GET:@"user/me" parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+    [self GET:UserMeKey parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         success(responseObject);
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         failure(error);
@@ -199,7 +173,7 @@ static NSString *const kClientSecretKey = @"8a9da763-9503-4093-82c2-6b22b8eb9a12
 
 - (void)getSurveysListOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure;
 {
-    [self GET:@"user/survey/eligible" parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+    [self GET:EligibleSurveysKey parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         success(responseObject);
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         failure(error);
@@ -210,18 +184,9 @@ static NSString *const kClientSecretKey = @"8a9da763-9503-4093-82c2-6b22b8eb9a12
 
 #pragma mark Update user
 
-- (void)updateCurrentUserWithFirstName:(NSString *)firstName
-                           andLastName:(NSString *)lastName
-                        andDateOfBirth:(NSString *)dateOfBirth
-                             andGender:(NSString *)gender
-                             onSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure
+- (void)updateCurrentUserWithParameters:(NSDictionary *)parameters onSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure
 {
-    NSDictionary *parameters = @{@"firstname": firstName,
-                                 @"lastname": lastName,
-                                 @"dob": dateOfBirth,
-                                 @"gender": gender};
-    
-    [self PUT:@"user/me" parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
+    [self PUT:UserMeKey parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
         success(responseObject);
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         failure(error);
@@ -232,11 +197,9 @@ static NSString *const kClientSecretKey = @"8a9da763-9503-4093-82c2-6b22b8eb9a12
 
 #pragma mark Send device token
 
-- (void)sendDeviceAPNSToken:(NSString *)token andDeviceIdentifier:(NSString *)udid onSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure
+- (void)sendDeviceCredentialsWithParameters:(NSDictionary *)parameters onSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure
 {
-    NSDictionary *parameters = @{@"device_id" : udid, @"notification_token" : token};
-    
-    [self POST:@"user/device" parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
+    [self POST:DeviceKey parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
         success(responseObject);
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         failure(error);

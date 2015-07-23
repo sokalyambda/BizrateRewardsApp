@@ -15,14 +15,23 @@
 + (void)getCurrentUserOnSuccess:(UserProfileSuccessBlock)success onFailure:(UserProfileFailureBlock)failure
 {
     [BZRReachabilityHelper checkConnectionOnSuccess:^{
-        [[BZRDataManager sharedInstance] getCurrentUserOnSuccess:^(id responseObject) {
+        
+        [[BZRDataManager sharedInstance] validateSessionWithType:BZRSessionTypeUser withCompletion:^(BOOL isValid, NSError *error) {
             
-            BZRUserProfile *currentUserProfile = [[BZRUserProfile alloc] initWithServerResponse:responseObject];
-            [BZRStorageManager sharedStorage].currentProfile = currentUserProfile;
-            success(currentUserProfile);
+            if (isValid) {
+                [[BZRDataManager sharedInstance] getCurrentUserOnSuccess:^(id responseObject) {
+                    
+                    BZRUserProfile *currentUserProfile = [[BZRUserProfile alloc] initWithServerResponse:responseObject];
+                    [BZRStorageManager sharedStorage].currentProfile = currentUserProfile;
+                    success(currentUserProfile);
+                    
+                } onFailure:^(NSError *error) {
+                    failure(error);
+                }];
+            } else {
+                failure(error);
+            }
             
-        } onFailure:^(NSError *error) {
-            failure(error);
         }];
     } failure:^{
         ShowAlert(InternetIsNotReachableString);
@@ -37,15 +46,24 @@
                              onSuccess:(UserProfileSuccessBlock)success onFailure:(UserProfileFailureBlock)failure
 {
     [BZRReachabilityHelper checkConnectionOnSuccess:^{
-        [[BZRDataManager sharedInstance] updateCurrentUserWithFirstName:firstName andLastName:lastName andDateOfBirth:dateOfBirth andGender:gender onSuccess:^(id responseObject) {
+        
+        [[BZRDataManager sharedInstance] validateSessionWithType:BZRSessionTypeUser withCompletion:^(BOOL isValid, NSError *error) {
             
-            BZRUserProfile *updatedProfile = [[BZRUserProfile alloc] initWithServerResponse:responseObject];
-            [BZRStorageManager sharedStorage].currentProfile = updatedProfile;
-            success(updatedProfile);
-            
-        } onFailure:^(NSError *error) {
-            failure(error);
+            if (isValid) {
+                [[BZRDataManager sharedInstance] updateCurrentUserWithFirstName:firstName andLastName:lastName andDateOfBirth:dateOfBirth andGender:gender onSuccess:^(id responseObject) {
+                    
+                    BZRUserProfile *updatedProfile = [[BZRUserProfile alloc] initWithServerResponse:responseObject];
+                    [BZRStorageManager sharedStorage].currentProfile = updatedProfile;
+                    success(updatedProfile);
+                    
+                } onFailure:^(NSError *error) {
+                    failure(error);
+                }];
+            } else {
+                failure(error);
+            }
         }];
+        
     } failure:^{
         ShowAlert(InternetIsNotReachableString);
         failure(nil);

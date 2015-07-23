@@ -23,6 +23,8 @@ typedef enum : NSUInteger {
 + (BZRDataManager *)sharedInstance;
 
 //Authorization
+- (void)renewSessionTokenOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure;
+
 - (void)getClientCredentialsOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure;
 
 - (void)signInWithUserName:(NSString *)userName password:(NSString *)password onSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure;
@@ -53,8 +55,9 @@ typedef enum : NSUInteger {
                         onSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure;
 
 //send device token
-- (void)sendDeviceAPNSTokenAndDeviceIdentifierOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure;
+- (void)sendDeviceCredentialsOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure;
 
-- (BOOL)isSessionValidWithType:(BZRSessionType)type;
+//validate session
+- (void)validateSessionWithType:(BZRSessionType)type withCompletion:(void(^)(BOOL success, NSError *error))completion;
 
 @end

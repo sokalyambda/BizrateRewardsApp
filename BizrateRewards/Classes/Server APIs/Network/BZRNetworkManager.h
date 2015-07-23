@@ -20,17 +20,13 @@ typedef void(^FailureBlock)(NSError *error);
 @property (assign, nonatomic) AFNetworkReachabilityStatus reachabilityStatus;
 
 //sign up/in
-- (void)getClientCredentialsOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure;
+- (void)renewSessionTokenWithParameters:(NSDictionary *)parameters onSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure;
 
-- (void)signInWithUserName:(NSString *)userName password:(NSString *)password onSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure;
+- (void)getClientCredentialsWithParameters:(NSDictionary *)parameters onSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure;
 
-- (void)signUpWithUserFirstName:(NSString *)firstName
-                andUserLastName:(NSString *)lastName
-                       andEmail:(NSString *)email
-                    andPassword:(NSString *)password
-                 andDateOfBirth:(NSString *)birthDate
-                      andGender:(NSString *)gender
-                     onSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure;
+- (void)signInWithParameters:(NSDictionary *)parameters onSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure;
+
+- (void)signUpWithParameters:(NSDictionary *)parameters onSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure;
 
 - (void)authorizeWithFacebookOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure;
 
@@ -41,14 +37,10 @@ typedef void(^FailureBlock)(NSError *error);
 - (void)getSurveysListOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure;
 
 //update user
-- (void)updateCurrentUserWithFirstName:(NSString *)firstName
-                           andLastName:(NSString *)lastName
-                        andDateOfBirth:(NSString *)dateOfBirth
-                             andGender:(NSString *)gender
-                        onSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure;
+- (void)updateCurrentUserWithParameters:(NSDictionary *)parameters onSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure;
 
 //send device token
-- (void)sendDeviceAPNSToken:(NSString *)token andDeviceIdentifier:(NSString *)udid onSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure;
+- (void)sendDeviceCredentialsWithParameters:(NSDictionary *)parameters onSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure;
 
 //post image
 - (void)postImage:(UIImage *)image withID:(NSInteger)ID onSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure;

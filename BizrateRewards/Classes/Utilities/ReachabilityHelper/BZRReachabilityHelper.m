@@ -14,7 +14,7 @@
 
 + (void)checkConnectionOnSuccess:(void (^)())success failure:(void (^)())failure
 {
-    BOOL isInternetAvaliable= [self isInternetAvaliable];
+    BOOL isInternetAvaliable = [self isInternetAvaliable];
     if (isInternetAvaliable) {
         if (success) {
             success();

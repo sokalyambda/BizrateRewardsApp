@@ -25,18 +25,27 @@
 + (void)getSurveysListOnSuccess:(SurveysListSuccess)success onFailure:(SurveysListFailure)failure
 {
     [BZRReachabilityHelper checkConnectionOnSuccess:^{
-        [[BZRDataManager sharedInstance] getSurveysListOnSuccess:^(id responseObject) {
+        
+        [[BZRDataManager sharedInstance] validateSessionWithType:BZRSessionTypeUser withCompletion:^(BOOL isValid, NSError *error) {
             
-            NSMutableArray *surveys = [NSMutableArray array];
-            if ([responseObject isKindOfClass:[NSArray class]]) {
-                for (NSDictionary *responseDict in responseObject) {
-                    BZRSurvey *survey = [[BZRSurvey alloc] initWithServerResponse:responseDict];
-                    [surveys addObject:survey];
-                }
+            if (isValid) {
+                [[BZRDataManager sharedInstance] getSurveysListOnSuccess:^(id responseObject) {
+                    
+                    NSMutableArray *surveys = [NSMutableArray array];
+                    if ([responseObject isKindOfClass:[NSArray class]]) {
+                        for (NSDictionary *responseDict in responseObject) {
+                            BZRSurvey *survey = [[BZRSurvey alloc] initWithServerResponse:responseDict];
+                            [surveys addObject:survey];
+                        }
+                    }
+                    success(surveys);
+                } onFailure:^(NSError *error) {
+                    failure(error);
+                }];
+                
+            } else {
+                failure(error);
             }
-            success(surveys);
-        } onFailure:^(NSError *error) {
-            failure(error);
         }];
     } failure:^{
         ShowAlert(InternetIsNotReachableString);
