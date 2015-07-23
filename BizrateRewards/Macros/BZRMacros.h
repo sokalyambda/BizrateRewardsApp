@@ -20,7 +20,9 @@
 
 #define IS_IOS7_OR_BELOW ([UIDevice currentDevice].systemVersion.floatValue < 8.0)
 
-
+#ifndef LOCALIZED
+#define LOCALIZED(arg) NSLocalizedString(arg, nil)
+#endif
 
 #pragma mark - DebugLog
 

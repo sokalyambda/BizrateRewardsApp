@@ -27,6 +27,9 @@
 		585641B61B4DA5AA007E7368 /* BZRAuthorizationField.m in Sources */ = {isa = PBXBuildFile; fileRef = 585641B51B4DA5AA007E7368 /* BZRAuthorizationField.m */; };
 		585813AA1B3BEDCC0087AEE2 /* BZRUserToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 585813A91B3BEDCC0087AEE2 /* BZRUserToken.m */; };
 		585813AE1B3C23840087AEE2 /* BZRSurvey.m in Sources */ = {isa = PBXBuildFile; fileRef = 585813AD1B3C23840087AEE2 /* BZRSurvey.m */; };
+		5858F26A1B61247D00F38DFC /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5858F2691B61247D00F38DFC /* SystemConfiguration.framework */; };
+		5858F26E1B61271E00F38DFC /* BZRErrorHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 5858F26D1B61271E00F38DFC /* BZRErrorHandler.m */; };
+		5858F2721B612B9200F38DFC /* NSString+JSONRepresentation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5858F2711B612B9200F38DFC /* NSString+JSONRepresentation.m */; };
 		586ED0D11B46E8F500FEB250 /* UIView+SoftRemoving.m in Sources */ = {isa = PBXBuildFile; fileRef = 586ED0D01B46E8F500FEB250 /* UIView+SoftRemoving.m */; };
 		5878D3DD1B43F92100A917D0 /* BZRReachabilityHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5878D3DC1B43F92100A917D0 /* BZRReachabilityHelper.m */; };
 		5878D3E11B4426E000A917D0 /* BZRCommonDateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5878D3E01B4426DF00A917D0 /* BZRCommonDateFormatter.m */; };
@@ -163,6 +166,11 @@
 		585813A91B3BEDCC0087AEE2 /* BZRUserToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRUserToken.m; path = Classes/MVC/Models/Token/BZRUserToken.m; sourceTree = "<group>"; };
 		585813AC1B3C23840087AEE2 /* BZRSurvey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRSurvey.h; path = Classes/MVC/Models/Survey/BZRSurvey.h; sourceTree = "<group>"; };
 		585813AD1B3C23840087AEE2 /* BZRSurvey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRSurvey.m; path = Classes/MVC/Models/Survey/BZRSurvey.m; sourceTree = "<group>"; };
+		5858F2691B61247D00F38DFC /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		5858F26C1B61271E00F38DFC /* BZRErrorHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRErrorHandler.h; path = Classes/Utilities/ErrorHandler/BZRErrorHandler.h; sourceTree = "<group>"; };
+		5858F26D1B61271E00F38DFC /* BZRErrorHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRErrorHandler.m; path = Classes/Utilities/ErrorHandler/BZRErrorHandler.m; sourceTree = "<group>"; };
+		5858F2701B612B9200F38DFC /* NSString+JSONRepresentation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+JSONRepresentation.h"; path = "Classes/Categories/NSString/NSString+JSONRepresentation/NSString+JSONRepresentation.h"; sourceTree = "<group>"; };
+		5858F2711B612B9200F38DFC /* NSString+JSONRepresentation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+JSONRepresentation.m"; path = "Classes/Categories/NSString/NSString+JSONRepresentation/NSString+JSONRepresentation.m"; sourceTree = "<group>"; };
 		586ED0CF1B46E8F500FEB250 /* UIView+SoftRemoving.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+SoftRemoving.h"; path = "Classes/Categories/UIView/UIView+SoftRemoving/UIView+SoftRemoving.h"; sourceTree = "<group>"; };
 		586ED0D01B46E8F500FEB250 /* UIView+SoftRemoving.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+SoftRemoving.m"; path = "Classes/Categories/UIView/UIView+SoftRemoving/UIView+SoftRemoving.m"; sourceTree = "<group>"; };
 		5878D3DB1B43F92100A917D0 /* BZRReachabilityHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRReachabilityHelper.h; path = Classes/Utilities/ReachabilityHelper/BZRReachabilityHelper.h; sourceTree = "<group>"; };
@@ -350,6 +358,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5858F26A1B61247D00F38DFC /* SystemConfiguration.framework in Frameworks */,
 				58A9FE931B53AF4600DBE379 /* AssetsLibrary.framework in Frameworks */,
 				58A9FE911B53AC0200DBE379 /* MobileCoreServices.framework in Frameworks */,
 				58A91F2F1B3A80A80032607F /* CoreLocation.framework in Frameworks */,
@@ -445,6 +454,7 @@
 		58219EE31B38A21900A9541A /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				5858F26B1B6126D000F38DFC /* ErrorHandler */,
 				58C770E41B5D5B3700E9031F /* CommonNumberFormatter */,
 				589420A21B452616004BAF48 /* PickersHelper */,
 				589BCCD61B565DC800D49056 /* SerialViewConstructor */,
@@ -580,6 +590,7 @@
 		58219EEF1B38A29B00A9541A /* NSString */ = {
 			isa = PBXGroup;
 			children = (
+				5858F26F1B612B4200F38DFC /* NSString+JSONRepresentation */,
 				58219F161B38A3DA00A9541A /* NSString+ContainsString */,
 			);
 			name = NSString;
@@ -702,6 +713,24 @@
 				585813AD1B3C23840087AEE2 /* BZRSurvey.m */,
 			);
 			name = Survey;
+			sourceTree = "<group>";
+		};
+		5858F26B1B6126D000F38DFC /* ErrorHandler */ = {
+			isa = PBXGroup;
+			children = (
+				5858F26C1B61271E00F38DFC /* BZRErrorHandler.h */,
+				5858F26D1B61271E00F38DFC /* BZRErrorHandler.m */,
+			);
+			name = ErrorHandler;
+			sourceTree = "<group>";
+		};
+		5858F26F1B612B4200F38DFC /* NSString+JSONRepresentation */ = {
+			isa = PBXGroup;
+			children = (
+				5858F2701B612B9200F38DFC /* NSString+JSONRepresentation.h */,
+				5858F2711B612B9200F38DFC /* NSString+JSONRepresentation.m */,
+			);
+			name = "NSString+JSONRepresentation";
 			sourceTree = "<group>";
 		};
 		586ED0CE1B46E8A900FEB250 /* UIView+SoftRemoving */ = {
@@ -1542,6 +1571,7 @@
 		D31C9EB6CC9E9EA49476A0B1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5858F2691B61247D00F38DFC /* SystemConfiguration.framework */,
 				58A9FE921B53AF4600DBE379 /* AssetsLibrary.framework */,
 				58A9FE901B53AC0200DBE379 /* MobileCoreServices.framework */,
 				58A91F2E1B3A80A80032607F /* CoreLocation.framework */,
@@ -1754,6 +1784,7 @@
 				58219EF51B38A2E000A9541A /* BZRNetworkManager.m in Sources */,
 				843C38411B4EAF38005E85CF /* BZRGiftcardCell.m in Sources */,
 				58DF1AE81B584CD000D28951 /* BZRAssetsHelper.m in Sources */,
+				5858F2721B612B9200F38DFC /* NSString+JSONRepresentation.m in Sources */,
 				58A91F581B3AD83F0032607F /* BZRUserProfile.m in Sources */,
 				58E238A41B5AA0B8007F8664 /* UIFont+Styles.m in Sources */,
 				5899D2541B4AB94200565F11 /* BZRApplicationToken.m in Sources */,
@@ -1764,6 +1795,7 @@
 				58ADC0E81B4BDCE400DF849F /* BZRSecondTutorialController.m in Sources */,
 				58D898011B5E748600C1EBE2 /* BZRUserProfileService.m in Sources */,
 				589420A51B45278E004BAF48 /* BZRPickersHelper.m in Sources */,
+				5858F26E1B61271E00F38DFC /* BZRErrorHandler.m in Sources */,
 				5878D3E11B4426E000A917D0 /* BZRCommonDateFormatter.m in Sources */,
 				58C770E71B5D5B6A00E9031F /* BZRCommonNumberFormatter.m in Sources */,
 				58ACC0811B39689F0081E546 /* BZRSignUpController.m in Sources */,

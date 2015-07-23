@@ -38,7 +38,6 @@
         } else {
             success([BZRStorageManager sharedStorage].applicationToken);
         }
-        
     }];
 }
 
