@@ -85,4 +85,10 @@ static NSString *const kSurveyID = @"Survey ID";
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
 }
 
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
+{
+    ShowFailureResponseAlertWithError(error);
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+}
+
 @end
