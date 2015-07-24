@@ -48,7 +48,7 @@ static NSString *const kSurveyID = @"Survey ID";
     NSURLRequest *surveyRequest = [NSURLRequest requestWithURL:self.currentSurvey.surveyLink];
     [self.surveyWebView loadRequest:surveyRequest];
     
-    [BZRMixpanelService trackEventWithType:BZRMixpanelEventSurveyViewed properties:@{kSurveyID : self.currentSurvey.surveyId}];
+    [BZRMixpanelService trackEventWithType:BZRMixpanelEventSurveyViewed properties:@{kSurveyID : @(self.currentSurvey.surveyId)}];
 }
 
 - (void)setupNavigationBar

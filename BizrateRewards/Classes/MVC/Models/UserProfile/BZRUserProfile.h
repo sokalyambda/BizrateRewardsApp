@@ -17,6 +17,7 @@
 @property (strong, nonatomic) NSString  *fullName;
 @property (strong, nonatomic) NSString  *email;
 @property (strong, nonatomic) NSDate    *dateOfBirth;
+@property (strong, nonatomic) NSString  *contactID;
 
 @property (strong, nonatomic) NSString *genderString;
 

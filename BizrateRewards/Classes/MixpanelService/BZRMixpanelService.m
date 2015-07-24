@@ -10,20 +10,21 @@
 
 #import <Mixpanel.h>
 
-static NSString *const kMixpanelToken = @"aae3e2388125817b27b8afcf99093d97";
+static NSString *const kMixpanelToken =  @"aae3e2388125817b27b8afcf99093d97";
 
 @implementation BZRMixpanelService
+
 
 + (void)setupMixpanel
 {
     Mixpanel *mixpanel = [Mixpanel sharedInstanceWithToken:kMixpanelToken];
-    NSString *mixpanelUUID = [[NSUserDefaults standardUserDefaults] objectForKey:MixpanelUUID];
+    NSString *mixpanelID = [[NSUserDefaults standardUserDefaults] objectForKey:MixpanelID];
     
-    if (!mixpanelUUID) {
-        mixpanelUUID = [[[UIDevice currentDevice]identifierForVendor]UUIDString];
-        [[NSUserDefaults standardUserDefaults] setObject:mixpanelUUID forKey:MixpanelUUID];
+    if (!mixpanelID) {
+        mixpanelID = [[[UIDevice currentDevice]identifierForVendor]UUIDString];
+        [[NSUserDefaults standardUserDefaults] setObject:mixpanelID forKey:MixpanelID];
     }
-    [mixpanel identify:mixpanelUUID];
+    [mixpanel identify:mixpanelID];
 }
 
 + (void)trackEventWithType:(BZRMixpanelEventType)eventType properties:(NSDictionary *)properties
@@ -34,6 +35,7 @@ static NSString *const kMixpanelToken = @"aae3e2388125817b27b8afcf99093d97";
     switch (eventType) {
         case BZRMixpanelEventOpenApp: {
             event = OpenApp;
+            
             break;
         }
         case BZRMixpanelEventSurveyViewed: {
@@ -89,11 +91,16 @@ static NSString *const kMixpanelToken = @"aae3e2388125817b27b8afcf99093d97";
     }
 }
 
-+ (void)setPeopleWithProperties:(NSDictionary *)properties
++ (void)setPeopleWithProperties:(NSDictionary *)properties bizrateID:(NSString *)bizrateID
 {
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    NSString  *bizID = [[NSUserDefaults standardUserDefaults] objectForKey:BizID];
+    if (!bizID) {
+        [[NSUserDefaults standardUserDefaults]setObject:bizrateID forKey:BizID];
+        [mixpanel createAlias:bizrateID forDistinctID:mixpanel.distinctId];
+        [mixpanel identify:mixpanel.distinctId];
+    }    
     [mixpanel.people set:properties];
-    
 }
 
 @end

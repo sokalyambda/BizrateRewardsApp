@@ -12,7 +12,7 @@
 
 @property (strong, nonatomic) NSString *surveyName;
 @property (strong, nonatomic) NSString *refSurveyId;
-@property (strong, nonatomic) NSString *surveyId;
+@property (assign, nonatomic) NSInteger surveyId;
 @property (strong, nonatomic) NSURL *surveyLink;
 @property (assign, nonatomic) NSInteger surveyPoints;
 

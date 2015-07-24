@@ -23,6 +23,9 @@
 #import "BZRRoundedImageView.h"
 #import "BZRProgressView.h"
 
+#import "BZRPushNotifiactionService.h"
+#import "BZRLocationObserver.h"
+
 static NSString *const kAccountSettingsSegueIdentifier = @"accountSettingsSegueIdentifier";
 static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
 
@@ -74,6 +77,7 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
     if (self.isUpdateNeeded) {
         [self getCurrentUserProfile];
     }
+
 }
 
 #pragma mark - Actions
@@ -121,9 +125,12 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
 
     self.userNameLabel.text = self.currentProfile.fullName;
     self.earnedPointsLabel.text = [NSString stringWithFormat:@"%@ %@", [[BZRCommonNumberFormatter commonNumberFormatter] stringFromNumber:@((long)self.currentProfile.pointsAmount)], NSLocalizedString(@"pts", nil)];
-    
 #warning User Points
     self.currentProfile.pointsRequired = 2000;
+    
+        if (!self.isUpdateNeeded) {
+            [self setupMixpanelPeople];
+    }
 }
 
 - (void)getCurrentUserProfile
@@ -133,12 +140,26 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
     [BZRUserProfileService getCurrentUserOnSuccess:^(BZRUserProfile *userProfile) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         [weakSelf updateUserInformation];
+        [weakSelf setupMixpanelPeople];
         [weakSelf calculateProgress];
         weakSelf.updateNeeded = NO;
     } onFailure:^(NSError *error) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         ShowFailureResponseAlertWithError(error);
     }];
+}
+
+- (void)setupMixpanelPeople
+{
+    BOOL isPushesEnabled = [BZRPushNotifiactionService pushNotificationsEnabled];
+    BOOL isGeolocationEnabled = [BZRLocationObserver sharedObserver].isAuthorized;
+    [BZRMixpanelService setPeopleWithProperties:@{PushNotificationsEnabled : isPushesEnabled? Yes : No,
+                                                  GeoLocationEnabled: isGeolocationEnabled? Yes : No,
+                                                  FirstName : self.currentProfile.firstName,
+                                                  LastName : self.currentProfile.lastName,
+                                                  BizrateID : self.currentProfile.contactID
+                                                  }
+                                      bizrateID: self.currentProfile.contactID];
 }
 
 - (void)calculateProgress
