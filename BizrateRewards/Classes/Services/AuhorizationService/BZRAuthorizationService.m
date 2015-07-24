@@ -66,6 +66,7 @@
                     andPassword:(NSString *)password
                  andDateOfBirth:(NSString *)birthDate
                       andGender:(NSString *)gender
+               andFacebookToken:(NSString *)facebookToken
                       onSuccess:(AuthorizationSuccessBlock)success
                       onFailure:(AuthorizationFailureBlock)failure
 {
@@ -74,14 +75,23 @@
         
         [weakSelf getClientCredentialsOnSuccess:^(BZRApplicationToken *token) {
             
-            [[BZRDataManager sharedInstance] signUpWithUserFirstName:firstName andUserLastName:lastName andEmail:email andPassword:password andDateOfBirth:birthDate andGender:gender onSuccess:^(id responseObject) {
-                BZRUserToken *token = [[BZRUserToken alloc] initWithServerResponse:responseObject];
-                [BZRStorageManager sharedStorage].userToken = token;
-                
-                success(token);
-            } onFailure:^(NSError *error) {
-                failure(error);
-            }];
+            [[BZRDataManager sharedInstance] signUpWithUserFirstName:firstName
+                                                     andUserLastName:lastName
+                                                            andEmail:email
+                                                         andPassword:password
+                                                      andDateOfBirth:birthDate
+                                                           andGender:gender
+                                                    andFacebookToken:facebookToken
+                                                           onSuccess:^(id responseObject) {
+                                                               
+                                                               BZRUserToken *token = [[BZRUserToken alloc] initWithServerResponse:responseObject];
+                                                               [BZRStorageManager sharedStorage].userToken = token;
+                                                               
+                                                               success(token);
+                                                           }
+                                                           onFailure:^(NSError *error) {
+                                                               failure(error);
+                                                           }];
             
         } onFailure:^(NSError *error) {
             failure(error);
@@ -92,15 +102,26 @@
     }];
 }
 
-+ (void)authorizeWithFacebookAccountOnSuccess:(AuthorizationSuccessBlock)success onFailure:(AuthorizationFailureBlock)failure
++ (void)authorizeWithFacebookAccountOnSuccess:(FacebookAuthorizationSuccess)success onFailure:(AuthorizationFailureBlock)failure
 {
     [BZRReachabilityHelper checkConnectionOnSuccess:^{
         [[BZRDataManager sharedInstance] authorizeWithFacebookOnSuccess:^(id responseObject) {
             
-            BZRUserToken *token = [[BZRUserToken alloc] initWithServerResponse:responseObject];
-            [BZRStorageManager sharedStorage].userToken = token;
+            FBSDKLoginManagerLoginResult *result = (FBSDKLoginManagerLoginResult *)responseObject;
             
-            success(token);
+            [BZRStorageManager sharedStorage].facebookToken = result.token;
+            
+            success(result);
+//            [self signUpWithUserFirstName:@"" andUserLastName:@"" andEmail:@"" andPassword:@"" andDateOfBirth:@"" andGender:@"" onSuccess:^(BZRApplicationToken *token) {
+//                
+//            } onFailure:^(NSError *error) {
+//                
+//            }];
+            
+//            BZRUserToken *token = [[BZRUserToken alloc] initWithServerResponse:responseObject];
+//            [BZRStorageManager sharedStorage].userToken = token;
+            
+//            success(responseObject);
             
         } onFailure:^(NSError *error) {
             failure(error);

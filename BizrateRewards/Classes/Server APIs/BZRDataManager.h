@@ -35,6 +35,7 @@ typedef enum : NSUInteger {
                     andPassword:(NSString *)password
                  andDateOfBirth:(NSString *)birthDate
                       andGender:(NSString *)gender
+               andFacebookToken:(NSString *)facebookToken
                      onSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure;
 
 - (void)authorizeWithFacebookOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure;
@@ -43,6 +44,7 @@ typedef enum : NSUInteger {
 
 //get user
 - (void)getCurrentUserOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure;
+- (void)getFacebookUserProfileOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure;
 
 //getSurvey
 - (void)getSurveysListOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure;

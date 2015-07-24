@@ -39,7 +39,8 @@ static NSString *const kIsTestUser          = @"is_test_user";
 static NSString *const kDeviceId            = @"device_id";
 static NSString *const kNotificationToken   = @"notification_token";
 
-static NSString *const kFBAccessToken       = @"fb_access_token";
+static NSString *const kFBAccessToken       = @"access_token";
+static NSString *const kFacebook            = @"facebook";
 
 //Facebook keys
 static NSString *const kFBPublicProfile = @"public_profile";
@@ -176,18 +177,25 @@ static NSString *const kFBUserMe        = @"me";
                     andPassword:(NSString *)password
                  andDateOfBirth:(NSString *)birthDate
                       andGender:(NSString *)gender
+               andFacebookToken:(NSString *)facebookToken
                       onSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure
 {
     self.network.requestSerializer = self.jsonRequestSerializer;
     [self addAuthHeaderWithToken:self.storage.applicationToken];
     
-    NSDictionary *parameters = @{kFirstName: firstName,
-                                 kLastName: lastName,
-                                 kEmail: email,
-                                 kPassword: password,
-                                 kGender: gender,
-                                 kDateOfBirth: birthDate,
-                                 kIsTestUser: @YES};
+    NSMutableDictionary *parameters = [@{kFirstName: firstName,
+                                        kLastName: lastName,
+                                        kEmail: email,
+                                        kGender: gender,
+                                        kDateOfBirth: birthDate,
+                                        kIsTestUser: @YES} mutableCopy];
+    if (password) {
+        [parameters setObject:password forKey:kPassword];
+    }
+    if (facebookToken) {
+        NSDictionary *facebookParameter = @{kFBAccessToken: facebookToken};
+        [parameters setObject:facebookParameter forKey:kFacebook];
+    }
     
     [self.network signUpWithParameters:parameters onSuccess:^(id responseObject) {
         success(responseObject);
@@ -203,19 +211,25 @@ static NSString *const kFBUserMe        = @"me";
     WEAK_SELF;
     [self tryLoginWithFacebookOnSuccess:^(FBSDKLoginManagerLoginResult *loginResult) {
         
-        NSString *facebookToken = loginResult.token.tokenString;
+        success(loginResult);
         
-        [weakSelf.network authorizeWithFacebookWithParameters:@{kFBAccessToken: facebookToken} onSuccess:^(id responseObject) {
-            
-            //MARK: We have to get user token here
-            
-//        NSURL *userImageURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?width=200", [facebookProfile valueForKey:@"id"]]];
-            
-            success(responseObject);
-            
-        } onFailure:^(NSError *error) {
-            failure(error);
-        }];
+//        [weakSelf getFacebookUserProfileOnSuccess:^(id responseObject) {
+//            success(responseObject);
+//        } onFailure:^(NSError *error) {
+//            failure(error);
+//        }];
+        
+//        [weakSelf.network authorizeWithFacebookWithParameters:@{kFBAccessToken: facebookToken} onSuccess:^(id responseObject) {
+//            
+//            //MARK: We have to get user token here
+//            
+////        NSURL *userImageURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?width=200", [facebookProfile valueForKey:@"id"]]];
+//            
+//            success(responseObject);
+//            
+//        } onFailure:^(NSError *error) {
+//            failure(error);
+//        }];
     } onFailure:^(NSError *error) {
         failure(error);
     }];
@@ -231,6 +245,7 @@ static NSString *const kFBUserMe        = @"me";
         self.loginManager.loginBehavior = FBSDKLoginBehaviorWeb;
     }
     
+    WEAK_SELF;
     [self.loginManager logInWithReadPermissions:@[kFBPublicProfile, kFBEmail] handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
         
         if (error) {
@@ -239,13 +254,7 @@ static NSString *const kFBUserMe        = @"me";
             failure(error);
         } else {
             if ([result.grantedPermissions containsObject:kFBEmail] && [result.grantedPermissions containsObject:kFBPublicProfile]) {
-                
-//                [weakSelf getFacebookUserProfileOnSuccess:^(id responseObject) {
-//                    success(responseObject);
-//                } onFailure:^(NSError *error) {
-//                    failure(error);
-//                }];
-                
+  
 //                NSString *facebookToken = result.token.tokenString;
                 success(result);
             }
@@ -255,7 +264,10 @@ static NSString *const kFBUserMe        = @"me";
 
 - (void)getFacebookUserProfileOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure
 {
-    FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:kFBUserMe parameters:nil HTTPMethod:@"GET"];
+    NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
+    [parameters setValue:@"id, name, email" forKey:@"fields"];
+    
+    FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:kFBUserMe parameters:parameters HTTPMethod:@"GET"];
     
     [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id response, NSError *error) {
         if (error) {
@@ -263,7 +275,7 @@ static NSString *const kFBUserMe        = @"me";
         } else {
 //            NSDictionary *user = (NSDictionary *)response;
 //            NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithDictionary:@{@"facebook_id":[user valueForKey:@"id"], @"first_name":[user valueForKey:@"first_name"], @"last_name":[user valueForKey:@"last_name"]}];
-//            
+//
 //            NSString *fbAccessToken = [FBSDKAccessToken currentAccessToken].tokenString;
             success(response);
         }
@@ -280,6 +292,8 @@ static NSString *const kFBUserMe        = @"me";
     
     [BZRKeychainHandler resetKeychain];
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:RememberMeKey];
+    
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:BizID];
     
     success(nil);
 }

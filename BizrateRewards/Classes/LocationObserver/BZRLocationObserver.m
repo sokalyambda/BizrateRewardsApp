@@ -14,11 +14,9 @@
 
 static NSString *const kGeolocationPermissionsLastState = @"geolocationPermissionsLastState";
 
-
 @interface BZRLocationObserver ()<CLLocationManagerDelegate, OB_LocationServicesDelegate>
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
-@property (strong, nonatomic) CLLocation *updatedLocation;
 
 @end
 
@@ -37,14 +35,13 @@ static NSString *const kGeolocationPermissionsLastState = @"geolocationPermissio
 {
     self = [super init];
     if (self) {
-        
         _locationManager = [[CLLocationManager alloc] init];
-        
         _locationManager.delegate           = self;
         _locationManager.distanceFilter     = kCLDistanceFilterNone;
         _locationManager.desiredAccuracy    = kCLLocationAccuracyKilometer;
         
-        if ([_locationManager respondsToSelector:@selector(requestAlwaysAuthorization)]) { // iOS8+
+        if ([_locationManager respondsToSelector:@selector(requestAlwaysAuthorization)]) {
+            // iOS8+
             // Sending a message to avoid compile time error
             [[UIApplication sharedApplication] sendAction:@selector(requestAlwaysAuthorization)
                                                        to:_locationManager
@@ -52,11 +49,8 @@ static NSString *const kGeolocationPermissionsLastState = @"geolocationPermissio
                                                  forEvent:nil];
         }
         
-        _updatedLocation = nil;
         [_locationManager startUpdatingLocation];
-        
-//        [self authorizeOfferBeamObserver];
-        
+//        [self setupOfferBeamObserver];
     }
     return self;
 }
@@ -92,18 +86,11 @@ static NSString *const kGeolocationPermissionsLastState = @"geolocationPermissio
     }
 }
 
-- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
-{
-    self.updatedLocation = manager.location;
-    //[self.locationManager stopUpdatingLocation];
-}
-
 #pragma mark - Public methods
 
 - (void)startUpdatingLocation
 {
     [self.locationManager startUpdatingLocation];
-//    [[OB_LocationServices sharedInstance].locationManager startUpdatingLocation];
 }
 
 #pragma mark - Private methods
@@ -132,9 +119,8 @@ static NSString *const kGeolocationPermissionsLastState = @"geolocationPermissio
 
 #pragma mark - Private methods
 
-- (void)authorizeOfferBeamObserver
+- (void)setupOfferBeamObserver
 {
-    [[OB_Services sharedInstance] requestAlwaysAuthorization];
     [OB_Services setLocationDelegate:self];
 }
 

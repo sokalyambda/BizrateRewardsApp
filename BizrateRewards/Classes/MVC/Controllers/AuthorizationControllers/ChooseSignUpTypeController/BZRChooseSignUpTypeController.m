@@ -8,8 +8,18 @@
 
 #import "BZRChooseSignUpTypeController.h"
 #import "BZRSignUpController.h"
+#import "BZRDashboardController.h"
+
+#import "BZRAuthorizationService.h"
+#import "BZRUserProfileService.h"
+
+#import "BZRStorageManager.h"
+
+#import "BZRCommonDateFormatter.h"
 
 static NSString *const kSignUpWithEmailSegueIdentifier = @"signUpWithEmailSegue";
+
+static NSString *const kEmail = @"email";
 
 @interface BZRChooseSignUpTypeController ()
 
@@ -35,14 +45,58 @@ static NSString *const kSignUpWithEmailSegueIdentifier = @"signUpWithEmailSegue"
 
 - (IBAction)signUpWithFacebookClick:(id)sender
 {
-    [BZRMixpanelService trackEventWithType:BZRMixpanelEventCreateAcountClicked properties:@{Type : Facebook}];
+//    [BZRMixpanelService trackEventWithType:BZRMixpanelEventCreateAcountClicked properties:@{Type: AuthTypeFacebook}];
+//    
+//    WEAK_SELF;
+//    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//    [BZRAuthorizationService authorizeWithFacebookAccountOnSuccess:^(FBSDKLoginManagerLoginResult *loginResult) {
+//
+//        [BZRUserProfileService getFacebookUserProfileOnSuccess:^(NSDictionary *facebookProfile) {
+//            
+//            NSString *email = facebookProfile[kEmail] ? facebookProfile[kEmail] : self.temporaryProfile.email;
+//            
+//            NSString *facebookToken = [BZRStorageManager sharedStorage].facebookToken.tokenString;
+//            
+//            [BZRAuthorizationService signUpWithUserFirstName:self.temporaryProfile.firstName
+//                                             andUserLastName:self.temporaryProfile.lastName
+//                                                    andEmail:email
+//                                                 andPassword:nil
+//                                              andDateOfBirth:[[BZRCommonDateFormatter commonDateFormatter] stringFromDate:self.temporaryProfile.dateOfBirth]
+//                                                   andGender:[self.temporaryProfile.genderString substringToIndex:1]
+//                                            andFacebookToken:facebookToken
+//                                                   onSuccess:^(BZRApplicationToken *token) {
+//                                                       
+//                                                       [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+//                                                       
+//                                                       [BZRMixpanelService trackEventWithType:BZRMixpanelEventRegistrationSuccessful properties:@{Type : AuthTypeFacebook}];
+//                                                       
+//                                                       BZRDashboardController *controller = [weakSelf.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRDashboardController class])];
+//                                                       controller.updateNeeded = YES;
+//                                                       [weakSelf.navigationController pushViewController:controller animated:YES];
+//                                                       
+//                                                   }
+//                                                   onFailure:^(NSError *error) {
+//                                                       
+//                                                       [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+//                                                       ShowFailureResponseAlertWithError(error);
+//                                                   }];
+//            
+//        } onFailure:^(NSError *error) {
+//            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+//            ShowFailureResponseAlertWithError(error);
+//        }];
+//        
+//    } onFailure:^(NSError *error) {
+//        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+//        ShowFailureResponseAlertWithError(error);
+//    }];
+    
 }
 
 - (IBAction)signUpWithEmailClick:(id)sender
 {
-    [BZRMixpanelService trackEventWithType:BZRMixpanelEventCreateAcountClicked properties: @{Type : Email}];
+    [BZRMixpanelService trackEventWithType:BZRMixpanelEventCreateAcountClicked properties: @{Type: AuthTypeEmail}];
     [self performSegueWithIdentifier:kSignUpWithEmailSegueIdentifier sender:self];
-
 }
 
 #pragma mark - Navigation

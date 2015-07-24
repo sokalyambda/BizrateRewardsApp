@@ -109,7 +109,7 @@ static NSInteger const kNotRegisteredErrorCode = 400.f;
                                                                   password:self.passwordField.text
                                                                  onSuccess:^(BZRApplicationToken *token) {
                                                                      
-                                                                     [BZRMixpanelService trackEventWithType:BZRMixpanelEventLoginSuccessful properties:@{Type : Email}];
+                                                                     [BZRMixpanelService trackEventWithType:BZRMixpanelEventLoginSuccessful properties:@{Type : AuthTypeEmail}];
                                    
                                    [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
                                    

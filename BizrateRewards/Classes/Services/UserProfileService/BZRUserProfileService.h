@@ -11,6 +11,8 @@
 typedef void(^UserProfileSuccessBlock)(BZRUserProfile *userProfile);
 typedef void(^UserProfileFailureBlock)(NSError *error);
 
+typedef void(^FacebookUserProfile)(NSDictionary *facebookProfile);
+
 @interface BZRUserProfileService : NSObject
 
 + (void)getCurrentUserOnSuccess:(UserProfileSuccessBlock)success
@@ -22,7 +24,7 @@ typedef void(^UserProfileFailureBlock)(NSError *error);
                              andGender:(NSString *)gender
                              onSuccess:(UserProfileSuccessBlock)success onFailure:(UserProfileFailureBlock)failure;
 
-+ (void)getFacebookUserProfileOnSuccess:(UserProfileSuccessBlock)success
++ (void)getFacebookUserProfileOnSuccess:(FacebookUserProfile)success
                               onFailure:(UserProfileFailureBlock)failure;
 
 @end

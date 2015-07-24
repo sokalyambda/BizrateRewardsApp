@@ -10,7 +10,7 @@
 
 #import <Mixpanel.h>
 
-static NSString *const kMixpanelToken =  @"aae3e2388125817b27b8afcf99093d97";
+static NSString *const kMixpanelToken = @"aae3e2388125817b27b8afcf99093d97";
 
 @implementation BZRMixpanelService
 

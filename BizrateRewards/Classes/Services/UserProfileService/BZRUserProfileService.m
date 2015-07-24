@@ -70,12 +70,19 @@
     }];
 }
 
-+ (void)getFacebookUserProfileOnSuccess:(UserProfileSuccessBlock)success onFailure:(UserProfileFailureBlock)failure
++ (void)getFacebookUserProfileOnSuccess:(FacebookUserProfile)success onFailure:(UserProfileFailureBlock)failure
 {
     [BZRReachabilityHelper checkConnectionOnSuccess:^{
         
-    } failure:^{
+        [[BZRDataManager sharedInstance] getFacebookUserProfileOnSuccess:^(id responseObject) {
+            success(responseObject);
+        } onFailure:^(NSError *error) {
+            failure(error);
+        }];
         
+    } failure:^{
+        ShowAlert(InternetIsNotReachableString);
+        failure(nil);
     }];
 }
 

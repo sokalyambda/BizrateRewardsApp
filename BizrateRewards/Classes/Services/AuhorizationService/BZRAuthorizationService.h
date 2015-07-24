@@ -11,6 +11,8 @@
 typedef void(^AuthorizationSuccessBlock)(BZRApplicationToken *token);
 typedef void(^AuthorizationFailureBlock)(NSError *error);
 
+typedef void(^FacebookAuthorizationSuccess)(FBSDKLoginManagerLoginResult *loginResult);
+
 @interface BZRAuthorizationService : NSObject
 
 + (void)signInWithUserName:(NSString *)userName
@@ -24,10 +26,11 @@ typedef void(^AuthorizationFailureBlock)(NSError *error);
                     andPassword:(NSString *)password
                  andDateOfBirth:(NSString *)birthDate
                       andGender:(NSString *)gender
+               andFacebookToken:(NSString *)facebookToken
                       onSuccess:(AuthorizationSuccessBlock)success
                       onFailure:(AuthorizationFailureBlock)failure;
 
-+ (void)authorizeWithFacebookAccountOnSuccess:(AuthorizationSuccessBlock)success
++ (void)authorizeWithFacebookAccountOnSuccess:(FacebookAuthorizationSuccess)success
                                     onFailure:(AuthorizationFailureBlock)failure;
 
 @end

@@ -61,9 +61,11 @@
                                                                        andEmail:weakSelf.temporaryProfile.email
                                                                     andPassword:weakSelf.passwordField.text
                                                                  andDateOfBirth:[[BZRCommonDateFormatter commonDateFormatter] stringFromDate:weakSelf.temporaryProfile.dateOfBirth]
-                                                                      andGender:[weakSelf.temporaryProfile.genderString substringToIndex:1] onSuccess:^(BZRApplicationToken *token) {
+                                                                      andGender:[weakSelf.temporaryProfile.genderString substringToIndex:1]
+                                                               andFacebookToken:nil
+                                                                      onSuccess:^(BZRApplicationToken *token) {
                                                                           
-                                                                          [BZRMixpanelService trackEventWithType:BZRMixpanelEventRegistrationSuccessful properties:@{Type : Email}];
+                                                                          [BZRMixpanelService trackEventWithType:BZRMixpanelEventRegistrationSuccessful properties:@{Type : AuthTypeEmail}];
                                                                           
                                                                           [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
                                                                           
