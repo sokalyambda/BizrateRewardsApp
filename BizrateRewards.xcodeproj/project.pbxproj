@@ -104,6 +104,9 @@
 		58C770E01B5CD07400E9031F /* BZRTutorialTitleLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C770DF1B5CD07400E9031F /* BZRTutorialTitleLabel.m */; };
 		58C770E31B5CD08E00E9031F /* BZRTutorialDescriptionLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C770E21B5CD08E00E9031F /* BZRTutorialDescriptionLabel.m */; };
 		58C770E71B5D5B6A00E9031F /* BZRCommonNumberFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C770E61B5D5B6A00E9031F /* BZRCommonNumberFormatter.m */; };
+		58D1E5D11B662EBD00347208 /* BZRSignInWithFacebookRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 58D1E5D01B662EBD00347208 /* BZRSignInWithFacebookRequest.m */; };
+		58D1E5D51B66426900347208 /* BZRFacebookService.m in Sources */ = {isa = PBXBuildFile; fileRef = 58D1E5D41B66426900347208 /* BZRFacebookService.m */; };
+		58D1E5D91B666D4300347208 /* BZRSignUpWithFacebookRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 58D1E5D81B666D4300347208 /* BZRSignUpWithFacebookRequest.m */; };
 		58DF1AE81B584CD000D28951 /* BZRAssetsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 58DF1AE71B584CD000D28951 /* BZRAssetsHelper.m */; };
 		58E238A41B5AA0B8007F8664 /* UIFont+Styles.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E238A31B5AA0B8007F8664 /* UIFont+Styles.m */; };
 		58E512431B4C70AF00865694 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 58E512391B4C70AF00865694 /* OpenSans-Bold.ttf */; };
@@ -341,6 +344,12 @@
 		58C770E21B5CD08E00E9031F /* BZRTutorialDescriptionLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRTutorialDescriptionLabel.m; path = Classes/MVC/Views/Styles/TutorialStyleLabels/TutorialDescriptionLabel/BZRTutorialDescriptionLabel.m; sourceTree = "<group>"; };
 		58C770E51B5D5B6A00E9031F /* BZRCommonNumberFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRCommonNumberFormatter.h; path = Classes/Utilities/CommonNumberFormatter/BZRCommonNumberFormatter.h; sourceTree = "<group>"; };
 		58C770E61B5D5B6A00E9031F /* BZRCommonNumberFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRCommonNumberFormatter.m; path = Classes/Utilities/CommonNumberFormatter/BZRCommonNumberFormatter.m; sourceTree = "<group>"; };
+		58D1E5CF1B662EBD00347208 /* BZRSignInWithFacebookRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRSignInWithFacebookRequest.h; path = SignInWithFacebookRequest/BZRSignInWithFacebookRequest.h; sourceTree = "<group>"; };
+		58D1E5D01B662EBD00347208 /* BZRSignInWithFacebookRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRSignInWithFacebookRequest.m; path = SignInWithFacebookRequest/BZRSignInWithFacebookRequest.m; sourceTree = "<group>"; };
+		58D1E5D31B66426900347208 /* BZRFacebookService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRFacebookService.h; path = Classes/FacebookService/BZRFacebookService.h; sourceTree = "<group>"; };
+		58D1E5D41B66426900347208 /* BZRFacebookService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRFacebookService.m; path = Classes/FacebookService/BZRFacebookService.m; sourceTree = "<group>"; };
+		58D1E5D71B666D4300347208 /* BZRSignUpWithFacebookRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRSignUpWithFacebookRequest.h; path = SignUpWithFacebookRequest/BZRSignUpWithFacebookRequest.h; sourceTree = "<group>"; };
+		58D1E5D81B666D4300347208 /* BZRSignUpWithFacebookRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRSignUpWithFacebookRequest.m; path = SignUpWithFacebookRequest/BZRSignUpWithFacebookRequest.m; sourceTree = "<group>"; };
 		58DF1AE61B584CD000D28951 /* BZRAssetsHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRAssetsHelper.h; path = Classes/Utilities/AssetsHelper/BZRAssetsHelper.h; sourceTree = "<group>"; };
 		58DF1AE71B584CD000D28951 /* BZRAssetsHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRAssetsHelper.m; path = Classes/Utilities/AssetsHelper/BZRAssetsHelper.m; sourceTree = "<group>"; };
 		58E238A21B5AA0B8007F8664 /* UIFont+Styles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIFont+Styles.h"; path = "Classes/Categories/UIFont/UIFont+Styles/UIFont+Styles.h"; sourceTree = "<group>"; };
@@ -789,6 +798,8 @@
 		585C32911B63AA3F005BF07B /* Auth */ = {
 			isa = PBXGroup;
 			children = (
+				58D1E5D61B666D2500347208 /* SignUpWithFacebookRequest */,
+				58D1E5CE1B662E8900347208 /* SignInWithFacebookRequest */,
 				589889B41B654047008684F3 /* GetClientCredentialsRequest */,
 				585C32AC1B63C83C005BF07B /* SignUpRequest */,
 				585C32A81B63C7EA005BF07B /* RenewSessionTokenRequest */,
@@ -1515,6 +1526,7 @@
 		58C770D91B5CCF6000E9031F /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				58D1E5D21B66423700347208 /* FacebookService */,
 				84A6124B1B5E30E6005E01A7 /* MixpanelService */,
 				5878D3DA1B43F8D500A917D0 /* ReachabilityHelper */,
 				58A9FE8C1B53A4FB00DBE379 /* TermsAndConditionsHelper */,
@@ -1567,6 +1579,33 @@
 				58C770E61B5D5B6A00E9031F /* BZRCommonNumberFormatter.m */,
 			);
 			name = CommonNumberFormatter;
+			sourceTree = "<group>";
+		};
+		58D1E5CE1B662E8900347208 /* SignInWithFacebookRequest */ = {
+			isa = PBXGroup;
+			children = (
+				58D1E5CF1B662EBD00347208 /* BZRSignInWithFacebookRequest.h */,
+				58D1E5D01B662EBD00347208 /* BZRSignInWithFacebookRequest.m */,
+			);
+			name = SignInWithFacebookRequest;
+			sourceTree = "<group>";
+		};
+		58D1E5D21B66423700347208 /* FacebookService */ = {
+			isa = PBXGroup;
+			children = (
+				58D1E5D31B66426900347208 /* BZRFacebookService.h */,
+				58D1E5D41B66426900347208 /* BZRFacebookService.m */,
+			);
+			name = FacebookService;
+			sourceTree = "<group>";
+		};
+		58D1E5D61B666D2500347208 /* SignUpWithFacebookRequest */ = {
+			isa = PBXGroup;
+			children = (
+				58D1E5D71B666D4300347208 /* BZRSignUpWithFacebookRequest.h */,
+				58D1E5D81B666D4300347208 /* BZRSignUpWithFacebookRequest.m */,
+			);
+			name = SignUpWithFacebookRequest;
 			sourceTree = "<group>";
 		};
 		58DF1AE51B584CA800D28951 /* AssetsHelper */ = {
@@ -1905,7 +1944,9 @@
 				585C32A11B63AA3F005BF07B /* BZRProjectFacade.m in Sources */,
 				589420B11B4567B2004BAF48 /* BZREditProfileContainerController.m in Sources */,
 				84BE35D91B5D0C93001B99E2 /* BZRSurveyCongratsLabel.m in Sources */,
+				58D1E5D51B66426900347208 /* BZRFacebookService.m in Sources */,
 				589BCCE51B569BB800D49056 /* UIView+Flashable.m in Sources */,
+				58D1E5D91B666D4300347208 /* BZRSignUpWithFacebookRequest.m in Sources */,
 				585813AA1B3BEDCC0087AEE2 /* BZRUserToken.m in Sources */,
 				58B574E11B38AE200083A80A /* KeychainItemWrapper.m in Sources */,
 				84A6124E1B5E3137005E01A7 /* BZRMixpanelService.m in Sources */,
@@ -1964,6 +2005,7 @@
 				58A5BEC41B415C7000B2BC27 /* BZRStarView.m in Sources */,
 				585C32AB1B63C82F005BF07B /* BZRRenewSessionTokenRequest.m in Sources */,
 				585813AE1B3C23840087AEE2 /* BZRSurvey.m in Sources */,
+				58D1E5D11B662EBD00347208 /* BZRSignInWithFacebookRequest.m in Sources */,
 				58C770E31B5CD08E00E9031F /* BZRTutorialDescriptionLabel.m in Sources */,
 				58A59E281B3EE00B00A5F30C /* BZRPushNotificationsAccessController.m in Sources */,
 				58A59E2C1B3EE91000A5F30C /* BZRFinishTutorialController.m in Sources */,

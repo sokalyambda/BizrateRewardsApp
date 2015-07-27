@@ -51,4 +51,17 @@
 
 + (void)signOutOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure;
 
+//Facebook
++ (void)tryLoginWithFacebookOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure;
++ (BZRNetworkOperation *)signInWithFacebookOnSuccess:(void (^)(BOOL isSuccess))success
+                                           onFailure:(void (^)(NSError *error, BOOL isCanceled))failure;
+
++ (BZRNetworkOperation *)signUpWithFacebookWithUserFirstName:(NSString *)firstName
+                                             andUserLastName:(NSString *)lastName
+                                                    andEmail:(NSString *)email
+                                              andDateOfBirth:(NSString *)dateOfBirth
+                                                   andGender:(NSString *)gender
+                                                   onSuccess:(void (^)(BOOL isSuccess))success
+                                                   onFailure:(void (^)(NSError *error, BOOL isCanceled))failure;
+
 @end

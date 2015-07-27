@@ -14,6 +14,8 @@
 
 #import "BZRProjectFacade.h"
 
+#import "BZRFacebookService.h"
+
 static NSString *const kDashboardSegueIdentifier = @"dashboardSegue";
 
 //const for auth error code
@@ -79,19 +81,34 @@ static NSInteger const kNotRegisteredErrorCode = 400.f;
 - (IBAction)facebookLoginClick:(id)sender
 {
 //    WEAK_SELF;
-//    [BZRReachabilityHelper checkConnectionOnSuccess:^{
-//        [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
-//        [weakSelf.dataManager authorizeWithFacebookWithResult:^(BOOL success, NSError *error, NSInteger responseStatusCode) {
-//            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-//            if (success) {
-    
-//                  [BZRMixpanelService trackEventWithType:BZRMixpanelEventLoginSuccessful properties:@{Type : Facebook}];
-    
+//    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//    
+//    [BZRFacebookService authorizeWithFacebookOnSuccess:^(BOOL isSuccess) {
+//        
+//        [BZRProjectFacade getClientCredentialsOnSuccess:^(BOOL success) {
+//            
+//            [BZRProjectFacade signInWithFacebookOnSuccess:^(BOOL isSuccess) {
+//                [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+//                
+//                //detect success login with facebook
+//                [BZRFacebookService setLoginSuccess:YES];
+//                
+//                //track mixpanel event
+//                [BZRMixpanelService trackEventWithType:BZRMixpanelEventLoginSuccessful properties:@{Type: AuthTypeFacebook}];
+//                
+//                //go to dashboard
 //                [weakSelf performSegueWithIdentifier:kDashboardSegueIdentifier sender:weakSelf];
-//            }
+//                
+//            } onFailure:^(NSError *error, BOOL isCanceled) {
+//                [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+//            }];
+//            
+//        } onFailure:^(NSError *error, BOOL isCanceled) {
+//            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
 //        }];
-//    } failure:^{
-//        ShowAlert(InternetIsNotReachableString);
+//        
+//    } onFailure:^(NSError *error, BOOL isCanceled) {
+//        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
 //    }];
 }
 

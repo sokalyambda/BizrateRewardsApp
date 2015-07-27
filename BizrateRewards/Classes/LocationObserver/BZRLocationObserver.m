@@ -71,18 +71,24 @@ static NSString *const kGeolocationPermissionsLastState = @"geolocationPermissio
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
 {
     BOOL isGeolocationEnable = NO;
+    BOOL isGeolocationStatusDetermine = YES;
+    
     if (status == kCLAuthorizationStatusAuthorizedAlways) {
         isGeolocationEnable = YES;
     } else if (status == kCLAuthorizationStatusDenied) {
         isGeolocationEnable = NO;
+    } else if (status == kCLAuthorizationStatusNotDetermined) {
+        isGeolocationStatusDetermine = NO;
     }
     
-    [self checkForPermissionsChangingWithGeolocationEnabled:isGeolocationEnable];
-    
-    if (isGeolocationEnable) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:LocationManagerDidSuccessAuthorizeNotification object:nil];
-    } else {
-        [[NSNotificationCenter defaultCenter] postNotificationName:LocationManagerDidFailAuthorizeNotification object:nil];
+    if (isGeolocationStatusDetermine) {
+       [self checkForPermissionsChangingWithGeolocationEnabled:isGeolocationEnable];
+        
+        if (isGeolocationEnable) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:LocationManagerDidSuccessAuthorizeNotification object:nil];
+        } else {
+            [[NSNotificationCenter defaultCenter] postNotificationName:LocationManagerDidFailAuthorizeNotification object:nil];
+        }
     }
 }
 

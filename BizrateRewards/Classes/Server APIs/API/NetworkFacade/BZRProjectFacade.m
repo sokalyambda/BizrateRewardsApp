@@ -21,6 +21,8 @@ typedef enum : NSUInteger {
 #import "BZRUserProfile.h"
 #import "BZRApplicationToken.h"
 
+#import "BZRFacebookService.h"
+
 #import "BZRKeychainHandler.h"
 
 #import <AFNetworking/AFNetworkActivityIndicatorManager.h>
@@ -107,7 +109,7 @@ static BZRSessionManager *sharedHTTPClient = nil;
         success(YES);
         
     } failure:^(BZRNetworkOperation *operation ,NSError *error, BOOL isCanceled) {
-        ShowFailureResponseAlertWithError(error);
+//        ShowFailureResponseAlertWithError(error);
         failure(error, isCanceled);
     }];
     return operation;
@@ -236,7 +238,13 @@ static BZRSessionManager *sharedHTTPClient = nil;
     
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:BizID];
     
-    success(YES);
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [BZRFacebookService logoutFromFacebook];
+    
+    if (success) {
+        success(YES);
+    }
 }
 
 + (BOOL)isSessionValidWithType:(BZRSessionType)type
@@ -299,75 +307,49 @@ static BZRSessionManager *sharedHTTPClient = nil;
 
 /******* FaceBook *******/
 
-- (void)authorizeWithFacebookOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure
++ (BZRNetworkOperation *)signInWithFacebookOnSuccess:(void (^)(BOOL isSuccess))success
+                                           onFailure:(void (^)(NSError *error, BOOL isCanceled))failure
 {
-//    [self tryLoginWithFacebookOnSuccess:^(FBSDKLoginManagerLoginResult *loginResult) {
-//        
-////        success(loginResult);
-//        
-//        //        [weakSelf getFacebookUserProfileOnSuccess:^(id responseObject) {
-//        //            success(responseObject);
-//        //        } onFailure:^(NSError *error) {
-//        //            failure(error);
-//        //        }];
-//        
-//        //        [weakSelf.network authorizeWithFacebookWithParameters:@{kFBAccessToken: facebookToken} onSuccess:^(id responseObject) {
-//        //
-//        //
-//        ////        NSURL *userImageURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?width=200", [facebookProfile valueForKey:@"id"]]];
-//        //
-//        //            success(responseObject);
-//        //
-//        //        } onFailure:^(NSError *error) {
-//        //            failure(error);
-//        //        }];
-//    } onFailure:^(NSError *error, BOOL isCanceled) {
-//        failure(error, isCanceled);
-//    }];
-}
-
-- (void)tryLoginWithFacebookOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure
-{
-    BOOL isFBinstalled = [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"fb://"]];
-    FBSDKLoginManager *loginManager = [[FBSDKLoginManager alloc] init];
-    if (isFBinstalled) {
-        loginManager.loginBehavior = FBSDKLoginBehaviorNative;
-    } else {
-        loginManager.loginBehavior = FBSDKLoginBehaviorWeb;
-    }
+    BZRSignInWithFacebookRequest *request = [[BZRSignInWithFacebookRequest alloc] init];
     
-    [loginManager logInWithReadPermissions:@[@"public_profile", @"email"] handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+    BZRNetworkOperation* operation = [[self  HTTPClient] enqueueOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
         
-        if (error) {
-            failure(error, result.isCancelled);
-        } else {
-            if ([result.grantedPermissions containsObject:@"email"] && [result.grantedPermissions containsObject:@"public_profile"]) {
-                
-                //                NSString *facebookToken = result.token.tokenString;
-                success(YES);
-            }
-        }
+        BZRSignInWithFacebookRequest *request = (BZRSignInWithFacebookRequest*)operation.networkRequest;
+        
+        [BZRStorageManager sharedStorage].userToken = request.userToken;
+        
+        success(YES);
+        
+    } failure:^(BZRNetworkOperation *operation ,NSError *error, BOOL isCanceled) {
+        ShowFailureResponseAlertWithError(error);
+        failure(error, isCanceled);
     }];
+    return operation;
 }
 
-- (void)getFacebookUserProfileOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure
++ (BZRNetworkOperation *)signUpWithFacebookWithUserFirstName:(NSString *)firstName
+                                             andUserLastName:(NSString *)lastName
+                                                    andEmail:(NSString *)email
+                                              andDateOfBirth:(NSString *)dateOfBirth
+                                                   andGender:(NSString *)gender
+                                                   onSuccess:(void (^)(BOOL isSuccess))success
+                                                   onFailure:(void (^)(NSError *error, BOOL isCanceled))failure
 {
-    NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
-    [parameters setValue:@"id, name, email" forKey:@"fields"];
+    BZRSignUpWithFacebookRequest *request = [[BZRSignUpWithFacebookRequest alloc] initWithUserFirstName:firstName andUserLastName:lastName andEmail:email andDateOfBirth:dateOfBirth andGender:gender];
     
-    FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:parameters HTTPMethod:@"GET"];
-    
-    [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id response, NSError *error) {
-        if (error) {
-            failure(error, NO);
-        } else {
-            //            NSDictionary *user = (NSDictionary *)response;
-            //            NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithDictionary:@{@"facebook_id":[user valueForKey:@"id"], @"first_name":[user valueForKey:@"first_name"], @"last_name":[user valueForKey:@"last_name"]}];
-            //
-            //            NSString *fbAccessToken = [FBSDKAccessToken currentAccessToken].tokenString;
-            success(YES);
-        }
+    BZRNetworkOperation* operation = [[self  HTTPClient] enqueueOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
+        
+        BZRSignUpWithFacebookRequest *request = (BZRSignUpWithFacebookRequest*)operation.networkRequest;
+        
+        [BZRStorageManager sharedStorage].userToken = request.userToken;
+        
+        success(YES);
+        
+    } failure:^(BZRNetworkOperation *operation ,NSError *error, BOOL isCanceled) {
+        ShowFailureResponseAlertWithError(error);
+        failure(error, isCanceled);
     }];
+    return operation;
 }
 
 /******* FaceBook *******/

@@ -15,12 +15,16 @@
 
 #import "BZRKeychainHandler.h"
 
+#import "BZRFacebookService.h"
+
 static NSString *const kStartTutorialSegueIdentirier = @"startTutorialSegue";
 
 @interface BZRAutologinController ()
 
 @property (assign, nonatomic, getter=isTutorialPassed) BOOL tutorialPassed;
 @property (assign, nonatomic, getter=isRememberMe) BOOL rememberMe;
+
+@property (assign, nonatomic, getter=isFacebookSessionValid) BOOL facebookSessionValid;
 
 @property (strong, nonatomic) NSUserDefaults *defaults;
 
@@ -41,6 +45,12 @@ static NSString *const kStartTutorialSegueIdentirier = @"startTutorialSegue";
 - (BOOL)isRememberMe
 {
     return [self.defaults boolForKey:RememberMeKey];
+}
+
+- (BOOL)isFacebookSessionValid
+{
+    _facebookSessionValid = [BZRFacebookService isFacebookSessionValid];
+    return _facebookSessionValid;
 }
 
 - (NSUserDefaults *)defaults
@@ -76,7 +86,9 @@ static NSString *const kStartTutorialSegueIdentirier = @"startTutorialSegue";
 - (void)checkForRedirection
 {
     if ([self isAutologinNeeded]) {
-        [self autologin];
+        [self autologinWithEmail];
+    } else if (self.isFacebookSessionValid) {
+        [self autologinWithFacebook];
     } else if (self.isTutorialPassed) {
         [self goToFinishTutorialController];
     } else {
@@ -104,7 +116,7 @@ static NSString *const kStartTutorialSegueIdentirier = @"startTutorialSegue";
     return self.savedUsername.length && self.savedPassword.length;
 }
 
-- (void)autologin
+- (void)autologinWithEmail
 {
     WEAK_SELF;
     [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
@@ -113,6 +125,29 @@ static NSString *const kStartTutorialSegueIdentirier = @"startTutorialSegue";
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         [weakSelf goToDashboardController];
     } failure:^(NSError *error, BOOL isCanceled) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        [weakSelf goToFinishTutorialController];
+    }];
+}
+
+- (void)autologinWithFacebook
+{
+    WEAK_SELF;
+    [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
+    [BZRProjectFacade getClientCredentialsOnSuccess:^(BOOL success) {
+        
+        [BZRProjectFacade signInWithFacebookOnSuccess:^(BOOL isSuccess) {
+            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+            
+            [BZRMixpanelService trackEventWithType:BZRMixpanelEventLoginSuccessful properties:@{Type: AuthTypeFacebook}];
+            [weakSelf goToDashboardController];
+            
+        } onFailure:^(NSError *error, BOOL isCanceled) {
+            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+            [weakSelf goToFinishTutorialController];
+        }];
+        
+    } onFailure:^(NSError *error, BOOL isCanceled) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         [weakSelf goToFinishTutorialController];
     }];

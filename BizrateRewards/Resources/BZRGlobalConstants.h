@@ -66,4 +66,10 @@ static NSString *const FirstName = @"First Name";
 static NSString *const LastName = @"Last Name";
 static NSString *const BizrateID = @"Bizrate ID";
 
+//Facebook (keys for NSUserDefaults)
+
+static NSString *const FBAccessToken = @"FBAccessToken";
+static NSString *const FBAccessTokenExpirationDate = @"FBAccessTokenExpirationDate";
+static NSString *const FBLoginSuccess = @"FBLoginSuccess";
+
 #endif
