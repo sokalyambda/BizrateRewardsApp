@@ -10,4 +10,6 @@
 
 + (NSString *)stringFromNetworkError:(NSError *)error;
 
++ (BOOL)errorIsNetworkError:(NSError *)error;
+
 @end

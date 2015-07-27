@@ -11,9 +11,9 @@
 #import "BZRStorageManager.h"
 #import "BZRPushNotifiactionService.h"
 
-#import "OB_Services.h"
+#import "BZRProjectFacade.h"
 
-#import "BZRDataManager.h"
+#import "OB_Services.h"
 
 @import HockeySDK;
 
@@ -28,7 +28,7 @@ static NSString *const kOfferBeamRetailerID = @"A27C65B0-DB22-11E4-8830-0800200C
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [BZRDataManager sharedInstance];
+    [BZRProjectFacade isInternetReachable];
     
     [BZRMixpanelService setupMixpanel];
     [BZRMixpanelService trackEventWithType:BZRMixpanelEventOpenApp properties:nil];

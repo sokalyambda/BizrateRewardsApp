@@ -11,9 +11,6 @@
 #import "BZRAssetsHelper.h"
 #import "BZRCommonNumberFormatter.h"
 
-#import "BZRSurveysService.h"
-#import "BZRUserProfileService.h"
-
 #import "BZRDashboardController.h"
 #import "BZRSurveyViewController.h"
 #import "BZRAccountSettingsController.h"
@@ -25,6 +22,7 @@
 
 #import "BZRPushNotifiactionService.h"
 #import "BZRLocationObserver.h"
+#import "BZRProjectFacade.h"
 
 static NSString *const kAccountSettingsSegueIdentifier = @"accountSettingsSegueIdentifier";
 static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
@@ -77,7 +75,6 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
     if (self.isUpdateNeeded) {
         [self getCurrentUserProfile];
     }
-
 }
 
 #pragma mark - Actions
@@ -85,10 +82,9 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
 - (IBAction)takeSurveyClick:(id)sender
 {
     WEAK_SELF;
-    
     [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
     
-    [BZRSurveysService getSurveysListOnSuccess:^(NSArray *surveys) {
+    [BZRProjectFacade getEligibleSurveysOnSuccess:^(NSArray *surveys) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         BZRSurveyViewController *controller = [weakSelf.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRSurveyViewController class])];
         if (surveys.count) {
@@ -98,9 +94,8 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
             ShowAlert(NSLocalizedString(@"There are no surveys for you", nil));
             return;
         }
-    } onFailure:^(NSError *error) {
+    } onFailure:^(NSError *error, BOOL isCanceled) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-        ShowFailureResponseAlertWithError(error);
     }];
 }
 
@@ -137,15 +132,15 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
 {
     WEAK_SELF;
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [BZRUserProfileService getCurrentUserOnSuccess:^(BZRUserProfile *userProfile) {
+    
+    [BZRProjectFacade getCurrentUserOnSuccess:^(BOOL isSuccess) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         [weakSelf updateUserInformation];
         [weakSelf setupMixpanelPeople];
         [weakSelf calculateProgress];
         weakSelf.updateNeeded = NO;
-    } onFailure:^(NSError *error) {
+    } onFailure:^(NSError *error, BOOL isCanceled) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-        ShowFailureResponseAlertWithError(error);
     }];
 }
 

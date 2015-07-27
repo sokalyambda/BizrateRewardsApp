@@ -12,7 +12,6 @@
 #import "BZRTutorialDescriptionLabel.h"
 #import "BZRProgressView.h"
 
-#import "BZRUserProfileService.h"
 #import "BZRStorageManager.h"
 
 #import "BZRSurvey.h"

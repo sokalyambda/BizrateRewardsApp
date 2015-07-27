@@ -9,8 +9,6 @@
 #import "BZRSurveyViewController.h"
 #import "BZRFinishSurveyController.h"
 
-#import "BZRDataManager.h"
-
 #import "BZRSurvey.h"
 
 #import "NSString+ContainsString.h"

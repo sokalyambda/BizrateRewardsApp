@@ -14,7 +14,7 @@
 
 #import "BZRStorageManager.h"
 
-#import "BZRUserProfileService.h"
+#import "BZRProjectFacade.h"
 
 #import "BZREditProfileField.h"
 
@@ -74,21 +74,21 @@ static NSString *const kEditProfileContainerSegueIdentifier = @"editProfileConta
                                andCheckboxes:nil onSuccess:^{
                                    
                                    [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
-                                   [BZRUserProfileService updateCurrentUserWithFirstName:self.container.firstNameField.text andLastName:self.container.lastNameField.text andDateOfBirth:self.container.dateOfBirthField.text andGender:[self.container.genderField.text substringToIndex:1] onSuccess:^(BZRUserProfile *userProfile) {
+                                   [BZRProjectFacade updateUserWithFirstName:weakSelf.container.firstNameField.text andLastName:weakSelf.container.lastNameField.text andDateOfBirth:weakSelf.container.dateOfBirthField.text andGender:[weakSelf.container.genderField.text substringToIndex:1] onSuccess:^(BOOL isSuccess) {
+                                       
                                        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
                                        [weakSelf.navigationController popViewControllerAnimated:YES];
-                                   } onFailure:^(NSError *error) {
+                                       
+                                   } onFailure:^(NSError *error, BOOL isCanceled) {
+                                       
                                        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-                                       ShowFailureResponseAlertWithError(error);
                                    }];
-                                   
                                } onFailure:^(NSString *errorString) {
                                    [BZRValidator cleanValidationErrorString];
                                }];
     } else {
         [self.navigationController popViewControllerAnimated:YES];
     }
-    
 }
 
 - (void)setupFieldsValueFromProfile

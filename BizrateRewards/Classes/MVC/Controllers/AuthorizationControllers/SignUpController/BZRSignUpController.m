@@ -14,7 +14,7 @@
 
 #import "BZRUserProfile.h"
 
-#import "BZRAuthorizationService.h"
+#import "BZRProjectFacade.h"
 
 @interface BZRSignUpController ()
 
@@ -52,32 +52,29 @@
                     andPasswordField:self.passwordField
              andConfirmPasswordField:self.confirmPasswordField
                            onSuccess:^{
-                               
                                weakSelf.temporaryProfile.email = weakSelf.userNameField.text;
                                
                                [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
-                               [BZRAuthorizationService signUpWithUserFirstName:weakSelf.temporaryProfile.firstName
-                                                                andUserLastName:weakSelf.temporaryProfile.lastName
-                                                                       andEmail:weakSelf.temporaryProfile.email
-                                                                    andPassword:weakSelf.passwordField.text
-                                                                 andDateOfBirth:[[BZRCommonDateFormatter commonDateFormatter] stringFromDate:weakSelf.temporaryProfile.dateOfBirth]
-                                                                      andGender:[weakSelf.temporaryProfile.genderString substringToIndex:1]
-                                                               andFacebookToken:nil
-                                                                      onSuccess:^(BZRApplicationToken *token) {
-                                                                          
-                                                                          [BZRMixpanelService trackEventWithType:BZRMixpanelEventRegistrationSuccessful properties:@{Type : AuthTypeEmail}];
-                                                                          
-                                                                          [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-                                                                          
-                                                                          BZRDashboardController *controller = [weakSelf.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRDashboardController class])];
-                                                                          controller.updateNeeded = YES;
-                                                                          [weakSelf.navigationController pushViewController:controller animated:YES];
-                                                                          
-                                                                      } onFailure:^(NSError *error) {
-                                                                          ShowFailureResponseAlertWithError(error);
-                                                                          [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-                                                                      }];
                                
+                               [BZRProjectFacade getClientCredentialsOnSuccess:^(BOOL success) {
+                                   
+                                   [BZRProjectFacade signUpWithUserFirstName:weakSelf.temporaryProfile.firstName andUserLastName:weakSelf.temporaryProfile.lastName andEmail:weakSelf.temporaryProfile.email andPassword:weakSelf.passwordField.text andDateOfBirth:[[BZRCommonDateFormatter commonDateFormatter] stringFromDate:weakSelf.temporaryProfile.dateOfBirth] andGender:[weakSelf.temporaryProfile.genderString substringToIndex:1] success:^(BOOL success) {
+                                       
+                                       [BZRMixpanelService trackEventWithType:BZRMixpanelEventRegistrationSuccessful properties:@{Type : AuthTypeEmail}];
+                                       
+                                       [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+                                       
+                                       BZRDashboardController *controller = [weakSelf.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRDashboardController class])];
+                                       controller.updateNeeded = YES;
+                                       [weakSelf.navigationController pushViewController:controller animated:YES];
+                                       
+                                   } failure:^(NSError *error, BOOL isCanceled) {
+                                       [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+                                   }];
+                                   
+                               } onFailure:^(NSError *error, BOOL isCanceled) {
+                                   [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+                               }];
                            }
                            onFailure:^(NSString *errorString) {
                                [BZRValidator cleanValidationErrorString];

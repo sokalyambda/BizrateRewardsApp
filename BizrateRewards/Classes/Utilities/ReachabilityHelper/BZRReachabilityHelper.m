@@ -8,11 +8,11 @@
 
 #import "BZRReachabilityHelper.h"
 
-#import "BZRDataManager.h"
+#import "BZRProjectFacade.h"
 
 @implementation BZRReachabilityHelper
 
-+ (void)checkConnectionOnSuccess:(void (^)())success failure:(void (^)())failure
++ (void)checkConnectionOnSuccess:(void (^)())success failure:(void (^)(NSError *error))failure
 {
     BOOL isInternetAvaliable = [self isInternetAvaliable];
     if (isInternetAvaliable) {
@@ -20,38 +20,16 @@
             success();
         }
     } else {
+        NSError *internetError = [NSError errorWithDomain:@"Internet error" code:NSURLErrorNotConnectedToInternet userInfo:@{NSURLErrorKey: @"Internet error"}];
         if (failure) {
-            failure();
+            failure(internetError);
         }
     }
 }
 
-+ (BOOL)checkConnectionShowingErrorInViewController:(UIViewController*)errorController
-{
-    BOOL isInternet = [self isInternetAvaliable];
-    
-    if (!isInternet) {
-        //show alert
-    }
-    return isInternet;
-}
-
-+ (BOOL)checkInternetAndShowAlertInViewController:(UIViewController*)errorController alertClicked:(void (^)())alertClicked
-{
-    BOOL internetAvaliable = [self isInternetAvaliable];
-    
-    __strong  void(^strongAlertClicked)() = alertClicked;
-    
-    if (!internetAvaliable) {
-        //show alert
-    }
-    
-    return internetAvaliable;
-}
-
 + (BOOL)isInternetAvaliable
 {
-    return [BZRDataManager sharedInstance].isReachable;
+    return [BZRProjectFacade isInternetReachable];
 }
 
 @end

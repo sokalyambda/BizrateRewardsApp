@@ -8,10 +8,8 @@
 
 @interface BZRReachabilityHelper : NSObject
 
-+ (void)checkConnectionOnSuccess:(void (^)())success failure:(void (^)())failure;
++ (void)checkConnectionOnSuccess:(void (^)())success failure:(void (^)(NSError *error))failure;
 
 + (BOOL)isInternetAvaliable;
-+ (BOOL)checkInternetAndShowAlertInViewController:(UIViewController*)errorController alertClicked:(void (^)())alertClicked;
-+ (BOOL)checkConnectionShowingErrorInViewController:(UIViewController*)errorController;
 
 @end

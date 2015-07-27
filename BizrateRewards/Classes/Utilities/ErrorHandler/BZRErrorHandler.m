@@ -8,8 +8,6 @@
 
 #import "BZRErrorHandler.h"
 
-#import <AFNetworking/AFNetworking.h>
-
 #import "NSString+JSONRepresentation.h"
 
 static NSString *const kErrors = @"errors";
@@ -97,6 +95,33 @@ static NSString *const kErrorMessage = @"error_message";
     }
     
     return errString.length > 0 ? errString : nil;
+}
+
++ (BOOL)errorIsNetworkError:(NSError *)error
+{
+    if (error == nil) {
+        return NO;
+    }
+    
+    NSError *innerError = error.userInfo[NSUnderlyingErrorKey];
+    if ([self errorIsNetworkError:innerError]) {
+        return YES;
+    }
+    
+    switch (error.code) {
+        case NSURLErrorTimedOut:
+        case NSURLErrorCannotFindHost:
+        case NSURLErrorCannotConnectToHost:
+        case NSURLErrorNetworkConnectionLost:
+        case NSURLErrorDNSLookupFailed:
+        case NSURLErrorNotConnectedToInternet:
+        case NSURLErrorInternationalRoamingOff:
+        case NSURLErrorCallIsActive:
+        case NSURLErrorDataNotAllowed:
+            return YES;
+        default:
+            return NO;
+    }
 }
 
 @end

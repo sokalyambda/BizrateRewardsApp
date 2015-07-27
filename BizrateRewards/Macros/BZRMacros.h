@@ -34,4 +34,21 @@
 #endif
 #endif
 
+#ifdef DEBUG
+//    #define DEBUG_PRINT
+#define DEBUG_PRINTLOG
+#endif
+
+#ifdef DEBUG_PRINT
+#define LOG_GENERAL(format, ...) NSLog(@"%s: " format, __FUNCTION__, ##__VA_ARGS__)
+#else
+#define LOG_GENERAL(format, ...) do {} while(0)
+#endif
+
+#ifdef DEBUG_PRINTLOG
+#define LOG_NETWORK(format, ...) NSLog(@"%s: " format, __FUNCTION__, ##__VA_ARGS__)
+#else
+#define LOG_NETWORK(format, ...) do {} while(0)
+#endif
+
 @end

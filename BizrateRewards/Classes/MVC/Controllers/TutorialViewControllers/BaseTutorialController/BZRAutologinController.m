@@ -11,7 +11,7 @@
 #import "BZRFinishTutorialController.h"
 #import "BZRDashboardController.h"
 
-#import "BZRAuthorizationService.h"
+#import "BZRProjectFacade.h"
 
 #import "BZRKeychainHandler.h"
 
@@ -108,17 +108,13 @@ static NSString *const kStartTutorialSegueIdentirier = @"startTutorialSegue";
 {
     WEAK_SELF;
     [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
-    [BZRAuthorizationService signInWithUserName:weakSelf.savedUsername password:weakSelf.savedPassword onSuccess:^(BZRApplicationToken *token) {
-        
+    [BZRProjectFacade signInWithEmail:weakSelf.savedUsername password:weakSelf.savedPassword success:^(BOOL success) {
         [BZRMixpanelService trackEventWithType:BZRMixpanelEventLoginSuccessful properties:nil];
-        
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         [weakSelf goToDashboardController];
-    } onFailure:^(NSError *error) {
+    } failure:^(NSError *error, BOOL isCanceled) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-        ShowFailureResponseAlertWithError(error);
         [weakSelf goToFinishTutorialController];
-        
     }];
 }
 

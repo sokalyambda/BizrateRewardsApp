@@ -14,10 +14,11 @@
 #import "BZRUserProfile.h"
 
 #import "BZRStorageManager.h"
-#import "BZRDataManager.h"
 #import "BZRStatusBarManager.h"
 
 #import "BZRAssetsHelper.h"
+
+#import "BZRProjectFacade.h"
 
 @import Photos;
 
@@ -31,7 +32,6 @@ static NSString *const kAccountSettingsContainerSegueIdentifier = @"accountSetti
 @property (weak, nonatomic) IBOutlet UILabel *userFullNameLabel;
 
 @property (strong, nonatomic) BZRUserProfile *currentProfile;
-@property (strong, nonatomic) BZRDataManager *dataManager;
 
 @end
 
@@ -51,14 +51,6 @@ static NSString *const kAccountSettingsContainerSegueIdentifier = @"accountSetti
 {
     _currentProfile = currentProfile;
     [BZRStorageManager sharedStorage].currentProfile = _currentProfile;
-}
-
-- (BZRDataManager *)dataManager
-{
-    if (!_dataManager) {
-        _dataManager = [BZRDataManager sharedInstance];
-    }
-    return _dataManager;
 }
 
 #pragma mark - View Lifecycle
@@ -112,7 +104,8 @@ static NSString *const kAccountSettingsContainerSegueIdentifier = @"accountSetti
 - (void)signOut
 {
     WEAK_SELF;
-    [self.dataManager signOutOnSuccess:^(id responseObject) {
+    
+    [BZRProjectFacade signOutOnSuccess:^(BOOL isSuccess) {
         BZRBaseNavigationController *navigationController = (BZRBaseNavigationController *)weakSelf.presentingViewController;
         
         [CATransaction begin];
@@ -121,8 +114,7 @@ static NSString *const kAccountSettingsContainerSegueIdentifier = @"accountSetti
         }];
         [navigationController popToRootViewControllerAnimated:YES];;
         [CATransaction commit];
-        
-    } onFailure:^(NSError *error) {
+    } onFailure:^(NSError *error, BOOL isCanceled) {
         
     }];
 }

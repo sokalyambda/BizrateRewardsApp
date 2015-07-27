@@ -12,7 +12,7 @@
 
 #import "BZRKeychainHandler.h"
 
-#import "BZRAuthorizationService.h"
+#import "BZRProjectFacade.h"
 
 static NSString *const kDashboardSegueIdentifier = @"dashboardSegue";
 
@@ -104,21 +104,25 @@ static NSInteger const kNotRegisteredErrorCode = 400.f;
     [BZRValidator validateEmailField:self.userNameField
                     andPasswordField:self.passwordField
                            onSuccess:^{
+                               
                                [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
-                               [BZRAuthorizationService signInWithUserName:self.userNameField.text
-                                                                  password:self.passwordField.text
-                                                                 onSuccess:^(BZRApplicationToken *token) {
-                                                                     
-                                                                     [BZRMixpanelService trackEventWithType:BZRMixpanelEventLoginSuccessful properties:@{Type : AuthTypeEmail}];
+                               
+                               [BZRProjectFacade signInWithEmail:weakSelf.userNameField.text password:weakSelf.passwordField.text success:^(BOOL success) {
                                    
+                                   //track success login event (MixPanel)
+                                   [BZRMixpanelService trackEventWithType:BZRMixpanelEventLoginSuccessful properties:@{Type : AuthTypeEmail}];
+                                   
+                                   //hide progress hud
                                    [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
                                    
                                    if (weakSelf.isRememberMe) {
                                        [BZRKeychainHandler storeCredentialsWithUsername:weakSelf.userNameField.text andPassword:weakSelf.passwordField.text];
                                    }
                                    [weakSelf performSegueWithIdentifier:kDashboardSegueIdentifier sender:weakSelf];
-                               }
-                                                                 onFailure:^(NSError *error) {
+                                   
+                                   
+                                   
+                               } failure:^(NSError *error, BOOL isCanceled) {
                                    
                                    [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
                                    

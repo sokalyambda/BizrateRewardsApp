@@ -98,7 +98,6 @@ static NSString *const kEditProfileSegueIdentifier = @"editProfileSegue";
         case BZRSettingsCellContactSupport: {
             break;
         }
-            
     }
 }
 
