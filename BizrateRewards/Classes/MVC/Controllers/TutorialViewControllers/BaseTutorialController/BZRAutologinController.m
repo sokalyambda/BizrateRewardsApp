@@ -139,7 +139,7 @@ static NSString *const kStartTutorialSegueIdentirier = @"startTutorialSegue";
         [BZRProjectFacade signInWithFacebookOnSuccess:^(BOOL isSuccess) {
             [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
             
-            [BZRMixpanelService trackEventWithType:BZRMixpanelEventLoginSuccessful properties:@{Type: AuthTypeFacebook}];
+            [BZRMixpanelService trackEventWithType:BZRMixpanelEventLoginSuccessful properties:@{AuthorizationType: AuthTypeFacebook}];
             [weakSelf goToDashboardController];
             
         } onFailure:^(NSError *error, BOOL isCanceled) {

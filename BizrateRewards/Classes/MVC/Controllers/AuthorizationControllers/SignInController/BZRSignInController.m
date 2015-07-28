@@ -127,7 +127,7 @@ static NSInteger const kNotRegisteredErrorCode = 400.f;
                                [BZRProjectFacade signInWithEmail:weakSelf.userNameField.text password:weakSelf.passwordField.text success:^(BOOL success) {
                                    
                                    //track success login event (MixPanel)
-                                   [BZRMixpanelService trackEventWithType:BZRMixpanelEventLoginSuccessful properties:@{Type : AuthTypeEmail}];
+                                   [BZRMixpanelService trackEventWithType:BZRMixpanelEventLoginSuccessful properties:@{AuthorizationType : AuthTypeEmail}];
                                    
                                    //hide progress hud
                                    [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];

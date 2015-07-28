@@ -25,6 +25,6 @@ typedef enum : NSUInteger {
 
 + (void)setupMixpanel;
 + (void)trackEventWithType:(BZRMixpanelEventType)eventType properties:(NSDictionary *)properties;
-+ (void)setPeopleWithProperties:(NSDictionary *)properties bizrateID:(NSString *)bizrateID;
++ (void)setPeopleWithProperties:(NSDictionary *)properties;
 
 @end

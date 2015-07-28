@@ -148,13 +148,12 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
 {
     BOOL isPushesEnabled = [BZRPushNotifiactionService pushNotificationsEnabled];
     BOOL isGeolocationEnabled = [BZRLocationObserver sharedObserver].isAuthorized;
-    [BZRMixpanelService setPeopleWithProperties:@{PushNotificationsEnabled : isPushesEnabled? Yes : No,
-                                                  GeoLocationEnabled: isGeolocationEnabled? Yes : No,
-                                                  FirstName : self.currentProfile.firstName,
-                                                  LastName : self.currentProfile.lastName,
-                                                  BizrateID : self.currentProfile.contactID
-                                                  }
-                                      bizrateID: self.currentProfile.contactID];
+    [BZRMixpanelService setPeopleWithProperties:@{PushNotificationsEnabled : isPushesEnabled? AccessGrantedKeyYes : AccessGrantedKeyNo,
+                                                  GeoLocationEnabled: isGeolocationEnabled? AccessGrantedKeyYes : AccessGrantedKeyNo,
+                                                  FirstNameProperty : self.currentProfile.firstName,
+                                                  LastNameProperty : self.currentProfile.lastName,
+                                                  BizrateIDProperty : self.currentProfile.contactID
+                                                  }];
 }
 
 - (void)calculateProgress

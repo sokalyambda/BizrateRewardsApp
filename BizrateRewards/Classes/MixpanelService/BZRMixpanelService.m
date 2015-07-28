@@ -10,7 +10,7 @@
 
 #import <Mixpanel.h>
 
-static NSString *const kMixpanelToken = @"aae3e2388125817b27b8afcf99093d97";
+static NSString *const kMixpanelToken = @"f818411581cc210c670fe3351a46debe";//@"aae3e2388125817b27b8afcf99093d97";
 
 @implementation BZRMixpanelService
 
@@ -22,7 +22,10 @@ static NSString *const kMixpanelToken = @"aae3e2388125817b27b8afcf99093d97";
     
     if (!mixpanelID) {
         mixpanelID = [[[UIDevice currentDevice]identifierForVendor]UUIDString];
-        [[NSUserDefaults standardUserDefaults] setObject:mixpanelID forKey:MixpanelID];
+        
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setObject:mixpanelID forKey:MixpanelID];
+        [defaults synchronize];
     }
     [mixpanel identify:mixpanelID];
 }
@@ -34,52 +37,52 @@ static NSString *const kMixpanelToken = @"aae3e2388125817b27b8afcf99093d97";
     
     switch (eventType) {
         case BZRMixpanelEventOpenApp: {
-            event = OpenApp;
+            event = OpenAppEvent;
             
             break;
         }
         case BZRMixpanelEventSurveyViewed: {
-            event = SurveyViewed;
+            event = SurveyViewedEvent;
             break;
         }
         case BZRMixpanelEventSurveyCompeted: {
-            event = SurveyCompleted;
+            event = SurveyCompletedEvent;
             break;
         }
         case BZRMixpanelEventSignupPage: {
-            event = SignupPage;
+            event = SignupPageEvent;
             break;
         }
         case BZRMixpanelEventCreateAccountPage: {
-            event = CreateAccountPage;
+            event = CreateAccountPageEvent;
             break;
         }
         case BZRMixpanelEventCreateAcountClicked: {
-            event = CreateAcountClicked;
+            event = CreateAcountClickedEvent;
             break;
         }
         case BZRMixpanelEventRegistrationSuccessful: {
-            event = RegistrationSuccessful;
+            event = RegistrationSuccessfulEvent;
             break;
         }
         case BZRMixpanelEventLoginSuccessful: {
-            event = LoginSuccessful;
+            event = LoginSuccessfulEvent;
             break;
         }
         case BZRMixpanelEventPushNotificationPermission: {
-            event = PushNotificationPermission;
+            event = PushNotificationPermissionEvent;
             break;
         }
         case BZRMixpanelEventLocationPermission: {
-            event = LocationPermission;
+            event = LocationPermissionEvent;
             break;
         }
         case BZRMixpanelEventGeofenceEnter: {
-            event = GeofenceEnter;
+            event = GeofenceEnterEvent;
             break;
         }
         case BZRMixpanelEventGeofenceExit: {
-            event = GeofenceExit;
+            event = GeofenceExitEvent;
             break;
         }
 
@@ -91,14 +94,18 @@ static NSString *const kMixpanelToken = @"aae3e2388125817b27b8afcf99093d97";
     }
 }
 
-+ (void)setPeopleWithProperties:(NSDictionary *)properties bizrateID:(NSString *)bizrateID
++ (void)setPeopleWithProperties:(NSDictionary *)properties
 {
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
-    NSString  *bizID = [[NSUserDefaults standardUserDefaults] objectForKey:BizID];
+    NSString  *bizID = [[NSUserDefaults standardUserDefaults] objectForKey:MixpanelAliasID];
     if (!bizID) {
-        [[NSUserDefaults standardUserDefaults]setObject:bizrateID forKey:BizID];
-        [mixpanel createAlias:bizrateID forDistinctID:mixpanel.distinctId];
+        bizID = [properties objectForKey:BizrateIDProperty];
+        [mixpanel createAlias:bizID forDistinctID:mixpanel.distinctId];
         [mixpanel identify:mixpanel.distinctId];
+        
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setObject:bizID forKey:MixpanelAliasID];
+        [defaults synchronize];
     }    
     [mixpanel.people set:properties];
 }
