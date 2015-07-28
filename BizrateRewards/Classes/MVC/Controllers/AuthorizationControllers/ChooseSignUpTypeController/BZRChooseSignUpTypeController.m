@@ -77,7 +77,7 @@ static NSString *const kEmail = @"email";
 //                    [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
 //                    
 //                }];
-//                
+//
 //            } onFailure:^(NSError *error, BOOL isCanceled) {
 //                [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
 //                
@@ -91,11 +91,58 @@ static NSString *const kEmail = @"email";
 //    } onFailure:^(NSError *error, BOOL isCanceled) {
 //        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
 //    }];
+    
+    
+//    WEAK_SELF;
+//    [BZRFacebookService authorizeTestFacebookUserOnSuccess:^(FBSDKAccessToken *token) {
+//        
+//        [[NSUserDefaults standardUserDefaults] setObject:token.tokenString forKey:FBAccessToken];
+//        [[NSUserDefaults standardUserDefaults] synchronize];
+//        
+//        NSString *userId = token.userID;
+//        NSString *tokenString = token.tokenString;
+//
+//        [BZRFacebookService getTestFacebookUserProfileWithId:userId andWithTokenString:tokenString OnSuccess:^(NSDictionary *facebookProfile) {
+//            
+//            NSString *email = facebookProfile[kEmail] ? facebookProfile[kEmail] : weakSelf.temporaryProfile.email;
+//            
+//            [BZRProjectFacade getClientCredentialsOnSuccess:^(BOOL success) {
+//                
+//                [BZRProjectFacade signUpWithFacebookWithUserFirstName:weakSelf.temporaryProfile.firstName andUserLastName:weakSelf.temporaryProfile.lastName andEmail:email andDateOfBirth:[[BZRCommonDateFormatter commonDateFormatter] stringFromDate:weakSelf.temporaryProfile.dateOfBirth] andGender:[self.temporaryProfile.genderString substringToIndex:1] onSuccess:^(BOOL isSuccess) {
+//                    
+//                    [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+//                    
+//                    //detect success login with facebook
+//                    [BZRFacebookService setLoginSuccess:YES];
+//                    
+//                    //track mixpanel event
+//                    [BZRMixpanelService trackEventWithType:BZRMixpanelEventRegistrationSuccessful properties:@{Type : AuthTypeFacebook}];
+//                    
+//                    //go to dashboard
+//                    BZRDashboardController *controller = [weakSelf.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRDashboardController class])];
+//                    controller.updateNeeded = YES;
+//                    [weakSelf.navigationController pushViewController:controller animated:YES];
+//                    
+//                } onFailure:^(NSError *error, BOOL isCanceled) {
+//                    [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+//                    
+//                }];
+//                
+//            } onFailure:^(NSError *error, BOOL isCanceled) {
+//                
+//            }];
+//
+//        } onFailure:^(NSError *error) {
+//            
+//        }];
+//    } onFailure:^(NSError *error, BOOL isCanceled) {
+//        
+//    }];
 }
 
 - (IBAction)signUpWithEmailClick:(id)sender
 {
-    [BZRMixpanelService trackEventWithType:BZRMixpanelEventCreateAcountClicked properties: @{Type: AuthTypeEmail}];
+    [BZRMixpanelService trackEventWithType:BZRMixpanelEventCreateAcountClicked properties: @{AuthorizationType: AuthTypeEmail}];
     [self performSegueWithIdentifier:kSignUpWithEmailSegueIdentifier sender:self];
 }
 

@@ -20,7 +20,7 @@
             success();
         }
     } else {
-        NSError *internetError = [NSError errorWithDomain:@"Internet error" code:NSURLErrorNotConnectedToInternet userInfo:@{NSURLErrorKey: @"Internet error"}];
+        NSError *internetError = [NSError errorWithDomain:@"" code:NSURLErrorNotConnectedToInternet userInfo:@{NSLocalizedDescriptionKey: InternetIsNotReachableString}];
         if (failure) {
             failure(internetError);
         }

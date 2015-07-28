@@ -6,11 +6,6 @@
 //  Copyright (c) 2015 Connexity. All rights reserved.
 //
 
-typedef enum : NSUInteger {
-    BZRSessionTypeApplication,
-    BZRSessionTypeUser
-} BZRSessionType;
-
 #import "BZRProjectFacade.h"
 
 #import "BZRSessionManager.h"
@@ -74,23 +69,25 @@ static BZRSessionManager *sharedHTTPClient = nil;
 //Authorization Requests
 + (BZRNetworkOperation *)getClientCredentialsOnSuccess:(void (^)(BOOL success))success onFailure:(void (^)(NSError *error, BOOL isCanceled))failure
 {
-    BZRGetClientCredentialsRequest *request = [[BZRGetClientCredentialsRequest alloc] init];
-    
-    BZRNetworkOperation *operation = [[self  HTTPClient] enqueueOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
+    if (![self isApplicationSessionValid]) {
+        BZRGetClientCredentialsRequest *request = [[BZRGetClientCredentialsRequest alloc] init];
         
-        BZRGetClientCredentialsRequest *request = (BZRGetClientCredentialsRequest*)operation.networkRequest;
-        
-        [BZRStorageManager sharedStorage].applicationToken = request.applicationToken;
-        
-        success(YES);
-        
-    } failure:^(BZRNetworkOperation *operation ,NSError *error, BOOL isCanceled) {
-        ShowFailureResponseAlertWithError(error);
-        failure(error, isCanceled);
-    }];
-    
-    
-    return operation;
+        BZRNetworkOperation *operation = [[self  HTTPClient] enqueueOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
+            
+            BZRGetClientCredentialsRequest *request = (BZRGetClientCredentialsRequest*)operation.networkRequest;
+            
+            [BZRStorageManager sharedStorage].applicationToken = request.applicationToken;
+            
+            success(YES);
+            
+        } failure:^(BZRNetworkOperation *operation ,NSError *error, BOOL isCanceled) {
+            ShowFailureResponseAlertWithError(error);
+            failure(error, isCanceled);
+        }];
+        return operation;
+    } else {
+        return nil;
+    }
 }
 
 + (BZRNetworkOperation *)signInWithEmail:(NSString*)email
@@ -138,27 +135,6 @@ static BZRSessionManager *sharedHTTPClient = nil;
         ShowFailureResponseAlertWithError(error);
         failure(error, isCanceled);
     }];
-    return operation;
-}
-
-+ (BZRNetworkOperation *)renewSessionTokenOnSuccess:(void (^)(BOOL isSuccess))success
-                                          onFailure:(void (^)(NSError *error, BOOL isCanceled))failure
-{
-    BZRRenewSessionTokenRequest *request = [[BZRRenewSessionTokenRequest alloc] init];
-    
-    BZRNetworkOperation* operation = [[self  HTTPClient] enqueueOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
-        
-        BZRRenewSessionTokenRequest *request = (BZRRenewSessionTokenRequest*)operation.networkRequest;
-        
-        [BZRStorageManager sharedStorage].userToken = request.userToken;
-        
-        success(YES);
-        
-    } failure:^(BZRNetworkOperation *operation ,NSError *error, BOOL isCanceled) {
-//        ShowFailureResponseAlertWithError(error);
-        failure(error, isCanceled);
-    }];
-    
     return operation;
 }
 
@@ -235,9 +211,6 @@ static BZRSessionManager *sharedHTTPClient = nil;
     
     [BZRKeychainHandler resetKeychain];
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:RememberMeKey];
-    
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:BizID];
-    
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     [BZRFacebookService logoutFromFacebook];
@@ -247,62 +220,12 @@ static BZRSessionManager *sharedHTTPClient = nil;
     }
 }
 
-+ (BOOL)isSessionValidWithType:(BZRSessionType)type
++ (BOOL)isApplicationSessionValid
 {
-    NSString *accessToken;
-    NSDate *tokenExpirationDate;
-    
-    switch (type) {
-        case BZRSessionTypeApplication: {
-            accessToken         = [BZRStorageManager sharedStorage].applicationToken.accessToken;
-            tokenExpirationDate = [BZRStorageManager sharedStorage].applicationToken.expirationDate;
-            break;
-        }
-        case BZRSessionTypeUser: {
-            accessToken         = [BZRStorageManager sharedStorage].userToken.accessToken;
-            tokenExpirationDate = [BZRStorageManager sharedStorage].userToken.expirationDate;
-            break;
-        }
-        default:
-            break;
-    }
+    NSString *accessToken = [BZRStorageManager sharedStorage].applicationToken.accessToken;
+    NSDate *tokenExpirationDate = [BZRStorageManager sharedStorage].applicationToken.expirationDate;
     
     return ((accessToken.length && ([[NSDate date] compare:tokenExpirationDate] == NSOrderedAscending)));
-}
-
-+ (void)validateSessionWithType:(BZRSessionType)type withCompletion:(void(^)(BOOL success, NSError *error))completion
-{
-    NSString *accessToken;
-    NSDate *tokenExpirationDate;
-    
-    switch (type) {
-        case BZRSessionTypeApplication: {
-            accessToken         = [BZRStorageManager sharedStorage].applicationToken.accessToken;
-            tokenExpirationDate = [BZRStorageManager sharedStorage].applicationToken.expirationDate;
-            break;
-        }
-        case BZRSessionTypeUser: {
-            accessToken         = [BZRStorageManager sharedStorage].userToken.accessToken;
-            tokenExpirationDate = [BZRStorageManager sharedStorage].userToken.expirationDate;
-            break;
-        }
-        default:
-            break;
-    }
-    
-    if (!(accessToken.length && ([[NSDate date] compare:tokenExpirationDate] == NSOrderedAscending))) {
-        if (type == BZRSessionTypeApplication) {
-            completion(NO, nil);
-        } else {
-            [self renewSessionTokenOnSuccess:^(BOOL isSuccess) {
-                completion(isSuccess, nil);
-            } onFailure:^(NSError *error, BOOL isCanceled) {
-                completion(NO, error);
-            }];
-        }
-    } else {
-        completion(YES, nil);
-    }
 }
 
 /******* FaceBook *******/

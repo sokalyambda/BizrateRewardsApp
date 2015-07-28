@@ -12,6 +12,9 @@ static NSString *const kPublicProfile = @"public_profile";
 static NSString *const kEmail = @"email";
 static NSString *const kFields = @"fields";
 
+static NSString *const kFBAppId = @"851500644887516";
+static NSString *const kFBAppSecret = @"530fa94f7370fc20a54cc392fbd83cf2";
+
 @implementation BZRFacebookService
 
 #pragma mark - Public Methods
@@ -62,6 +65,38 @@ static NSString *const kFields = @"fields";
             success(response);
         }
     }];
+}
+
++ (void)getTestFacebookUserProfileWithId:(NSString *)userId andWithTokenString:(NSString *)tokenString OnSuccess:(FacebookProfileSuccessBlock)success onFailure:(FacebookProfileFailureBlock)failure
+{
+    NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
+    [parameters setValue:@"id, name, email" forKey:kFields];
+    
+    FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:[NSString stringWithFormat:@"%@", userId] parameters:parameters tokenString:tokenString version:nil HTTPMethod:@"GET"];
+    
+    [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id response, NSError *error) {
+        if (error) {
+            failure(error);
+        } else {
+            //            NSDictionary *user = (NSDictionary *)response;
+            //            NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithDictionary:@{@"facebook_id":[user valueForKey:@"id"], @"first_name":[user valueForKey:@"first_name"], @"last_name":[user valueForKey:@"last_name"]}];
+            success(response);
+        }
+    }];
+}
+
++ (void)authorizeTestFacebookUserOnSuccess:(void(^)(FBSDKAccessToken *token))success onFailure:(FacebookAuthFailureBlock)failure
+{
+    [[FBSDKTestUsersManager sharedInstanceForAppID:kFBAppId appSecret:kFBAppSecret] requestTestAccountTokensWithArraysOfPermissions:@[[NSSet set], [NSSet set]] createIfNotFound:NO completionHandler:^(NSArray *tokens, NSError *error) {
+        NSLog(@"tokens %@", tokens);
+        success((FBSDKAccessToken *)[tokens firstObject]);
+    }];
+    
+    
+//    [[FBSDKTestUsersManager sharedInstanceForAppID:kFBAppId appSecret:kFBAppSecret] addTestAccountWithPermissions:[NSSet setWithObjects:@"email", nil] completionHandler:^(NSArray *tokens, NSError *error) {
+//        NSLog(@"tokens %@", tokens);
+//        success((FBSDKAccessToken *)[tokens firstObject]);
+//    }];
 }
 
 + (void)logoutFromFacebook

@@ -12,6 +12,7 @@
 
 static NSString *const kErrors = @"errors";
 static NSString *const kErrorMessage = @"error_message";
+static NSString *const kErrorDescription = @"error_description";
 
 @implementation BZRErrorHandler
 
@@ -37,16 +38,24 @@ static NSString *const kErrorMessage = @"error_message";
     
     if (errData) {
         NSString *jsonErrorString = [[NSString alloc] initWithData:errData encoding:NSUTF8StringEncoding];
+        
         NSDictionary *jsonErrorDict = [jsonErrorString dictionaryFromJSONString];
         
         NSArray *errors = jsonErrorDict[kErrors];
-
-        for (NSDictionary *currentErrorDict in errors) {
-            [outputErrorString appendFormat:@"%@\n", currentErrorDict[kErrorMessage]];
+        if (errors) {
+            for (NSDictionary *currentErrorDict in errors) {
+                [outputErrorString appendFormat:@"%@\n", currentErrorDict[kErrorMessage]];
+            }
         }
-    }
+        
+        NSString *errorDescriptionString = jsonErrorDict[kErrorDescription];
+        
+        if (errorDescriptionString.length) {
+            [outputErrorString appendString:errorDescriptionString];
+        }
     
-    return outputErrorString.length > 0 ? outputErrorString : nil;
+    }
+        return outputErrorString.length > 0 ? outputErrorString : nil;
 }
 
 + (NSString *)errorStringFromErrorCode:(NSError *)error

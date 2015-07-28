@@ -25,6 +25,8 @@ static NSString *const requestAction = @"user/me";
         _method = @"GET";
         _autorizationRequired = YES;
         
+        _retryIfConnectionFailed = YES;
+        
         self.serializationType = BZRRequestSerializationTypeHTTP;
         
         NSDictionary *parameters = @{};

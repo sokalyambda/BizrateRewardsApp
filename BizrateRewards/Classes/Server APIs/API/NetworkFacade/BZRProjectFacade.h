@@ -52,7 +52,6 @@
 + (void)signOutOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure;
 
 //Facebook
-+ (void)tryLoginWithFacebookOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure;
 + (BZRNetworkOperation *)signInWithFacebookOnSuccess:(void (^)(BOOL isSuccess))success
                                            onFailure:(void (^)(NSError *error, BOOL isCanceled))failure;
 

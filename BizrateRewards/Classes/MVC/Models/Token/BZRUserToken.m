@@ -16,7 +16,7 @@ static NSString *const kRefreshTokenKey = @"refresh_token";
 {
     self = [super initWithServerResponse:response];
     if (self) {
-        _refreshToken   = response[kRefreshTokenKey];
+        _refreshToken = response[kRefreshTokenKey];
     }
     return self;
 }

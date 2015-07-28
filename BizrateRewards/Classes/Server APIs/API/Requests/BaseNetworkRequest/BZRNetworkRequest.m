@@ -3,7 +3,7 @@
 //  WorkWithServerAPI
 //
 //  Created by EugeneS on 30.01.15.
-//  Copyright (c) 2015 eugenity. All rights reserved.
+//  Copyright (c) 2015 Connexity. All rights reserved.
 //
 
 /*
@@ -12,10 +12,6 @@
 */
 
 #import "BZRNetworkRequest.h"
-
-static NSString *actionKey  = @"action";
-static NSString *dataKey    = @"data";
-static NSString *paramsKey  = @"params";
 
 @implementation BZRNetworkRequest
 
