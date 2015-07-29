@@ -6,6 +6,11 @@
 //  Copyright (c) 2015 eugenity. All rights reserved.
 //
 
+typedef enum : NSUInteger {
+    BZRSessionTypeApplication,
+    BZRSessionTypeUser
+} BZRSessionType;
+
 #import "BZRNetworkOperation.h"
 
 typedef void (^CleanBlock)();
@@ -25,5 +30,7 @@ typedef void (^CleanBlock)();
 - (void)enqueueOperation:(BZRNetworkOperation*)operation success:(SuccessOperationBlock)success failure:(FailureOperationBlock)failure;
 
 - (BZRNetworkOperation*)enqueueOperationWithNetworkRequest:(BZRNetworkRequest*)networkRequest success:(SuccessOperationBlock)success failure:(FailureOperationBlock)failure;
+
+- (void)validateSessionWithType:(BZRSessionType)sessionType onSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure;
 
 @end

@@ -8,10 +8,6 @@
 
 #import "BZRBaseAuthRequest.h"
 
-@class BZRUserToken;
-
 @interface BZRRenewSessionTokenRequest : BZRBaseAuthRequest
-
-@property (strong, nonatomic) BZRUserToken *userToken;
 
 @end

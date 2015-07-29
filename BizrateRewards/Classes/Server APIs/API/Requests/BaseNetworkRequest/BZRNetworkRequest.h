@@ -16,9 +16,11 @@ typedef enum : NSUInteger {
     NSMutableDictionary *_parameters;
     NSString            *_method;
     NSMutableDictionary *_customHeaders;
-    BOOL                _autorizationRequired;
     BOOL                _retryIfConnectionFailed;
     NSError             *_error;
+    
+    BOOL                _applicationAuthorizationRequired;
+    BOOL                _userAuthorizationRequired;
 }
 
 @property (strong, nonatomic, readonly) NSString *path;
@@ -26,7 +28,10 @@ typedef enum : NSUInteger {
 @property (strong, nonatomic, readonly) NSString *method;
 @property (strong, nonatomic, readonly) NSMutableDictionary *customHeaders;
 
-@property (assign, nonatomic, readonly) BOOL autorizationRequired;
+//depends on API requirements
+@property (assign, nonatomic, readonly) BOOL applicationAuthorizationRequired;
+@property (assign, nonatomic, readonly) BOOL userAuthorizationRequired;
+
 @property (assign, nonatomic, readonly) BOOL retryIfConnectionFailed;
 
 @property (strong, nonatomic, readonly) NSMutableArray *files;

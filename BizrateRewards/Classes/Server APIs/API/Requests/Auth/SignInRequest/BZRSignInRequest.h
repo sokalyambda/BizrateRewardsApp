@@ -8,11 +8,7 @@
 
 #import "BZRBaseAuthRequest.h"
 
-@class BZRUserToken;
-
 @interface BZRSignInRequest : BZRBaseAuthRequest
-
-@property (strong, nonatomic) BZRUserToken *userToken;
 
 - (instancetype)initWithEmail:(NSString*)email andPassword:(NSString*)password;
 

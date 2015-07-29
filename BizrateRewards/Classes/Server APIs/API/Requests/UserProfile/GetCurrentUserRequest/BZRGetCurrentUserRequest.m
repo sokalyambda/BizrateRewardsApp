@@ -18,12 +18,13 @@ static NSString *const requestAction = @"user/me";
 {
     self = [super init];
     if (self) {
-        
         [self.customHeaders setObject:[NSString stringWithFormat:@"Bearer %@", [BZRStorageManager sharedStorage].userToken.accessToken] forKey:@"Authorization"];
         
         self.action = [self requestAction];
         _method = @"GET";
-        _autorizationRequired = YES;
+        
+        _userAuthorizationRequired = YES;
+        _applicationAuthorizationRequired = NO;
         
         _retryIfConnectionFailed = YES;
         

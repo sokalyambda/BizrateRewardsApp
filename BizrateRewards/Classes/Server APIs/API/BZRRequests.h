@@ -18,6 +18,5 @@
 #import "BZRGetEligibleSurveysRequest.h"
 
 #import "BZRSignInWithFacebookRequest.h"
-#import "BZRSignUpWithFacebookRequest.h"
 
 #endif

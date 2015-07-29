@@ -29,8 +29,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -56,23 +54,17 @@
                                
                                [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
                                
-                               [BZRProjectFacade getClientCredentialsOnSuccess:^(BOOL success) {
+                               [BZRProjectFacade signUpWithUserFirstName:weakSelf.temporaryProfile.firstName andUserLastName:weakSelf.temporaryProfile.lastName andEmail:weakSelf.temporaryProfile.email andPassword:weakSelf.passwordField.text andDateOfBirth:[[BZRCommonDateFormatter commonDateFormatter] stringFromDate:weakSelf.temporaryProfile.dateOfBirth] andGender:[weakSelf.temporaryProfile.genderString substringToIndex:1] success:^(BOOL success) {
                                    
-                                   [BZRProjectFacade signUpWithUserFirstName:weakSelf.temporaryProfile.firstName andUserLastName:weakSelf.temporaryProfile.lastName andEmail:weakSelf.temporaryProfile.email andPassword:weakSelf.passwordField.text andDateOfBirth:[[BZRCommonDateFormatter commonDateFormatter] stringFromDate:weakSelf.temporaryProfile.dateOfBirth] andGender:[weakSelf.temporaryProfile.genderString substringToIndex:1] success:^(BOOL success) {
-                                       
-                                       [BZRMixpanelService trackEventWithType:BZRMixpanelEventRegistrationSuccessful properties:@{AuthorizationType : AuthTypeEmail}];
-                                       
-                                       [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-                                       
-                                       BZRDashboardController *controller = [weakSelf.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRDashboardController class])];
-                                       controller.updateNeeded = YES;
-                                       [weakSelf.navigationController pushViewController:controller animated:YES];
-                                       
-                                   } failure:^(NSError *error, BOOL isCanceled) {
-                                       [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-                                   }];
+                                   [BZRMixpanelService trackEventWithType:BZRMixpanelEventRegistrationSuccessful properties:@{AuthorizationType : AuthTypeEmail}];
                                    
-                               } onFailure:^(NSError *error, BOOL isCanceled) {
+                                   [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+                                   
+                                   BZRDashboardController *controller = [weakSelf.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRDashboardController class])];
+                                   controller.updateNeeded = YES;
+                                   [weakSelf.navigationController pushViewController:controller animated:YES];
+                                   
+                               } failure:^(NSError *error, BOOL isCanceled) {
                                    [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
                                }];
                            }

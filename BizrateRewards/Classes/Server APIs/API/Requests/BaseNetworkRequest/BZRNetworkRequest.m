@@ -13,6 +13,8 @@
 
 #import "BZRNetworkRequest.h"
 
+#import "BZRStorageManager.h"
+
 @implementation BZRNetworkRequest
 
 #pragma mark - Lifecycle

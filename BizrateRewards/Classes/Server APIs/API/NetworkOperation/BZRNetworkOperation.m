@@ -91,8 +91,8 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
             [networkRequest.files enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
 
             }];
-            
         } error:error];
+        
     } else {
         self.urlRequest = [serializer requestWithMethod:networkRequest.method
                                               URLString:[NSString stringWithFormat:@"%@%@", [BZRProjectFacade HTTPClient].baseURL, networkRequest.path]
@@ -108,7 +108,6 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
     [self.urlRequest setHTTPShouldHandleCookies:NO];
     
     WEAK_SELF;
-    
     [networkRequest.customHeaders enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
         [weakSelf.urlRequest addValue:obj forHTTPHeaderField:key];
     }];
@@ -249,6 +248,9 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
     }
 }
 
+/**
+ *  Start the operation
+ */
 - (void)start
 {
     if (_dataTask) {
@@ -268,6 +270,9 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
     }
 }
 
+/**
+ *  Pause the operation
+ */
 - (void)pause
 {
     if (_dataTask) {
@@ -281,6 +286,9 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
     }
 }
 
+/**
+ *  Cancel operation
+ */
 - (void)cancel
 {
     if (_dataTask) {
@@ -301,7 +309,6 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
                         change:(NSDictionary *)change
                        context:(void *)context
 {
-    
     id newValue = change[NSKeyValueChangeNewKey];
     
     if (![newValue isEqual:[NSNull null]] && [newValue isKindOfClass:[NSNumber class]] && self.progressBlock) {

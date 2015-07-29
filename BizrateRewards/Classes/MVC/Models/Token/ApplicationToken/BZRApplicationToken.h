@@ -8,10 +8,12 @@
 
 #import "BZRMappingProtocol.h"
 
-@interface BZRApplicationToken : NSObject<BZRMappingProtocol>
+@interface BZRApplicationToken : NSObject<BZRMappingProtocol> {
+    NSString *_accessToken;
+}
 
-@property (strong, nonatomic) NSString *accessToken;
-@property (strong, nonatomic) NSDate *expirationDate;
+@property (strong, nonatomic, readonly) NSString *accessToken;
+@property (strong, nonatomic, readonly) NSDate *expirationDate;
 @property (strong, nonatomic) NSString *scope;
 @property (strong, nonatomic) NSString *tokenType;
 

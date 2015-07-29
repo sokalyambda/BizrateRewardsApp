@@ -8,10 +8,6 @@
 
 #import "BZRGetClientCredentialsRequest.h"
 
-#import "BZRApplicationToken.h"
-
-#import "BZRApiConstants.h"
-
 static NSString *const kGrantTypeClientCredentials = @"client_credentials";
 
 @implementation BZRGetClientCredentialsRequest
@@ -22,24 +18,14 @@ static NSString *const kGrantTypeClientCredentials = @"client_credentials";
     if (self) {
         self.serializationType = BZRRequestSerializationTypeHTTP;
         
-        NSDictionary *parameters = @{GrantTypeKey: kGrantTypeClientCredentials,
-                                     ClientIdKey: kClientIdValue,
-                                     ClientSecretKey: kClientSecretValue
-                                     };
-        
-        [self setParametersWithParamsData:parameters];
+        [self setParametersWithParamsData:self.baseAuthParameters];
     }
     return self;
 }
 
-- (BOOL)parseJSONDataSucessfully:(id)responseObject error:(NSError *__autoreleasing *)error
+- (NSString *)grantType
 {
-    if (!responseObject) {
-        return NO;
-    } else {
-        self.applicationToken = [[BZRApplicationToken alloc] initWithServerResponse:responseObject];
-        return !!self.applicationToken;
-    }
+    return kGrantTypeClientCredentials;
 }
 
 @end

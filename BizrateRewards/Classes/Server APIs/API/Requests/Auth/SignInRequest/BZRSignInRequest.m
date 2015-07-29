@@ -12,8 +12,8 @@
 
 #import "BZRApiConstants.h"
 
-static NSString *kEmail         = @"username";
-static NSString *kPassword      = @"password";
+static NSString *kEmail     = @"username";
+static NSString *kPassword  = @"password";
 
 @implementation BZRSignInRequest
 
@@ -22,24 +22,20 @@ static NSString *kPassword      = @"password";
 - (instancetype)initWithEmail:(NSString*)email andPassword:(NSString*)password
 {
     if (self = [super init]) {
-                
-        NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithDictionary:@{kEmail: email, kPassword: password, GrantTypeKey: kPassword, ClientIdKey: kClientIdValue, ClientSecretKey: kClientSecretValue}];
+        
+        [self.baseAuthParameters setObject:email forKey:kEmail];
+        [self.baseAuthParameters setObject:password forKey:kPassword];
         
         self.serializationType = BZRRequestSerializationTypeHTTP;
         
-        [self setParametersWithParamsData:parameters];
+        [self setParametersWithParamsData:self.baseAuthParameters];
     }
     return self;
 }
 
-- (BOOL)parseJSONDataSucessfully:(id)responseObject error:(NSError* __autoreleasing  *)error
+- (NSString *)grantType
 {
-    if (!responseObject) {
-        return NO;
-    } else {
-        self.userToken = [[BZRUserToken alloc] initWithServerResponse:responseObject];
-        return !!self.userToken;
-    }
+    return kPassword;
 }
 
 @end

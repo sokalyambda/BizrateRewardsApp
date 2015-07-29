@@ -16,6 +16,7 @@
 #import "BZRErrorHandler.h"
 
 #import "BZRRenewSessionTokenRequest.h"
+#import "BZRGetClientCredentialsRequest.h"
 
 static CGFloat const kRequestTimeInterval = 60.f;
 static NSInteger const kMaxConcurentRequests = 100.f;
@@ -206,7 +207,7 @@ static NSInteger const kAllCleansCount = 1.f;
         default:
             break;
     }
-
+    
     BZRNetworkOperation *operation = [[BZRNetworkOperation alloc] initWithNetworkRequest:networkRequest networkManager:manager error:&error];
     
     WEAK_SELF;
@@ -231,7 +232,6 @@ static NSInteger const kAllCleansCount = 1.f;
             }
         }];
     }
-    
     return operation;
 }
 
@@ -242,20 +242,9 @@ static NSInteger const kAllCleansCount = 1.f;
     [BZRReachabilityHelper checkConnectionOnSuccess:^{
         
         [operation setCompletionBlockAfterProcessingWithSuccess:success failure:failure];
+
+        [weakSelf addOperationToQueue:operation];
         
-        if (operation.networkRequest.autorizationRequired && ![weakSelf isUserSessionValid]) {
-            
-            BZRNetworkOperation *renewTokenOperation = [self renewSessionTokenOnSuccess:^(BOOL isSuccess) {
-                [weakSelf addOperationToQueue:operation];
-            } onFailure:^(NSError *error, BOOL isCanceled) {
-                failure(renewTokenOperation, error, isCanceled);
-            }];
-            
-        } else {
-            [weakSelf addOperationToQueue:operation];
-        }
-        
-//        [weakSelf addOperationToQueue:operation];
     } failure:^(NSError *error) {
         if (failure) {
             failure(operation, error, NO);
@@ -270,7 +259,11 @@ static NSInteger const kAllCleansCount = 1.f;
     }
 }
 
-//success queue
+/**
+ *  Remove operation from normal queue
+ *
+ *  @param operation Operation that has to be removed
+ */
 - (void)finishOperationInQueue:(BZRNetworkOperation*)operation
 {
     [self.operationsQueue removeObject:operation];
@@ -279,10 +272,15 @@ static NSInteger const kAllCleansCount = 1.f;
 - (void)addOperationToQueue:(BZRNetworkOperation*)operation
 {
     [self.operationsQueue addObject:operation];
+    
     [operation start];
 }
 
-//failed queue
+/**
+ *  Remove operation from failed queue
+ *
+ *  @param operation Operation that has to be removed
+ */
 - (void)finishOperationInFailedQueue:(BZRNetworkOperation *)operation
 {
     [self.failedOperationsQueue removeObject:operation];
@@ -293,8 +291,9 @@ static NSInteger const kAllCleansCount = 1.f;
     [self.failedOperationsQueue addObject:operation];
 }
 
-//restart operation
-
+/**
+ *  Possibility to renew the failed operation, if current request has this requirement .
+ */
 - (void)restartFailedOperationIfNeeded
 {
     if (!self.failedOperationsQueue.count) {
@@ -315,15 +314,43 @@ static NSInteger const kAllCleansCount = 1.f;
     }
 }
 
-- (BOOL)isUserSessionValid
+- (void)validateSessionWithType:(BZRSessionType)sessionType onSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure
 {
     NSString *accessToken;
     NSDate *tokenExpirationDate;
     
-    accessToken         = [BZRStorageManager sharedStorage].userToken.accessToken;
-    tokenExpirationDate = [BZRStorageManager sharedStorage].userToken.expirationDate;
+    switch (sessionType) {
+        case BZRSessionTypeApplication: {
+            accessToken = [BZRStorageManager sharedStorage].applicationToken.accessToken;
+            tokenExpirationDate = [BZRStorageManager sharedStorage].applicationToken.expirationDate;
+            break;
+        }
+        case BZRSessionTypeUser: {
+            accessToken = [BZRStorageManager sharedStorage].userToken.accessToken;
+            tokenExpirationDate = [BZRStorageManager sharedStorage].userToken.expirationDate;
+            break;
+        }
+        default:
+            break;
+    }
     
-    return (accessToken.length && ([[NSDate date] compare:tokenExpirationDate] == NSOrderedAscending));
+    BOOL isValid = (accessToken.length && ([[NSDate date] compare:tokenExpirationDate] == NSOrderedAscending));
+    
+    if (!isValid && sessionType == BZRSessionTypeUser) {
+        [self renewSessionTokenOnSuccess:^(BOOL isSuccess) {
+            success(isSuccess);
+        } onFailure:^(NSError *error, BOOL isCanceled) {
+            failure(error, isCanceled);
+        }];
+    } else if (!isValid && sessionType == BZRSessionTypeApplication) {
+        [self getClientCredentialsOnSuccess:^(BOOL isSuccess) {
+            success(isSuccess);
+        } onFailure:^(NSError *error, BOOL isCanceled) {
+            failure(error, isCanceled);
+        }];
+    } else {
+        success(YES);
+    }
 }
 
 #pragma mark - Renew Session Token
@@ -336,7 +363,7 @@ static NSInteger const kAllCleansCount = 1.f;
         
         BZRRenewSessionTokenRequest *request = (BZRRenewSessionTokenRequest *)operation.networkRequest;
         
-        [BZRStorageManager sharedStorage].userToken = request.userToken;
+        [BZRStorageManager sharedStorage].userToken = request.token;
         
         success(YES);
         
@@ -344,6 +371,27 @@ static NSInteger const kAllCleansCount = 1.f;
         
         failure(error, isCanceled);
         
+    }];
+    return operation;
+}
+
+#pragma mark - Get Application Token
+
+- (BZRNetworkOperation *)getClientCredentialsOnSuccess:(void (^)(BOOL success))success onFailure:(void (^)(NSError *error, BOOL isCanceled))failure
+{
+    BZRGetClientCredentialsRequest *request = [[BZRGetClientCredentialsRequest alloc] init];
+    
+    BZRNetworkOperation *operation = [self enqueueOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
+        
+        BZRGetClientCredentialsRequest *request = (BZRGetClientCredentialsRequest*)operation.networkRequest;
+        
+        [BZRStorageManager sharedStorage].applicationToken = request.token;
+        
+        success(YES);
+        
+    } failure:^(BZRNetworkOperation *operation ,NSError *error, BOOL isCanceled) {
+        ShowFailureResponseAlertWithError(error);
+        failure(error, isCanceled);
     }];
     return operation;
 }

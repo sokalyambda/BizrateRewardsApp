@@ -8,9 +8,12 @@
 
 #import "BZRNetworkRequest.h"
 
-static NSString *kClientIdValue     = @"92196543-9462-4b90-915a-738c9b4b558f";
-static NSString *kClientSecretValue = @"8a9da763-9503-4093-82c2-6b22b8eb9a12";
+@class BZRUserToken;
 
 @interface BZRBaseAuthRequest : BZRNetworkRequest
+
+@property (strong, nonatomic) BZRUserToken *token;
+
+@property (strong, nonatomic) NSMutableDictionary *baseAuthParameters;
 
 @end

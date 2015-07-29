@@ -12,6 +12,8 @@ static NSString *const kRefreshTokenKey = @"refresh_token";
 
 @implementation BZRUserToken
 
+#pragma mark - BZRMappingProtocol
+
 - (instancetype)initWithServerResponse:(NSDictionary *)response
 {
     self = [super initWithServerResponse:response];

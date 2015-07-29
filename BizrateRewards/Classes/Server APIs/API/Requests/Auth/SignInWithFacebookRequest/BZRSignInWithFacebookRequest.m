@@ -27,6 +27,9 @@ static NSString *const kFacebookAccessToken = @"access_token";
         self.action = [self requestAction];
         _method = @"POST";
         
+        _userAuthorizationRequired = NO;
+        _applicationAuthorizationRequired = YES;
+        
         NSString *fbAccessTokenString = [[NSUserDefaults standardUserDefaults] objectForKey:FBAccessToken];
         
         NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithDictionary:@{kFacebookAccessToken: fbAccessTokenString}];

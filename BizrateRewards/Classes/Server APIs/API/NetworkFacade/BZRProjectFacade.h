@@ -17,8 +17,6 @@
 + (BOOL)isInternetReachable;
 
 //Authorization Requests
-+ (BZRNetworkOperation*)getClientCredentialsOnSuccess:(void (^)(BOOL success))success
-                                            onFailure:(void (^)(NSError *error, BOOL isCanceled))failure;
 
 + (BZRNetworkOperation*)signInWithEmail:(NSString*)email
                               password:(NSString*)password

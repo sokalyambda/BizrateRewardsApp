@@ -8,11 +8,7 @@
 
 #import "BZRRenewSessionTokenRequest.h"
 
-#import "BZRApiConstants.h"
-
 #import "BZRStorageManager.h"
-
-#import "BZRUserToken.h"
 
 static NSString *const kRefreshToken = @"refresh_token";
 
@@ -22,24 +18,19 @@ static NSString *const kRefreshToken = @"refresh_token";
 {
     self = [super init];
     if (self) {
-        
-        NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithDictionary:@{GrantTypeKey: GrantTypeRefreshToken, ClientIdKey: kClientIdValue, ClientSecretKey: kClientSecretValue, kRefreshToken: [BZRStorageManager sharedStorage].userToken.refreshToken}];
+        NSString *refreshTokenValue = [BZRStorageManager sharedStorage].userToken.refreshToken;
+        [self.baseAuthParameters setObject:refreshTokenValue forKey:kRefreshToken];
         
         self.serializationType = BZRRequestSerializationTypeHTTP;
         
-        [self setParametersWithParamsData:parameters];
+        [self setParametersWithParamsData:self.baseAuthParameters];
     }
     return self;
 }
 
-- (BOOL)parseJSONDataSucessfully:(id)responseObject error:(NSError *__autoreleasing *)error
+- (NSString *)grantType
 {
-    if (!responseObject) {
-        return NO;
-    } else {
-        self.userToken = [[BZRUserToken alloc] initWithServerResponse:responseObject];
-        return !!self.userToken;
-    }
+    return kRefreshToken;
 }
 
 @end

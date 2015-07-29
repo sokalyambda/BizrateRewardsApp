@@ -8,10 +8,6 @@
 
 #import "BZRBaseAuthRequest.h"
 
-@class BZRApplicationToken;
-
 @interface BZRGetClientCredentialsRequest : BZRBaseAuthRequest
-
-@property (strong, nonatomic) BZRApplicationToken *applicationToken;
 
 @end

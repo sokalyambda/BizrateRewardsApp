@@ -33,7 +33,9 @@ static NSString *const kDateOfBirth = @"dob";
         
         self.action = [self requestAction];
         _method = @"PUT";
-        _autorizationRequired = YES;
+        
+        _userAuthorizationRequired = YES;
+        _applicationAuthorizationRequired = NO;
         
         self.serializationType = BZRRequestSerializationTypeJSON;
         

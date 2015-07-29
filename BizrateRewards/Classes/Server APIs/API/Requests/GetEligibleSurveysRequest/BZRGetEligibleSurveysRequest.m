@@ -25,7 +25,9 @@ static NSString *requestAction = @"user/survey/eligible";
         self.serializationType = BZRRequestSerializationTypeHTTP;
         self.action = [self requestAction];
         _method = @"GET";
-        _autorizationRequired = YES;
+        
+        _userAuthorizationRequired = YES;
+        _applicationAuthorizationRequired = NO;
 
         [self setParametersWithParamsData:nil];
     }

@@ -10,14 +10,22 @@
 
 @class BZRUserToken;
 
-@interface BZRSignUpRequest : BZRBaseAuthRequest
+@interface BZRSignUpRequest : BZRNetworkRequest
 
 @property (strong, nonatomic) BZRUserToken *userToken;
 
+//Email
 - (instancetype)initWithUserFirstName:(NSString *)firstName
                       andUserLastName:(NSString *)lastName
                              andEmail:(NSString *)email
                           andPassword:(NSString *)password
+                       andDateOfBirth:(NSString *)birthDate
+                            andGender:(NSString *)gender;
+
+//Facebook
+- (instancetype)initWithUserFirstName:(NSString *)firstName
+                      andUserLastName:(NSString *)lastName
+                             andEmail:(NSString *)email
                        andDateOfBirth:(NSString *)birthDate
                             andGender:(NSString *)gender;
 
