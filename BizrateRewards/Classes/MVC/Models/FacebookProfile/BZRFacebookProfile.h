@@ -16,7 +16,6 @@
 @property (strong, nonatomic) NSString *email;
 @property (strong, nonatomic) NSURL *avararURL;
 @property (assign, nonatomic) long long userId;
-@property (strong, nonatomic) FBSDKAccessToken *facebookToken;
 
 - (void)setFacebookProfileToDefaultsForKey:(NSString *)key;
 + (BZRFacebookProfile *)facebookProfileFromDefaultsForKey:(NSString *)key;

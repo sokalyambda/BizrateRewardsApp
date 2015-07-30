@@ -88,9 +88,9 @@ static NSString *const kFBAppSecret = @"530fa94f7370fc20a54cc392fbd83cf2";
         if (error) {
             failure(error);
         } else {
-            NSMutableDictionary *user = [NSMutableDictionary dictionaryWithDictionary:(NSDictionary *)response];
+            NSMutableDictionary *userProfile = [NSMutableDictionary dictionaryWithDictionary:(NSDictionary *)response];
             
-            BZRFacebookProfile *facebookProfile = [[BZRFacebookProfile alloc] initWithServerResponse:user];
+            BZRFacebookProfile *facebookProfile = [[BZRFacebookProfile alloc] initWithServerResponse:userProfile];
             [facebookProfile setFacebookProfileToDefaultsForKey:FBCurrentProfile];
             
             success(facebookProfile);
@@ -134,6 +134,12 @@ static NSString *const kFBAppSecret = @"530fa94f7370fc20a54cc392fbd83cf2";
     if ([self isLoginedWithFacebook] && ([[NSDate date] compare:fbTokenExpidaionDate] == NSOrderedAscending)) {
         return YES;
     } else {
+        //if session isn't valid - remove FB profile from defaults (if exists)
+        if ([defaults objectForKey:FBCurrentProfile]) {
+            [BZRStorageManager sharedStorage].facebookProfile = nil;
+            [defaults removeObjectForKey:FBCurrentProfile];
+            [defaults synchronize];
+        }
         return NO;
     }
 }
@@ -162,7 +168,9 @@ static NSString *const kFBAppSecret = @"530fa94f7370fc20a54cc392fbd83cf2";
     
     [BZRStorageManager sharedStorage].facebookProfile = nil;
     [defaults removeObjectForKey:FBCurrentProfile];
+    
     [self setLoginSuccess:NO];
+    
     [defaults synchronize];
 }
 

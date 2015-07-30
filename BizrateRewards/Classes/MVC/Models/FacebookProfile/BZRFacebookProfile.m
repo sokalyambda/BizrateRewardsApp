@@ -15,6 +15,10 @@ static NSString *const kUserId = @"id";
 static NSString *const kEmail = @"email";
 static NSString *const kAvatarURL = @"avatarURL";
 
+static NSString *const kPicture = @"picture";
+static NSString *const kData = @"data";
+static NSString *const kURL = @"url";
+
 @implementation BZRFacebookProfile
 
 #pragma mark - BZRMappingProtocol
@@ -29,7 +33,7 @@ static NSString *const kAvatarURL = @"avatarURL";
         _userId = [response[kUserId] longLongValue];
         _email = response[kEmail];
         
-        _avararURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?width=200", response[kUserId]]];
+        _avararURL = [NSURL URLWithString:response[kPicture][kData][kURL]];
     }
     return self;
 }
