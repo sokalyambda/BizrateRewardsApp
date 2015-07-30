@@ -7,6 +7,7 @@
 //
 
 #import "BZRUserProfile.h"
+#import "BZRFacebookProfile.h"
 #import "BZRUserToken.h"
 
 @interface BZRStorageManager : NSObject
@@ -18,8 +19,7 @@
 
 @property (strong, nonatomic) BZRUserProfile *currentProfile;
 
-@property (strong, nonatomic) NSDictionary *facebookProfile;
-@property (strong, nonatomic) FBSDKAccessToken *facebookToken;
+@property (strong, nonatomic) BZRFacebookProfile *facebookProfile;
 
 @property (strong, nonatomic) NSString *deviceToken;
 @property (strong, nonatomic) NSString *deviceUDID;

@@ -121,16 +121,32 @@ static NSString *const kAccountSettingsContainerSegueIdentifier = @"accountSetti
     }];
 }
 
+/**
+ *  Update fields relative to current user data
+ */
 - (void)updateUserData
 {
-    if (self.currentProfile.avatarURL) {
-        WEAK_SELF;
-        [BZRAssetsHelper imageFromAssetURL:self.currentProfile.avatarURL withCompletion:^(UIImage *image, NSDictionary *info) {
-            weakSelf.userIcon.image = image ? image : [UIImage imageNamed:@"user_icon_large"];
-        }];
-    }
+    [self setupUserAvatar];
     
     self.userFullNameLabel.text = self.currentProfile.fullName;
+}
+
+/**
+ *  Setup current user avatar
+ */
+- (void)setupUserAvatar
+{
+    NSURL *avatarURL = [BZRStorageManager sharedStorage].facebookProfile.avararURL;
+    
+    if (!avatarURL && self.currentProfile.avatarURL) {
+        WEAK_SELF;
+        [BZRAssetsHelper imageFromAssetURL:self.currentProfile.avatarURL withCompletion:^(UIImage *image, NSDictionary *info) {
+            weakSelf.userIcon.image = image ? image : [UIImage imageNamed:@"user_icon_small"];
+        }];
+    } else if (avatarURL) {
+        [self.userIcon sd_setImageWithURL:avatarURL];
+    }
+    
 }
 
 #pragma mark - Change photo actions

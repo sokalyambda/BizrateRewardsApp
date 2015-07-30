@@ -124,17 +124,8 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
  */
 - (void)updateUserInformation
 {
-    NSURL *avatarURL = [[NSUserDefaults standardUserDefaults] URLForKey:@"avatarURL"];
+    [self setupUserAvatar];
     
-    if (!avatarURL) {
-        WEAK_SELF;
-        [BZRAssetsHelper imageFromAssetURL:self.currentProfile.avatarURL withCompletion:^(UIImage *image, NSDictionary *info) {
-            weakSelf.userAvatar.image = image ? image : [UIImage imageNamed:@"user_icon_small"];
-        }];
-    } else {
-        [self.userAvatar sd_setImageWithURL:avatarURL];
-    }
-
     self.userNameLabel.text = self.currentProfile.fullName;
     self.earnedPointsLabel.text = [NSString stringWithFormat:@"%@ %@", [[BZRCommonNumberFormatter commonNumberFormatter] stringFromNumber:@((long)self.currentProfile.pointsAmount)], NSLocalizedString(@"pts", nil)];
     
@@ -143,6 +134,23 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
     
         if (!self.isUpdateNeeded) {
             [self setupMixpanelPeople];
+    }
+}
+
+/**
+ *  Setup current user avatar
+ */
+- (void)setupUserAvatar
+{
+    NSURL *avatarURL = [BZRStorageManager sharedStorage].facebookProfile.avararURL;
+    
+    if (!avatarURL && self.currentProfile.avatarURL) {
+        WEAK_SELF;
+        [BZRAssetsHelper imageFromAssetURL:self.currentProfile.avatarURL withCompletion:^(UIImage *image, NSDictionary *info) {
+            weakSelf.userAvatar.image = image ? image : [UIImage imageNamed:@"user_icon_small"];
+        }];
+    } else if (avatarURL) {
+        [self.userAvatar sd_setImageWithURL:avatarURL];
     }
 }
 

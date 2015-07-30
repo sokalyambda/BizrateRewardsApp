@@ -149,22 +149,30 @@ static NSInteger const kNotRegisteredErrorCode = 400.f;
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [BZRFacebookService authorizeWithFacebookOnSuccess:^(BOOL isSuccess) {
         
-        [BZRProjectFacade signInWithFacebookOnSuccess:^(BOOL isSuccess) {
+        [BZRFacebookService getFacebookUserProfileOnSuccess:^(BZRFacebookProfile *facebookProfile) {
             
+            [BZRProjectFacade signInWithFacebookOnSuccess:^(BOOL isSuccess) {
+                
+                [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+                //detect success login with facebook
+                [BZRFacebookService setLoginSuccess:YES];
+                //track mixpanel event
+                [BZRMixpanelService trackEventWithType:BZRMixpanelEventLoginSuccessful properties:@{AuthorizationType: AuthTypeFacebook}];
+                
+                //go to dashboard
+                [weakSelf performSegueWithIdentifier:kDashboardSegueIdentifier sender:weakSelf];
+                
+            } onFailure:^(NSError *error, BOOL isCanceled) {
+                [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+            }];
+            
+        } onFailure:^(NSError *error) {
             [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-            //detect success login with facebook
-            [BZRFacebookService setLoginSuccess:YES];
-            //track mixpanel event
-            [BZRMixpanelService trackEventWithType:BZRMixpanelEventLoginSuccessful properties:@{AuthorizationType: AuthTypeFacebook}];
             
-            //go to dashboard
-            [weakSelf performSegueWithIdentifier:kDashboardSegueIdentifier sender:weakSelf];
-            
-        } onFailure:^(NSError *error, BOOL isCanceled) {
-            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         }];
     } onFailure:^(NSError *error, BOOL isCanceled) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        
     }];
 }
 

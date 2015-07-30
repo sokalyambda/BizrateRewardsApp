@@ -89,15 +89,11 @@ static NSString *const kFBAppSecret = @"530fa94f7370fc20a54cc392fbd83cf2";
             failure(error);
         } else {
             NSMutableDictionary *user = [NSMutableDictionary dictionaryWithDictionary:(NSDictionary *)response];
-            NSURL *avatarURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?width=200", user[@"id"]]];
-            [user setObject:avatarURL forKey:@"avatarURL"];
-
-            [BZRStorageManager sharedStorage].facebookProfile = user;
             
-//            [[NSUserDefaults standardUserDefaults] setURL:avatarURL forKey:user[@"avatarURL"]];
-//            [[NSUserDefaults standardUserDefaults] synchronize];
+            BZRFacebookProfile *facebookProfile = [[BZRFacebookProfile alloc] initWithServerResponse:user];
+            [facebookProfile setFacebookProfileToDefaultsForKey:FBCurrentProfile];
             
-            success(user);
+            success(facebookProfile);
         }
     }];
 }
@@ -163,6 +159,7 @@ static NSString *const kFBAppSecret = @"530fa94f7370fc20a54cc392fbd83cf2";
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults removeObjectForKey:FBAccessToken];
     [defaults removeObjectForKey:FBAccessTokenExpirationDate];
+    [defaults removeObjectForKey:FBCurrentProfile];
     [self setLoginSuccess:NO];
     [defaults synchronize];
 }

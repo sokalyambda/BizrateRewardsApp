@@ -14,6 +14,16 @@
 
 @implementation BZRStorageManager
 
+#pragma mark - Accessors
+
+- (BZRFacebookProfile *)facebookProfile
+{
+    if (!_facebookProfile) {
+        _facebookProfile = [BZRFacebookProfile facebookProfileFromDefaultsForKey:FBCurrentProfile];
+    }
+    return _facebookProfile;
+}
+
 #pragma mark - Lifecycle
 
 + (instancetype)sharedStorage

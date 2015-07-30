@@ -101,6 +101,7 @@
 		58AF4AF41B5C13A30052C7E5 /* BZRStatusBarManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AF4AF31B5C13A30052C7E5 /* BZRStatusBarManager.m */; };
 		58B52A3B1B6A2874002D2529 /* UIImage+Base64Encoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B52A3A1B6A2874002D2529 /* UIImage+Base64Encoding.m */; };
 		58B52A3F1B6A28D3002D2529 /* NSString+Base64Decoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B52A3E1B6A28D3002D2529 /* NSString+Base64Decoding.m */; };
+		58B52A431B6A30F0002D2529 /* BZRFacebookProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B52A421B6A30F0002D2529 /* BZRFacebookProfile.m */; };
 		58B574E11B38AE200083A80A /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B574E01B38AE200083A80A /* KeychainItemWrapper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		58C770E01B5CD07400E9031F /* BZRTutorialTitleLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C770DF1B5CD07400E9031F /* BZRTutorialTitleLabel.m */; };
 		58C770E31B5CD08E00E9031F /* BZRTutorialDescriptionLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C770E21B5CD08E00E9031F /* BZRTutorialDescriptionLabel.m */; };
@@ -338,6 +339,8 @@
 		58B52A3A1B6A2874002D2529 /* UIImage+Base64Encoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Base64Encoding.m"; path = "Classes/Categories/UIImage/UIImage+Base64Encoding/UIImage+Base64Encoding.m"; sourceTree = "<group>"; };
 		58B52A3D1B6A28D3002D2529 /* NSString+Base64Decoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+Base64Decoding.h"; path = "Classes/Categories/NSString/NSString+Base64Decoding/NSString+Base64Decoding.h"; sourceTree = "<group>"; };
 		58B52A3E1B6A28D3002D2529 /* NSString+Base64Decoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+Base64Decoding.m"; path = "Classes/Categories/NSString/NSString+Base64Decoding/NSString+Base64Decoding.m"; sourceTree = "<group>"; };
+		58B52A411B6A30F0002D2529 /* BZRFacebookProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRFacebookProfile.h; path = Classes/MVC/Models/FacebookProfile/BZRFacebookProfile.h; sourceTree = "<group>"; };
+		58B52A421B6A30F0002D2529 /* BZRFacebookProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRFacebookProfile.m; path = Classes/MVC/Models/FacebookProfile/BZRFacebookProfile.m; sourceTree = "<group>"; };
 		58B574DF1B38AE200083A80A /* KeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KeychainItemWrapper.h; path = Classes/Utilities/KeyChain/KeychainItemWrapper.h; sourceTree = "<group>"; };
 		58B574E01B38AE200083A80A /* KeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KeychainItemWrapper.m; path = Classes/Utilities/KeyChain/KeychainItemWrapper.m; sourceTree = "<group>"; };
 		58C770DE1B5CD07400E9031F /* BZRTutorialTitleLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRTutorialTitleLabel.h; path = Classes/MVC/Views/Styles/TutorialStyleLabels/TutorialTitleLabel/BZRTutorialTitleLabel.h; sourceTree = "<group>"; };
@@ -511,6 +514,7 @@
 		58219EE51B38A22F00A9541A /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				58B52A401B6A30D7002D2529 /* FacebookProfile */,
 				585813AB1B3C235C0087AEE2 /* Survey */,
 				585813A71B3BEDAB0087AEE2 /* Token */,
 				58A91F551B3AD8220032607F /* UserProfile */,
@@ -1543,6 +1547,15 @@
 			name = "NSString+Base64Decoding";
 			sourceTree = "<group>";
 		};
+		58B52A401B6A30D7002D2529 /* FacebookProfile */ = {
+			isa = PBXGroup;
+			children = (
+				58B52A411B6A30F0002D2529 /* BZRFacebookProfile.h */,
+				58B52A421B6A30F0002D2529 /* BZRFacebookProfile.m */,
+			);
+			name = FacebookProfile;
+			sourceTree = "<group>";
+		};
 		58C770D91B5CCF6000E9031F /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -1999,6 +2012,7 @@
 				58219F191B38A3F600A9541A /* NSDictionary+JSONRepresentation.m in Sources */,
 				585C32B81B63C9D9005BF07B /* BZRUpdateCurrentUserRequest.m in Sources */,
 				84AD3F011B4587DA00C294AE /* BZRProgressView.m in Sources */,
+				58B52A431B6A30F0002D2529 /* BZRFacebookProfile.m in Sources */,
 				585C32A71B63AA3F005BF07B /* BZRSessionManager.m in Sources */,
 				58A5BEBD1B414B1800B2BC27 /* BZRBorderedTextField.m in Sources */,
 				58ACC08B1B39A35D0081E546 /* BZRBaseAuthController.m in Sources */,

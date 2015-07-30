@@ -65,9 +65,9 @@ static NSString *const kEmail = @"email";
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [BZRFacebookService authorizeWithFacebookOnSuccess:^(BOOL isSuccess) {
         
-        [BZRFacebookService getFacebookUserProfileOnSuccess:^(NSDictionary *facebookProfile) {
+        [BZRFacebookService getFacebookUserProfileOnSuccess:^(BZRFacebookProfile *facebookProfile) {
             
-            NSString *email = facebookProfile[kEmail] ? facebookProfile[kEmail] : weakSelf.temporaryProfile.email;
+            NSString *email = facebookProfile.email ? facebookProfile.email : weakSelf.temporaryProfile.email;
             
             [BZRProjectFacade signUpWithFacebookWithUserFirstName:weakSelf.temporaryProfile.firstName andUserLastName:weakSelf.temporaryProfile.lastName andEmail:email andDateOfBirth:[[BZRCommonDateFormatter commonDateFormatter] stringFromDate:weakSelf.temporaryProfile.dateOfBirth] andGender:[self.temporaryProfile.genderString substringToIndex:1] onSuccess:^(BOOL isSuccess) {
                 

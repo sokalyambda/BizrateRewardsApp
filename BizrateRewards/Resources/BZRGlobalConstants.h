@@ -71,5 +71,6 @@ static NSString *const BizrateIDProperty = @"Bizrate ID";
 static NSString *const FBAccessToken = @"FBAccessToken";
 static NSString *const FBAccessTokenExpirationDate = @"FBAccessTokenExpirationDate";
 static NSString *const FBLoginSuccess = @"FBLoginSuccess";
+static NSString *const FBCurrentProfile = @"FBCurrentProfile";
 
 #endif
