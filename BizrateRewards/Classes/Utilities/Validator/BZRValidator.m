@@ -46,6 +46,13 @@ static NSMutableString *_errorString;
 
 #pragma mark - Private methods
 
+/**
+ *  Validation of email field
+ *
+ *  @param emailField Current email field
+ *
+ *  @return Returns 'YES' if email is valid
+ */
 + (BOOL)validateEmailField:(UITextField *)emailField
 {
     NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}";
@@ -68,6 +75,13 @@ static NSMutableString *_errorString;
     return YES;
 }
 
+/**
+ *  Validation of password field
+ *
+ *  @param passwordField Current password field
+ *
+ *  @return Returns 'YES' if password is valid
+ */
 + (BOOL)validatePasswordField:(UITextField *)passwordField
 {
     if (!(passwordField.text.length >= kMinPasswordSymbols && passwordField.text.length <= kMaxPasswordSymbols)) {
@@ -112,6 +126,13 @@ static NSMutableString *_errorString;
     return isValid;
 }
 
+/**
+ *  Validate checkboxes
+ *
+ *  @param checkboxes Array of checkboxes
+ *
+ *  @return Returns 'YES' if each checkbox is selected
+ */
 + (BOOL)validateCheckboxes:(NSArray *)checkboxes
 {
     BOOL isValid = YES;
@@ -121,7 +142,6 @@ static NSMutableString *_errorString;
             isValid = NO;
         }
     }
-    
     return isValid;
 }
 
@@ -167,6 +187,13 @@ static NSMutableString *_errorString;
     return isValid;
 }
 
+/**
+ *  Validate date of birth field
+ *
+ *  @param dateField Current date of birth field
+ *
+ *  @return Returns 'YES' if user is older than min valid age and this date is in corrent format and exists
+ */
 + (BOOL)validateBirthDateField:(UITextField *)dateField
 {
     NSDate *now = [NSDate date];
@@ -207,6 +234,13 @@ static NSMutableString *_errorString;
     return YES;
 }
 
+/**
+ *  Validate gender field
+ *
+ *  @param genderField Current gender field
+ *
+ *  @return Returns 'YES' if gender is in correct format and exists
+ */
 + (BOOL)validateGenderField:(UITextField *)genderField
 {
     if (!genderField.text.length) {
@@ -225,6 +259,14 @@ static NSMutableString *_errorString;
 }
 
 #pragma mark - Public methods
+
+/**
+ *  Public Validation Methods
+ *
+ *  @param currentField Current field for validation
+ *  @param success      Success Block
+ *  @param failure      Failure Block
+ */
 
 + (void)validateEmailField:(UITextField *)emailField
                  onSuccess:(ValidationSuccessBlock)success
@@ -322,6 +364,9 @@ static NSMutableString *_errorString;
 
 #pragma mark - Other actions
 
+/**
+ *  Clean the validation error string
+ */
 + (void)cleanValidationErrorString
 {
     [self setValidationErrorString:[@"" mutableCopy]];

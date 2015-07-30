@@ -20,8 +20,6 @@
 
 #import "BZRProjectFacade.h"
 
-@import Photos;
-
 static NSString *const kAccountSettingsContainerSegueIdentifier = @"accountSettingsContainerSegue";
 
 @interface BZRAccountSettingsController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate>
@@ -101,11 +99,14 @@ static NSString *const kAccountSettingsContainerSegueIdentifier = @"accountSetti
     [self presentViewController:signOutController animated:YES completion:nil];
 }
 
+/**
+ *  Sign out: clean user data and move to root controller.
+ */
 - (void)signOut
 {
     WEAK_SELF;
-    
     [BZRProjectFacade signOutOnSuccess:^(BOOL isSuccess) {
+        
         BZRBaseNavigationController *navigationController = (BZRBaseNavigationController *)weakSelf.presentingViewController;
         
         [CATransaction begin];
@@ -114,6 +115,7 @@ static NSString *const kAccountSettingsContainerSegueIdentifier = @"accountSetti
         }];
         [navigationController popToRootViewControllerAnimated:YES];;
         [CATransaction commit];
+        
     } onFailure:^(NSError *error, BOOL isCanceled) {
         
     }];
@@ -155,6 +157,9 @@ static NSString *const kAccountSettingsContainerSegueIdentifier = @"accountSetti
     [self presentViewController:changePhotoActionSheet animated:YES completion:nil];
 }
 
+/**
+ *  If camera source type is available - show camera.
+ */
 - (void)takeNewPhotoFromCamera
 {
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
@@ -166,11 +171,19 @@ static NSString *const kAccountSettingsContainerSegueIdentifier = @"accountSetti
     }
 }
 
+/**
+ *  Choose photo from photo library
+ */
 - (void)choosePhotoFromExistingImages
 {
     [self showImagePickerWithType:UIImagePickerControllerSourceTypeSavedPhotosAlbum];
 }
 
+/**
+ *  Setup UIImagePickerController
+ *
+ *  @param type Chosen type
+ */
 - (void)showImagePickerWithType:(UIImagePickerControllerSourceType)type
 {
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];

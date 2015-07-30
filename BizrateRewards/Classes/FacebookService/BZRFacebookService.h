@@ -18,9 +18,6 @@ typedef void(^FacebookProfileFailureBlock)(NSError *error);
 
 + (void)getFacebookUserProfileOnSuccess:(FacebookProfileSuccessBlock)success onFailure:(FacebookProfileFailureBlock)failure;
 
-+ (void)authorizeTestFacebookUserOnSuccess:(void(^)(FBSDKAccessToken *token))success onFailure:(FacebookAuthFailureBlock)failure;
-+ (void)getTestFacebookUserProfileWithId:(NSString *)userId andWithTokenString:(NSString *)tokenString OnSuccess:(FacebookProfileSuccessBlock)success onFailure:(FacebookProfileFailureBlock)failure;
-
 + (void)setLoginSuccess:(BOOL)success;
 + (void)logoutFromFacebook;
 

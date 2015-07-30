@@ -17,12 +17,27 @@ static CGFloat const kDoneFontSize = 14.f;
 
 @implementation BZRSerialViewConstructor
 
+/**
+ *  Create custom back button for controller
+ *
+ *  @param controller Receiver of custom back button
+ *
+ *  @return Custom Back Button
+ */
 + (UIBarButtonItem *)backButtonForController:(UIViewController *)controller
 {
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:kBackArrowImageName] style:UIBarButtonItemStylePlain target:controller action:@selector(popViewControllerAnimated:)];
     return backButton;
 }
 
+/**
+ *  Create custom 'Done' button with specific background image
+ *
+ *  @param controller Receiver of custom 'Done' button
+ *  @param action     Selector that will be passed to 'Done' button
+ *
+ *  @return Custom Done Button
+ */
 + (UIBarButtonItem *)customDoneButtonForController:(UIViewController *)controller withAction:(SEL)action
 {
     UIImage *backgroundImage = [UIImage imageNamed:kDoneButtonImageName];

@@ -55,9 +55,11 @@ typedef enum : NSUInteger {
     self.pickersHelper = [[BZRPickersHelper alloc] initWithParentView:self.parentViewController.view andContainerController:self];
 }
 
+/**
+ *  Don't call [super viewWillAppear:YES] to avoid auto keyboard handling, provided by table view controller. Keyboard handles manually from BZRPickersHelper class
+ */
 - (void)viewWillAppear:(BOOL)animated
 {
-    //Don't call [super viewWillAppear:YES] to avoid auto keyboard handling, provided by table view controller. Keyboard handles manually from BZRPickersHelper class.
 }
 
 #pragma mark - UITableViewDelegate
@@ -102,6 +104,11 @@ typedef enum : NSUInteger {
 
 #pragma mark - Actions
 
+/**
+ *  Adjust table view insets relative to presented rect
+ *
+ *  @param rect Rect which can be the keyboard or the picker
+ */
 - (void)adjustTableViewInsetsWithPresentedRect:(CGRect)rect
 {
     self.savedKeyboardRect = rect;
@@ -123,6 +130,9 @@ typedef enum : NSUInteger {
 
 #pragma mark - Private methods
 
+/**
+ *  Resign first responder from active text field
+ */
 - (void)resignIfFirstResponder
 {
     for (UITextField *field in self.textFields) {
@@ -132,6 +142,9 @@ typedef enum : NSUInteger {
     }
 }
 
+/**
+ *  Check whether movement is needed
+ */
 - (void)checkForMovement
 {
     UITableViewCell *editedCell = [self.tableView cellForRowAtIndexPath:self.editedIndexPath];

@@ -51,17 +51,30 @@ static NSString *const kFinalTutorialControllerSegueIdentifier = @"finalTutorial
 
 #pragma mark - Notifications
 
+/**
+ *  Registering for push notification access notifications
+ */
 - (void)handlePushNotificationsAccessNotifications
 {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushNotificationServiceDidSuccessAuthorizeNotification:) name:PushNotificationServiceDidSuccessAuthorizeNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushNotificationServiceDidFailAuthorizeNotification:) name:PushNotificationServiceDidFailAuthorizeNotification object:nil];
 }
 
+/**
+ *  Handle success authorization
+ *
+ *  @param notification PushNotificationServiceDidSuccessAuthorizeNotification
+ */
 - (void)pushNotificationServiceDidSuccessAuthorizeNotification:(NSNotification *)notification
 {
     [self performSegueWithIdentifier:kFinalTutorialControllerSegueIdentifier sender:self];
 }
 
+/**
+ *  Handle failure authorization
+ *
+ *  @param notification PushNotificationServiceDidFailAuthorizeNotification
+ */
 - (void)pushNotificationServiceDidFailAuthorizeNotification:(NSNotification *)notification
 {
     NSError *error = notification.object;

@@ -16,9 +16,9 @@ typedef enum : NSUInteger {
     NSMutableDictionary *_parameters;
     NSString            *_method;
     NSMutableDictionary *_customHeaders;
-    BOOL                _retryIfConnectionFailed;
     NSError             *_error;
     
+    BOOL                _retryIfConnectionFailed;
     BOOL                _applicationAuthorizationRequired;
     BOOL                _userAuthorizationRequired;
 }

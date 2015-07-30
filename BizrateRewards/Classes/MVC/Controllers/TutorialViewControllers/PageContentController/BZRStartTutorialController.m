@@ -26,6 +26,9 @@ static NSString *const kSecondTutorialSegueIdentifier = @"secondTutorialSegue";
 
 #pragma mark - Actions
 
+/**
+ *  Add swipe gesture to controller's view
+ */
 - (void)addSwipeGesture
 {
     UISwipeGestureRecognizer *swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeGesture:)];
@@ -33,6 +36,11 @@ static NSString *const kSecondTutorialSegueIdentifier = @"secondTutorialSegue";
     [self.view addGestureRecognizer:swipe];
 }
 
+/**
+ *  Handle swipe gecture
+ *
+ *  @param swipe Swipe Gesture
+ */
 - (void)handleSwipeGesture:(UISwipeGestureRecognizer *)swipe
 {
     [self performSegueWithIdentifier:kSecondTutorialSegueIdentifier sender:self];

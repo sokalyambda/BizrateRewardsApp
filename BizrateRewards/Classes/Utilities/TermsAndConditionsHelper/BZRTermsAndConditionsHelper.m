@@ -13,7 +13,12 @@ static NSString *const kStoryboardName = @"Main";
 
 @implementation BZRTermsAndConditionsHelper
 
-
+/**
+ *  Show chosen privacy&terms controller
+ *
+ *  @param type                 Type of privacy
+ *  @param navigationController Navigation controller that will be pushed the privacy controller
+ */
 + (void)showPrivacyAndTermsWithType:(BZRConditionsType)type andWithNavigationController:(UINavigationController *)navigationController
 {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:kStoryboardName bundle:[NSBundle mainBundle]];

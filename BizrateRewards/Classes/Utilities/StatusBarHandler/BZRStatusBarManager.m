@@ -22,6 +22,11 @@ static CGFloat const kShowAnimationDuration = .5f;
 
 #pragma mark - Lifecycle
 
+/**
+ *  Singleton object of status bar manager
+ *
+ *  @return Status bar manager singleton object
+ */
 + (BZRStatusBarManager *)sharedManager
 {
     static BZRStatusBarManager *statusBarManager = nil;
@@ -43,6 +48,11 @@ static CGFloat const kShowAnimationDuration = .5f;
     return _mainWindow;
 }
 
+/**
+ *  Create custom status bar view if it hasn't existed already
+ *
+ *  @return Custom status bar view
+ */
 - (UIView *)statusBarView
 {
     if (!_statusBarView) {
@@ -56,6 +66,9 @@ static CGFloat const kShowAnimationDuration = .5f;
 
 #pragma mark - Actions
 
+/**
+ *  Add custom status bar view to main window once.
+ */
 - (void)addCustomStatusBarView
 {
     if (![self.mainWindow.subviews containsObject:self.statusBarView]) {
@@ -63,6 +76,9 @@ static CGFloat const kShowAnimationDuration = .5f;
     }
 }
 
+/**
+ *  Hide custom status bar view
+ */
 - (void)hideCustomStatusBarView
 {
     [UIView animateWithDuration:kHideAnimationDuration animations:^{
@@ -70,6 +86,9 @@ static CGFloat const kShowAnimationDuration = .5f;
     }];
 }
 
+/**
+ *  Show custom status bar view
+ */
 - (void)showCustomStatusBarView
 {
     [UIView animateWithDuration:kShowAnimationDuration animations:^{

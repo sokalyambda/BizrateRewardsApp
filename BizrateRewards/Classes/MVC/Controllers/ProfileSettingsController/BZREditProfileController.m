@@ -62,6 +62,9 @@ static NSString *const kEditProfileContainerSegueIdentifier = @"editProfileConta
     self.navigationItem.rightBarButtonItem = [BZRSerialViewConstructor customDoneButtonForController:self withAction:@selector(doneClick:)];
 }
 
+/**
+ *  If profile data has been changed - update current profile by sending new data to server.
+ */
 - (void)updateUser
 {
     WEAK_SELF;
@@ -91,6 +94,9 @@ static NSString *const kEditProfileContainerSegueIdentifier = @"editProfileConta
     }
 }
 
+/**
+ *  Setup profile data to relative text fields.
+ */
 - (void)setupFieldsValueFromProfile
 {
     self.container.firstNameField.text  = self.currentProfile.firstName;
@@ -102,6 +108,11 @@ static NSString *const kEditProfileContainerSegueIdentifier = @"editProfileConta
     self.container.emailField.userInteractionEnabled = NO;
 }
 
+/**
+ *  Detecting whether profile data has been changed
+ *
+ *  @return If there are changes - returns 'YES'
+ */
 - (BOOL)profileHasChanges
 {
     if (![self.container.firstNameField.text isEqualToString:self.currentProfile.firstName] ||

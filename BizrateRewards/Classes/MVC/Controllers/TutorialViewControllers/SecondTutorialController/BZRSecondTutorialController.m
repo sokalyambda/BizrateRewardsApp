@@ -26,6 +26,9 @@ static NSString *const kGeolocationAccessSegueIdentifier = @"geolocationAccessSe
 
 #pragma mark - Actions
 
+/**
+ *  Adding the swipe gesture to controller's view
+ */
 - (void)addSwipeGesture
 {
     UISwipeGestureRecognizer *leftSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleLeftSwipeGesture:)];
@@ -38,11 +41,21 @@ static NSString *const kGeolocationAccessSegueIdentifier = @"geolocationAccessSe
     [self.view addGestureRecognizer:rightSwipe];
 }
 
+/**
+ *  Handle the left swipe
+ *
+ *  @param swipe Left swipe gesture
+ */
 - (void)handleLeftSwipeGesture:(UISwipeGestureRecognizer *)swipe
 {
     [self performSegueWithIdentifier:kGeolocationAccessSegueIdentifier sender:self];
 }
 
+/**
+ *  Handle the right swipe
+ *
+ *  @param swipe Right swipe gesture
+ */
 - (void)handleRightSwipeGesture:(UISwipeGestureRecognizer *)swipe
 {
     [self.navigationController popViewControllerAnimated:YES];

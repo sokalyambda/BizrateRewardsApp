@@ -14,7 +14,13 @@ static NSString *const kUserCredentialsKey = @"userCredentialsKey";
 
 @implementation BZRKeychainHandler
 
-+ (void) storeCredentialsWithUsername:(NSString*)username andPassword:(NSString*)password
+/**
+ *  Store user private data to keychain, using the KeychainItemWrapper
+ *
+ *  @param username Username for storing
+ *  @param password Password for storing
+ */
++ (void)storeCredentialsWithUsername:(NSString*)username andPassword:(NSString*)password
 {
     KeychainItemWrapper *keychainItem = [[KeychainItemWrapper alloc] initWithIdentifier:kUserCredentialsKey accessGroup:nil];
     
@@ -24,6 +30,11 @@ static NSString *const kUserCredentialsKey = @"userCredentialsKey";
     [keychainItem setObject:password forKey:(__bridge id)(kSecValueData)];
 }
 
+/**
+ *  Get user private data from keychain
+ *
+ *  @return Dictionary with user private data
+ */
 + (NSDictionary*)getStoredCredentials
 {
     KeychainItemWrapper *keychainItem = [[KeychainItemWrapper alloc] initWithIdentifier:kUserCredentialsKey accessGroup:nil];
@@ -42,6 +53,9 @@ static NSString *const kUserCredentialsKey = @"userCredentialsKey";
     
 }
 
+/**
+ *  Reset keychain data
+ */
 + (void)resetKeychain
 {
     KeychainItemWrapper *keychainItem = [[KeychainItemWrapper alloc] initWithIdentifier:kUserCredentialsKey accessGroup:nil];

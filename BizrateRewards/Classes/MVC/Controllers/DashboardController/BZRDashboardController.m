@@ -81,6 +81,26 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
 
 - (IBAction)takeSurveyClick:(id)sender
 {
+    [self takeSurvey];
+}
+
+- (IBAction)seeAllGiftCardsClick:(id)sender
+{
+    [self performSegueWithIdentifier:kAllGiftCardsSegueIdentifier sender:self];
+}
+
+- (IBAction)accountSettingsClick:(id)sender
+{
+    BZRAccountSettingsController *accountController = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRAccountSettingsController class])];
+    BZRBaseNavigationController *navigationController = [[BZRBaseNavigationController alloc] initWithRootViewController:accountController];
+    [self presentViewController:navigationController animated:YES completion:nil];
+}
+
+/**
+ *  Getting surveys data from server, pick first survey and showing it to user.
+ */
+- (void)takeSurvey
+{
     WEAK_SELF;
     [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
     
@@ -99,27 +119,25 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
     }];
 }
 
-- (IBAction)seeAllGiftCardsClick:(id)sender
-{
-    [self performSegueWithIdentifier:kAllGiftCardsSegueIdentifier sender:self];
-}
-
-- (IBAction)accountSettingsClick:(id)sender
-{
-    BZRAccountSettingsController *accountController = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRAccountSettingsController class])];
-    BZRBaseNavigationController *navigationController = [[BZRBaseNavigationController alloc] initWithRootViewController:accountController];
-    [self presentViewController:navigationController animated:YES completion:nil];
-}
-
+/**
+ *  Update fields values relative to current user profile data
+ */
 - (void)updateUserInformation
 {
-    WEAK_SELF;
-    [BZRAssetsHelper imageFromAssetURL:self.currentProfile.avatarURL withCompletion:^(UIImage *image, NSDictionary *info) {
-        weakSelf.userAvatar.image = image ? image : [UIImage imageNamed:@"user_icon_small"];
-    }];
+    NSURL *avatarURL = [[NSUserDefaults standardUserDefaults] URLForKey:@"avatarURL"];
+    
+    if (!avatarURL) {
+        WEAK_SELF;
+        [BZRAssetsHelper imageFromAssetURL:self.currentProfile.avatarURL withCompletion:^(UIImage *image, NSDictionary *info) {
+            weakSelf.userAvatar.image = image ? image : [UIImage imageNamed:@"user_icon_small"];
+        }];
+    } else {
+        [self.userAvatar sd_setImageWithURL:avatarURL];
+    }
 
     self.userNameLabel.text = self.currentProfile.fullName;
     self.earnedPointsLabel.text = [NSString stringWithFormat:@"%@ %@", [[BZRCommonNumberFormatter commonNumberFormatter] stringFromNumber:@((long)self.currentProfile.pointsAmount)], NSLocalizedString(@"pts", nil)];
+    
 #warning User Points
     self.currentProfile.pointsRequired = 2000;
     
@@ -128,6 +146,9 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
     }
 }
 
+/**
+ *  Get current user profile data from server
+ */
 - (void)getCurrentUserProfile
 {
     WEAK_SELF;

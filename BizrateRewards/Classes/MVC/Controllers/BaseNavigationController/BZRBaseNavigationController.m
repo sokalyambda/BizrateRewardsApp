@@ -41,6 +41,9 @@
 
 #pragma mark - Actions
 
+/**
+ *  Customize navigation bar
+ */
 - (void)customizeNavigationBar
 {
     [self.navigationBar setBarTintColor:UIColorFromRGB(0x12a9d6)];

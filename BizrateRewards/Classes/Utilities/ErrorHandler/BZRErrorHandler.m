@@ -16,6 +16,13 @@ static NSString *const kErrorDescription = @"error_description";
 
 @implementation BZRErrorHandler
 
+/**
+ *  Get string value from network error
+ *
+ *  @param error Error that should be parsed
+ *
+ *  @return String value from current error
+ */
 + (NSString *)stringFromNetworkError:(NSError *)error
 {
     NSString *errFromJsonString = [self errorStringFromJSONResponseError:error];
@@ -31,6 +38,13 @@ static NSString *const kErrorDescription = @"error_description";
     return errLocalizedDescription;
 }
 
+/**
+ *  Get string value from server response error
+ *
+ *  @param error Error that should be parsed
+ *
+ *  @return String value from current error
+ */
 + (NSString *)errorStringFromJSONResponseError:(NSError *)error
 {
     NSData *errData = error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey];
@@ -58,6 +72,13 @@ static NSString *const kErrorDescription = @"error_description";
         return outputErrorString.length > 0 ? outputErrorString : nil;
 }
 
+/**
+ *  Get string value from error by code
+ *
+ *  @param error Error that should be parsed
+ *
+ *  @return String value from current error
+ */
 + (NSString *)errorStringFromErrorCode:(NSError *)error
 {
     NSString *errString;
@@ -106,6 +127,13 @@ static NSString *const kErrorDescription = @"error_description";
     return errString.length > 0 ? errString : nil;
 }
 
+/**
+ *  Checking whether error is a network error
+ *
+ *  @param error Error for checking
+ *
+ *  @return If error is network error - returns 'YES'
+ */
 + (BOOL)errorIsNetworkError:(NSError *)error
 {
     if (error == nil) {

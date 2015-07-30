@@ -48,6 +48,11 @@
     self.navigationItem.leftBarButtonItem = self.baseNavigationController.customBackButton;
 }
 
+/**
+ *  Status bar text color should be white, because background color is black.
+ *
+ *  @return UIStatusBarStyleLightContent
+ */
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
     return UIStatusBarStyleLightContent;
@@ -55,6 +60,9 @@
 
 #pragma mark - Actions
 
+/**
+ *  Setup black status bar background color
+ */
 - (void)setupStatusBarAppearance
 {
     [[BZRStatusBarManager sharedManager] addCustomStatusBarView];

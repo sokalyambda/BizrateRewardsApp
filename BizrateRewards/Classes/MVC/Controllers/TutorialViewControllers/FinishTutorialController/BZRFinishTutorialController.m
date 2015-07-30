@@ -54,6 +54,9 @@ static NSString *const kGetStartedSegueIdentifier = @"getStartedSegueIdentifier"
     [self performSegueWithIdentifier:kGetStartedSegueIdentifier sender:self];
 }
 
+/**
+ *  If user has seen this screen - set 'tutorial passed' value to 'true' and save it to user defaults
+ */
 - (void)setTutorialPassed
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];

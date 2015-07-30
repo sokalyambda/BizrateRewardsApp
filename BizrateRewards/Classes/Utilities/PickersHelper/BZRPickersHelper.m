@@ -21,7 +21,6 @@
 
 static NSInteger const kPickerHeight    = 218.f;
 static CGFloat const kAnimationDuration = .25f;
-static NSInteger const kValidAge        = 13.f;
 
 static NSString *const kHidePickerAnimation = @"hidePickerAnimation";
 static NSString *const kShowPickerAnimation = @"showPickerAnimation";
@@ -51,6 +50,14 @@ static NSString *const kCurrentPicker = @"currentPicker";
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+/**
+ *  Constructor that includes parent view and container controller
+ *
+ *  @param parentView The view where picker should be showing.
+ *  @param container  Container controller which manipulates current picker
+ *
+ *  @return <#return value description#>
+ */
 - (instancetype)initWithParentView:(UIView *)parentView andContainerController:(BZREditProfileContainerController *)container;
 {
     self = [super init];
@@ -74,6 +81,11 @@ static NSString *const kCurrentPicker = @"currentPicker";
 
 #pragma mark  Public methods
 
+/**
+ *  Showing the gender picker
+ *
+ *  @param result Result Block which takes the information of chosen gender
+ */
 - (void)showGenderPickerWithResult:(GenderResult)result
 {
     self.genderResult = result;
@@ -86,6 +98,11 @@ static NSString *const kCurrentPicker = @"currentPicker";
     [self showHidePickerViewWithAnimation:self.commonPickerView];
 }
 
+/**
+ *  Showing the date picker
+ *
+ *  @param result Result Block which takes the information of chosen date of birth
+ */
 - (void)showBirthDatePickerWithResult:(DateResult)result
 {
     self.dateResult = result;
@@ -98,6 +115,13 @@ static NSString *const kCurrentPicker = @"currentPicker";
 
 #pragma mark - Private methods
 
+/**
+ *  Check pickers for existing
+ *
+ *  @param pickerView Picker view that we shoud check
+ *
+ *  @return Returns 'YES' if picker exists
+ */
 - (BOOL)isPickerExists:(UIView *)pickerView
 {
     return [self.parentView.subviews containsObject:pickerView];
@@ -105,6 +129,11 @@ static NSString *const kCurrentPicker = @"currentPicker";
 
 #pragma mark - CAAnimation
 
+/**
+ *  Show chosen picker view with animations
+ *
+ *  @param pickerView Chosen picker view
+ */
 - (void)showHidePickerViewWithAnimation:(UIView *)pickerView
 {
     if (![self isPickerExists:pickerView]) {
@@ -164,6 +193,9 @@ static NSString *const kCurrentPicker = @"currentPicker";
     [self.containerController adjustTableViewInsetsWithPresentedRect:pickerView.frame];
 }
 
+/**
+ *  Force removing of existed picker
+ */
 - (void)removeExistedPicker
 {
     if ([self isPickerExists:self.commonPickerView]) {
@@ -226,6 +258,11 @@ static NSString *const kCurrentPicker = @"currentPicker";
 
 #pragma mark - Keyboard methods
 
+/**
+ *  Handle keyboard appearance
+ *
+ *  @param notification Keyboard will show notification
+ */
 - (void)keyboardWillShowNotification:(NSNotification *)notification
 {
     [self removeExistedPicker];
@@ -237,6 +274,12 @@ static NSString *const kCurrentPicker = @"currentPicker";
     }
 }
 
+
+/**
+ *  Handle keyboard disappearance
+ *
+ *  @param notification Keyboard will hide notification
+ */
 - (void)keyboardWillHideNotification:(NSNotification *)notification
 {
     [self.containerController adjustTableViewInsetsWithPresentedRect:[self getKeyboardFrameFromNotification:notification]];
@@ -247,6 +290,13 @@ static NSString *const kCurrentPicker = @"currentPicker";
     }
 }
 
+/**
+ *  Get converted keyboard frame
+ *
+ *  @param notification Current keyboard notificatio
+ *
+ *  @return Relative keyboard rect value
+ */
 - (CGRect)getKeyboardFrameFromNotification:(NSNotification *)notification
 {
     NSDictionary *userInfo = [notification userInfo];

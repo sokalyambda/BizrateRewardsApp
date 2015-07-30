@@ -42,6 +42,11 @@ static NSString *const kPasswordNotActiveIconName   = @"password_icon";
 
 #pragma mark - Keyboard methods
 
+/**
+ *  Handle keyboard showing
+ *
+ *  @param notification KeyboardWillShowNotification
+ */
 - (void)keyboardWillShow:(NSNotification*) notification
 {
     NSDictionary* info = [notification userInfo];
@@ -62,6 +67,11 @@ static NSString *const kPasswordNotActiveIconName   = @"password_icon";
     }
 }
 
+/**
+ *  Handle keyboard hiding
+ *
+ *  @param notification KeyboardWillHideNotification
+ */
 - (void)keyboardWillHide:(NSNotification*) notification
 {
     UIEdgeInsets contentInsets = UIEdgeInsetsZero;
@@ -73,6 +83,9 @@ static NSString *const kPasswordNotActiveIconName   = @"password_icon";
 
 #pragma mark - Actions
 
+/**
+ *  Registering for keyboard notifications
+ */
 - (void)registerForKeyboardNotifications
 {
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -86,6 +99,9 @@ static NSString *const kPasswordNotActiveIconName   = @"password_icon";
                                                object:nil];
 }
 
+/**
+ *  Base fields customization
+ */
 - (void)customizeFields
 {
     self.userNameField.activeImageName      = kEmailActiveIconName;

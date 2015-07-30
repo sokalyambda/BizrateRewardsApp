@@ -41,6 +41,9 @@ static NSString *const kSurveyID = @"Survey ID";
 
 #pragma mark - Actions
 
+/**
+ *  Load current survey in web view.
+ */
 - (void)loadSurveyInWebView
 {
     NSURLRequest *surveyRequest = [NSURLRequest requestWithURL:self.currentSurvey.surveyLink];
@@ -49,6 +52,9 @@ static NSString *const kSurveyID = @"Survey ID";
     [BZRMixpanelService trackEventWithType:BZRMixpanelEventSurveyViewed properties:@{kSurveyID : @(self.currentSurvey.surveyId)}];
 }
 
+/**
+ *  Customize navigation bar appearance
+ */
 - (void)setupNavigationBar
 {
     [self.navigationController setNavigationBarHidden:NO animated:YES];
@@ -58,9 +64,12 @@ static NSString *const kSurveyID = @"Survey ID";
 
 #pragma mark - UIWebViewDelegate
 
+/**
+ *  Detecting whether current survey has been completed.
+ *
+ */
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
-
     NSString *urlString = request.URL.absoluteString;
     
     if ([urlString containsString:kFinishSurveyString]) {

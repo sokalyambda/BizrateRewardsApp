@@ -70,12 +70,19 @@
     [self.navigationController setNavigationBarHidden:YES animated:YES];
     [self calculateProgress];
     [self setupObtainedPointsText];
-
 }
 
 #pragma mark - Actions
 
 - (IBAction)homeClick:(id)sender
+{
+    [self moveToDashboardController];
+}
+
+/**
+ *  When survey has been passed - move to home controller.
+ */
+- (void)moveToDashboardController
 {
     __block BZRDashboardController *homeController;
     
@@ -89,6 +96,9 @@
     [self.navigationController popToViewController:homeController animated:YES];
 }
 
+/**
+ *  Setup value of obtained points.
+ */
 - (void)setupObtainedPointsText
 {
     self.obtainedPointsLabel.text = [NSString stringWithFormat:@"%li %@", (long)self.passedSurvey.surveyPoints, self.obtainedPointsText];

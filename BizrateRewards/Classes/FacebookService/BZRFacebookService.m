@@ -8,6 +8,8 @@
 
 #import "BZRFacebookService.h"
 
+#import "BZRStorageManager.h"
+
 static NSString *const kPublicProfile = @"public_profile";
 static NSString *const kEmail = @"email";
 static NSString *const kFields = @"fields";
@@ -17,21 +19,41 @@ static NSString *const kFBAppSecret = @"530fa94f7370fc20a54cc392fbd83cf2";
 
 @implementation BZRFacebookService
 
+/**
+ *  Create the static instance of FBSDKLoginManager to avoid error, when it come to nil
+ *
+ *  @return Static FB login manager
+ */
++ (FBSDKLoginManager *)facebookLoginManager
+{
+    static FBSDKLoginManager *loginManager = nil;
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        BOOL isFBinstalled = [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"fb://"]];
+        
+        loginManager = [[FBSDKLoginManager alloc] init];
+        
+        if (isFBinstalled) {
+            loginManager.loginBehavior = FBSDKLoginBehaviorNative;
+        } else {
+            loginManager.loginBehavior = FBSDKLoginBehaviorWeb;
+        }
+    });
+    return loginManager;
+}
+
 #pragma mark - Public Methods
 
+/**
+ *  Authorize with facebook account (via FB iOS application or webView)
+ *
+ *  @param success Success Block
+ *  @param failure Failure Block
+ */
 + (void)authorizeWithFacebookOnSuccess:(FacebookAuthSuccessBlock)success onFailure:(FacebookAuthFailureBlock)failure
 {
-    BOOL isFBinstalled = [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"fb://"]];
-    
-    FBSDKLoginManager *loginManager = [[FBSDKLoginManager alloc] init];
-    
-    if (isFBinstalled) {
-        loginManager.loginBehavior = FBSDKLoginBehaviorNative;
-    } else {
-        loginManager.loginBehavior = FBSDKLoginBehaviorWeb;
-    }
-    
-    [loginManager logInWithReadPermissions:@[kPublicProfile, kEmail] handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+    [[self facebookLoginManager] logInWithReadPermissions:@[kPublicProfile, kEmail] handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
         
         if (error) {
             failure(error, result.isCancelled);
@@ -39,16 +61,22 @@ static NSString *const kFBAppSecret = @"530fa94f7370fc20a54cc392fbd83cf2";
             failure(error, result.isCancelled);
         } else {
             if ([result.grantedPermissions containsObject:kEmail] && [result.grantedPermissions containsObject:kPublicProfile]) {
-                
                 //store fb auth data
                 [self storeFacebookAuthData];
-                
                 success(YES);
+            } else {
+                failure(error, result.isCancelled);
             }
         }
     }];
 }
 
+/**
+ *  Get current authorized facebook profile
+ *
+ *  @param success Success Block with FB profile dictionary
+ *  @param failure Failure Block with an error
+ */
 + (void)getFacebookUserProfileOnSuccess:(FacebookProfileSuccessBlock)success onFailure:(FacebookProfileFailureBlock)failure
 {
     NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
@@ -60,45 +88,23 @@ static NSString *const kFBAppSecret = @"530fa94f7370fc20a54cc392fbd83cf2";
         if (error) {
             failure(error);
         } else {
-            //            NSDictionary *user = (NSDictionary *)response;
-            //            NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithDictionary:@{@"facebook_id":[user valueForKey:@"id"], @"first_name":[user valueForKey:@"first_name"], @"last_name":[user valueForKey:@"last_name"]}];
-            success(response);
+            NSMutableDictionary *user = [NSMutableDictionary dictionaryWithDictionary:(NSDictionary *)response];
+            NSURL *avatarURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?width=200", user[@"id"]]];
+            [user setObject:avatarURL forKey:@"avatarURL"];
+
+            [BZRStorageManager sharedStorage].facebookProfile = user;
+            
+//            [[NSUserDefaults standardUserDefaults] setURL:avatarURL forKey:user[@"avatarURL"]];
+//            [[NSUserDefaults standardUserDefaults] synchronize];
+            
+            success(user);
         }
     }];
 }
 
-+ (void)getTestFacebookUserProfileWithId:(NSString *)userId andWithTokenString:(NSString *)tokenString OnSuccess:(FacebookProfileSuccessBlock)success onFailure:(FacebookProfileFailureBlock)failure
-{
-    NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
-    [parameters setValue:@"id, name, email" forKey:kFields];
-    
-    FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:[NSString stringWithFormat:@"%@", userId] parameters:parameters tokenString:tokenString version:nil HTTPMethod:@"GET"];
-    
-    [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id response, NSError *error) {
-        if (error) {
-            failure(error);
-        } else {
-            //            NSDictionary *user = (NSDictionary *)response;
-            //            NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithDictionary:@{@"facebook_id":[user valueForKey:@"id"], @"first_name":[user valueForKey:@"first_name"], @"last_name":[user valueForKey:@"last_name"]}];
-            success(response);
-        }
-    }];
-}
-
-+ (void)authorizeTestFacebookUserOnSuccess:(void(^)(FBSDKAccessToken *token))success onFailure:(FacebookAuthFailureBlock)failure
-{
-    [[FBSDKTestUsersManager sharedInstanceForAppID:kFBAppId appSecret:kFBAppSecret] requestTestAccountTokensWithArraysOfPermissions:@[[NSSet set], [NSSet set]] createIfNotFound:NO completionHandler:^(NSArray *tokens, NSError *error) {
-        NSLog(@"tokens %@", tokens);
-        success((FBSDKAccessToken *)[tokens firstObject]);
-    }];
-    
-    
-//    [[FBSDKTestUsersManager sharedInstanceForAppID:kFBAppId appSecret:kFBAppSecret] addTestAccountWithPermissions:[NSSet setWithObjects:@"email", nil] completionHandler:^(NSArray *tokens, NSError *error) {
-//        NSLog(@"tokens %@", tokens);
-//        success((FBSDKAccessToken *)[tokens firstObject]);
-//    }];
-}
-
+/**
+ *  Logout from facebook account
+ */
 + (void)logoutFromFacebook
 {
     [self clearFacebookAuthData];
@@ -107,6 +113,11 @@ static NSString *const kFBAppSecret = @"530fa94f7370fc20a54cc392fbd83cf2";
     [loginManager logOut];
 }
 
+/**
+ *  Set success login key to user defaults
+ *
+ *  @param success BOOL value which will be set to user defaults
+ */
 + (void)setLoginSuccess:(BOOL)success
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -114,6 +125,11 @@ static NSString *const kFBAppSecret = @"530fa94f7370fc20a54cc392fbd83cf2";
     [defaults synchronize];
 }
 
+/**
+ *  Validate FB session
+ *
+ *  @return It will be true if user has logined and token's expiration date doesn't come
+ */
 + (BOOL)isFacebookSessionValid
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -128,6 +144,9 @@ static NSString *const kFBAppSecret = @"530fa94f7370fc20a54cc392fbd83cf2";
 
 #pragma mark - Private Methods
 
+/**
+ *  Store FB authorization data in user defaults
+ */
 + (void)storeFacebookAuthData
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -136,6 +155,9 @@ static NSString *const kFBAppSecret = @"530fa94f7370fc20a54cc392fbd83cf2";
     [defaults synchronize];
 }
 
+/**
+ *  Remove facebook data (access token and expiration date from User Defaults
+ */
 + (void)clearFacebookAuthData
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -145,6 +167,11 @@ static NSString *const kFBAppSecret = @"530fa94f7370fc20a54cc392fbd83cf2";
     [defaults synchronize];
 }
 
+/**
+ *  Check whether login with facebook was succeded
+ *
+ *  @return Logined or No
+ */
 + (BOOL)isLoginedWithFacebook
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];

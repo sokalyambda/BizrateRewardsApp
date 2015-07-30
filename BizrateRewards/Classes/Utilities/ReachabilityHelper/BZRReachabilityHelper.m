@@ -12,6 +12,12 @@
 
 @implementation BZRReachabilityHelper
 
+/**
+ *  Check internet reachability
+ *
+ *  @param success Success Block
+ *  @param failure Failure Block
+ */
 + (void)checkConnectionOnSuccess:(void (^)())success failure:(void (^)(NSError *error))failure
 {
     BOOL isInternetAvaliable = [self isInternetAvaliable];
@@ -27,6 +33,11 @@
     }
 }
 
+/**
+ *  Checking for reachability
+ *
+ *  @return If internet is reachable - returns 'YES'
+ */
 + (BOOL)isInternetAvaliable
 {
     return [BZRProjectFacade isInternetReachable];

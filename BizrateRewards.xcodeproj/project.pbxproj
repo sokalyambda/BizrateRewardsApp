@@ -73,7 +73,6 @@
 		58A5BEBA1B414ADC00B2BC27 /* BZRLeftImageTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A5BEB91B414ADC00B2BC27 /* BZRLeftImageTextField.m */; };
 		58A5BEBD1B414B1800B2BC27 /* BZRBorderedTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A5BEBC1B414B1800B2BC27 /* BZRBorderedTextField.m */; };
 		58A5BEC01B415C2F00B2BC27 /* BZRCheckBoxButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A5BEBF1B415C2F00B2BC27 /* BZRCheckBoxButton.m */; };
-		58A5BEC41B415C7000B2BC27 /* BZRStarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A5BEC31B415C7000B2BC27 /* BZRStarView.m */; };
 		58A7E23A1B45A3A200A1489A /* UIView+ConfigureAnchorPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A7E2391B45A3A200A1489A /* UIView+ConfigureAnchorPoint.m */; };
 		58A91F2F1B3A80A80032607F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58A91F2E1B3A80A80032607F /* CoreLocation.framework */; };
 		58A91F331B3A823D0032607F /* BZRLocationObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A91F321B3A823D0032607F /* BZRLocationObserver.m */; };
@@ -100,6 +99,8 @@
 		58ADC0E81B4BDCE400DF849F /* BZRSecondTutorialController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ADC0E71B4BDCE400DF849F /* BZRSecondTutorialController.m */; };
 		58AF4AF01B5BB6F10052C7E5 /* UIImagePickerController+AdjustStatusBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AF4AEF1B5BB6F10052C7E5 /* UIImagePickerController+AdjustStatusBar.m */; };
 		58AF4AF41B5C13A30052C7E5 /* BZRStatusBarManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AF4AF31B5C13A30052C7E5 /* BZRStatusBarManager.m */; };
+		58B52A3B1B6A2874002D2529 /* UIImage+Base64Encoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B52A3A1B6A2874002D2529 /* UIImage+Base64Encoding.m */; };
+		58B52A3F1B6A28D3002D2529 /* NSString+Base64Decoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B52A3E1B6A28D3002D2529 /* NSString+Base64Decoding.m */; };
 		58B574E11B38AE200083A80A /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B574E01B38AE200083A80A /* KeychainItemWrapper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		58C770E01B5CD07400E9031F /* BZRTutorialTitleLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C770DF1B5CD07400E9031F /* BZRTutorialTitleLabel.m */; };
 		58C770E31B5CD08E00E9031F /* BZRTutorialDescriptionLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C770E21B5CD08E00E9031F /* BZRTutorialDescriptionLabel.m */; };
@@ -267,8 +268,6 @@
 		58A5BEBC1B414B1800B2BC27 /* BZRBorderedTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRBorderedTextField.m; path = Classes/MVC/Views/BorderedTextField/BZRBorderedTextField.m; sourceTree = "<group>"; };
 		58A5BEBE1B415C2F00B2BC27 /* BZRCheckBoxButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRCheckBoxButton.h; path = Classes/MVC/Views/CheckBoxButton/BZRCheckBoxButton.h; sourceTree = "<group>"; };
 		58A5BEBF1B415C2F00B2BC27 /* BZRCheckBoxButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRCheckBoxButton.m; path = Classes/MVC/Views/CheckBoxButton/BZRCheckBoxButton.m; sourceTree = "<group>"; };
-		58A5BEC21B415C7000B2BC27 /* BZRStarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRStarView.h; path = Classes/MVC/Views/FiveStarView/BZRStarView.h; sourceTree = "<group>"; };
-		58A5BEC31B415C7000B2BC27 /* BZRStarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRStarView.m; path = Classes/MVC/Views/FiveStarView/BZRStarView.m; sourceTree = "<group>"; };
 		58A7E2381B45A3A200A1489A /* UIView+ConfigureAnchorPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+ConfigureAnchorPoint.h"; path = "Classes/Categories/UIView/UIView+ConfigureAnchorPoint/UIView+ConfigureAnchorPoint.h"; sourceTree = "<group>"; };
 		58A7E2391B45A3A200A1489A /* UIView+ConfigureAnchorPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+ConfigureAnchorPoint.m"; path = "Classes/Categories/UIView/UIView+ConfigureAnchorPoint/UIView+ConfigureAnchorPoint.m"; sourceTree = "<group>"; };
 		58A91F2E1B3A80A80032607F /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -335,6 +334,10 @@
 		58AF4AEF1B5BB6F10052C7E5 /* UIImagePickerController+AdjustStatusBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImagePickerController+AdjustStatusBar.m"; path = "Classes/Categories/UIImagePickerView/AdjustStatusBar/UIImagePickerController+AdjustStatusBar.m"; sourceTree = "<group>"; };
 		58AF4AF21B5C13A30052C7E5 /* BZRStatusBarManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRStatusBarManager.h; path = Classes/Utilities/StatusBarHandler/BZRStatusBarManager.h; sourceTree = "<group>"; };
 		58AF4AF31B5C13A30052C7E5 /* BZRStatusBarManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRStatusBarManager.m; path = Classes/Utilities/StatusBarHandler/BZRStatusBarManager.m; sourceTree = "<group>"; };
+		58B52A391B6A2874002D2529 /* UIImage+Base64Encoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Base64Encoding.h"; path = "Classes/Categories/UIImage/UIImage+Base64Encoding/UIImage+Base64Encoding.h"; sourceTree = "<group>"; };
+		58B52A3A1B6A2874002D2529 /* UIImage+Base64Encoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Base64Encoding.m"; path = "Classes/Categories/UIImage/UIImage+Base64Encoding/UIImage+Base64Encoding.m"; sourceTree = "<group>"; };
+		58B52A3D1B6A28D3002D2529 /* NSString+Base64Decoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+Base64Decoding.h"; path = "Classes/Categories/NSString/NSString+Base64Decoding/NSString+Base64Decoding.h"; sourceTree = "<group>"; };
+		58B52A3E1B6A28D3002D2529 /* NSString+Base64Decoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+Base64Decoding.m"; path = "Classes/Categories/NSString/NSString+Base64Decoding/NSString+Base64Decoding.m"; sourceTree = "<group>"; };
 		58B574DF1B38AE200083A80A /* KeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KeychainItemWrapper.h; path = Classes/Utilities/KeyChain/KeychainItemWrapper.h; sourceTree = "<group>"; };
 		58B574E01B38AE200083A80A /* KeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KeychainItemWrapper.m; path = Classes/Utilities/KeyChain/KeychainItemWrapper.m; sourceTree = "<group>"; };
 		58C770DE1B5CD07400E9031F /* BZRTutorialTitleLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRTutorialTitleLabel.h; path = Classes/MVC/Views/Styles/TutorialStyleLabels/TutorialTitleLabel/BZRTutorialTitleLabel.h; sourceTree = "<group>"; };
@@ -469,6 +472,7 @@
 		58219EE11B38A1F300A9541A /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				58B52A371B6A281D002D2529 /* UIImage */,
 				58E238A01B5AA078007F8664 /* UIFont */,
 				58219EF21B38A2CA00A9541A /* UIViewController */,
 				58219EF11B38A2C300A9541A /* UIView */,
@@ -526,7 +530,6 @@
 				84AD3EFE1B4587B100C294AE /* ProgressView */,
 				589420A61B4527F4004BAF48 /* CommonPickerView */,
 				58A4BBCB1B42709E008F4EA7 /* BirthDatePicker */,
-				58A5BEC11B415C4B00B2BC27 /* StarView */,
 				58A5BEB71B4133E000B2BC27 /* LeftImageTextField */,
 				58A5BEB61B4133D400B2BC27 /* BorderedTextField */,
 				58A5BEB51B4133CC00B2BC27 /* CheckboxButton */,
@@ -607,6 +610,7 @@
 		58219EEF1B38A29B00A9541A /* NSString */ = {
 			isa = PBXGroup;
 			children = (
+				58B52A3C1B6A28B0002D2529 /* NSString+Base64Decoding */,
 				5858F26F1B612B4200F38DFC /* NSString+JSONRepresentation */,
 				58219F161B38A3DA00A9541A /* NSString+ContainsString */,
 			);
@@ -1211,15 +1215,6 @@
 			name = LeftImageTextField;
 			sourceTree = "<group>";
 		};
-		58A5BEC11B415C4B00B2BC27 /* StarView */ = {
-			isa = PBXGroup;
-			children = (
-				58A5BEC21B415C7000B2BC27 /* BZRStarView.h */,
-				58A5BEC31B415C7000B2BC27 /* BZRStarView.m */,
-			);
-			name = StarView;
-			sourceTree = "<group>";
-		};
 		58A7E2371B45A35800A1489A /* UIView+ConfigureAnchorPoint */ = {
 			isa = PBXGroup;
 			children = (
@@ -1520,6 +1515,32 @@
 				58AF4AF31B5C13A30052C7E5 /* BZRStatusBarManager.m */,
 			);
 			name = StatusBarManager;
+			sourceTree = "<group>";
+		};
+		58B52A371B6A281D002D2529 /* UIImage */ = {
+			isa = PBXGroup;
+			children = (
+				58B52A381B6A2823002D2529 /* UIImage+Base64Encoding */,
+			);
+			name = UIImage;
+			sourceTree = "<group>";
+		};
+		58B52A381B6A2823002D2529 /* UIImage+Base64Encoding */ = {
+			isa = PBXGroup;
+			children = (
+				58B52A391B6A2874002D2529 /* UIImage+Base64Encoding.h */,
+				58B52A3A1B6A2874002D2529 /* UIImage+Base64Encoding.m */,
+			);
+			name = "UIImage+Base64Encoding";
+			sourceTree = "<group>";
+		};
+		58B52A3C1B6A28B0002D2529 /* NSString+Base64Decoding */ = {
+			isa = PBXGroup;
+			children = (
+				58B52A3D1B6A28D3002D2529 /* NSString+Base64Decoding.h */,
+				58B52A3E1B6A28D3002D2529 /* NSString+Base64Decoding.m */,
+			);
+			name = "NSString+Base64Decoding";
 			sourceTree = "<group>";
 		};
 		58C770D91B5CCF6000E9031F /* Services */ = {
@@ -1956,11 +1977,13 @@
 				5858F2721B612B9200F38DFC /* NSString+JSONRepresentation.m in Sources */,
 				58A91F581B3AD83F0032607F /* BZRUserProfile.m in Sources */,
 				589889B71B654093008684F3 /* BZRGetClientCredentialsRequest.m in Sources */,
+				58B52A3F1B6A28D3002D2529 /* NSString+Base64Decoding.m in Sources */,
 				58E238A41B5AA0B8007F8664 /* UIFont+Styles.m in Sources */,
 				5899D2541B4AB94200565F11 /* BZRApplicationToken.m in Sources */,
 				5894209D1B451E0F004BAF48 /* BZRBirthDatePickerView.m in Sources */,
 				58219F021B38A32700A9541A /* BZRAlertMessageService.m in Sources */,
 				58219F111B38A3B200A9541A /* UIImagePickerController+fixOrientation.m in Sources */,
+				58B52A3B1B6A2874002D2529 /* UIImage+Base64Encoding.m in Sources */,
 				58ADC0E41B4BDCC200DF849F /* BZRFinishSurveyController.m in Sources */,
 				585C32A31B63AA3F005BF07B /* BZRSignInRequest.m in Sources */,
 				58ADC0E81B4BDCE400DF849F /* BZRSecondTutorialController.m in Sources */,
@@ -1991,7 +2014,6 @@
 				58219F0A1B38A37600A9541A /* UIView+Shaking.m in Sources */,
 				5878D3DD1B43F92100A917D0 /* BZRReachabilityHelper.m in Sources */,
 				58ACC0871B3968DA0081E546 /* BZRGetStartedController.m in Sources */,
-				58A5BEC41B415C7000B2BC27 /* BZRStarView.m in Sources */,
 				585C32AB1B63C82F005BF07B /* BZRRenewSessionTokenRequest.m in Sources */,
 				585813AE1B3C23840087AEE2 /* BZRSurvey.m in Sources */,
 				58D1E5D11B662EBD00347208 /* BZRSignInWithFacebookRequest.m in Sources */,

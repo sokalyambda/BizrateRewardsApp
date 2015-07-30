@@ -77,80 +77,14 @@ static NSInteger const kNotRegisteredErrorCode = 400.f;
 
 #pragma mark - Actions
 
-//facebook
 - (IBAction)facebookLoginClick:(id)sender
 {
-//    WEAK_SELF;
-//    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-//    
-//    [BZRFacebookService authorizeWithFacebookOnSuccess:^(BOOL isSuccess) {
-//        
-//        [BZRProjectFacade getClientCredentialsOnSuccess:^(BOOL success) {
-//            
-//            [BZRProjectFacade signInWithFacebookOnSuccess:^(BOOL isSuccess) {
-//                [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-//                
-//                //detect success login with facebook
-//                [BZRFacebookService setLoginSuccess:YES];
-//                
-//                //track mixpanel event
-//                [BZRMixpanelService trackEventWithType:BZRMixpanelEventLoginSuccessful properties:@{Type: AuthTypeFacebook}];
-//                
-//                //go to dashboard
-//                [weakSelf performSegueWithIdentifier:kDashboardSegueIdentifier sender:weakSelf];
-//                
-//            } onFailure:^(NSError *error, BOOL isCanceled) {
-//                [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-//            }];
-//            
-//        } onFailure:^(NSError *error, BOOL isCanceled) {
-//            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-//        }];
-//        
-//    } onFailure:^(NSError *error, BOOL isCanceled) {
-//        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-//    }];
+    [self signInWithFacebook];
 }
 
-//email
 - (IBAction)signInClick:(id)sender
 {
-    [self.incorrectEmailView setHidden:YES];
-    
-    WEAK_SELF;
-    [BZRValidator validateEmailField:self.userNameField
-                    andPasswordField:self.passwordField
-                           onSuccess:^{
-                               
-                               [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
-                               
-                               [BZRProjectFacade signInWithEmail:weakSelf.userNameField.text password:weakSelf.passwordField.text success:^(BOOL success) {
-                                   
-                                   //track success login event (MixPanel)
-                                   [BZRMixpanelService trackEventWithType:BZRMixpanelEventLoginSuccessful properties:@{AuthorizationType : AuthTypeEmail}];
-                                   
-                                   //hide progress hud
-                                   [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-                                   
-                                   if (weakSelf.isRememberMe) {
-                                       [BZRKeychainHandler storeCredentialsWithUsername:weakSelf.userNameField.text andPassword:weakSelf.passwordField.text];
-                                   }
-                                   [weakSelf performSegueWithIdentifier:kDashboardSegueIdentifier sender:weakSelf];
-                                   
-                                   
-                                   
-                               } failure:^(NSError *error, BOOL isCanceled) {
-                                   
-                                   [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-                                   
-#warning check if email is not registered
-                                   [weakSelf.incorrectEmailView setHidden:NO];
-                                   weakSelf.userNameField.errorImageName = kEmailErrorIconName;
-                               }];
-                           }
-                           onFailure:^(NSString *errorString) {
-                               [BZRValidator cleanValidationErrorString];
-                           }];
+    [self signInWithEmail];
 }
 
 - (IBAction)forgotPasswordClick:(id)sender
@@ -169,6 +103,74 @@ static NSInteger const kNotRegisteredErrorCode = 400.f;
     self.rememberMe = !self.isRememberMe;
 }
 
+/**
+ *  Sign in with email
+ */
+- (void)signInWithEmail
+{
+    [self.incorrectEmailView setHidden:YES];
+    WEAK_SELF;
+    [BZRValidator validateEmailField:self.userNameField
+                    andPasswordField:self.passwordField
+                           onSuccess:^{
+                               
+                               [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
+                               [BZRProjectFacade signInWithEmail:weakSelf.userNameField.text password:weakSelf.passwordField.text success:^(BOOL success) {
+                                   //track success login event (MixPanel)
+                                   [BZRMixpanelService trackEventWithType:BZRMixpanelEventLoginSuccessful properties:@{AuthorizationType : AuthTypeEmail}];
+                                   //hide progress hud
+                                   [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+                                   
+                                   if (weakSelf.isRememberMe) {
+                                       [BZRKeychainHandler storeCredentialsWithUsername:weakSelf.userNameField.text andPassword:weakSelf.passwordField.text];
+                                   }
+                                   [weakSelf performSegueWithIdentifier:kDashboardSegueIdentifier sender:weakSelf];
+                                   
+                               } failure:^(NSError *error, BOOL isCanceled) {
+                                   
+                                   [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+                                   
+#warning check if email is not registered
+                                   [weakSelf.incorrectEmailView setHidden:NO];
+                                   weakSelf.userNameField.errorImageName = kEmailErrorIconName;
+                               }];
+                           }
+                           onFailure:^(NSString *errorString) {
+                               [BZRValidator cleanValidationErrorString];
+                           }];
+}
+
+/**
+ *  Sign in with facebook
+ */
+- (void)signInWithFacebook
+{
+    WEAK_SELF;
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [BZRFacebookService authorizeWithFacebookOnSuccess:^(BOOL isSuccess) {
+        
+        [BZRProjectFacade signInWithFacebookOnSuccess:^(BOOL isSuccess) {
+            
+            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+            //detect success login with facebook
+            [BZRFacebookService setLoginSuccess:YES];
+            //track mixpanel event
+            [BZRMixpanelService trackEventWithType:BZRMixpanelEventLoginSuccessful properties:@{AuthorizationType: AuthTypeFacebook}];
+            
+            //go to dashboard
+            [weakSelf performSegueWithIdentifier:kDashboardSegueIdentifier sender:weakSelf];
+            
+        } onFailure:^(NSError *error, BOOL isCanceled) {
+            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        }];
+    } onFailure:^(NSError *error, BOOL isCanceled) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+    }];
+}
+
+/**
+ *  Customize text fields and hide incorrect email view, if it has not hidden yet
+ */
 - (void)customizeFields
 {
     [super customizeFields];
@@ -179,6 +181,9 @@ static NSInteger const kNotRegisteredErrorCode = 400.f;
 
 #pragma mark - Private methods
 
+/**
+ *  Get user data from keychain, if needed
+ */
 - (void)getUserDataFromKeychain
 {
     if (self.isRememberMe) {

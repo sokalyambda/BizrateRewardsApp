@@ -11,11 +11,13 @@
 
 - (BOOL)containsSubString:(NSString*)patternStr
 {
-    if (self.length == 0)
+    if (self.length == 0) {
         return NO;
+    }
     
-    if (patternStr.length == 0)
+    if (patternStr.length == 0) {
         return YES;
+    }
     
     NSRange range = [self rangeOfString:patternStr options:NSCaseInsensitiveSearch];
     return range.location != NSNotFound;

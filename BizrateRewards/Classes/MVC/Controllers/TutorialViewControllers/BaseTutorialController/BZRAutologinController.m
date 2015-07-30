@@ -83,6 +83,9 @@ static NSString *const kStartTutorialSegueIdentirier = @"startTutorialSegue";
 
 #pragma mark - Actions
 
+/**
+ *  Check where we have to redirect the user, depends on previous sessions parameters.
+ */
 - (void)checkForRedirection
 {
     if ([self isAutologinNeeded]) {
@@ -96,6 +99,11 @@ static NSString *const kStartTutorialSegueIdentirier = @"startTutorialSegue";
     }
 }
 
+/**
+ *  Checking whether autologin with email needed
+ *
+ *  @return Returns YES if tutorial has been passed and user had switched 'remember me' to 'true'. Otherwise, returns NO.
+ */
 - (BOOL)isAutologinNeeded
 {
     if (self.isTutorialPassed && [self userDataExistsInKeychain]) {
@@ -104,6 +112,11 @@ static NSString *const kStartTutorialSegueIdentirier = @"startTutorialSegue";
     return NO;
 }
 
+/**
+ *  Checking whether user data exists in keychain
+ *
+ *  @return Returns 'YES' if 'remember me' value is 'true' and user auth data exists in keychain. Otherwise, returns 'NO'.
+ */
 - (BOOL)userDataExistsInKeychain
 {
     if (!self.isRememberMe) {
@@ -116,6 +129,9 @@ static NSString *const kStartTutorialSegueIdentirier = @"startTutorialSegue";
     return self.savedUsername.length && self.savedPassword.length;
 }
 
+/**
+ *  Perform autologin with email
+ */
 - (void)autologinWithEmail
 {
     WEAK_SELF;
@@ -130,6 +146,9 @@ static NSString *const kStartTutorialSegueIdentirier = @"startTutorialSegue";
     }];
 }
 
+/**
+ *  Perform autologin with Facebook
+ */
 - (void)autologinWithFacebook
 {
     WEAK_SELF;
@@ -149,6 +168,9 @@ static NSString *const kStartTutorialSegueIdentirier = @"startTutorialSegue";
 
 #pragma mark - Navigation
 
+/**
+ *  Move to dashboard controller
+ */
 - (void)goToDashboardController
 {
     BZRDashboardController *controller = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRDashboardController class])];
@@ -156,6 +178,9 @@ static NSString *const kStartTutorialSegueIdentirier = @"startTutorialSegue";
     [self.navigationController pushViewController:controller animated:YES];
 }
 
+/**
+ *  Move to finish tutorial controller
+ */
 - (void)goToFinishTutorialController
 {
     BZRFinishTutorialController *controller = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRFinishTutorialController class])];

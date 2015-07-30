@@ -67,6 +67,29 @@ static NSString *const kChooseSignUpTypeSegueIdentifier = @"сhooseSignUpTypeSeg
 
 - (IBAction)submitButtonClick:(UIButton *)sender
 {
+    [self submitUserData];
+}
+
+/**
+ *  Creation of temporary profile
+ */
+- (void)createNewTemporaryProfile
+{
+    //first step in user creation
+    self.temporaryProfile = [[BZRUserProfile alloc] init];
+    
+    self.temporaryProfile.firstName = self.editProfileTableViewController.firstNameField.text;
+    self.temporaryProfile.lastName = self.editProfileTableViewController.lastNameField.text;
+    self.temporaryProfile.genderString = self.editProfileTableViewController.genderField.text;
+    self.temporaryProfile.email = self.editProfileTableViewController.emailField.text;
+    self.temporaryProfile.dateOfBirth = [[BZRCommonDateFormatter commonDateFormatter] dateFromString:self.editProfileTableViewController.dateOfBirthField.text];
+}
+
+/**
+ *  Validation of entered user date and creation temporary user profile for registration.
+ */
+- (void)submitUserData
+{
     WEAK_SELF;
     [BZRValidator validateFirstNameField:self.editProfileTableViewController.firstNameField
                            lastNameField:self.editProfileTableViewController.lastNameField
@@ -79,23 +102,11 @@ static NSString *const kChooseSignUpTypeSegueIdentifier = @"сhooseSignUpTypeSeg
                                    [weakSelf createNewTemporaryProfile];
                                    
                                    [weakSelf performSegueWithIdentifier:kChooseSignUpTypeSegueIdentifier sender:weakSelf];
-        
-    }
+                                   
+                               }
                                onFailure:^(NSString *errorString) {
                                    [BZRValidator cleanValidationErrorString];
-    }];
-}
-
-- (void)createNewTemporaryProfile
-{
-    //first step in user creation
-    self.temporaryProfile = [[BZRUserProfile alloc] init];
-    
-    self.temporaryProfile.firstName = self.editProfileTableViewController.firstNameField.text;
-    self.temporaryProfile.lastName = self.editProfileTableViewController.lastNameField.text;
-    self.temporaryProfile.genderString = self.editProfileTableViewController.genderField.text;
-    self.temporaryProfile.email = self.editProfileTableViewController.emailField.text;
-    self.temporaryProfile.dateOfBirth = [[BZRCommonDateFormatter commonDateFormatter] dateFromString:self.editProfileTableViewController.dateOfBirthField.text];
+                               }];
 }
 
 #pragma mark - Navigation

@@ -3,7 +3,7 @@
 //  BizrateRewards
 //
 //  Created by Eugenity on 17.10.14.
-//  Copyright (c) 2014 thinkmobiles. All rights reserved.
+//  Copyright (c) 2014 Connexity. All rights reserved.
 //
 
 #import "BZRPushNotifiactionService.h"
@@ -14,6 +14,11 @@ static NSString *const kPushPermissionsLastState = @"pushPermissionLastState";
 
 @implementation BZRPushNotifiactionService
 
+/**
+ *  Called when application successfully registered for remote notifications and device token has been received
+ *
+ *  @param deviceToken Current Device Token
+ */
 + (void)registeredForPushNotificationsWithToken:(NSData *)deviceToken
 {
     NSString *token = [[[deviceToken.description
@@ -29,11 +34,21 @@ static NSString *const kPushPermissionsLastState = @"pushPermissionLastState";
     [[NSNotificationCenter defaultCenter] postNotificationName:PushNotificationServiceDidSuccessAuthorizeNotification object:nil];
 }
 
+/**
+ *  Called when application is failed to register for push notifications
+ *
+ *  @param error Error
+ */
 + (void)failedToRegisterForPushNotificationsWithError:(NSError *)error
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:PushNotificationServiceDidFailAuthorizeNotification object:error];
 }
 
+/**
+ *  Registering application for push notifications
+ *
+ *  @param application Application that will be registered
+ */
 + (void)registerApplicationForPushNotifications:(UIApplication *)application
 {
     UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge
@@ -42,6 +57,11 @@ static NSString *const kPushPermissionsLastState = @"pushPermissionLastState";
     [application registerUserNotificationSettings:settings];
 }
 
+/**
+ *  Checking whether application is registered for push notifications
+ *
+ *  @return Returns 'YES' if registered
+ */
 + (BOOL)pushNotificationsEnabled
 { 
     BOOL isPushesEnabled = [[UIApplication sharedApplication] currentUserNotificationSettings].types != UIUserNotificationTypeNone;
@@ -51,11 +71,21 @@ static NSString *const kPushPermissionsLastState = @"pushPermissionLastState";
     return isPushesEnabled;
 }
 
+/**
+ *  Called when applications received the remote notifications
+ *
+ *  @param userInfo Push notification info dictionary
+ */
 + (void)recivedPushNotification:(NSDictionary*)userInfo
 {
     
 }
 
+/**
+ *  Send device data to server
+ *
+ *  @param pushToken Token
+ */
 + (void)sendPushToken:(NSData*)pushToken
 {
     BOOL enabled = [self pushNotificationsEnabled];
@@ -66,6 +96,11 @@ static NSString *const kPushPermissionsLastState = @"pushPermissionLastState";
 
 #pragma mark - Private methods
 
+/**
+ *  Track the changing permissions event
+ *
+ *  @param isPushesEnabled Enable value
+ */
 + (void)checkForPermissionsChangingWithPushesEnabled:(BOOL)isPushesEnabled
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];

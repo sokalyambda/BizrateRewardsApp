@@ -45,6 +45,14 @@
 
 - (IBAction)createAccountClick:(id)sender
 {
+    [self signUpWithEmail];
+}
+
+/**
+ *  Validate fields and create new user profile, using user's email (on success)
+ */
+- (void)signUpWithEmail
+{
     WEAK_SELF;
     [BZRValidator validateEmailField:self.userNameField
                     andPasswordField:self.passwordField
@@ -73,6 +81,9 @@
                            }];
 }
 
+/**
+ *  Customize current auth fields
+ */
 - (void)customizeFields
 {
     [super customizeFields];
@@ -81,6 +92,9 @@
     self.confirmPasswordField.notActiveImageName   = @"password_icon";
 }
 
+/**
+ *  Setup email data to text fields relative to current temporary profile
+ */
 - (void)setupUserDataToFields
 {
     self.userNameField.text = self.temporaryProfile.email;

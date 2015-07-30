@@ -32,77 +32,76 @@ static CGFloat const kSurveyRemarkSmallFontSize = 11.f;
 static CGFloat const kSurveyRemarkMediumFontSize = 13.f;
 static CGFloat const kSurveyRemarkLargeFontSize = 15.f;
 
-
-
+static NSString *const kOpenSansFontName = @"OpenSans";
+static NSString *const kOpenSansSemiboldFontName = @"OpenSans-Semibold";
+static NSString *const kOpenSansBoldFontName = @"OpenSans-Bold";
 
 @implementation UIFont (Styles)
 
 + (UIFont *)tutorialTitleFont
 {
     if (IS_IPHONE_5) {
-        return [UIFont fontWithName:@"OpenSans" size:kTitelSmallFontSize];
+        return [UIFont fontWithName:kOpenSansFontName size:kTitelSmallFontSize];
     } else if (IS_IPHONE_6) {
-        return [UIFont fontWithName:@"OpenSans" size:kTitelMediumFontSize];
+        return [UIFont fontWithName:kOpenSansFontName size:kTitelMediumFontSize];
     } else {
-        return [UIFont fontWithName:@"OpenSans" size:kTitelLargeFontSize];
+        return [UIFont fontWithName:kOpenSansFontName size:kTitelLargeFontSize];
     }
 }
 
 + (UIFont *)tutorialDesciptionFont
 {
     if (IS_IPHONE_5) {
-        return [UIFont fontWithName:@"OpenSans" size:kDescriptionSmallFontSize];
+        return [UIFont fontWithName:kOpenSansFontName size:kDescriptionSmallFontSize];
     } else if (IS_IPHONE_6) {
-        return [UIFont fontWithName:@"OpenSans" size:kDescriptionMediumFontSize];
+        return [UIFont fontWithName:kOpenSansFontName size:kDescriptionMediumFontSize];
     } else {
-        return [UIFont fontWithName:@"OpenSans" size:kDescriptionLargeFontSize];
+        return [UIFont fontWithName:kOpenSansFontName size:kDescriptionLargeFontSize];
     }
 }
 
 + (UIFont *)surveyPointsInscriptionFont
 {
     if (IS_IPHONE_5) {
-        return [UIFont fontWithName:@"OpenSans-Semibold" size:kPointsInscriptionSmallFontSize];
+        return [UIFont fontWithName:kOpenSansSemiboldFontName size:kPointsInscriptionSmallFontSize];
     } else if (IS_IPHONE_6) {
-        return [UIFont fontWithName:@"OpenSans-Semibold" size:kPointsInscriptionMediumFontSize];
+        return [UIFont fontWithName:kOpenSansSemiboldFontName size:kPointsInscriptionMediumFontSize];
     } else {
-        return [UIFont fontWithName:@"OpenSans-Semibold" size:kPointsInscriptionLargeFontSize];
+        return [UIFont fontWithName:kOpenSansSemiboldFontName size:kPointsInscriptionLargeFontSize];
     }
 }
 
 + (UIFont *)surveyPointsValueFont
 {
     if (IS_IPHONE_5) {
-        return [UIFont fontWithName:@"OpenSans-Bold" size:kPointsValueSmallFontSize];
+        return [UIFont fontWithName:kOpenSansBoldFontName size:kPointsValueSmallFontSize];
     } else if (IS_IPHONE_6) {
-        return [UIFont fontWithName:@"OpenSans-Bold" size:kPointsValueMediumFontSize];
+        return [UIFont fontWithName:kOpenSansBoldFontName size:kPointsValueMediumFontSize];
     } else {
-        return [UIFont fontWithName:@"OpenSans-Bold" size:kPointsValueLargeFontSize];
+        return [UIFont fontWithName:kOpenSansBoldFontName size:kPointsValueLargeFontSize];
     }
 }
 
 + (UIFont *)surveyCongratsFont
 {
     if (IS_IPHONE_5) {
-        return [UIFont fontWithName:@"OpenSans-Semibold" size:kSurveyCongratsSmallFontSize];
+        return [UIFont fontWithName:kOpenSansSemiboldFontName size:kSurveyCongratsSmallFontSize];
     } else if (IS_IPHONE_6) {
-        return [UIFont fontWithName:@"OpenSans-Semibold" size:kSurveyCongratsMediumFontSize];
+        return [UIFont fontWithName:kOpenSansSemiboldFontName size:kSurveyCongratsMediumFontSize];
     } else {
-        return [UIFont fontWithName:@"OpenSans-Semibold" size:kSurveyCongratsLargeFontSize];
+        return [UIFont fontWithName:kOpenSansSemiboldFontName size:kSurveyCongratsLargeFontSize];
     }
 }
 
 + (UIFont *)surveyRemarkFont
 {
     if (IS_IPHONE_5) {
-        return [UIFont fontWithName:@"OpenSans" size:kSurveyRemarkSmallFontSize];
+        return [UIFont fontWithName:kOpenSansFontName size:kSurveyRemarkSmallFontSize];
     } else if (IS_IPHONE_6) {
-        return [UIFont fontWithName:@"OpenSans" size:kSurveyRemarkMediumFontSize];
+        return [UIFont fontWithName:kOpenSansFontName size:kSurveyRemarkMediumFontSize];
     } else {
-        return [UIFont fontWithName:@"OpenSans" size:kSurveyRemarkLargeFontSize];
+        return [UIFont fontWithName:kOpenSansFontName size:kSurveyRemarkLargeFontSize];
     }
 }
-
-
 
 @end

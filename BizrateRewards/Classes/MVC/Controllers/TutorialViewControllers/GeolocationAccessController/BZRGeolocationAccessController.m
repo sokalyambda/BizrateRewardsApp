@@ -46,17 +46,30 @@ static NSString *const kPushNotificationsAccessSegueIdentifier = @"pushNotificat
 
 #pragma mark - Notifications
 
+/**
+ *  Register location access notifications
+ */
 - (void)handleLocationObserverNotifications
 {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationManagerDidSuccessAuthorizeNotification:) name:LocationManagerDidSuccessAuthorizeNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationManagerDidFailAuthorizeNotification:) name:LocationManagerDidFailAuthorizeNotification object:nil];
 }
 
+/**
+ *  Handle success authorization
+ *
+ *  @param notification LocationManagerDidSuccessAuthorizeNotification
+ */
 - (void)locationManagerDidSuccessAuthorizeNotification:(NSNotification *)notification
 {
     [self performSegueWithIdentifier:kPushNotificationsAccessSegueIdentifier sender:self];
 }
 
+/**
+ *  Handle failure authorization
+ *
+ *  @param notification LocationManagerDidFailAuthorizeNotification
+ */
 - (void)locationManagerDidFailAuthorizeNotification:(NSNotification *)notification
 {
     [self showErrorAlertController];

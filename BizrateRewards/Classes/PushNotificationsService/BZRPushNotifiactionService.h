@@ -3,7 +3,7 @@
 //  BizrateRewards
 //
 //  Created by Euginity on 17.10.14.
-//  Copyright (c) 2014 realme. All rights reserved.
+//  Copyright (c) 2014 Connexity. All rights reserved.
 //
 
 @interface BZRPushNotifiactionService : NSObject

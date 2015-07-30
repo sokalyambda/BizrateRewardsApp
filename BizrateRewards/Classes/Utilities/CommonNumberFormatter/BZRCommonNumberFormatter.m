@@ -10,6 +10,11 @@
 
 @implementation BZRCommonNumberFormatter
 
+/**
+ *  Create common static instance of number formatter with specific format to avoid extra operations each time when we needed in formatter.
+ *
+ *  @return CommonNumberFormatter instance
+ */
 + (NSNumberFormatter *)commonNumberFormatter
 {
     static NSNumberFormatter *numberFormatter = nil;

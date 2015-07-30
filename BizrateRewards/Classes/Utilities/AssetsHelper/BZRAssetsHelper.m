@@ -14,6 +14,13 @@
 
 @implementation BZRAssetsHelper
 
+/**
+ *  Write image to local device storage
+ *
+ *  @param image      Image that will be written
+ *  @param mediaInfo  Image media info dictionary
+ *  @param completion Completion Block
+ */
 + (void)writeImage:(UIImage *)image withMediaInfo:(NSDictionary *)mediaInfo toPhotoAlbumWithCompletion:(AssetsSavingCompletion)completion
 {
     ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
@@ -24,6 +31,12 @@
                           }];
 }
 
+/**
+ *  Get image from asset's URL
+ *
+ *  @param url        URL for image asset
+ *  @param completion Completion Block
+ */
 + (void)imageFromAssetURL:(NSURL *)url withCompletion:(AssetsRetrievingCompletion)completion
 {
     if (url) {

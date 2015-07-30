@@ -13,9 +13,9 @@
 @property (strong, nonatomic) NSMutableArray *internalArray;
 
 @end
-
-NSUInteger COUNT_MULTIPLIER = 2000;
-NSUInteger MIDDLE_POSITION = 2000 / 2;
+//
+//NSUInteger COUNT_MULTIPLIER = 2000;
+//NSUInteger MIDDLE_POSITION = 2000 / 2;
 
 @implementation BZRPickerHolder
 
@@ -75,7 +75,7 @@ NSUInteger MIDDLE_POSITION = 2000 / 2;
         if (ind == NSNotFound)
             ind = 0;
         
-        [self selectRow:(MIDDLE_POSITION * items.count + ind) inComponent:component animated:NO];
+        [self selectRow:(items.count + ind) inComponent:component animated:NO];
     }
 }
 

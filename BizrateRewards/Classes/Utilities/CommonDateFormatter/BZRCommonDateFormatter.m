@@ -10,6 +10,11 @@
 
 @implementation BZRCommonDateFormatter
 
+/**
+ *  Create common static instance of date formatter with specific format to avoid extra operations each time when we needed in formatter.
+ *
+ *  @return CommonDateFormatter instance
+ */
 + (NSDateFormatter *)commonDateFormatter
 {
     static NSDateFormatter *commonDateFormatter = nil;
