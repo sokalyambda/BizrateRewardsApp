@@ -67,9 +67,11 @@ static NSString *const kAvatarURL = @"avatarURL";
 {
     NSData *encodedObject = [NSKeyedArchiver archivedDataWithRootObject:self];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
     if ([defaults.dictionaryRepresentation.allKeys containsObject:key]) {
         return;
     }
+    
     [defaults setObject:encodedObject forKey:key];
     [defaults synchronize];
 }

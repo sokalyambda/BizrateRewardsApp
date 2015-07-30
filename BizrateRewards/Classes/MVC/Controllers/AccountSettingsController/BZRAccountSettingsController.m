@@ -20,13 +20,15 @@
 
 #import "BZRProjectFacade.h"
 
+#import "BZRRoundedImageView.h"
+
 static NSString *const kAccountSettingsContainerSegueIdentifier = @"accountSettingsContainerSegue";
 
 @interface BZRAccountSettingsController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (weak, nonatomic) BZRAccountSettingsContaiterController *container;
 
-@property (weak, nonatomic) IBOutlet UIImageView *userIcon;
+@property (weak, nonatomic) IBOutlet BZRRoundedImageView *userIcon;
 @property (weak, nonatomic) IBOutlet UILabel *userFullNameLabel;
 
 @property (strong, nonatomic) BZRUserProfile *currentProfile;
@@ -136,17 +138,19 @@ static NSString *const kAccountSettingsContainerSegueIdentifier = @"accountSetti
  */
 - (void)setupUserAvatar
 {
-    NSURL *avatarURL = [BZRStorageManager sharedStorage].facebookProfile.avararURL;
-    
-    if (!avatarURL && self.currentProfile.avatarURL) {
-        WEAK_SELF;
-        [BZRAssetsHelper imageFromAssetURL:self.currentProfile.avatarURL withCompletion:^(UIImage *image, NSDictionary *info) {
-            weakSelf.userIcon.image = image ? image : [UIImage imageNamed:@"user_icon_small"];
-        }];
-    } else if (avatarURL) {
-        [self.userIcon sd_setImageWithURL:avatarURL];
-    }
-    
+//    NSURL *avatarURL = [BZRStorageManager sharedStorage].facebookProfile.avararURL;
+//    
+//    if (!avatarURL && self.currentProfile.avatarURL) {
+//        WEAK_SELF;
+//        [BZRAssetsHelper imageFromAssetURL:self.currentProfile.avatarURL withCompletion:^(UIImage *image, NSDictionary *info) {
+//            weakSelf.userIcon.image = image ? image : [UIImage imageNamed:@"user_icon_small"];
+//        }];
+//    } else if (avatarURL) {
+//        [self.userIcon sd_setImageWithURL:avatarURL placeholderImage:[UIImage imageNamed:@"user_icon_small"] options:SDWebImageRefreshCached completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+//            
+//        }];
+//    }
+    [self.userIcon setNeedsImageUpdate];
 }
 
 #pragma mark - Change photo actions

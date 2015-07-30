@@ -142,16 +142,27 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
  */
 - (void)setupUserAvatar
 {
-    NSURL *avatarURL = [BZRStorageManager sharedStorage].facebookProfile.avararURL;
+    [self.userAvatar setNeedsImageUpdate];
+//    NSURL *avatarURL = [BZRStorageManager sharedStorage].facebookProfile.avararURL;
+
+//    FBSDKProfilePictureView *profilePicture = [[FBSDKProfilePictureView alloc] initWithFrame:CGRectMake(0, 0, 200, 200)];
+//    profilePicture.center = self.view.center;
+//    [self.view addSubview:profilePicture];
     
-    if (!avatarURL && self.currentProfile.avatarURL) {
-        WEAK_SELF;
-        [BZRAssetsHelper imageFromAssetURL:self.currentProfile.avatarURL withCompletion:^(UIImage *image, NSDictionary *info) {
-            weakSelf.userAvatar.image = image ? image : [UIImage imageNamed:@"user_icon_small"];
-        }];
-    } else if (avatarURL) {
-        [self.userAvatar sd_setImageWithURL:avatarURL];
-    }
+//    if (!avatarURL && self.currentProfile.avatarURL) {
+//        WEAK_SELF;
+//        [BZRAssetsHelper imageFromAssetURL:self.currentProfile.avatarURL withCompletion:^(UIImage *image, NSDictionary *info) {
+//            weakSelf.userAvatar.image = image ? image : [UIImage imageNamed:@"user_icon_small"];
+//        }];
+//    } else if (avatarURL) {
+//        
+//        [[SDImageCache sharedImageCache] clearMemory];
+//        [[SDImageCache sharedImageCache] clearDisk];
+//        
+//        [self.userAvatar sd_setImageWithURL:avatarURL placeholderImage:[UIImage imageNamed:@"user_icon_small"] options:SDWebImageRefreshCached completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+//        
+//        }];
+//    }
 }
 
 /**

@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Connexity. All rights reserved.
 //
 
-@interface BZRRoundedImageView : UIImageView
+@interface BZRRoundedImageView : FBSDKProfilePictureView
 
 @property (strong, nonatomic) UIColor *borderColor;
 

@@ -240,7 +240,6 @@ static NSInteger const kAllCleansCount = 1.f;
     WEAK_SELF;
     //check reachability
     [BZRReachabilityHelper checkConnectionOnSuccess:^{
-        
         [operation setCompletionBlockAfterProcessingWithSuccess:success failure:failure];
 
         [weakSelf addOperationToQueue:operation];
