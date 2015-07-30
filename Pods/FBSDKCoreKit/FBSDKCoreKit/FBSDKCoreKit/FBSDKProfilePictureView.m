@@ -25,6 +25,8 @@
 #import "FBSDKURLConnection.h"
 #import "FBSDKUtility.h"
 
+static NSString *const kPlaceholderIconName = @"user_icon_small";
+
 @interface FBSDKProfilePictureViewState : NSObject
 
 - (instancetype)initWithProfileID:(NSString *)profileID
@@ -348,8 +350,7 @@
 
 - (void)_setPlaceholderImage
 {
-  UIColor *fillColor = [UIColor colorWithRed:157.0/255.0 green:177.0/255.0 blue:204.0/255.0 alpha:1.0];
-  _imageView.image = [[[FBSDKMaleSilhouetteIcon alloc] initWithColor:fillColor] imageWithSize:_imageView.bounds.size];
+  _imageView.image = [UIImage imageNamed:kPlaceholderIconName];
   _placeholderImageIsValid = YES;
   _hasProfileImage = NO;
 }

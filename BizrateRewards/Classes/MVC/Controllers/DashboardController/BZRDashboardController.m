@@ -106,7 +106,9 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
     
     [BZRProjectFacade getEligibleSurveysOnSuccess:^(NSArray *surveys) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        
         BZRSurveyViewController *controller = [weakSelf.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRSurveyViewController class])];
+        
         if (surveys.count) {
             controller.currentSurvey = [surveys firstObject];
             [weakSelf.navigationController pushViewController:controller animated:YES];
@@ -138,31 +140,22 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
 }
 
 /**
- *  Setup current user avatar
+ *  Setup current user avatar, using FBSDKProfilePictureView
  */
 - (void)setupUserAvatar
 {
     [self.userAvatar setNeedsImageUpdate];
-//    NSURL *avatarURL = [BZRStorageManager sharedStorage].facebookProfile.avararURL;
-
-//    FBSDKProfilePictureView *profilePicture = [[FBSDKProfilePictureView alloc] initWithFrame:CGRectMake(0, 0, 200, 200)];
-//    profilePicture.center = self.view.center;
-//    [self.view addSubview:profilePicture];
-    
-//    if (!avatarURL && self.currentProfile.avatarURL) {
-//        WEAK_SELF;
-//        [BZRAssetsHelper imageFromAssetURL:self.currentProfile.avatarURL withCompletion:^(UIImage *image, NSDictionary *info) {
-//            weakSelf.userAvatar.image = image ? image : [UIImage imageNamed:@"user_icon_small"];
-//        }];
-//    } else if (avatarURL) {
-//        
-//        [[SDImageCache sharedImageCache] clearMemory];
-//        [[SDImageCache sharedImageCache] clearDisk];
-//        
-//        [self.userAvatar sd_setImageWithURL:avatarURL placeholderImage:[UIImage imageNamed:@"user_icon_small"] options:SDWebImageRefreshCached completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-//        
-//        }];
-//    }
+ /*
+    NSURL *avatarURL = [BZRStorageManager sharedStorage].facebookProfile.avararURL;
+    if (!avatarURL && self.currentProfile.avatarURL) {
+        WEAK_SELF;
+        [BZRAssetsHelper imageFromAssetURL:self.currentProfile.avatarURL withCompletion:^(UIImage *image, NSDictionary *info) {
+            weakSelf.userAvatar.image = image ? image : [UIImage imageNamed:@"user_icon_small"];
+        }];
+    } else if (avatarURL) {
+        [self.userAvatar sd_setImageWithURL:avatarURL placeholderImage:[UIImage imageNamed:@"user_icon_small"] options:SDWebImageRefreshCached];
+    }
+*/
 }
 
 /**

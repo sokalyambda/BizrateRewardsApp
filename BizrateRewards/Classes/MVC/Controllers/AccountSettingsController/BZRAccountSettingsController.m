@@ -81,9 +81,14 @@ static NSString *const kAccountSettingsContainerSegueIdentifier = @"accountSetti
 
 - (IBAction)changeIconClick:(id)sender
 {
-    [self setupChangePhotoActionSheet];
+    /* This should be uncommented only if we DON'T use the FBSDKProfilePictureView
+     [self setupChangePhotoActionSheet];
+     */
 }
 
+/**
+ *  Show sign out action sheet
+ */
 - (void)showSignOutActionSheet
 {
     UIAlertController *signOutController = [UIAlertController alertControllerWithTitle:@"" message:NSLocalizedString(@"Do you want to sign out?", nil) preferredStyle:UIAlertControllerStyleActionSheet];
@@ -134,27 +139,18 @@ static NSString *const kAccountSettingsContainerSegueIdentifier = @"accountSetti
 }
 
 /**
- *  Setup current user avatar
+ *  Setup current user avatar, using FBSDKProfilePictureView
  */
 - (void)setupUserAvatar
 {
-//    NSURL *avatarURL = [BZRStorageManager sharedStorage].facebookProfile.avararURL;
-//    
-//    if (!avatarURL && self.currentProfile.avatarURL) {
-//        WEAK_SELF;
-//        [BZRAssetsHelper imageFromAssetURL:self.currentProfile.avatarURL withCompletion:^(UIImage *image, NSDictionary *info) {
-//            weakSelf.userIcon.image = image ? image : [UIImage imageNamed:@"user_icon_small"];
-//        }];
-//    } else if (avatarURL) {
-//        [self.userIcon sd_setImageWithURL:avatarURL placeholderImage:[UIImage imageNamed:@"user_icon_small"] options:SDWebImageRefreshCached completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-//            
-//        }];
-//    }
     [self.userIcon setNeedsImageUpdate];
 }
 
 #pragma mark - Change photo actions
 
+/**
+ *  Choose new photo and set it as user avatar image. (To make it work we have to change parent class of BZRRoundedImageView from FBSDKProfilePictureView to UIImageView).
+ */
 - (void)setupChangePhotoActionSheet
 {
     WEAK_SELF;
