@@ -135,7 +135,7 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
     self.currentProfile.pointsRequired = 2000;
     
         if (!self.isUpdateNeeded) {
-            [self setupMixpanelPeople];
+            [BZRMixpanelService setPeopleForUser:self.currentProfile];
     }
 }
 
@@ -169,7 +169,7 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
     [BZRProjectFacade getCurrentUserOnSuccess:^(BOOL isSuccess) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         [weakSelf updateUserInformation];
-        [weakSelf setupMixpanelPeople];
+        [BZRMixpanelService setPeopleForUser:weakSelf.currentProfile];
         [weakSelf calculateProgress];
         weakSelf.updateNeeded = NO;
     } onFailure:^(NSError *error, BOOL isCanceled) {
@@ -177,21 +177,9 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
     }];
 }
 
-- (void)setupMixpanelPeople
-{
-    BOOL isPushesEnabled = [BZRPushNotifiactionService pushNotificationsEnabled];
-    BOOL isGeolocationEnabled = [BZRLocationObserver sharedObserver].isAuthorized;
-    [BZRMixpanelService setPeopleWithProperties:@{PushNotificationsEnabled : isPushesEnabled? AccessGrantedKeyYes : AccessGrantedKeyNo,
-                                                  GeoLocationEnabled: isGeolocationEnabled? AccessGrantedKeyYes : AccessGrantedKeyNo,
-                                                  FirstNameProperty : self.currentProfile.firstName,
-                                                  LastNameProperty : self.currentProfile.lastName,
-                                                  BizrateIDProperty : self.currentProfile.contactID
-                                                  }];
-}
-
 - (void)calculateProgress
 {
-     self.progressView.progress  = (CGFloat)self.currentProfile.pointsAmount * CGRectGetWidth(self.progressView.frame) / (CGFloat)self.currentProfile.pointsRequired;
+    self.progressView.progress  = (CGFloat)self.currentProfile.pointsAmount * CGRectGetWidth(self.progressView.frame) / (CGFloat)self.currentProfile.pointsRequired;
     [self.progressView setNeedsDisplay];
 }
 

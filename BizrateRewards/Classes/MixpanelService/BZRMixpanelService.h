@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 Connexity. All rights reserved.
 //
 
+@class BZRUserProfile;
+
 typedef enum : NSUInteger {
     BZRMixpanelEventOpenApp,
     BZRMixpanelEventSurveyViewed,
@@ -25,6 +27,8 @@ typedef enum : NSUInteger {
 
 + (void)setupMixpanel;
 + (void)trackEventWithType:(BZRMixpanelEventType)eventType propertyValue:(NSString *)propertieValue;
-+ (void)setPeopleWithProperties:(NSDictionary *)properties;
++ (void)setAliasForUser:(BZRUserProfile *)userProfile;
++ (void)setPeopleForUser:(BZRUserProfile *)userProfile;
+
 
 @end

@@ -141,6 +141,8 @@ static BZRSessionManager *sharedHTTPClient = nil;
             
             [BZRStorageManager sharedStorage].currentProfile = currentProfile;
             
+            [BZRMixpanelService setAliasForUser:currentProfile];
+            
             success(YES);
             
         } failure:^(BZRNetworkOperation *operation ,NSError *error, BOOL isCanceled) {

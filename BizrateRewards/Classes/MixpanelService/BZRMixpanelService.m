@@ -7,8 +7,12 @@
 //
 
 #import "BZRMixpanelService.h"
-
 #import <Mixpanel.h>
+
+#import "BZRUserProfile.h"
+
+#import "BZRPushNotifiactionService.h"
+#import "BZRLocationObserver.h"
 
 static NSString *const kMixpanelToken = @"f818411581cc210c670fe3351a46debe";//@"aae3e2388125817b27b8afcf99093d97";
 
@@ -16,7 +20,6 @@ static NSString *const kMixpanelEventsFile = @"MixpanelEvents";
 static NSString *const kPlistResourceType = @"plist";
 
 @implementation BZRMixpanelService
-
 
 + (void)setupMixpanel
 {
@@ -38,20 +41,32 @@ static NSString *const kPlistResourceType = @"plist";
     }
 }
 
-+ (void)setPeopleWithProperties:(NSDictionary *)properties
++ (void)setPeopleForUser:(BZRUserProfile *)userProfile
 {
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
-    NSString  *aliasID = [[NSUserDefaults standardUserDefaults] objectForKey:MixpanelAliasID];
-    if (!aliasID) {
-        aliasID = [properties objectForKey:BizrateIDProperty];
-        [mixpanel createAlias:aliasID forDistinctID:mixpanel.distinctId];
+    
+    BOOL isPushesEnabled = [BZRPushNotifiactionService pushNotificationsEnabled];
+    BOOL isGeolocationEnabled = [BZRLocationObserver sharedObserver].isAuthorized;
+    
+    [mixpanel.people set:@{PushNotificationsEnabled:isPushesEnabled? AccessGrantedKeyYes : AccessGrantedKeyNo,
+                           GeoLocationEnabled:isGeolocationEnabled? AccessGrantedKeyYes : AccessGrantedKeyNo,
+                           FirstNameProperty:userProfile.firstName,
+                           LastNameProperty:userProfile.lastName,
+                           BizrateIDProperty:userProfile.contactID}];
+}
+
++ (void)setAliasForUser:(BZRUserProfile *)userProfile
+{
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    
+    if (![[[NSUserDefaults standardUserDefaults] objectForKey:MixpanelAliasID] isEqualToString:userProfile.contactID]) {
+        [mixpanel createAlias:userProfile.contactID forDistinctID:mixpanel.distinctId];
         [mixpanel identify:mixpanel.distinctId];
         
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        [defaults setObject:aliasID forKey:MixpanelAliasID];
+        [defaults setObject:userProfile.contactID forKey:MixpanelAliasID];
         [defaults synchronize];
     }
-    [mixpanel.people set:properties];
 }
 
 @end
