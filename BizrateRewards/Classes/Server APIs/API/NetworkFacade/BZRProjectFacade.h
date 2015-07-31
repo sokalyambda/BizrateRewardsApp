@@ -32,6 +32,11 @@
                                         success:(void (^)(BOOL success))success
                                         failure:(void (^)(NSError *error, BOOL isCanceled))failure;
 
++ (BZRNetworkOperation *)resetPasswordWithUserName:(NSString *)userName
+                                    andNewPassword:(NSString *)newPassword
+                                         onSuccess:(void (^)(BOOL isSuccess))success
+                                         onFailure:(void (^)(NSError *error, BOOL isCanceled))failure;
+
 //User Profile Requests
 + (BZRNetworkOperation*)getCurrentUserOnSuccess:(void (^)(BOOL isSuccess))success
                                       onFailure:(void (^)(NSError *error, BOOL isCanceled))failure;
