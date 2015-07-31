@@ -213,6 +213,30 @@ static BZRSessionManager *sharedHTTPClient = nil;
     return operation;
 }
 
+//Location Events
++ (BZRNetworkOperation *)sendGeolocationEvent:(BZRLocationEvent *)locationEvent onSuccess:(void (^)(BZRLocationEvent *locationEvent))success
+                                    onFailure:(void (^)(NSError *error, BOOL isCanceled))failure
+{
+    __block BZRNetworkOperation *operation;
+    [self validateSessionWithType:BZRSessionTypeUser onSuccess:^(BOOL isSuccess) {
+        
+        BZRSendLocationEventRequest *request = [[BZRSendLocationEventRequest alloc] initWithLocationEvent:locationEvent];
+        
+        operation = [[self  HTTPClient] enqueueOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
+            
+            BZRSendLocationEventRequest *request = (BZRSendLocationEventRequest*)operation.networkRequest;
+            
+            success(request.loggedEvent);
+            
+        } failure:^(BZRNetworkOperation *operation, NSError *error, BOOL isCanceled) {
+            failure(error, isCanceled);
+        }];
+    } onFailuer:^(NSError *error, BOOL isCanceled) {
+        
+    }];
+    return operation;
+}
+
 + (void)signOutOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure
 {
     [BZRStorageManager sharedStorage].currentProfile = nil;

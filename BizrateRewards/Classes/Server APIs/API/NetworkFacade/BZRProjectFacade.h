@@ -8,7 +8,7 @@
 
 #import "BZRSessionManager.h"
 
-@class BZRUserProfile;
+@class BZRUserProfile, BZRLocationEvent;
 
 @interface BZRProjectFacade : NSObject
 
@@ -47,6 +47,11 @@
 + (BZRNetworkOperation*)getEligibleSurveysOnSuccess:(void (^)(NSArray *surveys))success
                                           onFailure:(void (^)(NSError *error, BOOL isCanceled))failure;
 
+//Location Events
++ (BZRNetworkOperation *)sendGeolocationEvent:(BZRLocationEvent *)locationEvent onSuccess:(void (^)(BZRLocationEvent *locationEvent))success
+                                    onFailure:(void (^)(NSError *error, BOOL isCanceled))failure;
+
+//Sign Out
 + (void)signOutOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure;
 
 //Facebook

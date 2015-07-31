@@ -16,6 +16,7 @@
 #import "BZRGetClientCredentialsRequest.h"
 #import "BZRSignUpRequest.h"
 #import "BZRGetEligibleSurveysRequest.h"
+#import "BZRSendLocationEventRequest.h"
 
 #import "BZRSignInWithFacebookRequest.h"
 
