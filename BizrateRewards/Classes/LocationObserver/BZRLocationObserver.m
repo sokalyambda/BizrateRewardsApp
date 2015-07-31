@@ -106,7 +106,6 @@ static NSString *const kGeolocationPermissionsLastState = @"geolocationPermissio
  *
  *  @param isGeolocationEnable Enable value
  */
-
 - (void)checkForPermissionsChangingWithGeolocationEnabled:(BOOL)isGeolocationEnable
 {
     BOOL permissionsLastState = NO;

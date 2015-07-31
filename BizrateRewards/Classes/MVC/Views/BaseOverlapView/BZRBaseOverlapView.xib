@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="OpenSans-Regular.ttf">
+            <string>OpenSans</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="BZRBaseOverlapView">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Dx-P9-LCf" userLabel="Alert Holder">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NG7-ma-kua">
+                            <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                            <state key="normal" title="OK">
+                                <color key="titleColor" red="0.92156862750000001" green="0.92156862750000001" blue="0.92156862750000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="buttonApplyAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="GJc-qv-PGh"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sP5-wa-QGT">
+                            <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                            <state key="normal" title="NO">
+                                <color key="titleColor" red="0.92156862750000001" green="0.92156862750000001" blue="0.92156862750000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="buttonCancelAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="Vbv-NQ-ZLd"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="There is a custom alert view." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0bw-rm-xA7">
+                            <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="169" id="ETT-Y9-kkb"/>
+                                <constraint firstAttribute="height" constant="107" id="mdF-bf-km4"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="17"/>
+                            <color key="textColor" red="0.92156862750000001" green="0.92156862750000001" blue="0.92156862750000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="ETT-Y9-kkb"/>
+                                    <exclude reference="mdF-bf-km4"/>
+                                </mask>
+                            </variation>
+                            <variation key="heightClass=regular-widthClass=compact">
+                                <mask key="constraints">
+                                    <include reference="ETT-Y9-kkb"/>
+                                    <include reference="mdF-bf-km4"/>
+                                </mask>
+                            </variation>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="NG7-ma-kua" secondAttribute="bottom" constant="8" id="AVC-m3-Hfv"/>
+                        <constraint firstAttribute="height" constant="307" id="CqP-h4-087"/>
+                        <constraint firstAttribute="centerY" secondItem="0bw-rm-xA7" secondAttribute="centerY" id="Dih-ay-Hg6"/>
+                        <constraint firstAttribute="centerX" secondItem="0bw-rm-xA7" secondAttribute="centerX" constant="-0.5" id="Ehm-WC-iwd"/>
+                        <constraint firstItem="NG7-ma-kua" firstAttribute="centerY" secondItem="sP5-wa-QGT" secondAttribute="centerY" id="ROn-Kf-2ww"/>
+                        <constraint firstAttribute="centerX" secondItem="sP5-wa-QGT" secondAttribute="centerX" constant="-70" id="STm-f2-5BR"/>
+                        <constraint firstAttribute="centerX" secondItem="NG7-ma-kua" secondAttribute="centerX" constant="69" id="mMh-jg-f6Y"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="subviews">
+                            <exclude reference="NG7-ma-kua"/>
+                            <exclude reference="sP5-wa-QGT"/>
+                            <exclude reference="0bw-rm-xA7"/>
+                        </mask>
+                        <mask key="constraints">
+                            <exclude reference="CqP-h4-087"/>
+                            <exclude reference="Dih-ay-Hg6"/>
+                            <exclude reference="Ehm-WC-iwd"/>
+                            <exclude reference="AVC-m3-Hfv"/>
+                            <exclude reference="ROn-Kf-2ww"/>
+                            <exclude reference="mMh-jg-f6Y"/>
+                            <exclude reference="STm-f2-5BR"/>
+                        </mask>
+                    </variation>
+                    <variation key="heightClass=regular-widthClass=compact">
+                        <mask key="subviews">
+                            <include reference="NG7-ma-kua"/>
+                            <include reference="sP5-wa-QGT"/>
+                            <include reference="0bw-rm-xA7"/>
+                        </mask>
+                        <mask key="constraints">
+                            <include reference="CqP-h4-087"/>
+                            <include reference="Dih-ay-Hg6"/>
+                            <include reference="Ehm-WC-iwd"/>
+                            <include reference="AVC-m3-Hfv"/>
+                            <include reference="ROn-Kf-2ww"/>
+                            <include reference="mMh-jg-f6Y"/>
+                            <include reference="STm-f2-5BR"/>
+                        </mask>
+                    </variation>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="6Dx-P9-LCf" secondAttribute="trailing" id="YtU-Jj-UQB"/>
+                <constraint firstAttribute="centerX" secondItem="6Dx-P9-LCf" secondAttribute="centerX" id="ZsI-DI-drb"/>
+                <constraint firstAttribute="centerY" secondItem="6Dx-P9-LCf" secondAttribute="centerY" constant="0.5" id="mTo-rN-ZJR"/>
+                <constraint firstItem="6Dx-P9-LCf" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="nxE-1v-hx4"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="subviews">
+                    <exclude reference="6Dx-P9-LCf"/>
+                </mask>
+                <mask key="constraints">
+                    <exclude reference="YtU-Jj-UQB"/>
+                    <exclude reference="ZsI-DI-drb"/>
+                    <exclude reference="mTo-rN-ZJR"/>
+                    <exclude reference="nxE-1v-hx4"/>
+                </mask>
+            </variation>
+            <variation key="heightClass=regular-widthClass=compact">
+                <mask key="subviews">
+                    <include reference="6Dx-P9-LCf"/>
+                </mask>
+                <mask key="constraints">
+                    <include reference="YtU-Jj-UQB"/>
+                    <include reference="ZsI-DI-drb"/>
+                    <include reference="mTo-rN-ZJR"/>
+                    <include reference="nxE-1v-hx4"/>
+                </mask>
+            </variation>
+            <point key="canvasLocation" x="329" y="193"/>
+        </view>
+    </objects>
+</document>
