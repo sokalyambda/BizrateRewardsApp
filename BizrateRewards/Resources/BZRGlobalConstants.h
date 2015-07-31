@@ -31,30 +31,29 @@ static NSString *const RememberMeKey = @"RememberMeKey";
 static NSString *const UserNameKey = @"UsernameKey";
 static NSString *const PasswordKey = @"PasswordKey";
 
-static NSString *const MixpanelID = @"MixpanelID";
 static NSString *const MixpanelAliasID = @"MixpanelAliasID";
 
 // Mixpanel Events
 
-static NSString *const OpenAppEvent = @"Open App";
-static NSString *const SurveyViewedEvent = @"Survey viewed";
-static NSString *const SurveyCompletedEvent = @"Survey completed";
-static NSString *const SignupPageEvent = @"View Signup Page";
-static NSString *const CreateAccountPageEvent = @"View Create Account Page";
-static NSString *const CreateAcountClickedEvent = @"Create Acount Clicked";
-static NSString *const RegistrationSuccessfulEvent = @"Registration Successful";
-static NSString *const LoginSuccessfulEvent = @"Login Successful";
-static NSString *const PushNotificationPermissionEvent = @"Push Notification Permission";
-static NSString *const LocationPermissionEvent = @"Location Permission";
-static NSString *const GeofenceEnterEvent = @"Geofence Enter";
-static NSString *const GeofenceExitEvent = @"Geofence Exit";
+//static NSString *const OpenAppEvent = @"Open App";
+//static NSString *const SurveyViewedEvent = @"Survey viewed";
+//static NSString *const SurveyCompletedEvent = @"Survey completed";
+//static NSString *const SignupPageEvent = @"View Signup Page";
+//static NSString *const CreateAccountPageEvent = @"View Create Account Page";
+//static NSString *const CreateAcountClickedEvent = @"Create Acount Clicked";
+//static NSString *const RegistrationSuccessfulEvent = @"Registration Successful";
+//static NSString *const LoginSuccessfulEvent = @"Login Successful";
+//static NSString *const PushNotificationPermissionEvent = @"Push Notification Permission";
+//static NSString *const LocationPermissionEvent = @"Location Permission";
+//static NSString *const GeofenceEnterEvent = @"Geofence Enter";
+//static NSString *const GeofenceExitEvent = @"Geofence Exit";
 
 // Mixpanel Parameters
 
-static NSString *const AuthorizationType = @"Type";
+//static NSString *const AuthorizationType = @"Type";
 static NSString *const AuthTypeEmail = @"Email";
 static NSString *const AuthTypeFacebook = @"Facebook";
-static NSString *const AccessGrantedKey = @"Access Granted";
+//static NSString *const AccessGrantedKey = @"Access Granted";
 static NSString *const AccessGrantedKeyYes = @"YES";
 static NSString *const AccessGrantedKeyNo = @"NO";
 

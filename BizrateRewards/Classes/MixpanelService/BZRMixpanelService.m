@@ -12,101 +12,45 @@
 
 static NSString *const kMixpanelToken = @"f818411581cc210c670fe3351a46debe";//@"aae3e2388125817b27b8afcf99093d97";
 
+static NSString *const kMixpanelEventsFile = @"MixpanelEvents";
+static NSString *const kPlistResourceType = @"plist";
+
 @implementation BZRMixpanelService
 
 
 + (void)setupMixpanel
 {
-    Mixpanel *mixpanel = [Mixpanel sharedInstanceWithToken:kMixpanelToken];
-    NSString *mixpanelID = [[NSUserDefaults standardUserDefaults] objectForKey:MixpanelID];
-    
-    if (!mixpanelID) {
-        mixpanelID = [[[UIDevice currentDevice]identifierForVendor]UUIDString];
-        
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        [defaults setObject:mixpanelID forKey:MixpanelID];
-        [defaults synchronize];
-    }
-    [mixpanel identify:mixpanelID];
+    [Mixpanel sharedInstanceWithToken:kMixpanelToken];
 }
 
-+ (void)trackEventWithType:(BZRMixpanelEventType)eventType properties:(NSDictionary *)properties
++ (void)trackEventWithType:(BZRMixpanelEventType)eventType propertyValue:(NSString *)propertyValue
 {
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
-    NSString *event;
     
-    switch (eventType) {
-        case BZRMixpanelEventOpenApp: {
-            event = OpenAppEvent;
-            
-            break;
-        }
-        case BZRMixpanelEventSurveyViewed: {
-            event = SurveyViewedEvent;
-            break;
-        }
-        case BZRMixpanelEventSurveyCompeted: {
-            event = SurveyCompletedEvent;
-            break;
-        }
-        case BZRMixpanelEventSignupPage: {
-            event = SignupPageEvent;
-            break;
-        }
-        case BZRMixpanelEventCreateAccountPage: {
-            event = CreateAccountPageEvent;
-            break;
-        }
-        case BZRMixpanelEventCreateAcountClicked: {
-            event = CreateAcountClickedEvent;
-            break;
-        }
-        case BZRMixpanelEventRegistrationSuccessful: {
-            event = RegistrationSuccessfulEvent;
-            break;
-        }
-        case BZRMixpanelEventLoginSuccessful: {
-            event = LoginSuccessfulEvent;
-            break;
-        }
-        case BZRMixpanelEventPushNotificationPermission: {
-            event = PushNotificationPermissionEvent;
-            break;
-        }
-        case BZRMixpanelEventLocationPermission: {
-            event = LocationPermissionEvent;
-            break;
-        }
-        case BZRMixpanelEventGeofenceEnter: {
-            event = GeofenceEnterEvent;
-            break;
-        }
-        case BZRMixpanelEventGeofenceExit: {
-            event = GeofenceExitEvent;
-            break;
-        }
-
-    }
-    if (properties) {
-        [mixpanel track:event properties:properties];
+    NSArray *eventsArray = [NSArray arrayWithContentsOfFile:[[NSBundle mainBundle] pathForResource:kMixpanelEventsFile ofType:kPlistResourceType]];
+    NSString *eventName = [eventsArray[eventType] allKeys].firstObject;
+    NSString *propertyKey = eventsArray[eventType][eventName];
+    
+    if (propertyValue) {
+        [mixpanel track:eventName properties:@{propertyKey : propertyValue}];
     } else {
-        [mixpanel track:event];
+        [mixpanel track:eventName];
     }
 }
 
 + (void)setPeopleWithProperties:(NSDictionary *)properties
 {
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
-    NSString  *bizID = [[NSUserDefaults standardUserDefaults] objectForKey:MixpanelAliasID];
-    if (!bizID) {
-        bizID = [properties objectForKey:BizrateIDProperty];
-        [mixpanel createAlias:bizID forDistinctID:mixpanel.distinctId];
+    NSString  *aliasID = [[NSUserDefaults standardUserDefaults] objectForKey:MixpanelAliasID];
+    if (!aliasID) {
+        aliasID = [properties objectForKey:BizrateIDProperty];
+        [mixpanel createAlias:aliasID forDistinctID:mixpanel.distinctId];
         [mixpanel identify:mixpanel.distinctId];
         
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        [defaults setObject:bizID forKey:MixpanelAliasID];
+        [defaults setObject:aliasID forKey:MixpanelAliasID];
         [defaults synchronize];
-    }    
+    }
     [mixpanel.people set:properties];
 }
 

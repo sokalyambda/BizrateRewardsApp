@@ -61,7 +61,7 @@
 {
     [super viewDidLoad];
     
-    [BZRMixpanelService trackEventWithType:BZRMixpanelEventSurveyCompeted properties:nil];
+    [BZRMixpanelService trackEventWithType:BZRMixpanelEventSurveyCompeted propertyValue:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated
