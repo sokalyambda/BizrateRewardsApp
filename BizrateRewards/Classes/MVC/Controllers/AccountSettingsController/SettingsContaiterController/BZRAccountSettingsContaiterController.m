@@ -25,7 +25,7 @@ typedef enum : NSUInteger {
 
 #import "BZRPushNotifiactionService.h"
 #import "BZRLocationObserver.h"
-#import "BZRTermsAndConditionsHelper.h"
+#import "BZRRedirectionHelper.h"
 
 static NSString *const kEditProfileSegueIdentifier = @"editProfileSegue";
 
@@ -81,17 +81,17 @@ static NSString *const kEditProfileSegueIdentifier = @"editProfileSegue";
         }
             
         case BZRSettingsCellTermsOfService: {
-            [BZRTermsAndConditionsHelper showPrivacyAndTermsWithType:BZRConditionsTypeTermsAndConditions andWithNavigationController:self.navigationController];
+            [BZRRedirectionHelper showPrivacyAndTermsWithType:BZRConditionsTypeTermsAndConditions andWithNavigationController:self.navigationController];
             break;
         }
             
         case BZRSettingsCellUserAgreement: {
-            [BZRTermsAndConditionsHelper showPrivacyAndTermsWithType:BZRConditionsTypeUserAgreement andWithNavigationController:self.navigationController];
+            [BZRRedirectionHelper showPrivacyAndTermsWithType:BZRConditionsTypeUserAgreement andWithNavigationController:self.navigationController];
             break;
         }
             
         case BZRSettingsCellPrivacyPolicy: {
-            [BZRTermsAndConditionsHelper showPrivacyAndTermsWithType:BZRConditionsTypePrivacyPolicy andWithNavigationController:self.navigationController];
+            [BZRRedirectionHelper showPrivacyAndTermsWithType:BZRConditionsTypePrivacyPolicy andWithNavigationController:self.navigationController];
             break;
         }
             

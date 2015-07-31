@@ -12,7 +12,7 @@
 #import "BZRChooseSignUpTypeController.h"
 
 #import "BZRStorageManager.h"
-#import "BZRTermsAndConditionsHelper.h"
+#import "BZRRedirectionHelper.h"
 #import "BZRCommonDateFormatter.h"
 
 #import "BZRCheckBoxButton.h"
@@ -57,12 +57,12 @@ static NSString *const kChooseSignUpTypeSegueIdentifier = @"сhooseSignUpTypeSeg
 
 - (IBAction)privacyPolicyClick:(id)sender
 {
-    [BZRTermsAndConditionsHelper showPrivacyAndTermsWithType:BZRConditionsTypePrivacyPolicy andWithNavigationController:self.navigationController];
+    [BZRRedirectionHelper showPrivacyAndTermsWithType:BZRConditionsTypePrivacyPolicy andWithNavigationController:self.navigationController];
 }
 
 - (IBAction)termsAndConditionsClick:(id)sender
 {
-    [BZRTermsAndConditionsHelper showPrivacyAndTermsWithType:BZRConditionsTypeTermsAndConditions andWithNavigationController:self.navigationController];
+    [BZRRedirectionHelper showPrivacyAndTermsWithType:BZRConditionsTypeTermsAndConditions andWithNavigationController:self.navigationController];
 }
 
 - (IBAction)submitButtonClick:(UIButton *)sender

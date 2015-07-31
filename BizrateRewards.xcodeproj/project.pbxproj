@@ -80,7 +80,7 @@
 		58A91F431B3A995F0032607F /* BZRRoundedImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A91F421B3A995F0032607F /* BZRRoundedImageView.m */; };
 		58A91F481B3ABE6D0032607F /* BZRStorageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A91F471B3ABE6D0032607F /* BZRStorageManager.m */; };
 		58A91F581B3AD83F0032607F /* BZRUserProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A91F571B3AD83F0032607F /* BZRUserProfile.m */; };
-		58A9FE8F1B53A52A00DBE379 /* BZRTermsAndConditionsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A9FE8E1B53A52A00DBE379 /* BZRTermsAndConditionsHelper.m */; };
+		58A9FE8F1B53A52A00DBE379 /* BZRRedirectionHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A9FE8E1B53A52A00DBE379 /* BZRRedirectionHelper.m */; };
 		58A9FE911B53AC0200DBE379 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58A9FE901B53AC0200DBE379 /* MobileCoreServices.framework */; };
 		58A9FE931B53AF4600DBE379 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58A9FE921B53AF4600DBE379 /* AssetsLibrary.framework */; };
 		58AA1A221B5E1E6400BA824A /* BZRHighlightedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AA1A211B5E1E6400BA824A /* BZRHighlightedButton.m */; };
@@ -109,6 +109,9 @@
 		58BCCD8F1B6BA4D900521496 /* BZRSendLocationEventRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 58BCCD8E1B6BA4D900521496 /* BZRSendLocationEventRequest.m */; };
 		58BCCD931B6BAD9D00521496 /* BZRForgotPasswordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58BCCD921B6BAD9D00521496 /* BZRForgotPasswordController.m */; };
 		58BCCD971B6BB09000521496 /* BZRForgotPasswordRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 58BCCD961B6BB09000521496 /* BZRForgotPasswordRequest.m */; };
+		58BCCD9B1B6BB81700521496 /* BZRCustomURLHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 58BCCD9A1B6BB81700521496 /* BZRCustomURLHandler.m */; };
+		58BCCDA01B6BCDAF00521496 /* BZRSuccessResettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58BCCD9F1B6BCDAF00521496 /* BZRSuccessResettingController.m */; };
+		58BCCDA31B6BCDCA00521496 /* BZRFailureResettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58BCCDA21B6BCDCA00521496 /* BZRFailureResettingController.m */; };
 		58C770E01B5CD07400E9031F /* BZRTutorialTitleLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C770DF1B5CD07400E9031F /* BZRTutorialTitleLabel.m */; };
 		58C770E31B5CD08E00E9031F /* BZRTutorialDescriptionLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C770E21B5CD08E00E9031F /* BZRTutorialDescriptionLabel.m */; };
 		58C770E71B5D5B6A00E9031F /* BZRCommonNumberFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C770E61B5D5B6A00E9031F /* BZRCommonNumberFormatter.m */; };
@@ -290,8 +293,8 @@
 		58A91F471B3ABE6D0032607F /* BZRStorageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRStorageManager.m; path = Classes/Managers/StorageManager/BZRStorageManager.m; sourceTree = "<group>"; };
 		58A91F561B3AD83F0032607F /* BZRUserProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRUserProfile.h; path = Classes/MVC/Models/UserProfile/BZRUserProfile.h; sourceTree = "<group>"; };
 		58A91F571B3AD83F0032607F /* BZRUserProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRUserProfile.m; path = Classes/MVC/Models/UserProfile/BZRUserProfile.m; sourceTree = "<group>"; };
-		58A9FE8D1B53A52A00DBE379 /* BZRTermsAndConditionsHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRTermsAndConditionsHelper.h; path = Classes/Utilities/TermsAndConditionsHelper/BZRTermsAndConditionsHelper.h; sourceTree = "<group>"; };
-		58A9FE8E1B53A52A00DBE379 /* BZRTermsAndConditionsHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRTermsAndConditionsHelper.m; path = Classes/Utilities/TermsAndConditionsHelper/BZRTermsAndConditionsHelper.m; sourceTree = "<group>"; };
+		58A9FE8D1B53A52A00DBE379 /* BZRRedirectionHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRRedirectionHelper.h; path = Classes/Utilities/TermsAndConditionsHelper/BZRRedirectionHelper.h; sourceTree = "<group>"; };
+		58A9FE8E1B53A52A00DBE379 /* BZRRedirectionHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRRedirectionHelper.m; path = Classes/Utilities/TermsAndConditionsHelper/BZRRedirectionHelper.m; sourceTree = "<group>"; };
 		58A9FE901B53AC0200DBE379 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		58A9FE921B53AF4600DBE379 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		58AA1A201B5E1E6400BA824A /* BZRHighlightedButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRHighlightedButton.h; path = Classes/MVC/Views/HighlightedButton/BZRHighlightedButton.h; sourceTree = "<group>"; };
@@ -361,6 +364,12 @@
 		58BCCD921B6BAD9D00521496 /* BZRForgotPasswordController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRForgotPasswordController.m; path = Classes/MVC/Controllers/AuthorizationControllers/ForgotPasswordController/BZRForgotPasswordController.m; sourceTree = "<group>"; };
 		58BCCD951B6BB09000521496 /* BZRForgotPasswordRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRForgotPasswordRequest.h; path = ForgotPasswordRequest/BZRForgotPasswordRequest.h; sourceTree = "<group>"; };
 		58BCCD961B6BB09000521496 /* BZRForgotPasswordRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRForgotPasswordRequest.m; path = ForgotPasswordRequest/BZRForgotPasswordRequest.m; sourceTree = "<group>"; };
+		58BCCD991B6BB81700521496 /* BZRCustomURLHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRCustomURLHandler.h; path = Classes/Utilities/CustomURLHandler/BZRCustomURLHandler.h; sourceTree = "<group>"; };
+		58BCCD9A1B6BB81700521496 /* BZRCustomURLHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRCustomURLHandler.m; path = Classes/Utilities/CustomURLHandler/BZRCustomURLHandler.m; sourceTree = "<group>"; };
+		58BCCD9E1B6BCDAF00521496 /* BZRSuccessResettingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRSuccessResettingController.h; path = Classes/MVC/Controllers/AuthorizationControllers/ForgotPasswordController/SuccessResettingController/BZRSuccessResettingController.h; sourceTree = "<group>"; };
+		58BCCD9F1B6BCDAF00521496 /* BZRSuccessResettingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRSuccessResettingController.m; path = Classes/MVC/Controllers/AuthorizationControllers/ForgotPasswordController/SuccessResettingController/BZRSuccessResettingController.m; sourceTree = "<group>"; };
+		58BCCDA11B6BCDCA00521496 /* BZRFailureResettingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRFailureResettingController.h; path = Classes/MVC/Controllers/AuthorizationControllers/ForgotPasswordController/FailureResettingController/BZRFailureResettingController.h; sourceTree = "<group>"; };
+		58BCCDA21B6BCDCA00521496 /* BZRFailureResettingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRFailureResettingController.m; path = Classes/MVC/Controllers/AuthorizationControllers/ForgotPasswordController/FailureResettingController/BZRFailureResettingController.m; sourceTree = "<group>"; };
 		58C770DE1B5CD07400E9031F /* BZRTutorialTitleLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRTutorialTitleLabel.h; path = Classes/MVC/Views/Styles/TutorialStyleLabels/TutorialTitleLabel/BZRTutorialTitleLabel.h; sourceTree = "<group>"; };
 		58C770DF1B5CD07400E9031F /* BZRTutorialTitleLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRTutorialTitleLabel.m; path = Classes/MVC/Views/Styles/TutorialStyleLabels/TutorialTitleLabel/BZRTutorialTitleLabel.m; sourceTree = "<group>"; };
 		58C770E11B5CD08E00E9031F /* BZRTutorialDescriptionLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRTutorialDescriptionLabel.h; path = Classes/MVC/Views/Styles/TutorialStyleLabels/TutorialDescriptionLabel/BZRTutorialDescriptionLabel.h; sourceTree = "<group>"; };
@@ -508,6 +517,7 @@
 		58219EE31B38A21900A9541A /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				58BCCD981B6BB7E700521496 /* CustomURLHandler */,
 				5858F26B1B6126D000F38DFC /* ErrorHandler */,
 				58C770E41B5D5B3700E9031F /* CommonNumberFormatter */,
 				589420A21B452616004BAF48 /* PickersHelper */,
@@ -1325,8 +1335,8 @@
 		58A9FE8C1B53A4FB00DBE379 /* TermsAndConditionsHelper */ = {
 			isa = PBXGroup;
 			children = (
-				58A9FE8D1B53A52A00DBE379 /* BZRTermsAndConditionsHelper.h */,
-				58A9FE8E1B53A52A00DBE379 /* BZRTermsAndConditionsHelper.m */,
+				58A9FE8D1B53A52A00DBE379 /* BZRRedirectionHelper.h */,
+				58A9FE8E1B53A52A00DBE379 /* BZRRedirectionHelper.m */,
 			);
 			name = TermsAndConditionsHelper;
 			sourceTree = "<group>";
@@ -1619,6 +1629,8 @@
 		58BCCD901B6BAD7100521496 /* ForgotPasswordController */ = {
 			isa = PBXGroup;
 			children = (
+				58BCCD9D1B6BCD6C00521496 /* FailureResettingController */,
+				58BCCD9C1B6BCD6100521496 /* SuccessResettingController */,
 				58BCCD911B6BAD9D00521496 /* BZRForgotPasswordController.h */,
 				58BCCD921B6BAD9D00521496 /* BZRForgotPasswordController.m */,
 			);
@@ -1632,6 +1644,33 @@
 				58BCCD961B6BB09000521496 /* BZRForgotPasswordRequest.m */,
 			);
 			name = ForgotPasswordRequest;
+			sourceTree = "<group>";
+		};
+		58BCCD981B6BB7E700521496 /* CustomURLHandler */ = {
+			isa = PBXGroup;
+			children = (
+				58BCCD991B6BB81700521496 /* BZRCustomURLHandler.h */,
+				58BCCD9A1B6BB81700521496 /* BZRCustomURLHandler.m */,
+			);
+			name = CustomURLHandler;
+			sourceTree = "<group>";
+		};
+		58BCCD9C1B6BCD6100521496 /* SuccessResettingController */ = {
+			isa = PBXGroup;
+			children = (
+				58BCCD9E1B6BCDAF00521496 /* BZRSuccessResettingController.h */,
+				58BCCD9F1B6BCDAF00521496 /* BZRSuccessResettingController.m */,
+			);
+			name = SuccessResettingController;
+			sourceTree = "<group>";
+		};
+		58BCCD9D1B6BCD6C00521496 /* FailureResettingController */ = {
+			isa = PBXGroup;
+			children = (
+				58BCCDA11B6BCDCA00521496 /* BZRFailureResettingController.h */,
+				58BCCDA21B6BCDCA00521496 /* BZRFailureResettingController.m */,
+			);
+			name = FailureResettingController;
 			sourceTree = "<group>";
 		};
 		58C770D91B5CCF6000E9031F /* Services */ = {
@@ -2028,7 +2067,7 @@
 				58ACC08F1B39AD490081E546 /* BZRDashboardController.m in Sources */,
 				589420A91B452813004BAF48 /* BZRCommonPickerView.m in Sources */,
 				58A59E251B3EDFDC00A5F30C /* BZRGeolocationAccessController.m in Sources */,
-				58A9FE8F1B53A52A00DBE379 /* BZRTermsAndConditionsHelper.m in Sources */,
+				58A9FE8F1B53A52A00DBE379 /* BZRRedirectionHelper.m in Sources */,
 				589420981B451D87004BAF48 /* main.m in Sources */,
 				58BCCD8F1B6BA4D900521496 /* BZRSendLocationEventRequest.m in Sources */,
 				589BCCE01B56717200D49056 /* BZREditProfileField.m in Sources */,
@@ -2046,6 +2085,7 @@
 				58AA1A221B5E1E6400BA824A /* BZRHighlightedButton.m in Sources */,
 				585C32B41B63C9B9005BF07B /* BZRGetCurrentUserRequest.m in Sources */,
 				585C32A51B63AA3F005BF07B /* BZRNetworkRequest.m in Sources */,
+				58BCCDA01B6BCDAF00521496 /* BZRSuccessResettingController.m in Sources */,
 				58A59E341B3EE96700A5F30C /* BZREditProfileController.m in Sources */,
 				585C32A11B63AA3F005BF07B /* BZRProjectFacade.m in Sources */,
 				589420B11B4567B2004BAF48 /* BZREditProfileContainerController.m in Sources */,
@@ -2099,9 +2139,11 @@
 				585C32A71B63AA3F005BF07B /* BZRSessionManager.m in Sources */,
 				58A5BEBD1B414B1800B2BC27 /* BZRBorderedTextField.m in Sources */,
 				58ACC08B1B39A35D0081E546 /* BZRBaseAuthController.m in Sources */,
+				58BCCD9B1B6BB81700521496 /* BZRCustomURLHandler.m in Sources */,
 				58219F051B38A33E00A9541A /* UIViewController+fixOrientation.m in Sources */,
 				58219EFC1B38A30300A9541A /* BZRValidator.m in Sources */,
 				58BCCD841B6B8B8400521496 /* BZRBaseOverlapView.m in Sources */,
+				58BCCDA31B6BCDCA00521496 /* BZRFailureResettingController.m in Sources */,
 				58C770E01B5CD07400E9031F /* BZRTutorialTitleLabel.m in Sources */,
 				589BCCDC1B565E7D00D49056 /* BZRBaseViewController.m in Sources */,
 				58BCCD971B6BB09000521496 /* BZRForgotPasswordRequest.m in Sources */,

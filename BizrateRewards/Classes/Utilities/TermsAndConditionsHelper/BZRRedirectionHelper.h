@@ -12,8 +12,10 @@ typedef enum : NSUInteger {
     BZRConditionsTypeUserAgreement
 } BZRConditionsType;
 
-@interface BZRTermsAndConditionsHelper : NSObject
+@interface BZRRedirectionHelper : NSObject
 
 + (void)showPrivacyAndTermsWithType:(BZRConditionsType)type andWithNavigationController:(UINavigationController *)navigationController;
+
++ (void)showResetPasswordResultControllerWithObtainedURL:(NSURL *)redirectURL andWithNavigationController:(UINavigationController *)navigationController;
 
 @end

@@ -15,6 +15,10 @@
 
 #import "OB_Services.h"
 
+#import "BZRRedirectionHelper.h"
+
+#import "BZRBaseNavigationController.h"
+
 @import HockeySDK;
 
 static NSString *const kHockeyAppIdentifier = @"bf52cc6c526a07761d1b50a4078b6d67";
@@ -61,6 +65,9 @@ static NSString *const kOfferBeamRetailerID = @"A27C65B0-DB22-11E4-8830-0800200C
   sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation
 {
+    BZRBaseNavigationController *controller = (BZRBaseNavigationController *)self.window.rootViewController;
+    [BZRRedirectionHelper showResetPasswordResultControllerWithObtainedURL:url andWithNavigationController:controller];
+    
     return [[FBSDKApplicationDelegate sharedInstance] application:application
                                                           openURL:url
                                                 sourceApplication:sourceApplication
