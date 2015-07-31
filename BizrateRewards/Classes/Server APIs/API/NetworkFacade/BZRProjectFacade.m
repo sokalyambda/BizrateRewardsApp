@@ -67,7 +67,6 @@ static BZRSessionManager *sharedHTTPClient = nil;
 #pragma mark - Requests builder
 
 //Authorization Requests
-
 + (BZRNetworkOperation *)signInWithEmail:(NSString*)email
                              password:(NSString*)password
                               success:(void (^)(BOOL success))success
@@ -122,6 +121,23 @@ static BZRSessionManager *sharedHTTPClient = nil;
         failure(error, isCanceled);
     }];
     
+    return operation;
+}
+
++ (BZRNetworkOperation *)resetPasswordWithUserName:(NSString *)userName andNewPassword:(NSString *)newPassword onSuccess:(void (^)(BOOL isSuccess))success onFailure:(void (^)(NSError *error, BOOL isCanceled))failure
+{
+    BZRForgotPasswordRequest *request = [[BZRForgotPasswordRequest alloc] initWithUserName:userName andNewPassword:newPassword];
+    
+    BZRNetworkOperation* operation = [[self  HTTPClient] enqueueOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
+        
+        BZRForgotPasswordRequest *request = (BZRForgotPasswordRequest*)operation.networkRequest;
+        
+        success(YES);
+        
+    } failure:^(BZRNetworkOperation *operation ,NSError *error, BOOL isCanceled) {
+        ShowFailureResponseAlertWithError(error);
+        failure(error, isCanceled);
+    }];
     return operation;
 }
 
