@@ -272,11 +272,11 @@ static NSMutableString *_errorString;
                  onSuccess:(ValidationSuccessBlock)success
                  onFailure:(ValidationFailureBlock)failure
 {
-    if (![self validateEmailField:emailField]) {
+    if (![self validateEmailField:emailField] && failure) {
 
         failure([self validationErrorString]);
         
-    } else {
+    } else if (success) {
         success();
     }
 }
@@ -296,9 +296,9 @@ static NSMutableString *_errorString;
         isValid = NO;
     }
     
-    if (!isValid) {
+    if (!isValid && failure) {
         failure([self validationErrorString]);
-    } else {
+    } else if (success) {
         success();
     }
 }
@@ -318,9 +318,9 @@ static NSMutableString *_errorString;
         isValid = NO;
     }
     
-    if (!isValid) {
+    if (!isValid && failure) {
         failure([self validationErrorString]);
-    } else {
+    } else if (success) {
         success();
     }
 }
@@ -354,9 +354,9 @@ static NSMutableString *_errorString;
         }
     }
     
-    if (!isValid) {
+    if (!isValid && failure) {
         failure([self validationErrorString]);
-    } else {
+    } else if (success) {
         success();
     }
     

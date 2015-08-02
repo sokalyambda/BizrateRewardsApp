@@ -80,11 +80,15 @@ static BZRSessionManager *sharedHTTPClient = nil;
         
         [BZRStorageManager sharedStorage].userToken = request.token;
         
-        success(YES);
+        if (success) {
+            success(YES);
+        }
         
     } failure:^(BZRNetworkOperation *operation ,NSError *error, BOOL isCanceled) {
         ShowFailureResponseAlertWithError(error);
-        failure(error, isCanceled);
+        if (failure) {
+            failure(error, isCanceled);
+        }
     }];
     return operation;
 }
@@ -110,15 +114,21 @@ static BZRSessionManager *sharedHTTPClient = nil;
             
             [BZRStorageManager sharedStorage].userToken = request.userToken;
             
-            success(YES);
+            if (success) {
+               success(YES);
+            }
             
         } failure:^(BZRNetworkOperation *operation ,NSError *error, BOOL isCanceled) {
             ShowFailureResponseAlertWithError(error);
-            failure(error, isCanceled);
+            if (failure) {
+                failure(error, isCanceled);
+            }
         }];
 
     } onFailuer:^(NSError *error, BOOL isCanceled) {
-        failure(error, isCanceled);
+        if (failure) {
+            failure(error, isCanceled);
+        }
     }];
     
     return operation;
@@ -132,11 +142,15 @@ static BZRSessionManager *sharedHTTPClient = nil;
         
         BZRForgotPasswordRequest *request = (BZRForgotPasswordRequest*)operation.networkRequest;
         
-        success(YES);
+        if (success) {
+           success(YES);
+        }
         
     } failure:^(BZRNetworkOperation *operation ,NSError *error, BOOL isCanceled) {
         ShowFailureResponseAlertWithError(error);
-        failure(error, isCanceled);
+        if (failure) {
+            failure(error, isCanceled);
+        }
     }];
     return operation;
 }
@@ -159,14 +173,20 @@ static BZRSessionManager *sharedHTTPClient = nil;
             
             [BZRMixpanelService setAliasForUser:currentProfile];
             
-            success(YES);
+            if (success) {
+               success(YES);
+            }
             
         } failure:^(BZRNetworkOperation *operation ,NSError *error, BOOL isCanceled) {
             ShowFailureResponseAlertWithError(error);
-            failure(error, isCanceled);
+            if (failure) {
+                failure(error, isCanceled);
+            }
         }];
     } onFailuer:^(NSError *error, BOOL isCanceled) {
-        failure(error, isCanceled);
+        if (failure) {
+            failure(error, isCanceled);
+        }
     }];
     
     return operation;
@@ -189,14 +209,20 @@ static BZRSessionManager *sharedHTTPClient = nil;
             
             [BZRStorageManager sharedStorage].currentProfile = request.updatedProfile;
             
-            success(YES);
+            if (success) {
+                success(YES);
+            }
             
         } failure:^(BZRNetworkOperation *operation ,NSError *error, BOOL isCanceled) {
             ShowFailureResponseAlertWithError(error);
-            failure(error, isCanceled);
+            if (failure) {
+                failure(error, isCanceled);
+            }
         }];
     } onFailuer:^(NSError *error, BOOL isCanceled) {
-        failure(error, isCanceled);
+        if (failure) {
+            failure(error, isCanceled);
+        }
     }];
     
     return operation;
@@ -216,14 +242,20 @@ static BZRSessionManager *sharedHTTPClient = nil;
             
             BZRGetEligibleSurveysRequest *request = (BZRGetEligibleSurveysRequest*)operation.networkRequest;
             
-            success(request.eligibleSurveys);
+            if (success) {
+                success(request.eligibleSurveys);
+            }
             
         } failure:^(BZRNetworkOperation *operation ,NSError *error, BOOL isCanceled) {
             ShowFailureResponseAlertWithError(error);
-            failure(error, isCanceled);
+            if (failure) {
+                failure(error, isCanceled);
+            }
         }];
     } onFailuer:^(NSError *error, BOOL isCanceled) {
-        failure(error, isCanceled);
+        if (failure) {
+            failure(error, isCanceled);
+        }
     }];
     
     return operation;
@@ -242,10 +274,14 @@ static BZRSessionManager *sharedHTTPClient = nil;
             
             BZRSendLocationEventRequest *request = (BZRSendLocationEventRequest*)operation.networkRequest;
             
-            success(request.loggedEvent);
+            if (success) {
+                success(request.loggedEvent);
+            }
             
         } failure:^(BZRNetworkOperation *operation, NSError *error, BOOL isCanceled) {
-            failure(error, isCanceled);
+            if (failure) {
+                failure(error, isCanceled);
+            }
         }];
     } onFailuer:^(NSError *error, BOOL isCanceled) {
         
@@ -258,6 +294,7 @@ static BZRSessionManager *sharedHTTPClient = nil;
     [BZRStorageManager sharedStorage].currentProfile = nil;
     [BZRStorageManager sharedStorage].applicationToken = nil;
     [BZRStorageManager sharedStorage].userToken = nil;
+    [BZRStorageManager sharedStorage].facebookProfile = nil;
     
     [BZRKeychainHandler resetKeychain];
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:RememberMeKey];

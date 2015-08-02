@@ -55,17 +55,21 @@ static NSString *const kFBAppSecret = @"530fa94f7370fc20a54cc392fbd83cf2";
 {
     [[self facebookLoginManager] logInWithReadPermissions:@[kPublicProfile, kEmail] handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
         
-        if (error) {
+        if (error && failure) {
             failure(error, result.isCancelled);
-        } else if (result.isCancelled) {
+        } else if (result.isCancelled && failure) {
             failure(error, result.isCancelled);
         } else {
             if ([result.grantedPermissions containsObject:kEmail] && [result.grantedPermissions containsObject:kPublicProfile]) {
                 //store fb auth data
                 [self storeFacebookAuthData];
-                success(YES);
+                if (success) {
+                    success(YES);
+                }
             } else {
-                failure(error, result.isCancelled);
+                if (failure) {
+                    failure(error, result.isCancelled);
+                }
             }
         }
     }];
@@ -85,7 +89,7 @@ static NSString *const kFBAppSecret = @"530fa94f7370fc20a54cc392fbd83cf2";
     FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:parameters HTTPMethod:@"GET"];
     
     [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id response, NSError *error) {
-        if (error) {
+        if (error && failure) {
             failure(error);
         } else {
             NSMutableDictionary *userProfile = [NSMutableDictionary dictionaryWithDictionary:(NSDictionary *)response];
@@ -93,7 +97,9 @@ static NSString *const kFBAppSecret = @"530fa94f7370fc20a54cc392fbd83cf2";
             BZRFacebookProfile *facebookProfile = [[BZRFacebookProfile alloc] initWithServerResponse:userProfile];
             [facebookProfile setFacebookProfileToDefaultsForKey:FBCurrentProfile];
             
-            success(facebookProfile);
+            if (success) {
+                success(facebookProfile);
+            }
         }
     }];
 }
@@ -163,12 +169,10 @@ static NSString *const kFBAppSecret = @"530fa94f7370fc20a54cc392fbd83cf2";
 + (void)clearFacebookAuthData
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
     [defaults removeObjectForKey:FBAccessToken];
     [defaults removeObjectForKey:FBAccessTokenExpirationDate];
-    
-    [BZRStorageManager sharedStorage].facebookProfile = nil;
     [defaults removeObjectForKey:FBCurrentProfile];
-    
     [self setLoginSuccess:NO];
     
     [defaults synchronize];

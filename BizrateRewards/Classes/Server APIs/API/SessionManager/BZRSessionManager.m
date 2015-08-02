@@ -304,10 +304,18 @@ static NSInteger const kAllCleansCount = 1.f;
         @autoreleasepool {
             [self enqueueOperationWithNetworkRequest:failedOperation.networkRequest success:^(BZRNetworkOperation *operation) {
                 [weakSelf finishOperationInFailedQueue:failedOperation];
-                failedOperation.successBlock(operation);
+                
+                if (failedOperation.successBlock) {
+                    failedOperation.successBlock(operation);
+                }
+
             } failure:^(BZRNetworkOperation *operation, NSError *error, BOOL isCanceled) {
                 [weakSelf finishOperationInFailedQueue:failedOperation];
-                failedOperation.failureBlock(operation, error, isCanceled);
+                
+                if (failedOperation.failureBlock) {
+                    failedOperation.failureBlock(operation, error, isCanceled);
+                }
+                
             }];
         }
     }
@@ -337,18 +345,28 @@ static NSInteger const kAllCleansCount = 1.f;
     
     if (!isValid && sessionType == BZRSessionTypeUser) {
         [self renewSessionTokenOnSuccess:^(BOOL isSuccess) {
-            success(isSuccess);
+            if (success) {
+                success(isSuccess);
+            }
         } onFailure:^(NSError *error, BOOL isCanceled) {
-            failure(error, isCanceled);
+            if (failure) {
+                failure(error, isCanceled);
+            }
         }];
     } else if (!isValid && sessionType == BZRSessionTypeApplication) {
         [self getClientCredentialsOnSuccess:^(BOOL isSuccess) {
-            success(isSuccess);
+            if (success) {
+                success(isSuccess);
+            }
         } onFailure:^(NSError *error, BOOL isCanceled) {
-            failure(error, isCanceled);
+            if (failure) {
+                failure(error, isCanceled);
+            }
         }];
     } else {
-        success(YES);
+        if (success) {
+            success(YES);
+        }
     }
 }
 
@@ -364,11 +382,15 @@ static NSInteger const kAllCleansCount = 1.f;
         
         [BZRStorageManager sharedStorage].userToken = request.token;
         
-        success(YES);
+        if (success) {
+            success(YES);
+        }
         
     } failure:^(BZRNetworkOperation *operation, NSError *error, BOOL isCanceled) {
         
-        failure(error, isCanceled);
+        if (failure) {
+            failure(error, isCanceled);
+        }
         
     }];
     return operation;
@@ -386,11 +408,15 @@ static NSInteger const kAllCleansCount = 1.f;
         
         [BZRStorageManager sharedStorage].applicationToken = request.token;
         
-        success(YES);
+        if (success) {
+            success(YES);
+        }
         
     } failure:^(BZRNetworkOperation *operation ,NSError *error, BOOL isCanceled) {
         ShowFailureResponseAlertWithError(error);
-        failure(error, isCanceled);
+        if (failure) {
+            failure(error, isCanceled);
+        }
     }];
     return operation;
 }
