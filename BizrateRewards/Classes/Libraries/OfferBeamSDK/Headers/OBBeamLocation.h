@@ -18,7 +18,7 @@
 @property (nonatomic, retain) NSNumber * beam_latitude;
 @property (nonatomic, retain) NSNumber * beam_longitude;
 @property (nonatomic, retain) NSString * store_id;
-@property (nonatomic, retain) NSString * location;
+@property (nonatomic, retain) NSString * comp_loc;
 @property (nonatomic, retain) NSSet *oboffer;
 @property (nonatomic, retain) OBLocationItem *obstore;
 @end

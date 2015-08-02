@@ -33,15 +33,21 @@ static NSString *const kOfferBeamRetailerID = @"A27C65B0-DB22-11E4-8830-0800200C
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    NSURL *url = (NSURL *)[launchOptions valueForKey:UIApplicationLaunchOptionsURLKey];
+    [BZRRedirectionHelper showResetPasswordResultControllerWithObtainedURL:url];
+    
+    //setup mixPanel service
     [BZRMixpanelService setupMixpanel];
     [BZRMixpanelService trackEventWithType:BZRMixpanelEventOpenApp propertyValue:nil];
     
+    //setup hockey app service
     [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:kHockeyAppIdentifier];
     [[BITHockeyManager sharedHockeyManager].authenticator authenticateInstallation];
     [[BITHockeyManager sharedHockeyManager] startManager];
     
-//    [OB_Services start];
-//    [OB_Services setRetailerCode:kOfferBeamRetailerID];
+    //setup OfferBeam service
+    [OB_Services start];
+    [OB_Services setRetailerCode:kOfferBeamRetailerID];
     
     return [[FBSDKApplicationDelegate sharedInstance] application:application
                                     didFinishLaunchingWithOptions:launchOptions];
@@ -65,8 +71,7 @@ static NSString *const kOfferBeamRetailerID = @"A27C65B0-DB22-11E4-8830-0800200C
   sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation
 {
-    BZRBaseNavigationController *controller = (BZRBaseNavigationController *)self.window.rootViewController;
-    [BZRRedirectionHelper showResetPasswordResultControllerWithObtainedURL:url andWithNavigationController:controller];
+    [BZRRedirectionHelper showResetPasswordResultControllerWithObtainedURL:url];
     
     return [[FBSDKApplicationDelegate sharedInstance] application:application
                                                           openURL:url

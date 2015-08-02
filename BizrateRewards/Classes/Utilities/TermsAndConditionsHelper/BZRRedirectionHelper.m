@@ -12,10 +12,17 @@
 #import "BZRPrivacyAndTermsController.h"
 #import "BZRSuccessResettingController.h"
 #import "BZRFailureResettingController.h"
+#import "BZRBaseNavigationController.h"
+
+#import "AppDelegate.h"
 
 static NSString *const kStoryboardName = @"Main";
 
 static NSString *const kIsResettingSuccess = @"isResettingSuccess";
+
+static NSString *const kAppURLPrefix = @"com.bizraterewards://";
+
+static NSString *const kTermsAndConditionsLink = @"http://www.bizraterewards.com/program-terms.html";
 
 @implementation BZRRedirectionHelper
 
@@ -36,15 +43,15 @@ static NSString *const kIsResettingSuccess = @"isResettingSuccess";
     switch (type) {
         case BZRConditionsTypePrivacyPolicy:
             controller.navigationItem.title = NSLocalizedString(@"Privacy Policy", nil);
-            currentURLString = @"urlForPrivacyPolicy";
+            currentURLString = kTermsAndConditionsLink;
             break;
         case BZRConditionsTypeTermsAndConditions:
             controller.navigationItem.title = NSLocalizedString(@"Terms and Conditions", nil);
-            currentURLString = @"urlForTermsAndConditions";
+            currentURLString = kTermsAndConditionsLink;
             break;
         case BZRConditionsTypeUserAgreement:
             controller.navigationItem.title = NSLocalizedString(@"User Agreement", nil);
-            currentURLString = @"urlForUserAgreement";
+            currentURLString = kTermsAndConditionsLink;
             break;
             
         default:
@@ -61,8 +68,15 @@ static NSString *const kIsResettingSuccess = @"isResettingSuccess";
  *  @param redirectURL          URL which has to be parsed for determining destination controller
  *  @param navigationController Navigation controller that will push the needed controller
  */
-+ (void)showResetPasswordResultControllerWithObtainedURL:(NSURL *)redirectURL andWithNavigationController:(UINavigationController *)navigationController
++ (void)showResetPasswordResultControllerWithObtainedURL:(NSURL *)redirectURL
 {
+    if (!redirectURL || redirectURL.isFileURL || ![redirectURL.absoluteString containsString:kAppURLPrefix]) {
+        return;
+    }
+    
+    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+    BZRBaseNavigationController *navigationController = (BZRBaseNavigationController *)appDelegate.window.rootViewController;
+    
     NSDictionary *parsedParameters = [BZRCustomURLHandler urlParsingParametersFromURL:redirectURL];
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:kStoryboardName bundle:[NSBundle mainBundle]];
     

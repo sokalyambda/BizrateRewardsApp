@@ -8,7 +8,7 @@
 
 #import "BZRLocationEvent.h"
 
-static NSString *const kLocationId = @"locationId";
+static NSString *const kLocationId = @"altStoreId";
 static NSString *const kLatitude = @"latitude";
 static NSString *const kLongitude = @"longitude";
 static NSString *const kCustomerId = @"customerId";

@@ -20,7 +20,7 @@
 #import "OBLocationItem.h"
 #import "OBBeamLocation.h"
 #import "OBCustomer.h"
-#import "Store.h"
+
 
 @interface OB_DataManager : NSObject {
 }
@@ -40,6 +40,8 @@
 -(void)findAllonEntity:(NSString *) entity onCompletion:(void (^)(id result,NSError *error))onCompletion;
 -(BOOL)deleteAllonEntity:(NSString *) entity;
 -(void)deleteAllonEntity:(NSString *) entity onCompletion:(void (^)(BOOL success,NSError *error))onCompletion;
+
+-(void)deleteByAttribute:(NSString *) attr withValue:(NSString *)value onEntity:(NSString *) entity  onCompletion:(void (^)(BOOL success,NSError *error))onCompletion;
 
 -(void)findFirstByAttribute:(NSString *) attr withValue:(NSString *)value onEntity:(NSString *) entity  onCompletion:(void (^)(id result,NSError *error))onCompletion;
 

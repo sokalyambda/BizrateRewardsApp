@@ -2,7 +2,7 @@
 //  OBLocationLog.h
 //  SymphonyEYC
 //
-//  Created by Praveen Kumar on 4/9/15.
+//  Created by Praveen Kumar on 7/9/15.
 //  Copyright (c) 2015 Praveen Kumar. All rights reserved.
 //
 
@@ -19,5 +19,8 @@
 @property (nonatomic, retain) NSString * speed;
 @property (nonatomic, retain) NSNumber * timestamp;
 @property (nonatomic, retain) NSString * timezone;
+@property (nonatomic, retain) NSString * beam_id;
+@property (nonatomic, retain) NSString * status;
+@property (nonatomic, retain) NSNumber * record_id;
 
 @end

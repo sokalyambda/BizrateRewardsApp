@@ -12,7 +12,13 @@
 
 #import "OB_Services.h"
 
+#import "BZRProjectFacade.h"
+
+#import "BZRLocationEvent.h"
+
 static NSString *const kGeolocationPermissionsLastState = @"geolocationPermissionsLastState";
+
+static NSString *const kOBStore = @"Store";
 
 @interface BZRLocationObserver ()<CLLocationManagerDelegate, OB_LocationServicesDelegate>
 
@@ -50,7 +56,7 @@ static NSString *const kGeolocationPermissionsLastState = @"geolocationPermissio
         }
         
         [_locationManager startUpdatingLocation];
-//        [self setupOfferBeamObserver];
+        [self setupOfferBeamObserver];
     }
     return self;
 }
@@ -132,7 +138,20 @@ static NSString *const kGeolocationPermissionsLastState = @"geolocationPermissio
 
 - (void)setupOfferBeamObserver
 {
+    [[OB_Services sharedInstance] requestAlwaysAuthorization];
     [OB_Services setLocationDelegate:self];
+}
+
+- (void)sendLocationEventWithInitDictionary:(NSDictionary *)dictionary andType:(BZRLocaionEventType)eventType
+{
+    BZRLocationEvent *locationEvent = [[BZRLocationEvent alloc] initWithServerResponse:dictionary[kOBStore]];
+    locationEvent.eventType = eventType;
+    
+    [BZRProjectFacade sendGeolocationEvent:locationEvent onSuccess:^(BZRLocationEvent *locationEvent) {
+        
+    } onFailure:^(NSError *error, BOOL isCanceled) {
+        
+    }];
 }
 
 #pragma mark - OB_LocationServicesDelegate
@@ -140,11 +159,13 @@ static NSString *const kGeolocationPermissionsLastState = @"geolocationPermissio
 - (void)OB_receivedOnEnter:(NSDictionary *)data
 {
     NSLog(@"received on enter %@", data);
+    [self sendLocationEventWithInitDictionary:data andType:BZRLocaionEventTypeEntry];
 }
 
 - (void)OB_receivedOnExit:(NSDictionary *)data
 {
     NSLog(@"received on exit %@", data);
+    [self sendLocationEventWithInitDictionary:data andType:BZRLocaionEventTypeExit];
 }
 
 - (void)send_message:(NSString *)str

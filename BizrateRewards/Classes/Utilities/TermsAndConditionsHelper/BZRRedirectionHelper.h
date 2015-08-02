@@ -16,6 +16,6 @@ typedef enum : NSUInteger {
 
 + (void)showPrivacyAndTermsWithType:(BZRConditionsType)type andWithNavigationController:(UINavigationController *)navigationController;
 
-+ (void)showResetPasswordResultControllerWithObtainedURL:(NSURL *)redirectURL andWithNavigationController:(UINavigationController *)navigationController;
++ (void)showResetPasswordResultControllerWithObtainedURL:(NSURL *)redirectURL;
 
 @end

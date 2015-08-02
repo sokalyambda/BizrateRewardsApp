@@ -40,11 +40,20 @@
 
 #pragma mark - UIWebViewDelegate
 
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+- (void)webViewDidStartLoad:(UIWebView *)webView
 {
-    NSURL *url = request.URL;
-    NSLog(@"url %@", url);
-    return YES;
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+}
+
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
+{
+    ShowFailureResponseAlertWithError(error);
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
 }
 
 @end

@@ -84,8 +84,6 @@
 		58A9FE911B53AC0200DBE379 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58A9FE901B53AC0200DBE379 /* MobileCoreServices.framework */; };
 		58A9FE931B53AF4600DBE379 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58A9FE921B53AF4600DBE379 /* AssetsLibrary.framework */; };
 		58AA1A221B5E1E6400BA824A /* BZRHighlightedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AA1A211B5E1E6400BA824A /* BZRHighlightedButton.m */; };
-		58AA1A511B5E33CD00BA824A /* ModelOfferBeamSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 58AA1A501B5E33CD00BA824A /* ModelOfferBeamSDK.bundle */; };
-		58AA1A531B5E341E00BA824A /* libOfferBeamSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58AA1A521B5E341E00BA824A /* libOfferBeamSDK.a */; };
 		58ACC06A1B3937010081E546 /* BZRStartTutorialController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ACC0691B3937010081E546 /* BZRStartTutorialController.m */; };
 		58ACC06D1B3937160081E546 /* BZRAutologinController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ACC06C1B3937160081E546 /* BZRAutologinController.m */; };
 		58ACC0761B395E6A0081E546 /* BZRPrivacyAndTermsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ACC0751B395E6A0081E546 /* BZRPrivacyAndTermsController.m */; };
@@ -117,6 +115,19 @@
 		58C770E71B5D5B6A00E9031F /* BZRCommonNumberFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C770E61B5D5B6A00E9031F /* BZRCommonNumberFormatter.m */; };
 		58D1E5D11B662EBD00347208 /* BZRSignInWithFacebookRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 58D1E5D01B662EBD00347208 /* BZRSignInWithFacebookRequest.m */; };
 		58D1E5D51B66426900347208 /* BZRFacebookService.m in Sources */ = {isa = PBXBuildFile; fileRef = 58D1E5D41B66426900347208 /* BZRFacebookService.m */; };
+		58D32D4B1B6D3CFD00896D08 /* libOfferBeamSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58D32D491B6D3CFD00896D08 /* libOfferBeamSDK.a */; };
+		58D32D4C1B6D3CFD00896D08 /* ModelOfferBeamSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 58D32D4A1B6D3CFD00896D08 /* ModelOfferBeamSDK.bundle */; };
+		58D32D591B6D403100896D08 /* Carson.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 58D32D4E1B6D403100896D08 /* Carson.gpx */; };
+		58D32D5A1B6D403100896D08 /* Dublin.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 58D32D4F1B6D403100896D08 /* Dublin.gpx */; };
+		58D32D5B1B6D403100896D08 /* Los Angeles.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 58D32D501B6D403100896D08 /* Los Angeles.gpx */; };
+		58D32D5C1B6D403100896D08 /* Manhattan Beach.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 58D32D511B6D403100896D08 /* Manhattan Beach.gpx */; };
+		58D32D5D1B6D403100896D08 /* Pleasanton.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 58D32D521B6D403100896D08 /* Pleasanton.gpx */; };
+		58D32D5E1B6D403100896D08 /* Redondo Beach.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 58D32D531B6D403100896D08 /* Redondo Beach.gpx */; };
+		58D32D5F1B6D403100896D08 /* San Ramon.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 58D32D541B6D403100896D08 /* San Ramon.gpx */; };
+		58D32D601B6D403100896D08 /* Santa Monica.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 58D32D551B6D403100896D08 /* Santa Monica.gpx */; };
+		58D32D611B6D403100896D08 /* Torrance exit.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 58D32D561B6D403100896D08 /* Torrance exit.gpx */; };
+		58D32D621B6D403100896D08 /* Torrance.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 58D32D571B6D403100896D08 /* Torrance.gpx */; };
+		58D32D631B6D403100896D08 /* Venice.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 58D32D581B6D403100896D08 /* Venice.gpx */; };
 		58DF1AE81B584CD000D28951 /* BZRAssetsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 58DF1AE71B584CD000D28951 /* BZRAssetsHelper.m */; };
 		58E238A41B5AA0B8007F8664 /* UIFont+Styles.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E238A31B5AA0B8007F8664 /* UIFont+Styles.m */; };
 		58E512431B4C70AF00865694 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 58E512391B4C70AF00865694 /* OpenSans-Bold.ttf */; };
@@ -299,26 +310,6 @@
 		58A9FE921B53AF4600DBE379 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		58AA1A201B5E1E6400BA824A /* BZRHighlightedButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRHighlightedButton.h; path = Classes/MVC/Views/HighlightedButton/BZRHighlightedButton.h; sourceTree = "<group>"; };
 		58AA1A211B5E1E6400BA824A /* BZRHighlightedButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRHighlightedButton.m; path = Classes/MVC/Views/HighlightedButton/BZRHighlightedButton.m; sourceTree = "<group>"; };
-		58AA1A3E1B5E33BB00BA824A /* OB_DataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OB_DataManager.h; sourceTree = "<group>"; };
-		58AA1A3F1B5E33BB00BA824A /* OB_DBOperations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OB_DBOperations.h; sourceTree = "<group>"; };
-		58AA1A401B5E33BB00BA824A /* OB_KeyChainStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OB_KeyChainStore.h; sourceTree = "<group>"; };
-		58AA1A411B5E33BB00BA824A /* OB_LocationServices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OB_LocationServices.h; sourceTree = "<group>"; };
-		58AA1A421B5E33BB00BA824A /* OB_Macro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OB_Macro.h; sourceTree = "<group>"; };
-		58AA1A431B5E33BB00BA824A /* OB_NetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OB_NetworkManager.h; sourceTree = "<group>"; };
-		58AA1A441B5E33BB00BA824A /* OB_Services.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OB_Services.h; sourceTree = "<group>"; };
-		58AA1A451B5E33BB00BA824A /* OB_Webservices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OB_Webservices.h; sourceTree = "<group>"; };
-		58AA1A461B5E33BB00BA824A /* OBBeamLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBBeamLocation.h; sourceTree = "<group>"; };
-		58AA1A471B5E33BB00BA824A /* OBCategoriesItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBCategoriesItem.h; sourceTree = "<group>"; };
-		58AA1A481B5E33BB00BA824A /* OBCouponItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBCouponItem.h; sourceTree = "<group>"; };
-		58AA1A491B5E33BB00BA824A /* OBCustomer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBCustomer.h; sourceTree = "<group>"; };
-		58AA1A4A1B5E33BB00BA824A /* OBImageitems.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBImageitems.h; sourceTree = "<group>"; };
-		58AA1A4B1B5E33BB00BA824A /* OBLocationItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBLocationItem.h; sourceTree = "<group>"; };
-		58AA1A4C1B5E33BB00BA824A /* OBLocationLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBLocationLog.h; sourceTree = "<group>"; };
-		58AA1A4D1B5E33BB00BA824A /* OBStoreParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBStoreParam.h; sourceTree = "<group>"; };
-		58AA1A4E1B5E33BB00BA824A /* OBSystemParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBSystemParam.h; sourceTree = "<group>"; };
-		58AA1A4F1B5E33BB00BA824A /* Store.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Store.h; sourceTree = "<group>"; };
-		58AA1A501B5E33CD00BA824A /* ModelOfferBeamSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = ModelOfferBeamSDK.bundle; path = Classes/Libraries/OfferBeamSDK/ModelOfferBeamSDK.bundle; sourceTree = "<group>"; };
-		58AA1A521B5E341E00BA824A /* libOfferBeamSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libOfferBeamSDK.a; path = Classes/Libraries/OfferBeamSDK/libOfferBeamSDK.a; sourceTree = "<group>"; };
 		58ACC0681B3937010081E546 /* BZRStartTutorialController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRStartTutorialController.h; path = Classes/MVC/Controllers/TutorialViewControllers/PageContentController/BZRStartTutorialController.h; sourceTree = "<group>"; };
 		58ACC0691B3937010081E546 /* BZRStartTutorialController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRStartTutorialController.m; path = Classes/MVC/Controllers/TutorialViewControllers/PageContentController/BZRStartTutorialController.m; sourceTree = "<group>"; };
 		58ACC06B1B3937160081E546 /* BZRAutologinController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRAutologinController.h; path = Classes/MVC/Controllers/TutorialViewControllers/BaseTutorialController/BZRAutologinController.h; sourceTree = "<group>"; };
@@ -380,6 +371,36 @@
 		58D1E5D01B662EBD00347208 /* BZRSignInWithFacebookRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRSignInWithFacebookRequest.m; path = SignInWithFacebookRequest/BZRSignInWithFacebookRequest.m; sourceTree = "<group>"; };
 		58D1E5D31B66426900347208 /* BZRFacebookService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRFacebookService.h; path = Classes/FacebookService/BZRFacebookService.h; sourceTree = "<group>"; };
 		58D1E5D41B66426900347208 /* BZRFacebookService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRFacebookService.m; path = Classes/FacebookService/BZRFacebookService.m; sourceTree = "<group>"; };
+		58D32D381B6D3CEE00896D08 /* OB_DataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OB_DataManager.h; sourceTree = "<group>"; };
+		58D32D391B6D3CEE00896D08 /* OB_DBOperations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OB_DBOperations.h; sourceTree = "<group>"; };
+		58D32D3A1B6D3CEE00896D08 /* OB_KeyChainStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OB_KeyChainStore.h; sourceTree = "<group>"; };
+		58D32D3B1B6D3CEE00896D08 /* OB_LocationServices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OB_LocationServices.h; sourceTree = "<group>"; };
+		58D32D3C1B6D3CEE00896D08 /* OB_Macro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OB_Macro.h; sourceTree = "<group>"; };
+		58D32D3D1B6D3CEE00896D08 /* OB_NetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OB_NetworkManager.h; sourceTree = "<group>"; };
+		58D32D3E1B6D3CEE00896D08 /* OB_Services.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OB_Services.h; sourceTree = "<group>"; };
+		58D32D3F1B6D3CEE00896D08 /* OB_Webservices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OB_Webservices.h; sourceTree = "<group>"; };
+		58D32D401B6D3CEE00896D08 /* OBBeamLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBBeamLocation.h; sourceTree = "<group>"; };
+		58D32D411B6D3CEE00896D08 /* OBCategoriesItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBCategoriesItem.h; sourceTree = "<group>"; };
+		58D32D421B6D3CEE00896D08 /* OBCouponItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBCouponItem.h; sourceTree = "<group>"; };
+		58D32D431B6D3CEE00896D08 /* OBCustomer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBCustomer.h; sourceTree = "<group>"; };
+		58D32D441B6D3CEE00896D08 /* OBImageitems.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBImageitems.h; sourceTree = "<group>"; };
+		58D32D451B6D3CEE00896D08 /* OBLocationItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBLocationItem.h; sourceTree = "<group>"; };
+		58D32D461B6D3CEE00896D08 /* OBLocationLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBLocationLog.h; sourceTree = "<group>"; };
+		58D32D471B6D3CEE00896D08 /* OBStoreParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBStoreParam.h; sourceTree = "<group>"; };
+		58D32D481B6D3CEE00896D08 /* OBSystemParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBSystemParam.h; sourceTree = "<group>"; };
+		58D32D491B6D3CFD00896D08 /* libOfferBeamSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libOfferBeamSDK.a; sourceTree = "<group>"; };
+		58D32D4A1B6D3CFD00896D08 /* ModelOfferBeamSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ModelOfferBeamSDK.bundle; sourceTree = "<group>"; };
+		58D32D4E1B6D403100896D08 /* Carson.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Carson.gpx; sourceTree = "<group>"; };
+		58D32D4F1B6D403100896D08 /* Dublin.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Dublin.gpx; sourceTree = "<group>"; };
+		58D32D501B6D403100896D08 /* Los Angeles.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "Los Angeles.gpx"; sourceTree = "<group>"; };
+		58D32D511B6D403100896D08 /* Manhattan Beach.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "Manhattan Beach.gpx"; sourceTree = "<group>"; };
+		58D32D521B6D403100896D08 /* Pleasanton.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Pleasanton.gpx; sourceTree = "<group>"; };
+		58D32D531B6D403100896D08 /* Redondo Beach.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "Redondo Beach.gpx"; sourceTree = "<group>"; };
+		58D32D541B6D403100896D08 /* San Ramon.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "San Ramon.gpx"; sourceTree = "<group>"; };
+		58D32D551B6D403100896D08 /* Santa Monica.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "Santa Monica.gpx"; sourceTree = "<group>"; };
+		58D32D561B6D403100896D08 /* Torrance exit.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "Torrance exit.gpx"; sourceTree = "<group>"; };
+		58D32D571B6D403100896D08 /* Torrance.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Torrance.gpx; sourceTree = "<group>"; };
+		58D32D581B6D403100896D08 /* Venice.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Venice.gpx; sourceTree = "<group>"; };
 		58DF1AE61B584CD000D28951 /* BZRAssetsHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRAssetsHelper.h; path = Classes/Utilities/AssetsHelper/BZRAssetsHelper.h; sourceTree = "<group>"; };
 		58DF1AE71B584CD000D28951 /* BZRAssetsHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRAssetsHelper.m; path = Classes/Utilities/AssetsHelper/BZRAssetsHelper.m; sourceTree = "<group>"; };
 		58E238A21B5AA0B8007F8664 /* UIFont+Styles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIFont+Styles.h"; path = "Classes/Categories/UIFont/UIFont+Styles/UIFont+Styles.h"; sourceTree = "<group>"; };
@@ -423,11 +444,11 @@
 				5858F26A1B61247D00F38DFC /* SystemConfiguration.framework in Frameworks */,
 				58A9FE931B53AF4600DBE379 /* AssetsLibrary.framework in Frameworks */,
 				58A9FE911B53AC0200DBE379 /* MobileCoreServices.framework in Frameworks */,
+				58D32D4B1B6D3CFD00896D08 /* libOfferBeamSDK.a in Frameworks */,
 				58A91F2F1B3A80A80032607F /* CoreLocation.framework in Frameworks */,
 				58219F241B38A5A600A9541A /* QuartzCore.framework in Frameworks */,
 				58219F221B38A59F00A9541A /* CoreGraphics.framework in Frameworks */,
 				58219F201B38A59000A9541A /* Security.framework in Frameworks */,
-				58AA1A531B5E341E00BA824A /* libOfferBeamSDK.a in Frameworks */,
 				58219F1E1B38A58900A9541A /* UIKit.framework in Frameworks */,
 				58219F1C1B38A58300A9541A /* Foundation.framework in Frameworks */,
 				0DD221EAC7B2690BDE637D84 /* libPods.a in Frameworks */,
@@ -463,6 +484,7 @@
 		58219EDC1B38A06E00A9541A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				58D32D4D1B6D400600896D08 /* Location Examples */,
 				58E512241B4C6DFE00865694 /* Fonts */,
 				589420941B451D87004BAF48 /* BizrateRewards-Prefix.pch */,
 				589420951B451D87004BAF48 /* Info.plist */,
@@ -1370,8 +1392,8 @@
 		58AA1A241B5E330600BA824A /* OfferBeamSDK */ = {
 			isa = PBXGroup;
 			children = (
-				58AA1A521B5E341E00BA824A /* libOfferBeamSDK.a */,
-				58AA1A501B5E33CD00BA824A /* ModelOfferBeamSDK.bundle */,
+				58D32D491B6D3CFD00896D08 /* libOfferBeamSDK.a */,
+				58D32D4A1B6D3CFD00896D08 /* ModelOfferBeamSDK.bundle */,
 				58AA1A3D1B5E33BB00BA824A /* Headers */,
 			);
 			name = OfferBeamSDK;
@@ -1380,24 +1402,23 @@
 		58AA1A3D1B5E33BB00BA824A /* Headers */ = {
 			isa = PBXGroup;
 			children = (
-				58AA1A3E1B5E33BB00BA824A /* OB_DataManager.h */,
-				58AA1A3F1B5E33BB00BA824A /* OB_DBOperations.h */,
-				58AA1A401B5E33BB00BA824A /* OB_KeyChainStore.h */,
-				58AA1A411B5E33BB00BA824A /* OB_LocationServices.h */,
-				58AA1A421B5E33BB00BA824A /* OB_Macro.h */,
-				58AA1A431B5E33BB00BA824A /* OB_NetworkManager.h */,
-				58AA1A441B5E33BB00BA824A /* OB_Services.h */,
-				58AA1A451B5E33BB00BA824A /* OB_Webservices.h */,
-				58AA1A461B5E33BB00BA824A /* OBBeamLocation.h */,
-				58AA1A471B5E33BB00BA824A /* OBCategoriesItem.h */,
-				58AA1A481B5E33BB00BA824A /* OBCouponItem.h */,
-				58AA1A491B5E33BB00BA824A /* OBCustomer.h */,
-				58AA1A4A1B5E33BB00BA824A /* OBImageitems.h */,
-				58AA1A4B1B5E33BB00BA824A /* OBLocationItem.h */,
-				58AA1A4C1B5E33BB00BA824A /* OBLocationLog.h */,
-				58AA1A4D1B5E33BB00BA824A /* OBStoreParam.h */,
-				58AA1A4E1B5E33BB00BA824A /* OBSystemParam.h */,
-				58AA1A4F1B5E33BB00BA824A /* Store.h */,
+				58D32D381B6D3CEE00896D08 /* OB_DataManager.h */,
+				58D32D391B6D3CEE00896D08 /* OB_DBOperations.h */,
+				58D32D3A1B6D3CEE00896D08 /* OB_KeyChainStore.h */,
+				58D32D3B1B6D3CEE00896D08 /* OB_LocationServices.h */,
+				58D32D3C1B6D3CEE00896D08 /* OB_Macro.h */,
+				58D32D3D1B6D3CEE00896D08 /* OB_NetworkManager.h */,
+				58D32D3E1B6D3CEE00896D08 /* OB_Services.h */,
+				58D32D3F1B6D3CEE00896D08 /* OB_Webservices.h */,
+				58D32D401B6D3CEE00896D08 /* OBBeamLocation.h */,
+				58D32D411B6D3CEE00896D08 /* OBCategoriesItem.h */,
+				58D32D421B6D3CEE00896D08 /* OBCouponItem.h */,
+				58D32D431B6D3CEE00896D08 /* OBCustomer.h */,
+				58D32D441B6D3CEE00896D08 /* OBImageitems.h */,
+				58D32D451B6D3CEE00896D08 /* OBLocationItem.h */,
+				58D32D461B6D3CEE00896D08 /* OBLocationLog.h */,
+				58D32D471B6D3CEE00896D08 /* OBStoreParam.h */,
+				58D32D481B6D3CEE00896D08 /* OBSystemParam.h */,
 			);
 			name = Headers;
 			path = Classes/Libraries/OfferBeamSDK/Headers;
@@ -1749,6 +1770,24 @@
 			name = FacebookService;
 			sourceTree = "<group>";
 		};
+		58D32D4D1B6D400600896D08 /* Location Examples */ = {
+			isa = PBXGroup;
+			children = (
+				58D32D4E1B6D403100896D08 /* Carson.gpx */,
+				58D32D4F1B6D403100896D08 /* Dublin.gpx */,
+				58D32D501B6D403100896D08 /* Los Angeles.gpx */,
+				58D32D511B6D403100896D08 /* Manhattan Beach.gpx */,
+				58D32D521B6D403100896D08 /* Pleasanton.gpx */,
+				58D32D531B6D403100896D08 /* Redondo Beach.gpx */,
+				58D32D541B6D403100896D08 /* San Ramon.gpx */,
+				58D32D551B6D403100896D08 /* Santa Monica.gpx */,
+				58D32D561B6D403100896D08 /* Torrance exit.gpx */,
+				58D32D571B6D403100896D08 /* Torrance.gpx */,
+				58D32D581B6D403100896D08 /* Venice.gpx */,
+			);
+			name = "Location Examples";
+			sourceTree = "<group>";
+		};
 		58DF1AE51B584CA800D28951 /* AssetsHelper */ = {
 			isa = PBXGroup;
 			children = (
@@ -1993,18 +2032,29 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				58D32D611B6D403100896D08 /* Torrance exit.gpx in Resources */,
 				58E512471B4C70AF00865694 /* OpenSans-Italic.ttf in Resources */,
 				84FDAD101B6B674500AF02F6 /* MixpanelEvents.plist in Resources */,
 				58E512441B4C70AF00865694 /* OpenSans-BoldItalic.ttf in Resources */,
+				58D32D591B6D403100896D08 /* Carson.gpx in Resources */,
+				58D32D631B6D403100896D08 /* Venice.gpx in Resources */,
 				589420AB1B452827004BAF48 /* BZRCommonPickerView.xib in Resources */,
+				58D32D621B6D403100896D08 /* Torrance.gpx in Resources */,
 				58E5124B1B4C70AF00865694 /* OpenSans-Semibold.ttf in Resources */,
+				58D32D5C1B6D403100896D08 /* Manhattan Beach.gpx in Resources */,
+				58D32D5E1B6D403100896D08 /* Redondo Beach.gpx in Resources */,
 				58E512451B4C70AF00865694 /* OpenSans-ExtraBold.ttf in Resources */,
 				58A0B21E1B3854CF003C100C /* Main.storyboard in Resources */,
 				58BCCD861B6B8BA600521496 /* BZRBaseOverlapView.xib in Resources */,
+				58D32D5D1B6D403100896D08 /* Pleasanton.gpx in Resources */,
+				58D32D601B6D403100896D08 /* Santa Monica.gpx in Resources */,
+				58D32D5B1B6D403100896D08 /* Los Angeles.gpx in Resources */,
 				58E512491B4C70AF00865694 /* OpenSans-LightItalic.ttf in Resources */,
 				5894209E1B451E0F004BAF48 /* BZRBirthDatePickerView.xib in Resources */,
-				58AA1A511B5E33CD00BA824A /* ModelOfferBeamSDK.bundle in Resources */,
+				58D32D5A1B6D403100896D08 /* Dublin.gpx in Resources */,
 				58E512431B4C70AF00865694 /* OpenSans-Bold.ttf in Resources */,
+				58D32D5F1B6D403100896D08 /* San Ramon.gpx in Resources */,
+				58D32D4C1B6D3CFD00896D08 /* ModelOfferBeamSDK.bundle in Resources */,
 				58A0B2201B3854CF003C100C /* Images.xcassets in Resources */,
 				58E5124C1B4C70AF00865694 /* OpenSans-SemiboldItalic.ttf in Resources */,
 				58E512481B4C70AF00865694 /* OpenSans-Light.ttf in Resources */,
@@ -2293,6 +2343,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/BizrateRewards/Classes/Libraries/OfferBeamSDK",
+					"$(PROJECT_DIR)/BizrateRewards",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -2318,6 +2369,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/BizrateRewards/Classes/Libraries/OfferBeamSDK",
+					"$(PROJECT_DIR)/BizrateRewards",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -2414,6 +2466,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/BizrateRewards/Classes/Libraries/OfferBeamSDK",
+					"$(PROJECT_DIR)/BizrateRewards",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

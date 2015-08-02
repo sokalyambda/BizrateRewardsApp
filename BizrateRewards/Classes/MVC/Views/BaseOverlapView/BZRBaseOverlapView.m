@@ -13,16 +13,18 @@
 @interface BZRBaseOverlapView ()
 
 @property (copy, nonatomic) OverlapCompletion completion;
+@property (weak, nonatomic) IBOutlet UILabel *messageLabel;
 
 @end
 
 @implementation BZRBaseOverlapView
 
-+ (void)showWithCompletion:(OverlapCompletion)completion
++ (void)showWithMessage:(NSString *)message andCompletion:(OverlapCompletion)completion
 {
     BZRBaseOverlapView *view = [self makeFromXib];
     view.frame = [UIApplication sharedApplication].keyWindow.bounds;
     view.completion = completion;
+    view.messageLabel.text = message;
     
     view.alpha = 0.f;
     [[UIApplication sharedApplication].keyWindow addSubview:view];

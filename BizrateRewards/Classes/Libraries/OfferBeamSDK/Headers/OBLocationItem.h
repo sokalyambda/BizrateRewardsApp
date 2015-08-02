@@ -23,6 +23,7 @@
 @property (nonatomic, retain) NSNumber * max_beam;
 @property (nonatomic, retain) NSNumber * penetrationWidth;
 @property (nonatomic, retain) NSNumber * radius;
+@property (nonatomic, retain) NSNumber * open;
 @property (nonatomic, retain) NSString * retailer_address;
 @property (nonatomic, retain) NSString * retailer_altaddress;
 @property (nonatomic, retain) NSString * retailer_city;
@@ -37,6 +38,7 @@
 @property (nonatomic, retain) NSString * retailer_zip;
 @property (nonatomic, retain) NSNumber * retailerid;
 @property (nonatomic, retain) NSString * store_id;
+@property (nonatomic, retain) NSString * alt_store_id;
 @property (nonatomic, retain) NSNumber * storeParam;
 @property (nonatomic, retain) NSString * storeParameter;
 @property (nonatomic, retain) NSString * twitterURL;

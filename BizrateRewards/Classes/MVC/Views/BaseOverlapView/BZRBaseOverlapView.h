@@ -12,6 +12,6 @@ typedef void(^OverlapCompletion)(BZRBaseOverlapView *overlapView, BOOL isCancele
 
 @interface BZRBaseOverlapView : UIView
 
-+ (void)showWithCompletion:(OverlapCompletion)completion;
++ (void)showWithMessage:(NSString *)message andCompletion:(OverlapCompletion)completion;
 
 @end

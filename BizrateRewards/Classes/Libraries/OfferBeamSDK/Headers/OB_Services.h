@@ -27,7 +27,7 @@
 @property (nonatomic,strong) NSMutableArray *global_stores;
 @property (nonatomic,strong) NSMutableArray *global_coupons;
 
-@property (nonatomic,weak) id delegate;
+@property (nonatomic,strong) id delegate;
 
 @property (nonatomic,strong) dispatch_queue_t db_queue;
 

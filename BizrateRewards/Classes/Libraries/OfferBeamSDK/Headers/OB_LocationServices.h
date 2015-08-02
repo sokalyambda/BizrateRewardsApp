@@ -57,8 +57,10 @@
 @property (nonatomic,strong) NSMutableDictionary *gf_stop_counter;
 @property (nonatomic,strong) NSMutableDictionary *gf_enter_counter;
 @property (nonatomic,strong) NSMutableDictionary *gf_exit_counter;
-@property (nonatomic,strong) NSMutableDictionary *gf_start_time;
-@property (nonatomic,strong) NSMutableDictionary *gf_stop_time;
+@property (nonatomic,strong) NSMutableDictionary *gf_enter_time;
+@property (nonatomic,strong) NSMutableDictionary *gf_exit_time;
+
+@property (nonatomic,strong) NSMutableDictionary *gf_to_store_name;
 
 @property (nonatomic,strong) NSString *current_rewardid;
 
