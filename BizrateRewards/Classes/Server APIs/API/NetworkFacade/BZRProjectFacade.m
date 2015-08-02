@@ -76,6 +76,11 @@ static BZRSessionManager *sharedHTTPClient = nil;
     
     BZRNetworkOperation* operation = [[self  HTTPClient] enqueueOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
         
+        //to avoid FB profile usage when user has been logged with email
+        if ([BZRFacebookService isFacebookSessionValid]) {
+            [BZRFacebookService logoutFromFacebook];
+        }
+        
         BZRSignInRequest *request = (BZRSignInRequest*)operation.networkRequest;
         
         [BZRStorageManager sharedStorage].userToken = request.token;
@@ -105,10 +110,14 @@ static BZRSessionManager *sharedHTTPClient = nil;
     __block BZRNetworkOperation* operation;
     
     [self validateSessionWithType:BZRSessionTypeApplication onSuccess:^(BOOL isSuccess) {
-        
         BZRSignUpRequest *request = [[BZRSignUpRequest alloc] initWithUserFirstName:firstName andUserLastName:lastName andEmail:email andPassword:password andDateOfBirth:birthDate andGender:gender];
         
         operation = [[self  HTTPClient] enqueueOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
+            
+            //to avoid FB profile usage when user has been logged with email
+            if ([BZRFacebookService isFacebookSessionValid]) {
+                [BZRFacebookService logoutFromFacebook];
+            }
             
             BZRSignUpRequest *request = (BZRSignUpRequest*)operation.networkRequest;
             
