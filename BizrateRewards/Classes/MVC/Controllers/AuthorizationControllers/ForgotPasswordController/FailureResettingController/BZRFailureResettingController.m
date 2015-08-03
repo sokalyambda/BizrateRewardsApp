@@ -24,7 +24,14 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+}
+
+#pragma mark - Actions
+
+- (IBAction)requestNewLinkClick:(id)sender
+{
+    
 }
 
 @end

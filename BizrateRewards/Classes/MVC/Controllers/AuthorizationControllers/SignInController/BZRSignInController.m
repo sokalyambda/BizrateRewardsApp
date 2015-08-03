@@ -91,10 +91,9 @@ static NSInteger const kNotRegisteredErrorCode = 400.f;
 
 - (IBAction)forgotPasswordClick:(id)sender
 {
-    BZRForgotPasswordController *forgotPasswordController = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRForgotPasswordController class])];
-    BZRBaseNavigationController *navigationController = [[BZRBaseNavigationController alloc] initWithRootViewController:forgotPasswordController];
-    [self presentViewController:navigationController animated:YES completion:nil];
-
+//    BZRForgotPasswordController *forgotPasswordController = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRForgotPasswordController class])];
+//    BZRBaseNavigationController *navigationController = [[BZRBaseNavigationController alloc] initWithRootViewController:forgotPasswordController];
+//    [self presentViewController:navigationController animated:YES completion:nil];
 }
 
 - (IBAction)goToCreateNewAccountClick:(id)sender

@@ -306,7 +306,9 @@ static BZRSessionManager *sharedHTTPClient = nil;
             }
         }];
     } onFailure:^(NSError *error, BOOL isCanceled) {
-        
+        if (failure) {
+            failure(error, isCanceled);
+        }
     }];
     return operation;
 }
@@ -327,12 +329,15 @@ static BZRSessionManager *sharedHTTPClient = nil;
             }
             
         } failure:^(BZRNetworkOperation *operation, NSError *error, BOOL isCanceled) {
+//            ShowFailureResponseAlertWithError(error);
             if (failure) {
                 failure(error, isCanceled);
             }
         }];
     } onFailure:^(NSError *error, BOOL isCanceled) {
-        
+        if (failure) {
+            failure(error, isCanceled);
+        }
     }];
     return operation;
 }

@@ -8,6 +8,8 @@
 
 #import "BZRForgotPasswordController.h"
 
+#import "BZRValidator.h"
+
 @interface BZRForgotPasswordController ()
 
 @end
@@ -24,7 +26,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [super customizeFields];
     [self.navigationController setNavigationBarHidden:YES animated:YES];
 
 }
@@ -36,6 +37,14 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (IBAction)resetPasswordClick:(id)sender
+{
+    [BZRValidator validateEmailField:self.userNameField andPasswordField:self.passwordField onSuccess:^{
+        //TODO: forgot password request
+    } onFailure:^(NSString *errorString) {
+        [BZRValidator cleanValidationErrorString];
+    }];
+}
 
 #pragma mark - UITextFieldDelegate
 
@@ -46,7 +55,6 @@
     } else if ([self.passwordField isFirstResponder]) {
         [self.passwordField resignFirstResponder];
     }
-    
     return YES;
 }
 

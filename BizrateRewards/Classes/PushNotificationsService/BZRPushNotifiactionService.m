@@ -27,10 +27,7 @@ static NSString *const kPushPermissionsLastState = @"pushPermissionLastState";
                          stringByReplacingOccurrencesOfString:@"<" withString:@""]
                         stringByReplacingOccurrencesOfString:@">" withString:@""]
                        stringByReplacingOccurrencesOfString:@" " withString:@""];
-    if (token.length) {
-        [BZRStorageManager sharedStorage].deviceToken = token;
-    }
-//    [self sendDeviceData];
+    [self saveAndSendDeviceData:token];
     [[NSNotificationCenter defaultCenter] postNotificationName:PushNotificationServiceDidSuccessAuthorizeNotification object:nil];
 }
 
@@ -82,22 +79,22 @@ static NSString *const kPushPermissionsLastState = @"pushPermissionLastState";
 }
 
 /**
- *  Send device data to server
+ *  Save devicet token and send device data to server
  */
-+ (void)sendDeviceData
++ (void)saveAndSendDeviceData:(NSString *)deviceToken
 {
-    NSString *deviceToken = [BZRStorageManager sharedStorage].deviceToken;
     BOOL enabled = [self pushNotificationsEnabled];
     if (!enabled) {
         deviceToken = nil;
         return;
     }
     if (deviceToken.length && [BZRProjectFacade isUserSessionValid]) {
-        [BZRProjectFacade sendDeviceDataOnSuccess:^(BOOL isSuccess) {
-            
-        } onFailure:^(NSError *error, BOOL isCanceled) {
-            
-        }];
+        [BZRStorageManager sharedStorage].deviceToken = deviceToken;
+//        [BZRProjectFacade sendDeviceDataOnSuccess:^(BOOL isSuccess) {
+//            
+//        } onFailure:^(NSError *error, BOOL isCanceled) {
+//            
+//        }];
     }
 }
 

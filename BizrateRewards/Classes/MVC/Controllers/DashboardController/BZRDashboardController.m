@@ -163,12 +163,15 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
 {
     WEAK_SELF;
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    
     [BZRProjectFacade getCurrentUserOnSuccess:^(BOOL isSuccess) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         [weakSelf updateUserInformation];
         [BZRMixpanelService setPeopleForUser:weakSelf.currentProfile];
         [weakSelf calculateProgress];
+        
+        //Register app for push notifications, if success - send device data to server
+//        [BZRPushNotifiactionService registerApplicationForPushNotifications:[UIApplication sharedApplication]];
+        
         weakSelf.updateNeeded = NO;
     } onFailure:^(NSError *error, BOOL isCanceled) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];

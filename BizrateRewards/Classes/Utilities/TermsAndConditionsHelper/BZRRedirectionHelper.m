@@ -70,7 +70,7 @@ static NSString *const kTermsAndConditionsLink = @"http://www.bizraterewards.com
  */
 + (void)showResetPasswordResultControllerWithObtainedURL:(NSURL *)redirectURL
 {
-    if (!redirectURL || redirectURL.isFileURL || ![redirectURL.absoluteString containsString:kAppURLPrefix]) {
+    if (!redirectURL || redirectURL.isFileURL || ![redirectURL.absoluteString containsString:kAppURLPrefix] || [redirectURL.absoluteString isEqualToString:kAppURLPrefix]) {
         return;
     }
     
@@ -80,16 +80,22 @@ static NSString *const kTermsAndConditionsLink = @"http://www.bizraterewards.com
     NSDictionary *parsedParameters = [BZRCustomURLHandler urlParsingParametersFromURL:redirectURL];
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:kStoryboardName bundle:[NSBundle mainBundle]];
     
-    BOOL isResetingSuccess = [parsedParameters[kIsResettingSuccess] boolValue];
-    
-    BZRBaseViewController *redirectedController;
-    
-    if (isResetingSuccess) {
-        redirectedController = [storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRSuccessResettingController class])];
-    } else {
-        redirectedController = [storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRFailureResettingController class])];
+    if (parsedParameters.count) {
+        BOOL isResetingSuccess = [parsedParameters[kIsResettingSuccess] boolValue];
+        
+        BZRBaseViewController *redirectedController;
+        if (isResetingSuccess) {
+            redirectedController = [storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRSuccessResettingController class])];
+        } else {
+            redirectedController = [storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRFailureResettingController class])];
+        }
+        
+        //if modal controller was presented - dismiss it
+        for (UIViewController *controller in navigationController.viewControllers) {
+            [controller.presentedViewController dismissViewControllerAnimated:YES completion:nil];
+        }
+        [navigationController pushViewController:redirectedController animated:YES];
     }
-    [navigationController pushViewController:redirectedController animated:YES];
 }
 
 @end

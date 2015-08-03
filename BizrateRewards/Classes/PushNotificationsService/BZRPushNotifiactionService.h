@@ -11,7 +11,7 @@
 + (void)registerApplicationForPushNotifications:(UIApplication *)application;
 
 + (void)recivedPushNotification:(NSDictionary*)userInfo;
-+ (void)sendDeviceData;
++ (void)saveAndSendDeviceData:(NSString *)deviceToken;
 
 + (void)registeredForPushNotificationsWithToken:(NSData *)deviceToken;
 + (void)failedToRegisterForPushNotificationsWithError:(NSError *)error;
