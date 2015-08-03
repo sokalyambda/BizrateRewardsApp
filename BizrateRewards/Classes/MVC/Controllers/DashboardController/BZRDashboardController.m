@@ -167,7 +167,7 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         [weakSelf updateUserInformation];
         [BZRMixpanelService setPeopleForUser:weakSelf.currentProfile];
-        [weakSelf calculateProgress];
+        [weakSelf.progressView recalculateProgressWithCurrentPoints:self.currentProfile.pointsAmount requiredPoints:self.currentProfile.pointsRequired];
         
         //Register app for push notifications, if success - send device data to server
 //        [BZRPushNotifiactionService registerApplicationForPushNotifications:[UIApplication sharedApplication]];
@@ -176,12 +176,6 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
     } onFailure:^(NSError *error, BOOL isCanceled) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
     }];
-}
-
-- (void)calculateProgress
-{
-    self.progressView.progress  = (CGFloat)self.currentProfile.pointsAmount * CGRectGetWidth(self.progressView.frame) / (CGFloat)self.currentProfile.pointsRequired;
-    [self.progressView setNeedsDisplay];
 }
 
 #pragma mark - Navigation

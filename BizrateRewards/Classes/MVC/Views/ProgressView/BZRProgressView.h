@@ -8,6 +8,6 @@
 
 @interface BZRProgressView : UIView
 
-@property (assign, nonatomic) CGFloat progress;
+- (void)recalculateProgressWithCurrentPoints: (NSInteger)currentPoints requiredPoints: (NSInteger)requiredPoints;
 
 @end

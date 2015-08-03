@@ -68,8 +68,13 @@
 {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:YES];
-    [self calculateProgress];
     [self setupObtainedPointsText];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    NSInteger updatedPoints = self.currentProfile.pointsAmount + self.passedSurvey.surveyPoints;
+    [self.progressView recalculateProgressWithCurrentPoints:updatedPoints requiredPoints: self.currentProfile.pointsRequired];
 }
 
 #pragma mark - Actions
@@ -102,13 +107,6 @@
 - (void)setupObtainedPointsText
 {
     self.obtainedPointsLabel.text = [NSString stringWithFormat:@"%li %@", (long)self.passedSurvey.surveyPoints, self.obtainedPointsText];
-}
-
-- (void)calculateProgress
-{
-    NSInteger updatedPoints = self.currentProfile.pointsAmount + self.passedSurvey.surveyPoints;
-    self.progressView.progress  = (CGFloat)updatedPoints * CGRectGetWidth(self.progressView.frame) / (CGFloat)self.currentProfile.pointsRequired;
-    [self.progressView setNeedsDisplay];
 }
 
 @end
