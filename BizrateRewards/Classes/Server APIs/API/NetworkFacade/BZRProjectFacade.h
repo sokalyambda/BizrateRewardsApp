@@ -66,6 +66,9 @@
 + (BZRNetworkOperation *)sendGeolocationEvent:(BZRLocationEvent *)locationEvent onSuccess:(void (^)(BZRLocationEvent *locationEvent))success
                                     onFailure:(void (^)(NSError *error, BOOL isCanceled))failure;
 
+//Device Requests
++ (BZRNetworkOperation *)sendDeviceDataOnSuccess:(void (^)(BOOL isSuccess))success onFailure:(void (^)(NSError *error, BOOL isCanceled))failure;
+
 //Sign Out
 + (void)signOutOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure;
 

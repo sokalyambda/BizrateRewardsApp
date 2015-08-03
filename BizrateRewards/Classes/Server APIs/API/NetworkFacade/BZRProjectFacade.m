@@ -147,7 +147,7 @@ static BZRSessionManager *sharedHTTPClient = nil;
             }
         }];
 
-    } onFailuer:^(NSError *error, BOOL isCanceled) {
+    } onFailure:^(NSError *error, BOOL isCanceled) {
         if (failure) {
             failure(error, isCanceled);
         }
@@ -205,7 +205,7 @@ static BZRSessionManager *sharedHTTPClient = nil;
                 failure(error, isCanceled);
             }
         }];
-    } onFailuer:^(NSError *error, BOOL isCanceled) {
+    } onFailure:^(NSError *error, BOOL isCanceled) {
         if (failure) {
             failure(error, isCanceled);
         }
@@ -241,7 +241,7 @@ static BZRSessionManager *sharedHTTPClient = nil;
                 failure(error, isCanceled);
             }
         }];
-    } onFailuer:^(NSError *error, BOOL isCanceled) {
+    } onFailure:^(NSError *error, BOOL isCanceled) {
         if (failure) {
             failure(error, isCanceled);
         }
@@ -274,7 +274,7 @@ static BZRSessionManager *sharedHTTPClient = nil;
                 failure(error, isCanceled);
             }
         }];
-    } onFailuer:^(NSError *error, BOOL isCanceled) {
+    } onFailure:^(NSError *error, BOOL isCanceled) {
         if (failure) {
             failure(error, isCanceled);
         }
@@ -305,7 +305,33 @@ static BZRSessionManager *sharedHTTPClient = nil;
                 failure(error, isCanceled);
             }
         }];
-    } onFailuer:^(NSError *error, BOOL isCanceled) {
+    } onFailure:^(NSError *error, BOOL isCanceled) {
+        
+    }];
+    return operation;
+}
+
+//Device Requests
++ (BZRNetworkOperation *)sendDeviceDataOnSuccess:(void (^)(BOOL isSuccess))success onFailure:(void (^)(NSError *error, BOOL isCanceled))failure
+{
+    __block BZRNetworkOperation *operation;
+    [self validateSessionWithType:BZRSessionTypeUser onSuccess:^(BOOL isSuccess) {
+        BZRSendDeviceDataRequest *request = [[BZRSendDeviceDataRequest alloc] init];
+        
+        operation = [[self  HTTPClient] enqueueOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
+            
+            BZRSendDeviceDataRequest *request = (BZRSendDeviceDataRequest*)operation.networkRequest;
+            
+            if (success) {
+                success(YES);
+            }
+            
+        } failure:^(BZRNetworkOperation *operation, NSError *error, BOOL isCanceled) {
+            if (failure) {
+                failure(error, isCanceled);
+            }
+        }];
+    } onFailure:^(NSError *error, BOOL isCanceled) {
         
     }];
     return operation;
@@ -344,7 +370,7 @@ static BZRSessionManager *sharedHTTPClient = nil;
  *  @param success     Success Block
  *  @param failure     Failure Block
  */
-+ (void)validateSessionWithType:(BZRSessionType)sessionType onSuccess:(SuccessBlock)success onFailuer:(FailureBlock)failure
++ (void)validateSessionWithType:(BZRSessionType)sessionType onSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure
 {
     [[self HTTPClient] validateSessionWithType:sessionType onSuccess:success onFailure:failure];
 }
@@ -391,7 +417,7 @@ static BZRSessionManager *sharedHTTPClient = nil;
             ShowFailureResponseAlertWithError(error);
             failure(error, isCanceled);
         }];
-    } onFailuer:^(NSError *error, BOOL isCanceled) {
+    } onFailure:^(NSError *error, BOOL isCanceled) {
         failure(error, isCanceled);
     }];
     return operation;
@@ -424,7 +450,7 @@ static BZRSessionManager *sharedHTTPClient = nil;
             failure(error, isCanceled);
         }];
         
-    } onFailuer:^(NSError *error, BOOL isCanceled) {
+    } onFailure:^(NSError *error, BOOL isCanceled) {
         
     }];
     
