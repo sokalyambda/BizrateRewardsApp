@@ -3,7 +3,7 @@
 //  WorkWithServerAPI
 //
 //  Created by EugeneS on 30.01.15.
-//  Copyright (c) 2015 eugenity. All rights reserved.
+//  Copyright (c) 2015 Connexity. All rights reserved.
 //
 
 typedef enum : NSUInteger {
@@ -22,15 +22,17 @@ typedef void (^CleanBlock)();
 @property (strong, nonatomic, readonly) NSURL *baseURL;
 
 - (id)initWithBaseURL:(NSURL*)url;
-
 - (void)cancelAllOperations;
-
 - (void)cleanManagersWithCompletionBlock:(CleanBlock)block;
 
 - (void)enqueueOperation:(BZRNetworkOperation*)operation success:(SuccessOperationBlock)success failure:(FailureOperationBlock)failure;
-
 - (BZRNetworkOperation*)enqueueOperationWithNetworkRequest:(BZRNetworkRequest*)networkRequest success:(SuccessOperationBlock)success failure:(FailureOperationBlock)failure;
 
+//session validation
 - (void)validateSessionWithType:(BZRSessionType)sessionType onSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure;
+- (BOOL)isSessionValidWithType:(BZRSessionType)sessionType;
+
+//check whether operation is in process
+- (BOOL)isOperationInProcess;
 
 @end

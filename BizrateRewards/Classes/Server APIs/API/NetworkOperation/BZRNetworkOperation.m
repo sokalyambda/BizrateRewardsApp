@@ -302,6 +302,23 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
     }
 }
 
+/**
+ *  Check whether any operation is in process
+ *
+ *  @return Returns 'YES'
+ */
+- (BOOL)isInProcess
+{
+    if (_dataTask) {
+        return _dataTask.state == NSURLSessionTaskStateRunning;
+    } else if (_uploadTask) {
+        return _uploadTask.state == NSURLSessionTaskStateRunning;;
+    } else if (_downloadTask) {
+        return _downloadTask.state == NSURLSessionTaskStateRunning;;
+    }
+    return NO;
+}
+
 #pragma mark - Progress observer
 
 - (void)observeValueForKeyPath:(NSString *)keyPath

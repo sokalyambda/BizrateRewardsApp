@@ -144,27 +144,27 @@ static NSString *const kOBStore = @"Store";
 
 - (void)sendLocationEventWithInitDictionary:(NSDictionary *)dictionary andType:(BZRLocaionEventType)eventType
 {
-    BZRLocationEvent *locationEvent = [[BZRLocationEvent alloc] initWithServerResponse:dictionary[kOBStore]];
-    locationEvent.eventType = eventType;
-    
-    [BZRProjectFacade sendGeolocationEvent:locationEvent onSuccess:^(BZRLocationEvent *locationEvent) {
+    if ([BZRProjectFacade isUserSessionValid]) {
+        BZRLocationEvent *locationEvent = [[BZRLocationEvent alloc] initWithServerResponse:dictionary[kOBStore]];
+        locationEvent.eventType = eventType;
         
-    } onFailure:^(NSError *error, BOOL isCanceled) {
-        
-    }];
+        [BZRProjectFacade sendGeolocationEvent:locationEvent onSuccess:^(BZRLocationEvent *locationEvent) {
+            
+        } onFailure:^(NSError *error, BOOL isCanceled) {
+            
+        }];
+    }
 }
 
 #pragma mark - OB_LocationServicesDelegate
 
 - (void)OB_receivedOnEnter:(NSDictionary *)data
 {
-    NSLog(@"received on enter %@", data);
     [self sendLocationEventWithInitDictionary:data andType:BZRLocaionEventTypeEntry];
 }
 
 - (void)OB_receivedOnExit:(NSDictionary *)data
 {
-    NSLog(@"received on exit %@", data);
     [self sendLocationEventWithInitDictionary:data andType:BZRLocaionEventTypeExit];
 }
 

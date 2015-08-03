@@ -19,7 +19,9 @@ static NSString *const kRefreshToken = @"refresh_token";
     self = [super init];
     if (self) {
         NSString *refreshTokenValue = [BZRStorageManager sharedStorage].userToken.refreshToken;
-        [self.baseAuthParameters setObject:refreshTokenValue forKey:kRefreshToken];
+        if (refreshTokenValue) {
+            [self.baseAuthParameters setObject:refreshTokenValue forKey:kRefreshToken];
+        }
         
         self.serializationType = BZRRequestSerializationTypeHTTP;
         

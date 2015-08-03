@@ -72,7 +72,8 @@ static NSString *const kPushNotificationsAccessSegueIdentifier = @"pushNotificat
  */
 - (void)locationManagerDidFailAuthorizeNotification:(NSNotification *)notification
 {
-    [self showErrorAlertController];
+    [self performSegueWithIdentifier:kPushNotificationsAccessSegueIdentifier sender:self];
+//    [self showErrorAlertController];
 }
 
 - (IBAction)skipThisStepClick:(id)sender

@@ -15,8 +15,6 @@
 
 #import "BZRKeychainHandler.h"
 
-#import "BZRFacebookService.h"
-
 static NSString *const kStartTutorialSegueIdentirier = @"startTutorialSegue";
 
 @interface BZRAutologinController ()
@@ -49,7 +47,7 @@ static NSString *const kStartTutorialSegueIdentirier = @"startTutorialSegue";
 
 - (BOOL)isFacebookSessionValid
 {
-    _facebookSessionValid = [BZRFacebookService isFacebookSessionValid];
+    _facebookSessionValid = [BZRProjectFacade isFacebookSessionValid];
     return _facebookSessionValid;
 }
 

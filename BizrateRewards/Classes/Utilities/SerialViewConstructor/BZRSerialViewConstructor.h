@@ -8,7 +8,7 @@
 
 @interface BZRSerialViewConstructor : NSObject
 
-+ (UIBarButtonItem *)backButtonForController:(UIViewController *)controller;
++ (UIBarButtonItem *)backButtonForController:(UIViewController *)controller withAction:(SEL)action;
 
 + (UIBarButtonItem *)customDoneButtonForController:(UIViewController *)controller withAction:(SEL)action;
 

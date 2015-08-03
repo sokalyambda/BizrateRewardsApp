@@ -34,5 +34,6 @@ typedef void (^ProgressBlock)(BZRNetworkOperation* operation, long long totalByt
 - (void)start;
 - (void)pause;
 - (void)cancel;
+- (BOOL)isInProcess;
 
 @end

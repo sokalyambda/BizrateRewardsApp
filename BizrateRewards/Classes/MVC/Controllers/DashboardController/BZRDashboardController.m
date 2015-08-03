@@ -21,7 +21,6 @@
 #import "BZRProgressView.h"
 
 #import "BZRPushNotifiactionService.h"
-#import "BZRLocationObserver.h"
 #import "BZRProjectFacade.h"
 
 static NSString *const kAccountSettingsSegueIdentifier = @"accountSettingsSegueIdentifier";
@@ -134,8 +133,8 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
 #warning User Points
     self.currentProfile.pointsRequired = 2000;
     
-        if (!self.isUpdateNeeded) {
-            [BZRMixpanelService setPeopleForUser:self.currentProfile];
+    if (!self.isUpdateNeeded) {
+        [BZRMixpanelService setPeopleForUser:self.currentProfile];
     }
 }
 

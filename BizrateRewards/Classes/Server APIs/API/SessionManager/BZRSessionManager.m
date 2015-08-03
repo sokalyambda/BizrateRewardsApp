@@ -3,7 +3,7 @@
 //  WorkWithServerAPI
 //
 //  Created by EugeneS on 30.01.15.
-//  Copyright (c) 2015 eugenity. All rights reserved.
+//  Copyright (c) 2015 Connexity. All rights reserved.
 //
 
 #import "BZRSessionManager.h"
@@ -251,11 +251,33 @@ static NSInteger const kAllCleansCount = 1.f;
     }];
 }
 
+/**
+ *  Cancel all operations
+ */
 - (void)cancelAllOperations
 {
     if ([NSURLSession class]) {
+        
+        for (BZRNetworkOperation *operation in self.operationsQueue) {
+            [operation cancel];
+        }
         [self.sessionManager.operationQueue cancelAllOperations];
     }
+}
+
+/**
+ *  Check whether operation is in process
+ *
+ *  @return Returns 'YES' in any operation is in process
+ */
+- (BOOL)isOperationInProcess
+{
+    for (BZRNetworkOperation *operation in self.operationsQueue) {
+        if ([operation isInProcess]) {
+            return YES;
+        }
+    }
+    return NO;
 }
 
 /**
@@ -268,6 +290,11 @@ static NSInteger const kAllCleansCount = 1.f;
     [self.operationsQueue removeObject:operation];
 }
 
+/**
+ *  Add new operation to normal queue
+ *
+ *  @param operation Operation that has to be added to queue
+ */
 - (void)addOperationToQueue:(BZRNetworkOperation*)operation
 {
     [self.operationsQueue addObject:operation];
@@ -285,6 +312,11 @@ static NSInteger const kAllCleansCount = 1.f;
     [self.failedOperationsQueue removeObject:operation];
 }
 
+/**
+ *  Add new operation to failed queue
+ *
+ *  @param operation Operation that has to be added to queue
+ */
 - (void)addOperationToFailedQueue:(BZRNetworkOperation *)operation
 {
     [self.failedOperationsQueue addObject:operation];
@@ -321,27 +353,16 @@ static NSInteger const kAllCleansCount = 1.f;
     }
 }
 
+/**
+ *  Validate session and renew token if needed
+ *
+ *  @param sessionType Type of session for validation
+ *  @param success     Success Block
+ *  @param failure     Failure Block
+ */
 - (void)validateSessionWithType:(BZRSessionType)sessionType onSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure
 {
-    NSString *accessToken;
-    NSDate *tokenExpirationDate;
-    
-    switch (sessionType) {
-        case BZRSessionTypeApplication: {
-            accessToken = [BZRStorageManager sharedStorage].applicationToken.accessToken;
-            tokenExpirationDate = [BZRStorageManager sharedStorage].applicationToken.expirationDate;
-            break;
-        }
-        case BZRSessionTypeUser: {
-            accessToken = [BZRStorageManager sharedStorage].userToken.accessToken;
-            tokenExpirationDate = [BZRStorageManager sharedStorage].userToken.expirationDate;
-            break;
-        }
-        default:
-            break;
-    }
-    
-    BOOL isValid = (accessToken.length && ([[NSDate date] compare:tokenExpirationDate] == NSOrderedAscending));
+    BOOL isValid = [self isSessionValidWithType:sessionType];
     
     if (!isValid && sessionType == BZRSessionTypeUser) {
         [self renewSessionTokenOnSuccess:^(BOOL isSuccess) {
@@ -368,6 +389,36 @@ static NSInteger const kAllCleansCount = 1.f;
             success(YES);
         }
     }
+}
+
+/**
+ *  Validate current session with specific type
+ *
+ *  @param sessionType Type of session for validation
+ *
+ *  @return Returns 'YES' if session is valid
+ */
+- (BOOL)isSessionValidWithType:(BZRSessionType)sessionType
+{
+    NSString *accessToken;
+    NSDate *tokenExpirationDate;
+    
+    switch (sessionType) {
+        case BZRSessionTypeApplication: {
+            accessToken = [BZRStorageManager sharedStorage].applicationToken.accessToken;
+            tokenExpirationDate = [BZRStorageManager sharedStorage].applicationToken.expirationDate;
+            break;
+        }
+        case BZRSessionTypeUser: {
+            accessToken = [BZRStorageManager sharedStorage].userToken.accessToken;
+            tokenExpirationDate = [BZRStorageManager sharedStorage].userToken.expirationDate;
+            break;
+        }
+        default:
+            break;
+    }
+    
+    return (accessToken.length && ([[NSDate date] compare:tokenExpirationDate] == NSOrderedAscending));
 }
 
 #pragma mark - Renew Session Token

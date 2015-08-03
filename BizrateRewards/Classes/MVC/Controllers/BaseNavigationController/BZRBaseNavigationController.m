@@ -10,6 +10,8 @@
 
 #import "BZRSerialViewConstructor.h"
 
+#import "BZRProjectFacade.h"
+
 @interface BZRBaseNavigationController ()
 
 @end
@@ -21,7 +23,7 @@
 - (UIBarButtonItem *)customBackButton
 {
     if (!_customBackButton) {
-        _customBackButton = [BZRSerialViewConstructor backButtonForController:self];
+        _customBackButton = [BZRSerialViewConstructor backButtonForController:self withAction:@selector(backClick:)];
     }
     return _customBackButton;
 }
@@ -55,6 +57,19 @@
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
     return UIStatusBarStyleLightContent;
+}
+
+/**
+ *  Custom back action
+ *
+ *  @param sender Back button
+ */
+- (void)backClick:(UIBarButtonItem *)sender
+{
+    if ([BZRProjectFacade isOperationInProcess]) {
+        return;
+    }
+    [self popViewControllerAnimated:YES];
 }
 
 @end

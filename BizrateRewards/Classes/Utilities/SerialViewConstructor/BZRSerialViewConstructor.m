@@ -24,9 +24,9 @@ static CGFloat const kDoneFontSize = 14.f;
  *
  *  @return Custom Back Button
  */
-+ (UIBarButtonItem *)backButtonForController:(UIViewController *)controller
++ (UIBarButtonItem *)backButtonForController:(UIViewController *)controller withAction:(SEL)action
 {
-    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:kBackArrowImageName] style:UIBarButtonItemStylePlain target:controller action:@selector(popViewControllerAnimated:)];
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:kBackArrowImageName] style:UIBarButtonItemStylePlain target:controller action:action];
     return backButton;
 }
 

@@ -59,9 +59,22 @@ static BZRSessionManager *sharedHTTPClient = nil;
 
 #pragma mark - Actions
 
+/**
+ *  Cancel all operations
+ */
 + (void)cancelAllOperations
 {
     return [sharedHTTPClient cancelAllOperations];
+}
+
+/**
+ *  Check whether the operation is in process
+ *
+ *  @return Returns 'YES' if any opretaion is in process
+ */
++ (BOOL)isOperationInProcess
+{
+    return [[self HTTPClient] isOperationInProcess];
 }
 
 #pragma mark - Requests builder
@@ -77,7 +90,7 @@ static BZRSessionManager *sharedHTTPClient = nil;
     BZRNetworkOperation* operation = [[self  HTTPClient] enqueueOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
         
         //to avoid FB profile usage when user has been logged with email
-        if ([BZRFacebookService isFacebookSessionValid]) {
+        if ([self isFacebookSessionValid]) {
             [BZRFacebookService logoutFromFacebook];
         }
         
@@ -90,7 +103,7 @@ static BZRSessionManager *sharedHTTPClient = nil;
         }
         
     } failure:^(BZRNetworkOperation *operation ,NSError *error, BOOL isCanceled) {
-        ShowFailureResponseAlertWithError(error);
+//        ShowFailureResponseAlertWithError(error);
         if (failure) {
             failure(error, isCanceled);
         }
@@ -115,7 +128,7 @@ static BZRSessionManager *sharedHTTPClient = nil;
         operation = [[self  HTTPClient] enqueueOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
             
             //to avoid FB profile usage when user has been logged with email
-            if ([BZRFacebookService isFacebookSessionValid]) {
+            if ([self isFacebookSessionValid]) {
                 [BZRFacebookService logoutFromFacebook];
             }
             
@@ -298,8 +311,16 @@ static BZRSessionManager *sharedHTTPClient = nil;
     return operation;
 }
 
+/**
+ *  Sign out from current account
+ *
+ *  @param success Success Block
+ *  @param failure Failure Block
+ */
 + (void)signOutOnSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure
 {
+    [self cancelAllOperations];
+    
     [BZRStorageManager sharedStorage].currentProfile = nil;
     [BZRStorageManager sharedStorage].applicationToken = nil;
     [BZRStorageManager sharedStorage].userToken = nil;
@@ -316,9 +337,36 @@ static BZRSessionManager *sharedHTTPClient = nil;
     }
 }
 
+/**
+ *  Session validation, if not valid - renew session token
+ *
+ *  @param sessionType Type of session (application or user)
+ *  @param success     Success Block
+ *  @param failure     Failure Block
+ */
 + (void)validateSessionWithType:(BZRSessionType)sessionType onSuccess:(SuccessBlock)success onFailuer:(FailureBlock)failure
 {
     [[self HTTPClient] validateSessionWithType:sessionType onSuccess:success onFailure:failure];
+}
+
+/**
+ *  Check whether user session is valid
+ *
+ *  @return Returns 'YES' if user session is valid
+ */
++ (BOOL)isUserSessionValid
+{
+    return [[self HTTPClient] isSessionValidWithType:BZRSessionTypeUser];
+}
+
+/**
+ *  Check whether facebook session is valid
+ *
+ *  @return Returns 'YES' if facebook session is valid
+ */
++ (BOOL)isFacebookSessionValid
+{
+    return [BZRFacebookService isFacebookSessionValid];
 }
 
 /******* FaceBook *******/
@@ -346,7 +394,6 @@ static BZRSessionManager *sharedHTTPClient = nil;
     } onFailuer:^(NSError *error, BOOL isCanceled) {
         failure(error, isCanceled);
     }];
-    
     return operation;
 }
 

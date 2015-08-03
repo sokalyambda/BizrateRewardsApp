@@ -14,10 +14,20 @@
 
 + (BZRSessionManager *)HTTPClient;
 
+//internet checking
 + (BOOL)isInternetReachable;
 
-//Authorization Requests
+//session validation
++ (BOOL)isUserSessionValid;
++ (BOOL)isFacebookSessionValid;
 
+//cancel operations
++ (void)cancelAllOperations;
+
+//check whether any operation is in process
++ (BOOL)isOperationInProcess;
+
+//Authorization Requests
 + (BZRNetworkOperation*)signInWithEmail:(NSString*)email
                               password:(NSString*)password
                                success:(void (^)(BOOL success))success
