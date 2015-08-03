@@ -21,4 +21,33 @@
     [super viewDidLoad];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [super customizeFields];
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+
+}
+
+#pragma mark - Actions
+
+- (IBAction)exitClick:(id)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
+#pragma mark - UITextFieldDelegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if ([self.userNameField isFirstResponder]) {
+        [self.passwordField becomeFirstResponder];
+    } else if ([self.passwordField isFirstResponder]) {
+        [self.passwordField resignFirstResponder];
+    }
+    
+    return YES;
+}
+
 @end
