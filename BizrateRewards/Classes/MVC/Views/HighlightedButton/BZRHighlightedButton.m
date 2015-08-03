@@ -25,7 +25,7 @@
     if (!_highlightedLayer) {
         _highlightedLayer = [CALayer layer];
         _highlightedLayer.frame = self.bounds;
-        _highlightedLayer.backgroundColor = [UIColor colorWithWhite:.6f alpha:0.6f].CGColor;
+        _highlightedLayer.backgroundColor = [UIColor colorWithWhite:.6f alpha:0.7f].CGColor;
     }
     return _highlightedLayer;
 }

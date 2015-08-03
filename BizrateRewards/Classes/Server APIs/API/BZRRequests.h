@@ -18,6 +18,7 @@
 #import "BZRGetEligibleSurveysRequest.h"
 #import "BZRSendLocationEventRequest.h"
 #import "BZRForgotPasswordRequest.h"
+#import "BZRSendDeviceDataRequest.h"
 
 #import "BZRSignInWithFacebookRequest.h"
 

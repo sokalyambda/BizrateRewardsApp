@@ -24,6 +24,18 @@
     return _facebookProfile;
 }
 
+- (NSString *)deviceUDID
+{
+    _deviceUDID = [UIDevice currentDevice].identifierForVendor.UUIDString;
+    return _deviceUDID;
+}
+
+- (NSString *)deviceName
+{
+    _deviceName = [UIDevice currentDevice].name;
+    return _deviceName;
+}
+
 #pragma mark - Lifecycle
 
 + (instancetype)sharedStorage

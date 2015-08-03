@@ -102,7 +102,6 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
 {
     WEAK_SELF;
     [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
-    
     [BZRProjectFacade getEligibleSurveysOnSuccess:^(NSArray *surveys) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         

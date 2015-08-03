@@ -10,6 +10,8 @@
 
 #import "BZRStorageManager.h"
 
+#import "BZRProjectFacade.h"
+
 static NSString *const kPushPermissionsLastState = @"pushPermissionLastState";
 
 @implementation BZRPushNotifiactionService
@@ -25,12 +27,10 @@ static NSString *const kPushPermissionsLastState = @"pushPermissionLastState";
                          stringByReplacingOccurrencesOfString:@"<" withString:@""]
                         stringByReplacingOccurrencesOfString:@">" withString:@""]
                        stringByReplacingOccurrencesOfString:@" " withString:@""];
-    NSString *deviceId = [UIDevice currentDevice].identifierForVendor.UUIDString;
     if (token.length) {
-        //MARK: set device token
         [BZRStorageManager sharedStorage].deviceToken = token;
-        [BZRStorageManager sharedStorage].deviceUDID = deviceId;
     }
+//    [self sendDeviceData];
     [[NSNotificationCenter defaultCenter] postNotificationName:PushNotificationServiceDidSuccessAuthorizeNotification object:nil];
 }
 
@@ -83,14 +83,21 @@ static NSString *const kPushPermissionsLastState = @"pushPermissionLastState";
 
 /**
  *  Send device data to server
- *
- *  @param pushToken Token
  */
-+ (void)sendPushToken:(NSData*)pushToken
++ (void)sendDeviceData
 {
+    NSString *deviceToken = [BZRStorageManager sharedStorage].deviceToken;
     BOOL enabled = [self pushNotificationsEnabled];
     if (!enabled) {
-        pushToken = nil;
+        deviceToken = nil;
+        return;
+    }
+    if (deviceToken.length && [BZRProjectFacade isUserSessionValid]) {
+        [BZRProjectFacade sendDeviceDataOnSuccess:^(BOOL isSuccess) {
+            
+        } onFailure:^(NSError *error, BOOL isCanceled) {
+            
+        }];
     }
 }
 
