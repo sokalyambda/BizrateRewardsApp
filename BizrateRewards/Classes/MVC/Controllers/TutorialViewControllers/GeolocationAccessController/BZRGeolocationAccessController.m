@@ -73,32 +73,11 @@ static NSString *const kPushNotificationsAccessSegueIdentifier = @"pushNotificat
 - (void)locationManagerDidFailAuthorizeNotification:(NSNotification *)notification
 {
     [self performSegueWithIdentifier:kPushNotificationsAccessSegueIdentifier sender:self];
-//    [self showErrorAlertController];
 }
 
 - (IBAction)skipThisStepClick:(id)sender
 {
     [self performSegueWithIdentifier:kPushNotificationsAccessSegueIdentifier sender:self];
-}
-
-#pragma mark - UIAlertController
-
-- (void)showErrorAlertController
-{
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"" message:@"Do you want to enable geolocation from settings?" preferredStyle:UIAlertControllerStyleAlert];
-    
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"NO" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
-        [self performSegueWithIdentifier:kPushNotificationsAccessSegueIdentifier sender:self];
-    }];
-    
-    UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:@"YES" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
-    }];
-    
-    [alertController addAction:cancelAction];
-    [alertController addAction:confirmAction];
-    
-    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 @end

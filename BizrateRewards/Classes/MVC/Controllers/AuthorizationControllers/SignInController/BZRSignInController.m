@@ -81,6 +81,7 @@ static NSInteger const kNotRegisteredErrorCode = 400.f;
 
 - (IBAction)facebookLoginClick:(id)sender
 {
+    [self resignIfFirstResponder];
     [self signInWithFacebook];
 }
 
@@ -117,6 +118,8 @@ static NSInteger const kNotRegisteredErrorCode = 400.f;
     [BZRValidator validateEmailField:self.userNameField
                     andPasswordField:self.passwordField
                            onSuccess:^{
+                               
+                               [weakSelf resignIfFirstResponder];
                                
                                [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
                                [BZRProjectFacade signInWithEmail:weakSelf.userNameField.text password:weakSelf.passwordField.text success:^(BOOL success) {

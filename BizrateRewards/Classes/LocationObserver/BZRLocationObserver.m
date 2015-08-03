@@ -16,6 +16,8 @@
 
 #import "BZRLocationEvent.h"
 
+#import "BZRAlertFacade.h"
+
 static NSString *const kGeolocationPermissionsLastState = @"geolocationPermissionsLastState";
 
 static NSString *const kOBStore = @"Store";
@@ -93,6 +95,13 @@ static NSString *const kOBStore = @"Store";
         if (isGeolocationEnable) {
             [[NSNotificationCenter defaultCenter] postNotificationName:LocationManagerDidSuccessAuthorizeNotification object:nil];
         } else {
+//            [BZRAlertFacade showGlobalGeolocationPermissionsAlertWithCompletion:^(UIAlertAction *action) {
+//                if (action.style != UIAlertActionStyleCancel) {
+//                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+//                } else {
+//                    [[NSNotificationCenter defaultCenter] postNotificationName:LocationManagerDidFailAuthorizeNotification object:nil];
+//                }
+//            }];
             [[NSNotificationCenter defaultCenter] postNotificationName:LocationManagerDidFailAuthorizeNotification object:nil];
         }
     }

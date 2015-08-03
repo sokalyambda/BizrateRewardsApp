@@ -92,7 +92,7 @@ static NSString *const kErrorDescription = @"error_description";
             break;
         }
         case NSURLErrorDNSLookupFailed: {
-            errString = LOCALIZED(@"The connection failed because the DNS lookup failed.");
+            errString = LOCALIZED(@"DNS lookup failed.");
             break;
         }
         case NSURLErrorCannotFindHost:

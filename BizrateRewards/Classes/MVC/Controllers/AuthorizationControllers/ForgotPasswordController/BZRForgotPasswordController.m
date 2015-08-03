@@ -39,7 +39,9 @@
 
 - (IBAction)resetPasswordClick:(id)sender
 {
+    WEAK_SELF;
     [BZRValidator validateEmailField:self.userNameField andPasswordField:self.passwordField onSuccess:^{
+        [weakSelf resignIfFirstResponder];
         //TODO: forgot password request
     } onFailure:^(NSString *errorString) {
         [BZRValidator cleanValidationErrorString];

@@ -58,6 +58,8 @@
                     andPasswordField:self.passwordField
              andConfirmPasswordField:self.confirmPasswordField
                            onSuccess:^{
+                               [weakSelf resignIfFirstResponder];
+                               
                                weakSelf.temporaryProfile.email = weakSelf.userNameField.text;
                                
                                [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];

@@ -4065,6 +4065,8 @@
                         <outlet property="passwordField" destination="Sa2-FL-udh" id="Hh0-DI-VXe"/>
                         <outlet property="scrollView" destination="LCv-0Z-KpS" id="t7a-DX-ueA"/>
                         <outlet property="userNameField" destination="G1M-uq-Azr" id="mw6-d2-k4j"/>
+                        <outletCollection property="authFields" destination="G1M-uq-Azr" id="ktP-lK-NbS"/>
+                        <outletCollection property="authFields" destination="Sa2-FL-udh" id="3rO-f3-yAI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LLL-57-kzm" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -4558,6 +4560,8 @@
                         <outlet property="rememberMeSwitch" destination="V8P-a3-v7o" id="QFe-59-eO2"/>
                         <outlet property="scrollView" destination="nrb-am-Wxi" id="dYW-at-S93"/>
                         <outlet property="userNameField" destination="CUZ-To-o88" id="gPx-hJ-yFh"/>
+                        <outletCollection property="authFields" destination="CUZ-To-o88" id="U8u-6y-xUT"/>
+                        <outletCollection property="authFields" destination="QPu-Yg-UNs" id="fv8-iK-TQK"/>
                         <segue destination="8nJ-jh-bXm" kind="show" identifier="dashboardSegue" id="Q8N-sW-XsB"/>
                     </connections>
                 </viewController>
@@ -5780,6 +5784,9 @@
                         <outlet property="passwordField" destination="DQs-5z-XUm" id="UJ0-zI-C3k"/>
                         <outlet property="scrollView" destination="Ig0-1s-7m5" id="sF9-Hh-hs4"/>
                         <outlet property="userNameField" destination="Lmj-JX-jbd" id="67I-2z-ExY"/>
+                        <outletCollection property="authFields" destination="Lmj-JX-jbd" id="u0h-U5-0JM"/>
+                        <outletCollection property="authFields" destination="DQs-5z-XUm" id="Iy1-CN-APv"/>
+                        <outletCollection property="authFields" destination="j1j-UH-D0Z" id="Oax-VV-xHy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h10-WX-iDB" userLabel="First Responder" sceneMemberID="firstResponder"/>

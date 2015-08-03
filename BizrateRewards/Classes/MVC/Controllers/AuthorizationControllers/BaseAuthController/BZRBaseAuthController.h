@@ -20,6 +20,9 @@ static NSString *const kEmailErrorIconName = @"email_icon_error";
 
 @property (strong, nonatomic) UITextField *activeField;
 
+@property (strong, nonatomic) IBOutletCollection(UITextField) NSArray *authFields;
+
 - (void)customizeFields;
+- (void)resignIfFirstResponder;
 
 @end
