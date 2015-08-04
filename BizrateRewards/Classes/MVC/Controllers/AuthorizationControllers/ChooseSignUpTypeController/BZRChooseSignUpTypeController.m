@@ -51,7 +51,7 @@ static NSString *const kEmail = @"email";
 
 - (IBAction)signUpWithEmailClick:(id)sender
 {
-    [BZRMixpanelService trackEventWithType:BZRMixpanelEventCreateAcountClicked propertyValue:AuthTypeEmail];
+    [BZRMixpanelService trackEventWithType:BZRMixpanelEventCreateAcountClicked propertyValue:kAuthTypeEmail];
     [self performSegueWithIdentifier:kSignUpWithEmailSegueIdentifier sender:self];
 }
 
@@ -60,7 +60,7 @@ static NSString *const kEmail = @"email";
  */
 - (void)signUpWithFacebook
 {
-    [BZRMixpanelService trackEventWithType:BZRMixpanelEventCreateAcountClicked propertyValue:AuthTypeFacebook];
+    [BZRMixpanelService trackEventWithType:BZRMixpanelEventCreateAcountClicked propertyValue:kAuthTypeFacebook];
     WEAK_SELF;
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [BZRFacebookService authorizeWithFacebookOnSuccess:^(BOOL isSuccess) {
@@ -76,7 +76,7 @@ static NSString *const kEmail = @"email";
                 //detect success login with facebook
                 [BZRFacebookService setLoginSuccess:YES];
                 //track mixpanel event
-                [BZRMixpanelService trackEventWithType:BZRMixpanelEventRegistrationSuccessful propertyValue:AuthTypeFacebook];
+                [BZRMixpanelService trackEventWithType:BZRMixpanelEventRegistrationSuccessful propertyValue:kAuthTypeFacebook];
                 //go to dashboard
                 BZRDashboardController *controller = [weakSelf.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRDashboardController class])];
                 controller.updateNeeded = YES;

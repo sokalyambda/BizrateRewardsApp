@@ -66,7 +66,7 @@
                                
                                [BZRProjectFacade signUpWithUserFirstName:weakSelf.temporaryProfile.firstName andUserLastName:weakSelf.temporaryProfile.lastName andEmail:weakSelf.temporaryProfile.email andPassword:weakSelf.passwordField.text andDateOfBirth:[[BZRCommonDateFormatter commonDateFormatter] stringFromDate:weakSelf.temporaryProfile.dateOfBirth] andGender:[weakSelf.temporaryProfile.genderString substringToIndex:1] success:^(BOOL success) {
                                    
-                                   [BZRMixpanelService trackEventWithType:BZRMixpanelEventRegistrationSuccessful propertyValue:AuthTypeEmail];
+                                   [BZRMixpanelService trackEventWithType:BZRMixpanelEventRegistrationSuccessful propertyValue:kAuthTypeEmail];
                                    
                                    [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
                                    
