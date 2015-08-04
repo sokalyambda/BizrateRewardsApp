@@ -13,15 +13,28 @@
 
 @interface BZRForgotPasswordController ()
 
+@property (strong, nonatomic) NSUserDefaults *defaults;
+
 @end
 
 @implementation BZRForgotPasswordController
+
+#pragma mark - Accessors
+
+- (NSUserDefaults *)defaults
+{
+    if (!_defaults) {
+        _defaults = [NSUserDefaults standardUserDefaults];
+    }
+    return _defaults;
+}
 
 #pragma mark - Lifecycle
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self clearNewResettingPasswordRequirementFromDefaults];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -54,6 +67,17 @@
     } onFailure:^(NSString *errorString) {
         [BZRValidator cleanValidationErrorString];
     }];
+}
+
+/**
+ *  If user defaults contain the 'YES' value for key IsNewResettingLinkRequested - remove it, cause user has already seen this screen.
+ */
+- (void)clearNewResettingPasswordRequirementFromDefaults
+{
+    if ([self.defaults boolForKey:IsNewResettingLinkRequested]) {
+        [self.defaults removeObjectForKey:IsNewResettingLinkRequested];
+        [self.defaults synchronize];
+    }
 }
 
 #pragma mark - UITextFieldDelegate

@@ -73,6 +73,9 @@ static NSInteger const kNotRegisteredErrorCode = 400.f;
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    [self checkForNewResettingLinkRequest];
+    
     self.navigationItem.title = LOCALIZED(@"Login");
     [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
@@ -92,9 +95,7 @@ static NSInteger const kNotRegisteredErrorCode = 400.f;
 
 - (IBAction)forgotPasswordClick:(id)sender
 {
-    BZRForgotPasswordController *forgotPasswordController = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRForgotPasswordController class])];
-    BZRBaseNavigationController *navigationController = [[BZRBaseNavigationController alloc] initWithRootViewController:forgotPasswordController];
-    [self presentViewController:navigationController animated:YES completion:nil];
+    [self showForgotPasswordController];
 }
 
 - (IBAction)goToCreateNewAccountClick:(id)sender
@@ -106,6 +107,16 @@ static NSInteger const kNotRegisteredErrorCode = 400.f;
 - (IBAction)rememberMeValueChanged:(id)sender
 {
     self.rememberMe = !self.isRememberMe;
+}
+
+/**
+ *  Present the forgot password controller
+ */
+- (void)showForgotPasswordController
+{
+    BZRForgotPasswordController *forgotPasswordController = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRForgotPasswordController class])];
+    BZRBaseNavigationController *navigationController = [[BZRBaseNavigationController alloc] initWithRootViewController:forgotPasswordController];
+    [self presentViewController:navigationController animated:YES completion:nil];
 }
 
 /**
@@ -176,6 +187,16 @@ static NSInteger const kNotRegisteredErrorCode = 400.f;
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         
     }];
+}
+
+/**
+ *  Check whether forgot password controller has to be presented.
+ */
+- (void)checkForNewResettingLinkRequest
+{
+    if ([self.defaults boolForKey:IsNewResettingLinkRequested]) {
+        [self showForgotPasswordController];
+    }
 }
 
 /**

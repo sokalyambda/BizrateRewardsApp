@@ -38,4 +38,6 @@ static NSString *const FBAccessTokenExpirationDate = @"FBAccessTokenExpirationDa
 static NSString *const FBLoginSuccess = @"FBLoginSuccess";
 static NSString *const FBCurrentProfile = @"FBCurrentProfile";
 
+static NSString *const IsNewResettingLinkRequested = @"IsNewResettingLinkRequested";
+
 #endif
