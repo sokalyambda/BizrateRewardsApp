@@ -34,4 +34,9 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+- (IBAction)closeClick:(id)sender
+{
+
+}
+
 @end
