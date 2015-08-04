@@ -47,6 +47,10 @@
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
+- (IBAction)closeClick:(id)sender
+{
+    
+}
 /**
  *  If user clicks the 'requestNewLink' button he has to be redirected to forgot password screen. This value setted to determine this situation when autologin controller will perform redirection.
  */
@@ -54,11 +58,6 @@
 {
     [self.defaults setBool:YES forKey:IsNewResettingLinkRequested];
     [self.defaults synchronize];
-}
-
-- (IBAction)closeClick:(id)sender
-{
-    
 }
 
 @end
