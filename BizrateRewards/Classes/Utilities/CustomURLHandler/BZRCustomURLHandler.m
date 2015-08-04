@@ -68,6 +68,7 @@ static NSString *const kFailReasonMessage = @"failReasonMessage";
             failReasonMessage = LOCALIZED(@"This password reset link has been expired by a more recent password reset request.");
         }
         
+        [urlParsingParameters setObject:failReasonValue forKey:kReason];
         [urlParsingParameters setObject:@NO forKey:kIsResettingSuccess];
         [urlParsingParameters setObject:failReasonMessage forKey:kFailReasonMessage];
     }

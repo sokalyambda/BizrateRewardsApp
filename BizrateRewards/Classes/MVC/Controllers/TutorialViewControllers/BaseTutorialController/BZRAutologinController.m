@@ -90,7 +90,6 @@ static NSString *const kStartTutorialSegueIdentirier = @"startTutorialSegue";
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    
     [self checkForRedirection];
 }
 

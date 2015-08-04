@@ -18,11 +18,11 @@
 
 #import "BZRStorageManager.h"
 
+#import "AppDelegate.h"
+
 static NSString *const kStoryboardName = @"Main";
 
 static NSString *const kIsResettingSuccess = @"isResettingSuccess";
-
-static NSString *const kFailReasonMessage = @"failReasonMessage";
 
 static NSString *const kAppURLPrefix = @"com.bizraterewards://";
 
@@ -80,13 +80,13 @@ static NSString *const kTermsAndConditionsLink = @"http://www.bizraterewards.com
     //app opened with URL
     [BZRStorageManager sharedStorage].appOpenedWithURL = YES;
     
+    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+    BZRBaseNavigationController *navigationController = (BZRBaseNavigationController *)appDelegate.window.rootViewController;
+    
     NSDictionary *parsedParameters = [BZRCustomURLHandler urlParsingParametersFromURL:redirectURL];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:kStoryboardName bundle:[NSBundle mainBundle]];
     
     if (parsedParameters.count) {
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:kStoryboardName bundle:[NSBundle mainBundle]];
-        
-        BZRBaseNavigationController *navigationController = [storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRBaseNavigationController class])];
-        
         BOOL isResetingSuccess = [parsedParameters[kIsResettingSuccess] boolValue];
         
         BZRBaseViewController *redirectedController;
@@ -94,7 +94,7 @@ static NSString *const kTermsAndConditionsLink = @"http://www.bizraterewards.com
             redirectedController = [storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRSuccessResettingController class])];
         } else {
             redirectedController = [storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRFailureResettingController class])];
-            ((BZRFailureResettingController *)redirectedController).failReason = parsedParameters[kFailReasonMessage];
+            ((BZRFailureResettingController *)redirectedController).failReason = parsedParameters[@"failReasonMessage"];
         }
         
         //if modal controller was presented - dismiss it
