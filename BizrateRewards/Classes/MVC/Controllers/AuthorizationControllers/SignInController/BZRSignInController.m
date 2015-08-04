@@ -74,8 +74,6 @@ static NSInteger const kNotRegisteredErrorCode = 400.f;
 {
     [super viewWillAppear:animated];
     
-    [self checkForNewResettingLinkRequest];
-    
     self.navigationItem.title = LOCALIZED(@"Login");
     [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
@@ -187,16 +185,6 @@ static NSInteger const kNotRegisteredErrorCode = 400.f;
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         
     }];
-}
-
-/**
- *  Check whether forgot password controller has to be presented.
- */
-- (void)checkForNewResettingLinkRequest
-{
-    if ([self.defaults boolForKey:IsNewResettingLinkRequested]) {
-        [self showForgotPasswordController];
-    }
 }
 
 /**

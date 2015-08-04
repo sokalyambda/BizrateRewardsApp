@@ -13,6 +13,7 @@
 @interface BZRFailureResettingController ()
 
 @property (strong, nonatomic) NSUserDefaults *defaults;
+
 @property (weak, nonatomic) IBOutlet BZRTutorialDescriptionLabel *failReasonLabel;
 
 @end
@@ -40,6 +41,7 @@
 {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:YES];
+    [self updateFailReasonMessage];
 }
 
 #pragma mark - Actions
@@ -54,6 +56,12 @@
 {
     
 }
+
+- (void)updateFailReasonMessage
+{
+    self.failReasonLabel.text = self.failReason;
+}
+
 /**
  *  If user clicks the 'requestNewLink' button he has to be redirected to forgot password screen. This value setted to determine this situation when autologin controller will perform redirection.
  */

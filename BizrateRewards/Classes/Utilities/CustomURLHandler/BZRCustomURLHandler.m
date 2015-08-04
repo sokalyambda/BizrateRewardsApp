@@ -29,23 +29,28 @@ static NSString *const kExpiredLinkReacon = @"expired_link";
 static NSString *const kRejectedReason = @"rejected";
 
 static NSString *const kIsResettingSuccess = @"isResettingSuccess";
+static NSString *const kFailReasonMessage = @"failReasonMessage";
 
 @implementation BZRCustomURLHandler
 
+/**
+ *  Parse the custom URL and get parameters
+ *
+ *  @param url URL that shoud be parsed
+ *
+ *  @return Parsed Parameters
+ */
 + (NSDictionary *)urlParsingParametersFromURL:(NSURL *)url
 {
     NSString *urlString = url.absoluteString;
-    
     NSMutableDictionary *urlParsingParameters = [NSMutableDictionary dictionary];
     
     if ([urlString containsString:kSuccessParam]) {
         
         NSRange successRange = [urlString rangeOfString:kSuccessParam];
         NSString *successResetValue = [urlString substringFromIndex:successRange.location+successRange.length];
-        
         NSArray *params = [successResetValue componentsSeparatedByString:@"="];
         NSString *accessTokenValue = [params lastObject];
-        
         [urlParsingParameters setObject:accessTokenValue forKey:kAccessToken];
         [urlParsingParameters setObject:@YES forKey:kIsResettingSuccess];
         
@@ -53,12 +58,18 @@ static NSString *const kIsResettingSuccess = @"isResettingSuccess";
         
         NSRange failRange = [urlString rangeOfString:kFailParam];
         NSString *failResetValue = [urlString substringFromIndex:failRange.location+failRange.length];
-        
         NSArray *params = [failResetValue componentsSeparatedByString:@"="];
         NSString *failReasonValue = [params lastObject];
         
-        [urlParsingParameters setObject:failReasonValue forKey:kReason];
+        NSString *failReasonMessage;
+        if ([failReasonValue isEqualToString:kInvalidLinkReason] || [failReasonValue isEqualToString:kExpiredLinkReacon]) {
+            failReasonMessage = LOCALIZED(@"This password reset link has been expired.");
+        } else if ([failReasonValue isEqualToString:kRejectedReason]) {
+            failReasonMessage = LOCALIZED(@"This password reset link has been expired by a more recent password reset request.");
+        }
+        
         [urlParsingParameters setObject:@NO forKey:kIsResettingSuccess];
+        [urlParsingParameters setObject:failReasonMessage forKey:kFailReasonMessage];
     }
     
     return urlParsingParameters;

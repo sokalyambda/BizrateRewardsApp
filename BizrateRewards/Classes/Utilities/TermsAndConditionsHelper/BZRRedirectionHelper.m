@@ -16,11 +16,13 @@
 
 #import "BZRProjectFacade.h"
 
-#import "AppDelegate.h"
+#import "BZRStorageManager.h"
 
 static NSString *const kStoryboardName = @"Main";
 
 static NSString *const kIsResettingSuccess = @"isResettingSuccess";
+
+static NSString *const kFailReasonMessage = @"failReasonMessage";
 
 static NSString *const kAppURLPrefix = @"com.bizraterewards://";
 
@@ -68,7 +70,6 @@ static NSString *const kTermsAndConditionsLink = @"http://www.bizraterewards.com
  *  When we get the url on app opening (after password reseting), we have to redirect the user to correctly finish reset password controller to show whether the result was success or failure.
  *
  *  @param redirectURL          URL which has to be parsed for determining destination controller
- *  @param navigationController Navigation controller that will push the needed controller
  */
 + (void)showResetPasswordResultControllerWithObtainedURL:(NSURL *)redirectURL
 {
@@ -76,13 +77,16 @@ static NSString *const kTermsAndConditionsLink = @"http://www.bizraterewards.com
         return;
     }
     
-    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-    BZRBaseNavigationController *navigationController = (BZRBaseNavigationController *)appDelegate.window.rootViewController;
+    //app opened with URL
+    [BZRStorageManager sharedStorage].appOpenedWithURL = YES;
     
     NSDictionary *parsedParameters = [BZRCustomURLHandler urlParsingParametersFromURL:redirectURL];
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:kStoryboardName bundle:[NSBundle mainBundle]];
     
     if (parsedParameters.count) {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:kStoryboardName bundle:[NSBundle mainBundle]];
+        
+        BZRBaseNavigationController *navigationController = [storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRBaseNavigationController class])];
+        
         BOOL isResetingSuccess = [parsedParameters[kIsResettingSuccess] boolValue];
         
         BZRBaseViewController *redirectedController;
@@ -90,12 +94,14 @@ static NSString *const kTermsAndConditionsLink = @"http://www.bizraterewards.com
             redirectedController = [storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRSuccessResettingController class])];
         } else {
             redirectedController = [storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRFailureResettingController class])];
+            ((BZRFailureResettingController *)redirectedController).failReason = parsedParameters[kFailReasonMessage];
         }
         
         //if modal controller was presented - dismiss it
         for (UIViewController *controller in navigationController.viewControllers) {
             [controller.presentedViewController dismissViewControllerAnimated:YES completion:nil];
         }
+        
         [navigationController pushViewController:redirectedController animated:YES];
     }
 }

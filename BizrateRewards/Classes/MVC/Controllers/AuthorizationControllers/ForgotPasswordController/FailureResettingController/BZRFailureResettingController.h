@@ -10,4 +10,6 @@
 
 @interface BZRFailureResettingController : BZRBaseViewController
 
+@property (strong, nonatomic) NSString *failReason;
+
 @end

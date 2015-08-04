@@ -23,4 +23,6 @@
 @property (strong, nonatomic) NSString *deviceUDID;
 @property (strong, nonatomic) NSString *deviceName;
 
+@property (assign, nonatomic) BOOL appOpenedWithURL;
+
 @end
