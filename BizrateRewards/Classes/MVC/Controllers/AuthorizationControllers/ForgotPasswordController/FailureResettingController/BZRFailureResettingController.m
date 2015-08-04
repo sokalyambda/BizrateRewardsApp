@@ -34,4 +34,9 @@
     
 }
 
+- (IBAction)closeClick:(id)sender
+{
+    
+}
+
 @end
