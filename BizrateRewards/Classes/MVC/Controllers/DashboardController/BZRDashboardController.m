@@ -133,10 +133,6 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
     self.currentProfile.pointsRequired = 2000;
     
     [self.progressView recalculateProgressWithCurrentPoints:self.currentProfile.pointsAmount requiredPoints:self.currentProfile.pointsRequired];
-    
-//    if (!self.isUpdateNeeded) {
-//        [BZRMixpanelService setPeopleForUser:self.currentProfile];
-//    }
 }
 
 /**
@@ -170,8 +166,6 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
     
         [weakSelf updateUserInformation];
-        [BZRMixpanelService setPeopleForUser:weakSelf.currentProfile];
-        
         //Register app for push notifications, if success - send device data to server
 //        [BZRPushNotifiactionService registerApplicationForPushNotifications:[UIApplication sharedApplication]];
         

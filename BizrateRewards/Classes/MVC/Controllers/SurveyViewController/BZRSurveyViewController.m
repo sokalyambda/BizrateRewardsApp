@@ -49,7 +49,9 @@ static NSString *const kSurveyID = @"Survey ID";
     NSURLRequest *surveyRequest = [NSURLRequest requestWithURL:self.currentSurvey.surveyLink];
     [self.surveyWebView loadRequest:surveyRequest];
     
-    [BZRMixpanelService trackEventWithType:BZRMixpanelEventSurveyViewed propertyValue:[NSString stringWithFormat:@"%ld", (long)self.currentSurvey.surveyId]];
+    //track mixpanel event
+    [BZRMixpanelService trackEventWithType:BZRMixpanelEventSurveyViewed
+                             propertyValue:[NSString stringWithFormat:@"%ld", (long)self.currentSurvey.surveyId]];
 }
 
 /**

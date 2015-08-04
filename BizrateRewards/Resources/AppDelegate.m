@@ -38,6 +38,7 @@ static NSString *const kOfferBeamRetailerID = @"A27C65B0-DB22-11E4-8830-0800200C
     
     //setup mixPanel service
     [BZRMixpanelService setupMixpanel];
+    //track mixpanel event
     [BZRMixpanelService trackEventWithType:BZRMixpanelEventOpenApp propertyValue:nil];
     
     //setup hockey app service

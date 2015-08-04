@@ -139,7 +139,9 @@ static NSString *const kOBStore = @"Store";
     if (isPermissionsChanged) {
         [defaults setBool:isGeolocationEnable forKey:kGeolocationPermissionsLastState];
         
-        [BZRMixpanelService trackEventWithType:BZRMixpanelEventLocationPermission propertyValue:isGeolocationEnable? @"YES" : @"NO"];
+        //track mixpanel event
+        [BZRMixpanelService trackEventWithType:BZRMixpanelEventLocationPermission
+                                 propertyValue:isGeolocationEnable? @"YES" : @"NO"];
     }
 }
 
@@ -158,7 +160,8 @@ static NSString *const kOBStore = @"Store";
         
         locationEvent.eventType = eventType;
         
-        [BZRMixpanelService trackLocationEventWithType:eventType locationId:locationEvent.locationId];
+        //track mixpanel event (enter/exit geofence)
+        [BZRMixpanelService trackLocationEvent:locationEvent];
         
         [BZRProjectFacade sendGeolocationEvent:locationEvent onSuccess:^(BZRLocationEvent *locationEvent) {
             

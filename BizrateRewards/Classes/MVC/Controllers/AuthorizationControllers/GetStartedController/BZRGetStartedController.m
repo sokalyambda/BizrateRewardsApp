@@ -44,6 +44,7 @@ static NSString *const kChooseSignUpTypeSegueIdentifier = @"сhooseSignUpTypeSeg
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    //track mixpanel event
     [BZRMixpanelService trackEventWithType:BZRMixpanelEventSignupPage propertyValue:nil];
 }
 
