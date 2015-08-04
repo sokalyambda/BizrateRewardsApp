@@ -8,9 +8,12 @@
 
 #import "BZRFailureResettingController.h"
 
+#import "BZRTutorialDescriptionLabel.h"
+
 @interface BZRFailureResettingController ()
 
 @property (strong, nonatomic) NSUserDefaults *defaults;
+@property (weak, nonatomic) IBOutlet BZRTutorialDescriptionLabel *failReasonLabel;
 
 @end
 
