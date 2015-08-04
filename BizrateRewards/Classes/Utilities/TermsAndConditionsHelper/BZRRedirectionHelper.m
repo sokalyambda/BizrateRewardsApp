@@ -14,6 +14,8 @@
 #import "BZRFailureResettingController.h"
 #import "BZRBaseNavigationController.h"
 
+#import "BZRProjectFacade.h"
+
 #import "AppDelegate.h"
 
 static NSString *const kStoryboardName = @"Main";
@@ -70,7 +72,7 @@ static NSString *const kTermsAndConditionsLink = @"http://www.bizraterewards.com
  */
 + (void)showResetPasswordResultControllerWithObtainedURL:(NSURL *)redirectURL
 {
-    if (!redirectURL || redirectURL.isFileURL || ![redirectURL.absoluteString containsString:kAppURLPrefix] || [redirectURL.absoluteString isEqualToString:kAppURLPrefix]) {
+    if (!redirectURL || redirectURL.isFileURL || ![redirectURL.absoluteString containsString:kAppURLPrefix] || [redirectURL.absoluteString isEqualToString:kAppURLPrefix] || [BZRProjectFacade isUserSessionValid]) {
         return;
     }
     

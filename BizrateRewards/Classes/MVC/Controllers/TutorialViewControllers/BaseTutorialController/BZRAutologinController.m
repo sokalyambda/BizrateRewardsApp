@@ -10,6 +10,8 @@
 #import "BZRStartTutorialController.h"
 #import "BZRFinishTutorialController.h"
 #import "BZRDashboardController.h"
+#import "BZRBaseNavigationController.h"
+#import "BZRForgotPasswordController.h"
 
 #import "BZRProjectFacade.h"
 
@@ -21,8 +23,8 @@ static NSString *const kStartTutorialSegueIdentirier = @"startTutorialSegue";
 
 @property (assign, nonatomic, getter=isTutorialPassed) BOOL tutorialPassed;
 @property (assign, nonatomic, getter=isRememberMe) BOOL rememberMe;
-
 @property (assign, nonatomic, getter=isFacebookSessionValid) BOOL facebookSessionValid;
+@property (assign, nonatomic, getter=isForgotPasswordRedirectionNeeded) BOOL forgotPasswordRedirecionNeeded;
 
 @property (strong, nonatomic) NSUserDefaults *defaults;
 
@@ -49,6 +51,11 @@ static NSString *const kStartTutorialSegueIdentirier = @"startTutorialSegue";
 {
     _facebookSessionValid = [BZRProjectFacade isFacebookSessionValid];
     return _facebookSessionValid;
+}
+
+- (BOOL)isForgotPasswordRedirecionNeeded
+{
+    return [self.defaults boolForKey:IsNewResettingLinkRequested];
 }
 
 - (NSUserDefaults *)defaults
@@ -86,7 +93,9 @@ static NSString *const kStartTutorialSegueIdentirier = @"startTutorialSegue";
  */
 - (void)checkForRedirection
 {
-    if ([self isAutologinNeeded]) {
+    if (self.isForgotPasswordRedirecionNeeded) {
+        [self showForgotPasswordController];
+    } else if ([self isAutologinNeeded]) {
         [self autologinWithEmail];
     } else if (self.isFacebookSessionValid) {
         [self autologinWithFacebook];
@@ -119,11 +128,11 @@ static NSString *const kStartTutorialSegueIdentirier = @"startTutorialSegue";
 {
     if (!self.isRememberMe) {
         return NO;
-    } else {
-        NSDictionary *userCredentials = [BZRKeychainHandler getStoredCredentials];
-        self.savedPassword = userCredentials[PasswordKey];
-        self.savedUsername = userCredentials[UserNameKey];
     }
+    NSDictionary *userCredentials = [BZRKeychainHandler getStoredCredentials];
+    self.savedPassword = userCredentials[PasswordKey];
+    self.savedUsername = userCredentials[UserNameKey];
+    
     return self.savedUsername.length && self.savedPassword.length;
 }
 
@@ -184,6 +193,16 @@ static NSString *const kStartTutorialSegueIdentirier = @"startTutorialSegue";
 {
     BZRFinishTutorialController *controller = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRFinishTutorialController class])];
     [self.navigationController pushViewController:controller animated:YES];
+}
+
+/**
+ *  Present forgot password view controller.
+ */
+- (void)showForgotPasswordController
+{
+    BZRForgotPasswordController *forgotPasswordController = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRForgotPasswordController class])];
+    BZRBaseNavigationController *navigationController = [[BZRBaseNavigationController alloc] initWithRootViewController:forgotPasswordController];
+    [self presentViewController:navigationController animated:YES completion:nil];
 }
 
 @end

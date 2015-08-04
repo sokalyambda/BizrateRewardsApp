@@ -134,9 +134,9 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
     
     [self.progressView recalculateProgressWithCurrentPoints:self.currentProfile.pointsAmount requiredPoints:self.currentProfile.pointsRequired];
     
-    if (!self.isUpdateNeeded) {
-        [BZRMixpanelService setPeopleForUser:self.currentProfile];
-    }
+//    if (!self.isUpdateNeeded) {
+//        [BZRMixpanelService setPeopleForUser:self.currentProfile];
+//    }
 }
 
 /**
@@ -166,7 +166,9 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
     WEAK_SELF;
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [BZRProjectFacade getCurrentUserOnSuccess:^(BOOL isSuccess) {
+        
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+    
         [weakSelf updateUserInformation];
         [BZRMixpanelService setPeopleForUser:weakSelf.currentProfile];
         

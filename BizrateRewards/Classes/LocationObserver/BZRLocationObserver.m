@@ -155,6 +155,7 @@ static NSString *const kOBStore = @"Store";
 {
     if ([BZRProjectFacade isUserSessionValid]) {
         BZRLocationEvent *locationEvent = [[BZRLocationEvent alloc] initWithServerResponse:dictionary[kOBStore]];
+        
         locationEvent.eventType = eventType;
         
         [BZRMixpanelService trackLocationEventWithType:eventType locationId:locationEvent.locationId];
