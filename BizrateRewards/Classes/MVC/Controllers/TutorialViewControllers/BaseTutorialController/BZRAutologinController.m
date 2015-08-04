@@ -69,7 +69,7 @@ static NSString *const kStartTutorialSegueIdentirier = @"startTutorialSegue";
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:YES];
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -135,9 +135,11 @@ static NSString *const kStartTutorialSegueIdentirier = @"startTutorialSegue";
     WEAK_SELF;
     [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
     [BZRProjectFacade signInWithEmail:weakSelf.savedUsername password:weakSelf.savedPassword success:^(BOOL success) {
-        [BZRMixpanelService trackEventWithType:BZRMixpanelEventLoginSuccessful propertyValue:AuthTypeEmail];
+        
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        [BZRMixpanelService trackEventWithType:BZRMixpanelEventLoginSuccessful propertyValue:AuthTypeEmail];
         [weakSelf goToDashboardController];
+        
     } failure:^(NSError *error, BOOL isCanceled) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         [weakSelf goToFinishTutorialController];
@@ -151,10 +153,9 @@ static NSString *const kStartTutorialSegueIdentirier = @"startTutorialSegue";
 {
     WEAK_SELF;
     [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
-    
     [BZRProjectFacade signInWithFacebookOnSuccess:^(BOOL isSuccess) {
-        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         [BZRMixpanelService trackEventWithType:BZRMixpanelEventLoginSuccessful propertyValue:AuthTypeFacebook];
         [weakSelf goToDashboardController];
         

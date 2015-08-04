@@ -111,6 +111,9 @@ static NSString *const kPasswordNotActiveIconName   = @"password_icon";
     self.passwordField.notActiveImageName   = kPasswordNotActiveIconName;
 }
 
+/**
+ *  Resign first responder from any active field from auth outlet collection
+ */
 - (void)resignIfFirstResponder
 {
     for (UITextField *field in self.authFields) {

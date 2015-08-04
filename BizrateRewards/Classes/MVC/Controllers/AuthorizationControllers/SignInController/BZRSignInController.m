@@ -73,7 +73,7 @@ static NSInteger const kNotRegisteredErrorCode = 400.f;
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.navigationItem.title = NSLocalizedString(@"Login", nil);
+    self.navigationItem.title = LOCALIZED(@"Login");
     [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
@@ -92,9 +92,9 @@ static NSInteger const kNotRegisteredErrorCode = 400.f;
 
 - (IBAction)forgotPasswordClick:(id)sender
 {
-//    BZRForgotPasswordController *forgotPasswordController = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRForgotPasswordController class])];
-//    BZRBaseNavigationController *navigationController = [[BZRBaseNavigationController alloc] initWithRootViewController:forgotPasswordController];
-//    [self presentViewController:navigationController animated:YES completion:nil];
+    BZRForgotPasswordController *forgotPasswordController = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRForgotPasswordController class])];
+    BZRBaseNavigationController *navigationController = [[BZRBaseNavigationController alloc] initWithRootViewController:forgotPasswordController];
+    [self presentViewController:navigationController animated:YES completion:nil];
 }
 
 - (IBAction)goToCreateNewAccountClick:(id)sender
@@ -136,7 +136,6 @@ static NSInteger const kNotRegisteredErrorCode = 400.f;
                                } failure:^(NSError *error, BOOL isCanceled) {
                                    
                                    [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-                                   
 #warning check if email is not registered
                                    [weakSelf.incorrectEmailView setHidden:NO];
                                    weakSelf.userNameField.errorImageName = kEmailErrorIconName;

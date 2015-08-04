@@ -7,6 +7,7 @@
 //
 
 #import "BZRForgotPasswordController.h"
+#import "BZRConfirmPasswordController.h"
 
 #import "BZRValidator.h"
 
@@ -27,7 +28,6 @@
 {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:YES];
-
 }
 
 #pragma mark - Actions
@@ -41,7 +41,15 @@
 {
     WEAK_SELF;
     [BZRValidator validateEmailField:self.userNameField andPasswordField:self.passwordField onSuccess:^{
+        
         [weakSelf resignIfFirstResponder];
+        
+        [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
+        
+        BZRConfirmPasswordController *controller = [weakSelf.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRConfirmPasswordController class])];
+        [weakSelf.navigationController pushViewController:controller animated:YES];
+        
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         //TODO: forgot password request
     } onFailure:^(NSString *errorString) {
         [BZRValidator cleanValidationErrorString];

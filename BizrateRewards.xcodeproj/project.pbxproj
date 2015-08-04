@@ -41,6 +41,7 @@
 		586ED0D11B46E8F500FEB250 /* UIView+SoftRemoving.m in Sources */ = {isa = PBXBuildFile; fileRef = 586ED0D01B46E8F500FEB250 /* UIView+SoftRemoving.m */; };
 		5878D3DD1B43F92100A917D0 /* BZRReachabilityHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5878D3DC1B43F92100A917D0 /* BZRReachabilityHelper.m */; };
 		5878D3E11B4426E000A917D0 /* BZRCommonDateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5878D3E01B4426DF00A917D0 /* BZRCommonDateFormatter.m */; };
+		588CE7A01B70AAD00088DEB1 /* BZRConfirmPasswordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 588CE79F1B70AAD00088DEB1 /* BZRConfirmPasswordController.m */; };
 		58901CF41B500E1B00D4A16B /* BZRBaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58901CF31B500E1B00D4A16B /* BZRBaseNavigationController.m */; };
 		5894208B1B450FF6004BAF48 /* BZRAccountSettingsContaiterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5894208A1B450FF6004BAF48 /* BZRAccountSettingsContaiterController.m */; };
 		589420931B451D79004BAF48 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 589420921B451D79004BAF48 /* AppDelegate.m */; };
@@ -227,6 +228,8 @@
 		5878D3DC1B43F92100A917D0 /* BZRReachabilityHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRReachabilityHelper.m; path = Classes/Utilities/ReachabilityHelper/BZRReachabilityHelper.m; sourceTree = "<group>"; };
 		5878D3DF1B4426DF00A917D0 /* BZRCommonDateFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRCommonDateFormatter.h; path = Classes/Utilities/CommonDateFormatter/BZRCommonDateFormatter.h; sourceTree = "<group>"; };
 		5878D3E01B4426DF00A917D0 /* BZRCommonDateFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRCommonDateFormatter.m; path = Classes/Utilities/CommonDateFormatter/BZRCommonDateFormatter.m; sourceTree = "<group>"; };
+		588CE79E1B70AAD00088DEB1 /* BZRConfirmPasswordController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRConfirmPasswordController.h; path = Classes/MVC/Controllers/AuthorizationControllers/ForgotPasswordController/ConfirmPasswordController/BZRConfirmPasswordController.h; sourceTree = "<group>"; };
+		588CE79F1B70AAD00088DEB1 /* BZRConfirmPasswordController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRConfirmPasswordController.m; path = Classes/MVC/Controllers/AuthorizationControllers/ForgotPasswordController/ConfirmPasswordController/BZRConfirmPasswordController.m; sourceTree = "<group>"; };
 		58901CF21B500E1B00D4A16B /* BZRBaseNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRBaseNavigationController.h; path = Classes/MVC/Controllers/BaseNavigationController/BZRBaseNavigationController.h; sourceTree = "<group>"; };
 		58901CF31B500E1B00D4A16B /* BZRBaseNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRBaseNavigationController.m; path = Classes/MVC/Controllers/BaseNavigationController/BZRBaseNavigationController.m; sourceTree = "<group>"; };
 		589420891B450FF6004BAF48 /* BZRAccountSettingsContaiterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRAccountSettingsContaiterController.h; path = Classes/MVC/Controllers/AccountSettingsController/SettingsContaiterController/BZRAccountSettingsContaiterController.h; sourceTree = "<group>"; };
@@ -987,6 +990,15 @@
 			name = CommonDateFormatter;
 			sourceTree = "<group>";
 		};
+		588CE79D1B70AA350088DEB1 /* ConfirmPasswordController */ = {
+			isa = PBXGroup;
+			children = (
+				588CE79E1B70AAD00088DEB1 /* BZRConfirmPasswordController.h */,
+				588CE79F1B70AAD00088DEB1 /* BZRConfirmPasswordController.m */,
+			);
+			name = ConfirmPasswordController;
+			sourceTree = "<group>";
+		};
 		58901CF11B500DEB00D4A16B /* BaseNavigationController */ = {
 			isa = PBXGroup;
 			children = (
@@ -1658,6 +1670,7 @@
 		58BCCD901B6BAD7100521496 /* ForgotPasswordController */ = {
 			isa = PBXGroup;
 			children = (
+				588CE79D1B70AA350088DEB1 /* ConfirmPasswordController */,
 				58BCCD9D1B6BCD6C00521496 /* FailureResettingController */,
 				58BCCD9C1B6BCD6100521496 /* SuccessResettingController */,
 				58BCCD911B6BAD9D00521496 /* BZRForgotPasswordController.h */,
@@ -2184,6 +2197,7 @@
 				589420A11B451E35004BAF48 /* BZRPickerHolder.m in Sources */,
 				58A7E23A1B45A3A200A1489A /* UIView+ConfigureAnchorPoint.m in Sources */,
 				58A91F481B3ABE6D0032607F /* BZRStorageManager.m in Sources */,
+				588CE7A01B70AAD00088DEB1 /* BZRConfirmPasswordController.m in Sources */,
 				84BE35D11B5D0AE0001B99E2 /* BZRSurveyPointsValueLabel.m in Sources */,
 				58ACC06D1B3937160081E546 /* BZRAutologinController.m in Sources */,
 				58A5BEBA1B414ADC00B2BC27 /* BZRLeftImageTextField.m in Sources */,

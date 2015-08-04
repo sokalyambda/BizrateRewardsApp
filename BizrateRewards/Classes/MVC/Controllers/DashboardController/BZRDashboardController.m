@@ -34,7 +34,6 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
 @property (weak, nonatomic) IBOutlet UILabel *earnedPointsLabel;
 
 @property (strong, nonatomic) BZRStorageManager *storageManager;
-
 @property (strong, nonatomic) BZRUserProfile *currentProfile;
 
 @end
@@ -67,10 +66,11 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
     [self.view layoutIfNeeded];
     [self.navigationController setNavigationBarHidden:YES animated:YES];
-    [self updateUserInformation];
     
+    [self updateUserInformation];
     if (self.isUpdateNeeded) {
         [self getCurrentUserProfile];
     }
@@ -132,6 +132,8 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
 #warning User Points
     self.currentProfile.pointsRequired = 2000;
     
+    [self.progressView recalculateProgressWithCurrentPoints:self.currentProfile.pointsAmount requiredPoints:self.currentProfile.pointsRequired];
+    
     if (!self.isUpdateNeeded) {
         [BZRMixpanelService setPeopleForUser:self.currentProfile];
     }
@@ -167,7 +169,6 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         [weakSelf updateUserInformation];
         [BZRMixpanelService setPeopleForUser:weakSelf.currentProfile];
-        [weakSelf.progressView recalculateProgressWithCurrentPoints:self.currentProfile.pointsAmount requiredPoints:self.currentProfile.pointsRequired];
         
         //Register app for push notifications, if success - send device data to server
 //        [BZRPushNotifiactionService registerApplicationForPushNotifications:[UIApplication sharedApplication]];

@@ -23,7 +23,7 @@
     UIRectFill(CGRectMake(0.f, 0.f, self.progress, CGRectGetHeight(self.frame)));
 }
 
-- (void)recalculateProgressWithCurrentPoints: (NSInteger)currentPoints requiredPoints: (NSInteger)requiredPoints
+- (void)recalculateProgressWithCurrentPoints:(NSInteger)currentPoints requiredPoints:(NSInteger)requiredPoints
 {
     self.progress  = (CGFloat)currentPoints * CGRectGetWidth(self.frame) / (CGFloat)requiredPoints;
     [self setNeedsDisplay];
