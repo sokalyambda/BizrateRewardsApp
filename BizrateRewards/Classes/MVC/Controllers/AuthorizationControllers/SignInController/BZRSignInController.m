@@ -124,7 +124,7 @@ static NSInteger const kNotRegisteredErrorCode = 400.f;
                                [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
                                [BZRProjectFacade signInWithEmail:weakSelf.userNameField.text password:weakSelf.passwordField.text success:^(BOOL success) {
                                    //track success login event (MixPanel)
-                                   [BZRMixpanelService trackEventWithType:BZRMixpanelEventLoginSuccessful propertyValue:AuthTypeEmail];
+                                   [BZRMixpanelService trackEventWithType:BZRMixpanelEventLoginSuccessful propertyValue:kAuthTypeEmail];
                                    //hide progress hud
                                    [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
                                    
@@ -164,7 +164,7 @@ static NSInteger const kNotRegisteredErrorCode = 400.f;
                 //detect success login with facebook
                 [BZRFacebookService setLoginSuccess:YES];
                 //track mixpanel event
-                [BZRMixpanelService trackEventWithType:BZRMixpanelEventLoginSuccessful propertyValue:AuthTypeFacebook];
+                [BZRMixpanelService trackEventWithType:BZRMixpanelEventLoginSuccessful propertyValue:kAuthTypeFacebook];
                 
                 //go to dashboard
                 [weakSelf performSegueWithIdentifier:kDashboardSegueIdentifier sender:weakSelf];

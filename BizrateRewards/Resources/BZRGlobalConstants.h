@@ -31,23 +31,6 @@ static NSString *const RememberMeKey = @"RememberMeKey";
 static NSString *const UserNameKey = @"UsernameKey";
 static NSString *const PasswordKey = @"PasswordKey";
 
-static NSString *const MixpanelAliasID = @"MixpanelAliasID";
-
-// Mixpanel Parameters
-
-static NSString *const AuthTypeEmail = @"Email";
-static NSString *const AuthTypeFacebook = @"Facebook";
-static NSString *const AccessGrantedKeyYes = @"YES";
-static NSString *const AccessGrantedKeyNo = @"NO";
-
-//Mixpanel People Properties
-
-static NSString *const PushNotificationsEnabled = @"Push Notifications Enabled";
-static NSString *const GeoLocationEnabled = @"Geo Location Enabled";
-static NSString *const FirstNameProperty = @"First Name";
-static NSString *const LastNameProperty = @"Last Name";
-static NSString *const BizrateIDProperty = @"Bizrate ID";
-
 //Facebook (keys for NSUserDefaults)
 
 static NSString *const FBAccessToken = @"FBAccessToken";

@@ -14,10 +14,21 @@
 #import "BZRPushNotifiactionService.h"
 #import "BZRLocationObserver.h"
 
-static NSString *const kMixpanelToken = @"aae3e2388125817b27b8afcf99093d97";//@"f818411581cc210c670fe3351a46debe";
+static NSString *const kMixpanelToken = @"f818411581cc210c670fe3351a46debe";// @"aae3e2388125817b27b8afcf99093d97";
 
 static NSString *const kMixpanelEventsFile = @"MixpanelEvents";
-static NSString *const kPlistResourceType = @"plist";
+static NSString *const kPlistResourceType  = @"plist";
+
+// Mixpanel events
+
+NSString *const kMixpanelAliasID          = @"MixpanelAliasID";
+NSString *const kAuthTypeEmail            = @"Email";
+NSString *const kAuthTypeFacebook         = @"Facebook";
+NSString *const kPushNotificationsEnabled = @"Push Notifications Enabled";
+NSString *const kGeoLocationEnabled       = @"Geo Location Enabled";
+NSString *const kFirstNameProperty        = @"First Name";
+NSString *const kLastNameProperty         = @"Last Name";
+NSString *const kBizrateIDProperty        = @"Bizrate ID";
 
 @implementation BZRMixpanelService
 
@@ -41,6 +52,22 @@ static NSString *const kPlistResourceType = @"plist";
     }
 }
 
++ (void)trackLocationEventWithType:(BZRLocaionEventType)eventType locationId:(NSInteger)locationId
+{
+    switch (eventType) {
+        case BZRLocaionEventTypeEntry: {
+            [self trackEventWithType:BZRMixpanelEventGeofenceEnter
+                       propertyValue:[NSString stringWithFormat:@"%ld",(long)locationId]];
+            break;
+        }
+        case BZRLocaionEventTypeExit: {
+            [self trackEventWithType:BZRMixpanelEventGeofenceExit
+                       propertyValue:[NSString stringWithFormat:@"%ld",(long)locationId]];
+            break;
+        }
+    }
+}
+
 + (void)setPeopleForUser:(BZRUserProfile *)userProfile
 {
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
@@ -48,23 +75,23 @@ static NSString *const kPlistResourceType = @"plist";
     BOOL isPushesEnabled = [BZRPushNotifiactionService pushNotificationsEnabled];
     BOOL isGeolocationEnabled = [BZRLocationObserver sharedObserver].isAuthorized;
     
-    [mixpanel.people set:@{PushNotificationsEnabled:isPushesEnabled? AccessGrantedKeyYes : AccessGrantedKeyNo,
-                           GeoLocationEnabled:isGeolocationEnabled? AccessGrantedKeyYes : AccessGrantedKeyNo,
-                           FirstNameProperty:userProfile.firstName,
-                           LastNameProperty:userProfile.lastName,
-                           BizrateIDProperty:userProfile.contactID}];
+    [mixpanel.people set:@{kPushNotificationsEnabled:isPushesEnabled? @"YES" : @"NO",
+                           kGeoLocationEnabled:isGeolocationEnabled? @"YES" : @"NO",
+                           kFirstNameProperty:userProfile.firstName,
+                           kLastNameProperty:userProfile.lastName,
+                           kBizrateIDProperty:userProfile.contactID}];
 }
 
 + (void)setAliasForUser:(BZRUserProfile *)userProfile
 {
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     
-    if (![[[NSUserDefaults standardUserDefaults] objectForKey:MixpanelAliasID] isEqualToString:userProfile.contactID]) {
+    if (![[[NSUserDefaults standardUserDefaults] objectForKey:kMixpanelAliasID] isEqualToString:userProfile.contactID]) {
         [mixpanel createAlias:userProfile.contactID forDistinctID:mixpanel.distinctId];
         [mixpanel identify:mixpanel.distinctId];
         
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        [defaults setObject:userProfile.contactID forKey:MixpanelAliasID];
+        [defaults setObject:userProfile.contactID forKey:kMixpanelAliasID];
         [defaults synchronize];
     }
 }

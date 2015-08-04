@@ -139,7 +139,7 @@ static NSString *const kOBStore = @"Store";
     if (isPermissionsChanged) {
         [defaults setBool:isGeolocationEnable forKey:kGeolocationPermissionsLastState];
         
-        [BZRMixpanelService trackEventWithType:BZRMixpanelEventLocationPermission propertyValue:isGeolocationEnable? AccessGrantedKeyYes : AccessGrantedKeyNo];
+        [BZRMixpanelService trackEventWithType:BZRMixpanelEventLocationPermission propertyValue:isGeolocationEnable? @"YES" : @"NO"];
     }
 }
 
@@ -156,6 +156,8 @@ static NSString *const kOBStore = @"Store";
     if ([BZRProjectFacade isUserSessionValid]) {
         BZRLocationEvent *locationEvent = [[BZRLocationEvent alloc] initWithServerResponse:dictionary[kOBStore]];
         locationEvent.eventType = eventType;
+        
+        [BZRMixpanelService trackLocationEventWithType:eventType locationId:locationEvent.locationId];
         
         [BZRProjectFacade sendGeolocationEvent:locationEvent onSuccess:^(BZRLocationEvent *locationEvent) {
             

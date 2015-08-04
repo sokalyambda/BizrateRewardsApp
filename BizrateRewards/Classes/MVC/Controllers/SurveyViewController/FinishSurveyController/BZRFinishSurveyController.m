@@ -73,8 +73,7 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    NSInteger updatedPoints = self.currentProfile.pointsAmount + self.passedSurvey.surveyPoints;
-    [self.progressView recalculateProgressWithCurrentPoints:updatedPoints requiredPoints: self.currentProfile.pointsRequired];
+    [self recalculateProgress];
 }
 
 #pragma mark - Actions
@@ -107,6 +106,12 @@
 - (void)setupObtainedPointsText
 {
     self.obtainedPointsLabel.text = [NSString stringWithFormat:@"%li %@", (long)self.passedSurvey.surveyPoints, self.obtainedPointsText];
+}
+
+- (void)recalculateProgress
+{
+    NSInteger updatedPoints = self.currentProfile.pointsAmount + self.passedSurvey.surveyPoints;
+    [self.progressView recalculateProgressWithCurrentPoints:updatedPoints requiredPoints: self.currentProfile.pointsRequired];
 }
 
 @end
