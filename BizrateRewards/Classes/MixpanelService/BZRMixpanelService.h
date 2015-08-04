@@ -6,8 +6,6 @@
 //  Copyright (c) 2015 Connexity. All rights reserved.
 //
 
-#import "BZRLocationEvent.h"
-
 typedef enum : NSUInteger {
     BZRMixpanelEventOpenApp,
     BZRMixpanelEventSurveyViewed,
@@ -33,12 +31,13 @@ extern NSString *const kLastNameProperty;
 extern NSString *const kBizrateIDProperty;
 
 @class BZRUserProfile;
+@class BZRLocationEvent;
 
 @interface BZRMixpanelService : NSObject
 
 + (void)setupMixpanel;
 + (void)trackEventWithType:(BZRMixpanelEventType)eventType propertyValue:(NSString *)propertieValue;
-+ (void)trackLocationEventWithType:(BZRLocaionEventType)eventType locationId:(NSInteger)locationId;
++ (void)trackLocationEvent:(BZRLocationEvent *)locationEvent;
 + (void)setAliasForUser:(BZRUserProfile *)userProfile;
 + (void)setPeopleForUser:(BZRUserProfile *)userProfile;
 

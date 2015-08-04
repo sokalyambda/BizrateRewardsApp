@@ -137,7 +137,6 @@ static NSString *const kStartTutorialSegueIdentirier = @"startTutorialSegue";
     [BZRProjectFacade signInWithEmail:weakSelf.savedUsername password:weakSelf.savedPassword success:^(BOOL success) {
         
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-        [BZRMixpanelService trackEventWithType:BZRMixpanelEventLoginSuccessful propertyValue:kAuthTypeEmail];
         [weakSelf goToDashboardController];
         
     } failure:^(NSError *error, BOOL isCanceled) {
@@ -156,7 +155,6 @@ static NSString *const kStartTutorialSegueIdentirier = @"startTutorialSegue";
     [BZRProjectFacade signInWithFacebookOnSuccess:^(BOOL isSuccess) {
         
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-        [BZRMixpanelService trackEventWithType:BZRMixpanelEventLoginSuccessful propertyValue:kAuthTypeFacebook];
         [weakSelf goToDashboardController];
         
     } onFailure:^(NSError *error, BOOL isCanceled) {

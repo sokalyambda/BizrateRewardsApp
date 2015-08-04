@@ -10,6 +10,7 @@
 #import <Mixpanel.h>
 
 #import "BZRUserProfile.h"
+#import "BZRLocationEvent.h"
 
 #import "BZRPushNotifiactionService.h"
 #import "BZRLocationObserver.h"
@@ -52,17 +53,17 @@ NSString *const kBizrateIDProperty        = @"Bizrate ID";
     }
 }
 
-+ (void)trackLocationEventWithType:(BZRLocaionEventType)eventType locationId:(NSInteger)locationId
++ (void)trackLocationEvent:(BZRLocationEvent *)locationEvent
 {
-    switch (eventType) {
+    switch (locationEvent.eventType) {
         case BZRLocaionEventTypeEntry: {
             [self trackEventWithType:BZRMixpanelEventGeofenceEnter
-                       propertyValue:[NSString stringWithFormat:@"%ld",(long)locationId]];
+                       propertyValue:[NSString stringWithFormat:@"%ld",(long)locationEvent.locationId]];
             break;
         }
         case BZRLocaionEventTypeExit: {
             [self trackEventWithType:BZRMixpanelEventGeofenceExit
-                       propertyValue:[NSString stringWithFormat:@"%ld",(long)locationId]];
+                       propertyValue:[NSString stringWithFormat:@"%ld",(long)locationEvent.locationId]];
             break;
         }
     }

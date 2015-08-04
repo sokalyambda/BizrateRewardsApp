@@ -60,7 +60,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    //track mixpanel event
     [BZRMixpanelService trackEventWithType:BZRMixpanelEventSurveyCompeted propertyValue:nil];
 }
 

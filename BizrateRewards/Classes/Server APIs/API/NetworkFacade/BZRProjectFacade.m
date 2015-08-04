@@ -89,6 +89,9 @@ static BZRSessionManager *sharedHTTPClient = nil;
     
     BZRNetworkOperation* operation = [[self  HTTPClient] enqueueOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
         
+        //track mixpanel event
+        [BZRMixpanelService trackEventWithType:BZRMixpanelEventLoginSuccessful
+                                 propertyValue:kAuthTypeEmail];
         //to avoid FB profile usage when user has been logged with email
         if ([self isFacebookSessionValid]) {
             [BZRFacebookService logoutFromFacebook];
@@ -126,6 +129,10 @@ static BZRSessionManager *sharedHTTPClient = nil;
         BZRSignUpRequest *request = [[BZRSignUpRequest alloc] initWithUserFirstName:firstName andUserLastName:lastName andEmail:email andPassword:password andDateOfBirth:birthDate andGender:gender];
         
         operation = [[self  HTTPClient] enqueueOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
+            
+            //track mixpanel event
+            [BZRMixpanelService trackEventWithType:BZRMixpanelEventRegistrationSuccessful
+                                     propertyValue:kAuthTypeEmail];
             
             //to avoid FB profile usage when user has been logged with email
             if ([self isFacebookSessionValid]) {
@@ -193,7 +200,10 @@ static BZRSessionManager *sharedHTTPClient = nil;
             
             [BZRStorageManager sharedStorage].currentProfile = currentProfile;
             
+            //set mixpanel alias
             [BZRMixpanelService setAliasForUser:currentProfile];
+            //set mixpanel people
+            [BZRMixpanelService setPeopleForUser:currentProfile];
             
             if (success) {
                success(YES);
@@ -230,6 +240,9 @@ static BZRSessionManager *sharedHTTPClient = nil;
             BZRUpdateCurrentUserRequest *request = (BZRUpdateCurrentUserRequest*)operation.networkRequest;
             
             [BZRStorageManager sharedStorage].currentProfile = request.updatedProfile;
+            
+            //set mixpanel people
+            [BZRMixpanelService setPeopleForUser:request.updatedProfile];
             
             if (success) {
                 success(YES);
@@ -412,6 +425,10 @@ static BZRSessionManager *sharedHTTPClient = nil;
         
         operation = [[self  HTTPClient] enqueueOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
             
+            //track mixpanel event
+            [BZRMixpanelService trackEventWithType:BZRMixpanelEventLoginSuccessful
+                                     propertyValue:kAuthTypeFacebook];
+            
             BZRSignInWithFacebookRequest *request = (BZRSignInWithFacebookRequest*)operation.networkRequest;
             
             [BZRStorageManager sharedStorage].userToken = request.userToken;
@@ -439,6 +456,10 @@ static BZRSessionManager *sharedHTTPClient = nil;
     __block BZRNetworkOperation *operation;
     
     [self validateSessionWithType:BZRSessionTypeApplication onSuccess:^(BOOL isSuccess) {
+        
+        //track mixpanel event
+        [BZRMixpanelService trackEventWithType:BZRMixpanelEventRegistrationSuccessful
+                                 propertyValue:kAuthTypeFacebook];
         
         BZRSignUpRequest *request = [[BZRSignUpRequest alloc] initWithUserFirstName:firstName andUserLastName:lastName andEmail:email andDateOfBirth:dateOfBirth andGender:gender];
         
