@@ -10,8 +10,6 @@
 
 #import "BZRLocationEvent.h"
 
-#import "BZRStorageManager.h"
-
 static NSString *const requestAction = @"user/location/event";
 
 static NSString *const kLocation    = @"location";

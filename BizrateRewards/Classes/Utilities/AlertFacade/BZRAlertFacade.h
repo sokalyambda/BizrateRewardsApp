@@ -8,6 +8,6 @@
 
 @interface BZRAlertFacade : NSObject
 
-+ (void)showGlobalGeolocationPermissionsAlertWithCompletion:(void(^)(UIAlertAction *action))completion;
++ (void)showGlobalGeolocationPermissionsAlertWithCompletion:(void(^)(UIAlertAction *action, BOOL isCanceled))completion;
 
 @end

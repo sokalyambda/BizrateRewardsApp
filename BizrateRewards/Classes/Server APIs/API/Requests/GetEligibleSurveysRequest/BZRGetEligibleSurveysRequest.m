@@ -10,8 +10,6 @@
 
 #import "BZRSurvey.h"
 
-#import "BZRStorageManager.h"
-
 static NSString *requestAction = @"user/survey/eligible";
 
 @implementation BZRGetEligibleSurveysRequest

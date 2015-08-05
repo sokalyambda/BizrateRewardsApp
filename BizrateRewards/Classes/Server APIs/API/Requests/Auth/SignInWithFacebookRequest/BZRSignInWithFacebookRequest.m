@@ -8,10 +8,6 @@
 
 #import "BZRSignInWithFacebookRequest.h"
 
-#import "BZRUserToken.h"
-
-#import "BZRStorageManager.h"
-
 static NSString *const requestAction = @"user/facebook";
 
 static NSString *const kFacebookAccessToken = @"access_token";

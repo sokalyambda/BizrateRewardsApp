@@ -8,9 +8,9 @@
 
 #import "BZRForgotPasswordRequest.h"
 
-static NSString *const requestAction = @"resetPassword";
+static NSString *const requestAction = @"user/password/reset";
 
-static NSString *const kUsername = @"userName";
+static NSString *const kUsername = @"email";
 static NSString *const kPassword = @"password";
 
 @implementation BZRForgotPasswordRequest
@@ -19,13 +19,15 @@ static NSString *const kPassword = @"password";
 {
     self = [super init];
     if (self) {
+        [self.customHeaders setObject:[NSString stringWithFormat:@"Bearer %@", [BZRStorageManager sharedStorage].applicationToken.accessToken] forKey:@"Authorization"];
+        
         self.action = [self requestAction];
         _method = @"POST";
         
-        _userAuthorizationRequired = NO;
+        _userAuthorizationRequired = YES;
         _applicationAuthorizationRequired = NO;
         
-        self.serializationType = BZRRequestSerializationTypeHTTP;
+        self.serializationType = BZRRequestSerializationTypeJSON;
         
         NSDictionary *parameters = @{kUsername: userName, kPassword: newPassword};
         [self setParametersWithParamsData:parameters];

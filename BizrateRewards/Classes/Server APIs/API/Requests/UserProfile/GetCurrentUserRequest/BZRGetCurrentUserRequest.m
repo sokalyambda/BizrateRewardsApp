@@ -8,8 +8,6 @@
 
 #import "BZRGetCurrentUserRequest.h"
 
-#import "BZRStorageManager.h"
-
 static NSString *const requestAction = @"user/me";
 
 @implementation BZRGetCurrentUserRequest

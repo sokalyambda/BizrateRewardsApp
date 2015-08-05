@@ -14,8 +14,6 @@
 
 #import "BZRProjectFacade.h"
 
-#import "BZRStorageManager.h"
-
 #import "BZRCommonDateFormatter.h"
 
 static NSString *const kSignUpWithEmailSegueIdentifier = @"signUpWithEmailSegue";

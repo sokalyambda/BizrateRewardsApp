@@ -12,23 +12,11 @@
 
 @interface BZRFailureResettingController ()
 
-@property (strong, nonatomic) NSUserDefaults *defaults;
-
 @property (weak, nonatomic) IBOutlet BZRTutorialDescriptionLabel *failReasonLabel;
 
 @end
 
 @implementation BZRFailureResettingController
-
-#pragma mark - Accessors
-
-- (NSUserDefaults *)defaults
-{
-    if (!_defaults) {
-        _defaults = [NSUserDefaults standardUserDefaults];
-    }
-    return _defaults;
-}
 
 #pragma mark - View Lifecycle
 
@@ -48,15 +36,18 @@
 
 - (IBAction)requestNewLinkClick:(id)sender
 {
-    [self addNewResettingPasswordRequirementToDefaults];
+    [self addNewResettingPasswordRequirement];
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (IBAction)closeClick:(id)sender
 {
-    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
+/**
+ *  Updating text in failResonLabel
+ */
 - (void)updateFailReasonMessage
 {
     self.failReasonLabel.text = self.failReason;
@@ -65,10 +56,9 @@
 /**
  *  If user clicks the 'requestNewLink' button he has to be redirected to forgot password screen. This value setted to determine this situation when autologin controller will perform redirection.
  */
-- (void)addNewResettingPasswordRequirementToDefaults
+- (void)addNewResettingPasswordRequirement
 {
-    [self.defaults setBool:YES forKey:IsNewResettingLinkRequested];
-    [self.defaults synchronize];
+    [BZRStorageManager sharedStorage].resettingPasswordRepeatNeeded = YES;
 }
 
 @end

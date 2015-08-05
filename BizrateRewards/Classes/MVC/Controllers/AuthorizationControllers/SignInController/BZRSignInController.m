@@ -93,7 +93,7 @@ static NSInteger const kNotRegisteredErrorCode = 400.f;
 
 - (IBAction)forgotPasswordClick:(id)sender
 {
-//    [self showForgotPasswordController];
+    [self showForgotPasswordController];
 }
 
 - (IBAction)goToCreateNewAccountClick:(id)sender

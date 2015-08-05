@@ -8,9 +8,7 @@
 
 #import "BZRBaseAuthRequest.h"
 
-#import "BZRUserToken.h"
-
-static NSString *requestAction = @"oauth/token";
+static NSString *requestAction      = @"oauth/token";
 
 static NSString *kClientId          = @"client_id";
 static NSString *kClientSecret      = @"client_secret";

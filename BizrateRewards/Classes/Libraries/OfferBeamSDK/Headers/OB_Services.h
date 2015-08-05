@@ -30,6 +30,7 @@
 @property (nonatomic,strong) id delegate;
 
 @property (nonatomic,strong) dispatch_queue_t db_queue;
+@property (nonatomic,strong) NSString *SDK_Version;
 
 
 

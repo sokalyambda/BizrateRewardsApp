@@ -11,14 +11,11 @@
 #import "BZREditProfileContainerController.h"
 #import "BZRChooseSignUpTypeController.h"
 
-#import "BZRStorageManager.h"
 #import "BZRRedirectionHelper.h"
 #import "BZRCommonDateFormatter.h"
 
 #import "BZRCheckBoxButton.h"
 #import "BZREditProfileField.h"
-
-#import "BZRUserProfile.h"
 
 #import "UIView+Flashable.h"
 
@@ -51,6 +48,7 @@ static NSString *const kChooseSignUpTypeSegueIdentifier = @"сhooseSignUpTypeSeg
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
     self.navigationItem.title = NSLocalizedString(@"Get Started", nil);
 }
 

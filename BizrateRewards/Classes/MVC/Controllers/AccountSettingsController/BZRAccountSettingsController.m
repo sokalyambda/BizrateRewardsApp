@@ -11,9 +11,6 @@
 #import "BZRAccountSettingsContaiterController.h"
 #import "BZRBaseNavigationController.h"
 
-#import "BZRUserProfile.h"
-
-#import "BZRStorageManager.h"
 #import "BZRStatusBarManager.h"
 
 #import "BZRAssetsHelper.h"

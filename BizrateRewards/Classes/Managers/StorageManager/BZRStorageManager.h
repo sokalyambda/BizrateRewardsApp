@@ -16,6 +16,8 @@
 
 @property (strong, nonatomic) BZRApplicationToken *applicationToken;
 @property (strong, nonatomic) BZRUserToken *userToken;
+@property (strong, nonatomic) BZRUserToken *temporaryUserToken;
+
 @property (strong, nonatomic) BZRUserProfile *currentProfile;
 @property (strong, nonatomic) BZRFacebookProfile *facebookProfile;
 
@@ -24,5 +26,6 @@
 @property (strong, nonatomic) NSString *deviceName;
 
 @property (assign, nonatomic) BOOL appOpenedWithURL;
+@property (assign, nonatomic) BOOL resettingPasswordRepeatNeeded;
 
 @end

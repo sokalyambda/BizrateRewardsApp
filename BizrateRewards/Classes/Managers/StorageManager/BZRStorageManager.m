@@ -36,6 +36,14 @@
     return _deviceName;
 }
 
+- (BZRUserToken *)userToken
+{
+    if (!_userToken) {
+        _userToken = self.temporaryUserToken;
+    }
+    return _userToken;
+}
+
 #pragma mark - Lifecycle
 
 + (instancetype)sharedStorage

@@ -6,8 +6,6 @@
 //  Copyright (c) 2015 Connexity. All rights reserved.
 //
 
-#import "BZRStorageManager.h"
-
 #import "BZRAssetsHelper.h"
 #import "BZRCommonNumberFormatter.h"
 

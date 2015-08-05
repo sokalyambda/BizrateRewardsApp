@@ -8,10 +8,6 @@
 
 #import "BZRUpdateCurrentUserRequest.h"
 
-#import "BZRStorageManager.h"
-
-#import "BZRUserProfile.h"
-
 static NSString *const requestAction = @"user/me";
 
 static NSString *const kFirstName = @"firstname";

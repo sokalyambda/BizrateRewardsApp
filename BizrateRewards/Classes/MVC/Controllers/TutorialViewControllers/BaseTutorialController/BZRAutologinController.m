@@ -17,8 +17,6 @@
 
 #import "BZRKeychainHandler.h"
 
-#import "BZRStorageManager.h"
-
 static NSString *const kStartTutorialSegueIdentirier = @"startTutorialSegue";
 
 @interface BZRAutologinController ()
@@ -26,6 +24,7 @@ static NSString *const kStartTutorialSegueIdentirier = @"startTutorialSegue";
 @property (assign, nonatomic, getter=isTutorialPassed) BOOL tutorialPassed;
 @property (assign, nonatomic, getter=isRememberMe) BOOL rememberMe;
 @property (assign, nonatomic, getter=isFacebookSessionValid) BOOL facebookSessionValid;
+
 @property (assign, nonatomic, getter=isForgotPasswordRedirectionNeeded) BOOL forgotPasswordRedirecionNeeded;
 @property (assign, nonatomic, getter=isAppOpenedWithURL) BOOL appOpenedWithURL;
 
@@ -53,12 +52,16 @@ static NSString *const kStartTutorialSegueIdentirier = @"startTutorialSegue";
 - (BOOL)isFacebookSessionValid
 {
     _facebookSessionValid = [BZRProjectFacade isFacebookSessionValid];
-    return _facebookSessionValid && !self.isAppOpenedWithURL;
+    if (_facebookSessionValid) {
+        return !self.isAppOpenedWithURL;
+    }
+    return NO;
 }
 
 - (BOOL)isForgotPasswordRedirecionNeeded
 {
-    return [self.defaults boolForKey:IsNewResettingLinkRequested];
+//    return [self.defaults boolForKey:IsNewResettingLinkRequested];
+    return [BZRStorageManager sharedStorage].resettingPasswordRepeatNeeded;
 }
 
 - (BOOL)isAppOpenedWithURL
@@ -120,8 +123,8 @@ static NSString *const kStartTutorialSegueIdentirier = @"startTutorialSegue";
  */
 - (BOOL)isAutologinNeeded
 {
-    if (self.isTutorialPassed && [self userDataExistsInKeychain] && !self.isAppOpenedWithURL) {
-        return YES;
+    if (self.isTutorialPassed && [self userDataExistsInKeychain]) {
+        return !self.isAppOpenedWithURL;
     }
     return NO;
 }

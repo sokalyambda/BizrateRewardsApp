@@ -8,8 +8,6 @@
 
 #import "BZRFacebookService.h"
 
-#import "BZRStorageManager.h"
-
 static NSString *const kPublicProfile = @"public_profile";
 static NSString *const kEmail = @"email";
 static NSString *const kFields = @"fields";

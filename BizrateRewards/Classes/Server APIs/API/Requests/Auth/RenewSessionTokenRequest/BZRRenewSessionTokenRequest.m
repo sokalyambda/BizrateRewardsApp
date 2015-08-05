@@ -8,8 +8,6 @@
 
 #import "BZRRenewSessionTokenRequest.h"
 
-#import "BZRStorageManager.h"
-
 static NSString *const kRefreshToken = @"refresh_token";
 
 @implementation BZRRenewSessionTokenRequest

@@ -16,8 +16,6 @@
 
 #import "BZRProjectFacade.h"
 
-#import "BZRStorageManager.h"
-
 #import "AppDelegate.h"
 
 static NSString *const kStoryboardName = @"Main";
@@ -81,7 +79,7 @@ static NSString *const kTermsAndConditionsLink = @"http://www.bizraterewards.com
     [BZRStorageManager sharedStorage].appOpenedWithURL = YES;
     
     AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-    BZRBaseNavigationController *navigationController = (BZRBaseNavigationController *)appDelegate.window.rootViewController;
+    BZRBaseNavigationController *rootController = (BZRBaseNavigationController *)appDelegate.window.rootViewController;
     
     NSDictionary *parsedParameters = [BZRCustomURLHandler urlParsingParametersFromURL:redirectURL];
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:kStoryboardName bundle:[NSBundle mainBundle]];
@@ -98,11 +96,11 @@ static NSString *const kTermsAndConditionsLink = @"http://www.bizraterewards.com
         }
         
         //if modal controller was presented - dismiss it
-        for (UIViewController *controller in navigationController.viewControllers) {
+        for (UIViewController *controller in rootController.viewControllers) {
             [controller.presentedViewController dismissViewControllerAnimated:YES completion:nil];
         }
         
-        [navigationController pushViewController:redirectedController animated:YES];
+        [rootController pushViewController:redirectedController animated:YES];
     }
 }
 

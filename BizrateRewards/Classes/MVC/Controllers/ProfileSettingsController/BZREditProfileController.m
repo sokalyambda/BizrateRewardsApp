@@ -12,8 +12,6 @@
 #import "BZRCommonDateFormatter.h"
 #import "BZRSerialViewConstructor.h"
 
-#import "BZRStorageManager.h"
-
 #import "BZRProjectFacade.h"
 
 #import "BZREditProfileField.h"

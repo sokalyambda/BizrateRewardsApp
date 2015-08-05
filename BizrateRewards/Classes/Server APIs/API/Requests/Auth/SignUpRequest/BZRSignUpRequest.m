@@ -8,10 +8,6 @@
 
 #import "BZRSignUpRequest.h"
 
-#import "BZRStorageManager.h"
-
-#import "BZRUserToken.h"
-
 static NSString *const kFirstName   = @"firstname";
 static NSString *const kLastName    = @"lastname";
 static NSString *const kEmail       = @"email";

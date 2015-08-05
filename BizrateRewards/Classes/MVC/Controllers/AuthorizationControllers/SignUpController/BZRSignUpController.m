@@ -9,10 +9,7 @@
 #import "BZRSignUpController.h"
 #import "BZRDashboardController.h"
 
-#import "BZRStorageManager.h"
 #import "BZRCommonDateFormatter.h"
-
-#import "BZRUserProfile.h"
 
 #import "BZRProjectFacade.h"
 

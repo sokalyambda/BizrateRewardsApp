@@ -9,7 +9,6 @@
 #import "BZRMixpanelService.h"
 #import <Mixpanel.h>
 
-#import "BZRUserProfile.h"
 #import "BZRLocationEvent.h"
 
 #import "BZRPushNotifiactionService.h"

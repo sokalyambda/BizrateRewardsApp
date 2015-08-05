@@ -10,10 +10,7 @@
 #import "BZRGetStartedController.h"
 
 #import "BZRPickersHelper.h"
-#import "BZRStorageManager.h"
 #import "BZRCommonDateFormatter.h"
-
-#import "BZRUserProfile.h"
 
 #import "BZREditProfileField.h"
 

@@ -8,6 +8,10 @@
 
 #import "BZRSuccessResettingController.h"
 
+#import "BZRDashboardController.h"
+
+#import "BZRProjectFacade.h"
+
 @interface BZRSuccessResettingController ()
 
 @end
@@ -31,12 +35,24 @@
 
 - (IBAction)continueClick:(id)sender
 {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self resetUserData];
+    
+    BZRDashboardController *controller = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRDashboardController class])];
+    controller.updateNeeded = YES;
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 - (IBAction)closeClick:(id)sender
 {
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
+/**
+ *  Clear user data if it exists
+ */
+- (void)resetUserData
+{
+    [BZRProjectFacade signOutOnSuccess:nil onFailure:nil];
 }
 
 @end

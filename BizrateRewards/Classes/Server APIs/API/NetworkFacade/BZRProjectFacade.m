@@ -9,11 +9,9 @@
 #import "BZRProjectFacade.h"
 
 #import "BZRSessionManager.h"
-#import "BZRStorageManager.h"
 
 #import "BZRRequests.h"
 
-#import "BZRUserProfile.h"
 #import "BZRApplicationToken.h"
 
 #import "BZRFacebookService.h"
@@ -106,7 +104,7 @@ static BZRSessionManager *sharedHTTPClient = nil;
         }
         
     } failure:^(BZRNetworkOperation *operation ,NSError *error, BOOL isCanceled) {
-//        ShowFailureResponseAlertWithError(error);
+        ShowFailureResponseAlertWithError(error);
         if (failure) {
             failure(error, isCanceled);
         }
@@ -165,22 +163,29 @@ static BZRSessionManager *sharedHTTPClient = nil;
 
 + (BZRNetworkOperation *)resetPasswordWithUserName:(NSString *)userName andNewPassword:(NSString *)newPassword onSuccess:(void (^)(BOOL isSuccess))success onFailure:(void (^)(NSError *error, BOOL isCanceled))failure
 {
-    BZRForgotPasswordRequest *request = [[BZRForgotPasswordRequest alloc] initWithUserName:userName andNewPassword:newPassword];
+    __block BZRNetworkOperation* operation;
     
-    BZRNetworkOperation* operation = [[self  HTTPClient] enqueueOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
+    [self validateSessionWithType:BZRSessionTypeApplication onSuccess:^(BOOL isSuccess) {
+        BZRForgotPasswordRequest *request = [[BZRForgotPasswordRequest alloc] initWithUserName:userName andNewPassword:newPassword];
         
-        BZRForgotPasswordRequest *request = (BZRForgotPasswordRequest*)operation.networkRequest;
+        operation = [[self  HTTPClient] enqueueOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
+            
+            BZRForgotPasswordRequest *request = (BZRForgotPasswordRequest*)operation.networkRequest;
+            
+            if (success) {
+                success(YES);
+            }
+            
+        } failure:^(BZRNetworkOperation *operation ,NSError *error, BOOL isCanceled) {
+            ShowFailureResponseAlertWithError(error);
+            if (failure) {
+                failure(error, isCanceled);
+            }
+        }];
+    } onFailure:^(NSError *error, BOOL isCanceled) {
         
-        if (success) {
-           success(YES);
-        }
-        
-    } failure:^(BZRNetworkOperation *operation ,NSError *error, BOOL isCanceled) {
-        ShowFailureResponseAlertWithError(error);
-        if (failure) {
-            failure(error, isCanceled);
-        }
     }];
+    
     return operation;
 }
 

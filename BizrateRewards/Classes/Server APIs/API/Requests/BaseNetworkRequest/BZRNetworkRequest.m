@@ -13,7 +13,7 @@
 
 #import "BZRNetworkRequest.h"
 
-#import "BZRStorageManager.h"
+#import "BZRRequests.h"
 
 @implementation BZRNetworkRequest
 
@@ -58,11 +58,16 @@
 {
     BOOL parseJSONData = NO;
     
+    //This needs because response from API for this request is empty
+    if ([self isKindOfClass:[BZRForgotPasswordRequest class]]) {
+        return YES;
+    }
+    
     if (!responseObject) {
-        LOG_NETWORK(@"Error:Response Is Empty");
+        LOG_NETWORK(@"Error: Response Is Empty");
         _error = [NSError errorWithDomain:[NSString stringWithFormat:@"%@ - response is empty", NSStringFromClass([self class])]
                                      code:1
-                                 userInfo:@{NSLocalizedDescriptionKey: @"response empty"}];
+                                 userInfo:@{NSLocalizedDescriptionKey: @"Response is empty."}];
         return parseJSONData;
     }
     

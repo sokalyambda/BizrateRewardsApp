@@ -11,30 +11,20 @@
 
 #import "BZRValidator.h"
 
-@interface BZRForgotPasswordController ()
+#import "BZRProjectFacade.h"
 
-@property (strong, nonatomic) NSUserDefaults *defaults;
+@interface BZRForgotPasswordController ()
 
 @end
 
 @implementation BZRForgotPasswordController
-
-#pragma mark - Accessors
-
-- (NSUserDefaults *)defaults
-{
-    if (!_defaults) {
-        _defaults = [NSUserDefaults standardUserDefaults];
-    }
-    return _defaults;
-}
 
 #pragma mark - Lifecycle
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self clearNewResettingPasswordRequirementFromDefaults];
+    [self clearNewResettingPasswordRequirement];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -54,30 +44,40 @@
 {
     WEAK_SELF;
     [BZRValidator validateEmailField:self.userNameField andPasswordField:self.passwordField onSuccess:^{
-        
         [weakSelf resignIfFirstResponder];
-        
-        [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
-        
-        BZRConfirmPasswordController *controller = [weakSelf.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRConfirmPasswordController class])];
-        [weakSelf.navigationController pushViewController:controller animated:YES];
-        
-        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-        //TODO: forgot password request
+//        [weakSelf resetPassword];
     } onFailure:^(NSString *errorString) {
         [BZRValidator cleanValidationErrorString];
     }];
 }
 
 /**
- *  If user defaults contain the 'YES' value for key IsNewResettingLinkRequested - remove it, cause user has already seen this screen.
+ *  If 'resettingPasswordRepeatNeeded' is 'YES' - set it to 'NO', cause user has already seen this screen.
  */
-- (void)clearNewResettingPasswordRequirementFromDefaults
+- (void)clearNewResettingPasswordRequirement
 {
-    if ([self.defaults boolForKey:IsNewResettingLinkRequested]) {
-        [self.defaults removeObjectForKey:IsNewResettingLinkRequested];
-        [self.defaults synchronize];
+    if ([BZRStorageManager sharedStorage].resettingPasswordRepeatNeeded) {
+        [BZRStorageManager sharedStorage].resettingPasswordRepeatNeeded = NO;
     }
+}
+
+/**
+ *  Call reset password request
+ */
+- (void)resetPassword
+{
+    WEAK_SELF;
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [BZRProjectFacade resetPasswordWithUserName:self.userNameField.text andNewPassword:self.passwordField.text onSuccess:^(BOOL isSuccess) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        
+        BZRConfirmPasswordController *controller = [weakSelf.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRConfirmPasswordController class])];
+        [weakSelf.navigationController pushViewController:controller animated:YES];
+        
+    } onFailure:^(NSError *error, BOOL isCanceled) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        
+    }];
 }
 
 #pragma mark - UITextFieldDelegate

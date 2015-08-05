@@ -26,10 +26,12 @@ static NSString *const kReason = @"reason";
 
 static NSString *const kInvalidLinkReason = @"invalid_link";
 static NSString *const kExpiredLinkReacon = @"expired_link";
-static NSString *const kRejectedReason = @"rejected";
+static NSString *const kRejectedReason = @"rejected_link";
 
 static NSString *const kIsResettingSuccess = @"isResettingSuccess";
 static NSString *const kFailReasonMessage = @"failReasonMessage";
+
+static NSTimeInterval const kSupposedExpirationDate = 86400.f;
 
 @implementation BZRCustomURLHandler
 
@@ -51,8 +53,15 @@ static NSString *const kFailReasonMessage = @"failReasonMessage";
         NSString *successResetValue = [urlString substringFromIndex:successRange.location+successRange.length];
         NSArray *params = [successResetValue componentsSeparatedByString:@"="];
         NSString *accessTokenValue = [params lastObject];
+        
+        NSString *supposedExpiresIn = [NSString stringWithFormat:@"%f", kSupposedExpirationDate];
+        
         [urlParsingParameters setObject:accessTokenValue forKey:kAccessToken];
         [urlParsingParameters setObject:@YES forKey:kIsResettingSuccess];
+        [urlParsingParameters setObject:supposedExpiresIn forKey:@"expires_in"];
+        
+        BZRUserToken *token = [[BZRUserToken alloc] initWithServerResponse:urlParsingParameters];
+        [BZRStorageManager sharedStorage].temporaryUserToken = token;
         
     } else if ([urlString containsString:kFailParam]) {
         

@@ -8,8 +8,6 @@
 
 #import "BZRSignInRequest.h"
 
-#import "BZRUserToken.h"
-
 #import "BZRApiConstants.h"
 
 static NSString *kEmail     = @"username";

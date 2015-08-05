@@ -95,14 +95,13 @@ static NSString *const kOBStore = @"Store";
         if (isGeolocationEnable) {
             [[NSNotificationCenter defaultCenter] postNotificationName:LocationManagerDidSuccessAuthorizeNotification object:nil];
         } else {
-//            [BZRAlertFacade showGlobalGeolocationPermissionsAlertWithCompletion:^(UIAlertAction *action) {
-//                if (action.style != UIAlertActionStyleCancel) {
-//                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
-//                } else {
-//                    [[NSNotificationCenter defaultCenter] postNotificationName:LocationManagerDidFailAuthorizeNotification object:nil];
-//                }
-//            }];
-            [[NSNotificationCenter defaultCenter] postNotificationName:LocationManagerDidFailAuthorizeNotification object:nil];
+            [BZRAlertFacade showGlobalGeolocationPermissionsAlertWithCompletion:^(UIAlertAction *action, BOOL isCanceled) {
+                if (!isCanceled) {
+                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+                } else {
+                    [[NSNotificationCenter defaultCenter] postNotificationName:LocationManagerDidFailAuthorizeNotification object:nil];
+                }
+            }];
         }
     }
 }
@@ -124,7 +123,6 @@ static NSString *const kOBStore = @"Store";
 - (void)checkForPermissionsChangingWithGeolocationEnabled:(BOOL)isGeolocationEnable
 {
     BOOL permissionsLastState = NO;
-    
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
     if (![defaults.dictionaryRepresentation.allKeys containsObject:kGeolocationPermissionsLastState]) {

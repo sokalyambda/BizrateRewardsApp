@@ -8,8 +8,6 @@
 
 #import "BZRSendDeviceDataRequest.h"
 
-#import "BZRStorageManager.h"
-
 static NSString *const requestAction    = @"user/device";
 
 static NSString *const kDeviceAPNSToken = @"device_token";

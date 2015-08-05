@@ -12,10 +12,7 @@
 #import "BZRTutorialDescriptionLabel.h"
 #import "BZRProgressView.h"
 
-#import "BZRStorageManager.h"
-
 #import "BZRSurvey.h"
-#import "BZRUserProfile.h"
 
 @interface BZRFinishSurveyController ()
 
