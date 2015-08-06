@@ -9,5 +9,6 @@
 @interface BZRAlertFacade : NSObject
 
 + (void)showGlobalGeolocationPermissionsAlertWithCompletion:(void(^)(UIAlertAction *action, BOOL isCanceled))completion;
++ (void)showRetryInternetConnectionAlertWithCompletion:(void(^)(BOOL retry))completion;
 
 @end

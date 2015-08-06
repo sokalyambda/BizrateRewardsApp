@@ -44,4 +44,34 @@
     }
 }
 
++ (void)showRetryInternetConnectionAlertWithCompletion:(void(^)(BOOL retry))completion
+{
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"" message:LOCALIZED(@"Connection failed. Try again?") preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:LOCALIZED(@"No") style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+        if (completion) {
+            completion(NO);
+        }
+    }];
+    UIAlertAction *acceptAction = [UIAlertAction actionWithTitle:LOCALIZED(@"Yes") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        if (completion) {
+            completion(YES);
+        }
+    }];
+    
+    [alertController addAction:cancelAction];
+    [alertController addAction:acceptAction];
+    
+    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+    BZRBaseNavigationController *navigationController = (BZRBaseNavigationController *)appDelegate.window.rootViewController;
+    
+    UIViewController *lastPresentedViewController = ((UIViewController *)navigationController.viewControllers.lastObject).presentedViewController;
+    
+    if (lastPresentedViewController) {
+        [lastPresentedViewController presentViewController:alertController animated:YES completion:nil];
+    } else {
+        [navigationController presentViewController:alertController animated:YES completion:nil];
+    }
+}
+
 @end

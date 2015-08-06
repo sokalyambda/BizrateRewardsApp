@@ -98,7 +98,7 @@ static NSString *const kErrorDescription = @"error_description";
         case NSURLErrorCannotFindHost:
         case NSURLErrorCannotConnectToHost:
         case NSURLErrorNotConnectedToInternet: {
-            errString = LOCALIZED(@"Device is not connected to the internet.");
+            errString = LOCALIZED(@"Network connection failed. Check your signal and try again.");
             break;
         }
         case NSURLErrorInternationalRoamingOff: {

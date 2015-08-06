@@ -98,6 +98,7 @@
 		58ADC0E81B4BDCE400DF849F /* BZRSecondTutorialController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ADC0E71B4BDCE400DF849F /* BZRSecondTutorialController.m */; };
 		58AF4AF01B5BB6F10052C7E5 /* UIImagePickerController+AdjustStatusBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AF4AEF1B5BB6F10052C7E5 /* UIImagePickerController+AdjustStatusBar.m */; };
 		58AF4AF41B5C13A30052C7E5 /* BZRStatusBarManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AF4AF31B5C13A30052C7E5 /* BZRStatusBarManager.m */; };
+		58B38A491B7349AB00EDB024 /* BZRFailedOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B38A481B7349AB00EDB024 /* BZRFailedOperationManager.m */; };
 		58B52A3B1B6A2874002D2529 /* UIImage+Base64Encoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B52A3A1B6A2874002D2529 /* UIImage+Base64Encoding.m */; };
 		58B52A3F1B6A28D3002D2529 /* NSString+Base64Decoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B52A3E1B6A28D3002D2529 /* NSString+Base64Decoding.m */; };
 		58B52A431B6A30F0002D2529 /* BZRFacebookProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B52A421B6A30F0002D2529 /* BZRFacebookProfile.m */; };
@@ -341,6 +342,8 @@
 		58AF4AEF1B5BB6F10052C7E5 /* UIImagePickerController+AdjustStatusBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImagePickerController+AdjustStatusBar.m"; path = "Classes/Categories/UIImagePickerView/AdjustStatusBar/UIImagePickerController+AdjustStatusBar.m"; sourceTree = "<group>"; };
 		58AF4AF21B5C13A30052C7E5 /* BZRStatusBarManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRStatusBarManager.h; path = Classes/Utilities/StatusBarHandler/BZRStatusBarManager.h; sourceTree = "<group>"; };
 		58AF4AF31B5C13A30052C7E5 /* BZRStatusBarManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRStatusBarManager.m; path = Classes/Utilities/StatusBarHandler/BZRStatusBarManager.m; sourceTree = "<group>"; };
+		58B38A471B7349AB00EDB024 /* BZRFailedOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRFailedOperationManager.h; path = FailedOperationManager/BZRFailedOperationManager.h; sourceTree = "<group>"; };
+		58B38A481B7349AB00EDB024 /* BZRFailedOperationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRFailedOperationManager.m; path = FailedOperationManager/BZRFailedOperationManager.m; sourceTree = "<group>"; };
 		58B52A391B6A2874002D2529 /* UIImage+Base64Encoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Base64Encoding.h"; path = "Classes/Categories/UIImage/UIImage+Base64Encoding/UIImage+Base64Encoding.h"; sourceTree = "<group>"; };
 		58B52A3A1B6A2874002D2529 /* UIImage+Base64Encoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Base64Encoding.m"; path = "Classes/Categories/UIImage/UIImage+Base64Encoding/UIImage+Base64Encoding.m"; sourceTree = "<group>"; };
 		58B52A3D1B6A28D3002D2529 /* NSString+Base64Decoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+Base64Decoding.h"; path = "Classes/Categories/NSString/NSString+Base64Decoding/NSString+Base64Decoding.h"; sourceTree = "<group>"; };
@@ -824,6 +827,7 @@
 		585C32891B63AA3F005BF07B /* API */ = {
 			isa = PBXGroup;
 			children = (
+				58B38A461B73497C00EDB024 /* FailedOperationManager */,
 				585C328A1B63AA3F005BF07B /* NetworkFacade */,
 				585C328D1B63AA3F005BF07B /* NetworkOperation */,
 				585C32901B63AA3F005BF07B /* Requests */,
@@ -1596,6 +1600,15 @@
 			name = StatusBarManager;
 			sourceTree = "<group>";
 		};
+		58B38A461B73497C00EDB024 /* FailedOperationManager */ = {
+			isa = PBXGroup;
+			children = (
+				58B38A471B7349AB00EDB024 /* BZRFailedOperationManager.h */,
+				58B38A481B7349AB00EDB024 /* BZRFailedOperationManager.m */,
+			);
+			name = FailedOperationManager;
+			sourceTree = "<group>";
+		};
 		58B52A371B6A281D002D2529 /* UIImage */ = {
 			isa = PBXGroup;
 			children = (
@@ -2222,6 +2235,7 @@
 				58ADC0E41B4BDCC200DF849F /* BZRFinishSurveyController.m in Sources */,
 				585C32A31B63AA3F005BF07B /* BZRSignInRequest.m in Sources */,
 				58ADC0E81B4BDCE400DF849F /* BZRSecondTutorialController.m in Sources */,
+				58B38A491B7349AB00EDB024 /* BZRFailedOperationManager.m in Sources */,
 				589420A51B45278E004BAF48 /* BZRPickersHelper.m in Sources */,
 				5858F26E1B61271E00F38DFC /* BZRErrorHandler.m in Sources */,
 				5878D3E11B4426E000A917D0 /* BZRCommonDateFormatter.m in Sources */,
