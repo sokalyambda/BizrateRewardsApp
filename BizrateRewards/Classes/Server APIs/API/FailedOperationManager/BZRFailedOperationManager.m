@@ -13,9 +13,6 @@
 @interface BZRFailedOperationManager ()
 
 @property (strong, nonatomic) BZRSessionManager *sessionManager;
-
-//@property (strong, nonatomic) NSMutableArray *failedOperationsQueue;
-
 @property (strong, nonatomic) BZRNetworkOperation *currentFailedOperation;
 
 @property (copy, nonatomic) SuccessOperationBlock successBlock;
@@ -31,14 +28,6 @@
 {
     return [BZRProjectFacade HTTPClient];
 }
-
-//- (NSMutableArray *)failedOperationsQueue
-//{
-//    if (!_failedOperationsQueue) {
-//        _failedOperationsQueue = [NSMutableArray array];
-//    }
-//    return _failedOperationsQueue;
-//}
 
 #pragma mark - Lifecycle
 

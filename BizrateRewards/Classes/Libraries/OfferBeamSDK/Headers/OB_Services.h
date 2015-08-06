@@ -41,7 +41,6 @@
 
 
 -(NSString *) getUUID;
-- (void)requestAlwaysAuthorization;
 -(void) populateiBeaconsRange;
 - (UIImage*)loadImage;
 

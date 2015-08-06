@@ -58,7 +58,6 @@ static NSString *const kOBStore = @"Store";
         }
         
         [_locationManager startUpdatingLocation];
-        [self setupOfferBeamObserver];
     }
     return self;
 }
@@ -93,6 +92,10 @@ static NSString *const kOBStore = @"Store";
        [self checkForPermissionsChangingWithGeolocationEnabled:isGeolocationEnable];
         
         if (isGeolocationEnable) {
+            
+            //run OB observer
+            [self setupOfferBeamObserver];
+            
             [[NSNotificationCenter defaultCenter] postNotificationName:LocationManagerDidSuccessAuthorizeNotification object:nil];
         } else {
             [BZRAlertFacade showGlobalGeolocationPermissionsAlertWithCompletion:^(UIAlertAction *action, BOOL isCanceled) {
@@ -147,7 +150,6 @@ static NSString *const kOBStore = @"Store";
 
 - (void)setupOfferBeamObserver
 {
-    [[OB_Services sharedInstance] requestAlwaysAuthorization];
     [OB_Services setLocationDelegate:self];
 }
 

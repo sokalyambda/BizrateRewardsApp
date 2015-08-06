@@ -43,6 +43,11 @@ static NSString *const kEmail = @"email";
 
 #pragma mark - Actions
 
+- (IBAction)closeClick:(id)sender
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 - (IBAction)signUpWithFacebookClick:(id)sender
 {
     [self signUpWithFacebook];
