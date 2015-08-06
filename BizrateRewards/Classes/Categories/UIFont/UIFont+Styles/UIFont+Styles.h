@@ -16,4 +16,6 @@
 + (UIFont *)surveyCongratsFont;
 + (UIFont *)surveyRemarkFont;
 
++ (UIFont *)privacyAndTermsFont;
+
 @end

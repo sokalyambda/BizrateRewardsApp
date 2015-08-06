@@ -63,6 +63,7 @@
 		589BCCDC1B565E7D00D49056 /* BZRBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 589BCCDB1B565E7D00D49056 /* BZRBaseViewController.m */; };
 		589BCCE01B56717200D49056 /* BZREditProfileField.m in Sources */ = {isa = PBXBuildFile; fileRef = 589BCCDF1B56717200D49056 /* BZREditProfileField.m */; };
 		589BCCE51B569BB800D49056 /* UIView+Flashable.m in Sources */ = {isa = PBXBuildFile; fileRef = 589BCCE41B569BB800D49056 /* UIView+Flashable.m */; };
+		58A08B6B1B73A4F500BEF1D8 /* BZRPrivacyAndTermsButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A08B6A1B73A4F500BEF1D8 /* BZRPrivacyAndTermsButton.m */; };
 		58A0B21E1B3854CF003C100C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 58A0B21C1B3854CF003C100C /* Main.storyboard */; };
 		58A0B2201B3854CF003C100C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58A0B21F1B3854CF003C100C /* Images.xcassets */; };
 		58A0B22F1B3854CF003C100C /* BizrateRewardsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A0B22E1B3854CF003C100C /* BizrateRewardsTests.m */; };
@@ -289,6 +290,8 @@
 		589BCCDF1B56717200D49056 /* BZREditProfileField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZREditProfileField.m; path = Classes/MVC/Views/EditProfileFIeld/BZREditProfileField.m; sourceTree = "<group>"; };
 		589BCCE31B569BB800D49056 /* UIView+Flashable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+Flashable.h"; path = "Classes/Categories/Flashable/UIView+Flashable.h"; sourceTree = "<group>"; };
 		589BCCE41B569BB800D49056 /* UIView+Flashable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+Flashable.m"; path = "Classes/Categories/Flashable/UIView+Flashable.m"; sourceTree = "<group>"; };
+		58A08B691B73A4F500BEF1D8 /* BZRPrivacyAndTermsButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRPrivacyAndTermsButton.h; path = Classes/MVC/Views/Styles/PrivacyAndTerms/BZRPrivacyAndTermsButton.h; sourceTree = "<group>"; };
+		58A08B6A1B73A4F500BEF1D8 /* BZRPrivacyAndTermsButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRPrivacyAndTermsButton.m; path = Classes/MVC/Views/Styles/PrivacyAndTerms/BZRPrivacyAndTermsButton.m; sourceTree = "<group>"; };
 		58A0B20F1B3854CF003C100C /* BizrateRewards.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BizrateRewards.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		58A0B21D1B3854CF003C100C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		58A0B21F1B3854CF003C100C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -1139,6 +1142,15 @@
 			name = "UIView+Flashable";
 			sourceTree = "<group>";
 		};
+		58A08B681B73A4B100BEF1D8 /* PrivacyAndTerms */ = {
+			isa = PBXGroup;
+			children = (
+				58A08B691B73A4F500BEF1D8 /* BZRPrivacyAndTermsButton.h */,
+				58A08B6A1B73A4F500BEF1D8 /* BZRPrivacyAndTermsButton.m */,
+			);
+			name = PrivacyAndTerms;
+			sourceTree = "<group>";
+		};
 		58A0B2061B3854CF003C100C = {
 			isa = PBXGroup;
 			children = (
@@ -1770,6 +1782,7 @@
 		58C770DA1B5CCFF400E9031F /* Styles */ = {
 			isa = PBXGroup;
 			children = (
+				58A08B681B73A4B100BEF1D8 /* PrivacyAndTerms */,
 				84BE35C91B5D0A04001B99E2 /* SurveyStyleLabels */,
 				58C770DB1B5CCFFF00E9031F /* TutorialStyleLabels */,
 			);
@@ -2239,6 +2252,7 @@
 				589420A51B45278E004BAF48 /* BZRPickersHelper.m in Sources */,
 				5858F26E1B61271E00F38DFC /* BZRErrorHandler.m in Sources */,
 				5878D3E11B4426E000A917D0 /* BZRCommonDateFormatter.m in Sources */,
+				58A08B6B1B73A4F500BEF1D8 /* BZRPrivacyAndTermsButton.m in Sources */,
 				58C770E71B5D5B6A00E9031F /* BZRCommonNumberFormatter.m in Sources */,
 				585C32AF1B63C854005BF07B /* BZRSignUpRequest.m in Sources */,
 				58ACC0811B39689F0081E546 /* BZRSignUpController.m in Sources */,

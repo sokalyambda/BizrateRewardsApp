@@ -38,6 +38,7 @@ static NSString *const kOpenSansBoldFontName = @"OpenSans-Bold";
 
 @implementation UIFont (Styles)
 
+//MARK: Tutorial
 + (UIFont *)tutorialTitleFont
 {
     if (IS_IPHONE_5) {
@@ -60,6 +61,7 @@ static NSString *const kOpenSansBoldFontName = @"OpenSans-Bold";
     }
 }
 
+//MARK: Surveys
 + (UIFont *)surveyPointsInscriptionFont
 {
     if (IS_IPHONE_5) {
@@ -101,6 +103,18 @@ static NSString *const kOpenSansBoldFontName = @"OpenSans-Bold";
         return [UIFont fontWithName:kOpenSansFontName size:kSurveyRemarkMediumFontSize];
     } else {
         return [UIFont fontWithName:kOpenSansFontName size:kSurveyRemarkLargeFontSize];
+    }
+}
+
+//MARK: Privacy&Terms
++ (UIFont *)privacyAndTermsFont
+{
+    if (IS_IPHONE_5) {
+        return [UIFont fontWithName:kOpenSansFontName size:kPointsInscriptionSmallFontSize];
+    } else if (IS_IPHONE_6) {
+        return [UIFont fontWithName:kOpenSansFontName size:kPointsInscriptionMediumFontSize];
+    } else {
+        return [UIFont fontWithName:kOpenSansFontName size:kPointsInscriptionLargeFontSize];
     }
 }
 
