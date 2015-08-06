@@ -6,14 +6,13 @@
 //  Copyright (c) 2015 Connexity. All rights reserved.
 //
 
-@class BZRNetworkOperation;
+#import "BZRNetworkOperation.h"
 
 @interface BZRFailedOperationManager : NSObject
 
 + (BZRFailedOperationManager *)sharedManager;
 
-- (void)restartFailedOperations;
-
-- (void)addFailedOperation:(BZRNetworkOperation *)operation;
+- (void)addAndRestartFailedOperation:(BZRNetworkOperation *)operation;
+- (void)setFailedOperationSuccessBlock:(SuccessOperationBlock)success andFailureBlock:(FailureOperationBlock)failure;
 
 @end

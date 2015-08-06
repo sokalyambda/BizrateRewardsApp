@@ -8,15 +8,18 @@
 
 #import "BZRFailedOperationManager.h"
 
-#import "BZRNetworkOperation.h"
-
 #import "BZRProjectFacade.h"
 
 @interface BZRFailedOperationManager ()
 
 @property (strong, nonatomic) BZRSessionManager *sessionManager;
 
-@property (strong, nonatomic) NSMutableArray *failedOperationsQueue;
+//@property (strong, nonatomic) NSMutableArray *failedOperationsQueue;
+
+@property (strong, nonatomic) BZRNetworkOperation *currentFailedOperation;
+
+@property (copy, nonatomic) SuccessOperationBlock successBlock;
+@property (copy, nonatomic) FailureOperationBlock failureBlock;
 
 @end
 
@@ -29,13 +32,13 @@
     return [BZRProjectFacade HTTPClient];
 }
 
-- (NSMutableArray *)failedOperationsQueue
-{
-    if (!_failedOperationsQueue) {
-        _failedOperationsQueue = [NSMutableArray array];
-    }
-    return _failedOperationsQueue;
-}
+//- (NSMutableArray *)failedOperationsQueue
+//{
+//    if (!_failedOperationsQueue) {
+//        _failedOperationsQueue = [NSMutableArray array];
+//    }
+//    return _failedOperationsQueue;
+//}
 
 #pragma mark - Lifecycle
 
@@ -53,21 +56,30 @@
 
 #pragma mark - Actions
 
-- (void)restartFailedOperations
+- (void)restartFailedOperation
 {
-    for (BZRNetworkOperation *failedOperation in self.failedOperationsQueue) {
-        [self.sessionManager enqueueOperation:failedOperation success:^(BZRNetworkOperation *operation) {
-            
-        } failure:^(BZRNetworkOperation *operation, NSError *error, BOOL isCanceled) {
-            
-        }];
+    [self.sessionManager enqueueOperation:self.currentFailedOperation success:self.successBlock failure:self.failureBlock];
+}
+
+- (void)addAndRestartFailedOperation:(BZRNetworkOperation *)operation
+{
+    if (![self.currentFailedOperation isEqual:operation]) {
+        self.currentFailedOperation = operation;
+        self.currentFailedOperation.successBlock = self.successBlock;
+        self.currentFailedOperation.failureBlock = self.failureBlock;
+        [self restartFailedOperation];
+    } else {
+        [self restartFailedOperation];
     }
 }
 
-- (void)addFailedOperation:(BZRNetworkOperation *)operation
+- (void)setFailedOperationSuccessBlock:(SuccessOperationBlock)success andFailureBlock:(FailureOperationBlock)failure
 {
-    if ([self.failedOperationsQueue containsObject:operation]) {
-        [self.failedOperationsQueue addObject:operation];
+    if (success) {
+        self.successBlock = success;
+    }
+    if (failure) {
+        self.failureBlock = failure;
     }
 }
 

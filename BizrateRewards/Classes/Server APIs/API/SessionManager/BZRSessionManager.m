@@ -7,12 +7,15 @@
 //
 
 #import "BZRSessionManager.h"
+#import "BZRFailedOperationManager.h"
 
 #import "BZRNetworkOperation.h"
 
 #import "BZRReachabilityHelper.h"
 
 #import "BZRErrorHandler.h"
+
+#import "BZRAlertFacade.h"
 
 #import "BZRRenewSessionTokenRequest.h"
 #import "BZRGetClientCredentialsRequest.h"
@@ -26,13 +29,13 @@ static NSInteger const kAllCleansCount = 1.f;
 @property (copy, nonatomic) CleanBlock cleanBlock;
 
 @property (strong, nonatomic) AFHTTPSessionManager *sessionManager;
+@property (strong, nonatomic) BZRFailedOperationManager *failedOperationManager;
 
 @property (assign, nonatomic) AFNetworkReachabilityStatus reachabilityStatus;
 
 @property (strong, readwrite, nonatomic) NSURL *baseURL;
 
 @property (strong, nonatomic) NSMutableArray *operationsQueue;
-@property (strong, nonatomic) NSMutableArray *failedOperationsQueue;
 
 @property (assign, nonatomic) NSUInteger cleanCount;
 
@@ -47,12 +50,12 @@ static NSInteger const kAllCleansCount = 1.f;
 
 #pragma mark - Accessors
 
-- (NSMutableArray *)failedOperationsQueue
+- (BZRFailedOperationManager *)failedOperationManager
 {
-    if (!_failedOperationsQueue) {
-        _failedOperationsQueue = [NSMutableArray array];
+    if (!_failedOperationManager) {
+        _failedOperationManager = [BZRFailedOperationManager sharedManager];
     }
-    return _failedOperationsQueue;
+    return _failedOperationManager;
 }
 
 - (AFJSONRequestSerializer *)JSONRequestSerializer
@@ -121,10 +124,6 @@ static NSInteger const kAllCleansCount = 1.f;
                     break;
                 }
                 case AFNetworkReachabilityStatusReachableViaWiFi: {
-                    
-                    //restart failed operation
-                    [self restartFailedOperationIfNeeded];
-                    
                     stateText = @"Network is reachable via WiFi";
                     break;
                 }
@@ -214,19 +213,23 @@ static NSInteger const kAllCleansCount = 1.f;
         failure(operation ,error, NO);
     } else {
         [self enqueueOperation:operation success:^(BZRNetworkOperation *operation) {
-            
             [weakSelf finishOperationInQueue:operation];
             if (success) {
                 success(operation);
             }
         } failure:^(BZRNetworkOperation *operation, NSError *error, BOOL isCanceled) {
-
-            if ([BZRErrorHandler errorIsNetworkError:error] && operation.networkRequest.retryIfConnectionFailed) {
-                [weakSelf addOperationToFailedQueue:operation];
-            }
             
             [weakSelf finishOperationInQueue:operation];
-            if (failure) {
+            if ([BZRErrorHandler errorIsNetworkError:error] /* && operation.networkRequest.retryIfConnectionFailed*/) {
+                
+                [BZRAlertFacade showRetryInternetConnectionAlertWithCompletion:^(BOOL retry) {
+                    if (!retry && failure) {
+                        failure(operation, error, isCanceled);
+                    } else {
+                        [weakSelf.failedOperationManager addAndRestartFailedOperation:operation];
+                    }
+                }];
+            } else if (failure) {
                 failure(operation, error, isCanceled);
             }
         }];
@@ -237,10 +240,11 @@ static NSInteger const kAllCleansCount = 1.f;
 - (void)enqueueOperation:(BZRNetworkOperation*)operation success:(SuccessOperationBlock)success failure:(FailureOperationBlock)failure
 {
     WEAK_SELF;
+    [self.failedOperationManager setFailedOperationSuccessBlock:success andFailureBlock:failure];
     //check reachability
     [BZRReachabilityHelper checkConnectionOnSuccess:^{
+        
         [operation setCompletionBlockAfterProcessingWithSuccess:success failure:failure];
-
         [weakSelf addOperationToQueue:operation];
         
     } failure:^(NSError *error) {
@@ -299,57 +303,6 @@ static NSInteger const kAllCleansCount = 1.f;
     [self.operationsQueue addObject:operation];
     
     [operation start];
-}
-
-/**
- *  Remove operation from failed queue
- *
- *  @param operation Operation that has to be removed
- */
-- (void)finishOperationInFailedQueue:(BZRNetworkOperation *)operation
-{
-    [self.failedOperationsQueue removeObject:operation];
-}
-
-/**
- *  Add new operation to failed queue
- *
- *  @param operation Operation that has to be added to queue
- */
-- (void)addOperationToFailedQueue:(BZRNetworkOperation *)operation
-{
-    [self.failedOperationsQueue addObject:operation];
-}
-
-/**
- *  Possibility to renew the failed operation, if current request has this requirement .
- */
-- (void)restartFailedOperationIfNeeded
-{
-    if (!self.failedOperationsQueue.count) {
-        return;
-    }
-    
-    WEAK_SELF;
-    for (BZRNetworkOperation *failedOperation in self.failedOperationsQueue) {
-        @autoreleasepool {
-            [self enqueueOperationWithNetworkRequest:failedOperation.networkRequest success:^(BZRNetworkOperation *operation) {
-                [weakSelf finishOperationInFailedQueue:failedOperation];
-                
-                if (failedOperation.successBlock) {
-                    failedOperation.successBlock(operation);
-                }
-
-            } failure:^(BZRNetworkOperation *operation, NSError *error, BOOL isCanceled) {
-                [weakSelf finishOperationInFailedQueue:failedOperation];
-                
-                if (failedOperation.failureBlock) {
-                    failedOperation.failureBlock(operation, error, isCanceled);
-                }
-                
-            }];
-        }
-    }
 }
 
 /**
