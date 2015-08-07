@@ -33,6 +33,13 @@ static NSString *const kMailSubject = @"Bizrate Rewards Mobile App Help";
     return manager;
 }
 
+- (void)setupMailComposerAppearance
+{
+    [[UINavigationBar appearance] setBarTintColor:UIColorFromRGB(0x12a9d6)];
+    [[UINavigationBar appearance] setTitleTextAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"OpenSans" size:20.f], NSForegroundColorAttributeName : [UIColor whiteColor]}];
+    [[UIBarButtonItem appearanceWhenContainedIn:[UINavigationBar class], nil] setTintColor:[UIColor whiteColor]];
+}
+
 #pragma mark - Actions
 
 - (void)showMailComposeControllerWithPresentingController:(UIViewController *)presentingController andResult:(MailComposeResult)result
@@ -41,11 +48,13 @@ static NSString *const kMailSubject = @"Bizrate Rewards Mobile App Help";
         
         self.mailComposeResult = result;
         
+        [self setupMailComposerAppearance];
+        
         MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
         [mailController setMailComposeDelegate:self];
         [mailController setToRecipients:@[kBizrateEmailAddress]];
         [mailController setSubject:kMailSubject];
-        
+                
         [presentingController presentViewController:mailController animated:YES completion:nil];
         
     } else {
@@ -60,11 +69,6 @@ static NSString *const kMailSubject = @"Bizrate Rewards Mobile App Help";
     if (self.mailComposeResult) {
         self.mailComposeResult(controller, result, error);
     }
-}
-
-- (void)setupMailComposerAppearance
-{
-
 }
 
 @end
