@@ -10,8 +10,15 @@
 
 @interface BZRGiftcardCell ()
 
+@property (weak, nonatomic) IBOutlet UIImageView *giftcardImageView;
+
 @end
 
 @implementation BZRGiftcardCell
+
+- (void)configureCellWithGiftCard:(BZRGiftCard *)giftCard
+{
+    
+}
 
 @end

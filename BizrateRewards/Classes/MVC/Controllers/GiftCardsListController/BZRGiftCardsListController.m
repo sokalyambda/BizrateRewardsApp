@@ -50,7 +50,8 @@ static NSString *const kGiftCardCell = @"giftCardCell";
     
     BZRGiftcardCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kGiftCardCell forIndexPath:indexPath];
     
-    [cell.giftcardImageView sd_setImageWithURL:currentGiftCard.iconURL];
+    [cell configureCellWithGiftCard:currentGiftCard];
+//    [cell.giftcardImageView sd_setImageWithURL:currentGiftCard.iconURL];
     
     return cell;
 }

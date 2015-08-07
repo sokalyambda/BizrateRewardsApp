@@ -6,8 +6,10 @@
 //  Copyright (c) 2015 Connexity. All rights reserved.
 //
 
+@class BZRGiftCard;
+
 @interface BZRGiftcardCell : UICollectionViewCell
 
-@property (weak, nonatomic) IBOutlet UIImageView *giftcardImageView;
+- (void)configureCellWithGiftCard:(BZRGiftCard *)giftCard;
 
 @end

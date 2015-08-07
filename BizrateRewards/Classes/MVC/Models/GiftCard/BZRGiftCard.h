@@ -10,6 +10,11 @@
 
 @interface BZRGiftCard : NSObject<BZRMappingProtocol>
 
-@property (strong, nonatomic) NSURL *iconURL;
+@property (strong, nonatomic) NSURL *giftCardImageURL;
+@property (strong, nonatomic) NSString *giftCardName;
+@property (assign, nonatomic) NSInteger giftCardId;
+@property (assign, nonatomic) NSInteger giftBitId;
+@property (assign, nonatomic) NSInteger pointsRequired;
+@property (assign, nonatomic) NSInteger priceInCents;
 
 @end
