@@ -148,11 +148,21 @@ static NSString *const kOBStore = @"Store";
 
 #pragma mark - Private methods
 
+/**
+ *  Assign Offer Beam delegate to self
+ */
 - (void)setupOfferBeamObserver
 {
     [OB_Services setLocationDelegate:self];
+//    [OB_Services startLocationService];
 }
 
+/**
+ *  Send locaiton event
+ *
+ *  @param dictionary Dictionary for initializing of location event
+ *  @param eventType  Current event type (ETNRY/EXIT)
+ */
 - (void)sendLocationEventWithInitDictionary:(NSDictionary *)dictionary andType:(BZRLocaionEventType)eventType
 {
     if ([BZRProjectFacade isUserSessionValid]) {

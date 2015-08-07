@@ -32,6 +32,7 @@
         if(!_files) {
             _files = [NSMutableArray array];
         }
+        _retryIfConnectionFailed = YES;
     }
     return self;
 }

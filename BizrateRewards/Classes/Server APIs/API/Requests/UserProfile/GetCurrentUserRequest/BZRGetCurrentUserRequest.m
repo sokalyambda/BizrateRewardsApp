@@ -12,6 +12,8 @@ static NSString *const requestAction = @"user/me";
 
 @implementation BZRGetCurrentUserRequest
 
+#pragma mark - Lifecycle
+
 - (instancetype)init
 {
     self = [super init];
@@ -24,13 +26,10 @@ static NSString *const requestAction = @"user/me";
         _userAuthorizationRequired = YES;
         _applicationAuthorizationRequired = NO;
         
-        _retryIfConnectionFailed = YES;
-        
         self.serializationType = BZRRequestSerializationTypeHTTP;
         
         NSDictionary *parameters = @{};
         [self setParametersWithParamsData:parameters];
-        
     }
     return self;
 }

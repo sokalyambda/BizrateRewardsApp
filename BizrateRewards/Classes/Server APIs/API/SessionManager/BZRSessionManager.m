@@ -24,6 +24,8 @@ static CGFloat const kRequestTimeInterval = 60.f;
 static NSInteger const kMaxConcurentRequests = 100.f;
 static NSInteger const kAllCleansCount = 1.f;
 
+static NSString *const kCleanSessionLock = @"CleanSessionLock";
+
 @interface BZRSessionManager ()
 
 @property (copy, nonatomic) CleanBlock cleanBlock;
@@ -36,10 +38,9 @@ static NSInteger const kAllCleansCount = 1.f;
 @property (strong, readwrite, nonatomic) NSURL *baseURL;
 
 @property (strong, nonatomic) NSMutableArray *operationsQueue;
+@property (strong, nonatomic) NSLock *lock;
 
 @property (assign, nonatomic) NSUInteger cleanCount;
-
-@property (strong, nonatomic) NSLock *lock;
 
 @property (strong, nonatomic) AFHTTPRequestSerializer *HTTPRequestSerializer;
 @property (strong, nonatomic) AFJSONRequestSerializer *JSONRequestSerializer;
@@ -97,15 +98,17 @@ static NSInteger const kAllCleansCount = 1.f;
         }
         
         self.lock = [[NSLock alloc] init];
-        self.lock.name = @"CleanSessionLock";
+        self.lock.name = kCleanSessionLock;
         
         self.operationsQueue = [NSMutableArray array];
         
         WEAK_SELF;
         [[AFNetworkReachabilityManager sharedManager] startMonitoring];
         
-        weakSelf.reachabilityStatus = [[AFNetworkReachabilityManager sharedManager] networkReachabilityStatus];
+        weakSelf.reachabilityStatus = [AFNetworkReachabilityManager sharedManager].networkReachabilityStatus;
+        
         [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+            
             weakSelf.reachabilityStatus = status;
             
 #ifdef DEBUG
@@ -145,7 +148,6 @@ static NSInteger const kAllCleansCount = 1.f;
     if ([NSURLSession class]) {
         self.cleanCount = 0;
         self.cleanBlock = block;
-        
         WEAK_SELF;
         [_sessionManager setSessionDidBecomeInvalidBlock:^(NSURLSession *session, NSError *error) {
             [weakSelf syncCleans];
@@ -213,14 +215,17 @@ static NSInteger const kAllCleansCount = 1.f;
         failure(operation ,error, NO);
     } else {
         [self enqueueOperation:operation success:^(BZRNetworkOperation *operation) {
+            
             [weakSelf finishOperationInQueue:operation];
             if (success) {
                 success(operation);
             }
+            
         } failure:^(BZRNetworkOperation *operation, NSError *error, BOOL isCanceled) {
             
             [weakSelf finishOperationInQueue:operation];
-            if ([BZRErrorHandler errorIsNetworkError:error] /* && operation.networkRequest.retryIfConnectionFailed*/) {
+            
+            if ([BZRErrorHandler errorIsNetworkError:error] && operation.networkRequest.retryIfConnectionFailed) {
                 
                 [BZRAlertFacade showRetryInternetConnectionAlertWithCompletion:^(BOOL retry) {
                     if (!retry && failure) {
@@ -260,7 +265,6 @@ static NSInteger const kAllCleansCount = 1.f;
 - (void)cancelAllOperations
 {
     if ([NSURLSession class]) {
-        
         for (BZRNetworkOperation *operation in self.operationsQueue) {
             [operation cancel];
         }
@@ -375,6 +379,14 @@ static NSInteger const kAllCleansCount = 1.f;
 
 #pragma mark - Renew Session Token
 
+/**
+ *  Reauthorize user session
+ *
+ *  @param success Success Block
+ *  @param failure Failure Block
+ *
+ *  @return BZRNetworkOperation
+ */
 - (BZRNetworkOperation *)renewSessionTokenOnSuccess:(void (^)(BOOL isSuccess))success
                                               onFailure:(void (^)(NSError *error, BOOL isCanceled))failure
 {
@@ -401,6 +413,14 @@ static NSInteger const kAllCleansCount = 1.f;
 
 #pragma mark - Get Application Token
 
+/**
+ *  Authorize application session
+ *
+ *  @param success Success Block
+ *  @param failure Failure Block
+ *
+ *  @return BZRNetworkOperation
+ */
 - (BZRNetworkOperation *)getClientCredentialsOnSuccess:(void (^)(BOOL success))success onFailure:(void (^)(NSError *error, BOOL isCanceled))failure
 {
     BZRGetClientCredentialsRequest *request = [[BZRGetClientCredentialsRequest alloc] init];

@@ -45,11 +45,19 @@
 
 #pragma mark - Actions
 
+/**
+ *  Restart failed operation
+ */
 - (void)restartFailedOperation
 {
     [self.sessionManager enqueueOperation:self.currentFailedOperation success:self.successBlock failure:self.failureBlock];
 }
 
+/**
+ *  Add failed operation and restart it
+ *
+ *  @param operation Failed Operation
+ */
 - (void)addAndRestartFailedOperation:(BZRNetworkOperation *)operation
 {
     if (![self.currentFailedOperation isEqual:operation]) {
@@ -62,6 +70,12 @@
     }
 }
 
+/**
+ *  Set completion blocks to failed operation manager
+ *
+ *  @param success Success Block
+ *  @param failure Failure Block
+ */
 - (void)setFailedOperationSuccessBlock:(SuccessOperationBlock)success andFailureBlock:(FailureOperationBlock)failure
 {
     if (success) {

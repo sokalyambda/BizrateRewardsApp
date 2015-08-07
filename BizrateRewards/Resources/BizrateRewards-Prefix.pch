@@ -21,7 +21,7 @@
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 
 #import "BZRMacros.h"
-#import "BZRAlertMessageService.h"
+#import "BZRAlertFacade.h"
 #import "BZRGlobalConstants.h"
 #import "BZRValidator.h"
 

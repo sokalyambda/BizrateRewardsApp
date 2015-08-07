@@ -7,11 +7,6 @@
 //
 
 typedef enum : NSUInteger {
-    BZRAccessTypeGeolocation,
-    BZRAccessTypePushNotifications
-} BZRAccessType;
-
-typedef enum : NSUInteger {
     BZRSettingsCellPersonalInfo,
     BZRSettingsCellGeoLocation,
     BZRSettingsCellPushNotification,
@@ -27,6 +22,8 @@ typedef enum : NSUInteger {
 #import "BZRLocationObserver.h"
 #import "BZRRedirectionHelper.h"
 
+#import "BZRMailComposeManager.h"
+
 static NSString *const kEditProfileSegueIdentifier = @"editProfileSegue";
 
 @interface BZRAccountSettingsContaiterController ()
@@ -34,9 +31,21 @@ static NSString *const kEditProfileSegueIdentifier = @"editProfileSegue";
 @property (weak, nonatomic) IBOutlet UIImageView *geolocationAccessIcon;
 @property (weak, nonatomic) IBOutlet UIImageView *pushNotificationsAccessIcon;
 
+@property (strong, nonatomic) BZRMailComposeManager *mailManager;
+
 @end
 
 @implementation BZRAccountSettingsContaiterController
+
+#pragma mark - Accessors
+
+- (BZRMailComposeManager *)mailManager
+{
+    if (!_mailManager) {
+        _mailManager = [BZRMailComposeManager sharedManager];
+    }
+    return _mailManager;
+}
 
 #pragma mark - View Lifecycle
 
@@ -71,38 +80,41 @@ static NSString *const kEditProfileSegueIdentifier = @"editProfileSegue";
             break;
         }
         case BZRSettingsCellGeoLocation: {
-            [self showErrorAlertControllerWithAccessType:BZRAccessTypeGeolocation];
+            [BZRAlertFacade showChangePermissionsAlertWithAccessType:BZRAccessTypeGeolocation andCompletion:nil];
             break;
         }
-            
         case BZRSettingsCellPushNotification: {
-            [self showErrorAlertControllerWithAccessType:BZRAccessTypePushNotifications];
+            [BZRAlertFacade showChangePermissionsAlertWithAccessType:BZRAccessTypePushNotifications andCompletion:nil];
             break;
         }
-            
         case BZRSettingsCellTermsOfService: {
             [BZRRedirectionHelper showPrivacyAndTermsWithType:BZRConditionsTypeTermsAndConditions andWithNavigationController:self.navigationController];
             break;
         }
-            
         case BZRSettingsCellUserAgreement: {
             [BZRRedirectionHelper showPrivacyAndTermsWithType:BZRConditionsTypeUserAgreement andWithNavigationController:self.navigationController];
             break;
         }
-            
         case BZRSettingsCellPrivacyPolicy: {
             [BZRRedirectionHelper showPrivacyAndTermsWithType:BZRConditionsTypePrivacyPolicy andWithNavigationController:self.navigationController];
             break;
         }
-            
         case BZRSettingsCellContactSupport: {
+            [self.mailManager showMailComposeControllerWithPresentingController:self.parentViewController andResult:^(MFMailComposeViewController *mailController, MFMailComposeResult composeResult, NSError *error) {
+                [mailController dismissViewControllerAnimated:YES completion:nil];
+            }];
             break;
         }
+        default:
+            break;
     }
 }
 
 #pragma mark - Actions
 
+/**
+ *  Update icons that depends on permissions access
+ */
 - (void)updateAccessIcons
 {
     NSString *currentLocationImageName;
@@ -116,36 +128,6 @@ static NSString *const kEditProfileSegueIdentifier = @"editProfileSegue";
     
     self.pushNotificationsAccessIcon.image = [UIImage imageNamed:currentPushesImageName];
     self.geolocationAccessIcon.image = [UIImage imageNamed:currentLocationImageName];
-}
-
-#pragma mark - UIAlertController
-
-- (void)showErrorAlertControllerWithAccessType:(BZRAccessType)accessType
-{
-    NSString *alertMessage;
-    switch (accessType) {
-        case BZRAccessTypeGeolocation:
-            alertMessage = NSLocalizedString(@"Do you want to enable/disable geolocation from settings?", nil);
-            break;
-        case BZRAccessTypePushNotifications:
-            alertMessage = NSLocalizedString(@"Do you want to enable/disable push notifications from settings?", nil);
-            break;
-        default:
-            break;
-    }
-    
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"" message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
-    
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"NO" style:UIAlertActionStyleCancel handler:nil];
-    
-    UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:@"YES" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
-    }];
-    
-    [alertController addAction:cancelAction];
-    [alertController addAction:confirmAction];
-    
-    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 #pragma mark - Notifications

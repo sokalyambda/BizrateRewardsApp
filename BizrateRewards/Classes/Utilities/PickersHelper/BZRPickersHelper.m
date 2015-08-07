@@ -56,7 +56,7 @@ static NSString *const kCurrentPicker = @"currentPicker";
  *  @param parentView The view where picker should be showing.
  *  @param container  Container controller which manipulates current picker
  *
- *  @return <#return value description#>
+ *  @return self
  */
 - (instancetype)initWithParentView:(UIView *)parentView andContainerController:(BZREditProfileContainerController *)container;
 {
@@ -273,7 +273,6 @@ static NSString *const kCurrentPicker = @"currentPicker";
         [self.containerController.tableView setScrollEnabled:YES];
     }
 }
-
 
 /**
  *  Handle keyboard disappearance

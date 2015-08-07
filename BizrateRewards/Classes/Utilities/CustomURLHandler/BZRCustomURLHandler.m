@@ -13,7 +13,7 @@
  
  com.bizraterewards://reset_password/fail?reason=expired_link
  
- com.bizraterewards://reset_password/fail?reason=rejected
+ com.bizraterewards://reset_password/fail?reason=rejected_link
 */
 
 #import "BZRCustomURLHandler.h"
@@ -22,7 +22,6 @@ static NSString *const kSuccessParam = @"success?";
 static NSString *const kFailParam = @"fail?";
 
 static NSString *const kAccessToken = @"access_token";
-static NSString *const kReason = @"reason";
 
 static NSString *const kInvalidLinkReason = @"invalid_link";
 static NSString *const kExpiredLinkReacon = @"expired_link";
@@ -60,6 +59,7 @@ static NSTimeInterval const kSupposedExpirationDate = 86400.f;
         [urlParsingParameters setObject:@YES forKey:kIsResettingSuccess];
         [urlParsingParameters setObject:supposedExpiresIn forKey:@"expires_in"];
         
+        //set temporary token
         BZRUserToken *token = [[BZRUserToken alloc] initWithServerResponse:urlParsingParameters];
         [BZRStorageManager sharedStorage].temporaryUserToken = token;
         
@@ -69,7 +69,6 @@ static NSTimeInterval const kSupposedExpirationDate = 86400.f;
         NSString *failResetValue = [urlString substringFromIndex:failRange.location+failRange.length];
         NSArray *params = [failResetValue componentsSeparatedByString:@"="];
         NSString *failReasonValue = [params lastObject];
-        
         NSString *failReasonMessage;
         if ([failReasonValue isEqualToString:kInvalidLinkReason] || [failReasonValue isEqualToString:kExpiredLinkReacon]) {
             failReasonMessage = LOCALIZED(@"This password reset link has been expired.");
@@ -77,7 +76,6 @@ static NSTimeInterval const kSupposedExpirationDate = 86400.f;
             failReasonMessage = LOCALIZED(@"This password reset link has been expired by a more recent password reset request.");
         }
         
-        [urlParsingParameters setObject:failReasonValue forKey:kReason];
         [urlParsingParameters setObject:@NO forKey:kIsResettingSuccess];
         [urlParsingParameters setObject:failReasonMessage forKey:kFailReasonMessage];
     }

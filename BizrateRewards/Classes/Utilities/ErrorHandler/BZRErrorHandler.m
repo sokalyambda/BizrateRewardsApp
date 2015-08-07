@@ -87,17 +87,14 @@ static NSString *const kErrorDescription = @"error_description";
             errString = LOCALIZED(@"The connection timed out.");
             break;
         }
-        case NSURLErrorNetworkConnectionLost: {
-            errString = LOCALIZED(@"Connection was lost.");
-            break;
-        }
         case NSURLErrorDNSLookupFailed: {
             errString = LOCALIZED(@"DNS lookup failed.");
             break;
         }
         case NSURLErrorCannotFindHost:
         case NSURLErrorCannotConnectToHost:
-        case NSURLErrorNotConnectedToInternet: {
+        case NSURLErrorNotConnectedToInternet:
+        case NSURLErrorNetworkConnectionLost: {
             errString = LOCALIZED(@"Network connection failed. Check your signal and try again.");
             break;
         }

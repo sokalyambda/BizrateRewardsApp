@@ -20,6 +20,11 @@
 
 #pragma mark - Accessors
 
+/**
+ *  Set picker's components
+ *
+ *  @param pickerComponentsArray Components array
+ */
 - (void)setPickerComponentsArray:(NSArray *)pickerComponentsArray
 {
     _pickerComponentsArray = pickerComponentsArray;

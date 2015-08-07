@@ -38,9 +38,12 @@
 +(void) setLocationDelegate:(id)delegate;
 +(void) setRetailerID:(NSString *)retailer_id;
 +(void) setRetailerCode:(NSString *)retailer_code;
++ (CLAuthorizationStatus) startLocationService;
 
 
 -(NSString *) getUUID;
+//- (void)requestAlwaysAuthorization;
+
 -(void) populateiBeaconsRange;
 - (UIImage*)loadImage;
 

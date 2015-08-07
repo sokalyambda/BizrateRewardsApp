@@ -32,8 +32,8 @@ static NSString *const kOfferBeamRetailerID = @"A27C65B0-DB22-11E4-8830-0800200C
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-//    NSURL *url = (NSURL *)[launchOptions valueForKey:UIApplicationLaunchOptionsURLKey];
-//    [BZRRedirectionHelper showResetPasswordResultControllerWithObtainedURL:url];
+    NSURL *url = (NSURL *)[launchOptions valueForKey:UIApplicationLaunchOptionsURLKey];
+    [BZRRedirectionHelper showResetPasswordResultControllerWithObtainedURL:url];
     
     //setup mixPanel service
     [BZRMixpanelService setupMixpanel];
@@ -71,7 +71,7 @@ static NSString *const kOfferBeamRetailerID = @"A27C65B0-DB22-11E4-8830-0800200C
   sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation
 {
-//    [BZRRedirectionHelper showResetPasswordResultControllerWithObtainedURL:url];
+    [BZRRedirectionHelper showResetPasswordResultControllerWithObtainedURL:url];
     
     return [[FBSDKApplicationDelegate sharedInstance] application:application
                                                           openURL:url

@@ -13,9 +13,6 @@
 @property (strong, nonatomic) NSMutableArray *internalArray;
 
 @end
-//
-//NSUInteger COUNT_MULTIPLIER = 2000;
-//NSUInteger MIDDLE_POSITION = 2000 / 2;
 
 @implementation BZRPickerHolder
 
@@ -63,8 +60,9 @@
 
 - (void)addComponentsItems:(NSArray*)items
 {
-    if (items.count > 0)
-        [self.internalArray addObject:items];
+    if (items.count > 0) {
+       [self.internalArray addObject:items];
+    }
 }
 
 - (void)setRowInComponent:(NSUInteger)component byValue:(id)value
@@ -72,8 +70,9 @@
     if (component < self.internalArray.count) {
         NSArray *items = self.internalArray[component];
         NSUInteger ind =  [items indexOfObject:value];
-        if (ind == NSNotFound)
+        if (ind == NSNotFound) {
             ind = 0;
+        }
         
         [self selectRow:(items.count + ind) inComponent:component animated:NO];
     }
@@ -83,8 +82,9 @@
 {
     NSUInteger ind = [super selectedRowInComponent:component];
     
-    if (component < self.internalArray.count)
+    if (component < self.internalArray.count) {
         ind %= ((NSArray*)self.internalArray[component]).count;
+    }
     
     return ind;
 }
@@ -105,8 +105,9 @@
         NSArray *itemsArray = self.internalArray[component];
         ind %= itemsArray.count;
         
-        if (ind < itemsArray.count)
+        if (ind < itemsArray.count) {
             return itemsArray[ind];
+        }
     }
     
     return nil;
