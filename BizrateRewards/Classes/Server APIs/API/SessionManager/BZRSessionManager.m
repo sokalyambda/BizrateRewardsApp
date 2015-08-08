@@ -94,7 +94,7 @@ static NSString *const kCleanSessionLock = @"CleanSessionLock";
             _sessionManager = [[AFHTTPSessionManager alloc] initWithBaseURL:url sessionConfiguration:taskConfig];
             
             [_sessionManager setResponseSerializer:[AFJSONResponseSerializer serializer]];
-            [_sessionManager.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"application/schema+json", @"application/json", @"application/x-www-form-urlencoded", nil]];
+            [_sessionManager.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"application/schema+json", @"application/json", @"application/x-www-form-urlencoded", @"application/hal+json", nil]];
         }
         
         self.lock = [[NSLock alloc] init];

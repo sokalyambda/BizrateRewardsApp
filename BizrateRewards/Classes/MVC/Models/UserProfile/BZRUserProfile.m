@@ -18,6 +18,7 @@ static NSString *const kGender                  = @"gender";
 static NSString *const kIsMale                  = @"isMale";
 static NSString *const kPointsAmount            = @"points_awarded";
 static NSString *const kContactID               = @"ref_contact_id";
+static NSString *const kPointsRequired          = @"points_next_redemption";
 
 @interface BZRUserProfile ()<NSCoding>
 
@@ -86,6 +87,7 @@ static NSString *const kContactID               = @"ref_contact_id";
         _contactID      = response[kContactID];
         _dateOfBirth    = [[BZRCommonDateFormatter commonDateFormatter] dateFromString:response[kDateOfBirth]];
         _pointsAmount   = [response[kPointsAmount] integerValue];
+        _pointsRequired = [response[kPointsRequired] integerValue];
         
         self.genderString   = response[kGender];
     }

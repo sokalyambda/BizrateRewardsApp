@@ -17,6 +17,7 @@
 
 #import "BZRRoundedImageView.h"
 #import "BZRProgressView.h"
+#import "BZRSurveyPointsValueLabel.h"
 
 #import "BZRPushNotifiactionService.h"
 #import "BZRProjectFacade.h"
@@ -30,6 +31,7 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
 @property (weak, nonatomic) IBOutlet BZRRoundedImageView *userAvatar;
 @property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *earnedPointsLabel;
+@property (weak, nonatomic) IBOutlet BZRSurveyPointsValueLabel *pointsForNextGiftCardLabel;
 
 @property (strong, nonatomic) BZRStorageManager *storageManager;
 @property (strong, nonatomic) BZRUserProfile *currentProfile;
@@ -125,10 +127,8 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
     [self setupUserAvatar];
     
     self.userNameLabel.text = self.currentProfile.fullName;
-    self.earnedPointsLabel.text = [NSString stringWithFormat:@"%@ %@", [[BZRCommonNumberFormatter commonNumberFormatter] stringFromNumber:@((long)self.currentProfile.pointsAmount)], NSLocalizedString(@"pts", nil)];
-    
-#warning User Points
-    self.currentProfile.pointsRequired = 2000;
+    self.earnedPointsLabel.text = [NSString stringWithFormat:@"%@ %@", [[BZRCommonNumberFormatter commonNumberFormatter] stringFromNumber:@((long)self.currentProfile.pointsAmount)], LOCALIZED(@"pts")];
+    self.pointsForNextGiftCardLabel.text = [NSString stringWithFormat:@"%@ %@", [[BZRCommonNumberFormatter commonNumberFormatter] stringFromNumber:@((long)self.currentProfile.pointsRequired)], LOCALIZED(@"pts")];
     
     [self.progressView recalculateProgressWithCurrentPoints:self.currentProfile.pointsAmount requiredPoints:self.currentProfile.pointsRequired];
 }
