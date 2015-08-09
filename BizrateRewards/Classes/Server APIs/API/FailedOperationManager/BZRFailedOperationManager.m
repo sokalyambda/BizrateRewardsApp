@@ -13,7 +13,7 @@
 @interface BZRFailedOperationManager ()
 
 @property (strong, nonatomic) BZRSessionManager *sessionManager;
-@property (strong, nonatomic) BZRNetworkOperation *currentFailedOperation;
+@property (strong, nonatomic) BZRNetworkRequest *currentFailedRequest;
 
 @property (copy, nonatomic) SuccessOperationBlock successBlock;
 @property (copy, nonatomic) FailureOperationBlock failureBlock;
@@ -26,7 +26,10 @@
 
 - (BZRSessionManager *)sessionManager
 {
-    return [BZRProjectFacade HTTPClient];
+    if (!_sessionManager) {
+        _sessionManager = [BZRProjectFacade HTTPClient];
+    }
+    return _sessionManager;
 }
 
 #pragma mark - Lifecycle
@@ -50,7 +53,7 @@
  */
 - (void)restartFailedOperation
 {
-    [self.sessionManager enqueueOperation:self.currentFailedOperation success:self.successBlock failure:self.failureBlock];
+    [self.sessionManager enqueueOperationWithNetworkRequest:self.currentFailedRequest success:self.successBlock failure:self.failureBlock];
 }
 
 /**
@@ -60,10 +63,8 @@
  */
 - (void)addAndRestartFailedOperation:(BZRNetworkOperation *)operation
 {
-    if (![self.currentFailedOperation isEqual:operation]) {
-        self.currentFailedOperation = operation;
-        self.currentFailedOperation.successBlock = self.successBlock;
-        self.currentFailedOperation.failureBlock = self.failureBlock;
+    if (![self.currentFailedRequest isEqual:operation.networkRequest]) {
+        self.currentFailedRequest = operation.networkRequest;
         [self restartFailedOperation];
     } else {
         [self restartFailedOperation];
