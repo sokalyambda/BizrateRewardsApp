@@ -108,7 +108,7 @@
 - (void)recalculateProgress
 {
     NSInteger updatedPoints = self.currentProfile.pointsAmount + self.passedSurvey.surveyPoints;
-    [self.progressView recalculateProgressWithCurrentPoints:updatedPoints requiredPoints: self.currentProfile.pointsRequired];
+    [self.progressView recalculateProgressWithCurrentPoints:updatedPoints requiredPoints: self.currentProfile.pointsRequired withCompletion:nil];
 }
 
 @end

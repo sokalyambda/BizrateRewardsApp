@@ -8,6 +8,6 @@
 
 @interface BZRProgressView : UIView
 
-- (void)recalculateProgressWithCurrentPoints: (NSInteger)currentPoints requiredPoints: (NSInteger)requiredPoints;
+- (void)recalculateProgressWithCurrentPoints:(NSInteger)currentPoints requiredPoints:(NSInteger)requiredPoints withCompletion:(void(^)(BOOL maxPointsEarned))completion;
 
 @end

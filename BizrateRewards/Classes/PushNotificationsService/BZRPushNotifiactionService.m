@@ -88,11 +88,11 @@ static NSString *const kPushPermissionsLastState = @"pushPermissionLastState";
     }
     if (deviceToken.length && [BZRProjectFacade isUserSessionValid]) {
         [BZRStorageManager sharedStorage].deviceToken = deviceToken;
-//        [BZRProjectFacade sendDeviceDataOnSuccess:^(BOOL isSuccess) {
-//            
-//        } onFailure:^(NSError *error, BOOL isCanceled) {
-//            
-//        }];
+        [BZRProjectFacade sendDeviceDataOnSuccess:^(BOOL isSuccess) {
+            
+        } onFailure:^(NSError *error, BOOL isCanceled) {
+            
+        }];
     }
 }
 

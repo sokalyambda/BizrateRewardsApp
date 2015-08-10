@@ -18,6 +18,7 @@
 #import "BZRRoundedImageView.h"
 #import "BZRProgressView.h"
 #import "BZRSurveyPointsValueLabel.h"
+#import "BZRSurveyCongratsLabel.h"
 
 #import "BZRPushNotifiactionService.h"
 #import "BZRProjectFacade.h"
@@ -32,6 +33,8 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
 @property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *earnedPointsLabel;
 @property (weak, nonatomic) IBOutlet BZRSurveyPointsValueLabel *pointsForNextGiftCardLabel;
+@property (weak, nonatomic) IBOutlet BZRSurveyCongratsLabel *congratsLabel;
+
 
 @property (strong, nonatomic) BZRStorageManager *storageManager;
 @property (strong, nonatomic) BZRUserProfile *currentProfile;
@@ -127,10 +130,20 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
     [self setupUserAvatar];
     
     self.userNameLabel.text = self.currentProfile.fullName;
+    
     self.earnedPointsLabel.text = [NSString stringWithFormat:@"%@ %@", [[BZRCommonNumberFormatter commonNumberFormatter] stringFromNumber:@((long)self.currentProfile.pointsAmount)], LOCALIZED(@"pts")];
     self.pointsForNextGiftCardLabel.text = [NSString stringWithFormat:@"%@ %@", [[BZRCommonNumberFormatter commonNumberFormatter] stringFromNumber:@((long)self.currentProfile.pointsRequired)], LOCALIZED(@"pts")];
     
-    [self.progressView recalculateProgressWithCurrentPoints:self.currentProfile.pointsAmount requiredPoints:self.currentProfile.pointsRequired];
+    WEAK_SELF;
+    [self.progressView recalculateProgressWithCurrentPoints:self.currentProfile.pointsAmount requiredPoints:self.currentProfile.pointsRequired withCompletion:^(BOOL maxPointsEarned) {
+        
+        if (maxPointsEarned) {
+            weakSelf.congratsLabel.text = LOCALIZED(@"Awesome! You have earned a gift card!! We will email you with details how to choose a card and redeem your points.");
+        } else {
+            weakSelf.congratsLabel.text = LOCALIZED(@"Congrats! You are getting close to receiving your first gift card!");
+        }
+        
+    }];
 }
 
 /**
@@ -165,7 +178,7 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
     
         [weakSelf updateUserInformation];
         //Register app for push notifications, if success - send device data to server
-//        [BZRPushNotifiactionService registerApplicationForPushNotifications:[UIApplication sharedApplication]];
+        [BZRPushNotifiactionService registerApplicationForPushNotifications:[UIApplication sharedApplication]];
         
         weakSelf.updateNeeded = NO;
     } onFailure:^(NSError *error, BOOL isCanceled) {
