@@ -10,4 +10,8 @@
 
 @interface BZRGetStartedController : BZRBaseViewController
 
+@property (assign, nonatomic, getter=isRedirectedFromFacebookSignInFlow) BOOL redirectedFromFacebookSignInFlow;
+
+@property (strong, nonatomic) NSString *failedToSignInEmail;
+
 @end

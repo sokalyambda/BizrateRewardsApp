@@ -15,6 +15,7 @@
 @property (strong, nonatomic) NSString *fullName;
 @property (strong, nonatomic) NSString *email;
 @property (strong, nonatomic) NSURL *avararURL;
+@property (strong, nonatomic) NSString *genderString;
 @property (assign, nonatomic) long long userId;
 
 - (void)setFacebookProfileToDefaultsForKey:(NSString *)key;

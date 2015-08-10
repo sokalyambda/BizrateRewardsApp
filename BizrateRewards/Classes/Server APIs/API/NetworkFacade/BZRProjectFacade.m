@@ -91,9 +91,7 @@ static BZRSessionManager *sharedHTTPClient = nil;
         [BZRMixpanelService trackEventWithType:BZRMixpanelEventLoginSuccessful
                                  propertyValue:kAuthTypeEmail];
         //to avoid FB profile usage when user has been logged with email
-        if ([self isFacebookSessionValid]) {
-            [BZRFacebookService logoutFromFacebook];
-        }
+        [BZRFacebookService logoutFromFacebook];
         
         BZRSignInRequest *request = (BZRSignInRequest*)operation.networkRequest;
         
@@ -104,7 +102,7 @@ static BZRSessionManager *sharedHTTPClient = nil;
         }
         
     } failure:^(BZRNetworkOperation *operation ,NSError *error, BOOL isCanceled) {
-        ShowFailureResponseAlertWithError(error);
+        //ShowFailureResponseAlertWithError(error);
         if (failure) {
             failure(error, isCanceled);
         }
@@ -133,9 +131,7 @@ static BZRSessionManager *sharedHTTPClient = nil;
                                      propertyValue:kAuthTypeEmail];
             
             //to avoid FB profile usage when user has been logged with email
-            if ([self isFacebookSessionValid]) {
-                [BZRFacebookService logoutFromFacebook];
-            }
+            [BZRFacebookService logoutFromFacebook];
             
             BZRSignUpRequest *request = (BZRSignUpRequest*)operation.networkRequest;
             
@@ -438,14 +434,20 @@ static BZRSessionManager *sharedHTTPClient = nil;
             
             [BZRStorageManager sharedStorage].userToken = request.userToken;
             
-            success(YES);
+            if (success) {
+                success(YES);
+            }
             
-        } failure:^(BZRNetworkOperation *operation ,NSError *error, BOOL isCanceled) {
-            ShowFailureResponseAlertWithError(error);
-            failure(error, isCanceled);
+        } failure:^(BZRNetworkOperation *operation, NSError *error, BOOL isCanceled) {
+//            ShowFailureResponseAlertWithError(error);
+            if (failure) {
+                failure(error, isCanceled);
+            }
         }];
     } onFailure:^(NSError *error, BOOL isCanceled) {
-        failure(error, isCanceled);
+        if (failure) {
+            failure(error, isCanceled);
+        }
     }];
     return operation;
 }
@@ -474,15 +476,22 @@ static BZRSessionManager *sharedHTTPClient = nil;
             
             [BZRStorageManager sharedStorage].userToken = request.userToken;
             
-            success(YES);
+            if (success) {
+                success(YES);
+            }
             
         } failure:^(BZRNetworkOperation *operation ,NSError *error, BOOL isCanceled) {
             ShowFailureResponseAlertWithError(error);
-            failure(error, isCanceled);
+            if (failure) {
+                failure(error, isCanceled);
+            }
         }];
         
     } onFailure:^(NSError *error, BOOL isCanceled) {
         
+        if (failure) {
+            failure(error, isCanceled);
+        }
     }];
     
     return operation;

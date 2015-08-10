@@ -82,7 +82,7 @@ static NSString *const kFBAppSecret = @"530fa94f7370fc20a54cc392fbd83cf2";
 + (void)getFacebookUserProfileOnSuccess:(FacebookProfileSuccessBlock)success onFailure:(FacebookProfileFailureBlock)failure
 {
     NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
-    [parameters setValue:@"picture.type(large), id, name, email" forKey:kFields];
+    [parameters setValue:@"picture.type(large), id, name, first_name, last_name, email, gender" forKey:kFields];
     
     FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:parameters HTTPMethod:@"GET"];
     
@@ -162,7 +162,7 @@ static NSString *const kFBAppSecret = @"530fa94f7370fc20a54cc392fbd83cf2";
 }
 
 /**
- *  Remove facebook data (access token and expiration date from User Defaults
+ *  Remove facebook data (access token and expiration date from User Defaults)
  */
 + (void)clearFacebookAuthData
 {

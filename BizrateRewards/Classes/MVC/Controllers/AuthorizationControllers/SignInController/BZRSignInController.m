@@ -82,7 +82,13 @@ static NSInteger const kNotRegisteredErrorCode = 400.f;
 
 - (IBAction)facebookLoginClick:(id)sender
 {
+    //for case when we have existed FB credentials
+    [BZRFacebookService logoutFromFacebook];
+    
+    //resign responder from active fields
     [self resignIfFirstResponder];
+    
+    //signIn with facebook
     [self signInWithFacebook];
 }
 
@@ -99,6 +105,7 @@ static NSInteger const kNotRegisteredErrorCode = 400.f;
 - (IBAction)goToCreateNewAccountClick:(id)sender
 {
     BZRGetStartedController *controller = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRGetStartedController class])];
+    controller.failedToSignInEmail = self.userNameField.text;
     [self.navigationController pushViewController:controller animated:YES];
 }
 
@@ -144,8 +151,16 @@ static NSInteger const kNotRegisteredErrorCode = 400.f;
                                    
                                    [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
 #warning check if email is not registered
-                                   [weakSelf.incorrectEmailView setHidden:NO];
-                                   weakSelf.userNameField.errorImageName = kEmailErrorIconName;
+                                   
+                                   NSInteger operationStatusCode = [[[error userInfo] objectForKey:AFNetworkingOperationFailingURLResponseErrorKey] statusCode];
+                                   
+                                   if (operationStatusCode == 400) {
+                                       [weakSelf.incorrectEmailView setHidden:NO];
+                                       weakSelf.userNameField.errorImageName = kEmailErrorIconName;
+                                   } else {
+                                       ShowFailureResponseAlertWithError(error);
+                                   }
+                                   
                                }];
                            }
                            onFailure:^(NSString *errorString) {
@@ -175,6 +190,18 @@ static NSInteger const kNotRegisteredErrorCode = 400.f;
                 
             } onFailure:^(NSError *error, BOOL isCanceled) {
                 [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+                
+                NSInteger operationStatusCode = [[[error userInfo] objectForKey:AFNetworkingOperationFailingURLResponseErrorKey] statusCode];
+                
+                //Check whether the user has not already signed up
+                if (operationStatusCode == 400) {
+                    BZRGetStartedController *controller = [weakSelf.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRGetStartedController class])];
+                    controller.redirectedFromFacebookSignInFlow = YES;
+                    [weakSelf.navigationController pushViewController:controller animated:YES];
+                } else {
+                    ShowFailureResponseAlertWithError(error);
+                }
+                
             }];
             
         } onFailure:^(NSError *error) {

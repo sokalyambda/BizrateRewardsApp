@@ -8,8 +8,8 @@
 
 #import "BZRFacebookProfile.h"
 
-static NSString *const kFirstName = @"";
-static NSString *const kLastName = @"";
+static NSString *const kFirstName = @"first_name";
+static NSString *const kLastName = @"last_name";
 static NSString *const kFullName = @"name";
 static NSString *const kUserId = @"id";
 static NSString *const kEmail = @"email";
@@ -18,6 +18,7 @@ static NSString *const kAvatarURL = @"avatarURL";
 static NSString *const kPicture = @"picture";
 static NSString *const kData = @"data";
 static NSString *const kURL = @"url";
+static NSString *const kGender = @"gender";
 
 @implementation BZRFacebookProfile
 
@@ -32,6 +33,7 @@ static NSString *const kURL = @"url";
         _fullName = response[kFullName];
         _userId = [response[kUserId] longLongValue];
         _email = response[kEmail];
+        _genderString = [response[kGender] capitalizedString];
         
         _avararURL = [NSURL URLWithString:response[kPicture][kData][kURL]];
     }
@@ -49,6 +51,7 @@ static NSString *const kURL = @"url";
     [encoder encodeObject:self.fullName forKey:kFullName];
     [encoder encodeObject:@(self.userId) forKey:kUserId];
     [encoder encodeObject:self.avararURL forKey:kAvatarURL];
+    [encoder encodeObject:self.genderString forKey:kGender];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder
@@ -61,6 +64,7 @@ static NSString *const kURL = @"url";
         _fullName       = [decoder decodeObjectForKey:kFullName];
         _userId         = [[decoder decodeObjectForKey:kUserId] longLongValue];
         _avararURL      = [decoder decodeObjectForKey:kAvatarURL];
+        _genderString   = [decoder decodeObjectForKey:kGender];
     }
     return self;
 }
