@@ -8,6 +8,8 @@
 
 #import "BZRGiftcardCell.h"
 
+#import "BZRGiftCard.h"
+
 @interface BZRGiftcardCell ()
 
 @property (weak, nonatomic) IBOutlet UIImageView *giftcardImageView;
@@ -18,7 +20,7 @@
 
 - (void)configureCellWithGiftCard:(BZRGiftCard *)giftCard
 {
-    
+    [self.giftcardImageView sd_setImageWithURL:giftCard.giftCardImageURL];
 }
 
 @end

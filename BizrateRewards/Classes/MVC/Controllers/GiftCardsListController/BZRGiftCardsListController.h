@@ -10,4 +10,6 @@
 
 @interface BZRGiftCardsListController : BZRBaseViewController
 
+@property (strong, nonatomic) NSArray *giftCards;
+
 @end

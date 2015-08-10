@@ -100,6 +100,7 @@
 		58AF4AF41B5C13A30052C7E5 /* BZRStatusBarManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AF4AF31B5C13A30052C7E5 /* BZRStatusBarManager.m */; };
 		58B18C751B78AB9200F13F53 /* libOfferBeamSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58B18C731B78AB9200F13F53 /* libOfferBeamSDK.a */; };
 		58B18C761B78AB9200F13F53 /* ModelOfferBeamSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 58B18C741B78AB9200F13F53 /* ModelOfferBeamSDK.bundle */; };
+		58B18C8C1B790D7200F13F53 /* BZRGetFeaturedGiftcards.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B18C8B1B790D7200F13F53 /* BZRGetFeaturedGiftcards.m */; };
 		58B38A491B7349AB00EDB024 /* BZRFailedOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B38A481B7349AB00EDB024 /* BZRFailedOperationManager.m */; };
 		58B52A3B1B6A2874002D2529 /* UIImage+Base64Encoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B52A3A1B6A2874002D2529 /* UIImage+Base64Encoding.m */; };
 		58B52A3F1B6A28D3002D2529 /* NSString+Base64Decoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B52A3E1B6A28D3002D2529 /* NSString+Base64Decoding.m */; };
@@ -363,6 +364,8 @@
 		58B18C851B78ABA600F13F53 /* OBLocationLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBLocationLog.h; sourceTree = "<group>"; };
 		58B18C861B78ABA600F13F53 /* OBStoreParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBStoreParam.h; sourceTree = "<group>"; };
 		58B18C871B78ABA600F13F53 /* OBSystemParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBSystemParam.h; sourceTree = "<group>"; };
+		58B18C8A1B790D7200F13F53 /* BZRGetFeaturedGiftcards.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRGetFeaturedGiftcards.h; path = GiftCards/GetFeaturedGiftcards/BZRGetFeaturedGiftcards.h; sourceTree = "<group>"; };
+		58B18C8B1B790D7200F13F53 /* BZRGetFeaturedGiftcards.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRGetFeaturedGiftcards.m; path = GiftCards/GetFeaturedGiftcards/BZRGetFeaturedGiftcards.m; sourceTree = "<group>"; };
 		58B38A471B7349AB00EDB024 /* BZRFailedOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRFailedOperationManager.h; path = FailedOperationManager/BZRFailedOperationManager.h; sourceTree = "<group>"; };
 		58B38A481B7349AB00EDB024 /* BZRFailedOperationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRFailedOperationManager.m; path = FailedOperationManager/BZRFailedOperationManager.m; sourceTree = "<group>"; };
 		58B52A391B6A2874002D2529 /* UIImage+Base64Encoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Base64Encoding.h"; path = "Classes/Categories/UIImage/UIImage+Base64Encoding/UIImage+Base64Encoding.h"; sourceTree = "<group>"; };
@@ -856,6 +859,7 @@
 		585C32901B63AA3F005BF07B /* Requests */ = {
 			isa = PBXGroup;
 			children = (
+				58B18C881B790D1600F13F53 /* GiftCards */,
 				58BD59BC1B6F757E00B6C5C4 /* Device */,
 				58BCCD8B1B6BA48100521496 /* LocationEvent */,
 				589889B81B654C78008684F3 /* Surveys */,
@@ -1606,6 +1610,23 @@
 			name = StatusBarManager;
 			sourceTree = "<group>";
 		};
+		58B18C881B790D1600F13F53 /* GiftCards */ = {
+			isa = PBXGroup;
+			children = (
+				58B18C891B790D2300F13F53 /* GetFeaturedGiftcards */,
+			);
+			name = GiftCards;
+			sourceTree = "<group>";
+		};
+		58B18C891B790D2300F13F53 /* GetFeaturedGiftcards */ = {
+			isa = PBXGroup;
+			children = (
+				58B18C8A1B790D7200F13F53 /* BZRGetFeaturedGiftcards.h */,
+				58B18C8B1B790D7200F13F53 /* BZRGetFeaturedGiftcards.m */,
+			);
+			name = GetFeaturedGiftcards;
+			sourceTree = "<group>";
+		};
 		58B38A461B73497C00EDB024 /* FailedOperationManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -2307,6 +2328,7 @@
 				58ACC0871B3968DA0081E546 /* BZRGetStartedController.m in Sources */,
 				585C32AB1B63C82F005BF07B /* BZRRenewSessionTokenRequest.m in Sources */,
 				585813AE1B3C23840087AEE2 /* BZRSurvey.m in Sources */,
+				58B18C8C1B790D7200F13F53 /* BZRGetFeaturedGiftcards.m in Sources */,
 				58D1E5D11B662EBD00347208 /* BZRSignInWithFacebookRequest.m in Sources */,
 				58C770E31B5CD08E00E9031F /* BZRTutorialDescriptionLabel.m in Sources */,
 				58BD59C41B6FC75100B6C5C4 /* BZRAlertFacade.m in Sources */,

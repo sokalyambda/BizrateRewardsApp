@@ -88,7 +88,29 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
 
 - (IBAction)seeAllGiftCardsClick:(id)sender
 {
-    [self performSegueWithIdentifier:kAllGiftCardsSegueIdentifier sender:self];
+    WEAK_SELF;
+    [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
+    [BZRProjectFacade getFeaturedGiftCardsOnSuccess:^(NSArray *giftCards) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        
+        
+        BZRGiftCardsListController *controller = [weakSelf.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRGiftCardsListController class])];
+        controller.navigationItem.title = NSLocalizedString(@"Rewards", nil);
+        
+        if (giftCards.count) {
+            controller.giftCards = giftCards;
+            [weakSelf.navigationController pushViewController:controller animated:YES];
+        } else {
+            ShowAlert(NSLocalizedString(@"There are no gift cards at current time", nil));
+            return;
+        }
+        
+    } onFailure:^(NSError *error, BOOL isCanceled) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        
+    }];
+    
+//    [self performSegueWithIdentifier:kAllGiftCardsSegueIdentifier sender:self];
 }
 
 - (IBAction)accountSettingsClick:(id)sender
@@ -197,10 +219,10 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([segue.identifier isEqualToString:kAllGiftCardsSegueIdentifier]) {
-        BZRGiftCardsListController *controller = (BZRGiftCardsListController *)segue.destinationViewController;
-        controller.navigationItem.title = NSLocalizedString(@"Rewards", nil);
-    }
+//    if ([segue.identifier isEqualToString:kAllGiftCardsSegueIdentifier]) {
+//        BZRGiftCardsListController *controller = (BZRGiftCardsListController *)segue.destinationViewController;
+//        controller.navigationItem.title = NSLocalizedString(@"Rewards", nil);
+//    }
 }
 
 @end

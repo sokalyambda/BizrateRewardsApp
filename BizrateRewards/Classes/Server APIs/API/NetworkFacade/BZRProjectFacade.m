@@ -356,6 +356,35 @@ static BZRSessionManager *sharedHTTPClient = nil;
     return operation;
 }
 
+//GiftCards Requests
++ (BZRNetworkOperation *)getFeaturedGiftCardsOnSuccess:(void (^)(NSArray *giftCards))success onFailure:(void (^)(NSError *error, BOOL isCanceled))failure
+{
+    __block BZRNetworkOperation *operation;
+    [self validateSessionWithType:BZRSessionTypeUser onSuccess:^(BOOL isSuccess) {
+        BZRGetFeaturedGiftcards *request = [[BZRGetFeaturedGiftcards alloc] init];
+        
+        operation = [[self  HTTPClient] enqueueOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
+            
+            BZRGetFeaturedGiftcards *request = (BZRGetFeaturedGiftcards*)operation.networkRequest;
+            
+            if (success) {
+                success(request.featuredGiftCards);
+            }
+            
+        } failure:^(BZRNetworkOperation *operation, NSError *error, BOOL isCanceled) {
+            ShowFailureResponseAlertWithError(error);
+            if (failure) {
+                failure(error, isCanceled);
+            }
+        }];
+    } onFailure:^(NSError *error, BOOL isCanceled) {
+        if (failure) {
+            failure(error, isCanceled);
+        }
+    }];
+    return operation;
+}
+
 /**
  *  Sign out from current account
  *

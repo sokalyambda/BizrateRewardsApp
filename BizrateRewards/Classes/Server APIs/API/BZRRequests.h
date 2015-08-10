@@ -19,6 +19,7 @@
 #import "BZRSendLocationEventRequest.h"
 #import "BZRForgotPasswordRequest.h"
 #import "BZRSendDeviceDataRequest.h"
+#import "BZRGetFeaturedGiftcards.h"
 
 #import "BZRSignInWithFacebookRequest.h"
 

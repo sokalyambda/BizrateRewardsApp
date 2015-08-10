@@ -12,13 +12,9 @@
 
 #import "BZRGiftCard.h"
 
-static NSString *const kGiftCardCell = @"giftCardCell";
-
 @interface BZRGiftCardsListController ()<UICollectionViewDataSource, UICollectionViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *giftCardsCollectionView;
-
-@property (strong, nonatomic) NSArray *giftCards;
 
 @end
 
@@ -48,12 +44,16 @@ static NSString *const kGiftCardCell = @"giftCardCell";
 {
     BZRGiftCard *currentGiftCard = self.giftCards[indexPath.row];
     
-    BZRGiftcardCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kGiftCardCell forIndexPath:indexPath];
+    BZRGiftcardCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([BZRGiftcardCell class]) forIndexPath:indexPath];
     
     [cell configureCellWithGiftCard:currentGiftCard];
-//    [cell.giftcardImageView sd_setImageWithURL:currentGiftCard.iconURL];
     
     return cell;
 }
+
+//-(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    return CGSizeMake(collectionView.bounds.size.width/2, 50.f);
+//}
 
 @end
