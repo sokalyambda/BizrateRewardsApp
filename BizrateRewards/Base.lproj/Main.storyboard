@@ -3199,8 +3199,7 @@
                                                             <exclude reference="cWZ-w9-thK"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="0.0" y="0.0" width="240" height="1"/>
+                                                    <variation key="heightClass=regular-widthClass=compact">
                                                         <mask key="constraints">
                                                             <include reference="cWZ-w9-thK"/>
                                                         </mask>
@@ -3221,8 +3220,7 @@
                                                             <exclude reference="RFZ-6t-j1H"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="10" y="1" width="230" height="39"/>
+                                                    <variation key="heightClass=regular-widthClass=compact">
                                                         <mask key="constraints">
                                                             <include reference="RFZ-6t-j1H"/>
                                                         </mask>
@@ -3297,8 +3295,7 @@
                                                             <exclude reference="fVR-Nj-me8"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="10" y="0.0" width="230" height="40"/>
+                                                    <variation key="heightClass=regular-widthClass=compact">
                                                         <mask key="constraints">
                                                             <include reference="fVR-Nj-me8"/>
                                                         </mask>
@@ -3361,8 +3358,7 @@
                                                             <exclude reference="ubj-oz-wgE"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="10" y="0.0" width="230" height="40"/>
+                                                    <variation key="heightClass=regular-widthClass=compact">
                                                         <mask key="constraints">
                                                             <include reference="ubj-oz-wgE"/>
                                                         </mask>
@@ -3426,8 +3422,7 @@
                                                             <exclude reference="fTO-Rw-xcT"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="10" y="0.0" width="230" height="40"/>
+                                                    <variation key="heightClass=regular-widthClass=compact">
                                                         <mask key="constraints">
                                                             <include reference="fTO-Rw-xcT"/>
                                                         </mask>
@@ -3482,8 +3477,7 @@
                                                             <exclude reference="Cmo-5U-38c"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="10" y="0.0" width="230" height="40"/>
+                                                    <variation key="heightClass=regular-widthClass=compact">
                                                         <mask key="constraints">
                                                             <include reference="Cmo-5U-38c"/>
                                                         </mask>
@@ -3713,6 +3707,9 @@
                                 <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="18"/>
                                 <color key="textColor" red="0.035294117649999998" green="0.1176470588" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="29" y="241" width="343" height="21"/>
+                                </variation>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bizrate_rewards_logo" translatesAutoresizingMaskIntoConstraints="NO" id="PWg-4W-ttz" userLabel="Logo Image View">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
@@ -3723,6 +3720,9 @@
                                 <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="12"/>
                                 <color key="textColor" red="0.035294117649999998" green="0.1176470588" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="157" y="184" width="86" height="14"/>
+                                </variation>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ftn-Z0-oMX" userLabel="Exit Button">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -5208,9 +5208,9 @@
                     </view>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
-                        <outlet property="privacyPolicyCheckBox" destination="Ckk-Ke-WUU" id="b8x-4p-fcb"/>
-                        <outlet property="termsCheckBox" destination="Zeh-Be-dPY" id="sCB-sj-6Kz"/>
-                        <outlet property="yearsCheckBox" destination="9sV-CC-Arb" id="Wxy-Va-bwk"/>
+                        <outletCollection property="checkboxes" destination="Ckk-Ke-WUU" id="dBD-hd-9AK"/>
+                        <outletCollection property="checkboxes" destination="Zeh-Be-dPY" id="o6V-fr-eR0"/>
+                        <outletCollection property="checkboxes" destination="9sV-CC-Arb" id="GZH-J3-xvL"/>
                         <segue destination="91g-M1-rmL" kind="show" identifier="сhooseSignUpTypeSegue" id="ce0-PP-ZX2"/>
                     </connections>
                 </viewController>

@@ -150,8 +150,8 @@ static NSInteger const kNotRegisteredErrorCode = 400.f;
                                } failure:^(NSError *error, BOOL isCanceled) {
                                    
                                    [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-#warning check if email is not registered
                                    
+#warning check if email is not registered
                                    NSInteger operationStatusCode = [[[error userInfo] objectForKey:AFNetworkingOperationFailingURLResponseErrorKey] statusCode];
                                    
                                    if (operationStatusCode == 400) {
@@ -160,7 +160,6 @@ static NSInteger const kNotRegisteredErrorCode = 400.f;
                                    } else {
                                        ShowFailureResponseAlertWithError(error);
                                    }
-                                   
                                }];
                            }
                            onFailure:^(NSString *errorString) {
@@ -201,7 +200,6 @@ static NSInteger const kNotRegisteredErrorCode = 400.f;
                 } else {
                     ShowFailureResponseAlertWithError(error);
                 }
-                
             }];
             
         } onFailure:^(NSError *error) {

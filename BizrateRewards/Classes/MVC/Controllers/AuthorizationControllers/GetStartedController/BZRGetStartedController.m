@@ -31,9 +31,7 @@ static NSString *const kChooseSignUpTypeSegueIdentifier = @"сhooseSignUpTypeSeg
 
 @property (weak, nonatomic) BZREditProfileContainerController *editProfileTableViewController;
 
-@property (weak, nonatomic) IBOutlet BZRCheckBoxButton *privacyPolicyCheckBox;
-@property (weak, nonatomic) IBOutlet BZRCheckBoxButton *termsCheckBox;
-@property (weak, nonatomic) IBOutlet BZRCheckBoxButton *yearsCheckBox;
+@property (strong, nonatomic) IBOutletCollection(BZRCheckBoxButton) NSArray *checkboxes;
 
 @property (strong, nonatomic) BZRUserProfile *temporaryProfile;
 
@@ -106,7 +104,7 @@ static NSString *const kChooseSignUpTypeSegueIdentifier = @"сhooseSignUpTypeSeg
                               emailField:self.editProfileTableViewController.emailField
                         dateOfBirthField:self.editProfileTableViewController.dateOfBirthField
                              genderField:self.editProfileTableViewController.genderField
-                           andCheckboxes:@[self.privacyPolicyCheckBox, self.termsCheckBox, self.yearsCheckBox]
+                           andCheckboxes:self.checkboxes
                                onSuccess:^{
                                    
                                    [weakSelf createNewTemporaryProfile];
@@ -129,7 +127,7 @@ static NSString *const kChooseSignUpTypeSegueIdentifier = @"сhooseSignUpTypeSeg
                               emailField:self.editProfileTableViewController.emailField
                         dateOfBirthField:self.editProfileTableViewController.dateOfBirthField
                              genderField:self.editProfileTableViewController.genderField
-                           andCheckboxes:@[self.privacyPolicyCheckBox, self.termsCheckBox, self.yearsCheckBox]
+                           andCheckboxes:self.checkboxes
                                onSuccess:^{
                                    
                                    [weakSelf createNewTemporaryProfile];
@@ -173,7 +171,7 @@ static NSString *const kChooseSignUpTypeSegueIdentifier = @"сhooseSignUpTypeSeg
 }
 
 /**
- *  Prefill user data (it could be the facebook profile or unregistered email.
+ *  Prefill user data (it could be the facebook profile or unregistered email).
  */
 - (void)prefillUserDataIfExists
 {
