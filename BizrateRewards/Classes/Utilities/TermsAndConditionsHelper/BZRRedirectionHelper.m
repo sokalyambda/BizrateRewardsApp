@@ -24,7 +24,9 @@ static NSString *const kIsResettingSuccess = @"isResettingSuccess";
 
 static NSString *const kAppURLPrefix = @"com.bizraterewards://";
 
-static NSString *const kTermsAndConditionsLink = @"http://www.bizraterewards.com/program-terms.html";
+static NSString *const kTermsLink = @"http://www.bizraterewards.com/mobile-terms.html";
+static NSString *const kPrivacyLink = @"http://www.bizraterewards.com/mobile-privacy.html";
+static NSString *const kUserAgreementLink = @"http://www.bizraterewards.com/program-terms.html";
 
 @implementation BZRRedirectionHelper
 
@@ -44,16 +46,16 @@ static NSString *const kTermsAndConditionsLink = @"http://www.bizraterewards.com
     
     switch (type) {
         case BZRConditionsTypePrivacyPolicy:
-            controller.navigationItem.title = NSLocalizedString(@"Privacy Policy", nil);
-            currentURLString = kTermsAndConditionsLink;
+            controller.navigationItem.title = LOCALIZED(@"Privacy Policy");
+            currentURLString = kPrivacyLink;
             break;
         case BZRConditionsTypeTermsAndConditions:
-            controller.navigationItem.title = NSLocalizedString(@"Terms and Conditions", nil);
-            currentURLString = kTermsAndConditionsLink;
+            controller.navigationItem.title = LOCALIZED(@"Terms and Conditions");
+            currentURLString = kTermsLink;
             break;
         case BZRConditionsTypeUserAgreement:
-            controller.navigationItem.title = NSLocalizedString(@"User Agreement", nil);
-            currentURLString = kTermsAndConditionsLink;
+            controller.navigationItem.title = LOCALIZED(@"User Agreement");
+            currentURLString = kUserAgreementLink;
             break;
             
         default:

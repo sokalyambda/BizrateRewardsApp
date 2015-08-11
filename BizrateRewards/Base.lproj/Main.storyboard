@@ -1350,7 +1350,7 @@
                                                         <color key="textColor" red="0.035294117647058823" green="0.11764705882352941" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2,000 pts" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bDh-Dk-8Fa" userLabel="Next Giftcard Points" customClass="BZRSurveyPointsValueLabel">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bDh-Dk-8Fa" userLabel="Next Giftcard Points" customClass="BZRSurveyPointsValueLabel">
                                                         <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                                         <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="16"/>
                                                         <color key="textColor" red="0.035294117647058823" green="0.11764705882352941" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
@@ -1358,7 +1358,7 @@
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VSs-f0-rwS" userLabel="Progress bar view" customClass="BZRProgressView">
                                                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                                        <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="0.35000000000000003" colorSpace="calibratedRGB"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="15" id="oI9-jh-esH">
                                                                 <variation key="heightClass=regular-widthClass=compact" constant="10"/>
@@ -1702,9 +1702,6 @@
                                                 <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
                                                 <color key="textColor" red="0.035294117647058823" green="0.11764705882352941" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
-                                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                    <rect key="frame" x="87" y="117" width="228" height="20"/>
-                                                </variation>
                                             </label>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1847,7 +1844,7 @@
                         <outlet property="congratsLabel" destination="3sa-3F-1Q0" id="Px5-cH-6Ey"/>
                         <outlet property="earnedPointsLabel" destination="Gjo-B0-UWy" id="R2j-63-l4K"/>
                         <outlet property="pointsForNextGiftCardLabel" destination="bDh-Dk-8Fa" id="tqe-nT-sGh"/>
-                        <outlet property="progressView" destination="VSs-f0-rwS" id="3sz-8f-SGk"/>
+                        <outlet property="progressView" destination="VSs-f0-rwS" id="Aht-6Y-oAI"/>
                         <outlet property="userAvatar" destination="CeF-qR-2A8" id="4ST-KA-LxL"/>
                         <outlet property="userNameLabel" destination="1Ai-Yl-jJq" id="ZU0-8d-BBs"/>
                         <segue destination="me8-VQ-Apc" kind="show" identifier="finishSurveySegue" id="LwG-8G-Iok"/>
@@ -2722,9 +2719,6 @@
                                 <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="18"/>
                                 <color key="textColor" red="0.08235294118" green="0.57647058819999997" blue="0.80392156859999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="134" y="200" width="133" height="21"/>
-                                </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Important: Your point balance will be included in every email we send you." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aOK-4C-Ink">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -2732,7 +2726,7 @@
                                 <color key="textColor" red="0.49411764705882355" green="0.49411764705882355" blue="0.49411764705882355" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="66" y="289" width="269" height="26"/>
+                                    <rect key="frame" x="59" y="299" width="282" height="30"/>
                                 </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Keep a look out for your next Bizrate Rewards Invite!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zy0-wb-H5H">
@@ -2741,7 +2735,7 @@
                                 <color key="textColor" red="0.035294117649999998" green="0.1176470588" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="84" y="345" width="233" height="33"/>
+                                    <rect key="frame" x="79" y="359" width="242" height="39"/>
                                 </variation>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j0a-mg-y37">
@@ -2788,13 +2782,13 @@
                                     </mask>
                                 </variation>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="500 points have deposited to your account!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NJt-n1-YE1" customClass="BZRTutorialDescriptionLabel">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NJt-n1-YE1" customClass="BZRTutorialDescriptionLabel">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                 <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
                                 <color key="textColor" red="0.035294117649999998" green="0.1176470588" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="91" y="226" width="218" height="33"/>
+                                    <rect key="frame" x="87" y="230" width="227" height="39"/>
                                 </variation>
                             </label>
                         </subviews>
@@ -2802,11 +2796,12 @@
                         <constraints>
                             <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="aOK-4C-Ink" secondAttribute="trailing" constant="40" id="32L-E3-MJ9"/>
                             <constraint firstItem="GGs-SH-79q" firstAttribute="leading" secondItem="vM4-Au-2aS" secondAttribute="leading" constant="20" id="4vF-on-FpY"/>
-                            <constraint firstItem="aOK-4C-Ink" firstAttribute="top" secondItem="NJt-n1-YE1" secondAttribute="bottom" constant="20" id="6Dg-i9-qQx">
+                            <constraint firstItem="aOK-4C-Ink" firstAttribute="top" relation="greaterThanOrEqual" secondItem="NJt-n1-YE1" secondAttribute="bottom" constant="20" id="6Dg-i9-qQx">
                                 <variation key="heightClass=regular-widthClass=compact" constant="30"/>
                             </constraint>
                             <constraint firstItem="NJt-n1-YE1" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="vM4-Au-2aS" secondAttribute="leadingMargin" constant="50" id="8GU-Z3-shl"/>
                             <constraint firstItem="GGs-SH-79q" firstAttribute="top" secondItem="nLm-5e-r6O" secondAttribute="bottom" constant="50" id="EHO-yo-zAf"/>
+                            <constraint firstItem="aOK-4C-Ink" firstAttribute="top" secondItem="NJt-n1-YE1" secondAttribute="bottom" priority="999" constant="30" id="FjO-KE-6BM"/>
                             <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="Zy0-wb-H5H" secondAttribute="trailing" constant="45" id="HBl-ME-POX"/>
                             <constraint firstItem="aOK-4C-Ink" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="vM4-Au-2aS" secondAttribute="leadingMargin" constant="40" id="Kdi-Pv-amA"/>
                             <constraint firstItem="xYn-8N-RVZ" firstAttribute="top" secondItem="j0a-mg-y37" secondAttribute="bottom" id="PFi-kG-tjw"/>
@@ -2844,28 +2839,29 @@
                                 <exclude reference="NJt-n1-YE1"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="TdI-SP-dQn"/>
+                                <exclude reference="kSY-Z7-gQ0"/>
+                                <exclude reference="4vF-on-FpY"/>
+                                <exclude reference="EHO-yo-zAf"/>
+                                <exclude reference="Vex-KN-RVl"/>
                                 <exclude reference="WOj-tW-jWO"/>
                                 <exclude reference="vIk-kg-D6H"/>
                                 <exclude reference="8GU-Z3-shl"/>
                                 <exclude reference="ZWE-hg-gek"/>
                                 <exclude reference="w1R-BI-oMI"/>
                                 <exclude reference="wmY-Xk-ZKd"/>
+                                <exclude reference="32L-E3-MJ9"/>
+                                <exclude reference="6Dg-i9-qQx"/>
+                                <exclude reference="FjO-KE-6BM"/>
+                                <exclude reference="Kdi-Pv-amA"/>
+                                <exclude reference="rxj-XD-9SV"/>
                                 <exclude reference="HBl-ME-POX"/>
                                 <exclude reference="chX-A4-OaE"/>
                                 <exclude reference="iFq-Mo-EcX"/>
                                 <exclude reference="nql-Yg-u16"/>
-                                <exclude reference="32L-E3-MJ9"/>
-                                <exclude reference="6Dg-i9-qQx"/>
-                                <exclude reference="Kdi-Pv-amA"/>
-                                <exclude reference="rxj-XD-9SV"/>
-                                <exclude reference="PFi-kG-tjw"/>
                                 <exclude reference="XN9-j5-BLz"/>
                                 <exclude reference="wMY-Um-UQY"/>
-                                <exclude reference="TdI-SP-dQn"/>
-                                <exclude reference="kSY-Z7-gQ0"/>
-                                <exclude reference="4vF-on-FpY"/>
-                                <exclude reference="EHO-yo-zAf"/>
-                                <exclude reference="Vex-KN-RVl"/>
+                                <exclude reference="PFi-kG-tjw"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -2879,28 +2875,29 @@
                                 <include reference="NJt-n1-YE1"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="TdI-SP-dQn"/>
+                                <include reference="kSY-Z7-gQ0"/>
+                                <include reference="4vF-on-FpY"/>
+                                <include reference="EHO-yo-zAf"/>
+                                <include reference="Vex-KN-RVl"/>
                                 <include reference="WOj-tW-jWO"/>
                                 <include reference="vIk-kg-D6H"/>
                                 <include reference="8GU-Z3-shl"/>
                                 <include reference="ZWE-hg-gek"/>
                                 <include reference="w1R-BI-oMI"/>
                                 <include reference="wmY-Xk-ZKd"/>
+                                <include reference="32L-E3-MJ9"/>
+                                <include reference="6Dg-i9-qQx"/>
+                                <include reference="FjO-KE-6BM"/>
+                                <include reference="Kdi-Pv-amA"/>
+                                <include reference="rxj-XD-9SV"/>
                                 <include reference="HBl-ME-POX"/>
                                 <include reference="chX-A4-OaE"/>
                                 <include reference="iFq-Mo-EcX"/>
                                 <include reference="nql-Yg-u16"/>
-                                <include reference="32L-E3-MJ9"/>
-                                <include reference="6Dg-i9-qQx"/>
-                                <include reference="Kdi-Pv-amA"/>
-                                <include reference="rxj-XD-9SV"/>
-                                <include reference="PFi-kG-tjw"/>
                                 <include reference="XN9-j5-BLz"/>
                                 <include reference="wMY-Um-UQY"/>
-                                <include reference="TdI-SP-dQn"/>
-                                <include reference="kSY-Z7-gQ0"/>
-                                <include reference="4vF-on-FpY"/>
-                                <include reference="EHO-yo-zAf"/>
-                                <include reference="Vex-KN-RVl"/>
+                                <include reference="PFi-kG-tjw"/>
                             </mask>
                         </variation>
                     </view>
@@ -2922,7 +2919,7 @@
                         <viewControllerLayoutGuide type="bottom" id="mT7-Dp-dqS"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="IKJ-8B-pqg">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="k3C-eE-iRs" userLabel="Gift Cards Collection View">
@@ -2942,7 +2939,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="197" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ar9-kq-DPC" userLabel="Gift Card Image">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ar9-kq-DPC" userLabel="Gift Card Image">
                                                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                                 </imageView>
                                             </subviews>
@@ -2981,6 +2978,9 @@
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="0.0" y="96" width="400" height="704"/>
+                                </variation>
                                 <connections>
                                     <outlet property="dataSource" destination="r0U-fc-af4" id="DS0-yc-fdu"/>
                                     <outlet property="delegate" destination="r0U-fc-af4" id="FZW-bt-yXE"/>
@@ -2991,6 +2991,9 @@
                                 <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
                                 <color key="textColor" red="0.035294117649999998" green="0.1176470588" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="149" y="40" width="102" height="17"/>
+                                </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Earned points can be exchanget for giftcards at these stores" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.25000000000000006" translatesAutoresizingMaskIntoConstraints="NO" id="uGX-co-iD3" customClass="BZRSurveyRemarkLabel">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -3005,7 +3008,8 @@
                                         <exclude reference="puT-4I-8kk"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact">
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="16" y="62" width="368" height="13"/>
                                     <mask key="constraints">
                                         <include reference="puT-4I-8kk"/>
                                     </mask>

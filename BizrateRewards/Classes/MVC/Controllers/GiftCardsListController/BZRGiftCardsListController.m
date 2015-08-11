@@ -51,9 +51,12 @@
     return cell;
 }
 
-//-(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    return CGSizeMake(collectionView.bounds.size.width/2, 50.f);
-//}
+-(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@"%@", NSStringFromCGSize(CGSizeMake(collectionView.bounds.size.width/2.f, 100.f)));
+    NSLog(@"collection view bounds %@", NSStringFromCGRect(collectionView.bounds));
+    
+    return CGSizeMake(collectionView.bounds.size.width/2.f - 10.f, 100.f);
+}
 
 @end

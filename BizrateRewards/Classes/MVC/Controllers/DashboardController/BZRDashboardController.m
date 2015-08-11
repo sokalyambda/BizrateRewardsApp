@@ -204,15 +204,7 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
  */
 - (void)updateProgressView
 {
-    WEAK_SELF;
-    [self.progressView recalculateProgressWithCurrentPoints:self.currentProfile.pointsAmount requiredPoints:self.currentProfile.pointsRequired withCompletion:^(BOOL maxPointsEarned) {
-        
-        if (maxPointsEarned) {
-            weakSelf.congratsLabel.text = LOCALIZED(@"Awesome! You have earned a gift card!! We will email you with details how to choose a card and redeem your points.");
-        } else {
-            weakSelf.congratsLabel.text = LOCALIZED(@"Congrats! You are getting close to receiving your first gift card!");
-        }
-    }];
+    [self.progressView recalculateProgressWithCurrentPoints:self.currentProfile.pointsAmount requiredPoints:self.currentProfile.pointsRequired withCompletion:nil];
 }
 
 #pragma mark - Navigation

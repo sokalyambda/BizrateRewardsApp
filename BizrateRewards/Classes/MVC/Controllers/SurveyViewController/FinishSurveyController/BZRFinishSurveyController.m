@@ -33,7 +33,7 @@
 - (NSString *)obtainedPointsText
 {
     if (!_obtainedPointsText) {
-        _obtainedPointsText = NSLocalizedString(@"points have deposited to your account!", nil);
+        _obtainedPointsText = LOCALIZED(@"points have deposited to your account!");
     }
     return _obtainedPointsText;
 }
@@ -65,7 +65,7 @@
 {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:YES];
-    [self setupObtainedPointsText];
+//    [self setupObtainedPointsText];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -108,7 +108,14 @@
 - (void)recalculateProgress
 {
     NSInteger updatedPoints = self.currentProfile.pointsAmount + self.passedSurvey.surveyPoints;
-    [self.progressView recalculateProgressWithCurrentPoints:updatedPoints requiredPoints: self.currentProfile.pointsRequired withCompletion:nil];
+    WEAK_SELF;
+    [self.progressView recalculateProgressWithCurrentPoints:updatedPoints requiredPoints: self.currentProfile.pointsRequired withCompletion:^(BOOL maxPointsEarned) {
+        if (maxPointsEarned) {
+            weakSelf.obtainedPointsLabel.text = LOCALIZED(@"Awesome! You have earned a gift card!! We will email you with details how to choose a card and redeem your points.");
+        } else {
+            [weakSelf setupObtainedPointsText];
+        }
+    }];
 }
 
 @end
