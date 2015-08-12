@@ -88,25 +88,27 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
 
 - (IBAction)seeAllGiftCardsClick:(id)sender
 {
-    WEAK_SELF;
-    [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
-    [BZRProjectFacade getFeaturedGiftCardsOnSuccess:^(NSArray *giftCards) {
-        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-        
-        BZRGiftCardsListController *controller = [weakSelf.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRGiftCardsListController class])];
-        controller.navigationItem.title = NSLocalizedString(@"Rewards", nil);
-        
-        if (giftCards.count) {
-            controller.giftCards = giftCards;
-            [weakSelf.navigationController pushViewController:controller animated:YES];
-        } else {
-            ShowAlert(NSLocalizedString(@"There are no gift cards at current time", nil));
-            return;
-        }
-        
-    } onFailure:^(NSError *error, BOOL isCanceled) {
-        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-    }];
+//    WEAK_SELF;
+//    [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
+//    [BZRProjectFacade getFeaturedGiftCardsOnSuccess:^(NSArray *giftCards) {
+//        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+//
+//        if (giftCards.count) {
+//            BZRGiftCardsListController *controller = [weakSelf.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRGiftCardsListController class])];
+//            controller.navigationItem.title = NSLocalizedString(@"Rewards", nil);
+//            controller.giftCards = giftCards;
+//            [weakSelf.navigationController pushViewController:controller animated:YES];
+//        } else {
+//            ShowAlert(NSLocalizedString(@"There are no gift cards at current time", nil));
+//            return;
+//        }
+//        
+//    } onFailure:^(NSError *error, BOOL isCanceled) {
+//        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+//    }];
+    BZRGiftCardsListController *controller = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRGiftCardsListController class])];
+    controller.navigationItem.title = NSLocalizedString(@"Rewards", nil);
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 - (IBAction)accountSettingsClick:(id)sender

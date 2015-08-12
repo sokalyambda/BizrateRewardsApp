@@ -107,11 +107,8 @@ static NSString *const kEditProfileContainerSegueIdentifier = @"editProfileConta
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     
     //create custom 'Done' button
-    self.doneButton = [BZRSerialViewConstructor customDoneButtonForController:self withAction:@selector(doneClick:)];
-    
-    //set 'Cancel' title by default, because there are no changes for first view appearance
-    [((UIButton *)self.doneButton.customView) setTitle:LOCALIZED(@"Close") forState:UIControlStateNormal];
-    
+    self.doneButton = [BZRSerialViewConstructor customButtonWithTitle:LOCALIZED(@"Close") forController:self withAction:@selector(doneClick:)];
+
     //set right bar button item
     self.navigationItem.rightBarButtonItem = self.doneButton;
     

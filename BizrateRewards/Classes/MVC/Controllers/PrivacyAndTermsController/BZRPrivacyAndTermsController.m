@@ -8,9 +8,13 @@
 
 #import "BZRPrivacyAndTermsController.h"
 
+#import "BZRSerialViewConstructor.h"
+
 @interface BZRPrivacyAndTermsController ()<UIWebViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
+
+@property (strong, nonatomic) UIBarButtonItem *closeButton;
 
 @end
 
@@ -27,7 +31,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    [self customizeNavigationItem];
 }
 
 #pragma mark - Actions
@@ -36,6 +40,27 @@
 {
     NSURLRequest *currentRequest = [NSURLRequest requestWithURL:self.currentURL];
     [self.webView loadRequest:currentRequest];
+}
+
+- (void)customizeNavigationItem
+{
+    //show navigation bar
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    
+    //create custom 'Done' button
+    self.closeButton = [BZRSerialViewConstructor customButtonWithTitle:LOCALIZED(@"Close") forController:self withAction:@selector(closeClicik:)];
+    
+    //set right bar button item
+    self.navigationItem.rightBarButtonItem = self.closeButton;
+    
+    //remove back button (custom and system)
+    self.navigationItem.leftBarButtonItem = nil;
+    self.navigationItem.hidesBackButton = YES;
+}
+
+- (void)closeClicik:(id)sender
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - UIWebViewDelegate
