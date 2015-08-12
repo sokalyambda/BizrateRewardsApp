@@ -3,6 +3,110 @@
 <plist version="1.0">
 <array>
 	<dict>
+		<key>INTERNAL_SERVER_ERROR</key>
+		<string>Internal server error</string>
+	</dict>
+	<dict>
+		<key>PASSWORD_RESET_INVALID</key>
+		<string>This password reset request is no longer valid.</string>
+	</dict>
+	<dict>
+		<key>PASSWORD_RESET_REJECTED</key>
+		<string>This password reset request is no longer valid.</string>
+	</dict>
+	<dict>
+		<key>PASSWORD_ALREADY_CONFIRMED</key>
+		<string>This password has already been confirmed previously.</string>
+	</dict>
+	<dict>
+		<key>PASSWORD_RESET_ATTEMPT_INVALID</key>
+		<string>Invalid password reset attempt.</string>
+	</dict>
+	<dict>
+		<key>DEVICE_DETAILS_INVALID</key>
+		<string>Device details are invalid.</string>
+	</dict>
+	<dict>
+		<key>DEVICE_TOKEN_REQUIRED</key>
+		<string>Device token is required.</string>
+	</dict>
+	<dict>
+		<key>DEVICE_UID_REQUIRED</key>
+		<string>Device UID is required.</string>
+	</dict>
+	<dict>
+		<key>USER_NOT_FOUND</key>
+		<string>User not found.</string>
+	</dict>
+	<dict>
+		<key>ACCESS_TOKEN_REQUIRED</key>
+		<string>Facebook access token is required.</string>
+	</dict>
+	<dict>
+		<key>FACEBOOK_DETAILS_INVALID</key>
+		<string>Facebook details are invalid.</string>
+	</dict>
+	<dict>
+		<key>USER_DETAILS_INVALID</key>
+		<string>User details are invalid.</string>
+	</dict>
+	<dict>
+		<key>FACEBOOK_ACCESS_TOKEN_INVALID</key>
+		<string>Facebook access token is invalid.</string>
+	</dict>
+	<dict>
+		<key>EVENT_TYPE_INVALID_ENTRY</key>
+		<string>Event type must be ENTRY or EXIT.</string>
+	</dict>
+	<dict>
+		<key>EVENT_TYPE_REQUIRED</key>
+		<string>Event type is required</string>
+	</dict>
+	<dict>
+		<key>REF_EYC_CUSTOMER_ID_REQUIRED</key>
+		<string>Reference EYC Customer Id is required</string>
+	</dict>
+	<dict>
+		<key>LOCATION_ID_INVALID</key>
+		<string>Invalid location id provided.</string>
+	</dict>
+	<dict>
+		<key>LONGITUDE_REQUIRED</key>
+		<string>Longitude is required.</string>
+	</dict>
+	<dict>
+		<key>LATITUDE_REQUIRED</key>
+		<string>Latitude is required.</string>
+	</dict>
+	<dict>
+		<key>LOCATION_ID_REQUIRED</key>
+		<string>Location Id is required.</string>
+	</dict>
+	<dict>
+		<key>LOCATION_REQUIRED</key>
+		<string>Location is required.</string>
+	</dict>
+	<dict>
+		<key>EMAIL_REQUIRED</key>
+		<string>Email is required.</string>
+	</dict>
+	<dict>
+		<key>LASTNAME_REQUIRED</key>
+		<string>Lastname is required.</string>
+	</dict>
+	<dict>
+		<key>FIRSTNAME_REQUIRED</key>
+		<string>Firstname is required.</string>
+	</dict>
+	<dict>
+		<key>PASSWORD_OR_TOKEN_REQUIRED</key>
+		<string>Either a password or token is required.</string>
+	</dict>
+	<dict>
+		<key>PASSWORD_REQUIRED</key>
+		<string>Password is required.</string>
+	</dict>
+	<dict>
 		<key>EMAIL_ALREADY_REGISTERED</key>
 		<string>An account with this email address already exists.</string>
 	</dict>
