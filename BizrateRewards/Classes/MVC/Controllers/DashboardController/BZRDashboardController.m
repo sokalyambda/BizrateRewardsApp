@@ -191,7 +191,7 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
     
         [weakSelf updateUserInformation];
         //Register app for push notifications, if success - send device data to server
-//        [BZRPushNotifiactionService registerApplicationForPushNotifications:[UIApplication sharedApplication]];
+        [BZRPushNotifiactionService registerApplicationForPushNotifications:[UIApplication sharedApplication]];
         
         weakSelf.updateNeeded = NO;
     } onFailure:^(NSError *error, BOOL isCanceled) {
