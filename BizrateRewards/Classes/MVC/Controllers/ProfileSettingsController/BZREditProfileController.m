@@ -59,7 +59,7 @@ static NSString *const kEditProfileContainerSegueIdentifier = @"editProfileConta
 - (void)setProfileChanged:(BOOL)profileChanged
 {
     _profileChanged = profileChanged;
-    [((UIButton *)self.doneButton.customView) setTitle:_profileChanged ? LOCALIZED(@"Done") : LOCALIZED(@"Cancel") forState:UIControlStateNormal];
+    [((UIButton *)self.doneButton.customView) setTitle:_profileChanged ? LOCALIZED(@"Save") : LOCALIZED(@"Close") forState:UIControlStateNormal];
 }
 
 #pragma mark - View Lifecycle
@@ -110,7 +110,7 @@ static NSString *const kEditProfileContainerSegueIdentifier = @"editProfileConta
     self.doneButton = [BZRSerialViewConstructor customDoneButtonForController:self withAction:@selector(doneClick:)];
     
     //set 'Cancel' title by default, because there are no changes for first view appearance
-    [((UIButton *)self.doneButton.customView) setTitle:LOCALIZED(@"Cancel") forState:UIControlStateNormal];
+    [((UIButton *)self.doneButton.customView) setTitle:LOCALIZED(@"Close") forState:UIControlStateNormal];
     
     //set right bar button item
     self.navigationItem.rightBarButtonItem = self.doneButton;
