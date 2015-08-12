@@ -87,7 +87,16 @@ static NSString *const kPushPermissionsLastState = @"pushPermissionLastState";
         return;
     }
     if (deviceToken.length && [BZRProjectFacade isUserSessionValid]) {
+        
         [BZRStorageManager sharedStorage].deviceToken = deviceToken;
+        
+        //Uncomment below lines to show the progress hud added to main window.
+        /*
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
+        hud.labelText = LOCALIZED(@"Sending device data...");
+        [MBProgressHUD hideAllHUDsForView:[UIApplication sharedApplication].keyWindow animated:YES];
+         */
+        
         [BZRProjectFacade sendDeviceDataOnSuccess:^(BOOL isSuccess) {
             
         } onFailure:^(NSError *error, BOOL isCanceled) {
