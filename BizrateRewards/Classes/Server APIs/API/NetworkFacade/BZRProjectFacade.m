@@ -15,6 +15,7 @@
 #import "BZRApplicationToken.h"
 
 #import "BZRFacebookService.h"
+#import "BZRErrorHandler.h"
 
 #import "BZRKeychainHandler.h"
 
@@ -81,7 +82,7 @@ static BZRSessionManager *sharedHTTPClient = nil;
 + (BZRNetworkOperation *)signInWithEmail:(NSString*)email
                              password:(NSString*)password
                               success:(void (^)(BOOL success))success
-                              failure:(void (^)(NSError *error, BOOL isCanceled))failure
+                              failure:(void (^)(NSError *error, BOOL isCanceled, BOOL emailRegistered))failure
 {
     BZRSignInRequest *request = [[BZRSignInRequest alloc] initWithEmail:email andPassword:password];
     
@@ -101,10 +102,14 @@ static BZRSessionManager *sharedHTTPClient = nil;
             success(YES);
         }
         
-    } failure:^(BZRNetworkOperation *operation ,NSError *error, BOOL isCanceled) {
-        //ShowFailureResponseAlertWithError(error);
+    } failure:^(BZRNetworkOperation *operation, NSError *error, BOOL isCanceled) {
+        
+        BOOL isEmailRegistered = [BZRErrorHandler isEmailRegisteredFromError:error];
+        if (isEmailRegistered) {
+            ShowFailureResponseAlertWithError(error);
+        }
         if (failure) {
-            failure(error, isCanceled);
+            failure(error, isCanceled, isEmailRegistered);
         }
     }];
     return operation;
@@ -446,7 +451,7 @@ static BZRSessionManager *sharedHTTPClient = nil;
 /******* FaceBook *******/
 
 + (BZRNetworkOperation *)signInWithFacebookOnSuccess:(void (^)(BOOL isSuccess))success
-                                           onFailure:(void (^)(NSError *error, BOOL isCanceled))failure
+                                           onFailure:(void (^)(NSError *error, BOOL isCanceled, BOOL userExists))failure
 {
     __block BZRNetworkOperation* operation;
     
@@ -468,14 +473,19 @@ static BZRSessionManager *sharedHTTPClient = nil;
             }
             
         } failure:^(BZRNetworkOperation *operation, NSError *error, BOOL isCanceled) {
-//            ShowFailureResponseAlertWithError(error);
+            
+            BOOL isFacebookUserExists = [BZRErrorHandler isFacebookUserExistsFromError:error];
+            if (isFacebookUserExists) {
+                ShowFailureResponseAlertWithError(error);
+            }
             if (failure) {
-                failure(error, isCanceled);
+                failure(error, isCanceled, isFacebookUserExists);
             }
         }];
     } onFailure:^(NSError *error, BOOL isCanceled) {
+        BOOL isFacebookUserExists = [BZRErrorHandler isFacebookUserExistsFromError:error];
         if (failure) {
-            failure(error, isCanceled);
+            failure(error, isCanceled, isFacebookUserExists);
         }
     }];
     return operation;

@@ -12,4 +12,7 @@
 
 + (BOOL)errorIsNetworkError:(NSError *)error;
 
++ (BOOL)isEmailRegisteredFromError:(NSError *)error;
++ (BOOL)isFacebookUserExistsFromError:(NSError *)error;
+
 @end

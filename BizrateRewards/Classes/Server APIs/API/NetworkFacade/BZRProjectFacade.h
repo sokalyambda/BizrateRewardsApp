@@ -31,7 +31,7 @@
 + (BZRNetworkOperation*)signInWithEmail:(NSString*)email
                               password:(NSString*)password
                                success:(void (^)(BOOL success))success
-                               failure:(void (^)(NSError *error, BOOL isCanceled))failure;
+                               failure:(void (^)(NSError *error, BOOL isCanceled, BOOL emailRegistered))failure;
 
 + (BZRNetworkOperation*)signUpWithUserFirstName:(NSString *)firstName
                                 andUserLastName:(NSString *)lastName
@@ -77,7 +77,7 @@
 
 //Facebook
 + (BZRNetworkOperation *)signInWithFacebookOnSuccess:(void (^)(BOOL isSuccess))success
-                                           onFailure:(void (^)(NSError *error, BOOL isCanceled))failure;
+                                           onFailure:(void (^)(NSError *error, BOOL isCanceled, BOOL userExists))failure;
 
 + (BZRNetworkOperation *)signUpWithFacebookWithUserFirstName:(NSString *)firstName
                                              andUserLastName:(NSString *)lastName

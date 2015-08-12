@@ -71,8 +71,7 @@ static NSString *const kCurrentPicker = @"currentPicker";
         _birthDatePicker = [BZRBirthDatePickerView makeFromXibWithFileOwner:self];
         _birthDatePicker.delegate = self;
         
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShowNotification:) name:UIKeyboardWillShowNotification object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHideNotification:) name:UIKeyboardWillHideNotification object:nil];
+        [self registerForKeyboardNotifications];
     }
     return self;
 }
@@ -131,6 +130,15 @@ static NSString *const kCurrentPicker = @"currentPicker";
 - (BOOL)isPickerExists:(UIView *)pickerView
 {
     return [self.parentView.subviews containsObject:pickerView];
+}
+
+/**
+ *  Registering for keyboard appearance notifications
+ */
+- (void)registerForKeyboardNotifications
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShowNotification:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHideNotification:) name:UIKeyboardWillHideNotification object:nil];
 }
 
 #pragma mark - CAAnimation

@@ -20,9 +20,6 @@
 
 static NSString *const kDashboardSegueIdentifier = @"dashboardSegue";
 
-//const for auth error code
-static NSInteger const kNotRegisteredErrorCode = 400.f;
-
 @interface BZRSignInController ()
 
 @property (weak, nonatomic) IBOutlet UIView *incorrectEmailView;
@@ -147,18 +144,13 @@ static NSInteger const kNotRegisteredErrorCode = 400.f;
                                    }
                                    [weakSelf performSegueWithIdentifier:kDashboardSegueIdentifier sender:weakSelf];
                                    
-                               } failure:^(NSError *error, BOOL isCanceled) {
+                               } failure:^(NSError *error, BOOL isCanceled, BOOL emailRegistered) {
                                    
                                    [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
                                    
-#warning check if email is not registered
-                                   NSInteger operationStatusCode = [[[error userInfo] objectForKey:AFNetworkingOperationFailingURLResponseErrorKey] statusCode];
-                                   
-                                   if (operationStatusCode == 400) {
+                                   if (!emailRegistered) {
                                        [weakSelf.incorrectEmailView setHidden:NO];
                                        weakSelf.userNameField.errorImageName = kEmailErrorIconName;
-                                   } else {
-                                       ShowFailureResponseAlertWithError(error);
                                    }
                                }];
                            }
@@ -187,18 +179,14 @@ static NSInteger const kNotRegisteredErrorCode = 400.f;
                 //go to dashboard
                 [weakSelf performSegueWithIdentifier:kDashboardSegueIdentifier sender:weakSelf];
                 
-            } onFailure:^(NSError *error, BOOL isCanceled) {
+            } onFailure:^(NSError *error, BOOL isCanceled, BOOL userExists) {
                 [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
                 
-                NSInteger operationStatusCode = [[[error userInfo] objectForKey:AFNetworkingOperationFailingURLResponseErrorKey] statusCode];
-                
                 //Check whether the user has not already signed up
-                if (operationStatusCode == 400) {
+                if (!userExists) {
                     BZRGetStartedController *controller = [weakSelf.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRGetStartedController class])];
                     controller.redirectedFromFacebookSignInFlow = YES;
                     [weakSelf.navigationController pushViewController:controller animated:YES];
-                } else {
-                    ShowFailureResponseAlertWithError(error);
                 }
             }];
             

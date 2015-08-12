@@ -129,7 +129,7 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
             controller.currentSurvey = [surveys firstObject];
             [weakSelf.navigationController pushViewController:controller animated:YES];
         } else {
-            ShowAlert(NSLocalizedString(@"There are no surveys for you", nil));
+            ShowAlert(LOCALIZED(@"There are no surveys for you"));
             return;
         }
     } onFailure:^(NSError *error, BOOL isCanceled) {

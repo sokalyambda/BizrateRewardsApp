@@ -158,7 +158,7 @@ static NSString *const kStartTutorialSegueIdentirier = @"startTutorialSegue";
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         [weakSelf goToDashboardController];
         
-    } failure:^(NSError *error, BOOL isCanceled) {
+    } failure:^(NSError *error, BOOL isCanceled, BOOL emailRegistered) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         [weakSelf goToFinishTutorialController];
     }];
@@ -176,9 +176,11 @@ static NSString *const kStartTutorialSegueIdentirier = @"startTutorialSegue";
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         [weakSelf goToDashboardController];
         
-    } onFailure:^(NSError *error, BOOL isCanceled) {
+    } onFailure:^(NSError *error, BOOL isCanceled, BOOL userExists) {
+        
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         [weakSelf goToFinishTutorialController];
+        
     }];
 }
 
