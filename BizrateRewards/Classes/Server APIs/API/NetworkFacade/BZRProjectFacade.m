@@ -302,6 +302,37 @@ static BZRSessionManager *sharedHTTPClient = nil;
     return operation;
 }
 
++ (BZRNetworkOperation *)getPointsForNextSurveyOnSuccess:(void(^)(NSInteger pointsForNextSurvey))success onFailure:(void(^)(NSError *error, BOOL isCanceled))failure
+{
+    __block BZRNetworkOperation* operation;
+    
+    [self validateSessionWithType:BZRSessionTypeUser onSuccess:^(BOOL isSuccess) {
+        
+        BZRGetPointsForNextSurveyRequest *request = [[BZRGetPointsForNextSurveyRequest alloc] init];
+        
+        operation = [[self  HTTPClient] enqueueOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
+            
+            BZRGetPointsForNextSurveyRequest *request = (BZRGetPointsForNextSurveyRequest*)operation.networkRequest;
+            
+            if (success) {
+                success(request.pointsForNextSurvey);
+            }
+            
+        } failure:^(BZRNetworkOperation *operation ,NSError *error, BOOL isCanceled) {
+            ShowFailureResponseAlertWithError(error);
+            if (failure) {
+                failure(error, isCanceled);
+            }
+        }];
+    } onFailure:^(NSError *error, BOOL isCanceled) {
+        if (failure) {
+            failure(error, isCanceled);
+        }
+    }];
+    
+    return operation;
+}
+
 //Location Events
 + (BZRNetworkOperation *)sendGeolocationEvent:(BZRLocationEvent *)locationEvent onSuccess:(void (^)(BZRLocationEvent *locationEvent))success
                                     onFailure:(void (^)(NSError *error, BOOL isCanceled))failure

@@ -62,6 +62,8 @@
 + (BZRNetworkOperation*)getEligibleSurveysOnSuccess:(void (^)(NSArray *surveys))success
                                           onFailure:(void (^)(NSError *error, BOOL isCanceled))failure;
 
++ (BZRNetworkOperation *)getPointsForNextSurveyOnSuccess:(void(^)(NSInteger pointsForNextSurvey))success onFailure:(void(^)(NSError *error, BOOL isCanceled))failure;
+
 //Location Events
 + (BZRNetworkOperation *)sendGeolocationEvent:(BZRLocationEvent *)locationEvent onSuccess:(void (^)(BZRLocationEvent *locationEvent))success
                                     onFailure:(void (^)(NSError *error, BOOL isCanceled))failure;

@@ -18,8 +18,10 @@
 #import "BZRRoundedImageView.h"
 #import "BZRProgressView.h"
 #import "BZRSurveyPointsValueLabel.h"
+#import "BZRTutorialDescriptionLabel.h"
 
 #import "BZRPushNotifiactionService.h"
+#import "BZRSurveyService.h"
 #import "BZRProjectFacade.h"
 
 static NSString *const kAccountSettingsSegueIdentifier = @"accountSettingsSegueIdentifier";
@@ -32,6 +34,7 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
 @property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *earnedPointsLabel;
 @property (weak, nonatomic) IBOutlet BZRSurveyPointsValueLabel *pointsForNextGiftCardLabel;
+@property (weak, nonatomic) IBOutlet BZRTutorialDescriptionLabel *pointsForNextSurveyLabel;
 
 @property (strong, nonatomic) BZRStorageManager *storageManager;
 @property (strong, nonatomic) BZRUserProfile *currentProfile;
@@ -120,13 +123,14 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
 {
     WEAK_SELF;
     [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
-    [BZRProjectFacade getEligibleSurveysOnSuccess:^(NSArray *surveys) {
+    [BZRSurveyService getEligibleSurveysOnSuccess:^(NSArray *eligibleSurveys) {
+        
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         
         BZRSurveyViewController *controller = [weakSelf.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRSurveyViewController class])];
         
-        if (surveys.count) {
-            controller.currentSurvey = [surveys firstObject];
+        if (eligibleSurveys.count) {
+            controller.currentSurvey = [eligibleSurveys firstObject];
             [weakSelf.navigationController pushViewController:controller animated:YES];
         } else {
             ShowAlert(LOCALIZED(@"There are no surveys for you"));
@@ -180,13 +184,26 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [BZRProjectFacade getCurrentUserOnSuccess:^(BOOL isSuccess) {
         
-        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-    
-        [weakSelf updateUserInformation];
-        //Register app for push notifications, if success - send device data to server
-        [BZRPushNotifiactionService registerApplicationForPushNotifications:[UIApplication sharedApplication]];
+        [BZRSurveyService getPointsForNextSurveyOnSuccess:^(NSInteger pointsForNextSurvey) {
+            
+            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+            
+            if (!pointsForNextSurvey) {
+                weakSelf.pointsForNextSurveyLabel.text = LOCALIZED(@"Unfortunately, there are no eligible surveys now.");
+            } else {
+                [weakSelf setupPointsForNextSurveyTextWithPoints:pointsForNextSurvey];
+            }
+            
+            [weakSelf updateUserInformation];
+            //Register app for push notifications, if success - send device data to server
+            [BZRPushNotifiactionService registerApplicationForPushNotifications:[UIApplication sharedApplication]];
+            
+            weakSelf.updateNeeded = NO;
+            
+        } onFailure:^(NSError *error, BOOL isCanceled) {
+            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        }];
         
-        weakSelf.updateNeeded = NO;
     } onFailure:^(NSError *error, BOOL isCanceled) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
     }];
@@ -198,6 +215,16 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
 - (void)updateProgressView
 {
     [self.progressView recalculateProgressWithCurrentPoints:self.currentProfile.pointsAmount requiredPoints:self.currentProfile.pointsRequired withCompletion:nil];
+}
+
+/**
+ *  Setup points for next survey
+ *
+ *  @param points Points than should be set
+ */
+- (void)setupPointsForNextSurveyTextWithPoints:(NSInteger)points
+{
+    self.pointsForNextSurveyLabel.text = [NSString localizedStringWithFormat:LOCALIZED(@"Earn %li points for the next survey"), points];
 }
 
 @end

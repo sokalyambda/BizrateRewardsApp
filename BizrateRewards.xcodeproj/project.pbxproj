@@ -103,6 +103,8 @@
 		58AA306C1B7B81B100363119 /* Torrance exit.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 58AA30611B7B81B100363119 /* Torrance exit.gpx */; };
 		58AA306D1B7B81B100363119 /* Torrance.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 58AA30621B7B81B100363119 /* Torrance.gpx */; };
 		58AA306E1B7B81B100363119 /* Venice.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 58AA30631B7B81B100363119 /* Venice.gpx */; };
+		58AA30721B7B847000363119 /* BZRGetPointsForNextSurveyRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AA30711B7B847000363119 /* BZRGetPointsForNextSurveyRequest.m */; };
+		58AA30771B7B862D00363119 /* BZRSurveyService.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AA30761B7B862D00363119 /* BZRSurveyService.m */; };
 		58ACC06A1B3937010081E546 /* BZRStartTutorialController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ACC0691B3937010081E546 /* BZRStartTutorialController.m */; };
 		58ACC06D1B3937160081E546 /* BZRAutologinController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ACC06C1B3937160081E546 /* BZRAutologinController.m */; };
 		58ACC0761B395E6A0081E546 /* BZRPrivacyAndTermsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ACC0751B395E6A0081E546 /* BZRPrivacyAndTermsController.m */; };
@@ -344,6 +346,10 @@
 		58AA30611B7B81B100363119 /* Torrance exit.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = "Torrance exit.gpx"; path = "LocationFiles/Torrance exit.gpx"; sourceTree = "<group>"; };
 		58AA30621B7B81B100363119 /* Torrance.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = Torrance.gpx; path = LocationFiles/Torrance.gpx; sourceTree = "<group>"; };
 		58AA30631B7B81B100363119 /* Venice.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = Venice.gpx; path = LocationFiles/Venice.gpx; sourceTree = "<group>"; };
+		58AA30701B7B847000363119 /* BZRGetPointsForNextSurveyRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRGetPointsForNextSurveyRequest.h; path = GetPointsForNextSurveyRequest/BZRGetPointsForNextSurveyRequest.h; sourceTree = "<group>"; };
+		58AA30711B7B847000363119 /* BZRGetPointsForNextSurveyRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRGetPointsForNextSurveyRequest.m; path = GetPointsForNextSurveyRequest/BZRGetPointsForNextSurveyRequest.m; sourceTree = "<group>"; };
+		58AA30751B7B862D00363119 /* BZRSurveyService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRSurveyService.h; path = Classes/Services/ModelsServices/SurveyService/BZRSurveyService.h; sourceTree = "<group>"; };
+		58AA30761B7B862D00363119 /* BZRSurveyService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRSurveyService.m; path = Classes/Services/ModelsServices/SurveyService/BZRSurveyService.m; sourceTree = "<group>"; };
 		58ACC0681B3937010081E546 /* BZRStartTutorialController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRStartTutorialController.h; path = Classes/MVC/Controllers/TutorialViewControllers/PageContentController/BZRStartTutorialController.h; sourceTree = "<group>"; };
 		58ACC0691B3937010081E546 /* BZRStartTutorialController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRStartTutorialController.m; path = Classes/MVC/Controllers/TutorialViewControllers/PageContentController/BZRStartTutorialController.m; sourceTree = "<group>"; };
 		58ACC06B1B3937160081E546 /* BZRAutologinController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRAutologinController.h; path = Classes/MVC/Controllers/TutorialViewControllers/BaseTutorialController/BZRAutologinController.h; sourceTree = "<group>"; };
@@ -1079,6 +1085,7 @@
 		589889B81B654C78008684F3 /* Surveys */ = {
 			isa = PBXGroup;
 			children = (
+				58AA306F1B7B844200363119 /* GetPointsForNextSurveyRequest */,
 				589889B91B654C80008684F3 /* GetEligibleSurveysRequest */,
 			);
 			name = Surveys;
@@ -1465,6 +1472,32 @@
 			path = Classes/Libraries/OfferBeamSDK/Headers;
 			sourceTree = "<group>";
 		};
+		58AA306F1B7B844200363119 /* GetPointsForNextSurveyRequest */ = {
+			isa = PBXGroup;
+			children = (
+				58AA30701B7B847000363119 /* BZRGetPointsForNextSurveyRequest.h */,
+				58AA30711B7B847000363119 /* BZRGetPointsForNextSurveyRequest.m */,
+			);
+			name = GetPointsForNextSurveyRequest;
+			sourceTree = "<group>";
+		};
+		58AA30731B7B860000363119 /* ModelsServices */ = {
+			isa = PBXGroup;
+			children = (
+				58AA30741B7B860800363119 /* SurveyService */,
+			);
+			name = ModelsServices;
+			sourceTree = "<group>";
+		};
+		58AA30741B7B860800363119 /* SurveyService */ = {
+			isa = PBXGroup;
+			children = (
+				58AA30751B7B862D00363119 /* BZRSurveyService.h */,
+				58AA30761B7B862D00363119 /* BZRSurveyService.m */,
+			);
+			name = SurveyService;
+			sourceTree = "<group>";
+		};
 		58ACC05F1B3932840081E546 /* TutorialViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -1826,6 +1859,7 @@
 		58C770D91B5CCF6000E9031F /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				58AA30731B7B860000363119 /* ModelsServices */,
 				58BF35DF1B74930800699A63 /* MailComposeService */,
 				58D1E5D21B66423700347208 /* FacebookService */,
 				84A6124B1B5E30E6005E01A7 /* MixpanelService */,
@@ -2325,6 +2359,7 @@
 				585C32A71B63AA3F005BF07B /* BZRSessionManager.m in Sources */,
 				58A5BEBD1B414B1800B2BC27 /* BZRBorderedTextField.m in Sources */,
 				58ACC08B1B39A35D0081E546 /* BZRBaseAuthController.m in Sources */,
+				58AA30721B7B847000363119 /* BZRGetPointsForNextSurveyRequest.m in Sources */,
 				58BCCD9B1B6BB81700521496 /* BZRCustomURLHandler.m in Sources */,
 				58219F051B38A33E00A9541A /* UIViewController+fixOrientation.m in Sources */,
 				58219EFC1B38A30300A9541A /* BZRValidator.m in Sources */,
@@ -2347,6 +2382,7 @@
 				585C32AB1B63C82F005BF07B /* BZRRenewSessionTokenRequest.m in Sources */,
 				585813AE1B3C23840087AEE2 /* BZRSurvey.m in Sources */,
 				58B18C8C1B790D7200F13F53 /* BZRGetFeaturedGiftcards.m in Sources */,
+				58AA30771B7B862D00363119 /* BZRSurveyService.m in Sources */,
 				58D1E5D11B662EBD00347208 /* BZRSignInWithFacebookRequest.m in Sources */,
 				58C770E31B5CD08E00E9031F /* BZRTutorialDescriptionLabel.m in Sources */,
 				58BD59C41B6FC75100B6C5C4 /* BZRAlertFacade.m in Sources */,

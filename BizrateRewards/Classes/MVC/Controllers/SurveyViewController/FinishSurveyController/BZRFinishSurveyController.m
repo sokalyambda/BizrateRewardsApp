@@ -21,7 +21,6 @@
 
 @property (strong, nonatomic) BZRStorageManager *storageManager;
 
-@property (strong, nonatomic) NSString *obtainedPointsText;
 @property (strong, nonatomic) BZRUserProfile *currentProfile;
 
 @end
@@ -29,14 +28,6 @@
 @implementation BZRFinishSurveyController
 
 #pragma mark - Accessors
-
-- (NSString *)obtainedPointsText
-{
-    if (!_obtainedPointsText) {
-        _obtainedPointsText = LOCALIZED(@"points have deposited to your account!");
-    }
-    return _obtainedPointsText;
-}
 
 - (BZRStorageManager *)storageManager
 {
@@ -65,7 +56,6 @@
 {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:YES];
-//    [self setupObtainedPointsText];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -102,7 +92,7 @@
  */
 - (void)setupObtainedPointsText
 {
-    self.obtainedPointsLabel.text = [NSString stringWithFormat:@"%li %@", (long)self.passedSurvey.surveyPoints, self.obtainedPointsText];
+    self.obtainedPointsLabel.text = [NSString localizedStringWithFormat:LOCALIZED(@"%li points have deposited to your account!"), (long)self.passedSurvey.surveyPoints];
 }
 
 - (void)recalculateProgress
