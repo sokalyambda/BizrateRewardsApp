@@ -10,8 +10,6 @@
 
 @interface BZRBirthDatePickerView ()
 
-@property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
-
 @end
 
 @implementation BZRBirthDatePickerView

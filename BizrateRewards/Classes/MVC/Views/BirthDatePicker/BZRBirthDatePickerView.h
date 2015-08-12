@@ -12,6 +12,8 @@
 
 @property (weak, nonatomic) id<BZRBirthDatePickerDelegate> delegate;
 
+@property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
+
 @end
 
 @protocol BZRBirthDatePickerDelegate <NSObject>

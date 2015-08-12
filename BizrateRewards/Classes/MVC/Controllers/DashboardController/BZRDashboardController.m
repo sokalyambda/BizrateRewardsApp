@@ -18,7 +18,6 @@
 #import "BZRRoundedImageView.h"
 #import "BZRProgressView.h"
 #import "BZRSurveyPointsValueLabel.h"
-#import "BZRSurveyCongratsLabel.h"
 
 #import "BZRPushNotifiactionService.h"
 #import "BZRProjectFacade.h"
@@ -33,8 +32,6 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
 @property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *earnedPointsLabel;
 @property (weak, nonatomic) IBOutlet BZRSurveyPointsValueLabel *pointsForNextGiftCardLabel;
-@property (weak, nonatomic) IBOutlet BZRSurveyCongratsLabel *congratsLabel;
-
 
 @property (strong, nonatomic) BZRStorageManager *storageManager;
 @property (strong, nonatomic) BZRUserProfile *currentProfile;
@@ -93,7 +90,6 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
     [BZRProjectFacade getFeaturedGiftCardsOnSuccess:^(NSArray *giftCards) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         
-        
         BZRGiftCardsListController *controller = [weakSelf.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRGiftCardsListController class])];
         controller.navigationItem.title = NSLocalizedString(@"Rewards", nil);
         
@@ -107,10 +103,7 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
         
     } onFailure:^(NSError *error, BOOL isCanceled) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-        
     }];
-    
-//    [self performSegueWithIdentifier:kAllGiftCardsSegueIdentifier sender:self];
 }
 
 - (IBAction)accountSettingsClick:(id)sender
@@ -205,16 +198,6 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
 - (void)updateProgressView
 {
     [self.progressView recalculateProgressWithCurrentPoints:self.currentProfile.pointsAmount requiredPoints:self.currentProfile.pointsRequired withCompletion:nil];
-}
-
-#pragma mark - Navigation
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-//    if ([segue.identifier isEqualToString:kAllGiftCardsSegueIdentifier]) {
-//        BZRGiftCardsListController *controller = (BZRGiftCardsListController *)segue.destinationViewController;
-//        controller.navigationItem.title = NSLocalizedString(@"Rewards", nil);
-//    }
 }
 
 @end

@@ -107,6 +107,12 @@ static NSString *const kCurrentPicker = @"currentPicker";
 {
     self.dateResult = result;
     
+    //If current user exists - set his date of birth as date picker's date
+    NSDate *currentProfileDateOfBirth = [BZRStorageManager sharedStorage].currentProfile.dateOfBirth;
+    if (currentProfileDateOfBirth) {
+        [self.birthDatePicker.datePicker setDate:currentProfileDateOfBirth];
+    }
+    
     if ([self isPickerExists:self.commonPickerView]) {
         [self showHidePickerViewWithAnimation:self.commonPickerView];
     }
