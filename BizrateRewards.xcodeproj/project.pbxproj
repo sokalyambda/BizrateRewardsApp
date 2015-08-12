@@ -98,6 +98,7 @@
 		58ADC0E81B4BDCE400DF849F /* BZRSecondTutorialController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ADC0E71B4BDCE400DF849F /* BZRSecondTutorialController.m */; };
 		58AF4AF01B5BB6F10052C7E5 /* UIImagePickerController+AdjustStatusBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AF4AEF1B5BB6F10052C7E5 /* UIImagePickerController+AdjustStatusBar.m */; };
 		58AF4AF41B5C13A30052C7E5 /* BZRStatusBarManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AF4AF31B5C13A30052C7E5 /* BZRStatusBarManager.m */; };
+		58B05A5D1B7A2DDF0017CCE8 /* BZRProfileChangesObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B05A5C1B7A2DDF0017CCE8 /* BZRProfileChangesObserver.m */; };
 		58B18C751B78AB9200F13F53 /* libOfferBeamSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58B18C731B78AB9200F13F53 /* libOfferBeamSDK.a */; };
 		58B18C761B78AB9200F13F53 /* ModelOfferBeamSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 58B18C741B78AB9200F13F53 /* ModelOfferBeamSDK.bundle */; };
 		58B18C8C1B790D7200F13F53 /* BZRGetFeaturedGiftcards.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B18C8B1B790D7200F13F53 /* BZRGetFeaturedGiftcards.m */; };
@@ -345,6 +346,8 @@
 		58AF4AEF1B5BB6F10052C7E5 /* UIImagePickerController+AdjustStatusBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImagePickerController+AdjustStatusBar.m"; path = "Classes/Categories/UIImagePickerView/AdjustStatusBar/UIImagePickerController+AdjustStatusBar.m"; sourceTree = "<group>"; };
 		58AF4AF21B5C13A30052C7E5 /* BZRStatusBarManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRStatusBarManager.h; path = Classes/Utilities/StatusBarHandler/BZRStatusBarManager.h; sourceTree = "<group>"; };
 		58AF4AF31B5C13A30052C7E5 /* BZRStatusBarManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRStatusBarManager.m; path = Classes/Utilities/StatusBarHandler/BZRStatusBarManager.m; sourceTree = "<group>"; };
+		58B05A5B1B7A2DDF0017CCE8 /* BZRProfileChangesObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRProfileChangesObserver.h; path = Classes/Utilities/ProfileChangesObserver/BZRProfileChangesObserver.h; sourceTree = "<group>"; };
+		58B05A5C1B7A2DDF0017CCE8 /* BZRProfileChangesObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRProfileChangesObserver.m; path = Classes/Utilities/ProfileChangesObserver/BZRProfileChangesObserver.m; sourceTree = "<group>"; };
 		58B18C731B78AB9200F13F53 /* libOfferBeamSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libOfferBeamSDK.a; sourceTree = "<group>"; };
 		58B18C741B78AB9200F13F53 /* ModelOfferBeamSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ModelOfferBeamSDK.bundle; sourceTree = "<group>"; };
 		58B18C771B78ABA600F13F53 /* OB_DataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OB_DataManager.h; sourceTree = "<group>"; };
@@ -561,6 +564,7 @@
 		58219EE31B38A21900A9541A /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				58B05A5A1B7A2DAB0017CCE8 /* ProfileChangesObserver */,
 				58BD59C11B6FC72E00B6C5C4 /* AlertFacade */,
 				58BCCD981B6BB7E700521496 /* CustomURLHandler */,
 				5858F26B1B6126D000F38DFC /* ErrorHandler */,
@@ -1610,6 +1614,15 @@
 			name = StatusBarManager;
 			sourceTree = "<group>";
 		};
+		58B05A5A1B7A2DAB0017CCE8 /* ProfileChangesObserver */ = {
+			isa = PBXGroup;
+			children = (
+				58B05A5B1B7A2DDF0017CCE8 /* BZRProfileChangesObserver.h */,
+				58B05A5C1B7A2DDF0017CCE8 /* BZRProfileChangesObserver.m */,
+			);
+			name = ProfileChangesObserver;
+			sourceTree = "<group>";
+		};
 		58B18C881B790D1600F13F53 /* GiftCards */ = {
 			isa = PBXGroup;
 			children = (
@@ -2311,6 +2324,7 @@
 				58BCCD9B1B6BB81700521496 /* BZRCustomURLHandler.m in Sources */,
 				58219F051B38A33E00A9541A /* UIViewController+fixOrientation.m in Sources */,
 				58219EFC1B38A30300A9541A /* BZRValidator.m in Sources */,
+				58B05A5D1B7A2DDF0017CCE8 /* BZRProfileChangesObserver.m in Sources */,
 				58BCCD841B6B8B8400521496 /* BZRBaseOverlapView.m in Sources */,
 				58BF35E21B74933600699A63 /* BZRMailComposeManager.m in Sources */,
 				58BCCDA31B6BCDCA00521496 /* BZRFailureResettingController.m in Sources */,

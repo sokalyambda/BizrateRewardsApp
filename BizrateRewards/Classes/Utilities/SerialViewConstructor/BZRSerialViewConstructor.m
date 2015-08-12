@@ -46,7 +46,7 @@ static CGFloat const kDoneFontSize = 14.f;
     [doneButton setFrame:CGRectMake(0.0f, 0.0f, backgroundImage.size.width, backgroundImage.size.height)];
     
     [doneButton setBackgroundImage:backgroundImage forState:UIControlStateNormal];
-    [doneButton setTitle:NSLocalizedString(@"Done", nil) forState:UIControlStateNormal];
+    [doneButton setTitle:LOCALIZED(@"Done") forState:UIControlStateNormal];
     
     doneButton.titleLabel.font = [UIFont fontWithName:@"OpenSans" size:kDoneFontSize];
     

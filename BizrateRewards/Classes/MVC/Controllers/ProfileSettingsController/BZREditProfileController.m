@@ -16,6 +16,8 @@
 
 #import "BZREditProfileField.h"
 
+#import "BZRProfileChangesObserver.h"
+
 static NSString *const kEditProfileContainerSegueIdentifier = @"editProfileContainerSegue";
 
 @interface BZREditProfileController ()
@@ -24,16 +26,40 @@ static NSString *const kEditProfileContainerSegueIdentifier = @"editProfileConta
 
 @property (strong, nonatomic) BZRUserProfile *currentProfile;
 
+@property (strong, nonatomic) BZRProfileChangesObserver *profileChangesObserver;
+
+@property (assign, nonatomic, getter=isProfileChanged) BOOL profileChanged;
+
+@property (strong, nonatomic) UIBarButtonItem *doneButton;
+
 @end
 
 @implementation BZREditProfileController
 
 #pragma mark - Accessors
 
+- (BZRProfileChangesObserver *)profileChangesObserver
+{
+    if (!_profileChangesObserver) {
+        _profileChangesObserver = [[BZRProfileChangesObserver alloc] initWithFirstNameField:self.container.firstNameField
+                                                                           andLastNameField:self.container.lastNameField
+                                                                              andEmailField:self.container.emailField
+                                                                             andGenderField:self.container.genderField
+                                                                        andDateOfBirthField:self.container.dateOfBirthField];
+    }
+    return _profileChangesObserver;
+}
+
 - (BZRUserProfile *)currentProfile
 {
     _currentProfile = [BZRStorageManager sharedStorage].currentProfile;
     return _currentProfile;
+}
+
+- (void)setProfileChanged:(BOOL)profileChanged
+{
+    _profileChanged = profileChanged;
+    [((UIButton *)self.doneButton.customView) setTitle:_profileChanged ? LOCALIZED(@"Done") : LOCALIZED(@"Cancel") forState:UIControlStateNormal];
 }
 
 #pragma mark - View Lifecycle
@@ -42,22 +68,56 @@ static NSString *const kEditProfileContainerSegueIdentifier = @"editProfileConta
 {
     [super viewDidLoad];
     [self setupFieldsValueFromProfile];
+    [self observeProfileChanges];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
     [self customizeNavigationItem];
 }
 
 #pragma mark - Actions
+
+/**
+ *  Let profile changes observer starts to observe whether profile has changes
+ */
+- (void)observeProfileChanges
+{
+    WEAK_SELF;
+    [self.profileChangesObserver observeProfileChangesWithBlock:^(BOOL isChanged) {
+        weakSelf.profileChanged = isChanged;
+    }];
+}
 
 - (void)doneClick:(id)sender
 {
     [self updateUser];
 }
 
+/**
+ *  Method that customize the navigation item
+ */
 - (void)customizeNavigationItem
 {
-    self.navigationItem.title = NSLocalizedString(@"Profile", nil);
+    //set navigation title
+    self.navigationItem.title = LOCALIZED(@"Profile");
+    
+    //Show navigation bar
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     
-    self.navigationItem.rightBarButtonItem = [BZRSerialViewConstructor customDoneButtonForController:self withAction:@selector(doneClick:)];
+    //create custom 'Done' button
+    self.doneButton = [BZRSerialViewConstructor customDoneButtonForController:self withAction:@selector(doneClick:)];
+    
+    //set 'Cancel' title by default, because there are no changes for first view appearance
+    [((UIButton *)self.doneButton.customView) setTitle:LOCALIZED(@"Cancel") forState:UIControlStateNormal];
+    
+    //set right bar button item
+    self.navigationItem.rightBarButtonItem = self.doneButton;
+    
+    //remove back button (custom and system)
+    self.navigationItem.leftBarButtonItem = nil;
+    self.navigationItem.hidesBackButton = YES;
 }
 
 /**
@@ -66,7 +126,7 @@ static NSString *const kEditProfileContainerSegueIdentifier = @"editProfileConta
 - (void)updateUser
 {
     WEAK_SELF;
-    if ([self profileHasChanges]) {
+    if (self.isProfileChanged) {
         [BZRValidator validateFirstNameField:self.container.firstNameField
                                lastNameField:self.container.lastNameField
                                   emailField:self.container.emailField
@@ -104,22 +164,6 @@ static NSString *const kEditProfileContainerSegueIdentifier = @"editProfileConta
     self.container.dateOfBirthField.text = [[BZRCommonDateFormatter commonDateFormatter] stringFromDate:self.currentProfile.dateOfBirth];
     
     self.container.emailField.userInteractionEnabled = NO;
-}
-
-/**
- *  Detecting whether profile data has been changed
- *
- *  @return If there are changes - returns 'YES'
- */
-- (BOOL)profileHasChanges
-{
-    if (![self.container.firstNameField.text isEqualToString:self.currentProfile.firstName] ||
-        ![self.container.lastNameField.text isEqualToString:self.currentProfile.lastName] ||
-        ![self.container.genderField.text isEqualToString:self.currentProfile.genderString] ||
-        ![self.container.dateOfBirthField.text isEqualToString:[[BZRCommonDateFormatter commonDateFormatter] stringFromDate:self.currentProfile.dateOfBirth]]) {
-        return YES;
-    }
-    return NO;
 }
 
 #pragma mark - Navigation

@@ -78,9 +78,7 @@ typedef enum : NSUInteger {
             self.dateOfBirthField.validationFailed = NO;
             
             [self.pickersHelper showBirthDatePickerWithResult:^(NSDate *dateOfBirth) {
-                
                 weakSelf.dateOfBirthField.text = [[BZRCommonDateFormatter commonDateFormatter] stringFromDate:dateOfBirth];
-
             }];
             break;
         }
@@ -89,9 +87,7 @@ typedef enum : NSUInteger {
             self.genderField.validationFailed = NO;
             
             [self.pickersHelper showGenderPickerWithResult:^(NSString *genderString) {
-                
                 weakSelf.genderField.text = genderString;
-                
             }];
             break;
         }
