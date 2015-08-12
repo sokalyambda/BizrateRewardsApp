@@ -38,7 +38,6 @@
 		585C32B41B63C9B9005BF07B /* BZRGetCurrentUserRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 585C32B31B63C9B9005BF07B /* BZRGetCurrentUserRequest.m */; };
 		585C32B81B63C9D9005BF07B /* BZRUpdateCurrentUserRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 585C32B71B63C9D9005BF07B /* BZRUpdateCurrentUserRequest.m */; };
 		586ED0D11B46E8F500FEB250 /* UIView+SoftRemoving.m in Sources */ = {isa = PBXBuildFile; fileRef = 586ED0D01B46E8F500FEB250 /* UIView+SoftRemoving.m */; };
-		5878D3DD1B43F92100A917D0 /* BZRReachabilityHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5878D3DC1B43F92100A917D0 /* BZRReachabilityHelper.m */; };
 		5878D3E11B4426E000A917D0 /* BZRCommonDateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5878D3E01B4426DF00A917D0 /* BZRCommonDateFormatter.m */; };
 		588CE7A01B70AAD00088DEB1 /* BZRConfirmPasswordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 588CE79F1B70AAD00088DEB1 /* BZRConfirmPasswordController.m */; };
 		58901CF41B500E1B00D4A16B /* BZRBaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58901CF31B500E1B00D4A16B /* BZRBaseNavigationController.m */; };
@@ -76,15 +75,34 @@
 		58A5BEC01B415C2F00B2BC27 /* BZRCheckBoxButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A5BEBF1B415C2F00B2BC27 /* BZRCheckBoxButton.m */; };
 		58A7E23A1B45A3A200A1489A /* UIView+ConfigureAnchorPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A7E2391B45A3A200A1489A /* UIView+ConfigureAnchorPoint.m */; };
 		58A91F2F1B3A80A80032607F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58A91F2E1B3A80A80032607F /* CoreLocation.framework */; };
-		58A91F331B3A823D0032607F /* BZRLocationObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A91F321B3A823D0032607F /* BZRLocationObserver.m */; };
 		58A91F3B1B3A91E20032607F /* BZRGiftCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A91F3A1B3A91E20032607F /* BZRGiftCard.m */; };
 		58A91F431B3A995F0032607F /* BZRRoundedImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A91F421B3A995F0032607F /* BZRRoundedImageView.m */; };
 		58A91F481B3ABE6D0032607F /* BZRStorageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A91F471B3ABE6D0032607F /* BZRStorageManager.m */; };
 		58A91F581B3AD83F0032607F /* BZRUserProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A91F571B3AD83F0032607F /* BZRUserProfile.m */; };
-		58A9FE8F1B53A52A00DBE379 /* BZRRedirectionHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A9FE8E1B53A52A00DBE379 /* BZRRedirectionHelper.m */; };
 		58A9FE911B53AC0200DBE379 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58A9FE901B53AC0200DBE379 /* MobileCoreServices.framework */; };
 		58A9FE931B53AF4600DBE379 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58A9FE921B53AF4600DBE379 /* AssetsLibrary.framework */; };
 		58AA1A221B5E1E6400BA824A /* BZRHighlightedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AA1A211B5E1E6400BA824A /* BZRHighlightedButton.m */; };
+		58AA303D1B7B7FF300363119 /* BZRFacebookService.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AA303C1B7B7FF300363119 /* BZRFacebookService.m */; };
+		58AA30411B7B800A00363119 /* BZRMixpanelService.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AA303F1B7B800A00363119 /* BZRMixpanelService.m */; };
+		58AA30421B7B800A00363119 /* MixpanelEvents.plist in Resources */ = {isa = PBXBuildFile; fileRef = 58AA30401B7B800A00363119 /* MixpanelEvents.plist */; };
+		58AA30451B7B801E00363119 /* BZRReachabilityHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AA30441B7B801E00363119 /* BZRReachabilityHelper.m */; };
+		58AA30481B7B803300363119 /* BZRRedirectionHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AA30471B7B803300363119 /* BZRRedirectionHelper.m */; };
+		58AA304B1B7B804200363119 /* BZRAssetsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AA304A1B7B804200363119 /* BZRAssetsHelper.m */; };
+		58AA304E1B7B805B00363119 /* BZRPushNotifiactionService.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AA304D1B7B805B00363119 /* BZRPushNotifiactionService.m */; };
+		58AA30511B7B807000363119 /* BZRStatusBarManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AA30501B7B807000363119 /* BZRStatusBarManager.m */; };
+		58AA30541B7B807F00363119 /* BZRLocationObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AA30531B7B807F00363119 /* BZRLocationObserver.m */; };
+		58AA30581B7B80C900363119 /* ErrorsCodes.plist in Resources */ = {isa = PBXBuildFile; fileRef = 58AA30571B7B80C900363119 /* ErrorsCodes.plist */; };
+		58AA30641B7B81B100363119 /* Carson.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 58AA30591B7B81B100363119 /* Carson.gpx */; };
+		58AA30651B7B81B100363119 /* Dublin.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 58AA305A1B7B81B100363119 /* Dublin.gpx */; };
+		58AA30661B7B81B100363119 /* Los Angeles.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 58AA305B1B7B81B100363119 /* Los Angeles.gpx */; };
+		58AA30671B7B81B100363119 /* Manhattan Beach.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 58AA305C1B7B81B100363119 /* Manhattan Beach.gpx */; };
+		58AA30681B7B81B100363119 /* Pleasanton.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 58AA305D1B7B81B100363119 /* Pleasanton.gpx */; };
+		58AA30691B7B81B100363119 /* Redondo Beach.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 58AA305E1B7B81B100363119 /* Redondo Beach.gpx */; };
+		58AA306A1B7B81B100363119 /* San Ramon.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 58AA305F1B7B81B100363119 /* San Ramon.gpx */; };
+		58AA306B1B7B81B100363119 /* Santa Monica.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 58AA30601B7B81B100363119 /* Santa Monica.gpx */; };
+		58AA306C1B7B81B100363119 /* Torrance exit.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 58AA30611B7B81B100363119 /* Torrance exit.gpx */; };
+		58AA306D1B7B81B100363119 /* Torrance.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 58AA30621B7B81B100363119 /* Torrance.gpx */; };
+		58AA306E1B7B81B100363119 /* Venice.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 58AA30631B7B81B100363119 /* Venice.gpx */; };
 		58ACC06A1B3937010081E546 /* BZRStartTutorialController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ACC0691B3937010081E546 /* BZRStartTutorialController.m */; };
 		58ACC06D1B3937160081E546 /* BZRAutologinController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ACC06C1B3937160081E546 /* BZRAutologinController.m */; };
 		58ACC0761B395E6A0081E546 /* BZRPrivacyAndTermsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ACC0751B395E6A0081E546 /* BZRPrivacyAndTermsController.m */; };
@@ -97,7 +115,6 @@
 		58ADC0E41B4BDCC200DF849F /* BZRFinishSurveyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ADC0E31B4BDCC200DF849F /* BZRFinishSurveyController.m */; };
 		58ADC0E81B4BDCE400DF849F /* BZRSecondTutorialController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ADC0E71B4BDCE400DF849F /* BZRSecondTutorialController.m */; };
 		58AF4AF01B5BB6F10052C7E5 /* UIImagePickerController+AdjustStatusBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AF4AEF1B5BB6F10052C7E5 /* UIImagePickerController+AdjustStatusBar.m */; };
-		58AF4AF41B5C13A30052C7E5 /* BZRStatusBarManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AF4AF31B5C13A30052C7E5 /* BZRStatusBarManager.m */; };
 		58B05A5D1B7A2DDF0017CCE8 /* BZRProfileChangesObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B05A5C1B7A2DDF0017CCE8 /* BZRProfileChangesObserver.m */; };
 		58B18C751B78AB9200F13F53 /* libOfferBeamSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58B18C731B78AB9200F13F53 /* libOfferBeamSDK.a */; };
 		58B18C761B78AB9200F13F53 /* ModelOfferBeamSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 58B18C741B78AB9200F13F53 /* ModelOfferBeamSDK.bundle */; };
@@ -124,19 +141,6 @@
 		58C770E31B5CD08E00E9031F /* BZRTutorialDescriptionLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C770E21B5CD08E00E9031F /* BZRTutorialDescriptionLabel.m */; };
 		58C770E71B5D5B6A00E9031F /* BZRCommonNumberFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C770E61B5D5B6A00E9031F /* BZRCommonNumberFormatter.m */; };
 		58D1E5D11B662EBD00347208 /* BZRSignInWithFacebookRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 58D1E5D01B662EBD00347208 /* BZRSignInWithFacebookRequest.m */; };
-		58D1E5D51B66426900347208 /* BZRFacebookService.m in Sources */ = {isa = PBXBuildFile; fileRef = 58D1E5D41B66426900347208 /* BZRFacebookService.m */; };
-		58D32D591B6D403100896D08 /* Carson.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 58D32D4E1B6D403100896D08 /* Carson.gpx */; };
-		58D32D5A1B6D403100896D08 /* Dublin.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 58D32D4F1B6D403100896D08 /* Dublin.gpx */; };
-		58D32D5B1B6D403100896D08 /* Los Angeles.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 58D32D501B6D403100896D08 /* Los Angeles.gpx */; };
-		58D32D5C1B6D403100896D08 /* Manhattan Beach.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 58D32D511B6D403100896D08 /* Manhattan Beach.gpx */; };
-		58D32D5D1B6D403100896D08 /* Pleasanton.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 58D32D521B6D403100896D08 /* Pleasanton.gpx */; };
-		58D32D5E1B6D403100896D08 /* Redondo Beach.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 58D32D531B6D403100896D08 /* Redondo Beach.gpx */; };
-		58D32D5F1B6D403100896D08 /* San Ramon.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 58D32D541B6D403100896D08 /* San Ramon.gpx */; };
-		58D32D601B6D403100896D08 /* Santa Monica.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 58D32D551B6D403100896D08 /* Santa Monica.gpx */; };
-		58D32D611B6D403100896D08 /* Torrance exit.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 58D32D561B6D403100896D08 /* Torrance exit.gpx */; };
-		58D32D621B6D403100896D08 /* Torrance.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 58D32D571B6D403100896D08 /* Torrance.gpx */; };
-		58D32D631B6D403100896D08 /* Venice.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 58D32D581B6D403100896D08 /* Venice.gpx */; };
-		58DF1AE81B584CD000D28951 /* BZRAssetsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 58DF1AE71B584CD000D28951 /* BZRAssetsHelper.m */; };
 		58E238A41B5AA0B8007F8664 /* UIFont+Styles.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E238A31B5AA0B8007F8664 /* UIFont+Styles.m */; };
 		58E512431B4C70AF00865694 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 58E512391B4C70AF00865694 /* OpenSans-Bold.ttf */; };
 		58E512441B4C70AF00865694 /* OpenSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 58E5123A1B4C70AF00865694 /* OpenSans-BoldItalic.ttf */; };
@@ -148,15 +152,12 @@
 		58E5124A1B4C70AF00865694 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 58E512401B4C70AF00865694 /* OpenSans-Regular.ttf */; };
 		58E5124B1B4C70AF00865694 /* OpenSans-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 58E512411B4C70AF00865694 /* OpenSans-Semibold.ttf */; };
 		58E5124C1B4C70AF00865694 /* OpenSans-SemiboldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 58E512421B4C70AF00865694 /* OpenSans-SemiboldItalic.ttf */; };
-		58F49FC91B4197B7002F93EE /* BZRPushNotifiactionService.m in Sources */ = {isa = PBXBuildFile; fileRef = 58F49FC81B4197B7002F93EE /* BZRPushNotifiactionService.m */; };
 		843C38411B4EAF38005E85CF /* BZRGiftcardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 843C38401B4EAF38005E85CF /* BZRGiftcardCell.m */; };
-		84A6124E1B5E3137005E01A7 /* BZRMixpanelService.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A6124D1B5E3137005E01A7 /* BZRMixpanelService.m */; };
 		84AD3F011B4587DA00C294AE /* BZRProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AD3F001B4587DA00C294AE /* BZRProgressView.m */; };
 		84BE35CC1B5D0A4F001B99E2 /* BZRSurveyPointsInscriptionLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BE35CB1B5D0A4F001B99E2 /* BZRSurveyPointsInscriptionLabel.m */; };
 		84BE35D11B5D0AE0001B99E2 /* BZRSurveyPointsValueLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BE35D01B5D0AE0001B99E2 /* BZRSurveyPointsValueLabel.m */; };
 		84BE35D61B5D0C66001B99E2 /* BZRSurveyRemarkLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BE35D51B5D0C66001B99E2 /* BZRSurveyRemarkLabel.m */; };
 		84BE35D91B5D0C93001B99E2 /* BZRSurveyCongratsLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BE35D81B5D0C93001B99E2 /* BZRSurveyCongratsLabel.m */; };
-		84FDAD101B6B674500AF02F6 /* MixpanelEvents.plist in Resources */ = {isa = PBXBuildFile; fileRef = 84FDAD0F1B6B674500AF02F6 /* MixpanelEvents.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -172,7 +173,6 @@
 /* Begin PBXFileReference section */
 		16E7A55401C14794D2730A8C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		58219EDE1B38A1D600A9541A /* BZRMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRMacros.h; path = Macros/BZRMacros.h; sourceTree = "<group>"; };
-		58219EF61B38A2EE00A9541A /* BZRApiConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRApiConstants.h; path = "Classes/Server APIs/BZRApiConstants.h"; sourceTree = "<group>"; };
 		58219EFA1B38A30300A9541A /* BZRValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRValidator.h; path = Classes/Utilities/Validator/BZRValidator.h; sourceTree = "<group>"; };
 		58219EFB1B38A30300A9541A /* BZRValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRValidator.m; path = Classes/Utilities/Validator/BZRValidator.m; sourceTree = "<group>"; };
 		58219F031B38A33E00A9541A /* UIViewController+fixOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIViewController+fixOrientation.h"; path = "Classes/Categories/UIViewController/UIViewController+fixOrientation.h"; sourceTree = "<group>"; };
@@ -227,8 +227,6 @@
 		585C32B71B63C9D9005BF07B /* BZRUpdateCurrentUserRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRUpdateCurrentUserRequest.m; path = UserProfile/UpdateCurrentUserRequest/BZRUpdateCurrentUserRequest.m; sourceTree = "<group>"; };
 		586ED0CF1B46E8F500FEB250 /* UIView+SoftRemoving.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+SoftRemoving.h"; path = "Classes/Categories/UIView/UIView+SoftRemoving/UIView+SoftRemoving.h"; sourceTree = "<group>"; };
 		586ED0D01B46E8F500FEB250 /* UIView+SoftRemoving.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+SoftRemoving.m"; path = "Classes/Categories/UIView/UIView+SoftRemoving/UIView+SoftRemoving.m"; sourceTree = "<group>"; };
-		5878D3DB1B43F92100A917D0 /* BZRReachabilityHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRReachabilityHelper.h; path = Classes/Utilities/ReachabilityHelper/BZRReachabilityHelper.h; sourceTree = "<group>"; };
-		5878D3DC1B43F92100A917D0 /* BZRReachabilityHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRReachabilityHelper.m; path = Classes/Utilities/ReachabilityHelper/BZRReachabilityHelper.m; sourceTree = "<group>"; };
 		5878D3DF1B4426DF00A917D0 /* BZRCommonDateFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRCommonDateFormatter.h; path = Classes/Utilities/CommonDateFormatter/BZRCommonDateFormatter.h; sourceTree = "<group>"; };
 		5878D3E01B4426DF00A917D0 /* BZRCommonDateFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRCommonDateFormatter.m; path = Classes/Utilities/CommonDateFormatter/BZRCommonDateFormatter.m; sourceTree = "<group>"; };
 		588CE79E1B70AAD00088DEB1 /* BZRConfirmPasswordController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRConfirmPasswordController.h; path = Classes/MVC/Controllers/AuthorizationControllers/ForgotPasswordController/ConfirmPasswordController/BZRConfirmPasswordController.h; sourceTree = "<group>"; };
@@ -261,7 +259,6 @@
 		589889B61B654093008684F3 /* BZRGetClientCredentialsRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRGetClientCredentialsRequest.m; path = GetClientCredentialsRequest/BZRGetClientCredentialsRequest.m; sourceTree = "<group>"; };
 		589889BA1B654CAA008684F3 /* BZRGetEligibleSurveysRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRGetEligibleSurveysRequest.h; path = GetEligibleSurveysRequest/BZRGetEligibleSurveysRequest.h; sourceTree = "<group>"; };
 		589889BB1B654CAA008684F3 /* BZRGetEligibleSurveysRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRGetEligibleSurveysRequest.m; path = GetEligibleSurveysRequest/BZRGetEligibleSurveysRequest.m; sourceTree = "<group>"; };
-		589889BD1B6566DD008684F3 /* BZRRequests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BZRRequests.h; sourceTree = "<group>"; };
 		5899D2521B4AB94200565F11 /* BZRApplicationToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRApplicationToken.h; path = Classes/MVC/Models/Token/ApplicationToken/BZRApplicationToken.h; sourceTree = "<group>"; };
 		5899D2531B4AB94200565F11 /* BZRApplicationToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRApplicationToken.m; path = Classes/MVC/Models/Token/ApplicationToken/BZRApplicationToken.m; sourceTree = "<group>"; };
 		589BCCD71B565E0400D49056 /* BZRSerialViewConstructor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRSerialViewConstructor.h; path = Classes/Utilities/SerialViewConstructor/BZRSerialViewConstructor.h; sourceTree = "<group>"; };
@@ -303,8 +300,6 @@
 		58A7E2381B45A3A200A1489A /* UIView+ConfigureAnchorPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+ConfigureAnchorPoint.h"; path = "Classes/Categories/UIView/UIView+ConfigureAnchorPoint/UIView+ConfigureAnchorPoint.h"; sourceTree = "<group>"; };
 		58A7E2391B45A3A200A1489A /* UIView+ConfigureAnchorPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+ConfigureAnchorPoint.m"; path = "Classes/Categories/UIView/UIView+ConfigureAnchorPoint/UIView+ConfigureAnchorPoint.m"; sourceTree = "<group>"; };
 		58A91F2E1B3A80A80032607F /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		58A91F311B3A823D0032607F /* BZRLocationObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRLocationObserver.h; path = Classes/LocationObserver/BZRLocationObserver.h; sourceTree = "<group>"; };
-		58A91F321B3A823D0032607F /* BZRLocationObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRLocationObserver.m; path = Classes/LocationObserver/BZRLocationObserver.m; sourceTree = "<group>"; };
 		58A91F391B3A91E20032607F /* BZRGiftCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRGiftCard.h; path = Classes/MVC/Models/GiftCard/BZRGiftCard.h; sourceTree = "<group>"; };
 		58A91F3A1B3A91E20032607F /* BZRGiftCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRGiftCard.m; path = Classes/MVC/Models/GiftCard/BZRGiftCard.m; sourceTree = "<group>"; };
 		58A91F3F1B3A937B0032607F /* BZRMappingProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRMappingProtocol.h; path = Classes/Protocols/Mapping/BZRMappingProtocol.h; sourceTree = "<group>"; };
@@ -314,12 +309,41 @@
 		58A91F471B3ABE6D0032607F /* BZRStorageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRStorageManager.m; path = Classes/Managers/StorageManager/BZRStorageManager.m; sourceTree = "<group>"; };
 		58A91F561B3AD83F0032607F /* BZRUserProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRUserProfile.h; path = Classes/MVC/Models/UserProfile/BZRUserProfile.h; sourceTree = "<group>"; };
 		58A91F571B3AD83F0032607F /* BZRUserProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRUserProfile.m; path = Classes/MVC/Models/UserProfile/BZRUserProfile.m; sourceTree = "<group>"; };
-		58A9FE8D1B53A52A00DBE379 /* BZRRedirectionHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRRedirectionHelper.h; path = Classes/Utilities/TermsAndConditionsHelper/BZRRedirectionHelper.h; sourceTree = "<group>"; };
-		58A9FE8E1B53A52A00DBE379 /* BZRRedirectionHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRRedirectionHelper.m; path = Classes/Utilities/TermsAndConditionsHelper/BZRRedirectionHelper.m; sourceTree = "<group>"; };
 		58A9FE901B53AC0200DBE379 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		58A9FE921B53AF4600DBE379 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		58AA1A201B5E1E6400BA824A /* BZRHighlightedButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRHighlightedButton.h; path = Classes/MVC/Views/HighlightedButton/BZRHighlightedButton.h; sourceTree = "<group>"; };
 		58AA1A211B5E1E6400BA824A /* BZRHighlightedButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRHighlightedButton.m; path = Classes/MVC/Views/HighlightedButton/BZRHighlightedButton.m; sourceTree = "<group>"; };
+		58AA303B1B7B7FF300363119 /* BZRFacebookService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRFacebookService.h; path = Classes/Services/FacebookService/BZRFacebookService.h; sourceTree = "<group>"; };
+		58AA303C1B7B7FF300363119 /* BZRFacebookService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRFacebookService.m; path = Classes/Services/FacebookService/BZRFacebookService.m; sourceTree = "<group>"; };
+		58AA303E1B7B800A00363119 /* BZRMixpanelService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRMixpanelService.h; path = Classes/Services/MixpanelService/BZRMixpanelService.h; sourceTree = "<group>"; };
+		58AA303F1B7B800A00363119 /* BZRMixpanelService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRMixpanelService.m; path = Classes/Services/MixpanelService/BZRMixpanelService.m; sourceTree = "<group>"; };
+		58AA30401B7B800A00363119 /* MixpanelEvents.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = MixpanelEvents.plist; path = Classes/Services/MixpanelService/MixpanelEvents.plist; sourceTree = "<group>"; };
+		58AA30431B7B801E00363119 /* BZRReachabilityHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRReachabilityHelper.h; path = Classes/Services/ReachabilityHelper/BZRReachabilityHelper.h; sourceTree = "<group>"; };
+		58AA30441B7B801E00363119 /* BZRReachabilityHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRReachabilityHelper.m; path = Classes/Services/ReachabilityHelper/BZRReachabilityHelper.m; sourceTree = "<group>"; };
+		58AA30461B7B803300363119 /* BZRRedirectionHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRRedirectionHelper.h; path = Classes/Services/TermsAndConditionsHelper/BZRRedirectionHelper.h; sourceTree = "<group>"; };
+		58AA30471B7B803300363119 /* BZRRedirectionHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRRedirectionHelper.m; path = Classes/Services/TermsAndConditionsHelper/BZRRedirectionHelper.m; sourceTree = "<group>"; };
+		58AA30491B7B804200363119 /* BZRAssetsHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRAssetsHelper.h; path = Classes/Services/AssetsHelper/BZRAssetsHelper.h; sourceTree = "<group>"; };
+		58AA304A1B7B804200363119 /* BZRAssetsHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRAssetsHelper.m; path = Classes/Services/AssetsHelper/BZRAssetsHelper.m; sourceTree = "<group>"; };
+		58AA304C1B7B805B00363119 /* BZRPushNotifiactionService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRPushNotifiactionService.h; path = Classes/Services/PushNotificationsService/BZRPushNotifiactionService.h; sourceTree = "<group>"; };
+		58AA304D1B7B805B00363119 /* BZRPushNotifiactionService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRPushNotifiactionService.m; path = Classes/Services/PushNotificationsService/BZRPushNotifiactionService.m; sourceTree = "<group>"; };
+		58AA304F1B7B807000363119 /* BZRStatusBarManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRStatusBarManager.h; path = Classes/Managers/StatusBarManager/BZRStatusBarManager.h; sourceTree = "<group>"; };
+		58AA30501B7B807000363119 /* BZRStatusBarManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRStatusBarManager.m; path = Classes/Managers/StatusBarManager/BZRStatusBarManager.m; sourceTree = "<group>"; };
+		58AA30521B7B807F00363119 /* BZRLocationObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRLocationObserver.h; path = Classes/Managers/LocationObserver/BZRLocationObserver.h; sourceTree = "<group>"; };
+		58AA30531B7B807F00363119 /* BZRLocationObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRLocationObserver.m; path = Classes/Managers/LocationObserver/BZRLocationObserver.m; sourceTree = "<group>"; };
+		58AA30551B7B809F00363119 /* BZRApiConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BZRApiConstants.h; sourceTree = "<group>"; };
+		58AA30561B7B80AC00363119 /* BZRRequests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BZRRequests.h; sourceTree = "<group>"; };
+		58AA30571B7B80C900363119 /* ErrorsCodes.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = ErrorsCodes.plist; path = Classes/Utilities/ErrorHandler/ErrorsCodes.plist; sourceTree = "<group>"; };
+		58AA30591B7B81B100363119 /* Carson.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = Carson.gpx; path = LocationFiles/Carson.gpx; sourceTree = "<group>"; };
+		58AA305A1B7B81B100363119 /* Dublin.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = Dublin.gpx; path = LocationFiles/Dublin.gpx; sourceTree = "<group>"; };
+		58AA305B1B7B81B100363119 /* Los Angeles.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = "Los Angeles.gpx"; path = "LocationFiles/Los Angeles.gpx"; sourceTree = "<group>"; };
+		58AA305C1B7B81B100363119 /* Manhattan Beach.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = "Manhattan Beach.gpx"; path = "LocationFiles/Manhattan Beach.gpx"; sourceTree = "<group>"; };
+		58AA305D1B7B81B100363119 /* Pleasanton.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = Pleasanton.gpx; path = LocationFiles/Pleasanton.gpx; sourceTree = "<group>"; };
+		58AA305E1B7B81B100363119 /* Redondo Beach.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = "Redondo Beach.gpx"; path = "LocationFiles/Redondo Beach.gpx"; sourceTree = "<group>"; };
+		58AA305F1B7B81B100363119 /* San Ramon.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = "San Ramon.gpx"; path = "LocationFiles/San Ramon.gpx"; sourceTree = "<group>"; };
+		58AA30601B7B81B100363119 /* Santa Monica.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = "Santa Monica.gpx"; path = "LocationFiles/Santa Monica.gpx"; sourceTree = "<group>"; };
+		58AA30611B7B81B100363119 /* Torrance exit.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = "Torrance exit.gpx"; path = "LocationFiles/Torrance exit.gpx"; sourceTree = "<group>"; };
+		58AA30621B7B81B100363119 /* Torrance.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = Torrance.gpx; path = LocationFiles/Torrance.gpx; sourceTree = "<group>"; };
+		58AA30631B7B81B100363119 /* Venice.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = Venice.gpx; path = LocationFiles/Venice.gpx; sourceTree = "<group>"; };
 		58ACC0681B3937010081E546 /* BZRStartTutorialController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRStartTutorialController.h; path = Classes/MVC/Controllers/TutorialViewControllers/PageContentController/BZRStartTutorialController.h; sourceTree = "<group>"; };
 		58ACC0691B3937010081E546 /* BZRStartTutorialController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRStartTutorialController.m; path = Classes/MVC/Controllers/TutorialViewControllers/PageContentController/BZRStartTutorialController.m; sourceTree = "<group>"; };
 		58ACC06B1B3937160081E546 /* BZRAutologinController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRAutologinController.h; path = Classes/MVC/Controllers/TutorialViewControllers/BaseTutorialController/BZRAutologinController.h; sourceTree = "<group>"; };
@@ -344,8 +368,6 @@
 		58ADC0E71B4BDCE400DF849F /* BZRSecondTutorialController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRSecondTutorialController.m; path = Classes/MVC/Controllers/TutorialViewControllers/SecondTutorialController/BZRSecondTutorialController.m; sourceTree = "<group>"; };
 		58AF4AEE1B5BB6F10052C7E5 /* UIImagePickerController+AdjustStatusBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImagePickerController+AdjustStatusBar.h"; path = "Classes/Categories/UIImagePickerView/AdjustStatusBar/UIImagePickerController+AdjustStatusBar.h"; sourceTree = "<group>"; };
 		58AF4AEF1B5BB6F10052C7E5 /* UIImagePickerController+AdjustStatusBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImagePickerController+AdjustStatusBar.m"; path = "Classes/Categories/UIImagePickerView/AdjustStatusBar/UIImagePickerController+AdjustStatusBar.m"; sourceTree = "<group>"; };
-		58AF4AF21B5C13A30052C7E5 /* BZRStatusBarManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRStatusBarManager.h; path = Classes/Utilities/StatusBarHandler/BZRStatusBarManager.h; sourceTree = "<group>"; };
-		58AF4AF31B5C13A30052C7E5 /* BZRStatusBarManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRStatusBarManager.m; path = Classes/Utilities/StatusBarHandler/BZRStatusBarManager.m; sourceTree = "<group>"; };
 		58B05A5B1B7A2DDF0017CCE8 /* BZRProfileChangesObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRProfileChangesObserver.h; path = Classes/Utilities/ProfileChangesObserver/BZRProfileChangesObserver.h; sourceTree = "<group>"; };
 		58B05A5C1B7A2DDF0017CCE8 /* BZRProfileChangesObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRProfileChangesObserver.m; path = Classes/Utilities/ProfileChangesObserver/BZRProfileChangesObserver.m; sourceTree = "<group>"; };
 		58B18C731B78AB9200F13F53 /* libOfferBeamSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libOfferBeamSDK.a; sourceTree = "<group>"; };
@@ -412,21 +434,6 @@
 		58C770E61B5D5B6A00E9031F /* BZRCommonNumberFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRCommonNumberFormatter.m; path = Classes/Utilities/CommonNumberFormatter/BZRCommonNumberFormatter.m; sourceTree = "<group>"; };
 		58D1E5CF1B662EBD00347208 /* BZRSignInWithFacebookRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRSignInWithFacebookRequest.h; path = SignInWithFacebookRequest/BZRSignInWithFacebookRequest.h; sourceTree = "<group>"; };
 		58D1E5D01B662EBD00347208 /* BZRSignInWithFacebookRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRSignInWithFacebookRequest.m; path = SignInWithFacebookRequest/BZRSignInWithFacebookRequest.m; sourceTree = "<group>"; };
-		58D1E5D31B66426900347208 /* BZRFacebookService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRFacebookService.h; path = Classes/FacebookService/BZRFacebookService.h; sourceTree = "<group>"; };
-		58D1E5D41B66426900347208 /* BZRFacebookService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRFacebookService.m; path = Classes/FacebookService/BZRFacebookService.m; sourceTree = "<group>"; };
-		58D32D4E1B6D403100896D08 /* Carson.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Carson.gpx; sourceTree = "<group>"; };
-		58D32D4F1B6D403100896D08 /* Dublin.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Dublin.gpx; sourceTree = "<group>"; };
-		58D32D501B6D403100896D08 /* Los Angeles.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "Los Angeles.gpx"; sourceTree = "<group>"; };
-		58D32D511B6D403100896D08 /* Manhattan Beach.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "Manhattan Beach.gpx"; sourceTree = "<group>"; };
-		58D32D521B6D403100896D08 /* Pleasanton.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Pleasanton.gpx; sourceTree = "<group>"; };
-		58D32D531B6D403100896D08 /* Redondo Beach.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "Redondo Beach.gpx"; sourceTree = "<group>"; };
-		58D32D541B6D403100896D08 /* San Ramon.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "San Ramon.gpx"; sourceTree = "<group>"; };
-		58D32D551B6D403100896D08 /* Santa Monica.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "Santa Monica.gpx"; sourceTree = "<group>"; };
-		58D32D561B6D403100896D08 /* Torrance exit.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "Torrance exit.gpx"; sourceTree = "<group>"; };
-		58D32D571B6D403100896D08 /* Torrance.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Torrance.gpx; sourceTree = "<group>"; };
-		58D32D581B6D403100896D08 /* Venice.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Venice.gpx; sourceTree = "<group>"; };
-		58DF1AE61B584CD000D28951 /* BZRAssetsHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRAssetsHelper.h; path = Classes/Utilities/AssetsHelper/BZRAssetsHelper.h; sourceTree = "<group>"; };
-		58DF1AE71B584CD000D28951 /* BZRAssetsHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRAssetsHelper.m; path = Classes/Utilities/AssetsHelper/BZRAssetsHelper.m; sourceTree = "<group>"; };
 		58E238A21B5AA0B8007F8664 /* UIFont+Styles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIFont+Styles.h"; path = "Classes/Categories/UIFont/UIFont+Styles/UIFont+Styles.h"; sourceTree = "<group>"; };
 		58E238A31B5AA0B8007F8664 /* UIFont+Styles.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIFont+Styles.m"; path = "Classes/Categories/UIFont/UIFont+Styles/UIFont+Styles.m"; sourceTree = "<group>"; };
 		58E512391B4C70AF00865694 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-Bold.ttf"; path = "Resources/Fonts/OpenSans-Bold.ttf"; sourceTree = "<group>"; };
@@ -439,13 +446,9 @@
 		58E512401B4C70AF00865694 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-Regular.ttf"; path = "Resources/Fonts/OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		58E512411B4C70AF00865694 /* OpenSans-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-Semibold.ttf"; path = "Resources/Fonts/OpenSans-Semibold.ttf"; sourceTree = "<group>"; };
 		58E512421B4C70AF00865694 /* OpenSans-SemiboldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-SemiboldItalic.ttf"; path = "Resources/Fonts/OpenSans-SemiboldItalic.ttf"; sourceTree = "<group>"; };
-		58F49FC71B4197B7002F93EE /* BZRPushNotifiactionService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRPushNotifiactionService.h; path = Classes/PushNotificationsService/BZRPushNotifiactionService.h; sourceTree = "<group>"; };
-		58F49FC81B4197B7002F93EE /* BZRPushNotifiactionService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRPushNotifiactionService.m; path = Classes/PushNotificationsService/BZRPushNotifiactionService.m; sourceTree = "<group>"; };
 		7AF1FB2A8C4A8673EF3998F1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		843C383F1B4EAF38005E85CF /* BZRGiftcardCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRGiftcardCell.h; path = Classes/Cells/GiftcardCell/BZRGiftcardCell.h; sourceTree = "<group>"; };
 		843C38401B4EAF38005E85CF /* BZRGiftcardCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRGiftcardCell.m; path = Classes/Cells/GiftcardCell/BZRGiftcardCell.m; sourceTree = "<group>"; };
-		84A6124C1B5E3137005E01A7 /* BZRMixpanelService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRMixpanelService.h; path = Classes/MixpanelService/BZRMixpanelService.h; sourceTree = "<group>"; };
-		84A6124D1B5E3137005E01A7 /* BZRMixpanelService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = BZRMixpanelService.m; path = Classes/MixpanelService/BZRMixpanelService.m; sourceTree = "<group>"; };
 		84AD3EFF1B4587D900C294AE /* BZRProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRProgressView.h; path = Classes/MVC/Views/ProgressView/BZRProgressView.h; sourceTree = "<group>"; };
 		84AD3F001B4587DA00C294AE /* BZRProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRProgressView.m; path = Classes/MVC/Views/ProgressView/BZRProgressView.m; sourceTree = "<group>"; };
 		84BE35CA1B5D0A4F001B99E2 /* BZRSurveyPointsInscriptionLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRSurveyPointsInscriptionLabel.h; path = Classes/MVC/Views/Styles/SurveyStyleLabels/SurveyPointsInscriptionLabel/BZRSurveyPointsInscriptionLabel.h; sourceTree = "<group>"; };
@@ -456,7 +459,6 @@
 		84BE35D51B5D0C66001B99E2 /* BZRSurveyRemarkLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRSurveyRemarkLabel.m; path = Classes/MVC/Views/Styles/SurveyStyleLabels/SurveyRemarkLabel/BZRSurveyRemarkLabel.m; sourceTree = "<group>"; };
 		84BE35D71B5D0C93001B99E2 /* BZRSurveyCongratsLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRSurveyCongratsLabel.h; path = Classes/MVC/Views/Styles/SurveyStyleLabels/SurveyCongratsLabel/BZRSurveyCongratsLabel.h; sourceTree = "<group>"; };
 		84BE35D81B5D0C93001B99E2 /* BZRSurveyCongratsLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRSurveyCongratsLabel.m; path = Classes/MVC/Views/Styles/SurveyStyleLabels/SurveyCongratsLabel/BZRSurveyCongratsLabel.m; sourceTree = "<group>"; };
-		84FDAD0F1B6B674500AF02F6 /* MixpanelEvents.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = MixpanelEvents.plist; path = Classes/MixpanelService/MixpanelEvents.plist; sourceTree = "<group>"; };
 		E535AA4CB211EDDB654D82EC /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -583,7 +585,6 @@
 			isa = PBXGroup;
 			children = (
 				585C32891B63AA3F005BF07B /* API */,
-				58219EF61B38A2EE00A9541A /* BZRApiConstants.h */,
 			);
 			name = "Server APIs";
 			sourceTree = "<group>";
@@ -813,6 +814,7 @@
 		5858F26B1B6126D000F38DFC /* ErrorHandler */ = {
 			isa = PBXGroup;
 			children = (
+				58AA30571B7B80C900363119 /* ErrorsCodes.plist */,
 				5858F26C1B61271E00F38DFC /* BZRErrorHandler.h */,
 				5858F26D1B61271E00F38DFC /* BZRErrorHandler.m */,
 			);
@@ -831,12 +833,12 @@
 		585C32891B63AA3F005BF07B /* API */ = {
 			isa = PBXGroup;
 			children = (
+				58AA30551B7B809F00363119 /* BZRApiConstants.h */,
 				58B38A461B73497C00EDB024 /* FailedOperationManager */,
 				585C328A1B63AA3F005BF07B /* NetworkFacade */,
 				585C328D1B63AA3F005BF07B /* NetworkOperation */,
 				585C32901B63AA3F005BF07B /* Requests */,
 				585C329E1B63AA3F005BF07B /* SessionManager */,
-				589889BD1B6566DD008684F3 /* BZRRequests.h */,
 			);
 			name = API;
 			path = "Classes/Server APIs/API";
@@ -863,6 +865,7 @@
 		585C32901B63AA3F005BF07B /* Requests */ = {
 			isa = PBXGroup;
 			children = (
+				58AA30561B7B80AC00363119 /* BZRRequests.h */,
 				58B18C881B790D1600F13F53 /* GiftCards */,
 				58BD59BC1B6F757E00B6C5C4 /* Device */,
 				58BCCD8B1B6BA48100521496 /* LocationEvent */,
@@ -984,8 +987,8 @@
 		5878D3DA1B43F8D500A917D0 /* ReachabilityHelper */ = {
 			isa = PBXGroup;
 			children = (
-				5878D3DB1B43F92100A917D0 /* BZRReachabilityHelper.h */,
-				5878D3DC1B43F92100A917D0 /* BZRReachabilityHelper.m */,
+				58AA30431B7B801E00363119 /* BZRReachabilityHelper.h */,
+				58AA30441B7B801E00363119 /* BZRReachabilityHelper.m */,
 			);
 			name = ReachabilityHelper;
 			sourceTree = "<group>";
@@ -1324,8 +1327,8 @@
 		58A91F301B3A821C0032607F /* LocationObserver */ = {
 			isa = PBXGroup;
 			children = (
-				58A91F311B3A823D0032607F /* BZRLocationObserver.h */,
-				58A91F321B3A823D0032607F /* BZRLocationObserver.m */,
+				58AA30521B7B807F00363119 /* BZRLocationObserver.h */,
+				58AA30531B7B807F00363119 /* BZRLocationObserver.m */,
 			);
 			name = LocationObserver;
 			sourceTree = "<group>";
@@ -1395,8 +1398,8 @@
 		58A9FE8C1B53A4FB00DBE379 /* TermsAndConditionsHelper */ = {
 			isa = PBXGroup;
 			children = (
-				58A9FE8D1B53A52A00DBE379 /* BZRRedirectionHelper.h */,
-				58A9FE8E1B53A52A00DBE379 /* BZRRedirectionHelper.m */,
+				58AA30461B7B803300363119 /* BZRRedirectionHelper.h */,
+				58AA30471B7B803300363119 /* BZRRedirectionHelper.m */,
 			);
 			name = TermsAndConditionsHelper;
 			sourceTree = "<group>";
@@ -1608,8 +1611,8 @@
 		58AF4AF11B5C137E0052C7E5 /* StatusBarManager */ = {
 			isa = PBXGroup;
 			children = (
-				58AF4AF21B5C13A30052C7E5 /* BZRStatusBarManager.h */,
-				58AF4AF31B5C13A30052C7E5 /* BZRStatusBarManager.m */,
+				58AA304F1B7B807000363119 /* BZRStatusBarManager.h */,
+				58AA30501B7B807000363119 /* BZRStatusBarManager.m */,
 			);
 			name = StatusBarManager;
 			sourceTree = "<group>";
@@ -1892,8 +1895,8 @@
 		58D1E5D21B66423700347208 /* FacebookService */ = {
 			isa = PBXGroup;
 			children = (
-				58D1E5D31B66426900347208 /* BZRFacebookService.h */,
-				58D1E5D41B66426900347208 /* BZRFacebookService.m */,
+				58AA303B1B7B7FF300363119 /* BZRFacebookService.h */,
+				58AA303C1B7B7FF300363119 /* BZRFacebookService.m */,
 			);
 			name = FacebookService;
 			sourceTree = "<group>";
@@ -1901,17 +1904,17 @@
 		58D32D4D1B6D400600896D08 /* Location Examples */ = {
 			isa = PBXGroup;
 			children = (
-				58D32D4E1B6D403100896D08 /* Carson.gpx */,
-				58D32D4F1B6D403100896D08 /* Dublin.gpx */,
-				58D32D501B6D403100896D08 /* Los Angeles.gpx */,
-				58D32D511B6D403100896D08 /* Manhattan Beach.gpx */,
-				58D32D521B6D403100896D08 /* Pleasanton.gpx */,
-				58D32D531B6D403100896D08 /* Redondo Beach.gpx */,
-				58D32D541B6D403100896D08 /* San Ramon.gpx */,
-				58D32D551B6D403100896D08 /* Santa Monica.gpx */,
-				58D32D561B6D403100896D08 /* Torrance exit.gpx */,
-				58D32D571B6D403100896D08 /* Torrance.gpx */,
-				58D32D581B6D403100896D08 /* Venice.gpx */,
+				58AA30591B7B81B100363119 /* Carson.gpx */,
+				58AA305A1B7B81B100363119 /* Dublin.gpx */,
+				58AA305B1B7B81B100363119 /* Los Angeles.gpx */,
+				58AA305C1B7B81B100363119 /* Manhattan Beach.gpx */,
+				58AA305D1B7B81B100363119 /* Pleasanton.gpx */,
+				58AA305E1B7B81B100363119 /* Redondo Beach.gpx */,
+				58AA305F1B7B81B100363119 /* San Ramon.gpx */,
+				58AA30601B7B81B100363119 /* Santa Monica.gpx */,
+				58AA30611B7B81B100363119 /* Torrance exit.gpx */,
+				58AA30621B7B81B100363119 /* Torrance.gpx */,
+				58AA30631B7B81B100363119 /* Venice.gpx */,
 			);
 			name = "Location Examples";
 			sourceTree = "<group>";
@@ -1919,8 +1922,8 @@
 		58DF1AE51B584CA800D28951 /* AssetsHelper */ = {
 			isa = PBXGroup;
 			children = (
-				58DF1AE61B584CD000D28951 /* BZRAssetsHelper.h */,
-				58DF1AE71B584CD000D28951 /* BZRAssetsHelper.m */,
+				58AA30491B7B804200363119 /* BZRAssetsHelper.h */,
+				58AA304A1B7B804200363119 /* BZRAssetsHelper.m */,
 			);
 			name = AssetsHelper;
 			sourceTree = "<group>";
@@ -1962,8 +1965,8 @@
 		58F49FBF1B417F06002F93EE /* PushNotificationsService */ = {
 			isa = PBXGroup;
 			children = (
-				58F49FC71B4197B7002F93EE /* BZRPushNotifiactionService.h */,
-				58F49FC81B4197B7002F93EE /* BZRPushNotifiactionService.m */,
+				58AA304C1B7B805B00363119 /* BZRPushNotifiactionService.h */,
+				58AA304D1B7B805B00363119 /* BZRPushNotifiactionService.m */,
 			);
 			name = PushNotificationsService;
 			sourceTree = "<group>";
@@ -1988,9 +1991,9 @@
 		84A6124B1B5E30E6005E01A7 /* MixpanelService */ = {
 			isa = PBXGroup;
 			children = (
-				84FDAD0F1B6B674500AF02F6 /* MixpanelEvents.plist */,
-				84A6124C1B5E3137005E01A7 /* BZRMixpanelService.h */,
-				84A6124D1B5E3137005E01A7 /* BZRMixpanelService.m */,
+				58AA303E1B7B800A00363119 /* BZRMixpanelService.h */,
+				58AA303F1B7B800A00363119 /* BZRMixpanelService.m */,
+				58AA30401B7B800A00363119 /* MixpanelEvents.plist */,
 			);
 			name = MixpanelService;
 			sourceTree = "<group>";
@@ -2160,30 +2163,31 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				58D32D611B6D403100896D08 /* Torrance exit.gpx in Resources */,
 				58E512471B4C70AF00865694 /* OpenSans-Italic.ttf in Resources */,
-				84FDAD101B6B674500AF02F6 /* MixpanelEvents.plist in Resources */,
 				58E512441B4C70AF00865694 /* OpenSans-BoldItalic.ttf in Resources */,
-				58D32D591B6D403100896D08 /* Carson.gpx in Resources */,
-				58D32D631B6D403100896D08 /* Venice.gpx in Resources */,
+				58AA30681B7B81B100363119 /* Pleasanton.gpx in Resources */,
+				58AA306D1B7B81B100363119 /* Torrance.gpx in Resources */,
 				589420AB1B452827004BAF48 /* BZRCommonPickerView.xib in Resources */,
-				58D32D621B6D403100896D08 /* Torrance.gpx in Resources */,
 				58E5124B1B4C70AF00865694 /* OpenSans-Semibold.ttf in Resources */,
-				58D32D5C1B6D403100896D08 /* Manhattan Beach.gpx in Resources */,
-				58D32D5E1B6D403100896D08 /* Redondo Beach.gpx in Resources */,
 				58E512451B4C70AF00865694 /* OpenSans-ExtraBold.ttf in Resources */,
+				58AA30651B7B81B100363119 /* Dublin.gpx in Resources */,
+				58AA306E1B7B81B100363119 /* Venice.gpx in Resources */,
 				58A0B21E1B3854CF003C100C /* Main.storyboard in Resources */,
 				58BCCD861B6B8BA600521496 /* BZRBaseOverlapView.xib in Resources */,
-				58D32D5D1B6D403100896D08 /* Pleasanton.gpx in Resources */,
-				58D32D601B6D403100896D08 /* Santa Monica.gpx in Resources */,
-				58D32D5B1B6D403100896D08 /* Los Angeles.gpx in Resources */,
+				58AA30421B7B800A00363119 /* MixpanelEvents.plist in Resources */,
 				58E512491B4C70AF00865694 /* OpenSans-LightItalic.ttf in Resources */,
 				5894209E1B451E0F004BAF48 /* BZRBirthDatePickerView.xib in Resources */,
-				58D32D5A1B6D403100896D08 /* Dublin.gpx in Resources */,
+				58AA30691B7B81B100363119 /* Redondo Beach.gpx in Resources */,
+				58AA306B1B7B81B100363119 /* Santa Monica.gpx in Resources */,
+				58AA306C1B7B81B100363119 /* Torrance exit.gpx in Resources */,
 				58E512431B4C70AF00865694 /* OpenSans-Bold.ttf in Resources */,
-				58D32D5F1B6D403100896D08 /* San Ramon.gpx in Resources */,
+				58AA30641B7B81B100363119 /* Carson.gpx in Resources */,
+				58AA30661B7B81B100363119 /* Los Angeles.gpx in Resources */,
 				58B18C761B78AB9200F13F53 /* ModelOfferBeamSDK.bundle in Resources */,
 				58A0B2201B3854CF003C100C /* Images.xcassets in Resources */,
+				58AA30581B7B80C900363119 /* ErrorsCodes.plist in Resources */,
+				58AA30671B7B81B100363119 /* Manhattan Beach.gpx in Resources */,
+				58AA306A1B7B81B100363119 /* San Ramon.gpx in Resources */,
 				58E5124C1B4C70AF00865694 /* OpenSans-SemiboldItalic.ttf in Resources */,
 				58E512481B4C70AF00865694 /* OpenSans-Light.ttf in Resources */,
 				58E5124A1B4C70AF00865694 /* OpenSans-Regular.ttf in Resources */,
@@ -2245,7 +2249,6 @@
 				58ACC08F1B39AD490081E546 /* BZRDashboardController.m in Sources */,
 				589420A91B452813004BAF48 /* BZRCommonPickerView.m in Sources */,
 				58A59E251B3EDFDC00A5F30C /* BZRGeolocationAccessController.m in Sources */,
-				58A9FE8F1B53A52A00DBE379 /* BZRRedirectionHelper.m in Sources */,
 				589420981B451D87004BAF48 /* main.m in Sources */,
 				58BCCD8F1B6BA4D900521496 /* BZRSendLocationEventRequest.m in Sources */,
 				589BCCE01B56717200D49056 /* BZREditProfileField.m in Sources */,
@@ -2253,15 +2256,16 @@
 				58219F0D1B38A38600A9541A /* UIView+MakeFromXib.m in Sources */,
 				58A59E381B3EE99400A5F30C /* BZRGiftCardsListController.m in Sources */,
 				589420AE1B4529C8004BAF48 /* BZRZeroInsetsSeparatorCell.m in Sources */,
-				58AF4AF41B5C13A30052C7E5 /* BZRStatusBarManager.m in Sources */,
 				585C32A41B63AA3F005BF07B /* BZRBaseAuthRequest.m in Sources */,
 				586ED0D11B46E8F500FEB250 /* UIView+SoftRemoving.m in Sources */,
 				58A59E3C1B3EE9E300A5F30C /* BZRSurveyViewController.m in Sources */,
 				589BCCD91B565E0400D49056 /* BZRSerialViewConstructor.m in Sources */,
+				58AA304E1B7B805B00363119 /* BZRPushNotifiactionService.m in Sources */,
 				585C32A21B63AA3F005BF07B /* BZRNetworkOperation.m in Sources */,
 				58ACC0841B3968BF0081E546 /* BZRChooseSignUpTypeController.m in Sources */,
 				58AA1A221B5E1E6400BA824A /* BZRHighlightedButton.m in Sources */,
 				585C32B41B63C9B9005BF07B /* BZRGetCurrentUserRequest.m in Sources */,
+				58AA30481B7B803300363119 /* BZRRedirectionHelper.m in Sources */,
 				585C32A51B63AA3F005BF07B /* BZRNetworkRequest.m in Sources */,
 				58BCCDA01B6BCDAF00521496 /* BZRSuccessResettingController.m in Sources */,
 				58A59E341B3EE96700A5F30C /* BZREditProfileController.m in Sources */,
@@ -2269,15 +2273,14 @@
 				589420B11B4567B2004BAF48 /* BZREditProfileContainerController.m in Sources */,
 				58BCCD931B6BAD9D00521496 /* BZRForgotPasswordController.m in Sources */,
 				84BE35D91B5D0C93001B99E2 /* BZRSurveyCongratsLabel.m in Sources */,
-				58D1E5D51B66426900347208 /* BZRFacebookService.m in Sources */,
 				589BCCE51B569BB800D49056 /* UIView+Flashable.m in Sources */,
 				585813AA1B3BEDCC0087AEE2 /* BZRUserToken.m in Sources */,
 				58B574E11B38AE200083A80A /* KeychainItemWrapper.m in Sources */,
-				84A6124E1B5E3137005E01A7 /* BZRMixpanelService.m in Sources */,
 				58ACC06A1B3937010081E546 /* BZRStartTutorialController.m in Sources */,
 				589420A11B451E35004BAF48 /* BZRPickerHolder.m in Sources */,
 				58A7E23A1B45A3A200A1489A /* UIView+ConfigureAnchorPoint.m in Sources */,
 				58A91F481B3ABE6D0032607F /* BZRStorageManager.m in Sources */,
+				58AA30411B7B800A00363119 /* BZRMixpanelService.m in Sources */,
 				588CE7A01B70AAD00088DEB1 /* BZRConfirmPasswordController.m in Sources */,
 				58BF360B1B74F94300699A63 /* MFMailComposeViewController+Styles.m in Sources */,
 				84BE35D11B5D0AE0001B99E2 /* BZRSurveyPointsValueLabel.m in Sources */,
@@ -2287,10 +2290,8 @@
 				58A5BEC01B415C2F00B2BC27 /* BZRCheckBoxButton.m in Sources */,
 				58BD59C01B6F75AF00B6C5C4 /* BZRSendDeviceDataRequest.m in Sources */,
 				58ACC0761B395E6A0081E546 /* BZRPrivacyAndTermsController.m in Sources */,
-				58A91F331B3A823D0032607F /* BZRLocationObserver.m in Sources */,
 				589889BC1B654CAA008684F3 /* BZRGetEligibleSurveysRequest.m in Sources */,
 				843C38411B4EAF38005E85CF /* BZRGiftcardCell.m in Sources */,
-				58DF1AE81B584CD000D28951 /* BZRAssetsHelper.m in Sources */,
 				5858F2721B612B9200F38DFC /* NSString+JSONRepresentation.m in Sources */,
 				58A91F581B3AD83F0032607F /* BZRUserProfile.m in Sources */,
 				589889B71B654093008684F3 /* BZRGetClientCredentialsRequest.m in Sources */,
@@ -2309,13 +2310,16 @@
 				5878D3E11B4426E000A917D0 /* BZRCommonDateFormatter.m in Sources */,
 				58A08B6B1B73A4F500BEF1D8 /* BZRPrivacyAndTermsButton.m in Sources */,
 				58C770E71B5D5B6A00E9031F /* BZRCommonNumberFormatter.m in Sources */,
+				58AA303D1B7B7FF300363119 /* BZRFacebookService.m in Sources */,
 				585C32AF1B63C854005BF07B /* BZRSignUpRequest.m in Sources */,
 				58ACC0811B39689F0081E546 /* BZRSignUpController.m in Sources */,
 				585641B61B4DA5AA007E7368 /* BZRAuthorizationField.m in Sources */,
 				58AF4AF01B5BB6F10052C7E5 /* UIImagePickerController+AdjustStatusBar.m in Sources */,
 				58901CF41B500E1B00D4A16B /* BZRBaseNavigationController.m in Sources */,
 				58219F191B38A3F600A9541A /* NSDictionary+JSONRepresentation.m in Sources */,
+				58AA30451B7B801E00363119 /* BZRReachabilityHelper.m in Sources */,
 				585C32B81B63C9D9005BF07B /* BZRUpdateCurrentUserRequest.m in Sources */,
+				58AA30541B7B807F00363119 /* BZRLocationObserver.m in Sources */,
 				84AD3F011B4587DA00C294AE /* BZRProgressView.m in Sources */,
 				58B52A431B6A30F0002D2529 /* BZRFacebookProfile.m in Sources */,
 				585C32A71B63AA3F005BF07B /* BZRSessionManager.m in Sources */,
@@ -2326,6 +2330,7 @@
 				58219EFC1B38A30300A9541A /* BZRValidator.m in Sources */,
 				58B05A5D1B7A2DDF0017CCE8 /* BZRProfileChangesObserver.m in Sources */,
 				58BCCD841B6B8B8400521496 /* BZRBaseOverlapView.m in Sources */,
+				58AA30511B7B807000363119 /* BZRStatusBarManager.m in Sources */,
 				58BF35E21B74933600699A63 /* BZRMailComposeManager.m in Sources */,
 				58BCCDA31B6BCDCA00521496 /* BZRFailureResettingController.m in Sources */,
 				58C770E01B5CD07400E9031F /* BZRTutorialTitleLabel.m in Sources */,
@@ -2333,12 +2338,11 @@
 				58BCCD971B6BB09000521496 /* BZRForgotPasswordRequest.m in Sources */,
 				5894208B1B450FF6004BAF48 /* BZRAccountSettingsContaiterController.m in Sources */,
 				58ACC07E1B3968830081E546 /* BZRSignInController.m in Sources */,
-				58F49FC91B4197B7002F93EE /* BZRPushNotifiactionService.m in Sources */,
 				58219F151B38A3D700A9541A /* NSString+ContainsString.m in Sources */,
 				583681711B579C6200D541A4 /* BZRKeychainHandler.m in Sources */,
 				58BCCD8A1B6BA1FD00521496 /* BZRLocationEvent.m in Sources */,
+				58AA304B1B7B804200363119 /* BZRAssetsHelper.m in Sources */,
 				58219F0A1B38A37600A9541A /* UIView+Shaking.m in Sources */,
-				5878D3DD1B43F92100A917D0 /* BZRReachabilityHelper.m in Sources */,
 				58ACC0871B3968DA0081E546 /* BZRGetStartedController.m in Sources */,
 				585C32AB1B63C82F005BF07B /* BZRRenewSessionTokenRequest.m in Sources */,
 				585813AE1B3C23840087AEE2 /* BZRSurvey.m in Sources */,

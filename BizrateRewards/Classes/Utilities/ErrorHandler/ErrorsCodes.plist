@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>EMAIL_ALREADY_REGISTERED</key>
+		<string>An account with this email address already exists.</string>
+	</dict>
+	<dict>
+		<key>FACEBOOK_USER_NOT_FOUND</key>
+		<string>There is no existed user with this email.</string>
+	</dict>
+	<dict>
+		<key>PASSWORD_INVALID</key>
+		<string>Invalid password. Password must consist of 8 to 16 characters with at least one uppercase and one lowercase letter.</string>
+	</dict>
+	<dict>
+		<key>GENDER_INVALID_ENTRY</key>
+		<string>Gender must be M or F.</string>
+	</dict>
+	<dict>
+		<key>DOB_INVALID</key>
+		<string>Invalid date of birth. You must be of age 13 or older to register.</string>
+	</dict>
+	<dict>
+		<key>EMAIL_INVALID_FORMAT</key>
+		<string>Email must conform to valid email format.</string>
+	</dict>
+	<dict>
+		<key>LASTNAME_INVALID</key>
+		<string>Lastname must consist of letters only.</string>
+	</dict>
+	<dict>
+		<key>FIRSTNAME_INVALID</key>
+		<string>Firstname must consist of letters only.</string>
+	</dict>
+	<dict>
+		<key>EMAIL_NOT_REGISTERED</key>
+		<string>Email address is not registered.</string>
+	</dict>
+</array>
+</plist>

@@ -23,10 +23,10 @@ static NSString *const InternetIsNotReachableString = @"Internet is not reachabl
 
 //User
 
-static NSString *const CurrentProfileKey = @"CurrentProfileKey";
+static NSString *const CurrentProfileKey    = @"CurrentProfileKey";
 
-static NSString *const IsTutorialPassed = @"IsTutorialPassed";
-static NSString *const RememberMeKey = @"RememberMeKey";
+static NSString *const IsTutorialPassed     = @"IsTutorialPassed";
+static NSString *const RememberMeKey        = @"RememberMeKey";
 
 static NSString *const UserNameKey = @"UsernameKey";
 static NSString *const PasswordKey = @"PasswordKey";

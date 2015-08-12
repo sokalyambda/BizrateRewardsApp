@@ -15,6 +15,11 @@ static NSString *const kErrorMessage        = @"error_message";
 static NSString *const kErrorDescription    = @"error_description";
 static NSString *const kErrorStatusCode     = @"error_code";
 
+static NSString *const kFacebookUserNotFound    = @"FACEBOOK_USER_NOT_FOUND";
+static NSString *const kEmailNotRegistered      = @"EMAIL_NOT_REGISTERED";
+
+static NSString *const kErrorsCodesPlistName = @"ErrorsCodes";
+
 @implementation BZRErrorHandler
 
 #pragma mark - Public methods
@@ -88,7 +93,7 @@ static NSString *const kErrorStatusCode     = @"error_code";
     
     BOOL isRegistered = YES;
     for (NSDictionary *errorDict in errors) {
-        if ([errorDict[kErrorStatusCode] isEqualToString:@"EMAIL_NOT_REGISTERED"]) {
+        if ([errorDict[kErrorStatusCode] isEqualToString:kEmailNotRegistered]) {
             isRegistered = NO;
             break;
         }
@@ -109,7 +114,7 @@ static NSString *const kErrorStatusCode     = @"error_code";
     
     BOOL userExists = YES;
     for (NSDictionary *errorDict in errors) {
-        if ([errorDict[kErrorStatusCode] isEqualToString:@"FACEBOOK_USER_NOT_FOUND"]) {
+        if ([errorDict[kErrorStatusCode] isEqualToString:kFacebookUserNotFound]) {
             userExists = NO;
             break;
         }
@@ -233,26 +238,15 @@ static NSString *const kErrorStatusCode     = @"error_code";
  */
 + (NSString *)localizedStringFromErrorCode:(NSString *)errorCode
 {
-    NSString *resultString;
-    if ([errorCode isEqualToString:@"EMAIL_ALREADY_REGISTERED"]) {
-        resultString = LOCALIZED(@"An account with this email address already exists.");
-    } else if ([errorCode isEqualToString:@"FACEBOOK_USER_NOT_FOUND"]) {
-        resultString = LOCALIZED(@"There is no existed user with this email.");
-    } else if ([errorCode isEqualToString:@"PASSWORD_INVALID"]) {
-        resultString = LOCALIZED(@"Invalid password. Password must consist of 8 to 16 characters with at least one uppercase and one lowercase letter.");
-    } else if ([errorCode isEqualToString:@"GENDER_INVALID_ENTRY"]) {
-        resultString = LOCALIZED(@"Gender must be M or F.");
-    } else if ([errorCode isEqualToString:@"DOB_INVALID"]) {
-        resultString = LOCALIZED(@"Invalid date of birth. You must be of age 13 or older to register.");
-    } else if ([errorCode isEqualToString:@"EMAIL_INVALID_FORMAT"]) {
-        resultString = LOCALIZED(@"Email must conform to valid email format.");
-    } else if ([errorCode isEqualToString:@"LASTNAME_INVALID"]) {
-        resultString = LOCALIZED(@"Lastname must consist of letters only.");
-    } else if ([errorCode isEqualToString:@"FIRSTNAME_INVALID"]) {
-        resultString = LOCALIZED(@"Firstname must consist of letters only.");
-    } else if ([errorCode isEqualToString:@"EMAIL_NOT_REGISTERED"]) {
-        resultString = LOCALIZED(@"Email address is not registered.");
-    }
+    __block NSString *resultString;
+    NSArray *preservedErrorsArray = [NSArray arrayWithContentsOfFile:[[NSBundle mainBundle] pathForResource:kErrorsCodesPlistName ofType:@"plist"]];
+    
+    [preservedErrorsArray enumerateObjectsUsingBlock:^(NSDictionary *errorDict, NSUInteger idx, BOOL *stop) {
+        if (errorDict[errorCode]) {
+            resultString = LOCALIZED(errorDict[errorCode]);
+            *stop = YES;
+        }
+    }];
     return resultString;
 }
 
