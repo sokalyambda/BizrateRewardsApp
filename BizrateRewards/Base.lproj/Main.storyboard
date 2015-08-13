@@ -1768,22 +1768,22 @@
                                                 <exclude reference="Lm9-VG-dao"/>
                                             </mask>
                                             <mask key="constraints">
-                                                <exclude reference="12y-tl-K0n"/>
-                                                <exclude reference="NYT-u5-Hiz"/>
-                                                <exclude reference="Xx4-FJ-dU5"/>
-                                                <exclude reference="eRm-vF-gL1"/>
-                                                <exclude reference="wqz-A4-F5Z"/>
                                                 <exclude reference="5hn-zc-K03"/>
                                                 <exclude reference="JAV-eQ-nUj"/>
                                                 <exclude reference="UTk-tG-7Fa"/>
                                                 <exclude reference="bhK-bI-FKR"/>
                                                 <exclude reference="sZW-C0-AWg"/>
                                                 <exclude reference="G4j-kx-aXb"/>
+                                                <exclude reference="3B4-up-KGh"/>
+                                                <exclude reference="fuD-EG-wp4"/>
                                                 <exclude reference="2ch-Rs-Xdp"/>
                                                 <exclude reference="sQC-jY-HEL"/>
                                                 <exclude reference="xMH-h8-hcy"/>
-                                                <exclude reference="3B4-up-KGh"/>
-                                                <exclude reference="fuD-EG-wp4"/>
+                                                <exclude reference="12y-tl-K0n"/>
+                                                <exclude reference="NYT-u5-Hiz"/>
+                                                <exclude reference="Xx4-FJ-dU5"/>
+                                                <exclude reference="eRm-vF-gL1"/>
+                                                <exclude reference="wqz-A4-F5Z"/>
                                             </mask>
                                         </variation>
                                         <variation key="heightClass=regular-widthClass=compact">
@@ -1795,22 +1795,22 @@
                                                 <include reference="Lm9-VG-dao"/>
                                             </mask>
                                             <mask key="constraints">
-                                                <include reference="12y-tl-K0n"/>
-                                                <include reference="NYT-u5-Hiz"/>
-                                                <include reference="Xx4-FJ-dU5"/>
-                                                <include reference="eRm-vF-gL1"/>
-                                                <include reference="wqz-A4-F5Z"/>
                                                 <include reference="5hn-zc-K03"/>
                                                 <include reference="JAV-eQ-nUj"/>
                                                 <include reference="UTk-tG-7Fa"/>
                                                 <include reference="bhK-bI-FKR"/>
                                                 <include reference="sZW-C0-AWg"/>
                                                 <include reference="G4j-kx-aXb"/>
+                                                <include reference="3B4-up-KGh"/>
+                                                <include reference="fuD-EG-wp4"/>
                                                 <include reference="2ch-Rs-Xdp"/>
                                                 <include reference="sQC-jY-HEL"/>
                                                 <include reference="xMH-h8-hcy"/>
-                                                <include reference="3B4-up-KGh"/>
-                                                <include reference="fuD-EG-wp4"/>
+                                                <include reference="12y-tl-K0n"/>
+                                                <include reference="NYT-u5-Hiz"/>
+                                                <include reference="Xx4-FJ-dU5"/>
+                                                <include reference="eRm-vF-gL1"/>
+                                                <include reference="wqz-A4-F5Z"/>
                                             </mask>
                                         </variation>
                                     </view>
@@ -2971,8 +2971,8 @@
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="k3C-eE-iRs" userLabel="Gift Cards Collection View">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <color key="backgroundColor" red="0.92156862750000001" green="0.92156862750000001" blue="0.92156862750000001" alpha="1" colorSpace="calibratedRGB"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="5" id="a4N-RH-E6j">
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="a4N-RH-E6j">
                                     <size key="itemSize" width="197" height="100"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -2986,7 +2986,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="197" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ar9-kq-DPC" userLabel="Gift Card Image">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ar9-kq-DPC" userLabel="Gift Card Image">
                                                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                                 </imageView>
                                             </subviews>

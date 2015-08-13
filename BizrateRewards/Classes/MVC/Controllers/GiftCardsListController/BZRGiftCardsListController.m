@@ -12,6 +12,8 @@
 
 #import "BZRGiftCard.h"
 
+static CGFloat const kCellHeight = 100.f;
+
 @interface BZRGiftCardsListController ()<UICollectionViewDataSource, UICollectionViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *giftCardsCollectionView;
@@ -47,16 +49,21 @@
     BZRGiftcardCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([BZRGiftcardCell class]) forIndexPath:indexPath];
     
     [cell configureCellWithGiftCard:currentGiftCard];
+    [cell addBorders];
     
     return cell;
 }
 
--(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+#pragma mark - UICollectionViewDelegateFlowLayout
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"%@", NSStringFromCGSize(CGSizeMake(collectionView.bounds.size.width/2.f, 100.f)));
-    NSLog(@"collection view bounds %@", NSStringFromCGRect(collectionView.bounds));
+    CGSize size = CGSizeZero;
+    NSInteger width = CGRectGetWidth(collectionView.bounds) / 2.f;
+
+    size = CGSizeMake(width, kCellHeight);
     
-    return CGSizeMake(collectionView.bounds.size.width/2.f - 10.f, 100.f);
+    return size;
 }
 
 @end

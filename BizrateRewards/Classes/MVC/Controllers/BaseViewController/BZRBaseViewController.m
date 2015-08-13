@@ -9,8 +9,6 @@
 #import "BZRBaseViewController.h"
 #import "BZRBaseNavigationController.h"
 
-#import "BZRStatusBarManager.h"
-
 @interface BZRBaseViewController ()
 
 @property (weak, nonatomic) BZRBaseNavigationController *baseNavigationController;
@@ -43,8 +41,6 @@
 {
     [super viewWillAppear:animated];
     
-    [self setupStatusBarAppearance];
-    
     self.navigationItem.leftBarButtonItem = self.baseNavigationController.customBackButton;
 }
 
@@ -55,17 +51,7 @@
  */
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
-    return UIStatusBarStyleLightContent;
-}
-
-#pragma mark - Actions
-
-/**
- *  Setup black status bar background color
- */
-- (void)setupStatusBarAppearance
-{
-    [[BZRStatusBarManager sharedManager] addCustomStatusBarView];
+    return self.navigationController.isNavigationBarHidden ? UIStatusBarStyleDefault : UIStatusBarStyleLightContent;
 }
 
 @end

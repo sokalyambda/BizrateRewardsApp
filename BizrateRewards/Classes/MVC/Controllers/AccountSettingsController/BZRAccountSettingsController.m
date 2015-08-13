@@ -11,8 +11,6 @@
 #import "BZRAccountSettingsContaiterController.h"
 #import "BZRBaseNavigationController.h"
 
-#import "BZRStatusBarManager.h"
-
 #import "BZRAssetsHelper.h"
 
 #import "BZRProjectFacade.h"
@@ -180,7 +178,6 @@ static NSString *const kAccountSettingsContainerSegueIdentifier = @"accountSetti
         return;
     } else {
         [self showImagePickerWithType:UIImagePickerControllerSourceTypeCamera];
-        [[BZRStatusBarManager sharedManager] hideCustomStatusBarView];
     }
 }
 
@@ -224,12 +221,10 @@ static NSString *const kAccountSettingsContainerSegueIdentifier = @"accountSetti
             [BZRAssetsHelper writeImage:image withMediaInfo:info toPhotoAlbumWithCompletion:^(NSURL *assetURL, NSError *error) {
                 weakSelf.currentProfile.avatarURL = assetURL;
                 [picker dismissViewControllerAnimated:YES completion:nil];
-                [[BZRStatusBarManager sharedManager] showCustomStatusBarView];
             }];
         } else {
             self.currentProfile.avatarURL = imagePath;
             [picker dismissViewControllerAnimated:YES completion:nil];
-            [[BZRStatusBarManager sharedManager] showCustomStatusBarView];
         }
     }
 }
@@ -237,7 +232,6 @@ static NSString *const kAccountSettingsContainerSegueIdentifier = @"accountSetti
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
     [picker dismissViewControllerAnimated:YES completion:nil];
-    [[BZRStatusBarManager sharedManager] showCustomStatusBarView];
 }
 
 #pragma mark - Navigation

@@ -89,7 +89,6 @@
 		58AA30481B7B803300363119 /* BZRRedirectionHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AA30471B7B803300363119 /* BZRRedirectionHelper.m */; };
 		58AA304B1B7B804200363119 /* BZRAssetsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AA304A1B7B804200363119 /* BZRAssetsHelper.m */; };
 		58AA304E1B7B805B00363119 /* BZRPushNotifiactionService.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AA304D1B7B805B00363119 /* BZRPushNotifiactionService.m */; };
-		58AA30511B7B807000363119 /* BZRStatusBarManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AA30501B7B807000363119 /* BZRStatusBarManager.m */; };
 		58AA30541B7B807F00363119 /* BZRLocationObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 58AA30531B7B807F00363119 /* BZRLocationObserver.m */; };
 		58AA30581B7B80C900363119 /* ErrorsCodes.plist in Resources */ = {isa = PBXBuildFile; fileRef = 58AA30571B7B80C900363119 /* ErrorsCodes.plist */; };
 		58AA30641B7B81B100363119 /* Carson.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 58AA30591B7B81B100363119 /* Carson.gpx */; };
@@ -328,8 +327,6 @@
 		58AA304A1B7B804200363119 /* BZRAssetsHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRAssetsHelper.m; path = Classes/Services/AssetsHelper/BZRAssetsHelper.m; sourceTree = "<group>"; };
 		58AA304C1B7B805B00363119 /* BZRPushNotifiactionService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRPushNotifiactionService.h; path = Classes/Services/PushNotificationsService/BZRPushNotifiactionService.h; sourceTree = "<group>"; };
 		58AA304D1B7B805B00363119 /* BZRPushNotifiactionService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRPushNotifiactionService.m; path = Classes/Services/PushNotificationsService/BZRPushNotifiactionService.m; sourceTree = "<group>"; };
-		58AA304F1B7B807000363119 /* BZRStatusBarManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRStatusBarManager.h; path = Classes/Managers/StatusBarManager/BZRStatusBarManager.h; sourceTree = "<group>"; };
-		58AA30501B7B807000363119 /* BZRStatusBarManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRStatusBarManager.m; path = Classes/Managers/StatusBarManager/BZRStatusBarManager.m; sourceTree = "<group>"; };
 		58AA30521B7B807F00363119 /* BZRLocationObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRLocationObserver.h; path = Classes/Managers/LocationObserver/BZRLocationObserver.h; sourceTree = "<group>"; };
 		58AA30531B7B807F00363119 /* BZRLocationObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRLocationObserver.m; path = Classes/Managers/LocationObserver/BZRLocationObserver.m; sourceTree = "<group>"; };
 		58AA30551B7B809F00363119 /* BZRApiConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BZRApiConstants.h; sourceTree = "<group>"; };
@@ -1377,7 +1374,6 @@
 		58A91F441B3ABE480032607F /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				58AF4AF11B5C137E0052C7E5 /* StatusBarManager */,
 				58A91F301B3A821C0032607F /* LocationObserver */,
 				58A91F451B3ABE500032607F /* StorageManager */,
 			);
@@ -1639,15 +1635,6 @@
 				58AF4AEF1B5BB6F10052C7E5 /* UIImagePickerController+AdjustStatusBar.m */,
 			);
 			name = AdjustStatusBar;
-			sourceTree = "<group>";
-		};
-		58AF4AF11B5C137E0052C7E5 /* StatusBarManager */ = {
-			isa = PBXGroup;
-			children = (
-				58AA304F1B7B807000363119 /* BZRStatusBarManager.h */,
-				58AA30501B7B807000363119 /* BZRStatusBarManager.m */,
-			);
-			name = StatusBarManager;
 			sourceTree = "<group>";
 		};
 		58B05A5A1B7A2DAB0017CCE8 /* ProfileChangesObserver */ = {
@@ -2365,7 +2352,6 @@
 				58219EFC1B38A30300A9541A /* BZRValidator.m in Sources */,
 				58B05A5D1B7A2DDF0017CCE8 /* BZRProfileChangesObserver.m in Sources */,
 				58BCCD841B6B8B8400521496 /* BZRBaseOverlapView.m in Sources */,
-				58AA30511B7B807000363119 /* BZRStatusBarManager.m in Sources */,
 				58BF35E21B74933600699A63 /* BZRMailComposeManager.m in Sources */,
 				58BCCDA31B6BCDCA00521496 /* BZRFailureResettingController.m in Sources */,
 				58C770E01B5CD07400E9031F /* BZRTutorialTitleLabel.m in Sources */,

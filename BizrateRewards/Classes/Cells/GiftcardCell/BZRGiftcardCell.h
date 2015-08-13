@@ -11,5 +11,6 @@
 @interface BZRGiftcardCell : UICollectionViewCell
 
 - (void)configureCellWithGiftCard:(BZRGiftCard *)giftCard;
+- (void)addBorders;
 
 @end
