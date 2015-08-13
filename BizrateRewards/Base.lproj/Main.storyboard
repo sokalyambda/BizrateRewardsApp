@@ -1349,12 +1349,18 @@
                                                         <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="16"/>
                                                         <color key="textColor" red="0.035294117647058823" green="0.11764705882352941" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
+                                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                            <rect key="frame" x="20" y="75" width="150" height="0.0"/>
+                                                        </variation>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bDh-Dk-8Fa" userLabel="Next Giftcard Points" customClass="BZRSurveyPointsValueLabel">
                                                         <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                                         <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="16"/>
                                                         <color key="textColor" red="0.035294117647058823" green="0.11764705882352941" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
+                                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                            <rect key="frame" x="230" y="75" width="150" height="0.0"/>
+                                                        </variation>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VSs-f0-rwS" userLabel="Progress bar view" customClass="BZRProgressView">
                                                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -1369,7 +1375,8 @@
                                                                 <exclude reference="oI9-jh-esH"/>
                                                             </mask>
                                                         </variation>
-                                                        <variation key="heightClass=regular-widthClass=compact">
+                                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                            <rect key="frame" x="20" y="85" width="360" height="10"/>
                                                             <mask key="constraints">
                                                                 <include reference="oI9-jh-esH"/>
                                                             </mask>
@@ -1388,7 +1395,8 @@
                                                                 <exclude reference="AJf-96-pWi"/>
                                                             </mask>
                                                         </variation>
-                                                        <variation key="heightClass=regular-widthClass=compact">
+                                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                            <rect key="frame" x="230" y="57" width="150" height="16"/>
                                                             <mask key="constraints">
                                                                 <include reference="AJf-96-pWi"/>
                                                             </mask>
@@ -1407,7 +1415,8 @@
                                                                 <exclude reference="Yrl-rK-KCm"/>
                                                             </mask>
                                                         </variation>
-                                                        <variation key="heightClass=regular-widthClass=compact">
+                                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                            <rect key="frame" x="20" y="57" width="150" height="16"/>
                                                             <mask key="constraints">
                                                                 <include reference="Yrl-rK-KCm"/>
                                                             </mask>
@@ -1418,12 +1427,18 @@
                                                         <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="12"/>
                                                         <color key="textColor" red="0.035294117647058823" green="0.11764705882352941" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
+                                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                            <rect key="frame" x="57" y="103" width="287" height="28"/>
+                                                        </variation>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="YOUR POINTS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.40000000000000002" translatesAutoresizingMaskIntoConstraints="NO" id="yXp-XH-hFh" customClass="BZRTutorialDescriptionLabel">
                                                         <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                                         <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
                                                         <color key="textColor" red="0.035294117647058823" green="0.11764705882352941" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
+                                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                            <rect key="frame" x="153" y="30" width="94" height="17"/>
+                                                        </variation>
                                                     </label>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1498,7 +1513,8 @@
                                                         <exclude reference="f0i-BD-jYZ"/>
                                                     </mask>
                                                 </variation>
-                                                <variation key="heightClass=regular-widthClass=compact">
+                                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                    <rect key="frame" x="0.0" y="237" width="400" height="131"/>
                                                     <mask key="subviews">
                                                         <include reference="Gjo-B0-UWy"/>
                                                         <include reference="bDh-Dk-8Fa"/>
@@ -1571,7 +1587,8 @@
                                                                 <exclude reference="jjQ-tm-bTF"/>
                                                             </mask>
                                                         </variation>
-                                                        <variation key="heightClass=regular-widthClass=compact">
+                                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                            <rect key="frame" x="82" y="16" width="313" height="25"/>
                                                             <mask key="constraints">
                                                                 <exclude reference="jjQ-tm-bTF"/>
                                                             </mask>
@@ -1582,6 +1599,9 @@
                                                         <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <nil key="highlightedColor"/>
+                                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                            <rect key="frame" x="82" y="41" width="313" height="17"/>
+                                                        </variation>
                                                     </label>
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.11764705882352941" green="0.56862745098039214" blue="0.82352941176470584" alpha="1" colorSpace="calibratedRGB"/>
@@ -1663,7 +1683,8 @@
                                                         <exclude reference="bUM-0S-LFh"/>
                                                     </mask>
                                                 </variation>
-                                                <variation key="heightClass=regular-widthClass=compact">
+                                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                    <rect key="frame" x="118" y="403" width="165" height="31"/>
                                                     <mask key="constraints">
                                                         <include reference="bUM-0S-LFh"/>
                                                     </mask>
@@ -1750,22 +1771,22 @@
                                                 <exclude reference="MsH-T6-3Om"/>
                                             </mask>
                                             <mask key="constraints">
-                                                <exclude reference="12y-tl-K0n"/>
-                                                <exclude reference="NYT-u5-Hiz"/>
-                                                <exclude reference="Xx4-FJ-dU5"/>
-                                                <exclude reference="eRm-vF-gL1"/>
-                                                <exclude reference="wqz-A4-F5Z"/>
                                                 <exclude reference="5hn-zc-K03"/>
                                                 <exclude reference="JAV-eQ-nUj"/>
                                                 <exclude reference="UTk-tG-7Fa"/>
                                                 <exclude reference="V1K-EF-jLr"/>
                                                 <exclude reference="dgl-fm-D6s"/>
                                                 <exclude reference="G4j-kx-aXb"/>
+                                                <exclude reference="3B4-up-KGh"/>
+                                                <exclude reference="fuD-EG-wp4"/>
                                                 <exclude reference="2ch-Rs-Xdp"/>
                                                 <exclude reference="sQC-jY-HEL"/>
                                                 <exclude reference="xMH-h8-hcy"/>
-                                                <exclude reference="3B4-up-KGh"/>
-                                                <exclude reference="fuD-EG-wp4"/>
+                                                <exclude reference="12y-tl-K0n"/>
+                                                <exclude reference="NYT-u5-Hiz"/>
+                                                <exclude reference="Xx4-FJ-dU5"/>
+                                                <exclude reference="eRm-vF-gL1"/>
+                                                <exclude reference="wqz-A4-F5Z"/>
                                             </mask>
                                         </variation>
                                         <variation key="heightClass=regular-widthClass=compact">
@@ -1777,22 +1798,22 @@
                                                 <include reference="MsH-T6-3Om"/>
                                             </mask>
                                             <mask key="constraints">
-                                                <include reference="12y-tl-K0n"/>
-                                                <include reference="NYT-u5-Hiz"/>
-                                                <include reference="Xx4-FJ-dU5"/>
-                                                <include reference="eRm-vF-gL1"/>
-                                                <include reference="wqz-A4-F5Z"/>
                                                 <include reference="5hn-zc-K03"/>
                                                 <include reference="JAV-eQ-nUj"/>
                                                 <include reference="UTk-tG-7Fa"/>
                                                 <include reference="V1K-EF-jLr"/>
                                                 <include reference="dgl-fm-D6s"/>
                                                 <include reference="G4j-kx-aXb"/>
+                                                <include reference="3B4-up-KGh"/>
+                                                <include reference="fuD-EG-wp4"/>
                                                 <include reference="2ch-Rs-Xdp"/>
                                                 <include reference="sQC-jY-HEL"/>
                                                 <include reference="xMH-h8-hcy"/>
-                                                <include reference="3B4-up-KGh"/>
-                                                <include reference="fuD-EG-wp4"/>
+                                                <include reference="12y-tl-K0n"/>
+                                                <include reference="NYT-u5-Hiz"/>
+                                                <include reference="Xx4-FJ-dU5"/>
+                                                <include reference="eRm-vF-gL1"/>
+                                                <include reference="wqz-A4-F5Z"/>
                                             </mask>
                                         </variation>
                                     </view>
@@ -1870,6 +1891,7 @@
                         <outlet property="pointsForNextGiftCardLabel" destination="bDh-Dk-8Fa" id="tqe-nT-sGh"/>
                         <outlet property="pointsForNextSurveyLabel" destination="MsH-T6-3Om" id="kN0-jD-QVu"/>
                         <outlet property="progressView" destination="VSs-f0-rwS" id="Aht-6Y-oAI"/>
+                        <outlet property="takeSurveyButton" destination="Ian-0e-mEN" id="w3Q-1Z-HoY"/>
                         <outlet property="userAvatar" destination="CeF-qR-2A8" id="4ST-KA-LxL"/>
                         <outlet property="userNameLabel" destination="1Ai-Yl-jJq" id="ZU0-8d-BBs"/>
                         <segue destination="me8-VQ-Apc" kind="show" identifier="finishSurveySegue" id="LwG-8G-Iok"/>

@@ -25,7 +25,7 @@
     if (!_highlightedLayer) {
         _highlightedLayer = [CALayer layer];
         _highlightedLayer.frame = self.bounds;
-        _highlightedLayer.backgroundColor = [UIColor colorWithWhite:.6f alpha:0.7f].CGColor;
+        _highlightedLayer.backgroundColor = [UIColor colorWithWhite:.5f alpha:0.4f].CGColor;
     }
     return _highlightedLayer;
 }
@@ -37,6 +37,17 @@
     } else {
         [self.highlightedLayer removeFromSuperlayer];
     }
+    [super setHighlighted:highlighted];
+}
+
+- (void)setEnabled:(BOOL)enabled
+{
+    if (!enabled) {
+        [self.layer addSublayer:self.highlightedLayer];
+    } else {
+        [self.highlightedLayer removeFromSuperlayer];
+    }
+    [super setEnabled:enabled];
 }
 
 #pragma mark - Lifecycle

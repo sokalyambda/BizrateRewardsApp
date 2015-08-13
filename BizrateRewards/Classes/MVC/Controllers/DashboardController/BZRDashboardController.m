@@ -19,6 +19,7 @@
 #import "BZRProgressView.h"
 #import "BZRSurveyPointsValueLabel.h"
 #import "BZRTutorialDescriptionLabel.h"
+#import "BZRHighlightedButton.h"
 
 #import "BZRPushNotifiactionService.h"
 #import "BZRSurveyService.h"
@@ -35,6 +36,7 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
 @property (weak, nonatomic) IBOutlet UILabel *earnedPointsLabel;
 @property (weak, nonatomic) IBOutlet BZRSurveyPointsValueLabel *pointsForNextGiftCardLabel;
 @property (weak, nonatomic) IBOutlet BZRTutorialDescriptionLabel *pointsForNextSurveyLabel;
+@property (weak, nonatomic) IBOutlet BZRHighlightedButton *takeSurveyButton;
 
 @property (strong, nonatomic) BZRStorageManager *storageManager;
 @property (strong, nonatomic) BZRUserProfile *currentProfile;
@@ -192,8 +194,10 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
             
             if (!pointsForNextSurvey) {
                 weakSelf.pointsForNextSurveyLabel.text = LOCALIZED(@"Unfortunately, there are no eligible surveys now.");
+                weakSelf.takeSurveyButton.enabled = NO;
             } else {
                 [weakSelf setupPointsForNextSurveyTextWithPoints:pointsForNextSurvey];
+                weakSelf.takeSurveyButton.enabled = YES;
             }
             
             [weakSelf updateUserInformation];
