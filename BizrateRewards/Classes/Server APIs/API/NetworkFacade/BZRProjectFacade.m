@@ -480,7 +480,6 @@ static BZRSessionManager *sharedHTTPClient = nil;
 }
 
 /******* FaceBook *******/
-
 + (BZRNetworkOperation *)signInWithFacebookOnSuccess:(void (^)(BOOL isSuccess))success
                                            onFailure:(void (^)(NSError *error, BOOL isCanceled, BOOL userExists))failure
 {
@@ -566,7 +565,6 @@ static BZRSessionManager *sharedHTTPClient = nil;
     
     return operation;
 }
-
 /******* FaceBook *******/
 
 + (BOOL)isInternetReachable

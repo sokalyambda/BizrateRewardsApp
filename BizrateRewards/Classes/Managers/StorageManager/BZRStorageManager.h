@@ -28,4 +28,6 @@
 @property (assign, nonatomic) BOOL appOpenedWithURL;
 @property (assign, nonatomic) BOOL resettingPasswordRepeatNeeded;
 
+- (void)swapTokens;
+
 @end

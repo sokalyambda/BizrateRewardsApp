@@ -36,14 +36,6 @@
     return _deviceName;
 }
 
-- (BZRUserToken *)userToken
-{
-    if (!_userToken) {
-        _userToken = self.temporaryUserToken;
-    }
-    return _userToken;
-}
-
 #pragma mark - Lifecycle
 
 + (instancetype)sharedStorage
@@ -54,6 +46,19 @@
         storage = [[BZRStorageManager alloc] init];
     });
     return storage;
+}
+
+#pragma mark - Actions
+
+/**
+ *  If there is no user access token but temporary token exists - swap these values
+ */
+- (void)swapTokens
+{
+    if (!self.userToken) {
+        self.userToken = self.temporaryUserToken;
+        self.temporaryUserToken = nil;
+    }
 }
 
 @end
