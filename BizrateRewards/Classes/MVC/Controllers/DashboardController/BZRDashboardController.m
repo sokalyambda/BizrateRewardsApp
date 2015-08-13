@@ -193,7 +193,7 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
             [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
             
             if (!pointsForNextSurvey) {
-                weakSelf.pointsForNextSurveyLabel.text = LOCALIZED(@"Unfortunately, there are no eligible surveys now.");
+                weakSelf.pointsForNextSurveyLabel.text = LOCALIZED(@"Impressive! You have completed all surveys we have currently available for you!");
                 weakSelf.takeSurveyButton.enabled = NO;
             } else {
                 [weakSelf setupPointsForNextSurveyTextWithPoints:pointsForNextSurvey];
