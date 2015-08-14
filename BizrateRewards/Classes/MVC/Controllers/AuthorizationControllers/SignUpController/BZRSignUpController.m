@@ -31,9 +31,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.view layoutIfNeeded];
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
-    self.navigationItem.title = NSLocalizedString(@"Create Account with Email", nil);
+    [self customizeNavigationItem];
     [self customizeFields];
     [self setupUserDataToFields];
 }
@@ -87,6 +85,16 @@
     [self.confirmPasswordField addBottomBorder];
     self.confirmPasswordField.activeImageName      = @"password_icon_prepop";
     self.confirmPasswordField.notActiveImageName   = @"password_icon";
+}
+
+/**
+ *  Customize navigation item
+ */
+- (void)customizeNavigationItem
+{
+    [self.view layoutIfNeeded];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    self.navigationItem.title = NSLocalizedString(@"Create Account with Email", nil);
 }
 
 /**

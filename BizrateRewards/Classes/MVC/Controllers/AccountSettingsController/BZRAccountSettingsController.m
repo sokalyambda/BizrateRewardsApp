@@ -86,14 +86,14 @@ static NSString *const kAccountSettingsContainerSegueIdentifier = @"accountSetti
  */
 - (void)showSignOutActionSheet
 {
-    UIAlertController *signOutController = [UIAlertController alertControllerWithTitle:@"" message:NSLocalizedString(@"Do you want to sign out?", nil) preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertController *signOutController = [UIAlertController alertControllerWithTitle:@"" message:LOCALIZED(@"Do you want to sign out?") preferredStyle:UIAlertControllerStyleActionSheet];
  
     WEAK_SELF;
-    UIAlertAction *signOutAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Sign Out", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+    UIAlertAction *signOutAction = [UIAlertAction actionWithTitle:LOCALIZED(@"Sign Out") style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
         [weakSelf signOut];
     }];
     
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", nil) style:UIAlertActionStyleCancel handler:nil];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:LOCALIZED(@"Cancel") style:UIAlertActionStyleCancel handler:nil];
     
     [signOutController addAction:signOutAction];
     [signOutController addAction:cancelAction];
@@ -155,11 +155,11 @@ static NSString *const kAccountSettingsContainerSegueIdentifier = @"accountSetti
         [weakSelf takeNewPhotoFromCamera];
     }];
     
-    UIAlertAction *galleryAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Select from gallery", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+    UIAlertAction *galleryAction = [UIAlertAction actionWithTitle:LOCALIZED(@"Select from gallery") style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
         [weakSelf choosePhotoFromExistingImages];
     }];
     
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", nil) style:UIAlertActionStyleCancel handler:nil];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:LOCALIZED(@"Cancel") style:UIAlertActionStyleCancel handler:nil];
     
     [changePhotoActionSheet addAction:cameraAction];
     [changePhotoActionSheet addAction:galleryAction];
@@ -174,7 +174,7 @@ static NSString *const kAccountSettingsContainerSegueIdentifier = @"accountSetti
 - (void)takeNewPhotoFromCamera
 {
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        ShowAlert(NSLocalizedString(@"Camera is not available", nil));
+        ShowAlert(LOCALIZED(@"Camera is not available"));
         return;
     } else {
         [self showImagePickerWithType:UIImagePickerControllerSourceTypeCamera];
@@ -242,6 +242,18 @@ static NSString *const kAccountSettingsContainerSegueIdentifier = @"accountSetti
         self.container = (BZRAccountSettingsContaiterController *)segue.destinationViewController;
         [self.container viewWillAppear:YES];
     }
+}
+
+#pragma mark - UIStatusBar appearance
+
+/**
+ *  Either navigation bar exists or no, status bar should be light content here
+ *
+ *  @return UIStatusBarStyleLightContent
+ */
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
 }
 
 @end

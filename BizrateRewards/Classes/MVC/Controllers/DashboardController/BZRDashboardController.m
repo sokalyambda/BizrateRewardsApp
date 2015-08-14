@@ -90,27 +90,27 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
 
 - (IBAction)seeAllGiftCardsClick:(id)sender
 {
-//    WEAK_SELF;
-//    [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
-//    [BZRProjectFacade getFeaturedGiftCardsOnSuccess:^(NSArray *giftCards) {
-//        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-//
-//        if (giftCards.count) {
-//            BZRGiftCardsListController *controller = [weakSelf.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRGiftCardsListController class])];
-//            controller.navigationItem.title = NSLocalizedString(@"Rewards", nil);
-//            controller.giftCards = giftCards;
-//            [weakSelf.navigationController pushViewController:controller animated:YES];
-//        } else {
-//            ShowAlert(NSLocalizedString(@"There are no gift cards at current time", nil));
-//            return;
-//        }
-//        
-//    } onFailure:^(NSError *error, BOOL isCanceled) {
-//        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-//    }];
-    BZRGiftCardsListController *controller = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRGiftCardsListController class])];
-    controller.navigationItem.title = NSLocalizedString(@"Rewards", nil);
-    [self.navigationController pushViewController:controller animated:YES];
+    WEAK_SELF;
+    [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
+    [BZRProjectFacade getFeaturedGiftCardsOnSuccess:^(NSArray *giftCards) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+
+        if (giftCards.count) {
+            BZRGiftCardsListController *controller = [weakSelf.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRGiftCardsListController class])];
+            controller.navigationItem.title = NSLocalizedString(@"Rewards", nil);
+            controller.giftCards = giftCards;
+            [weakSelf.navigationController pushViewController:controller animated:YES];
+        } else {
+            ShowAlert(NSLocalizedString(@"There are no gift cards at current time", nil));
+            return;
+        }
+        
+    } onFailure:^(NSError *error, BOOL isCanceled) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+    }];
+//    BZRGiftCardsListController *controller = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRGiftCardsListController class])];
+//    controller.navigationItem.title = NSLocalizedString(@"Rewards", nil);
+//    [self.navigationController pushViewController:controller animated:YES];
 }
 
 - (IBAction)accountSettingsClick:(id)sender
@@ -231,6 +231,18 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
 - (void)setupPointsForNextSurveyTextWithPoints:(NSInteger)points
 {
     self.pointsForNextSurveyLabel.text = [NSString localizedStringWithFormat:LOCALIZED(@"Earn %li points for the next survey"), points];
+}
+
+#pragma mark - UIStatusBar appearance
+
+/**
+ *  Either navigation bar exists or no, status bar should be light content here
+ *
+ *  @return UIStatusBarStyleLightContent
+ */
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
 }
 
 @end

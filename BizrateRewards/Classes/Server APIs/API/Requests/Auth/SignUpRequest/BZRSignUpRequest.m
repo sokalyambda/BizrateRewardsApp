@@ -48,8 +48,7 @@ static NSString *const requestAction = @"user/create";
                                      kEmail: email,
                                      kPassword: password,
                                      kDateOfBirth: birthDate,
-                                     kGender: gender,
-                                     kIsTestUser: @YES};
+                                     kGender: gender};
         [self setParametersWithParamsData:parameters];
     }
     return self;
@@ -79,7 +78,6 @@ static NSString *const requestAction = @"user/create";
                                      kEmail: email,
                                      kDateOfBirth: birthDate,
                                      kGender: gender,
-                                     kIsTestUser: @YES,
                                      kFacebookParams: @{kAccessToken: fbAccessTokenString}};
         [self setParametersWithParamsData:parameters];
     }

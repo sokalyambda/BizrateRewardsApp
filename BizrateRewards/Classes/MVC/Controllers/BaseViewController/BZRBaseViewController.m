@@ -45,9 +45,9 @@
 }
 
 /**
- *  Status bar text color should be white, because background color is black.
+ *  Set status bar color depending on existence of navigation bar
  *
- *  @return UIStatusBarStyleLightContent
+ *  @return UIStatusBarStyleLightContent of UIStatusBarStyleDefault
  */
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
