@@ -58,10 +58,8 @@ static CGFloat const kCellHeight = 100.f;
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     CGSize size = CGSizeZero;
-    NSInteger width = CGRectGetWidth(collectionView.bounds) / 2.f;
-
+    CGFloat width = CGRectGetWidth(collectionView.bounds) / 2.f;
     size = CGSizeMake(width, kCellHeight);
-        
     return size;
 }
 
