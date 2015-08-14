@@ -20,11 +20,11 @@ static CGFloat const kBorderWidth = .5f;
 
 @implementation BZRGiftcardCell
 
-#pragma mark - Actions
+#pragma mark - Public methods
 
 - (void)configureCellWithGiftCard:(BZRGiftCard *)giftCard
 {
-    [self.giftcardImageView sd_setImageWithURL:giftCard.giftCardImageURL];
+    [self downloadImageForGiftCard:giftCard];
 }
 
 - (void)addBorders
@@ -34,6 +34,19 @@ static CGFloat const kBorderWidth = .5f;
     borderLayer.borderWidth = kBorderWidth;
     borderLayer.borderColor = UIColorFromRGB(0xD7D7D7).CGColor;
     [self.layer addSublayer:borderLayer];
+}
+
+#pragma mark - Private methods
+
+- (void)downloadImageForGiftCard:(BZRGiftCard *)giftCard
+{
+    WEAK_SELF;
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self animated:YES];
+    hud.color = [[UIColor clearColor] copy];
+    hud.activityIndicatorColor = [UIColor blackColor];
+    [self.giftcardImageView sd_setImageWithURL:giftCard.giftCardImageURL completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf animated:YES];
+    }];
 }
 
 @end
