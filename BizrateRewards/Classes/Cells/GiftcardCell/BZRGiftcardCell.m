@@ -27,6 +27,14 @@ static CGFloat const kBorderWidth = .5f;
     [self downloadImageForGiftCard:giftCard];
 }
 
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    [self addBorders];
+}
+
+#pragma mark - Private methods
+
 - (void)addBorders
 {
     CALayer *borderLayer = [CALayer layer];
@@ -35,8 +43,6 @@ static CGFloat const kBorderWidth = .5f;
     borderLayer.borderColor = UIColorFromRGB(0xD7D7D7).CGColor;
     [self.layer addSublayer:borderLayer];
 }
-
-#pragma mark - Private methods
 
 - (void)downloadImageForGiftCard:(BZRGiftCard *)giftCard
 {

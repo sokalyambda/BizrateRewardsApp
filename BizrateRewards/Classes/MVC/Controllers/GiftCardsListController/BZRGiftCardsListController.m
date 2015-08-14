@@ -49,7 +49,6 @@ static CGFloat const kCellHeight = 100.f;
     BZRGiftcardCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([BZRGiftcardCell class]) forIndexPath:indexPath];
     
     [cell configureCellWithGiftCard:currentGiftCard];
-    [cell addBorders];
     
     return cell;
 }
@@ -62,7 +61,7 @@ static CGFloat const kCellHeight = 100.f;
     NSInteger width = CGRectGetWidth(collectionView.bounds) / 2.f;
 
     size = CGSizeMake(width, kCellHeight);
-    
+        
     return size;
 }
 
