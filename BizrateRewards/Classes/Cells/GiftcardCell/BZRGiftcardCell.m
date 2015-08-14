@@ -10,6 +10,8 @@
 
 #import "BZRGiftCard.h"
 
+static CGFloat const kBorderWidth = .5f;
+
 @interface BZRGiftcardCell ()
 
 @property (weak, nonatomic) IBOutlet UIImageView *giftcardImageView;
@@ -27,21 +29,11 @@
 
 - (void)addBorders
 {
-//    CALayer *rightBorderLayer = [CALayer layer];
-//    CALayer *leftBorderLayer = [CALayer layer];
-//    CALayer *bottomBorderLayer = [CALayer layer];
-//    
-//    rightBorderLayer.backgroundColor = [UIColor lightGrayColor].CGColor;
-//    leftBorderLayer.backgroundColor = [UIColor lightGrayColor].CGColor;
-//    bottomBorderLayer.backgroundColor = [UIColor lightGrayColor].CGColor;
-//    
-//    [rightBorderLayer setFrame:CGRectMake(CGRectGetWidth(self.bounds), 0.f, 0.5f, CGRectGetHeight(self.bounds))];
-//    [leftBorderLayer setFrame:CGRectMake(0.f, 0.f, 0.5f, CGRectGetHeight(self.bounds))];
-//    [bottomBorderLayer setFrame:CGRectMake(0.f, CGRectGetHeight(self.bounds), CGRectGetWidth(self.bounds), 0.5f)];
-//    
-//    [self.layer addSublayer:rightBorderLayer];
-//    [self.layer addSublayer:leftBorderLayer];
-//    [self.layer addSublayer:bottomBorderLayer];
+    CALayer *borderLayer = [CALayer layer];
+    [borderLayer setFrame:self.bounds];
+    borderLayer.borderWidth = kBorderWidth;
+    borderLayer.borderColor = UIColorFromRGB(0xD7D7D7).CGColor;
+    [self.layer addSublayer:borderLayer];
 }
 
 @end

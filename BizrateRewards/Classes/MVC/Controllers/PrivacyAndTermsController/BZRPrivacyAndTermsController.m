@@ -47,6 +47,7 @@
     //show navigation bar
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     
+    /*
     //create custom 'Done' button
     self.closeButton = [BZRSerialViewConstructor customButtonWithTitle:LOCALIZED(@"Close") forController:self withAction:@selector(closeClicik:)];
     
@@ -56,6 +57,7 @@
     //remove back button (custom and system)
     self.navigationItem.leftBarButtonItem = nil;
     self.navigationItem.hidesBackButton = YES;
+     */
 }
 
 - (void)closeClicik:(id)sender
