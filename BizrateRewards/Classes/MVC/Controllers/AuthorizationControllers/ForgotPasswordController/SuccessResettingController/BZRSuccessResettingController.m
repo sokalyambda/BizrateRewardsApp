@@ -51,4 +51,14 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+/**
+ *  Set default status bar style because the background is white
+ *
+ *  @return UIStatusBarStyleDefault
+ */
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleDefault;
+}
+
 @end

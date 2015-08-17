@@ -80,4 +80,14 @@ static NSString *const kPushNotificationsAccessSegueIdentifier = @"pushNotificat
     [self performSegueWithIdentifier:kPushNotificationsAccessSegueIdentifier sender:self];
 }
 
+/**
+ *  Set default status bar style because the background is white
+ *
+ *  @return UIStatusBarStyleDefault
+ */
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleDefault;
+}
+
 @end

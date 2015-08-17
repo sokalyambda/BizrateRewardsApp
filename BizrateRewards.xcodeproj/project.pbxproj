@@ -1506,18 +1506,18 @@
 				58A59E221B3EDB2D00A5F30C /* PushNotificationsAccessController */,
 				58A59E211B3EDB2200A5F30C /* GeolocationAccessController */,
 				58ACC0641B3936780081E546 /* StartTutorialController */,
-				58ACC0631B3936340081E546 /* BaseTutorialController */,
+				58ACC0631B3936340081E546 /* AutologinController */,
 			);
 			name = TutorialViewControllers;
 			sourceTree = "<group>";
 		};
-		58ACC0631B3936340081E546 /* BaseTutorialController */ = {
+		58ACC0631B3936340081E546 /* AutologinController */ = {
 			isa = PBXGroup;
 			children = (
 				58ACC06B1B3937160081E546 /* BZRAutologinController.h */,
 				58ACC06C1B3937160081E546 /* BZRAutologinController.m */,
 			);
-			name = BaseTutorialController;
+			name = AutologinController;
 			sourceTree = "<group>";
 		};
 		58ACC0641B3936780081E546 /* StartTutorialController */ = {

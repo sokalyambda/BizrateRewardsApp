@@ -45,13 +45,13 @@
 }
 
 /**
- *  Set status bar color depending on existence of navigation bar
+ *  Setup the base status bar style
  *
- *  @return UIStatusBarStyleLightContent of UIStatusBarStyleDefault
+ *  @return UIStatusBarStyleLightContent
  */
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
-    return self.navigationController.isNavigationBarHidden ? UIStatusBarStyleDefault : UIStatusBarStyleLightContent;
+    return UIStatusBarStyleLightContent;
 }
 
 @end

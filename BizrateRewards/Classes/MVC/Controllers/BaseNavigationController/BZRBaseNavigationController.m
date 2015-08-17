@@ -56,7 +56,7 @@
 
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
-    return UIStatusBarStyleLightContent;
+    return self.topViewController.preferredStatusBarStyle;
 }
 
 /**

@@ -46,4 +46,14 @@ static NSString *const kSecondTutorialSegueIdentifier = @"secondTutorialSegue";
     [self performSegueWithIdentifier:kSecondTutorialSegueIdentifier sender:self];
 }
 
+/**
+ *  Set default status bar style because the background is white
+ *
+ *  @return UIStatusBarStyleDefault
+ */
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleDefault;
+}
+
 @end

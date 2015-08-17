@@ -36,12 +36,6 @@ static NSString *const kGetStartedSegueIdentifier = @"getStartedSegueIdentifier"
     [self setTutorialPassed];
 }
 
-//- (void)viewWillDisappear:(BOOL)animated
-//{
-//    [super viewWillDisappear:animated];
-//    [self.navigationController setNavigationBarHidden:NO animated:YES];
-//}
-
 #pragma mark - Actions
 
 - (IBAction)signInClick:(id)sender
@@ -68,6 +62,16 @@ static NSString *const kGetStartedSegueIdentifier = @"getStartedSegueIdentifier"
         [defaults setBool:YES forKey:IsTutorialPassed];
         [defaults synchronize];
     }
+}
+
+/**
+ *  Set default status bar style because the background is white
+ *
+ *  @return UIStatusBarStyleDefault
+ */
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleDefault;
 }
 
 @end

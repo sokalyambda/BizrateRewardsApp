@@ -102,4 +102,14 @@ static NSString *const kFinalTutorialControllerSegueIdentifier = @"finalTutorial
     [self presentViewController:alertController animated:YES completion:nil];
 }
 
+/**
+ *  Set default status bar style because the background is white
+ *
+ *  @return UIStatusBarStyleDefault
+ */
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleDefault;
+}
+
 @end
