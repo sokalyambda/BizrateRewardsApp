@@ -39,6 +39,27 @@
     [self showCurrentAlertController:alertController];
 }
 
++ (void)showGlobalPushNotificationsPermissionsAlertWithCompletion:(void(^)(UIAlertAction *action, BOOL isCanceled))completion
+{
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:LOCALIZED(@"Push-notifications are off") message:LOCALIZED(@"Do you want to enable them from settings?") preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:LOCALIZED(@"NO") style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+        if (completion) {
+            completion(action, YES);
+        }
+    }];
+    UIAlertAction *settingsAction = [UIAlertAction actionWithTitle:LOCALIZED(@"YES") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        if (completion) {
+            completion(action, NO);
+        }
+    }];
+    
+    [alertController addAction:cancelAction];
+    [alertController addAction:settingsAction];
+    
+    [self showCurrentAlertController:alertController];
+}
+
 + (void)showRetryInternetConnectionAlertWithCompletion:(void(^)(BOOL retry))completion
 {
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"" message:LOCALIZED(@"Connection failed. Try again?") preferredStyle:UIAlertControllerStyleAlert];

@@ -16,6 +16,9 @@ typedef enum : NSUInteger {
 //Geolocation permissions alert
 + (void)showGlobalGeolocationPermissionsAlertWithCompletion:(void(^)(UIAlertAction *action, BOOL isCanceled))completion;
 
+//Push-notifications permissions alert
++ (void)showGlobalPushNotificationsPermissionsAlertWithCompletion:(void(^)(UIAlertAction *action, BOOL isCanceled))completion;
+
 //Retry internet connection
 + (void)showRetryInternetConnectionAlertWithCompletion:(void(^)(BOOL retry))completion;
 

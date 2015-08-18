@@ -39,29 +39,6 @@ static NSString *const kOBStore = @"Store";
 
 #pragma mark - Lifecycle
 
-- (instancetype)init
-{
-    self = [super init];
-    if (self) {
-        _locationManager = [[CLLocationManager alloc] init];
-        _locationManager.delegate           = self;
-        _locationManager.distanceFilter     = kCLDistanceFilterNone;
-        _locationManager.desiredAccuracy    = kCLLocationAccuracyKilometer;
-        
-        if ([_locationManager respondsToSelector:@selector(requestAlwaysAuthorization)]) {
-            // iOS8+
-            // Sending a message to avoid compile time error
-            [[UIApplication sharedApplication] sendAction:@selector(requestAlwaysAuthorization)
-                                                       to:_locationManager
-                                                     from:self
-                                                 forEvent:nil];
-        }
-        
-        [_locationManager startUpdatingLocation];
-    }
-    return self;
-}
-
 + (BZRLocationObserver*)sharedObserver
 {
     static BZRLocationObserver *locationObserver = nil;
@@ -111,9 +88,27 @@ static NSString *const kOBStore = @"Store";
 
 #pragma mark - Public methods
 
+- (void)initLocationManager
+{
+    _locationManager = [[CLLocationManager alloc] init];
+    _locationManager.delegate           = self;
+    _locationManager.distanceFilter     = kCLDistanceFilterNone;
+    _locationManager.desiredAccuracy    = kCLLocationAccuracyKilometer;
+    
+    if ([_locationManager respondsToSelector:@selector(requestAlwaysAuthorization)]) {
+        // iOS8+
+        // Sending a message to avoid compile time error
+        [[UIApplication sharedApplication] sendAction:@selector(requestAlwaysAuthorization)
+                                                   to:_locationManager
+                                                 from:self
+                                             forEvent:nil];
+    }
+    [_locationManager startUpdatingLocation];
+}
+
 - (void)startUpdatingLocation
 {
-    [self.locationManager startUpdatingLocation];
+    [self initLocationManager];
 }
 
 #pragma mark - Private methods

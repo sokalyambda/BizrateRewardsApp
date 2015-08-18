@@ -86,20 +86,13 @@ static NSString *const kFinalTutorialControllerSegueIdentifier = @"finalTutorial
 - (void)showAlertControllerWithError:(NSError *)error
 {
     WEAK_SELF;
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"" message:@"Do you want to enable push-notifications from settings?" preferredStyle:UIAlertControllerStyleAlert];
-    
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
-        [weakSelf performSegueWithIdentifier:kFinalTutorialControllerSegueIdentifier sender:weakSelf];
+    [BZRAlertFacade showGlobalPushNotificationsPermissionsAlertWithCompletion:^(UIAlertAction *action, BOOL isCanceled) {
+        if (isCanceled) {
+            [weakSelf performSegueWithIdentifier:kFinalTutorialControllerSegueIdentifier sender:weakSelf];
+        } else {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+        }
     }];
-
-    UIAlertAction *settingsAction = [UIAlertAction actionWithTitle:@"Open Settings" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
-    }];
-    
-    [alertController addAction:cancelAction];
-    [alertController addAction:settingsAction];
-    
-    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 /**
