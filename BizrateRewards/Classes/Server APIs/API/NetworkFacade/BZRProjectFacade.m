@@ -171,8 +171,6 @@ static BZRSessionManager *sharedHTTPClient = nil;
         
         operation = [[self  HTTPClient] enqueueOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
             
-            BZRForgotPasswordRequest *request = (BZRForgotPasswordRequest*)operation.networkRequest;
-            
             if (success) {
                 success(YES);
             }
@@ -184,7 +182,9 @@ static BZRSessionManager *sharedHTTPClient = nil;
             }
         }];
     } onFailure:^(NSError *error, BOOL isCanceled) {
-        
+        if (failure) {
+            failure(error, isCanceled);
+        }
     }];
     
     return operation;
@@ -371,8 +371,6 @@ static BZRSessionManager *sharedHTTPClient = nil;
         BZRSendDeviceDataRequest *request = [[BZRSendDeviceDataRequest alloc] init];
         
         operation = [[self  HTTPClient] enqueueOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
-            
-            BZRSendDeviceDataRequest *request = (BZRSendDeviceDataRequest*)operation.networkRequest;
             
             if (success) {
                 success(YES);

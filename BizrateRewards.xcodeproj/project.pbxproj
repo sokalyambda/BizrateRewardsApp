@@ -330,7 +330,6 @@
 		58AA304D1B7B805B00363119 /* BZRPushNotifiactionService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRPushNotifiactionService.m; path = Classes/Services/PushNotificationsService/BZRPushNotifiactionService.m; sourceTree = "<group>"; };
 		58AA30521B7B807F00363119 /* BZRLocationObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRLocationObserver.h; path = Classes/Managers/LocationObserver/BZRLocationObserver.h; sourceTree = "<group>"; };
 		58AA30531B7B807F00363119 /* BZRLocationObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRLocationObserver.m; path = Classes/Managers/LocationObserver/BZRLocationObserver.m; sourceTree = "<group>"; };
-		58AA30551B7B809F00363119 /* BZRApiConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BZRApiConstants.h; sourceTree = "<group>"; };
 		58AA30561B7B80AC00363119 /* BZRRequests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BZRRequests.h; sourceTree = "<group>"; };
 		58AA30571B7B80C900363119 /* ErrorsCodes.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = ErrorsCodes.plist; path = Classes/Utilities/ErrorHandler/ErrorsCodes.plist; sourceTree = "<group>"; };
 		58AA30591B7B81B100363119 /* Carson.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = Carson.gpx; path = LocationFiles/Carson.gpx; sourceTree = "<group>"; };
@@ -657,7 +656,7 @@
 		58219EE91B38A24B00A9541A /* UICollectionViewCells */ = {
 			isa = PBXGroup;
 			children = (
-				843C383E1B4EAEFA005E85CF /* CiftcardCell */,
+				843C383E1B4EAEFA005E85CF /* GiftcardCell */,
 			);
 			name = UICollectionViewCells;
 			sourceTree = "<group>";
@@ -840,7 +839,6 @@
 		585C32891B63AA3F005BF07B /* API */ = {
 			isa = PBXGroup;
 			children = (
-				58AA30551B7B809F00363119 /* BZRApiConstants.h */,
 				58B38A461B73497C00EDB024 /* FailedOperationManager */,
 				585C328A1B63AA3F005BF07B /* NetworkFacade */,
 				585C328D1B63AA3F005BF07B /* NetworkOperation */,
@@ -2013,13 +2011,13 @@
 			name = GlobalConstants;
 			sourceTree = "<group>";
 		};
-		843C383E1B4EAEFA005E85CF /* CiftcardCell */ = {
+		843C383E1B4EAEFA005E85CF /* GiftcardCell */ = {
 			isa = PBXGroup;
 			children = (
 				843C383F1B4EAF38005E85CF /* BZRGiftcardCell.h */,
 				843C38401B4EAF38005E85CF /* BZRGiftcardCell.m */,
 			);
-			name = CiftcardCell;
+			name = GiftcardCell;
 			sourceTree = "<group>";
 		};
 		84A6124B1B5E30E6005E01A7 /* MixpanelService */ = {

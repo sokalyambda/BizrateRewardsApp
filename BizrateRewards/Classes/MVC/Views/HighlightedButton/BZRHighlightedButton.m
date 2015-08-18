@@ -45,12 +45,12 @@
 
 - (void)setHighlighted:(BOOL)highlighted
 {
-    [super setHighlighted:highlighted];
     if (highlighted) {
         [self.layer addSublayer:self.highlightedLayer];
     } else {
         [self.highlightedLayer removeFromSuperlayer];
     }
+    [super setHighlighted:highlighted];
 }
 
 - (void)setEnabled:(BOOL)enabled
