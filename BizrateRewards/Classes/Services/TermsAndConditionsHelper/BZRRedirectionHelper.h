@@ -14,7 +14,7 @@ typedef enum : NSUInteger {
 
 @interface BZRRedirectionHelper : NSObject
 
-+ (void)showPrivacyAndTermsWithType:(BZRConditionsType)type andWithNavigationController:(UINavigationController *)navigationController;
++ (void)showPrivacyAndTermsWithType:(BZRConditionsType)type andWithPresentingController:(UIViewController *)presentingController;
 
 + (void)showResetPasswordResultControllerWithObtainedURL:(NSURL *)redirectURL;
 

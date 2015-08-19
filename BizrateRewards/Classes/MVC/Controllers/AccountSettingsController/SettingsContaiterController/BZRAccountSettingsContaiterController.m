@@ -86,7 +86,7 @@ static NSString *const kEditProfileSegueIdentifier = @"editProfileSegue";
             break;
         }
         case BZRSettingsCellTermsOfService: {
-            [BZRRedirectionHelper showPrivacyAndTermsWithType:BZRConditionsTypeTermsAndConditions andWithNavigationController:self.navigationController];
+            [BZRRedirectionHelper showPrivacyAndTermsWithType:BZRConditionsTypeTermsAndConditions andWithPresentingController:self];
             break;
         }
         case BZRSettingsCellContactSupport: {

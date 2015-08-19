@@ -115,6 +115,8 @@
         [self.confirmPasswordField becomeFirstResponder];
     } else if ([self.confirmPasswordField isFirstResponder]) {
         [self.confirmPasswordField resignFirstResponder];
+        //sign up on done click
+        [self signUpWithEmail];
     }
     return YES;
 }

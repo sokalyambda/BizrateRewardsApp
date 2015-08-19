@@ -34,11 +34,12 @@ static NSString *const kTermsLink = @"http://www.bizraterewards.com/mobile-terms
  *  @param type                 Type of privacy
  *  @param navigationController Navigation controller that will push the privacy controller
  */
-+ (void)showPrivacyAndTermsWithType:(BZRConditionsType)type andWithNavigationController:(UINavigationController *)navigationController
++ (void)showPrivacyAndTermsWithType:(BZRConditionsType)type andWithPresentingController:(UIViewController *)presentingController
 {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:kStoryboardName bundle:[NSBundle mainBundle]];
     
     BZRPrivacyAndTermsController *controller = [storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRPrivacyAndTermsController class])];
+    BZRBaseNavigationController *navigationController = [[BZRBaseNavigationController alloc] initWithRootViewController:controller];
     
     NSString *currentURLString;
     
@@ -52,7 +53,8 @@ static NSString *const kTermsLink = @"http://www.bizraterewards.com/mobile-terms
     }
     
     controller.currentURL = [NSURL URLWithString:currentURLString];
-    [navigationController pushViewController:controller animated:YES];
+    
+    [presentingController presentViewController:navigationController animated:YES completion:nil];
 }
 
 /**
