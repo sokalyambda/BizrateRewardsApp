@@ -111,8 +111,8 @@ static NSString *const kChooseSignUpTypeSegueIdentifier = @"сhooseSignUpTypeSeg
                                    
                                    [weakSelf performSegueWithIdentifier:kChooseSignUpTypeSegueIdentifier sender:weakSelf];
                                }
-                               onFailure:^(NSString *errorString) {
-                                   [BZRValidator cleanValidationErrorString];
+                               onFailure:^(NSMutableDictionary *errorDict) {
+                                   [BZRValidator cleanValidationErrorDict];
                                }];
 }
 
@@ -152,8 +152,8 @@ static NSString *const kChooseSignUpTypeSegueIdentifier = @"сhooseSignUpTypeSeg
                                        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
                                        
                                    }];
-                               } onFailure:^(NSString *errorString) {
-                                   [BZRValidator cleanValidationErrorString];
+                               } onFailure:^(NSMutableDictionary *errorDict) {
+                                   [BZRValidator cleanValidationErrorDict];
                                }];
 }
 

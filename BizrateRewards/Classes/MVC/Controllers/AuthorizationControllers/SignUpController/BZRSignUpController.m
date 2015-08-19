@@ -71,8 +71,11 @@
                                    [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
                                }];
                            }
-                           onFailure:^(NSString *errorString) {
-                               [BZRValidator cleanValidationErrorString];
+                           onFailure:^(NSMutableDictionary *errorDict) {
+                               NSString *errorTitle = errorDict[kValidationErrorTitle];
+                               NSString *errorMessage = errorDict[kValidationErrorMessage];
+                               ShowTitleAlert(errorTitle, errorMessage);
+                               [BZRValidator cleanValidationErrorDict];
                            }];
 }
 

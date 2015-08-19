@@ -46,8 +46,8 @@
     [BZRValidator validateEmailField:self.userNameField andPasswordField:self.passwordField onSuccess:^{
         [weakSelf resignIfFirstResponder];
         [weakSelf resetPassword];
-    } onFailure:^(NSString *errorString) {
-        [BZRValidator cleanValidationErrorString];
+    } onFailure:^(NSMutableDictionary *errorDict) {
+        [BZRValidator cleanValidationErrorDict];
     }];
 }
 

@@ -21,26 +21,29 @@ static const NSInteger kMinValidAge = 13.f;
 static NSString *const kEmailErrorImageName = @"email_icon_error";
 static NSString *const kPasswordErrorImageName = @"password_icon_error";
 
+NSString *const kValidationErrorTitle = @"validationErrorTitle";
+NSString *const kValidationErrorMessage = @"validationErrorMessage";
+
 @implementation BZRValidator
 
-static NSMutableString *_errorString;
+static NSMutableDictionary *_errorDict;
 
 #pragma mark - Accessors
 
-+ (NSMutableString *)validationErrorString
++ (NSMutableDictionary *)validationErrorDict
 {
     @synchronized(self) {
-        if (!_errorString) {
-            _errorString = [NSMutableString string];
+        if (!_errorDict) {
+            _errorDict = [NSMutableDictionary dictionary];
         }
-        return _errorString;
+        return _errorDict;
     }
 }
 
-+ (void)setValidationErrorString:(NSMutableString *)validationErrorString
++ (void)setValidationErrorDict:(NSMutableDictionary *)validationErrorDict
 {
     @synchronized(self) {
-        _errorString = validationErrorString;
+        _errorDict = validationErrorDict;
     }
 }
 
@@ -59,7 +62,7 @@ static NSMutableString *_errorString;
     NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
     
     if (![emailTest evaluateWithObject:emailField.text]) {
-        [[self validationErrorString] appendString:NSLocalizedString(@"Email is incorrect. Check it\n", nil)];
+        [self setErrorTitle:@"" andMessage:LOCALIZED(@"Email is incorrect. Check it\n")];
         
         [emailField shakeView];
         
@@ -86,7 +89,7 @@ static NSMutableString *_errorString;
 {
     if (!(passwordField.text.length >= kMinPasswordSymbols && passwordField.text.length <= kMaxPasswordSymbols)) {
         
-        [[self validationErrorString] appendString:NSLocalizedString(@"Invalid password. Password must consist of 8 to 16 characters\n", nil)];
+        [self setErrorTitle:LOCALIZED(@"Your password is too simple") andMessage:LOCALIZED(@"Minimum length is XYZ and it needs to contain one number.\n")];
         
         [passwordField shakeView];
         
@@ -112,7 +115,7 @@ static NSMutableString *_errorString;
     
     if (![passwordField.text isEqualToString:confirmPasswordField.text]) {
 
-        [[self validationErrorString] appendString:NSLocalizedString(@"Password does not match the confirm password\n", nil)];
+        [self setErrorTitle:@"" andMessage:LOCALIZED(@"Password does not match the confirm password\n")];
         
         [confirmPasswordField shakeView];
         
@@ -160,7 +163,7 @@ static NSMutableString *_errorString;
     
     if (!isFirstNameValid) {
         
-        [[self validationErrorString] appendString:NSLocalizedString(@"First name can only contain letters\n", nil)];
+        [self setErrorTitle:@"" andMessage:LOCALIZED(@"First name can only contain letters\n")];
         
         [firstNameField shakeView];
         
@@ -173,7 +176,7 @@ static NSMutableString *_errorString;
     
     if (!isLastNameValid) {
         
-        [[self validationErrorString] appendString:NSLocalizedString(@"Last name can only contain letters\n", nil)];
+        [self setErrorTitle:@"" andMessage:LOCALIZED(@"Last name can only contain letters\n")];
         
         [lastNameField shakeView];
         
@@ -203,7 +206,7 @@ static NSMutableString *_errorString;
         
         [dateField shakeView];
         
-        [[self validationErrorString] appendString:NSLocalizedString(@"Date is empty\n", nil)];
+        [self setErrorTitle:@"" andMessage:LOCALIZED(@"Date is empty\n")];
         
         if ([dateField isKindOfClass:[BZREditProfileField class]]) {
             ((BZREditProfileField *)dateField).validationFailed = YES;
@@ -227,7 +230,7 @@ static NSMutableString *_errorString;
             ((BZREditProfileField *)dateField).validationFailed = YES;
         }
         
-        [[self validationErrorString] appendString:NSLocalizedString(@"You must be of age 13 or older to register\n", nil)];
+        [self setErrorTitle:@"" andMessage:LOCALIZED(@"You must be of age 13 or older to register\n")];
         return NO;
         
     }
@@ -245,7 +248,7 @@ static NSMutableString *_errorString;
 {
     if (!genderField.text.length) {
         
-        [[self validationErrorString] appendString:NSLocalizedString(@"Gender field is empty\n", nil)];
+        [self setErrorTitle:@"" andMessage:LOCALIZED(@"Gender field is empty\n")];
         
         [genderField shakeView];
         
@@ -274,7 +277,7 @@ static NSMutableString *_errorString;
 {
     if (![self validateEmailField:emailField] && failure) {
 
-        failure([self validationErrorString]);
+        failure([self validationErrorDict]);
         
     } else if (success) {
         success();
@@ -297,7 +300,7 @@ static NSMutableString *_errorString;
     }
     
     if (!isValid && failure) {
-        failure([self validationErrorString]);
+        failure([self validationErrorDict]);
     } else if (success) {
         success();
     }
@@ -319,7 +322,7 @@ static NSMutableString *_errorString;
     }
     
     if (!isValid && failure) {
-        failure([self validationErrorString]);
+        failure([self validationErrorDict]);
     } else if (success) {
         success();
     }
@@ -355,7 +358,7 @@ static NSMutableString *_errorString;
     }
     
     if (!isValid && failure) {
-        failure([self validationErrorString]);
+        failure([self validationErrorDict]);
     } else if (success) {
         success();
     }
@@ -367,9 +370,15 @@ static NSMutableString *_errorString;
 /**
  *  Clean the validation error string
  */
-+ (void)cleanValidationErrorString
++ (void)cleanValidationErrorDict
 {
-    [self setValidationErrorString:[@"" mutableCopy]];
+    [self setValidationErrorDict:[@{} mutableCopy]];
+}
+
++ (void)setErrorTitle:(NSString *)errorTitle andMessage:(NSString *)message
+{
+    [[self validationErrorDict] setObject:errorTitle forKey:kValidationErrorTitle];
+    [[self validationErrorDict] setObject:message forKey:kValidationErrorMessage];
 }
 
 @end

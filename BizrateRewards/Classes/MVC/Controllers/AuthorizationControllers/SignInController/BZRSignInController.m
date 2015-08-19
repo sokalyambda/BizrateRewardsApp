@@ -154,8 +154,8 @@ static NSString *const kDashboardSegueIdentifier = @"dashboardSegue";
                                    }
                                }];
                            }
-                           onFailure:^(NSString *errorString) {
-                               [BZRValidator cleanValidationErrorString];
+                           onFailure:^(NSMutableDictionary *errorDict) {
+                               [BZRValidator cleanValidationErrorDict];
                            }];
 }
 

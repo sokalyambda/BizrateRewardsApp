@@ -141,8 +141,8 @@ static NSString *const kEditProfileContainerSegueIdentifier = @"editProfileConta
                                        
                                        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
                                    }];
-                               } onFailure:^(NSString *errorString) {
-                                   [BZRValidator cleanValidationErrorString];
+                               } onFailure:^(NSMutableDictionary *errorDict) {
+                                   [BZRValidator cleanValidationErrorDict];
                                }];
     } else {
         [self.navigationController popViewControllerAnimated:YES];

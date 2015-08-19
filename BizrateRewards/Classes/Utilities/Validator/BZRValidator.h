@@ -7,12 +7,15 @@
 //
 
 typedef void(^ValidationSuccessBlock)(void);
-typedef void(^ValidationFailureBlock)(NSString *errorString);
+typedef void(^ValidationFailureBlock)(NSMutableDictionary *errorDict);
+
+extern NSString *const kValidationErrorTitle;
+extern NSString *const kValidationErrorMessage;
 
 @interface BZRValidator : NSObject
 
-+ (NSMutableString *)validationErrorString;
-//+ (void)setValidationErrorString:(NSMutableString *)validationErrorString;
++ (NSMutableDictionary *)validationErrorDict;
++ (void)setValidationErrorDict:(NSMutableDictionary *)validationErrorDict;
 
 
 + (void)validateEmailField:(UITextField *)emailField onSuccess:(ValidationSuccessBlock)success onFailure:(ValidationFailureBlock)failure;
@@ -23,6 +26,6 @@ typedef void(^ValidationFailureBlock)(NSString *errorString);
 
 + (void)validateEmailField:(UITextField *)emailField andPasswordField:(UITextField *)passwordField andConfirmPasswordField:(UITextField *)confirmPassword onSuccess:(ValidationSuccessBlock)success onFailure:(ValidationFailureBlock)failure;
 
-+ (void)cleanValidationErrorString;
++ (void)cleanValidationErrorDict;
 
 @end
