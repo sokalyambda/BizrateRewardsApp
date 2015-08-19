@@ -11,8 +11,6 @@ typedef enum : NSUInteger {
     BZRSettingsCellGeoLocation,
     BZRSettingsCellPushNotification,
     BZRSettingsCellTermsOfService,
-    BZRSettingsCellUserAgreement,
-    BZRSettingsCellPrivacyPolicy,
     BZRSettingsCellContactSupport
 } BZRSettingsCellType;
 
@@ -89,14 +87,6 @@ static NSString *const kEditProfileSegueIdentifier = @"editProfileSegue";
         }
         case BZRSettingsCellTermsOfService: {
             [BZRRedirectionHelper showPrivacyAndTermsWithType:BZRConditionsTypeTermsAndConditions andWithNavigationController:self.navigationController];
-            break;
-        }
-        case BZRSettingsCellUserAgreement: {
-            [BZRRedirectionHelper showPrivacyAndTermsWithType:BZRConditionsTypeUserAgreement andWithNavigationController:self.navigationController];
-            break;
-        }
-        case BZRSettingsCellPrivacyPolicy: {
-            [BZRRedirectionHelper showPrivacyAndTermsWithType:BZRConditionsTypePrivacyPolicy andWithNavigationController:self.navigationController];
             break;
         }
         case BZRSettingsCellContactSupport: {

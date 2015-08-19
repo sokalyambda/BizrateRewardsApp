@@ -61,12 +61,12 @@ static NSString *const kChooseSignUpTypeSegueIdentifier = @"сhooseSignUpTypeSeg
 
 - (IBAction)privacyPolicyClick:(id)sender
 {
-    [BZRRedirectionHelper showPrivacyAndTermsWithType:BZRConditionsTypePrivacyPolicy andWithNavigationController:self.navigationController];
+    [self showProgramTerms];
 }
 
 - (IBAction)termsAndConditionsClick:(id)sender
 {
-    [BZRRedirectionHelper showPrivacyAndTermsWithType:BZRConditionsTypeTermsAndConditions andWithNavigationController:self.navigationController];
+    [self showProgramTerms];
 }
 
 - (IBAction)submitButtonClick:(UIButton *)sender
@@ -180,6 +180,11 @@ static NSString *const kChooseSignUpTypeSegueIdentifier = @"сhooseSignUpTypeSeg
     } else if (self.failedToSignInEmail.length) {
         self.editProfileTableViewController.emailField.text = self.failedToSignInEmail;
     }
+}
+
+- (void)showProgramTerms
+{
+    [BZRRedirectionHelper showPrivacyAndTermsWithType:BZRConditionsTypeTermsAndConditions andWithNavigationController:self.navigationController];
 }
 
 #pragma mark - Navigation
