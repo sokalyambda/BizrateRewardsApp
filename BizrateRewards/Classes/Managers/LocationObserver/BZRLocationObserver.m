@@ -45,6 +45,7 @@ static NSString *const kOBStore = @"Store";
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         locationObserver = [[BZRLocationObserver alloc] init];
+        [locationObserver startUpdatingLocation];
     });
     
     return locationObserver;
@@ -94,21 +95,14 @@ static NSString *const kOBStore = @"Store";
     _locationManager.delegate           = self;
     _locationManager.distanceFilter     = kCLDistanceFilterNone;
     _locationManager.desiredAccuracy    = kCLLocationAccuracyKilometer;
-    
-    if ([_locationManager respondsToSelector:@selector(requestAlwaysAuthorization)]) {
-        // iOS8+
-        // Sending a message to avoid compile time error
-        [[UIApplication sharedApplication] sendAction:@selector(requestAlwaysAuthorization)
-                                                   to:_locationManager
-                                                 from:self
-                                             forEvent:nil];
-    }
+
     [_locationManager startUpdatingLocation];
 }
 
 - (void)startUpdatingLocation
 {
     [self initLocationManager];
+    [self setupOfferBeamObserver];
 }
 
 #pragma mark - Private methods
