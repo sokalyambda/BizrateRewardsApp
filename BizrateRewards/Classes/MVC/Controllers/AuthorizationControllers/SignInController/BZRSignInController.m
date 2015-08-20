@@ -139,9 +139,9 @@ static NSString *const kDashboardSegueIdentifier = @"dashboardSegue";
                                    //hide progress hud
                                    [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
                                    
-                                   if (weakSelf.isRememberMe) {
-                                       [BZRKeychainHandler storeCredentialsWithUsername:weakSelf.userNameField.text andPassword:weakSelf.passwordField.text];
-                                   }
+//                                   if (weakSelf.isRememberMe) {
+                                   [BZRKeychainHandler storeCredentialsWithUsername:weakSelf.userNameField.text andPassword:weakSelf.passwordField.text];
+//                                   }
                                    [weakSelf performSegueWithIdentifier:kDashboardSegueIdentifier sender:weakSelf];
                                    
                                } failure:^(NSError *error, BOOL isCanceled, BOOL emailRegistered) {

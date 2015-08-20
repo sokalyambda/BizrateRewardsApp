@@ -16,6 +16,7 @@
 #import "BZRProjectFacade.h"
 
 #import "BZRErrorHandler.h"
+#import "BZRKeychainHandler.h"
 
 @interface BZRSignUpController ()
 
@@ -66,6 +67,8 @@
                                [BZRProjectFacade signUpWithUserFirstName:weakSelf.temporaryProfile.firstName andUserLastName:weakSelf.temporaryProfile.lastName andEmail:weakSelf.temporaryProfile.email andPassword:weakSelf.passwordField.text andDateOfBirth:[[BZRCommonDateFormatter commonDateFormatter] stringFromDate:weakSelf.temporaryProfile.dateOfBirth] andGender:[weakSelf.temporaryProfile.genderString substringToIndex:1] success:^(BOOL success) {
                                    
                                    [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+                                   
+                                   [BZRKeychainHandler storeCredentialsWithUsername:weakSelf.userNameField.text andPassword:weakSelf.passwordField.text];
                                    
                                    BZRDashboardController *controller = [weakSelf.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRDashboardController class])];
                                    controller.updateNeeded = YES;

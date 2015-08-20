@@ -22,7 +22,6 @@ static NSString *const kStartTutorialSegueIdentirier = @"startTutorialSegue";
 @interface BZRAutologinController ()
 
 @property (assign, nonatomic, getter=isTutorialPassed) BOOL tutorialPassed;
-@property (assign, nonatomic, getter=isRememberMe) BOOL rememberMe;
 @property (assign, nonatomic, getter=isFacebookSessionValid) BOOL facebookSessionValid;
 
 @property (assign, nonatomic, getter=isForgotPasswordRedirectionNeeded) BOOL forgotPasswordRedirecionNeeded;
@@ -42,11 +41,6 @@ static NSString *const kStartTutorialSegueIdentirier = @"startTutorialSegue";
 - (BOOL)isTutorialPassed
 {
     return [self.defaults boolForKey:IsTutorialPassed];
-}
-
-- (BOOL)isRememberMe
-{
-    return [self.defaults boolForKey:RememberMeKey];
 }
 
 - (BOOL)isFacebookSessionValid
@@ -132,13 +126,10 @@ static NSString *const kStartTutorialSegueIdentirier = @"startTutorialSegue";
 /**
  *  Checking whether user data exists in keychain
  *
- *  @return Returns 'YES' if 'remember me' value is 'true' and user auth data exists in keychain. Otherwise, returns 'NO'.
+ *  @return Returns 'YES' if user's auth data exists in keychain. Otherwise, returns 'NO'.
  */
 - (BOOL)userDataExistsInKeychain
 {
-    if (!self.isRememberMe) {
-        return NO;
-    }
     NSDictionary *userCredentials = [BZRKeychainHandler getStoredCredentials];
     self.savedPassword = userCredentials[PasswordKey];
     self.savedUsername = userCredentials[UserNameKey];
