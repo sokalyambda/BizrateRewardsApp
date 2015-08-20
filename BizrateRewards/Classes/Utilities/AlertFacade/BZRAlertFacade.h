@@ -11,6 +11,9 @@ typedef enum : NSUInteger {
     BZRAccessTypePushNotifications
 } BZRAccessType;
 
+extern NSString *const kErrorAlertTitle;
+extern NSString *const kErrorAlertMessage;
+
 @interface BZRAlertFacade : NSObject
 
 //Geolocation permissions alert
@@ -21,15 +24,17 @@ typedef enum : NSUInteger {
 
 //Retry internet connection
 + (void)showRetryInternetConnectionAlertWithCompletion:(void(^)(BOOL retry))completion;
+//Email has already been registered
++ (void)showEmailAlreadyRegisteredAlertWithError:(NSError *)error andCompletion:(void(^)(void))completion;
 
 //Change permissions
 + (void)showChangePermissionsAlertWithAccessType:(BZRAccessType)accessType andCompletion:(void(^)(UIAlertAction *action, BOOL isCanceled))completion;
 
-//Alerts functions
-void ShowTitleErrorAlert(NSString *title, NSError *error);
-void ShowErrorAlert(NSError *error);
-void ShowTitleAlert(NSString *title, NSString *message);
-void ShowAlert(NSString *message);
-void ShowFailureResponseAlertWithError(NSError *error);
+//Common alerts methods
++ (void)showFailureResponseAlertWithError:(NSError *)error andCompletion:(void(^)(void))completion;
++ (void)showAlertWithTitle:(NSString *)title andError:(NSError *)error withCompletion:(void(^)(void))completion;
++ (void)showErrorAlert:(NSError *)error withCompletion:(void(^)(void))completion;
++ (void)showAlertWithTitle:(NSString *)title andMessage:(NSString *)message withCompletion:(void(^)(void))completion;
++ (void)showAlertWithMessage:(NSString *)message withCompletion:(void(^)(void))completion;
 
 @end

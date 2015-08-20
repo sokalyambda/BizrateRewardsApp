@@ -16,6 +16,7 @@
 
 #import "BZRFacebookService.h"
 #import "BZRErrorHandler.h"
+#import "BZRRedirectionHelper.h"
 
 #import "BZRKeychainHandler.h"
 
@@ -106,7 +107,9 @@ static BZRSessionManager *sharedHTTPClient = nil;
         
         BOOL isEmailRegistered = [BZRErrorHandler isEmailRegisteredFromError:error];
         if (isEmailRegistered) {
-            ShowFailureResponseAlertWithError(error);
+            [BZRAlertFacade showFailureResponseAlertWithError:error andCompletion:^{
+                
+            }];
         }
         if (failure) {
             failure(error, isCanceled, isEmailRegistered);
@@ -147,7 +150,6 @@ static BZRSessionManager *sharedHTTPClient = nil;
             }
             
         } failure:^(BZRNetworkOperation *operation ,NSError *error, BOOL isCanceled) {
-            ShowFailureResponseAlertWithError(error);
             if (failure) {
                 failure(error, isCanceled);
             }
@@ -176,7 +178,9 @@ static BZRSessionManager *sharedHTTPClient = nil;
             }
             
         } failure:^(BZRNetworkOperation *operation ,NSError *error, BOOL isCanceled) {
-            ShowFailureResponseAlertWithError(error);
+            [BZRAlertFacade showFailureResponseAlertWithError:error andCompletion:^{
+                
+            }];
             if (failure) {
                 failure(error, isCanceled);
             }
@@ -216,7 +220,9 @@ static BZRSessionManager *sharedHTTPClient = nil;
             }
             
         } failure:^(BZRNetworkOperation *operation ,NSError *error, BOOL isCanceled) {
-            ShowFailureResponseAlertWithError(error);
+            [BZRAlertFacade showFailureResponseAlertWithError:error andCompletion:^{
+                
+            }];
             if (failure) {
                 failure(error, isCanceled);
             }
@@ -255,7 +261,9 @@ static BZRSessionManager *sharedHTTPClient = nil;
             }
             
         } failure:^(BZRNetworkOperation *operation ,NSError *error, BOOL isCanceled) {
-            ShowFailureResponseAlertWithError(error);
+            [BZRAlertFacade showFailureResponseAlertWithError:error andCompletion:^{
+                
+            }];
             if (failure) {
                 failure(error, isCanceled);
             }
@@ -288,7 +296,9 @@ static BZRSessionManager *sharedHTTPClient = nil;
             }
             
         } failure:^(BZRNetworkOperation *operation ,NSError *error, BOOL isCanceled) {
-            ShowFailureResponseAlertWithError(error);
+            [BZRAlertFacade showFailureResponseAlertWithError:error andCompletion:^{
+                
+            }];
             if (failure) {
                 failure(error, isCanceled);
             }
@@ -319,7 +329,9 @@ static BZRSessionManager *sharedHTTPClient = nil;
             }
             
         } failure:^(BZRNetworkOperation *operation ,NSError *error, BOOL isCanceled) {
-            ShowFailureResponseAlertWithError(error);
+            [BZRAlertFacade showFailureResponseAlertWithError:error andCompletion:^{
+                
+            }];
             if (failure) {
                 failure(error, isCanceled);
             }
@@ -406,7 +418,9 @@ static BZRSessionManager *sharedHTTPClient = nil;
             }
             
         } failure:^(BZRNetworkOperation *operation, NSError *error, BOOL isCanceled) {
-            ShowFailureResponseAlertWithError(error);
+            [BZRAlertFacade showFailureResponseAlertWithError:error andCompletion:^{
+                
+            }];
             if (failure) {
                 failure(error, isCanceled);
             }
@@ -504,7 +518,9 @@ static BZRSessionManager *sharedHTTPClient = nil;
             
             BOOL isFacebookUserExists = [BZRErrorHandler isFacebookUserExistsFromError:error];
             if (isFacebookUserExists) {
-                ShowFailureResponseAlertWithError(error);
+                [BZRAlertFacade showFailureResponseAlertWithError:error andCompletion:^{
+                    
+                }];
             }
             if (failure) {
                 failure(error, isCanceled, isFacebookUserExists);
@@ -548,7 +564,6 @@ static BZRSessionManager *sharedHTTPClient = nil;
             }
             
         } failure:^(BZRNetworkOperation *operation ,NSError *error, BOOL isCanceled) {
-            ShowFailureResponseAlertWithError(error);
             if (failure) {
                 failure(error, isCanceled);
             }

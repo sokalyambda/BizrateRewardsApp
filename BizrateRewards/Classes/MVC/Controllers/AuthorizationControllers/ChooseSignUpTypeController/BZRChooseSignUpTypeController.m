@@ -9,8 +9,12 @@
 #import "BZRChooseSignUpTypeController.h"
 #import "BZRSignUpController.h"
 #import "BZRDashboardController.h"
+#import "BZRForgotPasswordController.h"
+#import "BZRBaseNavigationController.h"
 
 #import "BZRFacebookService.h"
+
+#import "BZRErrorHandler.h"
 
 #import "BZRProjectFacade.h"
 
@@ -88,6 +92,21 @@ static NSString *const kEmail = @"email";
                 
             } onFailure:^(NSError *error, BOOL isCanceled) {
                 [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+                
+                BOOL isEmailAlreadyRegistered = [BZRErrorHandler isEmailAlreadyExistFromError:error];
+                
+                if (isEmailAlreadyRegistered) {
+                    [BZRAlertFacade showEmailAlreadyRegisteredAlertWithError:error andCompletion:^{
+                        BZRForgotPasswordController *controller = [weakSelf.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRForgotPasswordController class])];
+                        controller.userName = weakSelf.userNameField.text;
+                        BZRBaseNavigationController *navController = [[BZRBaseNavigationController alloc] initWithRootViewController:controller];
+                        [weakSelf presentViewController:navController animated:YES completion:nil];
+                    }];
+                } else {
+                    [BZRAlertFacade showFailureResponseAlertWithError:error andCompletion:^{
+                        
+                    }];
+                }
                 
             }];
             

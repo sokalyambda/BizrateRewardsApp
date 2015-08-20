@@ -17,33 +17,51 @@ static NSString *const kErrorStatusCode     = @"error_code";
 
 static NSString *const kFacebookUserNotFound    = @"FACEBOOK_USER_NOT_FOUND";
 static NSString *const kEmailNotRegistered      = @"EMAIL_NOT_REGISTERED";
+static NSString *const kEmailAlreadyExist       = @"EMAIL_ALREADY_REGISTERED";
 
 static NSString *const kErrorsCodesPlistName = @"ErrorsCodes";
 
 @implementation BZRErrorHandler
 
+#pragma mark - Accessors
+
+static NSString *_errorAlertTitle = nil;
+
++ (NSString *)getErrorAlertTitle
+{
+    if (!_errorAlertTitle) {
+        _errorAlertTitle = @"";
+    }
+    return _errorAlertTitle;
+}
+
++ (void)setErrorAlertTitle:(NSString *)title
+{
+    _errorAlertTitle = title;
+}
+
 #pragma mark - Public methods
 
 /**
- *  Get string value from network error
+ *  Parse error and get alert title and message
  *
- *  @param error Error that should be parsed
- *
- *  @return String value from current error
+ *  @param error      Error that should be parsed
+ *  @param completion Completion Block
  */
-+ (NSString *)stringFromNetworkError:(NSError *)error
++ (void)parseError:(NSError *)error withCompletion:(ErrorParsingCompletion)completion
 {
     NSString *errFromJsonString = [self errorStringFromJSONResponseError:error];
     if (errFromJsonString) {
-        return errFromJsonString;
+        return completion([self getErrorAlertTitle], errFromJsonString);
     }
     NSString *errFromCodeString = [self errorStringFromErrorCode:error];
     if (errFromCodeString) {
-        return errFromCodeString;
+        return completion([self getErrorAlertTitle], errFromCodeString);
     }
     
     NSString *errLocalizedDescription = error.localizedDescription;
-    return errLocalizedDescription;
+    
+    return completion([self getErrorAlertTitle], errLocalizedDescription);
 }
 
 /**
@@ -120,6 +138,27 @@ static NSString *const kErrorsCodesPlistName = @"ErrorsCodes";
         }
     }
     return userExists;
+}
+
+/**
+ *  Check whether this email has already registered
+ *
+ *  @param error Error that should be parsed
+ *
+ *  @return 'YES' if registered
+ */
++ (BOOL)isEmailAlreadyExistFromError:(NSError *)error
+{
+    NSArray *errors = [self getErrorsArrayDataFromError:error];
+    
+    BOOL emailExists = NO;
+    for (NSDictionary *errorDict in errors) {
+        if ([errorDict[kErrorStatusCode] isEqualToString:kEmailAlreadyExist]) {
+            emailExists = YES;
+            break;
+        }
+    }
+    return emailExists;
 }
 
 #pragma mark - Private methods
@@ -243,7 +282,8 @@ static NSString *const kErrorsCodesPlistName = @"ErrorsCodes";
     
     [preservedErrorsArray enumerateObjectsUsingBlock:^(NSDictionary *errorDict, NSUInteger idx, BOOL *stop) {
         if (errorDict[errorCode]) {
-            resultString = LOCALIZED(errorDict[errorCode]);
+            resultString = LOCALIZED(errorDict[errorCode][kErrorAlertMessage]);
+            [self setErrorAlertTitle:LOCALIZED(errorDict[errorCode][kErrorAlertTitle])];
             *stop = YES;
         }
     }];

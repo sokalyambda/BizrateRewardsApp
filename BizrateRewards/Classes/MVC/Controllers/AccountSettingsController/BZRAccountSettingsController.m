@@ -174,7 +174,9 @@ static NSString *const kAccountSettingsContainerSegueIdentifier = @"accountSetti
 - (void)takeNewPhotoFromCamera
 {
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        ShowAlert(LOCALIZED(@"Camera is not available"));
+        [BZRAlertFacade showAlertWithMessage:LOCALIZED(@"Camera is not available") withCompletion:^{
+            
+        }];
         return;
     } else {
         [self showImagePickerWithType:UIImagePickerControllerSourceTypeCamera];

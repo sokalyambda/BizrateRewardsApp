@@ -6,13 +6,16 @@
 //  Copyright (c) 2015 Connexity. All rights reserved.
 //
 
-@interface BZRErrorHandler : NSObject
+typedef void(^ErrorParsingCompletion)(NSString *alertTitle, NSString *alertMessage);
 
-+ (NSString *)stringFromNetworkError:(NSError *)error;
+@interface BZRErrorHandler : NSObject
 
 + (BOOL)errorIsNetworkError:(NSError *)error;
 
 + (BOOL)isEmailRegisteredFromError:(NSError *)error;
 + (BOOL)isFacebookUserExistsFromError:(NSError *)error;
++ (BOOL)isEmailAlreadyExistFromError:(NSError *)error;
+
++ (void)parseError:(NSError *)error withCompletion:(ErrorParsingCompletion)completion;
 
 @end

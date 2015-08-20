@@ -8,10 +8,14 @@
 
 #import "BZRSignUpController.h"
 #import "BZRDashboardController.h"
+#import "BZRForgotPasswordController.h"
+#import "BZRBaseNavigationController.h"
 
 #import "BZRCommonDateFormatter.h"
 
 #import "BZRProjectFacade.h"
+
+#import "BZRErrorHandler.h"
 
 @interface BZRSignUpController ()
 
@@ -69,12 +73,29 @@
                                    
                                } failure:^(NSError *error, BOOL isCanceled) {
                                    [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+                                   
+                                   BOOL isEmailAlreadyRegistered = [BZRErrorHandler isEmailAlreadyExistFromError:error];
+                                   
+                                   if (isEmailAlreadyRegistered) {
+                                       [BZRAlertFacade showEmailAlreadyRegisteredAlertWithError:error andCompletion:^{
+                                           BZRForgotPasswordController *controller = [weakSelf.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRForgotPasswordController class])];
+                                           controller.userName = weakSelf.userNameField.text;
+                                           BZRBaseNavigationController *navController = [[BZRBaseNavigationController alloc] initWithRootViewController:controller];
+                                           [weakSelf presentViewController:navController animated:YES completion:nil];
+                                       }];
+                                   } else {
+                                       [BZRAlertFacade showFailureResponseAlertWithError:error andCompletion:^{
+                                           
+                                       }];
+                                   }
                                }];
                            }
                            onFailure:^(NSMutableDictionary *errorDict) {
                                NSString *errorTitle = errorDict[kValidationErrorTitle];
                                NSString *errorMessage = errorDict[kValidationErrorMessage];
-                               ShowTitleAlert(errorTitle, errorMessage);
+                               [BZRAlertFacade showAlertWithTitle:errorTitle andMessage:errorMessage withCompletion:^{
+                                   
+                               }];
                                [BZRValidator cleanValidationErrorDict];
                            }];
 }

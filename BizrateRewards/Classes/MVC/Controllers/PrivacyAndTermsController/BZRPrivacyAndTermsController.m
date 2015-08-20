@@ -79,7 +79,7 @@
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
-    ShowFailureResponseAlertWithError(error);
+    [BZRAlertFacade showFailureResponseAlertWithError:error andCompletion:nil];
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
 }
 

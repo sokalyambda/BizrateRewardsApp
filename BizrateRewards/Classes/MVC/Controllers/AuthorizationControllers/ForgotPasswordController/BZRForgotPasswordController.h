@@ -10,4 +10,6 @@
 
 @interface BZRForgotPasswordController : BZRBaseAuthController
 
+@property (strong, nonatomic) NSString *userName;
+
 @end

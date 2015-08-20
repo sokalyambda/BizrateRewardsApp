@@ -31,6 +31,7 @@
 {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:YES];
+    [self setupEmailIfExists];
 }
 
 #pragma mark - Actions
@@ -78,6 +79,13 @@
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         
     }];
+}
+
+- (void)setupEmailIfExists
+{
+    if (self.userName.length) {
+        self.userNameField.text = self.userName;
+    }
 }
 
 #pragma mark - UITextFieldDelegate

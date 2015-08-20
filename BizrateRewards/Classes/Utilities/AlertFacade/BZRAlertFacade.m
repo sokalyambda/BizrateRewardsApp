@@ -14,10 +14,29 @@
 
 #import "BZRErrorHandler.h"
 
+NSString *const kErrorAlertTitle = @"AlertTitle";
+NSString *const kErrorAlertMessage = @"AlertMessage";
+
 @implementation BZRAlertFacade
 
 #pragma mark - Actions
 
+/**
+ *  Show alert if email has already registered
+ *
+ *  @param error      Error that should be parsed
+ *  @param completion Completion Block
+ */
++ (void)showEmailAlreadyRegisteredAlertWithError:(NSError *)error andCompletion:(void(^)(void))completion
+{
+    [self showFailureResponseAlertWithError:error andCompletion:completion];
+}
+
+/**
+ *  Show geolocation global alert
+ *
+ *  @param completion Completion Block
+ */
 + (void)showGlobalGeolocationPermissionsAlertWithCompletion:(void(^)(UIAlertAction *action, BOOL isCanceled))completion
 {
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:LOCALIZED(@"Location services are off") message:LOCALIZED(@"To use background location you must turn on 'Always' in the Location Services Settings") preferredStyle:UIAlertControllerStyleAlert];
@@ -39,6 +58,11 @@
     [self showCurrentAlertController:alertController];
 }
 
+/**
+ *  Show push notifications global alert
+ *
+ *  @param completion Completion Block
+ */
 + (void)showGlobalPushNotificationsPermissionsAlertWithCompletion:(void(^)(UIAlertAction *action, BOOL isCanceled))completion
 {
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:LOCALIZED(@"Push-notifications are off") message:LOCALIZED(@"Do you want to enable them from settings?") preferredStyle:UIAlertControllerStyleAlert];
@@ -60,6 +84,11 @@
     [self showCurrentAlertController:alertController];
 }
 
+/**
+ *  Show retry internet connection alert
+ *
+ *  @param completion Completion Block
+ */
 + (void)showRetryInternetConnectionAlertWithCompletion:(void(^)(BOOL retry))completion
 {
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"" message:LOCALIZED(@"Connection failed. Try again?") preferredStyle:UIAlertControllerStyleAlert];
@@ -81,6 +110,12 @@
     [self showCurrentAlertController:alertController];
 }
 
+/**
+ *  Show change permissions alert
+ *
+ *  @param accessType BZRAccessType
+ *  @param completion Completion Block
+ */
 + (void)showChangePermissionsAlertWithAccessType:(BZRAccessType)accessType andCompletion:(void(^)(UIAlertAction *action, BOOL isCanceled))completion
 {
     NSString *alertMessage;
@@ -119,6 +154,11 @@
 
 #pragma mark - Private methods
 
+/**
+ *  Show alert controller
+ *
+ *  @param alertController Alert Controller that should be presented
+ */
 + (void)showCurrentAlertController:(UIAlertController *)alertController
 {
     AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
@@ -134,20 +174,21 @@
 
 #pragma mark - Alerts
 
-void ShowTitleErrorAlert(NSString *title, NSError *error)
+/**
+ *  Show error alert with title and message
+ *
+ *  @param title      Alert Title
+ *  @param error      Alert Message
+ *  @param completion Completion Block
+ */
++ (void)showAlertWithTitle:(NSString *)title andError:(NSError *)error withCompletion:(void(^)(void))completion
 {
     if (!error) {
         return;
     }
     
     NSMutableString *errStr = [NSMutableString stringWithString: LOCALIZED(@"Error")];
-    
-    //    if (error.code) {
-    //       [errStr appendFormat:@": %ld", (long)error.code];
-    //    }
-    
-    // If the user info dictionary doesn’t contain a value for NSLocalizedDescriptionKey
-    // error.localizedDescription is constructed from domain and code by default
+
     [errStr appendFormat:@"\n%@", error.localizedDescription];
     
     if (error.localizedFailureReason)
@@ -156,35 +197,75 @@ void ShowTitleErrorAlert(NSString *title, NSError *error)
     if (error.localizedRecoverySuggestion)
         [errStr appendFormat:@"\n%@", error.localizedRecoverySuggestion];
     
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:errStr delegate:nil cancelButtonTitle:LOCALIZED(@"OK") otherButtonTitles:nil];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:LOCALIZED(title) message:errStr preferredStyle:UIAlertControllerStyleAlert];
     
-    [alert show];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:LOCALIZED(@"OK") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        if (completion) {
+            completion();
+        }
+    }];
+    
+    [alertController addAction:okAction];
+    [self showCurrentAlertController:alertController];
 }
 
-void ShowErrorAlert(NSError *error)
+/**
+ *  Show alert with error
+ *
+ *  @param error      Error that should be parsed
+ *  @param completion Completion Block
+ */
++ (void)showErrorAlert:(NSError *)error withCompletion:(void(^)(void))completion
 {
-    ShowTitleErrorAlert(@"", error);
+    [self showAlertWithTitle:@"" andError:error withCompletion:completion];
 }
 
-void ShowTitleAlert(NSString *title, NSString *message)
+/**
+ *  Show alert with title and message
+ *
+ *  @param title      Alert Title
+ *  @param message    Alert Message
+ *  @param completion Completion Block
+ */
++ (void)showAlertWithTitle:(NSString *)title andMessage:(NSString *)message withCompletion:(void(^)(void))completion
 {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:LOCALIZED(@"OK") otherButtonTitles:nil];
-    [alert show];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:LOCALIZED(@"OK") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        if (completion) {
+            completion();
+        }
+    }];
+    
+    [alertController addAction:okAction];
+    [self showCurrentAlertController:alertController];
 }
 
-void ShowAlert(NSString *message)
+/**
+ *  Show Alert with message
+ *
+ *  @param message    Alert Message
+ *  @param completion Completion Block
+ */
++ (void)showAlertWithMessage:(NSString *)message withCompletion:(void(^)(void))completion
 {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:message delegate:nil cancelButtonTitle:LOCALIZED(@"OK") otherButtonTitles:nil];
-    [alert show];
+    [self showAlertWithTitle:@"" andMessage:message withCompletion:completion];
 }
 
-void ShowFailureResponseAlertWithError(NSError *error)
+/**
+ *  Show response error alert
+ *
+ *  @param error      Error that shoud be parsed
+ *  @param completion Completion Block
+ */
++ (void)showFailureResponseAlertWithError:(NSError *)error andCompletion:(void(^)(void))completion
 {
     if (!error) {
         return;
     }
-    NSString *errorString = [BZRErrorHandler stringFromNetworkError:error];
-    ShowAlert(errorString);
+    [BZRErrorHandler parseError:error withCompletion:^(NSString *alertTitle, NSString *alertMessage) {
+        [self showAlertWithTitle:alertTitle andMessage:alertMessage withCompletion:completion];
+    }];
 }
 
 @end
