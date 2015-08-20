@@ -59,7 +59,11 @@ static NSString *const kEditProfileContainerSegueIdentifier = @"editProfileConta
 - (void)setProfileChanged:(BOOL)profileChanged
 {
     _profileChanged = profileChanged;
+    
+    self.navigationItem.rightBarButtonItem.enabled = _profileChanged;
+    /*
     [((UIButton *)self.doneButton.customView) setTitle:_profileChanged ? LOCALIZED(@"Save") : LOCALIZED(@"Close") forState:UIControlStateNormal];
+     */
 }
 
 #pragma mark - View Lifecycle
@@ -107,14 +111,17 @@ static NSString *const kEditProfileContainerSegueIdentifier = @"editProfileConta
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     
     //create custom 'Done' button
-    self.doneButton = [BZRSerialViewConstructor customButtonWithTitle:LOCALIZED(@"Close") forController:self withAction:@selector(doneClick:)];
+    self.doneButton = [BZRSerialViewConstructor customButtonWithTitle:LOCALIZED(@"Save") forController:self withAction:@selector(doneClick:)];
+    self.doneButton.enabled = NO;
 
     //set right bar button item
     self.navigationItem.rightBarButtonItem = self.doneButton;
     
+    /*
     //remove back button (custom and system)
     self.navigationItem.leftBarButtonItem = nil;
     self.navigationItem.hidesBackButton = YES;
+     */
 }
 
 /**
