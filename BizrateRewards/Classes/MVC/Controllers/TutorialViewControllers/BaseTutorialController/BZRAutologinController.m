@@ -54,7 +54,6 @@ static NSString *const kStartTutorialSegueIdentirier = @"startTutorialSegue";
 
 - (BOOL)isForgotPasswordRedirecionNeeded
 {
-//    return [self.defaults boolForKey:IsNewResettingLinkRequested];
     return [BZRStorageManager sharedStorage].resettingPasswordRepeatNeeded;
 }
 
@@ -130,7 +129,7 @@ static NSString *const kStartTutorialSegueIdentirier = @"startTutorialSegue";
  */
 - (BOOL)userDataExistsInKeychain
 {
-    NSDictionary *userCredentials = [BZRKeychainHandler getStoredCredentials];
+    NSDictionary *userCredentials = [BZRKeychainHandler getStoredCredentialsForService:UserCredentialsKey];
     self.savedPassword = userCredentials[PasswordKey];
     self.savedUsername = userCredentials[UserNameKey];
     
@@ -152,6 +151,7 @@ static NSString *const kStartTutorialSegueIdentirier = @"startTutorialSegue";
     } failure:^(NSError *error, BOOL isCanceled, BOOL emailRegistered) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         [weakSelf goToFinishTutorialController];
+        [BZRAlertFacade showFailureResponseAlertWithError:error andCompletion:nil];
     }];
 }
 

@@ -68,7 +68,7 @@
                                    
                                    [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
                                    
-                                   [BZRKeychainHandler storeCredentialsWithUsername:weakSelf.userNameField.text andPassword:weakSelf.passwordField.text];
+                                   [BZRKeychainHandler storeCredentialsWithUsername:weakSelf.userNameField.text andPassword:weakSelf.passwordField.text forService:UserCredentialsKey];
                                    
                                    BZRDashboardController *controller = [weakSelf.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRDashboardController class])];
                                    controller.updateNeeded = YES;

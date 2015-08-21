@@ -8,9 +8,7 @@
 
 #import "BZRKeychainHandler.h"
 
-#import "KeychainItemWrapper.h"
-
-static NSString *const kUserCredentialsKey = @"userCredentialsKey";
+#import <SSKeychain/SSKeychain.h>
 
 @implementation BZRKeychainHandler
 
@@ -20,14 +18,11 @@ static NSString *const kUserCredentialsKey = @"userCredentialsKey";
  *  @param username Username for storing
  *  @param password Password for storing
  */
-+ (void)storeCredentialsWithUsername:(NSString*)username andPassword:(NSString*)password
++ (void)storeCredentialsWithUsername:(NSString*)username andPassword:(NSString*)password forService:(NSString *)serviceName
 {
-    KeychainItemWrapper *keychainItem = [[KeychainItemWrapper alloc] initWithIdentifier:kUserCredentialsKey accessGroup:nil];
-    
-    [keychainItem resetKeychainItem];
-    
-    [keychainItem setObject:username forKey:(__bridge id)(kSecAttrService)];
-    [keychainItem setObject:password forKey:(__bridge id)(kSecValueData)];
+    if (username && password) {
+        [SSKeychain setPassword:password forService:serviceName account:username];
+    }
 }
 
 /**
@@ -35,32 +30,41 @@ static NSString *const kUserCredentialsKey = @"userCredentialsKey";
  *
  *  @return Dictionary with user private data
  */
-+ (NSDictionary*)getStoredCredentials
++ (NSDictionary*)getStoredCredentialsForService:(NSString *)serviceName
 {
-    KeychainItemWrapper *keychainItem = [[KeychainItemWrapper alloc] initWithIdentifier:kUserCredentialsKey accessGroup:nil];
+    NSArray *accountsArray = [SSKeychain accountsForService:serviceName];
     
-    NSString *username = [keychainItem objectForKey:(__bridge id)(kSecAttrService)];
-    NSString *password = [keychainItem objectForKey:(__bridge id)(kSecValueData)];
+    NSString *accountName;
+    NSString *password;
+    NSDictionary *credentials;
     
-    return [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:
-                                                username,
-                                                password,
-                                                nil]
-                                       forKeys:[NSArray arrayWithObjects:
-                                                [NSString stringWithFormat:UserNameKey],
-                                                [NSString stringWithFormat:PasswordKey],
-                                                nil]];
+    if (accountsArray.count) {
+        NSDictionary *credentialsDictionary = accountsArray[0];
+        accountName = credentialsDictionary[kSSKeychainAccountKey];
+        password = [SSKeychain passwordForService:serviceName account:accountName];
+    }
+
+    if (password && accountName) {
+        credentials = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:
+                                                           accountName,
+                                                           password,
+                                                           nil]
+                                                  forKeys:[NSArray arrayWithObjects:
+                                                           [NSString stringWithFormat:UserNameKey],
+                                                           [NSString stringWithFormat:PasswordKey],
+                                                           nil]];
+    }
     
+    return credentials ?: @{UserNameKey: @"", PasswordKey: @""};
 }
 
 /**
  *  Reset keychain data
  */
-+ (void)resetKeychain
++ (void)resetKeychainForService:(NSString *)serviceName
 {
-    KeychainItemWrapper *keychainItem = [[KeychainItemWrapper alloc] initWithIdentifier:kUserCredentialsKey accessGroup:nil];
-    
-    [keychainItem resetKeychainItem];
+    NSDictionary *storedCredentials = [self getStoredCredentialsForService:serviceName];
+    [SSKeychain deletePasswordForService:serviceName account:storedCredentials[UserNameKey]];
 }
 
 @end

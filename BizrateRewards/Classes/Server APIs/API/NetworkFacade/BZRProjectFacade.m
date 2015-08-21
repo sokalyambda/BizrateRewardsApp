@@ -106,11 +106,6 @@ static BZRSessionManager *sharedHTTPClient = nil;
     } failure:^(BZRNetworkOperation *operation, NSError *error, BOOL isCanceled) {
         
         BOOL isEmailRegistered = [BZRErrorHandler isEmailRegisteredFromError:error];
-        if (isEmailRegistered) {
-            [BZRAlertFacade showFailureResponseAlertWithError:error andCompletion:^{
-                
-            }];
-        }
         if (failure) {
             failure(error, isCanceled, isEmailRegistered);
         }
@@ -448,7 +443,7 @@ static BZRSessionManager *sharedHTTPClient = nil;
     [BZRStorageManager sharedStorage].userToken = nil;
     [BZRStorageManager sharedStorage].facebookProfile = nil;
     
-    [BZRKeychainHandler resetKeychain];
+    [BZRKeychainHandler resetKeychainForService:UserCredentialsKey];
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:RememberMeKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
     

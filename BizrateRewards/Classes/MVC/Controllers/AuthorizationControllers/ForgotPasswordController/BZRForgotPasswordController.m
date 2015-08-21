@@ -13,6 +13,8 @@
 
 #import "BZRProjectFacade.h"
 
+#import "BZRKeychainHandler.h"
+
 @interface BZRForgotPasswordController ()
 
 @end
@@ -73,6 +75,10 @@
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         
         BZRConfirmPasswordController *controller = [weakSelf.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRConfirmPasswordController class])];
+        
+        //Store temporary credentials
+        [BZRKeychainHandler storeCredentialsWithUsername:weakSelf.userNameField.text andPassword:weakSelf.passwordField.text forService:TemporaryCredentialsKey];
+        
         [weakSelf.navigationController pushViewController:controller animated:YES];
         
     } onFailure:^(NSError *error, BOOL isCanceled) {

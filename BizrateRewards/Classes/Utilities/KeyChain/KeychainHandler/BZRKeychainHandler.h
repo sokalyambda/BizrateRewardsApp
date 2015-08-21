@@ -8,9 +8,9 @@
 
 @interface BZRKeychainHandler : NSObject
 
-+ (void)storeCredentialsWithUsername:(NSString*)username andPassword:(NSString*)password;
-+ (NSDictionary*)getStoredCredentials;
++ (void)storeCredentialsWithUsername:(NSString*)username andPassword:(NSString*)password forService:(NSString *)serviceName;
++ (NSDictionary*)getStoredCredentialsForService:(NSString *)serviceName;
 
-+ (void)resetKeychain;
++ (void)resetKeychainForService:(NSString *)serviceName;
 
 @end

@@ -26,29 +26,13 @@ static NSString *const kDashboardSegueIdentifier = @"dashboardSegue";
 
 @property (weak, nonatomic) IBOutlet UISwitch *rememberMeSwitch;
 
-@property (assign, nonatomic, getter=isRememberMe) BOOL rememberMe;
-
 @property (strong, nonatomic) NSUserDefaults *defaults;
 
 @end
 
 @implementation BZRSignInController
 
-@synthesize rememberMe = _rememberMe;
-
 #pragma mark - Accessors
-
-- (BOOL)isRememberMe
-{
-    return [self.defaults boolForKey:RememberMeKey];
-}
-
-- (void)setRememberMe:(BOOL)rememberMe
-{
-    _rememberMe = rememberMe;
-    [self.defaults setBool:_rememberMe forKey:RememberMeKey];
-    [self.defaults synchronize];
-}
 
 - (NSUserDefaults *)defaults
 {
@@ -63,7 +47,6 @@ static NSString *const kDashboardSegueIdentifier = @"dashboardSegue";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.rememberMeSwitch setOn:self.isRememberMe];
     [self getUserDataFromKeychain];
 }
 
@@ -108,7 +91,6 @@ static NSString *const kDashboardSegueIdentifier = @"dashboardSegue";
 
 - (IBAction)rememberMeValueChanged:(id)sender
 {
-    self.rememberMe = !self.isRememberMe;
 }
 
 /**
@@ -139,18 +121,19 @@ static NSString *const kDashboardSegueIdentifier = @"dashboardSegue";
                                    //hide progress hud
                                    [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
                                    
-//                                   if (weakSelf.isRememberMe) {
-                                   [BZRKeychainHandler storeCredentialsWithUsername:weakSelf.userNameField.text andPassword:weakSelf.passwordField.text];
-//                                   }
+                                   //Store Credentials
+                                   [BZRKeychainHandler storeCredentialsWithUsername:weakSelf.userNameField.text andPassword:weakSelf.passwordField.text forService:UserCredentialsKey];
                                    [weakSelf performSegueWithIdentifier:kDashboardSegueIdentifier sender:weakSelf];
                                    
                                } failure:^(NSError *error, BOOL isCanceled, BOOL emailRegistered) {
                                    
                                    [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-                                   
+
                                    if (!emailRegistered) {
                                        [weakSelf.incorrectEmailView setHidden:NO];
                                        weakSelf.userNameField.errorImageName = kEmailErrorIconName;
+                                   } else {
+                                       [BZRAlertFacade showFailureResponseAlertWithError:error andCompletion:nil];
                                    }
                                }];
                            }
@@ -218,11 +201,9 @@ static NSString *const kDashboardSegueIdentifier = @"dashboardSegue";
  */
 - (void)getUserDataFromKeychain
 {
-    if (self.isRememberMe) {
-        NSDictionary *userCredentials = [BZRKeychainHandler getStoredCredentials];
-        self.userNameField.text = userCredentials[UserNameKey];
-        self.passwordField.text = userCredentials[PasswordKey];
-    }
+    NSDictionary *userCredentials = [BZRKeychainHandler getStoredCredentialsForService:UserCredentialsKey];
+    self.userNameField.text = userCredentials[UserNameKey];
+    self.passwordField.text = userCredentials[PasswordKey];
 }
 
 #pragma mark - UITextFieldDelegate

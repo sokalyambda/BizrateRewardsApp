@@ -38,4 +38,9 @@ static NSString *const FBAccessTokenExpirationDate = @"FBAccessTokenExpirationDa
 static NSString *const FBLoginSuccess = @"FBLoginSuccess";
 static NSString *const FBCurrentProfile = @"FBCurrentProfile";
 
+//Keychain service keys
+
+static NSString *const UserCredentialsKey = @"UserCredentialsKey";
+static NSString *const TemporaryCredentialsKey = @"TemporaryCredentialsKey";
+
 #endif
