@@ -444,6 +444,7 @@ static BZRSessionManager *sharedHTTPClient = nil;
     [BZRStorageManager sharedStorage].facebookProfile = nil;
     
     [BZRKeychainHandler resetKeychainForService:UserCredentialsKey];
+    
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:RememberMeKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
     

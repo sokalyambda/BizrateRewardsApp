@@ -21,6 +21,7 @@
 + (void)storeCredentialsWithUsername:(NSString*)username andPassword:(NSString*)password forService:(NSString *)serviceName
 {
     if (username && password) {
+        [self resetKeychainForService:serviceName];
         [SSKeychain setPassword:password forService:serviceName account:username];
     }
 }

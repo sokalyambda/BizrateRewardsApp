@@ -263,8 +263,10 @@ NSString *const kErrorAlertMessage = @"AlertMessage";
     if (!error) {
         return;
     }
+    
+    WEAK_SELF;
     [BZRErrorHandler parseError:error withCompletion:^(NSString *alertTitle, NSString *alertMessage) {
-        [self showAlertWithTitle:alertTitle andMessage:alertMessage withCompletion:completion];
+        [weakSelf showAlertWithTitle:alertTitle andMessage:alertMessage withCompletion:completion];
     }];
 }
 

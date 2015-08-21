@@ -44,16 +44,10 @@ static NSString *const kDashboardSegueIdentifier = @"dashboardSegue";
 
 #pragma mark - View Lifecycle
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    [self getUserDataFromKeychain];
-}
-
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
+    [self getUserDataFromKeychain];
     self.navigationItem.title = LOCALIZED(@"Login");
     [self.navigationController setNavigationBarHidden:NO animated:YES];
 }

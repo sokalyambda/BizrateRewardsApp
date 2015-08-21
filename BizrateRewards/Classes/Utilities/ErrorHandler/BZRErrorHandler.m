@@ -15,9 +15,11 @@ static NSString *const kErrorMessage        = @"error_message";
 static NSString *const kErrorDescription    = @"error_description";
 static NSString *const kErrorStatusCode     = @"error_code";
 
-static NSString *const kFacebookUserNotFound    = @"FACEBOOK_USER_NOT_FOUND";
-static NSString *const kEmailNotRegistered      = @"EMAIL_NOT_REGISTERED";
-static NSString *const kEmailAlreadyExist       = @"EMAIL_ALREADY_REGISTERED";
+static NSString *const kFacebookUserNotFound        = @"FACEBOOK_USER_NOT_FOUND";
+static NSString *const kEmailNotRegistered          = @"EMAIL_NOT_REGISTERED";
+
+static NSString *const kEmailAlreadyExist           = @"EMAIL_ALREADY_REGISTERED";
+static NSString *const kFacebookEmailAlreadyExist   = @"FACEBOOK_USER_ALREADY_REGISTERED";
 
 static NSString *const kErrorsCodesPlistName = @"ErrorsCodes";
 
@@ -50,6 +52,8 @@ static NSString *_errorAlertTitle = nil;
  */
 + (void)parseError:(NSError *)error withCompletion:(ErrorParsingCompletion)completion
 {
+    [self setErrorAlertTitle:@""];
+    
     NSString *errFromJsonString = [self errorStringFromJSONResponseError:error];
     if (errFromJsonString) {
         return completion([self getErrorAlertTitle], errFromJsonString);
@@ -154,6 +158,27 @@ static NSString *_errorAlertTitle = nil;
     BOOL emailExists = NO;
     for (NSDictionary *errorDict in errors) {
         if ([errorDict[kErrorStatusCode] isEqualToString:kEmailAlreadyExist]) {
+            emailExists = YES;
+            break;
+        }
+    }
+    return emailExists;
+}
+
+/**
+ *  Check whether this facebook email has already registered
+ *
+ *  @param error Error that should be parsed
+ *
+ *  @return 'YES' if registered
+ */
++ (BOOL)isFacebookEmailAlreadyExistFromError:(NSError *)error
+{
+    NSArray *errors = [self getErrorsArrayDataFromError:error];
+    
+    BOOL emailExists = NO;
+    for (NSDictionary *errorDict in errors) {
+        if ([errorDict[kErrorStatusCode] isEqualToString:kFacebookEmailAlreadyExist]) {
             emailExists = YES;
             break;
         }

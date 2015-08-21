@@ -14,7 +14,9 @@ typedef void(^ErrorParsingCompletion)(NSString *alertTitle, NSString *alertMessa
 
 + (BOOL)isEmailRegisteredFromError:(NSError *)error;
 + (BOOL)isFacebookUserExistsFromError:(NSError *)error;
+
 + (BOOL)isEmailAlreadyExistFromError:(NSError *)error;
++ (BOOL)isFacebookEmailAlreadyExistFromError:(NSError *)error;
 
 + (void)parseError:(NSError *)error withCompletion:(ErrorParsingCompletion)completion;
 

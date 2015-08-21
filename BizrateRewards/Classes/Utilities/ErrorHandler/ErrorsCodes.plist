@@ -316,5 +316,14 @@
 			<string>Email address is not registered.</string>
 		</dict>
 	</dict>
+	<dict>
+		<key>FACEBOOK_USER_ALREADY_REGISTERED</key>
+		<dict>
+			<key>AlertTitle</key>
+			<string>Can not create account</string>
+			<key>AlertMessage</key>
+			<string>A Bizrate Rewards account is already connected with Facebook. You can go back to the login screen and sign-in via Facebook from there.</string>
+		</dict>
+	</dict>
 </array>
 </plist>

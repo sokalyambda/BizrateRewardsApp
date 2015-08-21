@@ -93,9 +93,9 @@ static NSString *const kEmail = @"email";
             } onFailure:^(NSError *error, BOOL isCanceled) {
                 [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
                 
-                BOOL isEmailAlreadyRegistered = [BZRErrorHandler isEmailAlreadyExistFromError:error];
+                BOOL isFacebookEmailAlreadyRegistered = [BZRErrorHandler isFacebookEmailAlreadyExistFromError:error];
                 
-                if (isEmailAlreadyRegistered) {
+                if (isFacebookEmailAlreadyRegistered) {
                     [BZRAlertFacade showEmailAlreadyRegisteredAlertWithError:error andCompletion:^{
                         BZRForgotPasswordController *controller = [weakSelf.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRForgotPasswordController class])];
                         controller.userName = weakSelf.userNameField.text;
