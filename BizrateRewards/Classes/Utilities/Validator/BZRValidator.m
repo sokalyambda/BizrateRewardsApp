@@ -71,7 +71,6 @@ static NSMutableDictionary *_errorDict;
         } else if ([emailField isKindOfClass:[BZREditProfileField class]]) {
             ((BZREditProfileField *)emailField).validationFailed = YES;
         }
-        
         return NO;
     }
     
@@ -87,7 +86,11 @@ static NSMutableDictionary *_errorDict;
  */
 + (BOOL)validatePasswordField:(UITextField *)passwordField
 {
-    if (!(passwordField.text.length >= kMinPasswordSymbols && passwordField.text.length <= kMaxPasswordSymbols)) {
+    NSString *passwordRegex = [NSString stringWithFormat:@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{%i,%i}+$", kMinPasswordSymbols, kMaxPasswordSymbols];
+    NSPredicate *passwordTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", passwordRegex];
+    BOOL isMatchSuccess = [passwordTest evaluateWithObject:passwordField.text];
+    
+    if (!isMatchSuccess) {
         
         [self setErrorTitle:LOCALIZED(@"Your password is too simple") andMessage:LOCALIZED(@"Minimum length is XYZ and it needs to contain one number.\n")];
         
