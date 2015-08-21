@@ -28,7 +28,10 @@ static NSString *const kFacebookAccessToken = @"access_token";
         
         NSString *fbAccessTokenString = [[NSUserDefaults standardUserDefaults] objectForKey:FBAccessToken];
         
-        NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithDictionary:@{kFacebookAccessToken: fbAccessTokenString}];
+        NSMutableDictionary *parameters;
+        if (fbAccessTokenString) {
+            parameters = [NSMutableDictionary dictionaryWithDictionary:@{kFacebookAccessToken: fbAccessTokenString}];
+        }
         
         self.serializationType = BZRRequestSerializationTypeJSON;
         
