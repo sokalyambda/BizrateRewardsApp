@@ -21,6 +21,8 @@
 @property (strong, nonatomic) BZRUserProfile *currentProfile;
 @property (strong, nonatomic) BZRFacebookProfile *facebookProfile;
 
+@property (strong, nonatomic) BZRLocationEvent *lastReceivedLocationEvent;
+
 @property (strong, nonatomic) NSString *deviceToken;
 @property (strong, nonatomic) NSString *deviceUDID;
 @property (strong, nonatomic) NSString *deviceName;

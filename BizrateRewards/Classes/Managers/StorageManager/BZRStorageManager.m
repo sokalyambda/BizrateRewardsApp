@@ -8,6 +8,8 @@
 
 #import "BZRStorageManager.h"
 
+#import "BZRLocationEvent.h"
+
 @interface BZRStorageManager ()
 
 @end
@@ -22,6 +24,14 @@
         _facebookProfile = [BZRFacebookProfile facebookProfileFromDefaultsForKey:FBCurrentProfile];
     }
     return _facebookProfile;
+}
+
+- (BZRLocationEvent *)lastReceivedLocationEvent
+{
+    if (!_lastReceivedLocationEvent) {
+        _lastReceivedLocationEvent = [BZRLocationEvent locationEventFromDefaultsForKey:LastReceivedLocationEvent];
+    }
+    return _lastReceivedLocationEvent;
 }
 
 - (NSString *)deviceUDID

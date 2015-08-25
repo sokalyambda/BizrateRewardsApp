@@ -20,6 +20,10 @@ static NSString *const kData = @"data";
 static NSString *const kURL = @"url";
 static NSString *const kGender = @"gender";
 
+@interface BZRFacebookProfile ()<NSCoding>
+
+@end
+
 @implementation BZRFacebookProfile
 
 #pragma mark - BZRMappingProtocol
@@ -40,7 +44,7 @@ static NSString *const kGender = @"gender";
     return self;
 }
 
-#pragma mark - NSCoder methods
+#pragma mark - NSCoding methods
 
 - (void)encodeWithCoder:(NSCoder *)encoder
 {

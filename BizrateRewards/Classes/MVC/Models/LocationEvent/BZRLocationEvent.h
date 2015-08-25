@@ -23,4 +23,7 @@ typedef enum : NSUInteger {
 
 @property (strong, nonatomic) NSString *customerId;
 
+- (void)setLocationEventToDefaultsForKey:(NSString *)key;
++ (BZRLocationEvent *)locationEventFromDefaultsForKey:(NSString *)key;
+
 @end
