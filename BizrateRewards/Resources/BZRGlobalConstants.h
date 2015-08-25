@@ -31,6 +31,8 @@ static NSString *const RememberMeKey        = @"RememberMeKey";
 static NSString *const UserNameKey = @"UsernameKey";
 static NSString *const PasswordKey = @"PasswordKey";
 
+static NSString *const IsFirstLaunch = @"IsFirstLaunch";
+
 //Facebook (keys for NSUserDefaults)
 
 static NSString *const FBAccessToken = @"FBAccessToken";

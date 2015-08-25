@@ -68,4 +68,17 @@
     [SSKeychain deletePasswordForService:serviceName account:storedCredentials[UserNameKey]];
 }
 
+/**
+ *  Check whether keychain contains data but app was previously deleted
+ */
++ (void)resetKeychainIfFirstLaunch
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if (![defaults.dictionaryRepresentation.allKeys containsObject:IsFirstLaunch]) {
+        [self resetKeychainForService:UserCredentialsKey];
+        [self resetKeychainForService:TemporaryCredentialsKey];
+        [defaults setBool:NO forKey:IsFirstLaunch];
+    }
+}
+
 @end

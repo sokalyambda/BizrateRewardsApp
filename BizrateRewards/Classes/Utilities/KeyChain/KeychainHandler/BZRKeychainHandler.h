@@ -13,4 +13,6 @@
 
 + (void)resetKeychainForService:(NSString *)serviceName;
 
++ (void)resetKeychainIfFirstLaunch;
+
 @end
