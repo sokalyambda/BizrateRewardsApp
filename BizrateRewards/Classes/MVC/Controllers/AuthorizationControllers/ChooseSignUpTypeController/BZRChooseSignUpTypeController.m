@@ -77,7 +77,7 @@ static NSString *const kEmail = @"email";
         
         [BZRFacebookService getFacebookUserProfileOnSuccess:^(BZRFacebookProfile *facebookProfile) {
             
-            NSString *email = facebookProfile.email ? facebookProfile.email : weakSelf.temporaryProfile.email;
+            NSString *email = facebookProfile.email ? facebookProfile.email : @"";
             
             [BZRProjectFacade signUpWithFacebookWithUserFirstName:weakSelf.temporaryProfile.firstName andUserLastName:weakSelf.temporaryProfile.lastName andEmail:email andDateOfBirth:[[BZRCommonDateFormatter commonDateFormatter] stringFromDate:weakSelf.temporaryProfile.dateOfBirth] andGender:[weakSelf.temporaryProfile.genderString substringToIndex:1] onSuccess:^(BOOL isSuccess) {
                 
@@ -103,9 +103,7 @@ static NSString *const kEmail = @"email";
                         [weakSelf presentViewController:navController animated:YES completion:nil];
                     }];
                 } else {
-                    [BZRAlertFacade showFailureResponseAlertWithError:error andCompletion:^{
-                        
-                    }];
+                    [BZRAlertFacade showFailureResponseAlertWithError:error andCompletion:nil];
                 }
             }];
             
