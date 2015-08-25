@@ -74,7 +74,7 @@
             ind = 0;
         }
         
-        [self selectRow:(items.count + ind) inComponent:component animated:NO];
+        [self selectRow:ind inComponent:component animated:NO];
     }
 }
 

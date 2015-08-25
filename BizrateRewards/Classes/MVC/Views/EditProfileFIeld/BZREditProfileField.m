@@ -58,7 +58,7 @@
 - (void)setupTextFieldAppearance
 {
     self.textColor = [self getCurrentColor];
-    self.attributedPlaceholder = [[NSAttributedString alloc] initWithString:self.placeholder attributes:@{NSForegroundColorAttributeName:[UIColor lightGrayColor]}];
+    self.attributedPlaceholder = [[NSAttributedString alloc] initWithString:self.placeholder attributes:@{NSForegroundColorAttributeName:UIColorFromRGB(0xC8C8C8)}];
 }
 
 - (void)setupErrorFieldAppearance

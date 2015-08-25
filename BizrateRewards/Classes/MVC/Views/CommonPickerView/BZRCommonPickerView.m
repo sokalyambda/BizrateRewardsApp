@@ -12,8 +12,6 @@
 
 @interface BZRCommonPickerView ()
 
-@property (weak, nonatomic) IBOutlet BZRPickerHolder *pickerHolder;
-
 @end
 
 @implementation BZRCommonPickerView

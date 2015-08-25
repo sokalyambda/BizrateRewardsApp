@@ -42,7 +42,7 @@
 - (void)setupTextFieldAppearance
 {
     self.textColor = [self getCurrentColor];
-    self.attributedPlaceholder = [[NSAttributedString alloc] initWithString:self.placeholder attributes:@{NSForegroundColorAttributeName:UIColorFromRGB(0x9097a3)}];
+    self.attributedPlaceholder = [[NSAttributedString alloc] initWithString:self.placeholder attributes:@{NSForegroundColorAttributeName:UIColorFromRGB(0xC8C8C8)}];
     self.imageName = [self getCurrentImageName];
 }
 

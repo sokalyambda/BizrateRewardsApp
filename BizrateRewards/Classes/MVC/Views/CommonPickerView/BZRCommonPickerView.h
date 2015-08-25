@@ -15,6 +15,8 @@
 
 @property (weak, nonatomic) id<BZRCommonPickerViewDelegate> delegate;
 
+@property (weak, nonatomic) IBOutlet BZRPickerHolder *pickerHolder;
+
 @end
 
 @protocol BZRCommonPickerViewDelegate <NSObject>

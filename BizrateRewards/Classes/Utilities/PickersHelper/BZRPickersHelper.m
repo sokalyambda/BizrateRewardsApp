@@ -33,7 +33,6 @@ static NSString *const kCurrentPicker = @"currentPicker";
 @property (strong, nonatomic) IBOutlet BZRCommonPickerView    *commonPickerView;
 @property (strong, nonatomic) IBOutlet BZRBirthDatePickerView *birthDatePicker;
 
-@property (strong, nonatomic) UIView *parentView;
 @property (weak, nonatomic) BZREditProfileContainerController *containerController;
 
 @property (copy, nonatomic) DateResult   dateResult;
@@ -58,11 +57,10 @@ static NSString *const kCurrentPicker = @"currentPicker";
  *
  *  @return self
  */
-- (instancetype)initWithParentView:(UIView *)parentView andContainerController:(BZREditProfileContainerController *)container;
+- (instancetype)initWithContainerController:(BZREditProfileContainerController *)container;
 {
     self = [super init];
     if (self) {
-        _parentView = parentView;
         _containerController = container;
         
         _commonPickerView = [BZRCommonPickerView makeFromXibWithFileOwner:self];
@@ -94,6 +92,7 @@ static NSString *const kCurrentPicker = @"currentPicker";
     if ([self isPickerExists:self.birthDatePicker]) {
         [self showHidePickerViewWithAnimation:self.birthDatePicker];
     }
+    
     [self showHidePickerViewWithAnimation:self.commonPickerView];
 }
 
@@ -108,6 +107,8 @@ static NSString *const kCurrentPicker = @"currentPicker";
     
     //If current user exists - set his date of birth as date picker's date
     NSDate *currentProfileDateOfBirth = [BZRStorageManager sharedStorage].currentProfile.dateOfBirth;
+    
+    //If user's date of birth exists - set it
     if (currentProfileDateOfBirth) {
         [self.birthDatePicker.datePicker setDate:currentProfileDateOfBirth];
     }

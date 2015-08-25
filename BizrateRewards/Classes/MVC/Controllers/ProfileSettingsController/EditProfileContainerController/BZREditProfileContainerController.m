@@ -44,13 +44,14 @@ typedef enum : NSUInteger {
 {
     [super viewDidLoad];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    
+    self.pickersHelper = [[BZRPickersHelper alloc] initWithContainerController:self];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    
-    self.pickersHelper = [[BZRPickersHelper alloc] initWithParentView:self.parentViewController.view andContainerController:self];
+    self.pickersHelper.parentView = self.parentViewController.view;
 }
 
 /**

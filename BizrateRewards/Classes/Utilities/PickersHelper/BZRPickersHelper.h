@@ -13,7 +13,10 @@ typedef void(^GenderResult)(NSString *genderString);
 
 @interface BZRPickersHelper : NSObject
 
-- (instancetype)initWithParentView:(UIView *)parentView andContainerController:(BZREditProfileContainerController *)container;
+//Parent view
+@property (strong, nonatomic) UIView *parentView;
+
+- (instancetype)initWithContainerController:(BZREditProfileContainerController *)container;
 
 - (void)showGenderPickerWithResult:(GenderResult)result;
 - (void)showBirthDatePickerWithResult:(DateResult)result;

@@ -19,11 +19,11 @@
 - (IBAction)doneClick:(id)sender
 {
     if ([self.delegate respondsToSelector:@selector(birthPickerViewWillDismiss:withChosenDate:)]) {
-        [self.delegate birthPickerViewWillDismiss:self withChosenDate:self.datePicker.date];
+        NSDate *selectedDate = self.datePicker.date;
+        [self.delegate birthPickerViewWillDismiss:self withChosenDate:selectedDate];
     } else {
         [self removeFromSuperview];
     }
-    
 }
 
 @end
