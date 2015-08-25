@@ -14,7 +14,10 @@
 
 #import "BZREditProfileField.h"
 
+#import "BZRZeroInsetsSeparatorCell.h"
+
 static CGFloat const kAnimationDuration = .25f;
+static CGFloat const kCellHeight = 41.f;
 
 typedef enum : NSUInteger {
     BZREditableFieldTypeFirstName,
@@ -33,6 +36,8 @@ typedef enum : NSUInteger {
 @property (strong, nonatomic) NSIndexPath *editedIndexPath;
 
 @property (assign, nonatomic) CGRect savedKeyboardRect;
+
+@property (weak, nonatomic) IBOutlet BZRZeroInsetsSeparatorCell *emailCell;
 
 @end
 
@@ -97,6 +102,18 @@ typedef enum : NSUInteger {
     }
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
+    
+    if ([cell isEqual:self.emailCell] && self.hideEmailField) {
+        [cell setHidden:YES];
+        return 0.f;
+    }
+    
+    return kCellHeight;
+}
+
 #pragma mark - Actions
 
 /**
@@ -158,9 +175,7 @@ typedef enum : NSUInteger {
     if ([self.firstNameField isFirstResponder]) {
         [self.lastNameField becomeFirstResponder];
     } else if ([self.lastNameField isFirstResponder]) {
-        self.emailField.userInteractionEnabled ? [self.emailField becomeFirstResponder] : [self.lastNameField resignFirstResponder];
-    } else if ([self.emailField isFirstResponder]) {
-        [self.emailField resignFirstResponder];
+        [self.lastNameField resignFirstResponder];
     }
 
     return YES;

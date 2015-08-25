@@ -19,6 +19,9 @@
 //set this bool for enabling/disabling scroll possibility while editing
 @property (assign, nonatomic) BOOL scrollNeeded;
 
+//determine whether email field should be hidden
+@property (assign, nonatomic) BOOL hideEmailField;
+
 - (void)adjustTableViewInsetsWithPresentedRect:(CGRect)rect;
 
 @end

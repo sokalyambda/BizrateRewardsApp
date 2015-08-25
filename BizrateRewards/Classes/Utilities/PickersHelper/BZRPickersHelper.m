@@ -89,6 +89,14 @@ static NSString *const kCurrentPicker = @"currentPicker";
     
     self.commonPickerView.pickerComponentsArray = @[@[@"Male", @"Female"]];
     
+    //If current user exists - set his gender as default picker's value
+    NSString *currentGenderString = [BZRStorageManager sharedStorage].currentProfile.genderString;
+    
+    //If user's date of birth exists - set it
+    if (currentGenderString) {
+        [self.commonPickerView.pickerHolder setRowInComponent:0 byValue:currentGenderString];
+    }
+    
     if ([self isPickerExists:self.birthDatePicker]) {
         [self showHidePickerViewWithAnimation:self.birthDatePicker];
     }

@@ -14,4 +14,6 @@
 
 @property (strong, nonatomic) NSString *failedToSignInEmail;
 
+@property (assign, nonatomic) BOOL hideEmailField;
+
 @end

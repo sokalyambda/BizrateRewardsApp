@@ -101,7 +101,7 @@ static NSString *const kChooseSignUpTypeSegueIdentifier = @"сhooseSignUpTypeSeg
     WEAK_SELF;
     [BZRValidator validateFirstNameField:self.editProfileTableViewController.firstNameField
                            lastNameField:self.editProfileTableViewController.lastNameField
-                              emailField:self.editProfileTableViewController.emailField
+                              emailField:nil
                         dateOfBirthField:self.editProfileTableViewController.dateOfBirthField
                              genderField:self.editProfileTableViewController.genderField
                            andCheckboxes:self.checkboxes
@@ -124,7 +124,7 @@ static NSString *const kChooseSignUpTypeSegueIdentifier = @"сhooseSignUpTypeSeg
     WEAK_SELF;
     [BZRValidator validateFirstNameField:self.editProfileTableViewController.firstNameField
                            lastNameField:self.editProfileTableViewController.lastNameField
-                              emailField:self.editProfileTableViewController.emailField
+                              emailField:nil
                         dateOfBirthField:self.editProfileTableViewController.dateOfBirthField
                              genderField:self.editProfileTableViewController.genderField
                            andCheckboxes:self.checkboxes
@@ -193,7 +193,11 @@ static NSString *const kChooseSignUpTypeSegueIdentifier = @"сhooseSignUpTypeSeg
 {
     if ([segue.identifier isEqualToString:kEditProfileContainerSegueIdentifier]) {
         self.editProfileTableViewController = (BZREditProfileContainerController *)segue.destinationViewController;
+        
         self.editProfileTableViewController.scrollNeeded = YES;
+        
+        self.editProfileTableViewController.hideEmailField = YES;
+        
         [self.editProfileTableViewController viewWillAppear:YES];
     } else if ([segue.identifier isEqualToString:kChooseSignUpTypeSegueIdentifier]) {
         BZRChooseSignUpTypeController *controller = (BZRChooseSignUpTypeController *)segue.destinationViewController;

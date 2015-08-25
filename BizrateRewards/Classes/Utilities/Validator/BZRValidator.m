@@ -92,7 +92,7 @@ static NSMutableDictionary *_errorDict;
     
     if (!isMatchSuccess) {
         
-        [self setErrorTitle:LOCALIZED(@"Your password is too simple") andMessage:LOCALIZED(@"Minimum length is XYZ and it needs to contain one number.\n")];
+        [self setErrorTitle:LOCALIZED(@"Your password is too simple") andMessage:LOCALIZED(@"Minimum length is 8 and it needs to contain at least one uppercase, one lowercase and one number.\n")];
         
         [passwordField shakeView];
         
@@ -342,16 +342,16 @@ static NSMutableDictionary *_errorDict;
 {
     BOOL isValid = YES;
     
-    if (![self validateFirstNameField:firstNameField andLastNameField:lastNameField]) {
+    if (![self validateFirstNameField:firstNameField andLastNameField:lastNameField] && firstNameField && lastNameField) {
         isValid = NO;
     }
-    if (![self validateEmailField:emailField]) {
+    if (![self validateEmailField:emailField] && emailField) {
         isValid = NO;
     }
-    if (![self validateBirthDateField:dateOfBirthField]) {
+    if (![self validateBirthDateField:dateOfBirthField] && dateOfBirthField) {
         isValid = NO;
     }
-    if (![self validateGenderField:genderField]) {
+    if (![self validateGenderField:genderField] && genderField) {
         isValid = NO;
     }
     if (checkboxes) {
