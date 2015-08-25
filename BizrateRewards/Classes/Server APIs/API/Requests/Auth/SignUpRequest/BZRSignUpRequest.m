@@ -73,12 +73,15 @@ static NSString *const requestAction = @"user/create";
         
         NSString *fbAccessTokenString = [[NSUserDefaults standardUserDefaults] objectForKey:FBAccessToken];
         
-        NSDictionary *parameters = @{kFirstName: firstName,
+        NSMutableDictionary *parameters = [@{kFirstName: firstName,
                                      kLastName: lastName,
                                      kEmail: email,
                                      kDateOfBirth: birthDate,
-                                     kGender: gender,
-                                     kFacebookParams: @{kAccessToken: fbAccessTokenString}};
+                                     kGender: gender
+                                            } mutableCopy];
+        if (fbAccessTokenString) {
+            [parameters setObject:@{kAccessToken: fbAccessTokenString} forKey:kFacebookParams];
+        }
         [self setParametersWithParamsData:parameters];
     }
     return self;

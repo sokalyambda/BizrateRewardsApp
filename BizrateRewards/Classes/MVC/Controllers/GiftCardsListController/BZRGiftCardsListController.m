@@ -24,11 +24,6 @@ static CGFloat const kCellHeight = 100.f;
 
 #pragma mark - View Lifecycle
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-}
-
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];

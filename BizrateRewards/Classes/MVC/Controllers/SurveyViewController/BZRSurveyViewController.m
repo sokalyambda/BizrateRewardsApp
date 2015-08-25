@@ -36,7 +36,7 @@ static NSString *const kSurveyID = @"Survey ID";
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self setupNavigationBar];
+    [self customizeNavigationBar];
 }
 
 #pragma mark - Actions
@@ -57,7 +57,7 @@ static NSString *const kSurveyID = @"Survey ID";
 /**
  *  Customize navigation bar appearance
  */
-- (void)setupNavigationBar
+- (void)customizeNavigationBar
 {
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     self.navigationItem.title = NSLocalizedString(self.currentSurvey.surveyName, nil);
@@ -96,9 +96,7 @@ static NSString *const kSurveyID = @"Survey ID";
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
-    [BZRAlertFacade showFailureResponseAlertWithError:error andCompletion:^{
-        
-    }];
+    [BZRAlertFacade showFailureResponseAlertWithError:error andCompletion:nil];
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
 }
 

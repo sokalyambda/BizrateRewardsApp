@@ -51,6 +51,7 @@ static NSString *const kFBAppSecret = @"530fa94f7370fc20a54cc392fbd83cf2";
  */
 + (void)authorizeWithFacebookOnSuccess:(FacebookAuthSuccessBlock)success onFailure:(FacebookAuthFailureBlock)failure
 {
+    WEAK_SELF;
     [[self facebookLoginManager] logInWithReadPermissions:@[kPublicProfile, kEmail] handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
         
         if (error && failure) {
@@ -60,7 +61,7 @@ static NSString *const kFBAppSecret = @"530fa94f7370fc20a54cc392fbd83cf2";
         } else {
             if ([result.grantedPermissions containsObject:kEmail] && [result.grantedPermissions containsObject:kPublicProfile]) {
                 //store fb auth data
-                [self storeFacebookAuthData];
+                [weakSelf storeFacebookAuthData];
                 if (success) {
                     success(YES);
                 }

@@ -54,7 +54,6 @@ static NSTimeInterval const kSupposedExpirationDate = 86400.f;
         NSString *accessTokenValue = [params lastObject];
         
         NSString *supposedExpiresIn = [NSString stringWithFormat:@"%f", kSupposedExpirationDate];
-        
         [urlParsingParameters setObject:accessTokenValue forKey:kAccessToken];
         [urlParsingParameters setObject:@YES forKey:kIsResettingSuccess];
         [urlParsingParameters setObject:supposedExpiresIn forKey:@"expires_in"];

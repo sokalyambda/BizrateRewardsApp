@@ -95,6 +95,9 @@
     self.obtainedPointsLabel.text = [NSString localizedStringWithFormat:LOCALIZED(@"%li points have deposited to your account!"), (long)self.passedSurvey.surveyPoints];
 }
 
+/**
+ *  Recalculate progress in progress bar
+ */
 - (void)recalculateProgress
 {
     NSInteger updatedPoints = self.currentProfile.pointsAmount + self.passedSurvey.surveyPoints;

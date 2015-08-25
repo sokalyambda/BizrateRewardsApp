@@ -63,11 +63,6 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
 
 #pragma mark - View Lifecycle
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-}
-
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -140,9 +135,7 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
             controller.giftCards = giftCards;
             [weakSelf.navigationController pushViewController:controller animated:YES];
         } else {
-            [BZRAlertFacade showAlertWithMessage:LOCALIZED(@"There are no gift cards at current time") withCompletion:^{
-                
-            }];
+            [BZRAlertFacade showAlertWithMessage:LOCALIZED(@"There are no gift cards at current time") withCompletion:nil];
             return;
         }
         

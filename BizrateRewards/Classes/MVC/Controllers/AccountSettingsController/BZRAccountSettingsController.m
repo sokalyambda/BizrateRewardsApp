@@ -50,11 +50,6 @@ static NSString *const kAccountSettingsContainerSegueIdentifier = @"accountSetti
 
 #pragma mark - View Lifecycle
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-}
-
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -174,9 +169,7 @@ static NSString *const kAccountSettingsContainerSegueIdentifier = @"accountSetti
 - (void)takeNewPhotoFromCamera
 {
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        [BZRAlertFacade showAlertWithMessage:LOCALIZED(@"Camera is not available") withCompletion:^{
-            
-        }];
+        [BZRAlertFacade showAlertWithMessage:LOCALIZED(@"Camera is not available") withCompletion:nil];
         return;
     } else {
         [self showImagePickerWithType:UIImagePickerControllerSourceTypeCamera];

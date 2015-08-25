@@ -13,8 +13,6 @@
 
 @property (weak, nonatomic) BZRBaseNavigationController *baseNavigationController;
 
-@property (weak, nonatomic) UIWindow *mainWindow;
-
 @end
 
 @implementation BZRBaseViewController
@@ -30,12 +28,6 @@
 }
 
 #pragma mark - View Lifecycle
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    [self setNeedsStatusBarAppearanceUpdate];
-}
 
 - (void)viewWillAppear:(BOOL)animated
 {

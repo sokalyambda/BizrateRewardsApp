@@ -79,7 +79,7 @@ static NSString *const kEmail = @"email";
             
             NSString *email = facebookProfile.email ? facebookProfile.email : weakSelf.temporaryProfile.email;
             
-            [BZRProjectFacade signUpWithFacebookWithUserFirstName:weakSelf.temporaryProfile.firstName andUserLastName:weakSelf.temporaryProfile.lastName andEmail:email andDateOfBirth:[[BZRCommonDateFormatter commonDateFormatter] stringFromDate:weakSelf.temporaryProfile.dateOfBirth] andGender:[self.temporaryProfile.genderString substringToIndex:1] onSuccess:^(BOOL isSuccess) {
+            [BZRProjectFacade signUpWithFacebookWithUserFirstName:weakSelf.temporaryProfile.firstName andUserLastName:weakSelf.temporaryProfile.lastName andEmail:email andDateOfBirth:[[BZRCommonDateFormatter commonDateFormatter] stringFromDate:weakSelf.temporaryProfile.dateOfBirth] andGender:[weakSelf.temporaryProfile.genderString substringToIndex:1] onSuccess:^(BOOL isSuccess) {
                 
                 [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
                 
@@ -107,7 +107,6 @@ static NSString *const kEmail = @"email";
                         
                     }];
                 }
-                
             }];
             
         } onFailure:^(NSError *error) {
