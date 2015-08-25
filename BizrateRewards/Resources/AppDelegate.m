@@ -18,6 +18,8 @@
 
 #import "BZRBaseNavigationController.h"
 
+#import "BZRLocationEvent.h"
+
 @import HockeySDK;
 
 static NSString *const kHockeyAppIdentifier = @"bf52cc6c526a07761d1b50a4078b6d67";
@@ -32,6 +34,12 @@ static NSString *const kOfferBeamRetailerID = @"A27C65B0-DB22-11E4-8830-0800200C
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    /*
+    BZRLocationEvent *lastEvent = [BZRLocationEvent locationEventFromDefaultsForKey:LastReceivedLocationEvent];
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Last Event Data" message:[NSString stringWithFormat:@"Event type: %@\n Event latitude: %f\n Event longitude: %f\n Customer id: %@\n", lastEvent.eventType == BZRLocaionEventTypeEntry ? @"Entry" : @"Exit", lastEvent.coordinate.latitude, lastEvent.coordinate.longitude, lastEvent.customerId] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alertView show];
+    */
+    
     NSURL *url = (NSURL *)[launchOptions valueForKey:UIApplicationLaunchOptionsURLKey];
     [BZRRedirectionHelper showResetPasswordResultControllerWithObtainedURL:url];
     

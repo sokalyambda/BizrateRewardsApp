@@ -81,7 +81,7 @@ static NSString *const kGender = @"gender";
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
     if ([defaults.dictionaryRepresentation.allKeys containsObject:key]) {
-        return;
+        [defaults removeObjectForKey:key];
     }
     
     [defaults setObject:encodedObject forKey:key];

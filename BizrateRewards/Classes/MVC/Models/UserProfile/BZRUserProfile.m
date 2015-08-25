@@ -127,6 +127,11 @@ static NSString *const kPointsRequired          = @"points_next_redemption";
 {
     NSData *encodedObject = [NSKeyedArchiver archivedDataWithRootObject:self];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    if (![defaults.dictionaryRepresentation.allKeys containsObject:key]) {
+        [defaults removeObjectForKey:key];
+    }
+    
     [defaults setObject:encodedObject forKey:key];
     [defaults synchronize];
 }

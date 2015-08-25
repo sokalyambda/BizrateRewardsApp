@@ -8,11 +8,18 @@
 
 #import "BZRLocationEvent.h"
 
-static NSString *const kLocationId = @"altStoreId";
-static NSString *const kLatitude = @"latitude";
-static NSString *const kLongitude = @"longitude";
-static NSString *const kCustomerId = @"customerId";
-static NSString *const kLocationEventType = @"locationEventType";
+//keys for OB call back
+static NSString *const kOBLocationId = @"altStoreId";
+static NSString *const kOBLatitude = @"latitude";
+static NSString *const kOBLongitude = @"longitude";
+static NSString *const kOBCustomerId = @"customerId";
+static NSString *const kOBLocationEventType = @"locationEventType";
+
+//keys for server response
+static NSString *const kServerLatitude = @"lat";
+static NSString *const kServerLongitude = @"long";
+static NSString *const kServerCustomerId = @"ref_eyc_customer_id";
+static NSString *const kServerLocationEventType = @"event_type";
 
 @interface BZRLocationEvent ()<NSCoding>
 
@@ -26,9 +33,20 @@ static NSString *const kLocationEventType = @"locationEventType";
 {
     self = [super init];
     if (self) {
-        _coordinate = CLLocationCoordinate2DMake([response[kLatitude] doubleValue], [response[kLongitude] doubleValue]);
-        _locationId = [response[kLocationId] integerValue];
-        _customerId = response[kCustomerId];
+        _coordinate = CLLocationCoordinate2DMake([response[kServerLatitude] doubleValue], [response[kServerLongitude] doubleValue]);
+        _customerId = response[kServerCustomerId];
+        _eventType = [response[kServerLocationEventType] isEqualToString:@"ENTRY"] ? BZRLocaionEventTypeEntry : BZRLocaionEventTypeExit;
+    }
+    return self;
+}
+
+- (instancetype)initWithOfferBeamCallback:(NSDictionary *)locationData
+{
+    self = [super init];
+    if (self) {
+        _coordinate = CLLocationCoordinate2DMake([locationData[kOBLatitude] doubleValue], [locationData[kOBLongitude] doubleValue]);
+        _locationId = [locationData[kOBLocationId] integerValue];
+        _customerId = locationData[kOBCustomerId];
     }
     return self;
 }
@@ -38,23 +56,23 @@ static NSString *const kLocationEventType = @"locationEventType";
 - (void)encodeWithCoder:(NSCoder *)encoder
 {
     //Encode properties, other class variables, etc
-    [encoder encodeObject:@(self.coordinate.longitude) forKey:kLongitude];
-    [encoder encodeObject:@(self.coordinate.latitude) forKey:kLatitude];
-    [encoder encodeObject:@(self.locationId) forKey:kLocationId];
-    [encoder encodeObject:self.customerId forKey:kCustomerId];
-    [encoder encodeObject:@(self.eventType) forKey:kLocationEventType];
+    [encoder encodeObject:@(self.coordinate.longitude) forKey:kOBLongitude];
+    [encoder encodeObject:@(self.coordinate.latitude) forKey:kOBLatitude];
+    [encoder encodeObject:@(self.locationId) forKey:kOBLocationId];
+    [encoder encodeObject:self.customerId forKey:kOBCustomerId];
+    [encoder encodeObject:@(self.eventType) forKey:kOBLocationEventType];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder
 {
     if((self = [super init])) {
         //decode properties, other class vars
-        CGFloat latitude    = [[decoder decodeObjectForKey:kLatitude] doubleValue];
-        CGFloat longitude   = [[decoder decodeObjectForKey:kLongitude] doubleValue];
+        CGFloat latitude    = [[decoder decodeObjectForKey:kOBLatitude] doubleValue];
+        CGFloat longitude   = [[decoder decodeObjectForKey:kOBLongitude] doubleValue];
         _coordinate = CLLocationCoordinate2DMake(latitude, longitude);
-        _locationId         = [[decoder decodeObjectForKey:kLocationId] integerValue];
-        _customerId         = [decoder decodeObjectForKey:kCustomerId];
-        _eventType          = [[decoder decodeObjectForKey:kLocationEventType] integerValue];
+        _locationId         = [[decoder decodeObjectForKey:kOBLocationId] integerValue];
+        _customerId         = [decoder decodeObjectForKey:kOBCustomerId];
+        _eventType          = [[decoder decodeObjectForKey:kOBLocationEventType] integerValue];
     }
     return self;
 }
@@ -67,7 +85,7 @@ static NSString *const kLocationEventType = @"locationEventType";
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
     if ([defaults.dictionaryRepresentation.allKeys containsObject:key]) {
-        return;
+        [defaults removeObjectForKey:key];
     }
     
     [defaults setObject:encodedObject forKey:key];

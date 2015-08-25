@@ -155,14 +155,16 @@ static NSString *const kOBStore = @"Store";
 - (void)sendLocationEventWithInitDictionary:(NSDictionary *)dictionary andType:(BZRLocaionEventType)eventType
 {
     if ([BZRProjectFacade isUserSessionValid]) {
-        BZRLocationEvent *locationEvent = [[BZRLocationEvent alloc] initWithServerResponse:dictionary[kOBStore]];
+        BZRLocationEvent *locationEvent = [[BZRLocationEvent alloc] initWithOfferBeamCallback:dictionary[kOBStore]];
         
         locationEvent.eventType = eventType;
-        
         //track mixpanel event (enter/exit geofence)
         [BZRMixpanelService trackLocationEvent:locationEvent];
         
         [BZRProjectFacade sendGeolocationEvent:locationEvent onSuccess:^(BZRLocationEvent *locationEvent) {
+            
+            //set last location event to userDefaults
+            [locationEvent setLocationEventToDefaultsForKey:LastReceivedLocationEvent];
             
         } onFailure:^(NSError *error, BOOL isCanceled) {
             
