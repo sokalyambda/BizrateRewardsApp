@@ -72,6 +72,7 @@
             <string>OpenSans</string>
             <string>OpenSans</string>
             <string>OpenSans</string>
+            <string>OpenSans</string>
         </mutableArray>
         <mutableArray key="OpenSans-Semibold.ttf">
             <string>OpenSans-Semibold</string>
@@ -2214,6 +2215,7 @@
                     <navigationItem key="navigationItem" id="sCN-So-UzU"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
+                        <outlet property="containerHeightConstraint" destination="9Pa-fc-Lzi" id="ShV-Hl-Syw"/>
                         <outlet property="userFullNameLabel" destination="ZwT-xq-ec6" id="RwM-IY-ykY"/>
                         <outlet property="userIcon" destination="sBi-NG-xXa" id="gfy-Et-FFk"/>
                         <segue destination="xdw-Sw-7dh" kind="show" identifier="editProfileSegue" id="daZ-Qz-qqb"/>
@@ -2565,6 +2567,59 @@
                                             </variation>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="Too-4t-LS3" userLabel="Contact Support Cell" customClass="BZRZeroInsetsSeparatorCell">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Too-4t-LS3" id="CHN-St-MUX">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Diagnostic" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EsJ-k1-fEI">
+                                                    <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="107" id="hCj-98-VIx"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
+                                                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <variation key="default">
+                                                        <mask key="constraints">
+                                                            <exclude reference="hCj-98-VIx"/>
+                                                        </mask>
+                                                    </variation>
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="15" y="11" width="107" height="17"/>
+                                                        <mask key="constraints">
+                                                            <include reference="hCj-98-VIx"/>
+                                                        </mask>
+                                                    </variation>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="EsJ-k1-fEI" firstAttribute="top" secondItem="CHN-St-MUX" secondAttribute="top" constant="12" id="BSn-Ki-VSQ">
+                                                    <variation key="heightClass=regular-widthClass=compact" constant="11"/>
+                                                </constraint>
+                                                <constraint firstItem="EsJ-k1-fEI" firstAttribute="leading" secondItem="CHN-St-MUX" secondAttribute="leading" constant="15" id="Jqi-dZ-7PZ"/>
+                                            </constraints>
+                                            <variation key="default">
+                                                <mask key="subviews">
+                                                    <exclude reference="EsJ-k1-fEI"/>
+                                                </mask>
+                                                <mask key="constraints">
+                                                    <exclude reference="BSn-Ki-VSQ"/>
+                                                    <exclude reference="Jqi-dZ-7PZ"/>
+                                                </mask>
+                                            </variation>
+                                            <variation key="heightClass=regular-widthClass=compact">
+                                                <mask key="subviews">
+                                                    <include reference="EsJ-k1-fEI"/>
+                                                </mask>
+                                                <mask key="constraints">
+                                                    <include reference="BSn-Ki-VSQ"/>
+                                                    <include reference="Jqi-dZ-7PZ"/>
+                                                </mask>
+                                            </variation>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -2574,7 +2629,7 @@
                         </connections>
                     </tableView>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="400" height="205"/>
+                    <size key="freeformSize" width="400" height="246"/>
                     <connections>
                         <outlet property="geolocationAccessIcon" destination="8oj-Xx-ipZ" id="nPS-gK-7E7"/>
                         <outlet property="pushNotificationsAccessIcon" destination="q1N-sT-QOU" id="NjT-iK-ZgW"/>

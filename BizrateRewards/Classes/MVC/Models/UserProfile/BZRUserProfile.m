@@ -20,6 +20,8 @@ static NSString *const kPointsAmount            = @"points_awarded";
 static NSString *const kContactID               = @"ref_contact_id";
 static NSString *const kPointsRequired          = @"points_next_redemption";
 
+static NSString *const kIsTestUser              = @"is_test_user";
+
 @interface BZRUserProfile ()<NSCoding>
 
 @property (strong, nonatomic) NSUserDefaults *defaults;
@@ -88,8 +90,9 @@ static NSString *const kPointsRequired          = @"points_next_redemption";
         _dateOfBirth    = [[BZRCommonDateFormatter commonDateFormatter] dateFromString:response[kDateOfBirth]];
         _pointsAmount   = [response[kPointsAmount] integerValue];
         _pointsRequired = [response[kPointsRequired] integerValue];
+        _testUser       = [response[kIsTestUser] boolValue];
         
-        self.genderString   = response[kGender];
+        self.genderString = response[kGender];
     }
     return self;
 }

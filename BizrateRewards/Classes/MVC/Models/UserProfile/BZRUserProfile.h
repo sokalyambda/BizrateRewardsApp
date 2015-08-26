@@ -24,6 +24,8 @@
 @property (assign, nonatomic) NSInteger pointsAmount;
 @property (assign, nonatomic) NSInteger pointsRequired;
 
+@property (assign, nonatomic, getter=isTestUser) BOOL testUser;
+
 @property (strong, nonatomic) NSArray *eligibleSurveys;
 
 @property (assign, nonatomic) BOOL isMale;

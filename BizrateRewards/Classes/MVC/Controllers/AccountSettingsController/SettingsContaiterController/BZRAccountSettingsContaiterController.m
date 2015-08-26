@@ -22,20 +22,34 @@ typedef enum : NSUInteger {
 
 #import "BZRMailComposeManager.h"
 
+#import "BZRZeroInsetsSeparatorCell.h"
+
 static NSString *const kEditProfileSegueIdentifier = @"editProfileSegue";
+
+static CGFloat const kCellHeight = 41.f;
 
 @interface BZRAccountSettingsContaiterController ()
 
 @property (weak, nonatomic) IBOutlet UIImageView *geolocationAccessIcon;
 @property (weak, nonatomic) IBOutlet UIImageView *pushNotificationsAccessIcon;
 
+@property (weak, nonatomic) IBOutlet BZRZeroInsetsSeparatorCell *diagnosticCell;
+
 @property (strong, nonatomic) BZRMailComposeManager *mailManager;
+
+@property (strong, nonatomic) BZRUserProfile *currentProfile;
 
 @end
 
 @implementation BZRAccountSettingsContaiterController
 
 #pragma mark - Accessors
+
+- (BZRUserProfile *)currentProfile
+{
+    _currentProfile = [BZRStorageManager sharedStorage].currentProfile;
+    return _currentProfile;
+}
 
 - (BZRMailComposeManager *)mailManager
 {
@@ -93,6 +107,16 @@ static NSString *const kEditProfileSegueIdentifier = @"editProfileSegue";
         default:
             break;
     }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
+    
+    if ([cell isEqual:self.diagnosticCell] && !self.currentProfile.isTestUser) {
+        return 0.f;
+    }
+    return kCellHeight;
 }
 
 #pragma mark - Actions
