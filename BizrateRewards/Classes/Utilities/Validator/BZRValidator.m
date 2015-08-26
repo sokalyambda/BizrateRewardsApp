@@ -86,7 +86,7 @@ static NSMutableDictionary *_errorDict;
  */
 + (BOOL)validatePasswordField:(UITextField *)passwordField
 {
-    NSString *passwordRegex = [NSString stringWithFormat:@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{%i,%i}+$", kMinPasswordSymbols, kMaxPasswordSymbols];
+    NSString *passwordRegex = [NSString stringWithFormat:@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{%li,%li}+$", (long)kMinPasswordSymbols, (long)kMaxPasswordSymbols];
     NSPredicate *passwordTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", passwordRegex];
     BOOL isMatchSuccess = [passwordTest evaluateWithObject:passwordField.text];
     
