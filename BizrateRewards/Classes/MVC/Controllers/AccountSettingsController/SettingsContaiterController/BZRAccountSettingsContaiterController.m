@@ -11,10 +11,13 @@ typedef enum : NSUInteger {
     BZRSettingsCellGeoLocation,
     BZRSettingsCellPushNotification,
     BZRSettingsCellTermsOfService,
-    BZRSettingsCellContactSupport
+    BZRSettingsCellContactSupport,
+    BZRSettingsCellDiagnostics
 } BZRSettingsCellType;
 
 #import "BZRAccountSettingsContaiterController.h"
+#import "BZRDiagnosticsController.h"
+#import "BZRBaseNavigationController.h"
 
 #import "BZRPushNotifiactionService.h"
 #import "BZRLocationObserver.h"
@@ -103,6 +106,11 @@ static CGFloat const kCellHeight = 41.f;
                 [mailController dismissViewControllerAnimated:YES completion:nil];
             }];
             break;
+        }
+        case BZRSettingsCellDiagnostics: {
+            BZRDiagnosticsController *controller = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRDiagnosticsController class])];
+            BZRBaseNavigationController *navigationController = [[BZRBaseNavigationController alloc] initWithRootViewController:controller];
+            [self presentViewController:navigationController animated:YES completion:nil];
         }
         default:
             break;

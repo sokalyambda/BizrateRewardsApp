@@ -154,6 +154,8 @@
 		58E5124A1B4C70AF00865694 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 58E512401B4C70AF00865694 /* OpenSans-Regular.ttf */; };
 		58E5124B1B4C70AF00865694 /* OpenSans-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 58E512411B4C70AF00865694 /* OpenSans-Semibold.ttf */; };
 		58E5124C1B4C70AF00865694 /* OpenSans-SemiboldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 58E512421B4C70AF00865694 /* OpenSans-SemiboldItalic.ttf */; };
+		58ECCEDD1B8F3A1800528192 /* BZRDiagnosticsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ECCEDC1B8F3A1800528192 /* BZRDiagnosticsController.m */; };
+		58ECCEE11B8F462300528192 /* BZRDiagnosticsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ECCEE01B8F462300528192 /* BZRDiagnosticsCell.m */; };
 		843C38411B4EAF38005E85CF /* BZRGiftcardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 843C38401B4EAF38005E85CF /* BZRGiftcardCell.m */; };
 		84AD3F011B4587DA00C294AE /* BZRProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AD3F001B4587DA00C294AE /* BZRProgressView.m */; };
 		84BE35CC1B5D0A4F001B99E2 /* BZRSurveyPointsInscriptionLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BE35CB1B5D0A4F001B99E2 /* BZRSurveyPointsInscriptionLabel.m */; };
@@ -451,6 +453,10 @@
 		58E512401B4C70AF00865694 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-Regular.ttf"; path = "Resources/Fonts/OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		58E512411B4C70AF00865694 /* OpenSans-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-Semibold.ttf"; path = "Resources/Fonts/OpenSans-Semibold.ttf"; sourceTree = "<group>"; };
 		58E512421B4C70AF00865694 /* OpenSans-SemiboldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-SemiboldItalic.ttf"; path = "Resources/Fonts/OpenSans-SemiboldItalic.ttf"; sourceTree = "<group>"; };
+		58ECCEDB1B8F3A1800528192 /* BZRDiagnosticsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRDiagnosticsController.h; path = Classes/MVC/Controllers/DiagnosticsController/BZRDiagnosticsController.h; sourceTree = "<group>"; };
+		58ECCEDC1B8F3A1800528192 /* BZRDiagnosticsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRDiagnosticsController.m; path = Classes/MVC/Controllers/DiagnosticsController/BZRDiagnosticsController.m; sourceTree = "<group>"; };
+		58ECCEDF1B8F462300528192 /* BZRDiagnosticsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRDiagnosticsCell.h; path = Classes/Cells/UITableViewCells/DiagnosticsCell/BZRDiagnosticsCell.h; sourceTree = "<group>"; };
+		58ECCEE01B8F462300528192 /* BZRDiagnosticsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRDiagnosticsCell.m; path = Classes/Cells/UITableViewCells/DiagnosticsCell/BZRDiagnosticsCell.m; sourceTree = "<group>"; };
 		7AF1FB2A8C4A8673EF3998F1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		843C383F1B4EAF38005E85CF /* BZRGiftcardCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRGiftcardCell.h; path = Classes/Cells/GiftcardCell/BZRGiftcardCell.h; sourceTree = "<group>"; };
 		843C38401B4EAF38005E85CF /* BZRGiftcardCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRGiftcardCell.m; path = Classes/Cells/GiftcardCell/BZRGiftcardCell.m; sourceTree = "<group>"; };
@@ -631,6 +637,7 @@
 		58219EE71B38A23A00A9541A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				58ECCEDA1B8F39A000528192 /* DiagnosticsController */,
 				589BCCD51B565DB700D49056 /* BaseViewController */,
 				58901CF11B500DEB00D4A16B /* BaseNavigationController */,
 				58A59E391B3EE9C100A5F30C /* SurveyViewController */,
@@ -648,6 +655,7 @@
 		58219EE81B38A24300A9541A /* UITableViewCells */ = {
 			isa = PBXGroup;
 			children = (
+				58ECCEDE1B8F45ED00528192 /* DiagnosticsCell */,
 				58A9FE941B53CD4A00DBE379 /* ZeroInsetsSeparatorCell */,
 			);
 			name = UITableViewCells;
@@ -1994,6 +2002,24 @@
 			name = Fonts;
 			sourceTree = "<group>";
 		};
+		58ECCEDA1B8F39A000528192 /* DiagnosticsController */ = {
+			isa = PBXGroup;
+			children = (
+				58ECCEDB1B8F3A1800528192 /* BZRDiagnosticsController.h */,
+				58ECCEDC1B8F3A1800528192 /* BZRDiagnosticsController.m */,
+			);
+			name = DiagnosticsController;
+			sourceTree = "<group>";
+		};
+		58ECCEDE1B8F45ED00528192 /* DiagnosticsCell */ = {
+			isa = PBXGroup;
+			children = (
+				58ECCEDF1B8F462300528192 /* BZRDiagnosticsCell.h */,
+				58ECCEE01B8F462300528192 /* BZRDiagnosticsCell.m */,
+			);
+			name = DiagnosticsCell;
+			sourceTree = "<group>";
+		};
 		58F49FBF1B417F06002F93EE /* PushNotificationsService */ = {
 			isa = PBXGroup;
 			children = (
@@ -2275,6 +2301,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				589420931B451D79004BAF48 /* AppDelegate.m in Sources */,
+				58ECCEDD1B8F3A1800528192 /* BZRDiagnosticsController.m in Sources */,
 				84BE35D61B5D0C66001B99E2 /* BZRSurveyRemarkLabel.m in Sources */,
 				58A91F3B1B3A91E20032607F /* BZRGiftCard.m in Sources */,
 				58A59E301B3EE93F00A5F30C /* BZRAccountSettingsController.m in Sources */,
@@ -2294,6 +2321,7 @@
 				589BCCD91B565E0400D49056 /* BZRSerialViewConstructor.m in Sources */,
 				58AA304E1B7B805B00363119 /* BZRPushNotifiactionService.m in Sources */,
 				585C32A21B63AA3F005BF07B /* BZRNetworkOperation.m in Sources */,
+				58ECCEE11B8F462300528192 /* BZRDiagnosticsCell.m in Sources */,
 				58ACC0841B3968BF0081E546 /* BZRChooseSignUpTypeController.m in Sources */,
 				58AA1A221B5E1E6400BA824A /* BZRHighlightedButton.m in Sources */,
 				585C32B41B63C9B9005BF07B /* BZRGetCurrentUserRequest.m in Sources */,
