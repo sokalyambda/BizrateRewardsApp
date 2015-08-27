@@ -239,7 +239,7 @@
 		5894208A1B450FF6004BAF48 /* BZRAccountSettingsContaiterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRAccountSettingsContaiterController.m; path = Classes/MVC/Controllers/AccountSettingsController/SettingsContaiterController/BZRAccountSettingsContaiterController.m; sourceTree = "<group>"; };
 		589420911B451D79004BAF48 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Resources/AppDelegate.h; sourceTree = "<group>"; };
 		589420921B451D79004BAF48 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = Resources/AppDelegate.m; sourceTree = "<group>"; };
-		589420941B451D87004BAF48 /* BizrateRewards-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "BizrateRewards-Prefix.pch"; path = "Resources/BizrateRewards-Prefix.pch"; sourceTree = "<group>"; };
+		589420941B451D87004BAF48 /* Bizrate Rewards-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Bizrate Rewards-Prefix.pch"; path = "Resources/Bizrate Rewards-Prefix.pch"; sourceTree = "<group>"; };
 		589420951B451D87004BAF48 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Resources/Info.plist; sourceTree = "<group>"; };
 		589420961B451D87004BAF48 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Resources/main.m; sourceTree = "<group>"; };
 		589420991B451DD2004BAF48 /* BZRGlobalConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRGlobalConstants.h; path = Resources/BZRGlobalConstants.h; sourceTree = "<group>"; };
@@ -273,10 +273,10 @@
 		589BCCE41B569BB800D49056 /* UIView+Flashable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+Flashable.m"; path = "Classes/Categories/Flashable/UIView+Flashable.m"; sourceTree = "<group>"; };
 		58A08B691B73A4F500BEF1D8 /* BZRPrivacyAndTermsButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRPrivacyAndTermsButton.h; path = Classes/MVC/Views/Styles/PrivacyAndTerms/BZRPrivacyAndTermsButton.h; sourceTree = "<group>"; };
 		58A08B6A1B73A4F500BEF1D8 /* BZRPrivacyAndTermsButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRPrivacyAndTermsButton.m; path = Classes/MVC/Views/Styles/PrivacyAndTerms/BZRPrivacyAndTermsButton.m; sourceTree = "<group>"; };
-		58A0B20F1B3854CF003C100C /* BizrateRewards.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BizrateRewards.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		58A0B20F1B3854CF003C100C /* Bizrate Rewards.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bizrate Rewards.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		58A0B21D1B3854CF003C100C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		58A0B21F1B3854CF003C100C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		58A0B2281B3854CF003C100C /* BizrateRewardsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BizrateRewardsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		58A0B2281B3854CF003C100C /* Bizrate RewardsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Bizrate RewardsTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		58A0B22D1B3854CF003C100C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		58A0B22E1B3854CF003C100C /* BizrateRewardsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BizrateRewardsTests.m; sourceTree = "<group>"; };
 		58A59E231B3EDFDC00A5F30C /* BZRGeolocationAccessController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRGeolocationAccessController.h; path = Classes/MVC/Controllers/TutorialViewControllers/GeolocationAccessController/BZRGeolocationAccessController.h; sourceTree = "<group>"; };
@@ -517,7 +517,7 @@
 			children = (
 				58D32D4D1B6D400600896D08 /* Location Examples */,
 				58E512241B4C6DFE00865694 /* Fonts */,
-				589420941B451D87004BAF48 /* BizrateRewards-Prefix.pch */,
+				589420941B451D87004BAF48 /* Bizrate Rewards-Prefix.pch */,
 				589420951B451D87004BAF48 /* Info.plist */,
 				589420961B451D87004BAF48 /* main.m */,
 				589420911B451D79004BAF48 /* AppDelegate.h */,
@@ -1176,8 +1176,8 @@
 		58A0B2101B3854CF003C100C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				58A0B20F1B3854CF003C100C /* BizrateRewards.app */,
-				58A0B2281B3854CF003C100C /* BizrateRewardsTests.xctest */,
+				58A0B20F1B3854CF003C100C /* Bizrate Rewards.app */,
+				58A0B2281B3854CF003C100C /* Bizrate RewardsTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2115,9 +2115,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		58A0B20E1B3854CF003C100C /* BizrateRewards */ = {
+		58A0B20E1B3854CF003C100C /* Bizrate Rewards */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 58A0B2321B3854CF003C100C /* Build configuration list for PBXNativeTarget "BizrateRewards" */;
+			buildConfigurationList = 58A0B2321B3854CF003C100C /* Build configuration list for PBXNativeTarget "Bizrate Rewards" */;
 			buildPhases = (
 				7C38B15BCC7AF1C43512E319 /* Check Pods Manifest.lock */,
 				58A0B20B1B3854CF003C100C /* Sources */,
@@ -2129,14 +2129,14 @@
 			);
 			dependencies = (
 			);
-			name = BizrateRewards;
+			name = "Bizrate Rewards";
 			productName = BizrateRewards;
-			productReference = 58A0B20F1B3854CF003C100C /* BizrateRewards.app */;
+			productReference = 58A0B20F1B3854CF003C100C /* Bizrate Rewards.app */;
 			productType = "com.apple.product-type.application";
 		};
-		58A0B2271B3854CF003C100C /* BizrateRewardsTests */ = {
+		58A0B2271B3854CF003C100C /* Bizrate RewardsTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 58A0B2351B3854CF003C100C /* Build configuration list for PBXNativeTarget "BizrateRewardsTests" */;
+			buildConfigurationList = 58A0B2351B3854CF003C100C /* Build configuration list for PBXNativeTarget "Bizrate RewardsTests" */;
 			buildPhases = (
 				58A0B2241B3854CF003C100C /* Sources */,
 				58A0B2251B3854CF003C100C /* Frameworks */,
@@ -2147,9 +2147,9 @@
 			dependencies = (
 				58A0B22A1B3854CF003C100C /* PBXTargetDependency */,
 			);
-			name = BizrateRewardsTests;
+			name = "Bizrate RewardsTests";
 			productName = BizrateRewardsTests;
-			productReference = 58A0B2281B3854CF003C100C /* BizrateRewardsTests.xctest */;
+			productReference = 58A0B2281B3854CF003C100C /* Bizrate RewardsTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -2171,7 +2171,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 58A0B20A1B3854CF003C100C /* Build configuration list for PBXProject "BizrateRewards" */;
+			buildConfigurationList = 58A0B20A1B3854CF003C100C /* Build configuration list for PBXProject "Bizrate Rewards" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -2184,8 +2184,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				58A0B20E1B3854CF003C100C /* BizrateRewards */,
-				58A0B2271B3854CF003C100C /* BizrateRewardsTests */,
+				58A0B20E1B3854CF003C100C /* Bizrate Rewards */,
+				58A0B2271B3854CF003C100C /* Bizrate RewardsTests */,
 			);
 		};
 /* End PBXProject section */
@@ -2402,7 +2402,7 @@
 /* Begin PBXTargetDependency section */
 		58A0B22A1B3854CF003C100C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 58A0B20E1B3854CF003C100C /* BizrateRewards */;
+			target = 58A0B20E1B3854CF003C100C /* Bizrate Rewards */;
 			targetProxy = 58A0B2291B3854CF003C100C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -2510,7 +2510,7 @@
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CURRENT_PROJECT_VERSION = 38;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "BizrateRewards/Resources/BizrateRewards-Prefix.pch";
+				GCC_PREFIX_HEADER = "BizrateRewards/Resources/Bizrate Rewards-Prefix.pch";
 				INFOPLIST_FILE = BizrateRewards/Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -2519,7 +2519,7 @@
 					"$(PROJECT_DIR)/BizrateRewards/Classes/Libraries/OfferBeamSDK",
 					"$(PROJECT_DIR)/BizrateRewards",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Bizrate Rewards";
 				PROVISIONING_PROFILE = "";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -2536,7 +2536,7 @@
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CURRENT_PROJECT_VERSION = 38;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "BizrateRewards/Resources/BizrateRewards-Prefix.pch";
+				GCC_PREFIX_HEADER = "BizrateRewards/Resources/Bizrate Rewards-Prefix.pch";
 				INFOPLIST_FILE = BizrateRewards/Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -2545,7 +2545,7 @@
 					"$(PROJECT_DIR)/BizrateRewards/Classes/Libraries/OfferBeamSDK",
 					"$(PROJECT_DIR)/BizrateRewards",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Bizrate Rewards";
 				PROVISIONING_PROFILE = "";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -2565,7 +2565,7 @@
 				);
 				INFOPLIST_FILE = BizrateRewardsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Bizrate RewardsTests";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BizrateRewards.app/BizrateRewards";
 			};
 			name = Debug;
@@ -2580,7 +2580,7 @@
 				);
 				INFOPLIST_FILE = BizrateRewardsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Bizrate RewardsTests";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BizrateRewards.app/BizrateRewards";
 			};
 			name = Release;
@@ -2633,7 +2633,7 @@
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CURRENT_PROJECT_VERSION = 38;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "BizrateRewards/Resources/BizrateRewards-Prefix.pch";
+				GCC_PREFIX_HEADER = "BizrateRewards/Resources/Bizrate Rewards-Prefix.pch";
 				INFOPLIST_FILE = BizrateRewards/Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -2642,7 +2642,7 @@
 					"$(PROJECT_DIR)/BizrateRewards/Classes/Libraries/OfferBeamSDK",
 					"$(PROJECT_DIR)/BizrateRewards",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Bizrate Rewards";
 				PROVISIONING_PROFILE = "";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -2658,7 +2658,7 @@
 				);
 				INFOPLIST_FILE = BizrateRewardsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Bizrate RewardsTests";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BizrateRewards.app/BizrateRewards";
 			};
 			name = AdHoc;
@@ -2666,7 +2666,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		58A0B20A1B3854CF003C100C /* Build configuration list for PBXProject "BizrateRewards" */ = {
+		58A0B20A1B3854CF003C100C /* Build configuration list for PBXProject "Bizrate Rewards" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				58A0B2301B3854CF003C100C /* Debug */,
@@ -2676,7 +2676,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		58A0B2321B3854CF003C100C /* Build configuration list for PBXNativeTarget "BizrateRewards" */ = {
+		58A0B2321B3854CF003C100C /* Build configuration list for PBXNativeTarget "Bizrate Rewards" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				58A0B2331B3854CF003C100C /* Debug */,
@@ -2686,7 +2686,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		58A0B2351B3854CF003C100C /* Build configuration list for PBXNativeTarget "BizrateRewardsTests" */ = {
+		58A0B2351B3854CF003C100C /* Build configuration list for PBXNativeTarget "Bizrate RewardsTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				58A0B2361B3854CF003C100C /* Debug */,

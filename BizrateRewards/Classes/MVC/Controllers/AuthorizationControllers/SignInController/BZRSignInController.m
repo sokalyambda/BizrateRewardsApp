@@ -93,6 +93,7 @@ static NSString *const kDashboardSegueIdentifier = @"dashboardSegue";
 - (void)showForgotPasswordController
 {
     BZRForgotPasswordController *forgotPasswordController = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRForgotPasswordController class])];
+    forgotPasswordController.userName = self.userNameField.text;
     BZRBaseNavigationController *navigationController = [[BZRBaseNavigationController alloc] initWithRootViewController:forgotPasswordController];
     [self presentViewController:navigationController animated:YES completion:nil];
 }

@@ -27,6 +27,8 @@ static CGFloat const kBorderWidth = .5f;
     [self downloadImageForGiftCard:giftCard];
 }
 
+#pragma mark - Lifecycle
+
 - (void)layoutSubviews
 {
     [super layoutSubviews];
@@ -50,6 +52,7 @@ static CGFloat const kBorderWidth = .5f;
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self animated:YES];
     hud.color = [[UIColor clearColor] copy];
     hud.activityIndicatorColor = [UIColor blackColor];
+    
     [self.giftcardImageView sd_setImageWithURL:giftCard.giftCardImageURL completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         [MBProgressHUD hideAllHUDsForView:weakSelf animated:YES];
     }];
