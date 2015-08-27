@@ -3127,6 +3127,9 @@
                                                 <include reference="Ifv-nL-wMz"/>
                                             </mask>
                                         </variation>
+                                        <connections>
+                                            <action selector="saveAPIEndpointClick:" destination="k4t-FB-a2N" eventType="touchUpInside" id="rJJ-to-zWZ"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

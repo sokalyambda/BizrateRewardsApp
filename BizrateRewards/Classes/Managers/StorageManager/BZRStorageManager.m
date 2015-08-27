@@ -9,6 +9,7 @@
 #import "BZRStorageManager.h"
 
 #import "BZRLocationEvent.h"
+#import "BZRServerAPIEntity.h"
 
 @interface BZRStorageManager ()
 

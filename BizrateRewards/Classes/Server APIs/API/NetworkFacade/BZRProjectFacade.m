@@ -79,6 +79,30 @@ static BZRSessionManager *sharedHTTPClient = nil;
 
 #pragma mark - Requests builder
 
+//GET API info request
++ (BZRNetworkOperation *)getAPIInfoOnSuccess:(void (^)(BOOL success))success
+                                   onFailure:(void (^)(NSError *error, BOOL isCanceled))failure
+{
+    BZRAPIInfoRequest *request = [[BZRAPIInfoRequest alloc] init];
+    
+    BZRNetworkOperation* operation = [[self  HTTPClient] enqueueOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
+        
+        BZRAPIInfoRequest *request = (BZRAPIInfoRequest*)operation.networkRequest;
+        [BZRStorageManager sharedStorage].currentServerAPIEntity = request.apiEntity;
+        
+        if (success) {
+            success(YES);
+        }
+        
+    } failure:^(BZRNetworkOperation *operation, NSError *error, BOOL isCanceled) {
+        
+        if (failure) {
+            failure(error, isCanceled);
+        }
+    }];
+    return operation;
+}
+
 //Authorization Requests
 + (BZRNetworkOperation *)signInWithEmail:(NSString*)email
                              password:(NSString*)password
@@ -355,6 +379,35 @@ static BZRSessionManager *sharedHTTPClient = nil;
             
             if (success) {
                 success(request.loggedEvent);
+            }
+            
+        } failure:^(BZRNetworkOperation *operation, NSError *error, BOOL isCanceled) {
+            if (failure) {
+                failure(error, isCanceled);
+            }
+        }];
+    } onFailure:^(NSError *error, BOOL isCanceled) {
+        if (failure) {
+            failure(error, isCanceled);
+        }
+    }];
+    return operation;
+}
+
++ (BZRNetworkOperation *)getGeolocationEventsListOnSuccess:(void (^)(NSArray *locationEvents))success
+                                                 onFailure:(void (^)(NSError *error, BOOL isCanceled))failure
+{
+    __block BZRNetworkOperation *operation;
+    [self validateSessionWithType:BZRSessionTypeUser onSuccess:^(BOOL isSuccess) {
+        
+        BZRGetLocationEventsListRequest *request = [[BZRGetLocationEventsListRequest alloc] init];
+        
+        operation = [[self  HTTPClient] enqueueOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
+            
+            BZRGetLocationEventsListRequest *request = (BZRGetLocationEventsListRequest*)operation.networkRequest;
+            
+            if (success) {
+                success(request.locationEventsList);
             }
             
         } failure:^(BZRNetworkOperation *operation, NSError *error, BOOL isCanceled) {

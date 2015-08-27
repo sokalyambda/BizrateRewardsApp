@@ -10,6 +10,8 @@
 #import "BZRFacebookProfile.h"
 #import "BZRUserToken.h"
 
+@class BZRServerAPIEntity;
+
 @interface BZRStorageManager : NSObject
 
 + (instancetype)sharedStorage;
@@ -20,6 +22,8 @@
 
 @property (strong, nonatomic) BZRUserProfile *currentProfile;
 @property (strong, nonatomic) BZRFacebookProfile *facebookProfile;
+
+@property (strong, nonatomic) BZRServerAPIEntity *currentServerAPIEntity;
 
 @property (strong, nonatomic) BZRLocationEvent *lastReceivedLocationEvent;
 

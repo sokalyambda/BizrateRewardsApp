@@ -27,6 +27,10 @@
 //check whether any operation is in process
 + (BOOL)isOperationInProcess;
 
+//GET API Info Request
++ (BZRNetworkOperation *)getAPIInfoOnSuccess:(void (^)(BOOL success))success
+                                   onFailure:(void (^)(NSError *error, BOOL isCanceled))failure;
+
 //Authorization Requests
 + (BZRNetworkOperation*)signInWithEmail:(NSString*)email
                               password:(NSString*)password
@@ -66,6 +70,8 @@
 
 //Location Events
 + (BZRNetworkOperation *)sendGeolocationEvent:(BZRLocationEvent *)locationEvent onSuccess:(void (^)(BZRLocationEvent *locationEvent))success
+                                    onFailure:(void (^)(NSError *error, BOOL isCanceled))failure;
++ (BZRNetworkOperation *)getGeolocationEventsListOnSuccess:(void (^)(NSArray *locationEvents))success
                                     onFailure:(void (^)(NSError *error, BOOL isCanceled))failure;
 
 //Device Requests

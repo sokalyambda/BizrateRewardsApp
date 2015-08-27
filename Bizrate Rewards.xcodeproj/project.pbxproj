@@ -156,6 +156,9 @@
 		58E5124C1B4C70AF00865694 /* OpenSans-SemiboldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 58E512421B4C70AF00865694 /* OpenSans-SemiboldItalic.ttf */; };
 		58ECCEDD1B8F3A1800528192 /* BZRDiagnosticsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ECCEDC1B8F3A1800528192 /* BZRDiagnosticsController.m */; };
 		58ECCEE11B8F462300528192 /* BZRDiagnosticsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ECCEE01B8F462300528192 /* BZRDiagnosticsCell.m */; };
+		58ECCEE51B8F4D9B00528192 /* BZRGetLocationEventsListRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ECCEE41B8F4D9B00528192 /* BZRGetLocationEventsListRequest.m */; };
+		58ECCEE91B8F5ECC00528192 /* BZRAPIInfoRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ECCEE81B8F5ECC00528192 /* BZRAPIInfoRequest.m */; };
+		58ECCEED1B8F600C00528192 /* BZRServerAPIEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ECCEEC1B8F600C00528192 /* BZRServerAPIEntity.m */; };
 		843C38411B4EAF38005E85CF /* BZRGiftcardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 843C38401B4EAF38005E85CF /* BZRGiftcardCell.m */; };
 		84AD3F011B4587DA00C294AE /* BZRProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AD3F001B4587DA00C294AE /* BZRProgressView.m */; };
 		84BE35CC1B5D0A4F001B99E2 /* BZRSurveyPointsInscriptionLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BE35CB1B5D0A4F001B99E2 /* BZRSurveyPointsInscriptionLabel.m */; };
@@ -457,6 +460,12 @@
 		58ECCEDC1B8F3A1800528192 /* BZRDiagnosticsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRDiagnosticsController.m; path = Classes/MVC/Controllers/DiagnosticsController/BZRDiagnosticsController.m; sourceTree = "<group>"; };
 		58ECCEDF1B8F462300528192 /* BZRDiagnosticsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRDiagnosticsCell.h; path = Classes/Cells/UITableViewCells/DiagnosticsCell/BZRDiagnosticsCell.h; sourceTree = "<group>"; };
 		58ECCEE01B8F462300528192 /* BZRDiagnosticsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRDiagnosticsCell.m; path = Classes/Cells/UITableViewCells/DiagnosticsCell/BZRDiagnosticsCell.m; sourceTree = "<group>"; };
+		58ECCEE31B8F4D9B00528192 /* BZRGetLocationEventsListRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRGetLocationEventsListRequest.h; path = LocationEvents/GetLocationEventsListRequest/BZRGetLocationEventsListRequest.h; sourceTree = "<group>"; };
+		58ECCEE41B8F4D9B00528192 /* BZRGetLocationEventsListRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRGetLocationEventsListRequest.m; path = LocationEvents/GetLocationEventsListRequest/BZRGetLocationEventsListRequest.m; sourceTree = "<group>"; };
+		58ECCEE71B8F5ECC00528192 /* BZRAPIInfoRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRAPIInfoRequest.h; path = APIInfoRequest/BZRAPIInfoRequest.h; sourceTree = "<group>"; };
+		58ECCEE81B8F5ECC00528192 /* BZRAPIInfoRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRAPIInfoRequest.m; path = APIInfoRequest/BZRAPIInfoRequest.m; sourceTree = "<group>"; };
+		58ECCEEB1B8F600C00528192 /* BZRServerAPIEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRServerAPIEntity.h; path = Classes/MVC/Models/ServerAPIEntity/BZRServerAPIEntity.h; sourceTree = "<group>"; };
+		58ECCEEC1B8F600C00528192 /* BZRServerAPIEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRServerAPIEntity.m; path = Classes/MVC/Models/ServerAPIEntity/BZRServerAPIEntity.m; sourceTree = "<group>"; };
 		7AF1FB2A8C4A8673EF3998F1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		843C383F1B4EAF38005E85CF /* BZRGiftcardCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRGiftcardCell.h; path = Classes/Cells/GiftcardCell/BZRGiftcardCell.h; sourceTree = "<group>"; };
 		843C38401B4EAF38005E85CF /* BZRGiftcardCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRGiftcardCell.m; path = Classes/Cells/GiftcardCell/BZRGiftcardCell.m; sourceTree = "<group>"; };
@@ -603,6 +612,7 @@
 		58219EE51B38A22F00A9541A /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				58ECCEEA1B8F5FEA00528192 /* ServerAPIEntity */,
 				58BCCD871B6BA1E000521496 /* LocationEvent */,
 				58B52A401B6A30D7002D2529 /* FacebookProfile */,
 				585813AB1B3C235C0087AEE2 /* Survey */,
@@ -879,6 +889,7 @@
 			isa = PBXGroup;
 			children = (
 				58AA30561B7B80AC00363119 /* BZRRequests.h */,
+				58ECCEE61B8F5EA700528192 /* APIInfoRequest */,
 				58B18C881B790D1600F13F53 /* GiftCards */,
 				58BD59BC1B6F757E00B6C5C4 /* Device */,
 				58BCCD8B1B6BA48100521496 /* LocationEvent */,
@@ -1739,6 +1750,7 @@
 		58BCCD8B1B6BA48100521496 /* LocationEvent */ = {
 			isa = PBXGroup;
 			children = (
+				58ECCEE21B8F4D7C00528192 /* GetLocationEventsListRequest */,
 				58BCCD8C1B6BA4B400521496 /* SendLocationEventRequest */,
 			);
 			name = LocationEvent;
@@ -2018,6 +2030,33 @@
 				58ECCEE01B8F462300528192 /* BZRDiagnosticsCell.m */,
 			);
 			name = DiagnosticsCell;
+			sourceTree = "<group>";
+		};
+		58ECCEE21B8F4D7C00528192 /* GetLocationEventsListRequest */ = {
+			isa = PBXGroup;
+			children = (
+				58ECCEE31B8F4D9B00528192 /* BZRGetLocationEventsListRequest.h */,
+				58ECCEE41B8F4D9B00528192 /* BZRGetLocationEventsListRequest.m */,
+			);
+			name = GetLocationEventsListRequest;
+			sourceTree = "<group>";
+		};
+		58ECCEE61B8F5EA700528192 /* APIInfoRequest */ = {
+			isa = PBXGroup;
+			children = (
+				58ECCEE71B8F5ECC00528192 /* BZRAPIInfoRequest.h */,
+				58ECCEE81B8F5ECC00528192 /* BZRAPIInfoRequest.m */,
+			);
+			name = APIInfoRequest;
+			sourceTree = "<group>";
+		};
+		58ECCEEA1B8F5FEA00528192 /* ServerAPIEntity */ = {
+			isa = PBXGroup;
+			children = (
+				58ECCEEB1B8F600C00528192 /* BZRServerAPIEntity.h */,
+				58ECCEEC1B8F600C00528192 /* BZRServerAPIEntity.m */,
+			);
+			name = ServerAPIEntity;
 			sourceTree = "<group>";
 		};
 		58F49FBF1B417F06002F93EE /* PushNotificationsService */ = {
@@ -2343,6 +2382,7 @@
 				58AA30411B7B800A00363119 /* BZRMixpanelService.m in Sources */,
 				588CE7A01B70AAD00088DEB1 /* BZRConfirmPasswordController.m in Sources */,
 				58BF360B1B74F94300699A63 /* MFMailComposeViewController+Styles.m in Sources */,
+				58ECCEE51B8F4D9B00528192 /* BZRGetLocationEventsListRequest.m in Sources */,
 				84BE35D11B5D0AE0001B99E2 /* BZRSurveyPointsValueLabel.m in Sources */,
 				58C505311B7DE68A0030DCE5 /* BZRIncreaseableButton.m in Sources */,
 				58ACC06D1B3937160081E546 /* BZRAutologinController.m in Sources */,
@@ -2370,6 +2410,7 @@
 				5858F26E1B61271E00F38DFC /* BZRErrorHandler.m in Sources */,
 				5878D3E11B4426E000A917D0 /* BZRCommonDateFormatter.m in Sources */,
 				58A08B6B1B73A4F500BEF1D8 /* BZRPrivacyAndTermsButton.m in Sources */,
+				58ECCEE91B8F5ECC00528192 /* BZRAPIInfoRequest.m in Sources */,
 				58C770E71B5D5B6A00E9031F /* BZRCommonNumberFormatter.m in Sources */,
 				58AA303D1B7B7FF300363119 /* BZRFacebookService.m in Sources */,
 				585C32AF1B63C854005BF07B /* BZRSignUpRequest.m in Sources */,
@@ -2377,6 +2418,7 @@
 				585641B61B4DA5AA007E7368 /* BZRAuthorizationField.m in Sources */,
 				58AF4AF01B5BB6F10052C7E5 /* UIImagePickerController+AdjustStatusBar.m in Sources */,
 				58901CF41B500E1B00D4A16B /* BZRBaseNavigationController.m in Sources */,
+				58ECCEED1B8F600C00528192 /* BZRServerAPIEntity.m in Sources */,
 				58219F191B38A3F600A9541A /* NSDictionary+JSONRepresentation.m in Sources */,
 				58AA30451B7B801E00363119 /* BZRReachabilityHelper.m in Sources */,
 				585C32B81B63C9D9005BF07B /* BZRUpdateCurrentUserRequest.m in Sources */,
