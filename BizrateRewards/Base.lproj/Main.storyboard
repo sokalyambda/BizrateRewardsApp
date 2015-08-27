@@ -2567,7 +2567,7 @@
                                             </variation>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="Too-4t-LS3" userLabel="Contact Support Cell" customClass="BZRZeroInsetsSeparatorCell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="Too-4t-LS3" userLabel="Diagnostic Cell" customClass="BZRZeroInsetsSeparatorCell">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Too-4t-LS3" id="CHN-St-MUX">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -2631,6 +2631,7 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="400" height="246"/>
                     <connections>
+                        <outlet property="diagnosticCell" destination="Too-4t-LS3" id="EiT-kG-2cI"/>
                         <outlet property="geolocationAccessIcon" destination="8oj-Xx-ipZ" id="nPS-gK-7E7"/>
                         <outlet property="pushNotificationsAccessIcon" destination="q1N-sT-QOU" id="NjT-iK-ZgW"/>
                     </connections>
