@@ -21,8 +21,9 @@ typedef enum : NSUInteger {
 @property (assign, nonatomic) CLLocationCoordinate2D coordinate;
 @property (assign, nonatomic) NSInteger locationId;
 @property (strong, nonatomic) NSString *customerId;
+
 @property (strong, nonatomic) NSString *creationDateString;
-@property (strong, nonatomic) NSString *creationLocalDateString;
+@property (strong, nonatomic) NSString *locationLink;
 
 - (instancetype)initWithOfferBeamCallback:(NSDictionary *)locationData;
 

@@ -8,12 +8,15 @@
 
 #import "BZRLocationEvent.h"
 
+#import "BZRCommonDateFormatter.h"
+
 //keys for OB call back
 static NSString *const kOBLocationId = @"altStoreId";
 static NSString *const kOBLatitude = @"latitude";
 static NSString *const kOBLongitude = @"longitude";
 static NSString *const kOBCustomerId = @"customerId";
 static NSString *const kOBLocationEventType = @"locationEventType";
+static NSString *const kOBLocationEventLink = @"locationEventLink";
 
 //keys for server response
 static NSString *const kServerLatitude = @"lat";
@@ -22,18 +25,16 @@ static NSString *const kServerCustomerId = @"ref_eyc_customer_id";
 static NSString *const kServerLocationEventType = @"event_type";
 static NSString *const kServerEventCreationDate = @"created";
 
+static NSString *const kServerEventLinks = @"links";
+static NSString *const kServerEventLinkRef = @"href";
+static NSString *const kServerEventLinkRel = @"rel";
+static NSString *const kServerEventLinkLocation = @"location";
+
 @interface BZRLocationEvent ()<NSCoding>
 
 @end
 
 @implementation BZRLocationEvent
-
-#pragma mark - Accessors
-
-//- (void)setCreationDateString:(NSString *)creationDateString
-//{
-//    
-//}
 
 #pragma mark - BZRMappingProtocol
 
@@ -44,8 +45,18 @@ static NSString *const kServerEventCreationDate = @"created";
         _coordinate = CLLocationCoordinate2DMake([response[kServerLatitude] doubleValue], [response[kServerLongitude] doubleValue]);
         _customerId = response[kServerCustomerId];
         _eventType = [response[kServerLocationEventType] isEqualToString:@"ENTRY"] ? BZRLocationEventTypeEntry : BZRLocationEventTypeExit;
+        
         _creationDateString = response[kServerEventCreationDate];
-//        _creationLocalDateString
+        
+        NSArray *links = response[kServerEventLinks];
+        if (links.count) {
+            [links enumerateObjectsUsingBlock:^(NSDictionary *linkDict, NSUInteger idx, BOOL *stop) {
+                if ([linkDict[kServerEventLinkRel] isEqualToString:kServerEventLinkLocation]) {
+                    _locationLink = linkDict[kServerEventLinkRef];
+                    *stop = YES;
+                }
+            }];
+        }
     }
     return self;
 }
@@ -54,9 +65,10 @@ static NSString *const kServerEventCreationDate = @"created";
 {
     self = [super init];
     if (self) {
-        _coordinate = CLLocationCoordinate2DMake([locationData[kOBLatitude] doubleValue], [locationData[kOBLongitude] doubleValue]);
-        _locationId = [locationData[kOBLocationId] integerValue];
-        _customerId = locationData[kOBCustomerId];
+        _coordinate     = CLLocationCoordinate2DMake([locationData[kOBLatitude] doubleValue], [locationData[kOBLongitude] doubleValue]);
+        _locationId     = [locationData[kOBLocationId] integerValue];
+        _customerId     = locationData[kOBCustomerId];
+        _locationLink   = [NSString stringWithFormat:@"%@/%d", @"https://api.bizraterewards.com/v1/location", _locationId];
     }
     return self;
 }
@@ -71,6 +83,7 @@ static NSString *const kServerEventCreationDate = @"created";
     [encoder encodeObject:@(self.locationId) forKey:kOBLocationId];
     [encoder encodeObject:self.customerId forKey:kOBCustomerId];
     [encoder encodeObject:@(self.eventType) forKey:kOBLocationEventType];
+    [encoder encodeObject:self.locationLink forKey:kOBLocationEventLink];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder
@@ -83,6 +96,7 @@ static NSString *const kServerEventCreationDate = @"created";
         _locationId         = [[decoder decodeObjectForKey:kOBLocationId] integerValue];
         _customerId         = [decoder decodeObjectForKey:kOBCustomerId];
         _eventType          = [[decoder decodeObjectForKey:kOBLocationEventType] integerValue];
+        _locationLink       = [decoder decodeObjectForKey:kOBLocationEventLink];
     }
     return self;
 }

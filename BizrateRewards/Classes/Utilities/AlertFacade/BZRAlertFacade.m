@@ -55,7 +55,7 @@ NSString *const kErrorAlertMessage = @"AlertMessage";
     [alertController addAction:cancelAction];
     [alertController addAction:settingsAction];
     
-    [self showCurrentAlertController:alertController];
+    [self showCurrentAlertController:alertController forController:nil];
 }
 
 /**
@@ -81,7 +81,7 @@ NSString *const kErrorAlertMessage = @"AlertMessage";
     [alertController addAction:cancelAction];
     [alertController addAction:settingsAction];
     
-    [self showCurrentAlertController:alertController];
+    [self showCurrentAlertController:alertController forController:nil];
 }
 
 /**
@@ -107,7 +107,7 @@ NSString *const kErrorAlertMessage = @"AlertMessage";
     [alertController addAction:cancelAction];
     [alertController addAction:acceptAction];
     
-    [self showCurrentAlertController:alertController];
+    [self showCurrentAlertController:alertController forController:nil];
 }
 
 /**
@@ -149,7 +149,7 @@ NSString *const kErrorAlertMessage = @"AlertMessage";
     [alertController addAction:cancelAction];
     [alertController addAction:confirmAction];
     
-    [self showCurrentAlertController:alertController];
+    [self showCurrentAlertController:alertController forController:nil];
 }
 
 #pragma mark - Private methods
@@ -159,17 +159,22 @@ NSString *const kErrorAlertMessage = @"AlertMessage";
  *
  *  @param alertController Alert Controller that should be presented
  */
-+ (void)showCurrentAlertController:(UIAlertController *)alertController
++ (void)showCurrentAlertController:(UIAlertController *)alertController forController:(UIViewController *)currentController
 {
-    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-    BZRBaseNavigationController *navigationController = (BZRBaseNavigationController *)appDelegate.window.rootViewController;
-    UIViewController *lastPresentedViewController = ((UIViewController *)navigationController.viewControllers.lastObject).presentedViewController;
-    
-    if (lastPresentedViewController) {
-        [lastPresentedViewController presentViewController:alertController animated:YES completion:nil];
+    if (!currentController) {
+        AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+        BZRBaseNavigationController *navigationController = (BZRBaseNavigationController *)appDelegate.window.rootViewController;
+        UIViewController *lastPresentedViewController = ((UIViewController *)navigationController.viewControllers.lastObject).presentedViewController;
+        
+        if (lastPresentedViewController) {
+            [lastPresentedViewController presentViewController:alertController animated:YES completion:nil];
+        } else {
+            [navigationController presentViewController:alertController animated:YES completion:nil];
+        }
     } else {
-        [navigationController presentViewController:alertController animated:YES completion:nil];
+        [currentController presentViewController:alertController animated:YES completion:nil];
     }
+    
 }
 
 #pragma mark - Alerts
@@ -206,7 +211,7 @@ NSString *const kErrorAlertMessage = @"AlertMessage";
     }];
     
     [alertController addAction:okAction];
-    [self showCurrentAlertController:alertController];
+    [self showCurrentAlertController:alertController forController:nil];
 }
 
 /**
@@ -227,7 +232,7 @@ NSString *const kErrorAlertMessage = @"AlertMessage";
  *  @param message    Alert Message
  *  @param completion Completion Block
  */
-+ (void)showAlertWithTitle:(NSString *)title andMessage:(NSString *)message withCompletion:(void(^)(void))completion
++ (void)showAlertWithTitle:(NSString *)title andMessage:(NSString *)message forController:(UIViewController *)currentController withCompletion:(void(^)(void))completion
 {
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
     
@@ -238,7 +243,7 @@ NSString *const kErrorAlertMessage = @"AlertMessage";
     }];
     
     [alertController addAction:okAction];
-    [self showCurrentAlertController:alertController];
+    [self showCurrentAlertController:alertController forController:currentController];
 }
 
 /**
@@ -249,7 +254,7 @@ NSString *const kErrorAlertMessage = @"AlertMessage";
  */
 + (void)showAlertWithMessage:(NSString *)message withCompletion:(void(^)(void))completion
 {
-    [self showAlertWithTitle:@"" andMessage:message withCompletion:completion];
+    [self showAlertWithTitle:@"" andMessage:message forController:nil withCompletion:completion];
 }
 
 /**
@@ -266,7 +271,7 @@ NSString *const kErrorAlertMessage = @"AlertMessage";
     
     WEAK_SELF;
     [BZRErrorHandler parseError:error withCompletion:^(NSString *alertTitle, NSString *alertMessage) {
-        [weakSelf showAlertWithTitle:alertTitle andMessage:alertMessage withCompletion:completion];
+        [weakSelf showAlertWithTitle:alertTitle andMessage:alertMessage forController:nil withCompletion:completion];
     }];
 }
 

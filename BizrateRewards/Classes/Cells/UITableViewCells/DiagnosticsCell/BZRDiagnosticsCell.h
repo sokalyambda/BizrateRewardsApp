@@ -9,9 +9,19 @@
 #import "BZRZeroInsetsSeparatorCell.h"
 
 @class BZRLocationEvent;
+@protocol BZRDiagnosticsCellDelegate;
 
 @interface BZRDiagnosticsCell : BZRZeroInsetsSeparatorCell
 
+@property (weak, nonatomic) id<BZRDiagnosticsCellDelegate> delegate;
+
 - (void)configureWithLocationEvent:(BZRLocationEvent *)locationEvent;
+
+@end
+
+@protocol BZRDiagnosticsCellDelegate <NSObject>
+
+@optional
+- (void)diagnosticsCellDidTapLocationLabel:(BZRDiagnosticsCell *)cell;
 
 @end

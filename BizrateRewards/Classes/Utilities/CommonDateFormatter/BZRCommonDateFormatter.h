@@ -10,4 +10,6 @@
 
 + (NSDateFormatter *)commonDateFormatter;
 
++ (NSDateFormatter *)locationEventsDateFormatter;
+
 @end

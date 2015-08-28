@@ -35,12 +35,6 @@ static NSString *const kOfferBeamRetailerID = @"A27C65B0-DB22-11E4-8830-0800200C
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    /*
-    BZRLocationEvent *lastEvent = [BZRLocationEvent locationEventFromDefaultsForKey:LastReceivedLocationEvent];
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Last Event Data" message:[NSString stringWithFormat:@"Event type: %@\n Event latitude: %f\n Event longitude: %f\n Customer id: %@\n", lastEvent.eventType == BZRLocaionEventTypeEntry ? @"Entry" : @"Exit", lastEvent.coordinate.latitude, lastEvent.coordinate.longitude, lastEvent.customerId] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [alertView show];
-    */
-    
     //Reset keychain if it's a first launch of an app
     [BZRKeychainHandler resetKeychainIfFirstLaunch];
     

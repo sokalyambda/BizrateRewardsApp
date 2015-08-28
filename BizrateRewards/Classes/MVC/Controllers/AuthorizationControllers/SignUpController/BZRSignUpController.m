@@ -96,9 +96,7 @@
                            onFailure:^(NSMutableDictionary *errorDict) {
                                NSString *errorTitle = errorDict[kValidationErrorTitle];
                                NSString *errorMessage = errorDict[kValidationErrorMessage];
-                               [BZRAlertFacade showAlertWithTitle:errorTitle andMessage:errorMessage withCompletion:^{
-                                   
-                               }];
+                               [BZRAlertFacade showAlertWithTitle:errorTitle andMessage:errorMessage forController:nil withCompletion:nil];
                                [BZRValidator cleanValidationErrorDict];
                            }];
 }

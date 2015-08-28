@@ -36,9 +36,9 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         locationEventsDateFormatter = [[NSDateFormatter alloc] init];
-//        [commonDateFormatter setDateStyle:NSDateFormatterShortStyle];
-//        [commonDateFormatter setTimeStyle:NSDateFormatterNoStyle];
-        [locationEventsDateFormatter setDateFormat:@"yyyy-MM-dd"];
+        
+        [locationEventsDateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss'.000Z'"];
+        [locationEventsDateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
     });
     return locationEventsDateFormatter;
 }

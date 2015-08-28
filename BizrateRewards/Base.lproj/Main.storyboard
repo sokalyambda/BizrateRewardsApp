@@ -22,7 +22,6 @@
             <string>OpenSans-Light</string>
             <string>OpenSans-Light</string>
             <string>OpenSans-Light</string>
-            <string>OpenSans-Light</string>
         </mutableArray>
         <mutableArray key="OpenSans-Regular.ttf">
             <string>OpenSans</string>
@@ -94,6 +93,9 @@
             <string>OpenSans</string>
         </mutableArray>
         <mutableArray key="OpenSans-Semibold.ttf">
+            <string>OpenSans-Semibold</string>
+            <string>OpenSans-Semibold</string>
+            <string>OpenSans-Semibold</string>
             <string>OpenSans-Semibold</string>
             <string>OpenSans-Semibold</string>
             <string>OpenSans-Semibold</string>
@@ -3184,20 +3186,23 @@
                                             </mask>
                                         </variation>
                                     </label>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="https://api.testapi.com" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4XB-E4-Esc">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4XB-E4-Esc">
                                         <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
                                         <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="k4t-FB-a2N" id="5n7-YC-pW2"/>
+                                        </connections>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4QZ-pD-HgR" userLabel="API Version Value">
                                         <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kck-p7-5Xd" userLabel="APP Version Value">
                                         <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -3208,6 +3213,7 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="15"/>
                                         <state key="normal" title="Save">
+                                            <color key="titleColor" red="0.08235294118" green="0.57647058819999997" blue="0.80392156859999997" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <variation key="default">
@@ -3235,7 +3241,9 @@
                                     <constraint firstAttribute="trailing" secondItem="4QZ-pD-HgR" secondAttribute="trailing" constant="8" id="Bty-q8-JeY"/>
                                     <constraint firstItem="00I-GY-TzU" firstAttribute="top" secondItem="fPn-vn-VLE" secondAttribute="top" constant="8" id="Czl-XP-klh"/>
                                     <constraint firstItem="4QZ-pD-HgR" firstAttribute="top" secondItem="00I-GY-TzU" secondAttribute="top" id="DnU-Rb-eDH"/>
-                                    <constraint firstItem="70m-gP-6C0" firstAttribute="top" secondItem="an2-dv-NUC" secondAttribute="bottom" constant="22" id="EOl-ng-Q8B"/>
+                                    <constraint firstItem="70m-gP-6C0" firstAttribute="top" secondItem="an2-dv-NUC" secondAttribute="bottom" constant="22" id="EOl-ng-Q8B">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="10"/>
+                                    </constraint>
                                     <constraint firstAttribute="trailing" secondItem="Kck-p7-5Xd" secondAttribute="trailing" constant="8" id="Im8-ZB-ilV"/>
                                     <constraint firstItem="Kck-p7-5Xd" firstAttribute="leading" secondItem="an2-dv-NUC" secondAttribute="trailing" constant="8" id="MJI-ok-h9i"/>
                                     <constraint firstItem="00I-GY-TzU" firstAttribute="leading" secondItem="fPn-vn-VLE" secondAttribute="leading" constant="8" id="MYm-lN-Fwh"/>
@@ -3426,10 +3434,10 @@
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ucg-bm-glW" userLabel="Location Value">
+                                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ucg-bm-glW" userLabel="Location Value">
                                                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                                                    <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="15"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="15"/>
+                                                    <color key="textColor" red="0.08235294118" green="0.57647058819999997" blue="0.80392156859999997" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -3695,6 +3703,65 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l5A-pD-iEP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1792.5" y="2512.5"/>
+        </scene>
+        <!--Location Details Diagnostics Controller-->
+        <scene sceneID="bzK-3d-T13">
+            <objects>
+                <viewController storyboardIdentifier="BZRLocationDetailsDiagnosticsController" id="JEI-r4-fC5" customClass="BZRLocationDetailsDiagnosticsController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="hlC-an-Ukb"/>
+                        <viewControllerLayoutGuide type="bottom" id="AoS-OY-Qll"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Tcz-Sk-ikh">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rai-vG-2AI">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="delegate" destination="JEI-r4-fC5" id="EKd-Xu-bog"/>
+                                </connections>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Rai-vG-2AI" firstAttribute="leading" secondItem="Tcz-Sk-ikh" secondAttribute="leading" id="Y7t-Uz-Lwt"/>
+                            <constraint firstItem="Rai-vG-2AI" firstAttribute="top" secondItem="hlC-an-Ukb" secondAttribute="bottom" constant="-20" id="aWt-A3-gtX">
+                                <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                            </constraint>
+                            <constraint firstItem="AoS-OY-Qll" firstAttribute="top" secondItem="Rai-vG-2AI" secondAttribute="bottom" id="tQ9-01-AOj"/>
+                            <constraint firstAttribute="trailing" secondItem="Rai-vG-2AI" secondAttribute="trailing" id="vJo-wL-jGT"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="Rai-vG-2AI"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="Y7t-Uz-Lwt"/>
+                                <exclude reference="aWt-A3-gtX"/>
+                                <exclude reference="vJo-wL-jGT"/>
+                                <exclude reference="tQ9-01-AOj"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="Rai-vG-2AI"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="Y7t-Uz-Lwt"/>
+                                <include reference="aWt-A3-gtX"/>
+                                <include reference="vJo-wL-jGT"/>
+                                <include reference="tQ9-01-AOj"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="webView" destination="Rai-vG-2AI" id="23x-fl-rhu"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="a5g-aX-io3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2598" y="2512.5"/>
         </scene>
         <!--Edit Profile Controller-->
         <scene sceneID="opC-Ve-FAj">

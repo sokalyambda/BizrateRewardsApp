@@ -34,7 +34,7 @@ extern NSString *const kErrorAlertMessage;
 + (void)showFailureResponseAlertWithError:(NSError *)error andCompletion:(void(^)(void))completion;
 + (void)showAlertWithTitle:(NSString *)title andError:(NSError *)error withCompletion:(void(^)(void))completion;
 + (void)showErrorAlert:(NSError *)error withCompletion:(void(^)(void))completion;
-+ (void)showAlertWithTitle:(NSString *)title andMessage:(NSString *)message withCompletion:(void(^)(void))completion;
++ (void)showAlertWithTitle:(NSString *)title andMessage:(NSString *)message forController:(UIViewController *)currentController withCompletion:(void(^)(void))completion;
 + (void)showAlertWithMessage:(NSString *)message withCompletion:(void(^)(void))completion;
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "BZRDiagnosticsController.h"
+#import "BZRLocationDetailsDiagnosticsController.h"
 
 #import "BZRSerialViewConstructor.h"
 
@@ -18,8 +19,9 @@
 #import "BZRServerAPIEntity.h"
 
 static NSInteger const kCurrentNumberOfSections = 2.f;
+static NSInteger const kLocationEventsCount = 10.f;
 
-@interface BZRDiagnosticsController ()<UITableViewDataSource, UITableViewDelegate>
+@interface BZRDiagnosticsController ()<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, BZRDiagnosticsCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *apiVersionValue;
 @property (weak, nonatomic) IBOutlet UILabel *appVersionValue;
@@ -51,7 +53,21 @@ static NSInteger const kCurrentNumberOfSections = 2.f;
     return _currentAPIEntity;
 }
 
+- (void)setLocationEvents:(NSArray *)locationEvents
+{
+    if (locationEvents.count > kLocationEventsCount) {
+        _locationEvents = [locationEvents subarrayWithRange:NSMakeRange(0, kLocationEventsCount)];
+    } else {
+        _locationEvents = locationEvents;
+    }
+}
+
 #pragma mark - View Lifecycle
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+}
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -63,6 +79,7 @@ static NSInteger const kCurrentNumberOfSections = 2.f;
 {
     [super viewDidAppear:animated];
     [self getAPIInfo];
+    self.apiEndpointField.text = [BZRProjectFacade HTTPClient].baseURL.absoluteString;
 }
 
 #pragma mark - Actions
@@ -134,6 +151,11 @@ static NSInteger const kCurrentNumberOfSections = 2.f;
     if ([self.apiEndpointField isFirstResponder]) {
         [self.apiEndpointField resignFirstResponder];
     }
+    
+    /* Temporary solution */
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:LOCALIZED(@"API endpoint has been saved.") delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alert show];
+    /* Temporary solution */
 }
 
 #pragma mark - UITableViewDataSource
@@ -153,7 +175,7 @@ static NSInteger const kCurrentNumberOfSections = 2.f;
     BZRDiagnosticsCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([BZRDiagnosticsCell class]) forIndexPath:indexPath];
     
     BZRLocationEvent *currentEvent = indexPath.section == 0 ? self.lastLocationEvent : self.locationEvents[indexPath.row];
-    
+    cell.delegate = self;
     [cell configureWithLocationEvent:currentEvent];
     
     return cell;
@@ -162,6 +184,34 @@ static NSInteger const kCurrentNumberOfSections = 2.f;
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
     return section == 0 ? LOCALIZED(@"Last Event from EYC SDK") : LOCALIZED(@"Last 10 Events Captured on API");
+}
+
+#pragma mark - UITextFieldDelegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if ([self.apiEndpointField isFirstResponder]) {
+        [self.apiEndpointField resignFirstResponder];
+    }
+    
+    return YES;
+}
+
+#pragma mark - BZRDiagnosticsCellDelegate
+
+- (void)diagnosticsCellDidTapLocationLabel:(BZRDiagnosticsCell *)cell
+{
+    NSIndexPath *indexPath = [self.eventsListTableView indexPathForCell:cell];
+    BZRLocationEvent *currentEvent = indexPath.section == 0 ? self.lastLocationEvent : self.locationEvents[indexPath.row];
+    
+    if (!currentEvent.locationLink.length) {
+        return;
+    }
+    
+    BZRLocationDetailsDiagnosticsController *controller = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRLocationDetailsDiagnosticsController class])];
+    controller.currentLocationEvent = currentEvent;
+    [self.navigationController pushViewController:controller animated:YES];
+   
 }
 
 @end

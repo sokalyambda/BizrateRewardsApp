@@ -159,6 +159,7 @@
 		58ECCEE51B8F4D9B00528192 /* BZRGetLocationEventsListRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ECCEE41B8F4D9B00528192 /* BZRGetLocationEventsListRequest.m */; };
 		58ECCEE91B8F5ECC00528192 /* BZRAPIInfoRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ECCEE81B8F5ECC00528192 /* BZRAPIInfoRequest.m */; };
 		58ECCEED1B8F600C00528192 /* BZRServerAPIEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ECCEEC1B8F600C00528192 /* BZRServerAPIEntity.m */; };
+		58ECEAFE1B908451000F699D /* BZRLocationDetailsDiagnosticsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58ECEAFD1B908451000F699D /* BZRLocationDetailsDiagnosticsController.m */; };
 		843C38411B4EAF38005E85CF /* BZRGiftcardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 843C38401B4EAF38005E85CF /* BZRGiftcardCell.m */; };
 		84AD3F011B4587DA00C294AE /* BZRProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AD3F001B4587DA00C294AE /* BZRProgressView.m */; };
 		84BE35CC1B5D0A4F001B99E2 /* BZRSurveyPointsInscriptionLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BE35CB1B5D0A4F001B99E2 /* BZRSurveyPointsInscriptionLabel.m */; };
@@ -466,6 +467,8 @@
 		58ECCEE81B8F5ECC00528192 /* BZRAPIInfoRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRAPIInfoRequest.m; path = APIInfoRequest/BZRAPIInfoRequest.m; sourceTree = "<group>"; };
 		58ECCEEB1B8F600C00528192 /* BZRServerAPIEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRServerAPIEntity.h; path = Classes/MVC/Models/ServerAPIEntity/BZRServerAPIEntity.h; sourceTree = "<group>"; };
 		58ECCEEC1B8F600C00528192 /* BZRServerAPIEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRServerAPIEntity.m; path = Classes/MVC/Models/ServerAPIEntity/BZRServerAPIEntity.m; sourceTree = "<group>"; };
+		58ECEAFC1B908451000F699D /* BZRLocationDetailsDiagnosticsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRLocationDetailsDiagnosticsController.h; path = Classes/MVC/Controllers/DiagnosticsController/LocationDetailsDiagnosticsController/BZRLocationDetailsDiagnosticsController.h; sourceTree = "<group>"; };
+		58ECEAFD1B908451000F699D /* BZRLocationDetailsDiagnosticsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRLocationDetailsDiagnosticsController.m; path = Classes/MVC/Controllers/DiagnosticsController/LocationDetailsDiagnosticsController/BZRLocationDetailsDiagnosticsController.m; sourceTree = "<group>"; };
 		7AF1FB2A8C4A8673EF3998F1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		843C383F1B4EAF38005E85CF /* BZRGiftcardCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRGiftcardCell.h; path = Classes/Cells/GiftcardCell/BZRGiftcardCell.h; sourceTree = "<group>"; };
 		843C38401B4EAF38005E85CF /* BZRGiftcardCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRGiftcardCell.m; path = Classes/Cells/GiftcardCell/BZRGiftcardCell.m; sourceTree = "<group>"; };
@@ -2017,6 +2020,7 @@
 		58ECCEDA1B8F39A000528192 /* DiagnosticsController */ = {
 			isa = PBXGroup;
 			children = (
+				58ECEAFB1B908423000F699D /* LocationDetailsDiagnosticsController */,
 				58ECCEDB1B8F3A1800528192 /* BZRDiagnosticsController.h */,
 				58ECCEDC1B8F3A1800528192 /* BZRDiagnosticsController.m */,
 			);
@@ -2057,6 +2061,15 @@
 				58ECCEEC1B8F600C00528192 /* BZRServerAPIEntity.m */,
 			);
 			name = ServerAPIEntity;
+			sourceTree = "<group>";
+		};
+		58ECEAFB1B908423000F699D /* LocationDetailsDiagnosticsController */ = {
+			isa = PBXGroup;
+			children = (
+				58ECEAFC1B908451000F699D /* BZRLocationDetailsDiagnosticsController.h */,
+				58ECEAFD1B908451000F699D /* BZRLocationDetailsDiagnosticsController.m */,
+			);
+			name = LocationDetailsDiagnosticsController;
 			sourceTree = "<group>";
 		};
 		58F49FBF1B417F06002F93EE /* PushNotificationsService */ = {
@@ -2450,6 +2463,7 @@
 				585C32AB1B63C82F005BF07B /* BZRRenewSessionTokenRequest.m in Sources */,
 				585813AE1B3C23840087AEE2 /* BZRSurvey.m in Sources */,
 				58B18C8C1B790D7200F13F53 /* BZRGetFeaturedGiftcards.m in Sources */,
+				58ECEAFE1B908451000F699D /* BZRLocationDetailsDiagnosticsController.m in Sources */,
 				58AA30771B7B862D00363119 /* BZRSurveyService.m in Sources */,
 				58D1E5D11B662EBD00347208 /* BZRSignInWithFacebookRequest.m in Sources */,
 				58C770E31B5CD08E00E9031F /* BZRTutorialDescriptionLabel.m in Sources */,

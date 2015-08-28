@@ -161,10 +161,10 @@ static NSString *const kOBStore = @"Store";
         //track mixpanel event (enter/exit geofence)
         [BZRMixpanelService trackLocationEvent:locationEvent];
         
+        //set last location event to userDefaults
+        [locationEvent setLocationEventToDefaultsForKey:LastReceivedLocationEvent];
+        
         [BZRProjectFacade sendGeolocationEvent:locationEvent onSuccess:^(BZRLocationEvent *locationEvent) {
-            
-            //set last location event to userDefaults
-            [locationEvent setLocationEventToDefaultsForKey:LastReceivedLocationEvent];
             
         } onFailure:^(NSError *error, BOOL isCanceled) {
             
