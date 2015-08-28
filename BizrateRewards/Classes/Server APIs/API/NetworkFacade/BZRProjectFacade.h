@@ -14,6 +14,8 @@
 
 + (BZRSessionManager *)HTTPClient;
 
++ (void)initHTTPClientWithRootPath:(NSString*)baseURL;
+
 //internet checking
 + (BOOL)isInternetReachable;
 

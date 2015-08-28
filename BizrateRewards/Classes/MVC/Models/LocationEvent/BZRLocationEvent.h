@@ -7,8 +7,8 @@
 //
 
 typedef enum : NSUInteger {
-    BZRLocaionEventTypeEntry,
-    BZRLocaionEventTypeExit
+    BZRLocationEventTypeEntry,
+    BZRLocationEventTypeExit
 } BZRLocaionEventType;
 
 #import "BZRMappingProtocol.h"
@@ -20,8 +20,9 @@ typedef enum : NSUInteger {
 @property (assign, nonatomic) BZRLocaionEventType eventType;
 @property (assign, nonatomic) CLLocationCoordinate2D coordinate;
 @property (assign, nonatomic) NSInteger locationId;
-
 @property (strong, nonatomic) NSString *customerId;
+@property (strong, nonatomic) NSString *creationDateString;
+@property (strong, nonatomic) NSString *creationLocalDateString;
 
 - (instancetype)initWithOfferBeamCallback:(NSDictionary *)locationData;
 

@@ -20,12 +20,20 @@ static NSString *const kServerLatitude = @"lat";
 static NSString *const kServerLongitude = @"long";
 static NSString *const kServerCustomerId = @"ref_eyc_customer_id";
 static NSString *const kServerLocationEventType = @"event_type";
+static NSString *const kServerEventCreationDate = @"created";
 
 @interface BZRLocationEvent ()<NSCoding>
 
 @end
 
 @implementation BZRLocationEvent
+
+#pragma mark - Accessors
+
+//- (void)setCreationDateString:(NSString *)creationDateString
+//{
+//    
+//}
 
 #pragma mark - BZRMappingProtocol
 
@@ -35,7 +43,9 @@ static NSString *const kServerLocationEventType = @"event_type";
     if (self) {
         _coordinate = CLLocationCoordinate2DMake([response[kServerLatitude] doubleValue], [response[kServerLongitude] doubleValue]);
         _customerId = response[kServerCustomerId];
-        _eventType = [response[kServerLocationEventType] isEqualToString:@"ENTRY"] ? BZRLocaionEventTypeEntry : BZRLocaionEventTypeExit;
+        _eventType = [response[kServerLocationEventType] isEqualToString:@"ENTRY"] ? BZRLocationEventTypeEntry : BZRLocationEventTypeExit;
+        _creationDateString = response[kServerEventCreationDate];
+//        _creationLocalDateString
     }
     return self;
 }

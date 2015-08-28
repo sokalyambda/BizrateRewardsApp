@@ -36,7 +36,7 @@ static NSString *const kEventType   = @"event_type";
         _userAuthorizationRequired = YES;
         _applicationAuthorizationRequired = NO;
         
-        NSString *eventTypeString = locationEvent.eventType == BZRLocaionEventTypeEntry ? @"ENTRY" : @"EXIT";
+        NSString *eventTypeString = locationEvent.eventType == BZRLocationEventTypeEntry ? @"ENTRY" : @"EXIT";
         NSDictionary *parameters = @{kLocation: @{kId: @(locationEvent.locationId)}, kLatitude: @(locationEvent.coordinate.latitude), kLongitude: @(locationEvent.coordinate.longitude), kCustomerId: locationEvent.customerId, kEventType: eventTypeString};
         
         [self setParametersWithParamsData:parameters];

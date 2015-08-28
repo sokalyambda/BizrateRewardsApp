@@ -55,12 +55,12 @@ NSString *const kBizrateIDProperty        = @"Bizrate ID";
 + (void)trackLocationEvent:(BZRLocationEvent *)locationEvent
 {
     switch (locationEvent.eventType) {
-        case BZRLocaionEventTypeEntry: {
+        case BZRLocationEventTypeEntry: {
             [self trackEventWithType:BZRMixpanelEventGeofenceEnter
                        propertyValue:[NSString stringWithFormat:@"%ld",(long)locationEvent.locationId]];
             break;
         }
-        case BZRLocaionEventTypeExit: {
+        case BZRLocationEventTypeExit: {
             [self trackEventWithType:BZRMixpanelEventGeofenceExit
                        propertyValue:[NSString stringWithFormat:@"%ld",(long)locationEvent.locationId]];
             break;

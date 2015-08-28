@@ -176,12 +176,12 @@ static NSString *const kOBStore = @"Store";
 
 - (void)OB_receivedOnEnter:(NSDictionary *)data
 {
-    [self sendLocationEventWithInitDictionary:data andType:BZRLocaionEventTypeEntry];
+    [self sendLocationEventWithInitDictionary:data andType:BZRLocationEventTypeEntry];
 }
 
 - (void)OB_receivedOnExit:(NSDictionary *)data
 {
-    [self sendLocationEventWithInitDictionary:data andType:BZRLocaionEventTypeExit];
+    [self sendLocationEventWithInitDictionary:data andType:BZRLocationEventTypeExit];
 }
 
 - (void)send_message:(NSString *)str

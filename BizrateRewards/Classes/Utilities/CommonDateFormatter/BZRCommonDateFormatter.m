@@ -30,4 +30,17 @@
     return commonDateFormatter;
 }
 
++ (NSDateFormatter *)locationEventsDateFormatter
+{
+    static NSDateFormatter *locationEventsDateFormatter = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        locationEventsDateFormatter = [[NSDateFormatter alloc] init];
+//        [commonDateFormatter setDateStyle:NSDateFormatterShortStyle];
+//        [commonDateFormatter setTimeStyle:NSDateFormatterNoStyle];
+        [locationEventsDateFormatter setDateFormat:@"yyyy-MM-dd"];
+    });
+    return locationEventsDateFormatter;
+}
+
 @end

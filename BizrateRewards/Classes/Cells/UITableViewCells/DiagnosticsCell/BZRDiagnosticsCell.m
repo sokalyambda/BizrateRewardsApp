@@ -28,7 +28,13 @@
 
 - (void)configureWithLocationEvent:(BZRLocationEvent *)locationEvent
 {
+    self.eventTypeLabel.text = locationEvent.eventType == BZRLocationEventTypeEntry ? LOCALIZED(@"ENTRY") : LOCALIZED(@"EXIT");
+    self.locationLabel.text = [NSString stringWithFormat:@"%d", locationEvent.locationId];
+    self.latitudeLabel.text = [NSString stringWithFormat:@"%f", locationEvent.coordinate.latitude];
+    self.longitudeLabel.text = [NSString stringWithFormat:@"%f", locationEvent.coordinate.longitude];
+    self.eycCustomerIdLabel.text = locationEvent.customerId;
     
+    self.createdLabel.text = locationEvent.creationDateString;
 }
 
 @end
