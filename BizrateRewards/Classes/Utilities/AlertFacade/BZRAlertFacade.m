@@ -27,9 +27,9 @@ NSString *const kErrorAlertMessage = @"AlertMessage";
  *  @param error      Error that should be parsed
  *  @param completion Completion Block
  */
-+ (void)showEmailAlreadyRegisteredAlertWithError:(NSError *)error andCompletion:(void(^)(void))completion
++ (void)showEmailAlreadyRegisteredAlertWithError:(NSError *)error forController:(UIViewController *)controller andCompletion:(void(^)(void))completion
 {
-    [self showFailureResponseAlertWithError:error andCompletion:completion];
+    [self showFailureResponseAlertWithError:error forController:controller andCompletion:completion];
 }
 
 /**
@@ -37,7 +37,7 @@ NSString *const kErrorAlertMessage = @"AlertMessage";
  *
  *  @param completion Completion Block
  */
-+ (void)showGlobalGeolocationPermissionsAlertWithCompletion:(void(^)(UIAlertAction *action, BOOL isCanceled))completion
++ (void)showGlobalGeolocationPermissionsAlertForController:(UIViewController *)controller withCompletion:(void(^)(UIAlertAction *action, BOOL isCanceled))completion
 {
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:LOCALIZED(@"Location services are off") message:LOCALIZED(@"To use background location you must turn on 'Always' in the Location Services Settings") preferredStyle:UIAlertControllerStyleAlert];
     
@@ -55,7 +55,7 @@ NSString *const kErrorAlertMessage = @"AlertMessage";
     [alertController addAction:cancelAction];
     [alertController addAction:settingsAction];
     
-    [self showCurrentAlertController:alertController forController:nil];
+    [self showCurrentAlertController:alertController forController:controller];
 }
 
 /**
@@ -63,7 +63,7 @@ NSString *const kErrorAlertMessage = @"AlertMessage";
  *
  *  @param completion Completion Block
  */
-+ (void)showGlobalPushNotificationsPermissionsAlertWithCompletion:(void(^)(UIAlertAction *action, BOOL isCanceled))completion
++ (void)showGlobalPushNotificationsPermissionsAlertForController:(UIViewController *)controller withCompletion:(void(^)(UIAlertAction *action, BOOL isCanceled))completion
 {
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:LOCALIZED(@"Push-notifications are off") message:LOCALIZED(@"Do you want to enable them from settings?") preferredStyle:UIAlertControllerStyleAlert];
     
@@ -81,7 +81,7 @@ NSString *const kErrorAlertMessage = @"AlertMessage";
     [alertController addAction:cancelAction];
     [alertController addAction:settingsAction];
     
-    [self showCurrentAlertController:alertController forController:nil];
+    [self showCurrentAlertController:alertController forController:controller];
 }
 
 /**
@@ -89,7 +89,7 @@ NSString *const kErrorAlertMessage = @"AlertMessage";
  *
  *  @param completion Completion Block
  */
-+ (void)showRetryInternetConnectionAlertWithCompletion:(void(^)(BOOL retry))completion
++ (void)showRetryInternetConnectionAlertForController:(UIViewController *)controller withCompletion:(void(^)(BOOL retry))completion
 {
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"" message:LOCALIZED(@"Connection failed. Try again?") preferredStyle:UIAlertControllerStyleAlert];
     
@@ -107,7 +107,7 @@ NSString *const kErrorAlertMessage = @"AlertMessage";
     [alertController addAction:cancelAction];
     [alertController addAction:acceptAction];
     
-    [self showCurrentAlertController:alertController forController:nil];
+    [self showCurrentAlertController:alertController forController:controller];
 }
 
 /**
@@ -116,7 +116,7 @@ NSString *const kErrorAlertMessage = @"AlertMessage";
  *  @param accessType BZRAccessType
  *  @param completion Completion Block
  */
-+ (void)showChangePermissionsAlertWithAccessType:(BZRAccessType)accessType andCompletion:(void(^)(UIAlertAction *action, BOOL isCanceled))completion
++ (void)showChangePermissionsAlertWithAccessType:(BZRAccessType)accessType forController:(UIViewController *)controller andCompletion:(void(^)(UIAlertAction *action, BOOL isCanceled))completion
 {
     NSString *alertMessage;
     switch (accessType) {
@@ -149,7 +149,7 @@ NSString *const kErrorAlertMessage = @"AlertMessage";
     [alertController addAction:cancelAction];
     [alertController addAction:confirmAction];
     
-    [self showCurrentAlertController:alertController forController:nil];
+    [self showCurrentAlertController:alertController forController:controller];
 }
 
 #pragma mark - Private methods
@@ -186,7 +186,7 @@ NSString *const kErrorAlertMessage = @"AlertMessage";
  *  @param error      Alert Message
  *  @param completion Completion Block
  */
-+ (void)showAlertWithTitle:(NSString *)title andError:(NSError *)error withCompletion:(void(^)(void))completion
++ (void)showAlertWithTitle:(NSString *)title andError:(NSError *)error forController:(UIViewController *)controller withCompletion:(void(^)(void))completion
 {
     if (!error) {
         return;
@@ -211,7 +211,7 @@ NSString *const kErrorAlertMessage = @"AlertMessage";
     }];
     
     [alertController addAction:okAction];
-    [self showCurrentAlertController:alertController forController:nil];
+    [self showCurrentAlertController:alertController forController:controller];
 }
 
 /**
@@ -220,9 +220,9 @@ NSString *const kErrorAlertMessage = @"AlertMessage";
  *  @param error      Error that should be parsed
  *  @param completion Completion Block
  */
-+ (void)showErrorAlert:(NSError *)error withCompletion:(void(^)(void))completion
++ (void)showErrorAlert:(NSError *)error forController:(UIViewController *)controller withCompletion:(void(^)(void))completion
 {
-    [self showAlertWithTitle:@"" andError:error withCompletion:completion];
+    [self showAlertWithTitle:@"" andError:error forController:controller withCompletion:completion];
 }
 
 /**
@@ -252,9 +252,9 @@ NSString *const kErrorAlertMessage = @"AlertMessage";
  *  @param message    Alert Message
  *  @param completion Completion Block
  */
-+ (void)showAlertWithMessage:(NSString *)message withCompletion:(void(^)(void))completion
++ (void)showAlertWithMessage:(NSString *)message forController:(UIViewController *)controller withCompletion:(void(^)(void))completion
 {
-    [self showAlertWithTitle:@"" andMessage:message forController:nil withCompletion:completion];
+    [self showAlertWithTitle:@"" andMessage:message forController:controller withCompletion:completion];
 }
 
 /**
@@ -263,7 +263,7 @@ NSString *const kErrorAlertMessage = @"AlertMessage";
  *  @param error      Error that shoud be parsed
  *  @param completion Completion Block
  */
-+ (void)showFailureResponseAlertWithError:(NSError *)error andCompletion:(void(^)(void))completion
++ (void)showFailureResponseAlertWithError:(NSError *)error forController:(UIViewController *)controller andCompletion:(void(^)(void))completion
 {
     if (!error) {
         return;
@@ -271,7 +271,7 @@ NSString *const kErrorAlertMessage = @"AlertMessage";
     
     WEAK_SELF;
     [BZRErrorHandler parseError:error withCompletion:^(NSString *alertTitle, NSString *alertMessage) {
-        [weakSelf showAlertWithTitle:alertTitle andMessage:alertMessage forController:nil withCompletion:completion];
+        [weakSelf showAlertWithTitle:alertTitle andMessage:alertMessage forController:controller withCompletion:completion];
     }];
 }
 

@@ -152,10 +152,7 @@ static NSInteger const kLocationEventsCount = 10.f;
         [self.apiEndpointField resignFirstResponder];
     }
     
-    /* Temporary solution */
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:LOCALIZED(@"API endpoint has been saved.") delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [alert show];
-    /* Temporary solution */
+    [BZRAlertFacade showAlertWithMessage:LOCALIZED(@"API endpoint has been saved.") forController:self withCompletion:nil];
 }
 
 #pragma mark - UITableViewDataSource
@@ -211,7 +208,6 @@ static NSInteger const kLocationEventsCount = 10.f;
     BZRLocationDetailsDiagnosticsController *controller = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRLocationDetailsDiagnosticsController class])];
     controller.currentLocationEvent = currentEvent;
     [self.navigationController pushViewController:controller animated:YES];
-   
 }
 
 @end

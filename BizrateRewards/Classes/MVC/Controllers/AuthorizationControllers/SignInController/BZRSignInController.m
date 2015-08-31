@@ -128,7 +128,7 @@ static NSString *const kDashboardSegueIdentifier = @"dashboardSegue";
                                        [weakSelf.incorrectEmailView setHidden:NO];
                                        weakSelf.userNameField.errorImageName = kEmailErrorIconName;
                                    } else {
-                                       [BZRAlertFacade showFailureResponseAlertWithError:error andCompletion:nil];
+                                       [BZRAlertFacade showFailureResponseAlertWithError:error forController:self andCompletion:nil];
                                    }
                                }];
                            }

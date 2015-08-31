@@ -76,7 +76,7 @@ static NSString *const kOBStore = @"Store";
             
             [[NSNotificationCenter defaultCenter] postNotificationName:LocationManagerDidSuccessAuthorizeNotification object:nil];
         } else {
-            [BZRAlertFacade showGlobalGeolocationPermissionsAlertWithCompletion:^(UIAlertAction *action, BOOL isCanceled) {
+            [BZRAlertFacade showGlobalGeolocationPermissionsAlertForController:nil withCompletion:^(UIAlertAction *action, BOOL isCanceled) {
                 if (!isCanceled) {
                     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
                 } else {

@@ -90,11 +90,11 @@ static CGFloat const kCellHeight = 41.f;
             break;
         }
         case BZRSettingsCellGeoLocation: {
-            [BZRAlertFacade showChangePermissionsAlertWithAccessType:BZRAccessTypeGeolocation andCompletion:nil];
+            [BZRAlertFacade showChangePermissionsAlertWithAccessType:BZRAccessTypeGeolocation forController:self.parentViewController andCompletion:nil];
             break;
         }
         case BZRSettingsCellPushNotification: {
-            [BZRAlertFacade showChangePermissionsAlertWithAccessType:BZRAccessTypePushNotifications andCompletion:nil];
+            [BZRAlertFacade showChangePermissionsAlertWithAccessType:BZRAccessTypePushNotifications forController:self.parentViewController andCompletion:nil];
             break;
         }
         case BZRSettingsCellTermsOfService: {

@@ -96,7 +96,7 @@ static NSString *const kSurveyID = @"Survey ID";
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
-    [BZRAlertFacade showFailureResponseAlertWithError:error andCompletion:nil];
+    [BZRAlertFacade showFailureResponseAlertWithError:error forController:self andCompletion:nil];
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
 }
 

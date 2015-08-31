@@ -112,7 +112,7 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
             controller.currentSurvey = [eligibleSurveys firstObject];
             [weakSelf.navigationController pushViewController:controller animated:YES];
         } else {
-            [BZRAlertFacade showAlertWithMessage:LOCALIZED(@"There are no surveys for you") withCompletion:^{
+            [BZRAlertFacade showAlertWithMessage:LOCALIZED(@"There are no surveys for you") forController:self withCompletion:^{
                 
             }];
             return;
@@ -135,7 +135,7 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
             controller.giftCards = giftCards;
             [weakSelf.navigationController pushViewController:controller animated:YES];
         } else {
-            [BZRAlertFacade showAlertWithMessage:LOCALIZED(@"There are no gift cards at current time") withCompletion:nil];
+            [BZRAlertFacade showAlertWithMessage:LOCALIZED(@"There are no gift cards at current time") forController:self withCompletion:nil];
             return;
         }
         

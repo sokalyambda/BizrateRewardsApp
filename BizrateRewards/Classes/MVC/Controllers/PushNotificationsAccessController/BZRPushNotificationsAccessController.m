@@ -86,7 +86,7 @@ static NSString *const kFinalTutorialControllerSegueIdentifier = @"finalTutorial
 - (void)showAlertControllerWithError:(NSError *)error
 {
     WEAK_SELF;
-    [BZRAlertFacade showGlobalPushNotificationsPermissionsAlertWithCompletion:^(UIAlertAction *action, BOOL isCanceled) {
+    [BZRAlertFacade showGlobalPushNotificationsPermissionsAlertForController:self withCompletion:^(UIAlertAction *action, BOOL isCanceled) {
         if (isCanceled) {
             [weakSelf performSegueWithIdentifier:kFinalTutorialControllerSegueIdentifier sender:weakSelf];
         } else {

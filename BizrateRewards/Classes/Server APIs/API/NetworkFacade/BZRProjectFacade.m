@@ -197,7 +197,7 @@ static BZRSessionManager *sharedHTTPClient = nil;
             }
             
         } failure:^(BZRNetworkOperation *operation ,NSError *error, BOOL isCanceled) {
-            [BZRAlertFacade showFailureResponseAlertWithError:error andCompletion:^{
+            [BZRAlertFacade showFailureResponseAlertWithError:error forController:nil andCompletion:^{
                 
             }];
             if (failure) {
@@ -239,7 +239,7 @@ static BZRSessionManager *sharedHTTPClient = nil;
             }
             
         } failure:^(BZRNetworkOperation *operation ,NSError *error, BOOL isCanceled) {
-            [BZRAlertFacade showFailureResponseAlertWithError:error andCompletion:^{
+            [BZRAlertFacade showFailureResponseAlertWithError:error forController:nil andCompletion:^{
                 
             }];
             if (failure) {
@@ -280,7 +280,7 @@ static BZRSessionManager *sharedHTTPClient = nil;
             }
             
         } failure:^(BZRNetworkOperation *operation ,NSError *error, BOOL isCanceled) {
-            [BZRAlertFacade showFailureResponseAlertWithError:error andCompletion:^{
+            [BZRAlertFacade showFailureResponseAlertWithError:error forController:nil andCompletion:^{
                 
             }];
             if (failure) {
@@ -315,7 +315,7 @@ static BZRSessionManager *sharedHTTPClient = nil;
             }
             
         } failure:^(BZRNetworkOperation *operation ,NSError *error, BOOL isCanceled) {
-            [BZRAlertFacade showFailureResponseAlertWithError:error andCompletion:^{
+            [BZRAlertFacade showFailureResponseAlertWithError:error forController:nil andCompletion:^{
                 
             }];
             if (failure) {
@@ -348,7 +348,7 @@ static BZRSessionManager *sharedHTTPClient = nil;
             }
             
         } failure:^(BZRNetworkOperation *operation ,NSError *error, BOOL isCanceled) {
-            [BZRAlertFacade showFailureResponseAlertWithError:error andCompletion:^{
+            [BZRAlertFacade showFailureResponseAlertWithError:error forController:nil andCompletion:^{
                 
             }];
             if (failure) {
@@ -466,7 +466,7 @@ static BZRSessionManager *sharedHTTPClient = nil;
             }
             
         } failure:^(BZRNetworkOperation *operation, NSError *error, BOOL isCanceled) {
-            [BZRAlertFacade showFailureResponseAlertWithError:error andCompletion:^{
+            [BZRAlertFacade showFailureResponseAlertWithError:error forController:nil andCompletion:^{
                 
             }];
             if (failure) {
@@ -567,7 +567,7 @@ static BZRSessionManager *sharedHTTPClient = nil;
             
             BOOL isFacebookUserExists = [BZRErrorHandler isFacebookUserExistsFromError:error];
             if (isFacebookUserExists) {
-                [BZRAlertFacade showFailureResponseAlertWithError:error andCompletion:^{
+                [BZRAlertFacade showFailureResponseAlertWithError:error forController:nil andCompletion:^{
                     
                 }];
             }

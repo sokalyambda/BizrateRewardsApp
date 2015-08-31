@@ -193,7 +193,7 @@ static CGFloat const kDiagnosticShownHeightConstant = 246.f;
 - (void)takeNewPhotoFromCamera
 {
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        [BZRAlertFacade showAlertWithMessage:LOCALIZED(@"Camera is not available") withCompletion:nil];
+        [BZRAlertFacade showAlertWithMessage:LOCALIZED(@"Camera is not available") forController:self withCompletion:nil];
         return;
     } else {
         [self showImagePickerWithType:UIImagePickerControllerSourceTypeCamera];

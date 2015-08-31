@@ -151,7 +151,7 @@ static NSString *const kStartTutorialSegueIdentirier = @"startTutorialSegue";
     } failure:^(NSError *error, BOOL isCanceled, BOOL emailRegistered) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         [weakSelf goToFinishTutorialController];
-        [BZRAlertFacade showFailureResponseAlertWithError:error andCompletion:nil];
+        [BZRAlertFacade showFailureResponseAlertWithError:error forController:self andCompletion:nil];
     }];
 }
 

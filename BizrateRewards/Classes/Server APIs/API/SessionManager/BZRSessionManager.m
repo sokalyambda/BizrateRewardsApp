@@ -230,7 +230,7 @@ static NSString *const kCleanSessionLock = @"CleanSessionLock";
             
             if ([BZRErrorHandler errorIsNetworkError:error] && operation.networkRequest.retryIfConnectionFailed) {
                 
-                [BZRAlertFacade showRetryInternetConnectionAlertWithCompletion:^(BOOL retry) {
+                [BZRAlertFacade showRetryInternetConnectionAlertForController:nil withCompletion:^(BOOL retry) {
                     if (!retry && failure) {
                         failure(operation, error, isCanceled);
                     } else {
@@ -438,7 +438,7 @@ static NSString *const kCleanSessionLock = @"CleanSessionLock";
         }
         
     } failure:^(BZRNetworkOperation *operation ,NSError *error, BOOL isCanceled) {
-        [BZRAlertFacade showFailureResponseAlertWithError:error andCompletion:^{
+        [BZRAlertFacade showFailureResponseAlertWithError:error forController:nil andCompletion:^{
             
         }];
         if (failure) {
