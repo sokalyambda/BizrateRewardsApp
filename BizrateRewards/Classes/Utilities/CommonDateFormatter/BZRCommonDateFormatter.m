@@ -8,6 +8,8 @@
 
 #import "BZRCommonDateFormatter.h"
 
+#import "ISO8601DateFormatter.h"
+
 @implementation BZRCommonDateFormatter
 
 /**
@@ -30,6 +32,22 @@
     return commonDateFormatter;
 }
 
+/**
+ *  Create a static ISO8601 date formatter
+ *
+ *  @return ISO8601DateFormatter singleton entity
+ */
++ (ISO8601DateFormatter *)commonISO8601DateFormatter
+{
+    static ISO8601DateFormatter *commonDateFormatter = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        commonDateFormatter = [[ISO8601DateFormatter alloc] init];
+    });
+    
+    return commonDateFormatter;
+}
+
 + (NSDateFormatter *)locationEventsDateFormatter
 {
     static NSDateFormatter *locationEventsDateFormatter = nil;
@@ -37,7 +55,8 @@
     dispatch_once(&onceToken, ^{
         locationEventsDateFormatter = [[NSDateFormatter alloc] init];
         
-        [locationEventsDateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss'.000Z'"];
+        [locationEventsDateFormatter setDateStyle:NSDateFormatterShortStyle];
+        [locationEventsDateFormatter setTimeStyle:NSDateFormatterShortStyle];
         [locationEventsDateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
     });
     return locationEventsDateFormatter;

@@ -74,6 +74,7 @@
 		58A5BEBD1B414B1800B2BC27 /* BZRBorderedTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A5BEBC1B414B1800B2BC27 /* BZRBorderedTextField.m */; };
 		58A5BEC01B415C2F00B2BC27 /* BZRCheckBoxButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A5BEBF1B415C2F00B2BC27 /* BZRCheckBoxButton.m */; };
 		58A7E23A1B45A3A200A1489A /* UIView+ConfigureAnchorPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A7E2391B45A3A200A1489A /* UIView+ConfigureAnchorPoint.m */; };
+		58A841691B94436D0032AEF0 /* ISO8601DateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A841681B94436D0032AEF0 /* ISO8601DateFormatter.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		58A91F2F1B3A80A80032607F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58A91F2E1B3A80A80032607F /* CoreLocation.framework */; };
 		58A91F3B1B3A91E20032607F /* BZRGiftCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A91F3A1B3A91E20032607F /* BZRGiftCard.m */; };
 		58A91F431B3A995F0032607F /* BZRRoundedImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58A91F421B3A995F0032607F /* BZRRoundedImageView.m */; };
@@ -307,6 +308,8 @@
 		58A5BEBF1B415C2F00B2BC27 /* BZRCheckBoxButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRCheckBoxButton.m; path = Classes/MVC/Views/CheckBoxButton/BZRCheckBoxButton.m; sourceTree = "<group>"; };
 		58A7E2381B45A3A200A1489A /* UIView+ConfigureAnchorPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+ConfigureAnchorPoint.h"; path = "Classes/Categories/UIView/UIView+ConfigureAnchorPoint/UIView+ConfigureAnchorPoint.h"; sourceTree = "<group>"; };
 		58A7E2391B45A3A200A1489A /* UIView+ConfigureAnchorPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+ConfigureAnchorPoint.m"; path = "Classes/Categories/UIView/UIView+ConfigureAnchorPoint/UIView+ConfigureAnchorPoint.m"; sourceTree = "<group>"; };
+		58A841671B94436D0032AEF0 /* ISO8601DateFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISO8601DateFormatter.h; sourceTree = "<group>"; };
+		58A841681B94436D0032AEF0 /* ISO8601DateFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISO8601DateFormatter.m; sourceTree = "<group>"; };
 		58A91F2E1B3A80A80032607F /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		58A91F391B3A91E20032607F /* BZRGiftCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRGiftCard.h; path = Classes/MVC/Models/GiftCard/BZRGiftCard.h; sourceTree = "<group>"; };
 		58A91F3A1B3A91E20032607F /* BZRGiftCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRGiftCard.m; path = Classes/MVC/Models/GiftCard/BZRGiftCard.m; sourceTree = "<group>"; };
@@ -1352,6 +1355,15 @@
 			name = "UIView+ConfigureAnchorPoint";
 			sourceTree = "<group>";
 		};
+		58A841661B9443520032AEF0 /* ISO8601DateFormatter */ = {
+			isa = PBXGroup;
+			children = (
+				58A841671B94436D0032AEF0 /* ISO8601DateFormatter.h */,
+				58A841681B94436D0032AEF0 /* ISO8601DateFormatter.m */,
+			);
+			name = ISO8601DateFormatter;
+			sourceTree = "<group>";
+		};
 		58A91F301B3A821C0032607F /* LocationObserver */ = {
 			isa = PBXGroup;
 			children = (
@@ -1452,6 +1464,7 @@
 		58AA1A231B5E32F800BA824A /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				58A841661B9443520032AEF0 /* ISO8601DateFormatter */,
 				58AA1A241B5E330600BA824A /* OfferBeamSDK */,
 			);
 			name = Libraries;
@@ -2393,6 +2406,7 @@
 				58A7E23A1B45A3A200A1489A /* UIView+ConfigureAnchorPoint.m in Sources */,
 				58A91F481B3ABE6D0032607F /* BZRStorageManager.m in Sources */,
 				58AA30411B7B800A00363119 /* BZRMixpanelService.m in Sources */,
+				58A841691B94436D0032AEF0 /* ISO8601DateFormatter.m in Sources */,
 				588CE7A01B70AAD00088DEB1 /* BZRConfirmPasswordController.m in Sources */,
 				58BF360B1B74F94300699A63 /* MFMailComposeViewController+Styles.m in Sources */,
 				58ECCEE51B8F4D9B00528192 /* BZRGetLocationEventsListRequest.m in Sources */,

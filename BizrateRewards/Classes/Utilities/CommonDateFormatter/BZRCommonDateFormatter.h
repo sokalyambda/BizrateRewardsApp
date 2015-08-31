@@ -6,9 +6,13 @@
 //  Copyright (c) 2015 Connexity. All rights reserved.
 //
 
+@class ISO8601DateFormatter;
+
 @interface BZRCommonDateFormatter : NSObject
 
 + (NSDateFormatter *)commonDateFormatter;
+
++ (ISO8601DateFormatter *)commonISO8601DateFormatter;
 
 + (NSDateFormatter *)locationEventsDateFormatter;
 

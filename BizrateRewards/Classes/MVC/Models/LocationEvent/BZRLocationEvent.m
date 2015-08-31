@@ -9,6 +9,7 @@
 #import "BZRLocationEvent.h"
 
 #import "BZRCommonDateFormatter.h"
+#import "ISO8601DateFormatter.h"
 
 //keys for OB call back
 static NSString *const kOBLocationId = @"altStoreId";
@@ -17,6 +18,8 @@ static NSString *const kOBLongitude = @"longitude";
 static NSString *const kOBCustomerId = @"customerId";
 static NSString *const kOBLocationEventType = @"locationEventType";
 static NSString *const kOBLocationEventLink = @"locationEventLink";
+static NSString *const kOBLocalCreationDate = @"localCreationDate";
+static NSString *const kOBCreationDate      = @"creationDate";
 
 //keys for server response
 static NSString *const kServerLatitude = @"lat";
@@ -48,6 +51,10 @@ static NSString *const kServerEventLinkLocation = @"location";
         
         _creationDateString = response[kServerEventCreationDate];
         
+        //get local date from ISO8601 format
+        NSDate *localDate = [[BZRCommonDateFormatter commonISO8601DateFormatter] dateFromString:_creationDateString];
+        _localDateString = [[BZRCommonDateFormatter locationEventsDateFormatter] stringFromDate:localDate];
+        
         NSArray *links = response[kServerEventLinks];
         if (links.count) {
             [links enumerateObjectsUsingBlock:^(NSDictionary *linkDict, NSUInteger idx, BOOL *stop) {
@@ -69,6 +76,9 @@ static NSString *const kServerEventLinkLocation = @"location";
         _locationId     = [locationData[kOBLocationId] integerValue];
         _customerId     = locationData[kOBCustomerId];
         _locationLink   = [NSString stringWithFormat:@"%@/%d", @"https://api.bizraterewards.com/v1/location", _locationId];
+        
+        _localDateString = [[BZRCommonDateFormatter locationEventsDateFormatter] stringFromDate:[NSDate date]];
+        _creationDateString = _localDateString;
     }
     return self;
 }
@@ -84,6 +94,8 @@ static NSString *const kServerEventLinkLocation = @"location";
     [encoder encodeObject:self.customerId forKey:kOBCustomerId];
     [encoder encodeObject:@(self.eventType) forKey:kOBLocationEventType];
     [encoder encodeObject:self.locationLink forKey:kOBLocationEventLink];
+    [encoder encodeObject:_creationDateString forKey:kOBCreationDate];
+    [encoder encodeObject:self.localDateString forKey:kOBLocalCreationDate];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder
@@ -97,6 +109,8 @@ static NSString *const kServerEventLinkLocation = @"location";
         _customerId         = [decoder decodeObjectForKey:kOBCustomerId];
         _eventType          = [[decoder decodeObjectForKey:kOBLocationEventType] integerValue];
         _locationLink       = [decoder decodeObjectForKey:kOBLocationEventLink];
+        _creationDateString = [decoder decodeObjectForKey:kOBCreationDate];
+        _localDateString    = [decoder decodeObjectForKey:kOBLocalCreationDate];
     }
     return self;
 }

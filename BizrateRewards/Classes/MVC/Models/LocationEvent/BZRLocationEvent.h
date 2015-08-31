@@ -23,6 +23,7 @@ typedef enum : NSUInteger {
 @property (strong, nonatomic) NSString *customerId;
 
 @property (strong, nonatomic) NSString *creationDateString;
+@property (strong, nonatomic) NSString *localDateString;
 @property (strong, nonatomic) NSString *locationLink;
 
 - (instancetype)initWithOfferBeamCallback:(NSDictionary *)locationData;

@@ -60,6 +60,7 @@
     self.eycCustomerIdLabel.text = locationEvent.customerId;
     
     self.createdLabel.text = locationEvent.creationDateString;
+    self.localTimeLabel.text = locationEvent.localDateString;
 }
 
 - (void)commonInit
