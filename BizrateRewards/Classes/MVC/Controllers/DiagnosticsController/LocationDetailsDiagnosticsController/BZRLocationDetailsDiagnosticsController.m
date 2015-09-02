@@ -39,7 +39,7 @@
     NSString *token = [BZRStorageManager sharedStorage].userToken.accessToken;
     
     if (token.length) {
-        NSURL *currentLocationURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@", self.currentLocationEvent.locationLink, token]];
+        NSURL *currentLocationURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@?access_token=%@", self.currentLocationEvent.locationLink, token]];
         NSURLRequest *currentRequest = [NSURLRequest requestWithURL:currentLocationURL];
         [self.webView loadRequest:currentRequest];
     }
