@@ -8,13 +8,17 @@
 
 #import "BZRSessionManager.h"
 
+extern NSString *defaultBaseURLString;
+
 @class BZRUserProfile, BZRLocationEvent;
 
 @interface BZRProjectFacade : NSObject
 
 + (BZRSessionManager *)HTTPClient;
 
-+ (void)initHTTPClientWithRootPath:(NSString*)baseURL;
++ (NSString *)baseURLString;
++ (void)setBaseURLString:(NSString *)baseURLString;
++ (void)initHTTPClientWithRootPath:(NSString*)baseURL withCompletion:(void(^)(void))completion;
 
 //internet checking
 + (BOOL)isInternetReachable;

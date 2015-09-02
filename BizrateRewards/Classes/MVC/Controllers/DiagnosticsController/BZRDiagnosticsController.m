@@ -79,7 +79,14 @@ static NSInteger const kLocationEventsCount = 10.f;
 {
     [super viewDidAppear:animated];
     [self getAPIInfo];
-    self.apiEndpointField.text = [BZRProjectFacade HTTPClient].baseURL.absoluteString;
+    [self updateAPIEndpointTextField];
+    
+    NSLog(@"self %@", self);
+    NSLog(@"self.navigationController %@", self.navigationController);
+    NSLog(@"self.presentingViewController %@", self.presentingViewController);
+    NSLog(@"self.navigationController.presentingViewController %@", self.navigationController.presentingViewController);
+    NSLog(@"self.presentingViewController.navigationController %@", self.presentingViewController.navigationController);
+    
 }
 
 #pragma mark - Actions
@@ -136,6 +143,9 @@ static NSInteger const kLocationEventsCount = 10.f;
     }];
 }
 
+/**
+ *  Update diagnostics information
+ */
 - (void)updateDiagnosticsInformation
 {
     self.apiVersionValue.text = self.currentAPIEntity.apiVersion;
@@ -144,15 +154,67 @@ static NSInteger const kLocationEventsCount = 10.f;
     [self.eventsListTableView reloadData];
 }
 
+- (void)updateAPIEndpointTextField
+{
+    self.apiEndpointField.text = [BZRProjectFacade baseURLString];
+}
+
 - (IBAction)saveAPIEndpointClick:(id)sender
 {
-    [BZRProjectFacade initHTTPClientWithRootPath:self.apiEndpointField.text];
+    [self saveAPIEndpoint];
+}
+
+- (void)saveAPIEndpoint
+{
+    WEAK_SELF;
+    [BZRProjectFacade setBaseURLString:self.apiEndpointField.text];
+    
+    [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
+    [BZRProjectFacade initHTTPClientWithRootPath:[BZRProjectFacade baseURLString] withCompletion:^{
+        
+        [BZRProjectFacade getAPIInfoOnSuccess:^(BOOL success) {
+            
+            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+            [[NSUserDefaults standardUserDefaults] setObject:[BZRProjectFacade baseURLString] forKey:BaseURLStringKey];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            
+            [weakSelf updateAPIEndpointTextField];
+            
+            [BZRAlertFacade showAlertWithMessage:LOCALIZED(@"API endpoint has been saved.") forController:weakSelf withCompletion:^{
+                //logout..
+                if (![[BZRProjectFacade baseURLString] isEqualToString:defaultBaseURLString]) {
+                   /*
+                    [BZRProjectFacade signOutOnSuccess:^(BOOL isSuccess) {
+                        
+                        [CATransaction begin];
+                        [CATransaction setCompletionBlock:^{
+                            [weakSelf.navigationController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+                        }];
+                        [weakSelf.navigationController.presentingViewController.navigationController popToRootViewControllerAnimated:YES];;
+                        [CATransaction commit];
+                    
+                    } onFailure:^(NSError *error, BOOL isCanceled) {
+                        
+                    }];
+                    */
+                }
+            }];
+        } onFailure:^(NSError *error, BOOL isCanceled) {
+            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+            
+            [BZRAlertFacade showAlertWithMessage:LOCALIZED(@"API endpoint is incorrect.") forController:weakSelf withCompletion:nil];
+            
+            [BZRProjectFacade setBaseURLString:defaultBaseURLString];
+            [BZRProjectFacade initHTTPClientWithRootPath:[BZRProjectFacade baseURLString] withCompletion:nil];
+            
+            [weakSelf updateAPIEndpointTextField];
+        }];
+        
+    }];
     
     if ([self.apiEndpointField isFirstResponder]) {
         [self.apiEndpointField resignFirstResponder];
     }
-    
-    [BZRAlertFacade showAlertWithMessage:LOCALIZED(@"API endpoint has been saved.") forController:self withCompletion:nil];
 }
 
 #pragma mark - UITableViewDataSource

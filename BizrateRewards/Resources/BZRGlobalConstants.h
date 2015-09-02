@@ -40,6 +40,8 @@ static NSString *const FBAccessTokenExpirationDate = @"FBAccessTokenExpirationDa
 static NSString *const FBLoginSuccess = @"FBLoginSuccess";
 static NSString *const FBCurrentProfile = @"FBCurrentProfile";
 
+static NSString *const BaseURLStringKey = @"BaseURLStringKey";
+
 //Location Events (keys for NSUserDefaults)
 
 static NSString *const LastReceivedLocationEvent = @"LastReceivedLocationEvent";

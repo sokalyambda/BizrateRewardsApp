@@ -22,23 +22,45 @@
 
 #import <AFNetworking/AFNetworkActivityIndicatorManager.h>
 
-static NSString *baseURLString = @"https://api.bizraterewards.com/v1/";
-
 static BZRSessionManager *sharedHTTPClient = nil;
 
+NSString *defaultBaseURLString = @"https://api.bizraterewards.com/v1/";
+static NSString *_baseURLString;
+
 @implementation BZRProjectFacade
+
+#pragma mark - Accessors
+
++ (NSString *)baseURLString
+{
+    @synchronized(self) {
+        if (!_baseURLString && [[NSUserDefaults standardUserDefaults] stringForKey:BaseURLStringKey]) {
+            _baseURLString = [[NSUserDefaults standardUserDefaults] stringForKey:BaseURLStringKey];
+        } else if (!_baseURLString) {
+            _baseURLString = defaultBaseURLString;
+        }
+        return _baseURLString;
+    }
+}
+
++ (void)setBaseURLString:(NSString *)baseURLString
+{
+    @synchronized(self) {
+        _baseURLString = baseURLString;
+    }
+}
 
 #pragma mark - Lifecycle
 
 + (BZRSessionManager *)HTTPClient
 {
     if (!sharedHTTPClient) {
-        [self initHTTPClientWithRootPath:baseURLString];
+        [self initHTTPClientWithRootPath:[self baseURLString] withCompletion:nil];
     }
     return sharedHTTPClient;
 }
 
-+ (void)initHTTPClientWithRootPath:(NSString*)baseURL
++ (void)initHTTPClientWithRootPath:(NSString*)baseURL withCompletion:(void(^)(void))completion
 {
     if (sharedHTTPClient) {
         
@@ -50,10 +72,17 @@ static BZRSessionManager *sharedHTTPClient = nil;
             sharedHTTPClient = [[BZRSessionManager alloc] initWithBaseURL:[NSURL URLWithString:baseURL]];
 
             AFNetworkActivityIndicatorManager.sharedManager.enabled = YES;
+            
+            if (completion) {
+                completion();
+            }
         }];
     } else {
         sharedHTTPClient = [[BZRSessionManager alloc] initWithBaseURL:[NSURL URLWithString:baseURL]];
         AFNetworkActivityIndicatorManager.sharedManager.enabled = YES;
+        if (completion) {
+            completion();
+        }
     }
 }
 
