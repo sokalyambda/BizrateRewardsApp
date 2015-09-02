@@ -8,6 +8,7 @@
 
 #import "BZRDiagnosticsController.h"
 #import "BZRLocationDetailsDiagnosticsController.h"
+#import "BZRAccountSettingsController.h"
 
 #import "BZRSerialViewConstructor.h"
 
@@ -80,13 +81,6 @@ static NSInteger const kLocationEventsCount = 10.f;
     [super viewDidAppear:animated];
     [self getAPIInfo];
     [self updateAPIEndpointTextField];
-    
-    NSLog(@"self %@", self);
-    NSLog(@"self.navigationController %@", self.navigationController);
-    NSLog(@"self.presentingViewController %@", self.presentingViewController);
-    NSLog(@"self.navigationController.presentingViewController %@", self.navigationController.presentingViewController);
-    NSLog(@"self.presentingViewController.navigationController %@", self.presentingViewController.navigationController);
-    
 }
 
 #pragma mark - Actions
@@ -183,20 +177,21 @@ static NSInteger const kLocationEventsCount = 10.f;
             [BZRAlertFacade showAlertWithMessage:LOCALIZED(@"API endpoint has been saved.") forController:weakSelf withCompletion:^{
                 //logout..
                 if (![[BZRProjectFacade baseURLString] isEqualToString:defaultBaseURLString]) {
-                   /*
+                    
                     [BZRProjectFacade signOutOnSuccess:^(BOOL isSuccess) {
                         
                         [CATransaction begin];
                         [CATransaction setCompletionBlock:^{
-                            [weakSelf.navigationController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+                            [weakSelf dismissViewControllerAnimated:YES completion:nil];
                         }];
-                        [weakSelf.navigationController.presentingViewController.navigationController popToRootViewControllerAnimated:YES];;
                         [CATransaction commit];
-                    
+                        
+                        [weakSelf.settingsController signOut];
+                        
                     } onFailure:^(NSError *error, BOOL isCanceled) {
                         
                     }];
-                    */
+                    
                 }
             }];
         } onFailure:^(NSError *error, BOOL isCanceled) {

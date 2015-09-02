@@ -8,6 +8,10 @@
 
 #import "BZRBaseViewController.h"
 
+@class BZRAccountSettingsController;
+
 @interface BZRDiagnosticsController : BZRBaseViewController
+
+@property (weak, nonatomic) BZRAccountSettingsController *settingsController;
 
 @end

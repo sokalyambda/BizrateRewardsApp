@@ -50,6 +50,7 @@
         [weakSelf resignIfFirstResponder];
         [weakSelf resetPassword];
     } onFailure:^(NSMutableDictionary *errorDict) {
+        [BZRAlertFacade showAlertWithTitle:errorDict[kValidationErrorTitle] andMessage:errorDict[kValidationErrorMessage] forController:weakSelf withCompletion:nil];
         [BZRValidator cleanValidationErrorDict];
     }];
 }

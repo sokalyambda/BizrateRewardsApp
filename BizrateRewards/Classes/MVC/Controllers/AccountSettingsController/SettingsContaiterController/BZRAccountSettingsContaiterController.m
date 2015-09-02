@@ -110,6 +110,7 @@ static CGFloat const kCellHeight = 41.f;
         case BZRSettingsCellDiagnostics: {
             BZRDiagnosticsController *controller = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRDiagnosticsController class])];
             BZRBaseNavigationController *navigationController = [[BZRBaseNavigationController alloc] initWithRootViewController:controller];
+            controller.settingsController = (BZRAccountSettingsController *)self.parentViewController;
             [self presentViewController:navigationController animated:YES completion:nil];
         }
         default:

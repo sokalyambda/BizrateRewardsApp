@@ -10,4 +10,6 @@
 
 @interface BZRAccountSettingsController : BZRBaseViewController
 
+- (void)signOut;
+
 @end
