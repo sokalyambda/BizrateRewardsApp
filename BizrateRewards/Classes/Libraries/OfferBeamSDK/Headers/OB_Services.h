@@ -18,6 +18,7 @@
 +(OB_Services *) sharedInstance;
 
 @property (nonatomic,strong) NSDictionary *Beacons;
+@property (nonatomic,strong) NSDictionary *BeaconsMap;
 @property (nonatomic,strong) NSDictionary *Geofences;
 @property (nonatomic,strong) NSMutableDictionary *beaconNotification;
 @property (nonatomic,strong) NSDictionary *Messages;
@@ -38,13 +39,14 @@
 +(void) setLocationDelegate:(id)delegate;
 +(void) setRetailerID:(NSString *)retailer_id;
 +(void) setRetailerCode:(NSString *)retailer_code;
-+ (CLAuthorizationStatus) startLocationService;
++(CLAuthorizationStatus) startLocationService;
+
 
 
 -(NSString *) getUUID;
 //- (void)requestAlwaysAuthorization;
-
 -(void) populateiBeaconsRange;
+-(void) populateiBeaconsMonitor;
 - (UIImage*)loadImage;
 
 

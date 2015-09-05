@@ -34,6 +34,7 @@
 //@property (nonatomic, retain) NSString * store_id;
 @property (nonatomic, retain) NSNumber * purchasedItems;
 @property (nonatomic, retain) NSNumber * rank;
+@property (nonatomic, retain) NSNumber * sBeamed;
 @property (nonatomic, retain) NSNumber * redemptionType;
 @property (nonatomic, retain) NSNumber * shareable;
 @property (nonatomic, retain) NSSet *obbeam;

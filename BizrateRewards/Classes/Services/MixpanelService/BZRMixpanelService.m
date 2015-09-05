@@ -50,6 +50,7 @@ NSString *const kBizrateIDProperty        = @"Bizrate ID";
     } else {
         [mixpanel track:eventName];
     }
+    
 }
 
 + (void)trackLocationEvent:(BZRLocationEvent *)locationEvent

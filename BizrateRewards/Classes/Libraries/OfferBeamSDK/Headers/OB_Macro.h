@@ -18,7 +18,7 @@
 #if PROD
 #define SERVERIP @"prod.offerbeam.com" // PROD
 #define SERVICEURL @"http://prod.offerbeam.com/web_services/" // PROD
-#define SERVICEURLJAVA @"http://offerbeam.com:8080/OfferBeamWebServices/" // PROD
+#define SERVICEURLJAVA @"http://prod.offerbeam.com:8080/OfferBeamWebServices/" // PROD
 #define SERVERHOSTNAME @"prod.offerbeam.com"
 #define ImageUrl  @"http://prod.offerbeam.com/img/uploads/"
 #else
