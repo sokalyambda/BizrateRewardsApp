@@ -25,7 +25,7 @@
 
 static NSString *const kHockeyAppIdentifier = @"bf52cc6c526a07761d1b50a4078b6d67";
 
-static NSString *const kOfferBeamRetailerID = @"A27C65B0-DB22-11E4-8830-0800200C9A66";
+static NSString *const kOfferBeamRetailerID = @"6F8E3A94-FE29-4144-BE86-AA8372D1D407";
 
 @interface AppDelegate ()
 
