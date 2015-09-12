@@ -24,6 +24,8 @@
 -(void) OB_receivedOnEnter:(NSDictionary *) offer;
 -(void) OB_receivedOnExit:(NSDictionary *) offer;
 
+-(void) OB_receivedOnerror:(NSDictionary *) error;
+
 -(void) OB_receivedOnBKEnter:(NSString *) beacon;
 
 - (void)OB_didEnterRegion:(CLRegion *)region;
