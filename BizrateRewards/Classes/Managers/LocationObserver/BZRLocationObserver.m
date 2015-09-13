@@ -204,4 +204,9 @@ static NSString *const kOBStore = @"Store";
     
 }
 
+- (void)OB_receivedOnerror:(NSDictionary *)error
+{
+    
+}
+
 @end
