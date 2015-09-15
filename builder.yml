@@ -44,5 +44,13 @@ default: &default
         app_id:     bf52cc6c526a07761d1b50a4078b6d67
         notify:     true
         download:   true
-adhoc:
+        
+adhoc: &adhoc
     <<: *default
+    
+appstore: &appstore
+    <<: *default
+    profile:
+        file:       "~/Dropbox/buildProfiles/BizrateRewards/Bizrate_Rewards_AppStore.mobileprovision"
+    build:
+        configuration:  AppStore
