@@ -23,7 +23,8 @@
 
 @import HockeySDK;
 
-static NSString *const kHockeyAppIdentifier = @"bf52cc6c526a07761d1b50a4078b6d67";
+//static NSString *const kHockeyAppIdentifier = @"bf52cc6c526a07761d1b50a4078b6d67";
+static NSString *const kHockeyAppProductionIdentifier = @"c451b1dd35fc4db43a265d8ea7b7ce5a";
 
 static NSString *const kOfferBeamRetailerID = @"6F8E3A94-FE29-4144-BE86-AA8372D1D407";
 
@@ -47,7 +48,7 @@ static NSString *const kOfferBeamRetailerID = @"6F8E3A94-FE29-4144-BE86-AA8372D1
     [BZRMixpanelService trackEventWithType:BZRMixpanelEventOpenApp propertyValue:nil];
     
     //setup hockey app service
-    [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:kHockeyAppIdentifier];
+    [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:kHockeyAppProductionIdentifier];
     [[BITHockeyManager sharedHockeyManager].authenticator authenticateInstallation];
     [[BITHockeyManager sharedHockeyManager] startManager];
     
