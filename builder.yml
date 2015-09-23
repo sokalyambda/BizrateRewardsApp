@@ -54,3 +54,7 @@ appstore: &appstore
         file:       "~/Dropbox/buildProfiles/BizrateRewards/Bizrate_Rewards_AppStore.mobileprovision"
     build:
         configuration:  AppStore
+    hockeyapp:
+        enabled:    true
+        token:      6e73f9e9f1f245848fd855eb9b68222a
+        app_id:     c451b1dd35fc4db43a265d8ea7b7ce5a

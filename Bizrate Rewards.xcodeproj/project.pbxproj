@@ -2621,6 +2621,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CURRENT_PROJECT_VERSION = 47;
+				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BizrateRewards/Resources/Bizrate Rewards-Prefix.pch";
 				INFOPLIST_FILE = BizrateRewards/Resources/Info.plist;
@@ -2632,7 +2633,7 @@
 					"$(PROJECT_DIR)/BizrateRewards",
 				);
 				PRODUCT_NAME = "Bizrate Rewards";
-				PROVISIONING_PROFILE = "00ce253b-0171-4333-881f-8407ed68a915";
+				PROVISIONING_PROFILE = "";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -2647,6 +2648,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CURRENT_PROJECT_VERSION = 47;
+				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BizrateRewards/Resources/Bizrate Rewards-Prefix.pch";
 				INFOPLIST_FILE = BizrateRewards/Resources/Info.plist;
@@ -2658,7 +2660,7 @@
 					"$(PROJECT_DIR)/BizrateRewards",
 				);
 				PRODUCT_NAME = "Bizrate Rewards";
-				PROVISIONING_PROFILE = "00ce253b-0171-4333-881f-8407ed68a915";
+				PROVISIONING_PROFILE = "";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
@@ -2744,6 +2746,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CURRENT_PROJECT_VERSION = 47;
+				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BizrateRewards/Resources/Bizrate Rewards-Prefix.pch";
 				INFOPLIST_FILE = BizrateRewards/Resources/Info.plist;
@@ -2755,7 +2758,7 @@
 					"$(PROJECT_DIR)/BizrateRewards",
 				);
 				PRODUCT_NAME = "Bizrate Rewards";
-				PROVISIONING_PROFILE = "00ce253b-0171-4333-881f-8407ed68a915";
+				PROVISIONING_PROFILE = "";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = AppStore;
@@ -2822,6 +2825,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CURRENT_PROJECT_VERSION = 47;
+				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BizrateRewards/Resources/Bizrate Rewards-Prefix.pch";
 				INFOPLIST_FILE = BizrateRewards/Resources/Info.plist;
@@ -2833,7 +2837,7 @@
 					"$(PROJECT_DIR)/BizrateRewards",
 				);
 				PRODUCT_NAME = "Bizrate Rewards";
-				PROVISIONING_PROFILE = "00ce253b-0171-4333-881f-8407ed68a915";
+				PROVISIONING_PROFILE = "";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = AdHoc;
