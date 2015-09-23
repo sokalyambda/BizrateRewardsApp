@@ -208,7 +208,7 @@ static NSString *_errorAlertTitle = nil;
         NSDictionary *jsonErrorDict = [self getErrorsDictDataFromError:error];
         NSString *errorDescriptionString = jsonErrorDict[kErrorDescription];
         
-        if (errorDescriptionString.length) {
+        if (errorDescriptionString && errorDescriptionString.length) {
             [outputErrorString appendString:errorDescriptionString];
         }
     }

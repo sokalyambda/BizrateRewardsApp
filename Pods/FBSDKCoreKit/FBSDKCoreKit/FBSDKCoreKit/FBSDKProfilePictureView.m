@@ -25,7 +25,7 @@
 #import "FBSDKURLConnection.h"
 #import "FBSDKUtility.h"
 
-static NSString *const kPlaceholderIconName = @"user_icon_small";
+static NSString *const kProfileIconName = @"user_icon_small";
 
 @interface FBSDKProfilePictureViewState : NSObject
 
@@ -350,9 +350,9 @@ static NSString *const kPlaceholderIconName = @"user_icon_small";
 
 - (void)_setPlaceholderImage
 {
-  _imageView.image = [UIImage imageNamed:kPlaceholderIconName];
-  _placeholderImageIsValid = YES;
-  _hasProfileImage = NO;
+    _imageView.image = [UIImage imageNamed:kProfileIconName];
+    _placeholderImageIsValid = YES;
+    _hasProfileImage = NO;
 }
 
 - (void)_updateImageWithData:(NSData *)data state:(FBSDKProfilePictureViewState *)state
