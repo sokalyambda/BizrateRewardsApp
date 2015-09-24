@@ -438,9 +438,9 @@ static NSString *const kCleanSessionLock = @"CleanSessionLock";
         }
         
     } failure:^(BZRNetworkOperation *operation ,NSError *error, BOOL isCanceled) {
-        [BZRAlertFacade showFailureResponseAlertWithError:error forController:nil andCompletion:^{
-            
-        }];
+//        [BZRAlertFacade showFailureResponseAlertWithError:error forController:nil andCompletion:^{
+//            
+//        }];
         if (failure) {
             failure(error, isCanceled);
         }

@@ -96,14 +96,14 @@ static NSString *const kEmail = @"email";
                 BOOL isFacebookEmailAlreadyRegistered = [BZRErrorHandler isFacebookEmailAlreadyExistFromError:error];
                 
                 if (isFacebookEmailAlreadyRegistered) {
-                    [BZRAlertFacade showEmailAlreadyRegisteredAlertWithError:error forController:self andCompletion:^{
+                    [BZRAlertFacade showEmailAlreadyRegisteredAlertWithError:error forController:weakSelf andCompletion:^{
                         BZRForgotPasswordController *controller = [weakSelf.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRForgotPasswordController class])];
                         controller.userName = weakSelf.userNameField.text;
                         BZRBaseNavigationController *navController = [[BZRBaseNavigationController alloc] initWithRootViewController:controller];
                         [weakSelf presentViewController:navController animated:YES completion:nil];
                     }];
                 } else {
-                    [BZRAlertFacade showFailureResponseAlertWithError:error forController:self andCompletion:nil];
+                    [BZRAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
                 }
             }];
             

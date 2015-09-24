@@ -80,14 +80,14 @@
                                    BOOL isEmailAlreadyRegistered = [BZRErrorHandler isEmailAlreadyExistFromError:error];
                                    
                                    if (isEmailAlreadyRegistered) {
-                                       [BZRAlertFacade showEmailAlreadyRegisteredAlertWithError:error forController:self andCompletion:^{
+                                       [BZRAlertFacade showEmailAlreadyRegisteredAlertWithError:error forController:weakSelf andCompletion:^{
                                            BZRForgotPasswordController *controller = [weakSelf.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRForgotPasswordController class])];
                                            controller.userName = weakSelf.userNameField.text;
                                            BZRBaseNavigationController *navController = [[BZRBaseNavigationController alloc] initWithRootViewController:controller];
                                            [weakSelf presentViewController:navController animated:YES completion:nil];
                                        }];
                                    } else {
-                                       [BZRAlertFacade showFailureResponseAlertWithError:error forController:self andCompletion:^{
+                                       [BZRAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:^{
                                            
                                        }];
                                    }

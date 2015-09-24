@@ -128,7 +128,7 @@ static NSString *const kDashboardSegueIdentifier = @"dashboardSegue";
                                        [weakSelf.incorrectEmailView setHidden:NO];
                                        weakSelf.userNameField.errorImageName = kEmailErrorIconName;
                                    } else {
-                                       [BZRAlertFacade showFailureResponseAlertWithError:error forController:self andCompletion:nil];
+                                       [BZRAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
                                    }
                                }];
                            }
@@ -165,6 +165,9 @@ static NSString *const kDashboardSegueIdentifier = @"dashboardSegue";
                     BZRGetStartedController *controller = [weakSelf.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRGetStartedController class])];
                     controller.redirectedFromFacebookSignInFlow = YES;
                     [weakSelf.navigationController pushViewController:controller animated:YES];
+                } else {
+                    [BZRAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:^{
+                    }];
                 }
             }];
             

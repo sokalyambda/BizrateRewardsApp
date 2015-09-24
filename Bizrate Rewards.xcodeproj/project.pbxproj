@@ -2263,7 +2263,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = BZR;
-				LastUpgradeCheck = 0630;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = Connexity;
 				TargetAttributes = {
 					58A0B20E1B3854CF003C100C = {
@@ -2552,6 +2552,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -2620,8 +2621,8 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
-				ENABLE_BITCODE = NO;
 				CURRENT_PROJECT_VERSION = 48;
+				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BizrateRewards/Resources/Bizrate Rewards-Prefix.pch";
 				INFOPLIST_FILE = BizrateRewards/Resources/Info.plist;
@@ -2632,6 +2633,7 @@
 					"$(PROJECT_DIR)/BizrateRewards/Classes/Libraries/OfferBeamSDK",
 					"$(PROJECT_DIR)/BizrateRewards",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.shopzilla.bizrate.rewards;
 				PRODUCT_NAME = "Bizrate Rewards";
 				PROVISIONING_PROFILE = "";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -2647,8 +2649,8 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
-				ENABLE_BITCODE = NO;
 				CURRENT_PROJECT_VERSION = 48;
+				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BizrateRewards/Resources/Bizrate Rewards-Prefix.pch";
 				INFOPLIST_FILE = BizrateRewards/Resources/Info.plist;
@@ -2659,6 +2661,7 @@
 					"$(PROJECT_DIR)/BizrateRewards/Classes/Libraries/OfferBeamSDK",
 					"$(PROJECT_DIR)/BizrateRewards",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.shopzilla.bizrate.rewards;
 				PRODUCT_NAME = "Bizrate Rewards";
 				PROVISIONING_PROFILE = "";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -2679,6 +2682,7 @@
 				);
 				INFOPLIST_FILE = BizrateRewardsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.thinkmobiles.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "Bizrate RewardsTests";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BizrateRewards.app/BizrateRewards";
 			};
@@ -2694,6 +2698,7 @@
 				);
 				INFOPLIST_FILE = BizrateRewardsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.thinkmobiles.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "Bizrate RewardsTests";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BizrateRewards.app/BizrateRewards";
 			};
@@ -2745,8 +2750,8 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
-				ENABLE_BITCODE = NO;
 				CURRENT_PROJECT_VERSION = 48;
+				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BizrateRewards/Resources/Bizrate Rewards-Prefix.pch";
 				INFOPLIST_FILE = BizrateRewards/Resources/Info.plist;
@@ -2757,6 +2762,7 @@
 					"$(PROJECT_DIR)/BizrateRewards/Classes/Libraries/OfferBeamSDK",
 					"$(PROJECT_DIR)/BizrateRewards",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.shopzilla.bizrate.rewards;
 				PRODUCT_NAME = "Bizrate Rewards";
 				PROVISIONING_PROFILE = "";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -2773,6 +2779,7 @@
 				);
 				INFOPLIST_FILE = BizrateRewardsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.thinkmobiles.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "Bizrate RewardsTests";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BizrateRewards.app/BizrateRewards";
 			};
@@ -2824,8 +2831,8 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
-				ENABLE_BITCODE = NO;
 				CURRENT_PROJECT_VERSION = 48;
+				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BizrateRewards/Resources/Bizrate Rewards-Prefix.pch";
 				INFOPLIST_FILE = BizrateRewards/Resources/Info.plist;
@@ -2836,6 +2843,7 @@
 					"$(PROJECT_DIR)/BizrateRewards/Classes/Libraries/OfferBeamSDK",
 					"$(PROJECT_DIR)/BizrateRewards",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.shopzilla.bizrate.rewards;
 				PRODUCT_NAME = "Bizrate Rewards";
 				PROVISIONING_PROFILE = "";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -2852,6 +2860,7 @@
 				);
 				INFOPLIST_FILE = BizrateRewardsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.thinkmobiles.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "Bizrate RewardsTests";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BizrateRewards.app/BizrateRewards";
 			};

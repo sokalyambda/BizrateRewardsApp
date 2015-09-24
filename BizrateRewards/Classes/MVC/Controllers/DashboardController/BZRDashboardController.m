@@ -112,13 +112,16 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
             controller.currentSurvey = [eligibleSurveys firstObject];
             [weakSelf.navigationController pushViewController:controller animated:YES];
         } else {
-            [BZRAlertFacade showAlertWithMessage:LOCALIZED(@"There are no surveys for you") forController:self withCompletion:^{
+            [BZRAlertFacade showAlertWithMessage:LOCALIZED(@"There are no surveys for you") forController:weakSelf withCompletion:^{
                 
             }];
             return;
         }
     } onFailure:^(NSError *error, BOOL isCanceled) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        [BZRAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:^{
+            
+        }];
     }];
 }
 
@@ -135,12 +138,15 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
             controller.giftCards = giftCards;
             [weakSelf.navigationController pushViewController:controller animated:YES];
         } else {
-            [BZRAlertFacade showAlertWithMessage:LOCALIZED(@"There are no gift cards at current time") forController:self withCompletion:nil];
+            [BZRAlertFacade showAlertWithMessage:LOCALIZED(@"There are no gift cards at current time") forController:weakSelf withCompletion:nil];
             return;
         }
         
     } onFailure:^(NSError *error, BOOL isCanceled) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        [BZRAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:^{
+            
+        }];
     }];
 }
 
@@ -207,10 +213,16 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
             
         } onFailure:^(NSError *error, BOOL isCanceled) {
             [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+            [BZRAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:^{
+                
+            }];
         }];
         
     } onFailure:^(NSError *error, BOOL isCanceled) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        [BZRAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:^{
+            
+        }];
     }];
 }
 

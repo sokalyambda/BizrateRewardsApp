@@ -150,8 +150,10 @@ static NSString *const kStartTutorialSegueIdentirier = @"startTutorialSegue";
         
     } failure:^(NSError *error, BOOL isCanceled, BOOL emailRegistered) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-        [weakSelf goToFinishTutorialController];
-        [BZRAlertFacade showFailureResponseAlertWithError:error forController:self andCompletion:nil];
+        
+        [BZRAlertFacade showFailureResponseAlertWithError:error forController:self andCompletion:^{
+            [weakSelf goToFinishTutorialController];
+        }];
     }];
 }
 
@@ -170,8 +172,12 @@ static NSString *const kStartTutorialSegueIdentirier = @"startTutorialSegue";
     } onFailure:^(NSError *error, BOOL isCanceled, BOOL userExists) {
         
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-        [weakSelf goToFinishTutorialController];
         
+        if (userExists) {
+            [BZRAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:^{
+                [weakSelf goToFinishTutorialController];
+            }];
+        }
     }];
 }
 
@@ -193,8 +199,10 @@ static NSString *const kStartTutorialSegueIdentirier = @"startTutorialSegue";
 - (void)goToFinishTutorialController
 {
     BZRFinishTutorialController *controller = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRFinishTutorialController class])];
+    
     [self.navigationController pushViewController:controller animated:YES];
-}
+    
+ }
 
 /**
  *  Present forgot password view controller.

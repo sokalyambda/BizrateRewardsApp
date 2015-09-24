@@ -226,9 +226,7 @@ static NSString *_baseURLString;
             }
             
         } failure:^(BZRNetworkOperation *operation ,NSError *error, BOOL isCanceled) {
-            [BZRAlertFacade showFailureResponseAlertWithError:error forController:nil andCompletion:^{
-                
-            }];
+            
             if (failure) {
                 failure(error, isCanceled);
             }
@@ -268,9 +266,7 @@ static NSString *_baseURLString;
             }
             
         } failure:^(BZRNetworkOperation *operation ,NSError *error, BOOL isCanceled) {
-            [BZRAlertFacade showFailureResponseAlertWithError:error forController:nil andCompletion:^{
-                
-            }];
+            
             if (failure) {
                 failure(error, isCanceled);
             }
@@ -309,9 +305,7 @@ static NSString *_baseURLString;
             }
             
         } failure:^(BZRNetworkOperation *operation ,NSError *error, BOOL isCanceled) {
-            [BZRAlertFacade showFailureResponseAlertWithError:error forController:nil andCompletion:^{
-                
-            }];
+            
             if (failure) {
                 failure(error, isCanceled);
             }
@@ -344,9 +338,7 @@ static NSString *_baseURLString;
             }
             
         } failure:^(BZRNetworkOperation *operation ,NSError *error, BOOL isCanceled) {
-            [BZRAlertFacade showFailureResponseAlertWithError:error forController:nil andCompletion:^{
-                
-            }];
+            
             if (failure) {
                 failure(error, isCanceled);
             }
@@ -377,9 +369,7 @@ static NSString *_baseURLString;
             }
             
         } failure:^(BZRNetworkOperation *operation ,NSError *error, BOOL isCanceled) {
-            [BZRAlertFacade showFailureResponseAlertWithError:error forController:nil andCompletion:^{
-                
-            }];
+            
             if (failure) {
                 failure(error, isCanceled);
             }
@@ -466,7 +456,7 @@ static NSString *_baseURLString;
             }
             
         } failure:^(BZRNetworkOperation *operation, NSError *error, BOOL isCanceled) {
-//            ShowFailureResponseAlertWithError(error);
+            
             if (failure) {
                 failure(error, isCanceled);
             }
@@ -495,9 +485,7 @@ static NSString *_baseURLString;
             }
             
         } failure:^(BZRNetworkOperation *operation, NSError *error, BOOL isCanceled) {
-            [BZRAlertFacade showFailureResponseAlertWithError:error forController:nil andCompletion:^{
-                
-            }];
+            
             if (failure) {
                 failure(error, isCanceled);
             }
@@ -595,11 +583,7 @@ static NSString *_baseURLString;
         } failure:^(BZRNetworkOperation *operation, NSError *error, BOOL isCanceled) {
             
             BOOL isFacebookUserExists = [BZRErrorHandler isFacebookUserExistsFromError:error];
-            if (isFacebookUserExists) {
-                [BZRAlertFacade showFailureResponseAlertWithError:error forController:nil andCompletion:^{
-                    
-                }];
-            }
+            
             if (failure) {
                 failure(error, isCanceled, isFacebookUserExists);
             }

@@ -84,7 +84,9 @@
         
     } onFailure:^(NSError *error, BOOL isCanceled) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-        
+        [BZRAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:^{
+            
+        }];
     }];
 }
 
