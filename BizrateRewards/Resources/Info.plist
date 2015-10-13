@@ -34,7 +34,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>61</string>
+	<string>62</string>
 	<key>FacebookAppID</key>
 	<string>238135986206621</string>
 	<key>FacebookDisplayName</key>
@@ -74,10 +74,6 @@
 			</dict>
 			<key>bizraterewards.com</key>
 			<dict>
-				<key>NSExceptionAllowsInsecureHTTPLoads</key>
-				<true/>
-				<key>NSExceptionMinimumTLSVersion</key>
-				<string>TLSv1.2</string>
 				<key>NSExceptionRequiresForwardSecrecy</key>
 				<false/>
 				<key>NSIncludesSubdomains</key>
