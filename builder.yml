@@ -27,8 +27,8 @@ default: &default
         sdk:            iphoneos
         doclean:        true
         workspace:
-            name:       BizrateRewards
-            scheme:     BizrateRewards
+            name:       "Bizrate Rewards"
+            scheme:     "Bizrate Rewards"
     pack_ipa:
         enabled:    true
         naming:
