@@ -69,7 +69,11 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
     
     [self.view layoutIfNeeded];
     [self.navigationController setNavigationBarHidden:YES animated:YES];
-    
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
     [self updateUserInformation];
     if (self.isUpdateNeeded) {
         [self getCurrentUserProfile];

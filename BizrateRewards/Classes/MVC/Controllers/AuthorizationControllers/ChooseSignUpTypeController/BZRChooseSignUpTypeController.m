@@ -39,7 +39,7 @@ static NSString *const kEmail = @"email";
     [BZRMixpanelService trackEventWithType:BZRMixpanelEventCreateAccountPage propertyValue:nil];
 }
 
--(void)viewWillAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:YES];
@@ -73,7 +73,7 @@ static NSString *const kEmail = @"email";
     [BZRMixpanelService trackEventWithType:BZRMixpanelEventCreateAcountClicked propertyValue:kAuthTypeFacebook];
     WEAK_SELF;
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [BZRFacebookService authorizeWithFacebookOnSuccess:^(BOOL isSuccess) {
+    [BZRFacebookService authorizeWithFacebookFromController:self onSuccess:^(BOOL isSuccess) {
         
         [BZRFacebookService getFacebookUserProfileOnSuccess:^(BZRFacebookProfile *facebookProfile) {
             

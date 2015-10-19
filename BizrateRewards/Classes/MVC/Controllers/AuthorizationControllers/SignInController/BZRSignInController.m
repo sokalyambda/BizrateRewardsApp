@@ -123,7 +123,7 @@ static NSString *const kDashboardSegueIdentifier = @"dashboardSegue";
                                } failure:^(NSError *error, BOOL isCanceled, BOOL emailRegistered) {
                                    
                                    [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-
+                                   
                                    if (!emailRegistered) {
                                        [weakSelf.incorrectEmailView setHidden:NO];
                                        weakSelf.userNameField.errorImageName = kEmailErrorIconName;
@@ -144,7 +144,7 @@ static NSString *const kDashboardSegueIdentifier = @"dashboardSegue";
 {
     WEAK_SELF;
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [BZRFacebookService authorizeWithFacebookOnSuccess:^(BOOL isSuccess) {
+    [BZRFacebookService authorizeWithFacebookFromController:self onSuccess:^(BOOL isSuccess) {
         
         [BZRFacebookService getFacebookUserProfileOnSuccess:^(BZRFacebookProfile *facebookProfile) {
             

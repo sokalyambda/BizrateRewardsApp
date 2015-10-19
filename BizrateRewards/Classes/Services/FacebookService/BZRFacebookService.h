@@ -16,7 +16,9 @@ typedef void(^FacebookAuthFailureBlock)(NSError *error, BOOL isCanceled);
 typedef void(^FacebookProfileSuccessBlock)(BZRFacebookProfile *facebookProfile);
 typedef void(^FacebookProfileFailureBlock)(NSError *error);
 
-+ (void)authorizeWithFacebookOnSuccess:(FacebookAuthSuccessBlock)success onFailure:(FacebookAuthFailureBlock)failure;
++ (void)authorizeWithFacebookFromController:(UIViewController *)fromController
+                                  onSuccess:(FacebookAuthSuccessBlock)success
+                                  onFailure:(FacebookAuthFailureBlock)failure;
 
 + (void)getFacebookUserProfileOnSuccess:(FacebookProfileSuccessBlock)success onFailure:(FacebookProfileFailureBlock)failure;
 

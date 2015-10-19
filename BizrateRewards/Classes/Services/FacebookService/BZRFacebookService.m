@@ -49,10 +49,12 @@ static NSString *const kFBAppSecret = @"530fa94f7370fc20a54cc392fbd83cf2";
  *  @param success Success Block
  *  @param failure Failure Block
  */
-+ (void)authorizeWithFacebookOnSuccess:(FacebookAuthSuccessBlock)success onFailure:(FacebookAuthFailureBlock)failure
++ (void)authorizeWithFacebookFromController:(UIViewController *)fromController
+                                  onSuccess:(FacebookAuthSuccessBlock)success
+                                  onFailure:(FacebookAuthFailureBlock)failure
 {
     WEAK_SELF;
-    [[self facebookLoginManager] logInWithReadPermissions:@[kPublicProfile, kEmail] handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+    [[self facebookLoginManager] logInWithReadPermissions:@[kPublicProfile, kEmail] fromViewController:fromController handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
         
         if (error && failure) {
             failure(error, result.isCancelled);
