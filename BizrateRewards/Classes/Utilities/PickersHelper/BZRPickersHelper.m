@@ -15,7 +15,6 @@
 #import "UIView+MakeFromXib.h"
 #import "UIView+ConfigureAnchorPoint.h"
 #import "UIView+SoftRemoving.h"
-#import "UIView+ConfigureAnchorPoint.h"
 
 #import "BZREditProfileContainerController.h"
 
@@ -168,9 +167,7 @@ static NSString *const kCurrentPicker = @"currentPicker";
         [pickerView setFrame:CGRectMake(0, CGRectGetMaxY(self.parentView.bounds), CGRectGetWidth(self.parentView.frame), kPickerHeight)];
         [self.parentView addSubview:pickerView];
         
-        CGPoint toPoint = CGPointMake(0, CGRectGetMaxY(self.parentView.bounds) - kPickerHeight);
-        
-        [pickerView setAnchorPoint:CGPointZero];
+        CGPoint toPoint = CGPointMake(CGRectGetMidX(self.parentView.bounds), CGRectGetMaxY(self.parentView.bounds) - CGRectGetHeight(pickerView.frame)/2.f);
         
         CABasicAnimation * animationPosition = [CABasicAnimation animationWithKeyPath:@"position"];
         animationPosition.fromValue = [pickerView.layer valueForKey:@"position"];
@@ -194,11 +191,11 @@ static NSString *const kCurrentPicker = @"currentPicker";
             [self.containerController.tableView setScrollEnabled:NO];
         }
         
-        CGPoint toPoint = CGPointMake(0.f, CGRectGetMaxY(self.parentView.bounds));
+        CGPoint toPoint = CGPointMake(CGRectGetMidX(self.parentView.bounds), CGRectGetMaxY(self.parentView.bounds) + CGRectGetHeight(pickerView.frame)/2.f);
         
         CABasicAnimation *hideAnimation = [CABasicAnimation animationWithKeyPath:@"position"];
         hideAnimation.fromValue = [pickerView.layer valueForKey:@"position"];
-        hideAnimation.toValue = [NSValue valueWithCGPoint:CGPointMake(0.f, CGRectGetMaxY(self.parentView.bounds))];
+        hideAnimation.toValue = [NSValue valueWithCGPoint:CGPointMake(CGRectGetMidX(self.parentView.bounds), CGRectGetMaxY(self.parentView.bounds) + CGRectGetHeight(pickerView.frame)/2.f)];
         
         hideAnimation.duration = kAnimationDuration;
         hideAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];

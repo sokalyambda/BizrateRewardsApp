@@ -113,6 +113,8 @@ implicitPurchaseLoggingEnabled:(BOOL)implicitPurchaseLoggingEnabled
 
 - (BOOL)useNativeDialogForDialogName:(NSString *)dialogName
 {
+    NSLog(@"%i", self.nativeAuthFlowEnabled);
+//    return YES;
   return [self _useFeatureWithKey:FBSDKDialogConfigurationFeatureUseNativeFlow dialogName:dialogName];
 }
 
@@ -126,8 +128,12 @@ implicitPurchaseLoggingEnabled:(BOOL)implicitPurchaseLoggingEnabled
 - (BOOL)_useFeatureWithKey:(NSString *)key dialogName:(NSString *)dialogName
 {
   if ([dialogName isEqualToString:FBSDKDialogConfigurationNameLogin]) {
-    return [(NSNumber *)(_dialogFlows[dialogName][key] ?:
-                         _dialogFlows[FBSDKDialogConfigurationNameDefault][key]) boolValue];
+      if (self.nativeAuthFlowEnabled) {
+          return YES;
+      } else {
+          return [(NSNumber *)(_dialogFlows[dialogName][key] ?:
+                               _dialogFlows[FBSDKDialogConfigurationNameDefault][key]) boolValue];
+      }
   } else {
     return [(NSNumber *)(_dialogFlows[dialogName][key] ?:
                          _dialogFlows[FBSDKDialogConfigurationNameSharing][key] ?:
