@@ -2635,7 +2635,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.shopzilla.bizrate.rewards;
 				PRODUCT_NAME = "Bizrate Rewards";
-				PROVISIONING_PROFILE = "5301b132-6625-4615-a0fc-1eaddea52488";
+				PROVISIONING_PROFILE = "";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -2663,7 +2663,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.shopzilla.bizrate.rewards;
 				PRODUCT_NAME = "Bizrate Rewards";
-				PROVISIONING_PROFILE = "5301b132-6625-4615-a0fc-1eaddea52488";
+				PROVISIONING_PROFILE = "";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
@@ -2747,8 +2747,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CURRENT_PROJECT_VERSION = 52;
 				ENABLE_BITCODE = NO;
@@ -2764,7 +2764,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.shopzilla.bizrate.rewards;
 				PRODUCT_NAME = "Bizrate Rewards";
-				PROVISIONING_PROFILE = "5301b132-6625-4615-a0fc-1eaddea52488";
+				PROVISIONING_PROFILE = "";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = AppStore;
@@ -2845,7 +2845,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.shopzilla.bizrate.rewards;
 				PRODUCT_NAME = "Bizrate Rewards";
-				PROVISIONING_PROFILE = "5301b132-6625-4615-a0fc-1eaddea52488";
+				PROVISIONING_PROFILE = "";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = AdHoc;
