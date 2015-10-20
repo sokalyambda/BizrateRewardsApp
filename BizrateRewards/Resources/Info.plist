@@ -34,14 +34,13 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>53</string>
+	<string>63</string>
 	<key>FacebookAppID</key>
 	<string>238135986206621</string>
 	<key>FacebookDisplayName</key>
 	<string>Bizrate Rewards</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
-		<string>fb</string>
 		<string>fbapi</string>
 		<string>fb-messenger-api</string>
 		<string>fbauth2</string>
@@ -123,6 +122,10 @@
 		<string>OpenSans-Regular.ttf</string>
 		<string>OpenSans-Semibold.ttf</string>
 		<string>OpenSans-SemiboldItalic.ttf</string>
+	</array>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>location</string>
 	</array>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
