@@ -16,4 +16,6 @@
 
 @property (assign, nonatomic) BOOL hideEmailField;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *containerHeightConstraint;
+
 @end

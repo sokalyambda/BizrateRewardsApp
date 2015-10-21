@@ -24,8 +24,12 @@
 
 #import "BZRProjectFacade.h"
 
+#import "BZRTermsLabel.h"
+
 static NSString *const kEditProfileContainerSegueIdentifier = @"editProfileContainerSegue";
 static NSString *const kChooseSignUpTypeSegueIdentifier = @"сhooseSignUpTypeSegue";
+
+static CGFloat const kCurrentNumberOfRows = 4.f;
 
 @interface BZRGetStartedController ()<UITextFieldDelegate>
 
@@ -55,19 +59,14 @@ static NSString *const kChooseSignUpTypeSegueIdentifier = @"сhooseSignUpTypeSeg
     self.navigationItem.title = NSLocalizedString(@"Get Started", nil);
     
     [self prefillUserDataIfExists];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        self.containerHeightConstraint.constant = self.editProfileTableViewController.tableView.rowHeight * kCurrentNumberOfRows; //number of rows in this screen
+        [self.view layoutIfNeeded];
+    });
 }
 
 #pragma mark - Actions
-
-- (IBAction)privacyPolicyClick:(id)sender
-{
-    [self showProgramTerms];
-}
-
-- (IBAction)termsAndConditionsClick:(id)sender
-{
-    [self showProgramTerms];
-}
 
 - (IBAction)submitButtonClick:(UIButton *)sender
 {
@@ -182,9 +181,19 @@ static NSString *const kChooseSignUpTypeSegueIdentifier = @"сhooseSignUpTypeSeg
     }
 }
 
+/**
+ *  Redirect to terms of service
+ */
 - (void)showProgramTerms
 {
     [BZRRedirectionHelper showPrivacyAndTermsWithType:BZRConditionsTypeTermsAndConditions andWithPresentingController:self];
+}
+
+#pragma mark - TTTAttributedLabelDelegate
+
+- (void)attributedLabel:(TTTAttributedLabel *)label didSelectLinkWithURL:(NSURL *)url
+{
+    [self showProgramTerms];
 }
 
 #pragma mark - Navigation
@@ -197,8 +206,9 @@ static NSString *const kChooseSignUpTypeSegueIdentifier = @"сhooseSignUpTypeSeg
         self.editProfileTableViewController.scrollNeeded = YES;
         
         self.editProfileTableViewController.hideEmailField = YES;
-        
+
         [self.editProfileTableViewController viewWillAppear:YES];
+        
     } else if ([segue.identifier isEqualToString:kChooseSignUpTypeSegueIdentifier]) {
         BZRChooseSignUpTypeController *controller = (BZRChooseSignUpTypeController *)segue.destinationViewController;
         controller.temporaryProfile = self.temporaryProfile;

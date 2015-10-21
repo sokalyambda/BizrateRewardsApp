@@ -7,6 +7,7 @@
 //
 
 #import "BZRSurveyRemarkLabel.h"
+
 #import "UIFont+Styles.h"
 
 @implementation BZRSurveyRemarkLabel

@@ -37,8 +37,6 @@ static NSString *const kGetStartedSegueIdentifier = @"getStartedSegueIdentifier"
 {
     [super viewDidAppear:animated];
     [self setTutorialPassed];
-    
-    NSLog(@"container frame %@", NSStringFromCGRect(self.containerView.frame));
 }
 
 #pragma mark - Actions

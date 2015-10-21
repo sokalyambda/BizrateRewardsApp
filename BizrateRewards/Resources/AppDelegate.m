@@ -53,8 +53,8 @@ static NSString *const kOfferBeamRetailerID = @"6F8E3A94-FE29-4144-BE86-AA8372D1
     [[BITHockeyManager sharedHockeyManager] startManager];
     
     //setup OfferBeam service
-    [OB_Services start];
-    [OB_Services setRetailerCode:kOfferBeamRetailerID];
+//    [OB_Services start];
+//    [OB_Services setRetailerCode:kOfferBeamRetailerID];
     
     return [[FBSDKApplicationDelegate sharedInstance] application:application
                                     didFinishLaunchingWithOptions:launchOptions];

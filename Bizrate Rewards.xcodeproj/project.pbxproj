@@ -40,6 +40,8 @@
 		585C32B81B63C9D9005BF07B /* BZRUpdateCurrentUserRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 585C32B71B63C9D9005BF07B /* BZRUpdateCurrentUserRequest.m */; };
 		586ED0D11B46E8F500FEB250 /* UIView+SoftRemoving.m in Sources */ = {isa = PBXBuildFile; fileRef = 586ED0D01B46E8F500FEB250 /* UIView+SoftRemoving.m */; };
 		5878D3E11B4426E000A917D0 /* BZRCommonDateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5878D3E01B4426DF00A917D0 /* BZRCommonDateFormatter.m */; };
+		587E322F1BD7A58E009B6F3E /* TTTAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 587E322E1BD7A58E009B6F3E /* TTTAttributedLabel.m */; settings = {ASSET_TAGS = (); }; };
+		587E32331BD7A5BB009B6F3E /* BZRTermsLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 587E32321BD7A5BB009B6F3E /* BZRTermsLabel.m */; settings = {ASSET_TAGS = (); }; };
 		588CE7A01B70AAD00088DEB1 /* BZRConfirmPasswordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 588CE79F1B70AAD00088DEB1 /* BZRConfirmPasswordController.m */; };
 		58901CF41B500E1B00D4A16B /* BZRBaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 58901CF31B500E1B00D4A16B /* BZRBaseNavigationController.m */; };
 		5894208B1B450FF6004BAF48 /* BZRAccountSettingsContaiterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5894208A1B450FF6004BAF48 /* BZRAccountSettingsContaiterController.m */; };
@@ -242,6 +244,10 @@
 		586ED0D01B46E8F500FEB250 /* UIView+SoftRemoving.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+SoftRemoving.m"; path = "Classes/Categories/UIView/UIView+SoftRemoving/UIView+SoftRemoving.m"; sourceTree = "<group>"; };
 		5878D3DF1B4426DF00A917D0 /* BZRCommonDateFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRCommonDateFormatter.h; path = Classes/Utilities/CommonDateFormatter/BZRCommonDateFormatter.h; sourceTree = "<group>"; };
 		5878D3E01B4426DF00A917D0 /* BZRCommonDateFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRCommonDateFormatter.m; path = Classes/Utilities/CommonDateFormatter/BZRCommonDateFormatter.m; sourceTree = "<group>"; };
+		587E322D1BD7A58E009B6F3E /* TTTAttributedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TTTAttributedLabel.h; path = Classes/Libraries/TTTAttributedLabel/TTTAttributedLabel.h; sourceTree = "<group>"; };
+		587E322E1BD7A58E009B6F3E /* TTTAttributedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TTTAttributedLabel.m; path = Classes/Libraries/TTTAttributedLabel/TTTAttributedLabel.m; sourceTree = "<group>"; };
+		587E32311BD7A5BB009B6F3E /* BZRTermsLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRTermsLabel.h; path = Classes/MVC/Views/TermsLabel/BZRTermsLabel.h; sourceTree = "<group>"; };
+		587E32321BD7A5BB009B6F3E /* BZRTermsLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRTermsLabel.m; path = Classes/MVC/Views/TermsLabel/BZRTermsLabel.m; sourceTree = "<group>"; };
 		588CE79E1B70AAD00088DEB1 /* BZRConfirmPasswordController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRConfirmPasswordController.h; path = Classes/MVC/Controllers/AuthorizationControllers/ForgotPasswordController/ConfirmPasswordController/BZRConfirmPasswordController.h; sourceTree = "<group>"; };
 		588CE79F1B70AAD00088DEB1 /* BZRConfirmPasswordController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRConfirmPasswordController.m; path = Classes/MVC/Controllers/AuthorizationControllers/ForgotPasswordController/ConfirmPasswordController/BZRConfirmPasswordController.m; sourceTree = "<group>"; };
 		58901CF21B500E1B00D4A16B /* BZRBaseNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRBaseNavigationController.h; path = Classes/MVC/Controllers/BaseNavigationController/BZRBaseNavigationController.h; sourceTree = "<group>"; };
@@ -639,6 +645,7 @@
 		58219EE61B38A23400A9541A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				587E32301BD7A598009B6F3E /* TermsLabel */,
 				58C5052E1B7DE6400030DCE5 /* IncreaseableButton */,
 				58BCCD811B6B8B6500521496 /* BaseOverlapView */,
 				58AA1A1F1B5E1E3800BA824A /* HighlightedButton */,
@@ -1047,6 +1054,24 @@
 				5878D3E01B4426DF00A917D0 /* BZRCommonDateFormatter.m */,
 			);
 			name = CommonDateFormatter;
+			sourceTree = "<group>";
+		};
+		587E322C1BD7A56E009B6F3E /* TTTAttributedLabel */ = {
+			isa = PBXGroup;
+			children = (
+				587E322D1BD7A58E009B6F3E /* TTTAttributedLabel.h */,
+				587E322E1BD7A58E009B6F3E /* TTTAttributedLabel.m */,
+			);
+			name = TTTAttributedLabel;
+			sourceTree = "<group>";
+		};
+		587E32301BD7A598009B6F3E /* TermsLabel */ = {
+			isa = PBXGroup;
+			children = (
+				587E32311BD7A5BB009B6F3E /* BZRTermsLabel.h */,
+				587E32321BD7A5BB009B6F3E /* BZRTermsLabel.m */,
+			);
+			name = TermsLabel;
 			sourceTree = "<group>";
 		};
 		588CE79D1B70AA350088DEB1 /* ConfirmPasswordController */ = {
@@ -1481,6 +1506,7 @@
 		58AA1A231B5E32F800BA824A /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				587E322C1BD7A56E009B6F3E /* TTTAttributedLabel */,
 				58A841661B9443520032AEF0 /* ISO8601DateFormatter */,
 				58AA1A241B5E330600BA824A /* OfferBeamSDK */,
 			);
@@ -2408,6 +2434,7 @@
 				589420A91B452813004BAF48 /* BZRCommonPickerView.m in Sources */,
 				58A59E251B3EDFDC00A5F30C /* BZRGeolocationAccessController.m in Sources */,
 				589420981B451D87004BAF48 /* main.m in Sources */,
+				587E322F1BD7A58E009B6F3E /* TTTAttributedLabel.m in Sources */,
 				58BCCD8F1B6BA4D900521496 /* BZRSendLocationEventRequest.m in Sources */,
 				589BCCE01B56717200D49056 /* BZREditProfileField.m in Sources */,
 				58A91F431B3A995F0032607F /* BZRRoundedImageView.m in Sources */,
@@ -2466,6 +2493,7 @@
 				58ADC0E41B4BDCC200DF849F /* BZRFinishSurveyController.m in Sources */,
 				585C32A31B63AA3F005BF07B /* BZRSignInRequest.m in Sources */,
 				58ADC0E81B4BDCE400DF849F /* BZRSecondTutorialController.m in Sources */,
+				587E32331BD7A5BB009B6F3E /* BZRTermsLabel.m in Sources */,
 				58B38A491B7349AB00EDB024 /* BZRFailedOperationManager.m in Sources */,
 				589420A51B45278E004BAF48 /* BZRPickersHelper.m in Sources */,
 				5858F26E1B61271E00F38DFC /* BZRErrorHandler.m in Sources */,
