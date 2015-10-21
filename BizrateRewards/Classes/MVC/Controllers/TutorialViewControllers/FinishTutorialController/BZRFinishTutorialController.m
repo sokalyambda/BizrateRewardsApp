@@ -13,6 +13,8 @@ static NSString *const kGetStartedSegueIdentifier = @"getStartedSegueIdentifier"
 
 @interface BZRFinishTutorialController ()
 
+@property (weak, nonatomic) IBOutlet UIView *containerView;
+
 @end
 
 @implementation BZRFinishTutorialController
@@ -27,6 +29,7 @@ static NSString *const kGetStartedSegueIdentifier = @"getStartedSegueIdentifier"
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self.view layoutIfNeeded];
     [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
@@ -34,6 +37,8 @@ static NSString *const kGetStartedSegueIdentifier = @"getStartedSegueIdentifier"
 {
     [super viewDidAppear:animated];
     [self setTutorialPassed];
+    
+    NSLog(@"container frame %@", NSStringFromCGRect(self.containerView.frame));
 }
 
 #pragma mark - Actions

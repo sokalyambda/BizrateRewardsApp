@@ -7,6 +7,7 @@
 //
 
 #import "BZRTutorialTitleLabel.h"
+
 #import "UIFont+Styles.h"
 
 @implementation BZRTutorialTitleLabel
