@@ -51,7 +51,7 @@
 
 - (UIColor *)currentColor
 {
-    return self.isMaxPointsEarned ? UIColorFromRGB(0xf9105e) : UIColorFromRGB(0x19cb86);
+    return self.isMaxPointsEarned ? UIColorFromRGB(0x1bc886) : UIColorFromRGB(0x1e91d2); //if earned color will be green, otherwise - blue
 }
 
 #pragma mark - Actions

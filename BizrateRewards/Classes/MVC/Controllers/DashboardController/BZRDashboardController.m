@@ -37,6 +37,8 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
 @property (weak, nonatomic) IBOutlet BZRSurveyPointsValueLabel *pointsForNextGiftCardLabel;
 @property (weak, nonatomic) IBOutlet BZRTutorialDescriptionLabel *pointsForNextSurveyLabel;
 @property (weak, nonatomic) IBOutlet BZRHighlightedButton *takeSurveyButton;
+@property (weak, nonatomic) IBOutlet UIButton *seeAvailableGiftCardsButton;
+@property (weak, nonatomic) IBOutlet UIButton *reedemPointsButton;
 
 @property (strong, nonatomic) BZRStorageManager *storageManager;
 @property (strong, nonatomic) BZRUserProfile *currentProfile;
@@ -90,6 +92,11 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
 - (IBAction)seeAllGiftCardsClick:(id)sender
 {
     [self seeAllGiftCards];
+}
+
+- (IBAction)reedemPointsClick:(id)sender
+{
+    
 }
 
 - (IBAction)accountSettingsClick:(id)sender
@@ -245,7 +252,7 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
  */
 - (void)setupPointsForNextSurveyTextWithPoints:(NSInteger)points
 {
-    self.pointsForNextSurveyLabel.text = [NSString localizedStringWithFormat:LOCALIZED(@"Earn %li points for the next survey"), points];
+    self.pointsForNextSurveyLabel.text = LOCALIZED(@"Earn more points by taking another survey!");//[NSString localizedStringWithFormat:LOCALIZED(@"Earn %li points for the next survey"), points];
 }
 
 #pragma mark - UIStatusBar appearance

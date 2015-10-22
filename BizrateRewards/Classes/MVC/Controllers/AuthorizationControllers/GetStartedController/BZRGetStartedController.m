@@ -60,7 +60,7 @@ static CGFloat const kCurrentNumberOfRows = 4.f;
     
     [self prefillUserDataIfExists];
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.01f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         self.containerHeightConstraint.constant = self.editProfileTableViewController.tableView.rowHeight * kCurrentNumberOfRows; //number of rows in this screen
         [self.view layoutIfNeeded];
     });
