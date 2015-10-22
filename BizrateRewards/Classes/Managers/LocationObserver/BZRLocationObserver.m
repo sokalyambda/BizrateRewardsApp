@@ -142,8 +142,8 @@ static NSString *const kOBStore = @"Store";
  */
 - (void)setupOfferBeamObserver
 {
-//    [OB_Services setLocationDelegate:self];
-//    [OB_Services startLocationService];
+    [OB_Services setLocationDelegate:self];
+    [OB_Services startLocationService];
 }
 
 /**

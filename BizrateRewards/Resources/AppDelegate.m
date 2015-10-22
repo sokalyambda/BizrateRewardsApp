@@ -23,8 +23,8 @@
 
 @import HockeySDK;
 
-static NSString *const kHockeyAppBetaIdentifier = @"bf52cc6c526a07761d1b50a4078b6d67";
-static NSString *const kHockeyAppProductionIdentifier = @"c451b1dd35fc4db43a265d8ea7b7ce5a";
+static NSString *const kHockeyAppBetaIdentifier = @"58315ada266550380341a1b283654d02";
+//static NSString *const kHockeyAppProductionIdentifier = @"c451b1dd35fc4db43a265d8ea7b7ce5a";
 
 static NSString *const kOfferBeamRetailerID = @"6F8E3A94-FE29-4144-BE86-AA8372D1D407";
 
@@ -48,13 +48,14 @@ static NSString *const kOfferBeamRetailerID = @"6F8E3A94-FE29-4144-BE86-AA8372D1
     [BZRMixpanelService trackEventWithType:BZRMixpanelEventOpenApp propertyValue:nil];
     
     //setup hockey app service
-    [[BITHockeyManager sharedHockeyManager] configureWithBetaIdentifier:kHockeyAppBetaIdentifier liveIdentifier:kHockeyAppProductionIdentifier delegate:nil];
+//    [[BITHockeyManager sharedHockeyManager] configureWithBetaIdentifier:kHockeyAppBetaIdentifier liveIdentifier:kHockeyAppProductionIdentifier delegate:nil];
+    [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:kHockeyAppBetaIdentifier];
     [[BITHockeyManager sharedHockeyManager].authenticator authenticateInstallation];
     [[BITHockeyManager sharedHockeyManager] startManager];
     
     //setup OfferBeam service
-//    [OB_Services start];
-//    [OB_Services setRetailerCode:kOfferBeamRetailerID];
+    [OB_Services start];
+    [OB_Services setRetailerCode:kOfferBeamRetailerID];
     
     return [[FBSDKApplicationDelegate sharedInstance] application:application
                                     didFinishLaunchingWithOptions:launchOptions];
