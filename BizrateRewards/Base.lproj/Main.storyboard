@@ -4156,9 +4156,6 @@
                                 <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="18"/>
                                 <color key="textColor" red="0.035294117649999998" green="0.1176470588" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="40" y="238" width="321" height="21"/>
-                                </variation>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aJC-QM-NR1" userLabel="Reset Password Button" customClass="BZRHighlightedButton">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -4176,8 +4173,7 @@
                                         <exclude reference="802-W2-c5V"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="0.0" y="413" width="400" height="65"/>
+                                <variation key="heightClass=regular-widthClass=compact">
                                     <mask key="constraints">
                                         <include reference="802-W2-c5V"/>
                                     </mask>
@@ -4195,9 +4191,6 @@
                                 <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="12"/>
                                 <color key="textColor" red="0.035294117649999998" green="0.1176470588" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="156" y="184" width="88" height="14"/>
-                                </variation>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2sP-Z2-8dB" userLabel="Exit Button">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -4308,9 +4301,6 @@
                                 <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="18"/>
                                 <color key="textColor" red="0.035294117649999998" green="0.1176470588" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="29" y="241" width="343" height="21"/>
-                                </variation>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bizrate_rewards_logo" translatesAutoresizingMaskIntoConstraints="NO" id="PWg-4W-ttz" userLabel="Logo Image View">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
@@ -4321,9 +4311,6 @@
                                 <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="12"/>
                                 <color key="textColor" red="0.035294117649999998" green="0.1176470588" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="157" y="184" width="86" height="14"/>
-                                </variation>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ftn-Z0-oMX" userLabel="Exit Button">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -4383,10 +4370,10 @@
                             <constraint firstItem="wPp-eK-Kg3" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Ldt-t9-qUS" secondAttribute="leading" constant="23" id="Mj0-YV-lIl"/>
                             <constraint firstAttribute="centerX" secondItem="Ls3-gu-dyd" secondAttribute="centerX" id="NOU-fb-jy7"/>
                             <constraint firstAttribute="centerX" secondItem="wPp-eK-Kg3" secondAttribute="centerX" id="Txr-gE-DPA"/>
+                            <constraint firstItem="dsS-2I-Ale" firstAttribute="top" secondItem="wPp-eK-Kg3" secondAttribute="bottom" constant="151" id="UbS-uq-8rW"/>
                             <constraint firstItem="wPp-eK-Kg3" firstAttribute="top" secondItem="Ls3-gu-dyd" secondAttribute="bottom" constant="40" id="ddQ-fL-tfQ">
                                 <variation key="heightClass=regular-widthClass=compact" constant="43"/>
                             </constraint>
-                            <constraint firstAttribute="centerY" secondItem="dsS-2I-Ale" secondAttribute="centerY" constant="-52.5" id="eNj-z0-RTQ"/>
                             <constraint firstItem="Ls3-gu-dyd" firstAttribute="top" secondItem="PWg-4W-ttz" secondAttribute="bottom" constant="55" id="jn1-mw-pAd"/>
                             <constraint firstAttribute="trailing" secondItem="Ftn-Z0-oMX" secondAttribute="trailing" constant="10" id="juF-2V-80P"/>
                             <constraint firstAttribute="trailing" secondItem="dsS-2I-Ale" secondAttribute="trailing" id="rOF-01-n6i"/>
@@ -4403,6 +4390,8 @@
                                 <exclude reference="dsS-2I-Ale"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="1VX-WN-7Pg"/>
+                                <exclude reference="yKc-jx-nld"/>
                                 <exclude reference="NOU-fb-jy7"/>
                                 <exclude reference="jn1-mw-pAd"/>
                                 <exclude reference="Mj0-YV-lIl"/>
@@ -4411,11 +4400,9 @@
                                 <exclude reference="yQe-ud-f2A"/>
                                 <exclude reference="05C-45-DRr"/>
                                 <exclude reference="juF-2V-80P"/>
-                                <exclude reference="eNj-z0-RTQ"/>
+                                <exclude reference="UbS-uq-8rW"/>
                                 <exclude reference="rOF-01-n6i"/>
                                 <exclude reference="t4Z-9C-DJl"/>
-                                <exclude reference="1VX-WN-7Pg"/>
-                                <exclude reference="yKc-jx-nld"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -4427,6 +4414,8 @@
                                 <include reference="dsS-2I-Ale"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="1VX-WN-7Pg"/>
+                                <include reference="yKc-jx-nld"/>
                                 <include reference="NOU-fb-jy7"/>
                                 <include reference="jn1-mw-pAd"/>
                                 <include reference="Mj0-YV-lIl"/>
@@ -4435,11 +4424,9 @@
                                 <include reference="yQe-ud-f2A"/>
                                 <include reference="05C-45-DRr"/>
                                 <include reference="juF-2V-80P"/>
-                                <include reference="eNj-z0-RTQ"/>
+                                <include reference="UbS-uq-8rW"/>
                                 <include reference="rOF-01-n6i"/>
                                 <include reference="t4Z-9C-DJl"/>
-                                <include reference="1VX-WN-7Pg"/>
-                                <include reference="yKc-jx-nld"/>
                             </mask>
                         </variation>
                     </view>
@@ -4481,8 +4468,7 @@
                                                         <exclude reference="3cT-bp-SjT"/>
                                                     </mask>
                                                 </variation>
-                                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                    <rect key="frame" x="0.0" y="326" width="400" height="45"/>
+                                                <variation key="heightClass=regular-widthClass=compact">
                                                     <mask key="constraints">
                                                         <include reference="3cT-bp-SjT"/>
                                                     </mask>
@@ -4503,8 +4489,7 @@
                                                         <exclude reference="b6R-WN-pzU"/>
                                                     </mask>
                                                 </variation>
-                                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                    <rect key="frame" x="0.0" y="371" width="400" height="45"/>
+                                                <variation key="heightClass=regular-widthClass=compact">
                                                     <mask key="constraints">
                                                         <include reference="b6R-WN-pzU"/>
                                                     </mask>
@@ -4518,9 +4503,6 @@
                                                 <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="18"/>
                                                 <color key="textColor" red="0.035294117647058823" green="0.11764705882352941" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
-                                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                    <rect key="frame" x="22" y="233" width="356" height="63"/>
-                                                </variation>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2nQ-Ki-7nG" userLabel="Reset Password Button" customClass="BZRHighlightedButton">
                                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -4538,8 +4520,7 @@
                                                         <exclude reference="Fbg-Oe-GUM"/>
                                                     </mask>
                                                 </variation>
-                                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                    <rect key="frame" x="0.0" y="416" width="400" height="65"/>
+                                                <variation key="heightClass=regular-widthClass=compact">
                                                     <mask key="constraints">
                                                         <include reference="Fbg-Oe-GUM"/>
                                                     </mask>
@@ -4557,9 +4538,6 @@
                                                 <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="12"/>
                                                 <color key="textColor" red="0.035294117647058823" green="0.11764705882352941" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
-                                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                    <rect key="frame" x="127" y="184" width="146" height="14"/>
-                                                </variation>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5MV-Rh-E1L" userLabel="Exit Button">
                                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
