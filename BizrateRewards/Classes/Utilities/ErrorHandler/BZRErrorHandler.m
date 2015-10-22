@@ -213,7 +213,9 @@ static NSString *_errorAlertTitle = nil;
         }
     }
     
-    return outputErrorString.length > 0 ? outputErrorString : nil;
+    BOOL canReturn = ![outputErrorString isEqual:[NSNull null]];
+    
+    return canReturn ? outputErrorString : nil;
 }
 
 /**

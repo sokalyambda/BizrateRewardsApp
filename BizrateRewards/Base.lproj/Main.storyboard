@@ -672,18 +672,12 @@
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="geolocation_icon" translatesAutoresizingMaskIntoConstraints="NO" id="HhU-kg-QQq">
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                            <rect key="frame" x="118" y="49" width="125" height="175"/>
-                                        </variation>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Earn rewards now!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a0Y-fe-G2e" customClass="BZRTutorialTitleLabel">
                                         <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                         <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="26"/>
                                         <color key="textColor" red="0.08235294118" green="0.57647058819999997" blue="0.80392156859999997" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
-                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                            <rect key="frame" x="72" y="0.0" width="217" height="31"/>
-                                        </variation>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="73g-S8-ObY" customClass="BZRTutorialDescriptionLabel">
                                         <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -691,9 +685,6 @@
                                         <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="18"/>
                                         <color key="textColor" red="0.035294117649999998" green="0.1176470588" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
-                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                            <rect key="frame" x="18" y="232" width="324" height="105"/>
-                                        </variation>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -729,7 +720,7 @@
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="20" y="200" width="360" height="337"/>
+                                    <rect key="frame" x="20" y="189" width="360" height="360"/>
                                     <mask key="subviews">
                                         <include reference="HhU-kg-QQq"/>
                                         <include reference="a0Y-fe-G2e"/>
@@ -916,9 +907,6 @@
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="push_notifications_icon" translatesAutoresizingMaskIntoConstraints="NO" id="lCW-Uk-MFC">
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                            <rect key="frame" x="103" y="49" width="155" height="155"/>
-                                        </variation>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Earn rewards faster!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.40000000000000002" translatesAutoresizingMaskIntoConstraints="NO" id="7eN-Km-twL" customClass="BZRTutorialTitleLabel">
                                         <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -926,7 +914,7 @@
                                         <color key="textColor" red="0.08235294118" green="0.57647058819999997" blue="0.80392156859999997" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                         <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                            <rect key="frame" x="64" y="0.0" width="233" height="31"/>
+                                            <rect key="frame" x="59" y="0.0" width="244" height="36"/>
                                         </variation>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Get alerts when new reward earning surveys are available. Early bird gets the most points! " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AEg-KH-Zwo" customClass="BZRTutorialDescriptionLabel">
@@ -935,7 +923,7 @@
                                         <color key="textColor" red="0.035294117649999998" green="0.1176470588" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                         <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                            <rect key="frame" x="32" y="212" width="298" height="63"/>
+                                            <rect key="frame" x="27" y="217" width="309" height="74"/>
                                         </variation>
                                     </label>
                                 </subviews>
@@ -975,8 +963,7 @@
                                         <exclude reference="OHm-be-d4H"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="20" y="231" width="360" height="275"/>
+                                <variation key="heightClass=regular-widthClass=compact">
                                     <mask key="subviews">
                                         <include reference="lCW-Uk-MFC"/>
                                         <include reference="7eN-Km-twL"/>
@@ -1139,9 +1126,6 @@
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="intro_img_3" translatesAutoresizingMaskIntoConstraints="NO" id="C51-X8-FlC">
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                            <rect key="frame" x="104" y="36" width="152" height="147"/>
-                                        </variation>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y8h-1k-OUb" customClass="BZRTutorialDescriptionLabel">
                                         <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -1149,18 +1133,12 @@
                                         <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="18"/>
                                         <color key="textColor" red="0.035294117649999998" green="0.1176470588" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
-                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                            <rect key="frame" x="17" y="191" width="327" height="84"/>
-                                        </variation>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Choose the rewards you want" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.40000000000000002" translatesAutoresizingMaskIntoConstraints="NO" id="azB-qE-cfs" customClass="BZRTutorialTitleLabel">
                                         <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                         <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="26"/>
                                         <color key="textColor" red="0.08235294118" green="0.57647058819999997" blue="0.80392156859999997" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
-                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                            <rect key="frame" x="7" y="0.0" width="347" height="31"/>
-                                        </variation>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1199,8 +1177,7 @@
                                         <exclude reference="fa6-jf-m0n"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="20" y="231" width="360" height="275"/>
+                                <variation key="heightClass=regular-widthClass=compact">
                                     <mask key="subviews">
                                         <include reference="C51-X8-FlC"/>
                                         <include reference="Y8h-1k-OUb"/>
@@ -5496,8 +5473,7 @@
                                                 <exclude reference="s1e-NJ-slp"/>
                                             </mask>
                                         </variation>
-                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                            <rect key="frame" x="77" y="368" width="246" height="73"/>
+                                        <variation key="heightClass=regular-widthClass=compact">
                                             <mask key="subviews">
                                                 <include reference="Zeh-Be-dPY"/>
                                                 <include reference="9sV-CC-Arb"/>
@@ -5545,8 +5521,7 @@
                                                 <exclude reference="cSz-lo-4lk"/>
                                             </mask>
                                         </variation>
-                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                            <rect key="frame" x="0.0" y="155" width="400" height="212"/>
+                                        <variation key="heightClass=regular-widthClass=compact">
                                             <mask key="constraints">
                                                 <include reference="cSz-lo-4lk"/>
                                             </mask>
@@ -5580,21 +5555,44 @@
                                             <action selector="submitButtonClick:" destination="25h-nv-K7N" eventType="touchUpInside" id="cPo-Er-CFl"/>
                                         </connections>
                                     </button>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" image="star_icon" translatesAutoresizingMaskIntoConstraints="NO" id="6Yb-l0-FgH">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="249" verticalHuggingPriority="249" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" image="star_icon" translatesAutoresizingMaskIntoConstraints="NO" id="6Yb-l0-FgH">
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="6Yb-l0-FgH" secondAttribute="height" multiplier="29:27" id="SM1-AQ-p2O"/>
+                                        </constraints>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="SM1-AQ-p2O"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="heightClass=regular-widthClass=compact">
+                                            <mask key="constraints">
+                                                <include reference="SM1-AQ-p2O"/>
+                                            </mask>
+                                        </variation>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" verticalCompressionResistancePriority="752" text="If you are a new member of Bizrate Rewards you will earn 500 points" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ma5-Pe-IzA" customClass="BZRTutorialDescriptionLabel">
                                         <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                         <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="18"/>
                                         <color key="textColor" red="0.22352941179999999" green="0.22352941179999999" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
-                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                            <rect key="frame" x="57" y="105" width="286" height="42"/>
-                                        </variation>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" image="bizrate_rewards_logo" translatesAutoresizingMaskIntoConstraints="NO" id="ZSt-hG-Xo1" userLabel="Logo Image VIew">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="249" verticalHuggingPriority="249" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" image="bizrate_rewards_logo" translatesAutoresizingMaskIntoConstraints="NO" id="ZSt-hG-Xo1" userLabel="Logo Image VIew">
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="ZSt-hG-Xo1" secondAttribute="height" multiplier="250:59" id="75S-TX-7n2"/>
+                                        </constraints>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="75S-TX-7n2"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="heightClass=regular-widthClass=compact">
+                                            <mask key="constraints">
+                                                <include reference="75S-TX-7n2"/>
+                                            </mask>
+                                        </variation>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -5607,7 +5605,7 @@
                                         <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                                     </constraint>
                                     <constraint firstItem="QZn-pb-eHH" firstAttribute="top" secondItem="F6f-Zk-GEM" secondAttribute="bottom" constant="5" id="Ggm-qI-JEF">
-                                        <variation key="heightClass=regular-widthClass=compact" constant="1"/>
+                                        <variation key="heightClass=regular-widthClass=compact" constant="5"/>
                                     </constraint>
                                     <constraint firstItem="DFV-eH-F4m" firstAttribute="trailing" secondItem="F6f-Zk-GEM" secondAttribute="trailing" id="NKe-Ez-vJp"/>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ma5-Pe-IzA" secondAttribute="trailing" constant="30" id="RzJ-uo-TzI"/>
@@ -5621,13 +5619,14 @@
                                     <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="QZn-pb-eHH" secondAttribute="trailing" constant="77" id="bkb-IE-6ZC"/>
                                     <constraint firstItem="QZn-pb-eHH" firstAttribute="leading" relation="lessThanOrEqual" secondItem="JIP-T9-6hg" secondAttribute="leading" constant="77" id="cvy-ta-sAW"/>
                                     <constraint firstItem="6Yb-l0-FgH" firstAttribute="top" secondItem="ZSt-hG-Xo1" secondAttribute="bottom" constant="8" id="hbh-Tc-jlt">
-                                        <variation key="heightClass=regular-widthClass=compact" constant="2"/>
+                                        <variation key="heightClass=regular-widthClass=compact" constant="8"/>
                                     </constraint>
                                     <constraint firstAttribute="centerX" secondItem="ZSt-hG-Xo1" secondAttribute="centerX" id="iyd-TE-fV3"/>
                                     <constraint firstItem="ma5-Pe-IzA" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="JIP-T9-6hg" secondAttribute="leading" constant="30" id="nBg-up-Zte"/>
-                                    <constraint firstItem="ma5-Pe-IzA" firstAttribute="top" secondItem="6Yb-l0-FgH" secondAttribute="bottom" constant="2" id="ore-bj-KMa"/>
+                                    <constraint firstItem="ma5-Pe-IzA" firstAttribute="top" secondItem="6Yb-l0-FgH" secondAttribute="bottom" constant="8" id="ore-bj-KMa"/>
                                     <constraint firstAttribute="centerX" secondItem="6Yb-l0-FgH" secondAttribute="centerX" id="uuL-Mw-h7q"/>
                                     <constraint firstItem="ZSt-hG-Xo1" firstAttribute="top" secondItem="JIP-T9-6hg" secondAttribute="top" constant="15" id="yaO-Ml-yGM"/>
+                                    <constraint firstItem="6Yb-l0-FgH" firstAttribute="width" secondItem="ZSt-hG-Xo1" secondAttribute="height" multiplier="29:59" id="yhX-Ul-FHr"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="subviews">
@@ -5639,25 +5638,26 @@
                                         <exclude reference="ZSt-hG-Xo1"/>
                                     </mask>
                                     <mask key="constraints">
+                                        <exclude reference="iyd-TE-fV3"/>
+                                        <exclude reference="yaO-Ml-yGM"/>
                                         <exclude reference="Gfw-G1-9MR"/>
                                         <exclude reference="RzJ-uo-TzI"/>
                                         <exclude reference="nBg-up-Zte"/>
                                         <exclude reference="ore-bj-KMa"/>
-                                        <exclude reference="0CP-iq-jf2"/>
-                                        <exclude reference="BFG-E0-shl"/>
-                                        <exclude reference="NKe-Ez-vJp"/>
-                                        <exclude reference="an3-ym-5yk"/>
-                                        <exclude reference="hbh-Tc-jlt"/>
-                                        <exclude reference="uuL-Mw-h7q"/>
                                         <exclude reference="2Yh-wa-gXz"/>
                                         <exclude reference="FNB-hF-ASu"/>
                                         <exclude reference="Yc1-YY-8xD"/>
-                                        <exclude reference="iyd-TE-fV3"/>
-                                        <exclude reference="yaO-Ml-yGM"/>
+                                        <exclude reference="hbh-Tc-jlt"/>
+                                        <exclude reference="uuL-Mw-h7q"/>
+                                        <exclude reference="yhX-Ul-FHr"/>
                                         <exclude reference="Ggm-qI-JEF"/>
                                         <exclude reference="Uqf-OC-0uQ"/>
                                         <exclude reference="bkb-IE-6ZC"/>
                                         <exclude reference="cvy-ta-sAW"/>
+                                        <exclude reference="0CP-iq-jf2"/>
+                                        <exclude reference="BFG-E0-shl"/>
+                                        <exclude reference="NKe-Ez-vJp"/>
+                                        <exclude reference="an3-ym-5yk"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact">
@@ -5670,25 +5670,26 @@
                                         <include reference="ZSt-hG-Xo1"/>
                                     </mask>
                                     <mask key="constraints">
+                                        <include reference="iyd-TE-fV3"/>
+                                        <include reference="yaO-Ml-yGM"/>
                                         <include reference="Gfw-G1-9MR"/>
                                         <include reference="RzJ-uo-TzI"/>
                                         <include reference="nBg-up-Zte"/>
                                         <include reference="ore-bj-KMa"/>
-                                        <include reference="0CP-iq-jf2"/>
-                                        <include reference="BFG-E0-shl"/>
-                                        <include reference="NKe-Ez-vJp"/>
-                                        <include reference="an3-ym-5yk"/>
-                                        <include reference="hbh-Tc-jlt"/>
-                                        <include reference="uuL-Mw-h7q"/>
                                         <include reference="2Yh-wa-gXz"/>
                                         <include reference="FNB-hF-ASu"/>
                                         <include reference="Yc1-YY-8xD"/>
-                                        <include reference="iyd-TE-fV3"/>
-                                        <include reference="yaO-Ml-yGM"/>
+                                        <include reference="hbh-Tc-jlt"/>
+                                        <include reference="uuL-Mw-h7q"/>
+                                        <include reference="yhX-Ul-FHr"/>
                                         <include reference="Ggm-qI-JEF"/>
                                         <include reference="Uqf-OC-0uQ"/>
                                         <include reference="bkb-IE-6ZC"/>
                                         <include reference="cvy-ta-sAW"/>
+                                        <include reference="0CP-iq-jf2"/>
+                                        <include reference="BFG-E0-shl"/>
+                                        <include reference="NKe-Ez-vJp"/>
+                                        <include reference="an3-ym-5yk"/>
                                     </mask>
                                 </variation>
                             </view>
