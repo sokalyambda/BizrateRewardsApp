@@ -102,7 +102,7 @@
 {
     NSInteger updatedPoints = self.currentProfile.pointsAmount + self.passedSurvey.surveyPoints;
     WEAK_SELF;
-    [self.progressView recalculateProgressWithCurrentPoints:updatedPoints requiredPoints: self.currentProfile.pointsRequired withCompletion:^(BOOL maxPointsEarned) {
+    [self.progressView recalculateProgressWithCurrentPoints:updatedPoints requiredPoints:self.currentProfile.pointsRequired withCompletion:^(BOOL maxPointsEarned) {
         if (maxPointsEarned) {
             weakSelf.obtainedPointsLabel.text = LOCALIZED(@"Awesome! You have earned a gift card!! We will email you with details how to choose a card and redeem your points.");
         } else {
