@@ -27,6 +27,7 @@ static CGFloat const kCellHeight = 100.f;
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+//    [self.view layoutIfNeeded];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 

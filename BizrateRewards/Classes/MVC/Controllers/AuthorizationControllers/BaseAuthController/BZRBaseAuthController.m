@@ -31,7 +31,9 @@ static NSString *const kPasswordNotActiveIconName   = @"password_icon";
     [super viewWillAppear:animated];
     [self registerForKeyboardNotifications];
     [self.view layoutIfNeeded];
-    [self customizeFields];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self customizeFields];
+    });
 }
 
 - (void)viewWillDisappear:(BOOL)animated

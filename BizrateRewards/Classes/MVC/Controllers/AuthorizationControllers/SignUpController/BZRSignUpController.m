@@ -28,16 +28,10 @@
 
 #pragma mark - View Lifecycle
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-}
-
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     [self customizeNavigationItem];
-    [self customizeFields];
     [self setupUserDataToFields];
 }
 
@@ -119,7 +113,7 @@
 {
     [self.view layoutIfNeeded];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
-    self.navigationItem.title = NSLocalizedString(@"Create Account with Email", nil);
+    self.navigationItem.title = LOCALIZED(@"Create Account with Email");
 }
 
 /**

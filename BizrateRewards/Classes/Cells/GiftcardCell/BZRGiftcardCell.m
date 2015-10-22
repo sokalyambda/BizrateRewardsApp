@@ -32,6 +32,7 @@ static CGFloat const kBorderWidth = .5f;
 - (void)layoutSubviews
 {
     [super layoutSubviews];
+    [self.giftcardImageView layoutIfNeeded];
     [self addBorders];
 }
 

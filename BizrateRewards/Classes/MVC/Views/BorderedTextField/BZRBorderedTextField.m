@@ -12,6 +12,9 @@ static CGFloat kLeftViewWidth = 10.f;
 
 @interface BZRBorderedTextField ()
 
+@property (strong, nonatomic) CALayer *bottomBorderLayer;
+@property (strong, nonatomic) CALayer *topBorderLayer;
+
 @end
 
 @implementation BZRBorderedTextField
@@ -46,6 +49,8 @@ static CGFloat kLeftViewWidth = 10.f;
     [self addLeftView];
 }
 
+#pragma mark - Actions
+
 - (void)addLeftView
 {
     self.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kLeftViewWidth, CGRectGetHeight(self.frame))];
@@ -54,18 +59,18 @@ static CGFloat kLeftViewWidth = 10.f;
 
 - (void)addTopBorder
 {
-    CALayer *topBorderLayer = [CALayer layer];
-    topBorderLayer.frame = CGRectMake(0, 0, CGRectGetWidth(self.frame), 0.5f);
-    topBorderLayer.backgroundColor = [UIColor lightGrayColor].CGColor;
-    [self.layer addSublayer:topBorderLayer];
+    self.topBorderLayer = [CALayer layer];
+    self.topBorderLayer.frame = CGRectMake(0, 0, CGRectGetWidth(self.frame), 0.5f);
+    self.topBorderLayer.backgroundColor = [UIColor lightGrayColor].CGColor;
+    [self.layer addSublayer:self.topBorderLayer];
 }
 
 - (void)addBottomBorder
 {
-    CALayer *topBorderLayer = [CALayer layer];
-    topBorderLayer.frame = CGRectMake(0, CGRectGetHeight(self.frame) - 0.5f, CGRectGetWidth(self.frame), 0.5f);
-    topBorderLayer.backgroundColor = [UIColor lightGrayColor].CGColor;
-    [self.layer addSublayer:topBorderLayer];
+    self.bottomBorderLayer = [CALayer layer];
+    self.bottomBorderLayer.frame = CGRectMake(0, CGRectGetHeight(self.frame) - 0.5f, CGRectGetWidth(self.frame), 0.5f);
+    self.bottomBorderLayer.backgroundColor = [UIColor lightGrayColor].CGColor;
+    [self.layer addSublayer:self.bottomBorderLayer];
 }
 
 @end
