@@ -94,9 +94,9 @@
             <string>OpenSans</string>
             <string>OpenSans</string>
             <string>OpenSans</string>
-            <string>OpenSans</string>
         </mutableArray>
         <mutableArray key="OpenSans-Semibold.ttf">
+            <string>OpenSans-Semibold</string>
             <string>OpenSans-Semibold</string>
             <string>OpenSans-Semibold</string>
             <string>OpenSans-Semibold</string>
@@ -1472,14 +1472,14 @@
                                                     <action selector="seeAllGiftCardsClick:" destination="8nJ-jh-bXm" eventType="touchUpInside" id="01F-Yh-3Il"/>
                                                 </connections>
                                             </button>
-                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tUt-5p-A82" userLabel="Reedem your points Buttom">
+                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tUt-5p-A82" userLabel="Redeem your points Buttom">
                                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                                <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="15"/>
-                                                <state key="normal" title="REEDEM YOUR POINTS">
+                                                <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="15"/>
+                                                <state key="normal" title="REDEEM YOUR POINTS">
                                                     <color key="titleColor" red="0.070588235289999995" green="0.66274509800000003" blue="0.83921568629999999" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="reedemPointsClick:" destination="8nJ-jh-bXm" eventType="touchUpInside" id="5UK-nh-23k"/>
+                                                    <action selector="redeemPointsClick:" destination="8nJ-jh-bXm" eventType="touchUpInside" id="gNR-L9-zaT"/>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MsH-T6-3Om" customClass="BZRTutorialDescriptionLabel">
@@ -1890,11 +1890,12 @@
                     <navigationItem key="navigationItem" id="rEG-WH-Pm0"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
+                        <outlet property="congratulationsLabel" destination="3sa-3F-1Q0" id="09W-Dj-e36"/>
                         <outlet property="earnedPointsLabel" destination="Gjo-B0-UWy" id="R2j-63-l4K"/>
                         <outlet property="pointsForNextGiftCardLabel" destination="bDh-Dk-8Fa" id="tqe-nT-sGh"/>
                         <outlet property="pointsForNextSurveyLabel" destination="MsH-T6-3Om" id="kN0-jD-QVu"/>
                         <outlet property="progressView" destination="VSs-f0-rwS" id="Aht-6Y-oAI"/>
-                        <outlet property="reedemPointsButton" destination="tUt-5p-A82" id="wYw-0j-MYN"/>
+                        <outlet property="redeemPointsButton" destination="tUt-5p-A82" id="0yU-Yo-s8i"/>
                         <outlet property="seeAvailableGiftCardsButton" destination="atw-jX-KW5" id="Wkv-hz-L5G"/>
                         <outlet property="takeSurveyButton" destination="Ian-0e-mEN" id="w3Q-1Z-HoY"/>
                         <outlet property="userAvatar" destination="CeF-qR-2A8" id="4ST-KA-LxL"/>

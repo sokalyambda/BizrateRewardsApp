@@ -19,6 +19,7 @@
 #import "BZRProgressView.h"
 #import "BZRSurveyPointsValueLabel.h"
 #import "BZRTutorialDescriptionLabel.h"
+#import "BZRSurveyCongratsLabel.h"
 #import "BZRHighlightedButton.h"
 
 #import "BZRPushNotifiactionService.h"
@@ -38,7 +39,8 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
 @property (weak, nonatomic) IBOutlet BZRTutorialDescriptionLabel *pointsForNextSurveyLabel;
 @property (weak, nonatomic) IBOutlet BZRHighlightedButton *takeSurveyButton;
 @property (weak, nonatomic) IBOutlet UIButton *seeAvailableGiftCardsButton;
-@property (weak, nonatomic) IBOutlet UIButton *reedemPointsButton;
+@property (weak, nonatomic) IBOutlet UIButton *redeemPointsButton;
+@property (weak, nonatomic) IBOutlet BZRSurveyCongratsLabel *congratulationsLabel;
 
 @property (strong, nonatomic) BZRStorageManager *storageManager;
 @property (strong, nonatomic) BZRUserProfile *currentProfile;
@@ -94,7 +96,7 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
     [self seeAllGiftCards];
 }
 
-- (IBAction)reedemPointsClick:(id)sender
+- (IBAction)redeemPointsClick:(id)sender
 {
     
 }
@@ -242,7 +244,19 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
  */
 - (void)updateProgressView
 {
-    [self.progressView recalculateProgressWithCurrentPoints:self.currentProfile.pointsAmount requiredPoints:self.currentProfile.pointsRequired withCompletion:nil];
+    WEAK_SELF;
+    [self.progressView recalculateProgressWithCurrentPoints:self.currentProfile.pointsAmount requiredPoints:self.currentProfile.pointsRequired withCompletion:^(BOOL maxPointsEarned) {
+
+        weakSelf.seeAvailableGiftCardsButton.hidden = maxPointsEarned;
+        weakSelf.redeemPointsButton.hidden = !maxPointsEarned;
+        
+        [weakSelf updateSurveyCongratulationsLabelWithMaxPointsEarned:maxPointsEarned];
+    }];
+}
+
+- (void)updateSurveyCongratulationsLabelWithMaxPointsEarned:(BOOL)maxPointsEarned
+{
+    self.congratulationsLabel.text = maxPointsEarned ? LOCALIZED(@"Congrats! You have earned enough points to redeem for a gift card!") : LOCALIZED(@"Congrats! You are getting close to receiving your first gift card!");
 }
 
 /**
