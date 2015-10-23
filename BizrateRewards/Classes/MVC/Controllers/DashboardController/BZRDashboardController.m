@@ -14,6 +14,7 @@
 #import "BZRAccountSettingsController.h"
 #import "BZRBaseNavigationController.h"
 #import "BZRGiftCardsListController.h"
+#import "BZRRedeemPointsController.h"
 
 #import "BZRRoundedImageView.h"
 #import "BZRProgressView.h"
@@ -98,7 +99,7 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
 
 - (IBAction)redeemPointsClick:(id)sender
 {
-    
+    [self redeemPoints];
 }
 
 - (IBAction)accountSettingsClick:(id)sender
@@ -106,6 +107,16 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
     BZRAccountSettingsController *accountController = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRAccountSettingsController class])];
     BZRBaseNavigationController *navigationController = [[BZRBaseNavigationController alloc] initWithRootViewController:accountController];
     [self presentViewController:navigationController animated:YES completion:nil];
+}
+
+/**
+ *  Move to redeem points view controller
+ */
+- (void)redeemPoints
+{
+    BZRRedeemPointsController *controller = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRRedeemPointsController class])];
+    controller.currentRedemptionURL = self.currentProfile.redemptionURL;
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 /**

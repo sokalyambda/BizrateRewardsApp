@@ -19,6 +19,8 @@
 @property (strong, nonatomic) NSDate    *dateOfBirth;
 @property (strong, nonatomic) NSString  *contactID;
 
+@property (strong, nonatomic) NSURL *redemptionURL;
+
 @property (strong, nonatomic) NSString *genderString;
 
 @property (assign, nonatomic) NSInteger pointsAmount;

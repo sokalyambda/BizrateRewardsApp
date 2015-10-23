@@ -38,6 +38,7 @@
 		585C32AF1B63C854005BF07B /* BZRSignUpRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 585C32AE1B63C854005BF07B /* BZRSignUpRequest.m */; };
 		585C32B41B63C9B9005BF07B /* BZRGetCurrentUserRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 585C32B31B63C9B9005BF07B /* BZRGetCurrentUserRequest.m */; };
 		585C32B81B63C9D9005BF07B /* BZRUpdateCurrentUserRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 585C32B71B63C9D9005BF07B /* BZRUpdateCurrentUserRequest.m */; };
+		5864DFB61BDA382600F4331A /* BZRRedeemPointsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5864DFB51BDA382600F4331A /* BZRRedeemPointsController.m */; settings = {ASSET_TAGS = (); }; };
 		586ED0D11B46E8F500FEB250 /* UIView+SoftRemoving.m in Sources */ = {isa = PBXBuildFile; fileRef = 586ED0D01B46E8F500FEB250 /* UIView+SoftRemoving.m */; };
 		5878D3E11B4426E000A917D0 /* BZRCommonDateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5878D3E01B4426DF00A917D0 /* BZRCommonDateFormatter.m */; };
 		587E322F1BD7A58E009B6F3E /* TTTAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 587E322E1BD7A58E009B6F3E /* TTTAttributedLabel.m */; settings = {ASSET_TAGS = (); }; };
@@ -240,6 +241,8 @@
 		585C32B31B63C9B9005BF07B /* BZRGetCurrentUserRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRGetCurrentUserRequest.m; path = UserProfile/GetCurrentUserRequest/BZRGetCurrentUserRequest.m; sourceTree = "<group>"; };
 		585C32B61B63C9D9005BF07B /* BZRUpdateCurrentUserRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRUpdateCurrentUserRequest.h; path = UserProfile/UpdateCurrentUserRequest/BZRUpdateCurrentUserRequest.h; sourceTree = "<group>"; };
 		585C32B71B63C9D9005BF07B /* BZRUpdateCurrentUserRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRUpdateCurrentUserRequest.m; path = UserProfile/UpdateCurrentUserRequest/BZRUpdateCurrentUserRequest.m; sourceTree = "<group>"; };
+		5864DFB41BDA382600F4331A /* BZRRedeemPointsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRRedeemPointsController.h; path = Classes/MVC/Controllers/RedeemPointsController/BZRRedeemPointsController.h; sourceTree = "<group>"; };
+		5864DFB51BDA382600F4331A /* BZRRedeemPointsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRRedeemPointsController.m; path = Classes/MVC/Controllers/RedeemPointsController/BZRRedeemPointsController.m; sourceTree = "<group>"; };
 		586ED0CF1B46E8F500FEB250 /* UIView+SoftRemoving.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+SoftRemoving.h"; path = "Classes/Categories/UIView/UIView+SoftRemoving/UIView+SoftRemoving.h"; sourceTree = "<group>"; };
 		586ED0D01B46E8F500FEB250 /* UIView+SoftRemoving.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+SoftRemoving.m"; path = "Classes/Categories/UIView/UIView+SoftRemoving/UIView+SoftRemoving.m"; sourceTree = "<group>"; };
 		5878D3DF1B4426DF00A917D0 /* BZRCommonDateFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRCommonDateFormatter.h; path = Classes/Utilities/CommonDateFormatter/BZRCommonDateFormatter.h; sourceTree = "<group>"; };
@@ -667,6 +670,7 @@
 		58219EE71B38A23A00A9541A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				5864DFB31BDA37C700F4331A /* RedeemPointsController */,
 				58ECCEDA1B8F39A000528192 /* DiagnosticsController */,
 				589BCCD51B565DB700D49056 /* BaseViewController */,
 				58901CF11B500DEB00D4A16B /* BaseNavigationController */,
@@ -1027,6 +1031,15 @@
 				585C32B71B63C9D9005BF07B /* BZRUpdateCurrentUserRequest.m */,
 			);
 			name = UpdateCurrentUserRequest;
+			sourceTree = "<group>";
+		};
+		5864DFB31BDA37C700F4331A /* RedeemPointsController */ = {
+			isa = PBXGroup;
+			children = (
+				5864DFB41BDA382600F4331A /* BZRRedeemPointsController.h */,
+				5864DFB51BDA382600F4331A /* BZRRedeemPointsController.m */,
+			);
+			name = RedeemPointsController;
 			sourceTree = "<group>";
 		};
 		586ED0CE1B46E8A900FEB250 /* UIView+SoftRemoving */ = {
@@ -2488,6 +2501,7 @@
 				58E238A41B5AA0B8007F8664 /* UIFont+Styles.m in Sources */,
 				5899D2541B4AB94200565F11 /* BZRApplicationToken.m in Sources */,
 				5894209D1B451E0F004BAF48 /* BZRBirthDatePickerView.m in Sources */,
+				5864DFB61BDA382600F4331A /* BZRRedeemPointsController.m in Sources */,
 				58219F111B38A3B200A9541A /* UIImagePickerController+fixOrientation.m in Sources */,
 				58B52A3B1B6A2874002D2529 /* UIImage+Base64Encoding.m in Sources */,
 				58ADC0E41B4BDCC200DF849F /* BZRFinishSurveyController.m in Sources */,

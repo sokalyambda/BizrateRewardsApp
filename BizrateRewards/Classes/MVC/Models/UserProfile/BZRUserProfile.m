@@ -19,6 +19,7 @@ static NSString *const kIsMale                  = @"isMale";
 static NSString *const kPointsAmount            = @"points_awarded";
 static NSString *const kContactID               = @"ref_contact_id";
 static NSString *const kPointsRequired          = @"points_next_redemption";
+static NSString *const kRedemptionURL           = @"redemption_url";
 
 static NSString *const kIsTestUser              = @"is_test_user";
 
@@ -92,6 +93,8 @@ static NSString *const kIsTestUser              = @"is_test_user";
         _pointsRequired = [response[kPointsRequired] integerValue];
         _testUser       = [response[kIsTestUser] boolValue];
         
+        _redemptionURL  = [NSURL URLWithString:response[kRedemptionURL]];
+        
         self.genderString = response[kGender];
     }
     return self;
@@ -108,6 +111,7 @@ static NSString *const kIsTestUser              = @"is_test_user";
     [encoder encodeObject:self.dateOfBirth forKey:kDateOfBirth];
     [encoder encodeObject:@(self.isMale) forKey:kIsMale];
     [encoder encodeObject:self.genderString forKey:kGender];
+    [encoder encodeObject:self.redemptionURL forKey:kRedemptionURL];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder
@@ -120,6 +124,7 @@ static NSString *const kIsTestUser              = @"is_test_user";
         _dateOfBirth    = [decoder decodeObjectForKey:kDateOfBirth];
         _isMale         = [[decoder decodeObjectForKey:kIsMale] boolValue];
         _genderString   = [decoder decodeObjectForKey:kGender];
+        _redemptionURL  = [decoder decodeObjectForKey:kRedemptionURL];
     }
     return self;
 }
