@@ -41,6 +41,7 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
 @property (weak, nonatomic) IBOutlet BZRSurveyPointsValueLabel *pointsForNextGiftCardLabel;
 @property (weak, nonatomic) IBOutlet BZRTutorialDescriptionLabel *pointsForNextSurveyLabel;
 @property (weak, nonatomic) IBOutlet BZRHighlightedButton *takeSurveyButton;
+
 @property (weak, nonatomic) IBOutlet UIButton *seeAvailableGiftCardsButton;
 @property (weak, nonatomic) IBOutlet UIButton *redeemPointsButton;
 @property (weak, nonatomic) IBOutlet BZRSurveyCongratsLabel *congratulationsLabel;
@@ -337,6 +338,15 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
     return UIStatusBarStyleLightContent;
+}
+
+#pragma mark - UIScrollViewDelegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if (scrollView.contentOffset.y > 0.f) {
+        [scrollView setContentOffset:CGPointZero];
+    }
 }
 
 @end

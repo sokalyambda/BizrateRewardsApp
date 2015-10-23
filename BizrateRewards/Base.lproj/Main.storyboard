@@ -1878,6 +1878,9 @@
                                         <include reference="u3l-6q-C8d"/>
                                     </mask>
                                 </variation>
+                                <connections>
+                                    <outlet property="delegate" destination="8nJ-jh-bXm" id="gQD-c3-J47"/>
+                                </connections>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -5586,8 +5589,7 @@
                                                 <exclude reference="s1e-NJ-slp"/>
                                             </mask>
                                         </variation>
-                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                            <rect key="frame" x="77" y="384" width="246" height="73"/>
+                                        <variation key="heightClass=regular-widthClass=compact">
                                             <mask key="subviews">
                                                 <include reference="Zeh-Be-dPY"/>
                                                 <include reference="9sV-CC-Arb"/>
@@ -5635,8 +5637,7 @@
                                                 <exclude reference="cSz-lo-4lk"/>
                                             </mask>
                                         </variation>
-                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                            <rect key="frame" x="0.0" y="167" width="400" height="212"/>
+                                        <variation key="heightClass=regular-widthClass=compact">
                                             <mask key="constraints">
                                                 <include reference="cSz-lo-4lk"/>
                                             </mask>
@@ -5691,9 +5692,6 @@
                                         <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="18"/>
                                         <color key="textColor" red="0.22352941179999999" green="0.22352941179999999" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
-                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                            <rect key="frame" x="57" y="117" width="286" height="42"/>
-                                        </variation>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="249" verticalHuggingPriority="249" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" image="bizrate_rewards_logo" translatesAutoresizingMaskIntoConstraints="NO" id="ZSt-hG-Xo1" userLabel="Logo Image VIew">
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
