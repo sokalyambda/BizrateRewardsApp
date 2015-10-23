@@ -11,6 +11,7 @@
 #import "BZRDashboardController.h"
 #import "BZRForgotPasswordController.h"
 #import "BZRBaseNavigationController.h"
+#import "BZRShareCodeController.h"
 
 #import "BZRFacebookService.h"
 
@@ -19,8 +20,6 @@
 #import "BZRProjectFacade.h"
 
 #import "BZRCommonDateFormatter.h"
-
-static NSString *const kSignUpWithEmailSegueIdentifier = @"signUpWithEmailSegue";
 
 static NSString *const kEmail = @"email";
 
@@ -61,7 +60,10 @@ static NSString *const kEmail = @"email";
 {
     //track mixpanel event
     [BZRMixpanelService trackEventWithType:BZRMixpanelEventCreateAcountClicked propertyValue:kAuthTypeEmail];
-    [self performSegueWithIdentifier:kSignUpWithEmailSegueIdentifier sender:self];
+    
+    BZRShareCodeController *shareCodeController = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRShareCodeController class])];
+    shareCodeController.temporaryProfile = self.temporaryProfile;
+    [self.navigationController pushViewController:shareCodeController animated:YES];
 }
 
 /**
@@ -118,14 +120,6 @@ static NSString *const kEmail = @"email";
 }
 
 #pragma mark - Navigation
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if ([segue.identifier isEqualToString:kSignUpWithEmailSegueIdentifier]) {
-        BZRSignUpController *controller = (BZRSignUpController *)segue.destinationViewController;
-        controller.temporaryProfile = self.temporaryProfile;
-    }
-}
 
 /**
  *  Set default status bar style because the background is white
