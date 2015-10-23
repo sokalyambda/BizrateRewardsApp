@@ -32,6 +32,8 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
 
 @interface BZRDashboardController ()
 
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+
 @property (weak, nonatomic) IBOutlet BZRProgressView *progressView;
 @property (weak, nonatomic) IBOutlet BZRRoundedImageView *userAvatar;
 @property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
@@ -67,6 +69,12 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
 }
 
 #pragma mark - View Lifecycle
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    [self configureRefreshControl];
+}
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -117,6 +125,36 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
     BZRRedeemPointsController *controller = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRRedeemPointsController class])];
     controller.currentRedemptionURL = self.currentProfile.redemptionURL;
     [self.navigationController pushViewController:controller animated:YES];
+}
+
+/**
+ *  Configure the refresh control to update the total points
+ */
+- (void)configureRefreshControl
+{
+    self.scrollView.alwaysBounceVertical = YES;
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    [refreshControl addTarget:self action:@selector(updateTotalPointsWithRefreshControl:) forControlEvents:UIControlEventValueChanged];
+    [self.scrollView addSubview:refreshControl];
+}
+
+/**
+ *  Update total points
+ */
+- (void)updateTotalPointsWithRefreshControl:(UIRefreshControl *)refreshControl
+{
+    WEAK_SELF;
+    [refreshControl beginRefreshing];
+    [BZRProjectFacade getCurrentUserOnSuccess:^(BOOL isSuccess) {
+        [refreshControl endRefreshing];
+        
+        //update points
+        [weakSelf updatePoints];
+
+    } onFailure:^(NSError *error, BOOL isCanceled) {
+        [refreshControl endRefreshing];
+        [BZRAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
+    }];
 }
 
 /**
@@ -187,6 +225,15 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
     self.pointsForNextGiftCardLabel.text = [NSString stringWithFormat:@"%@ %@", [[BZRCommonNumberFormatter commonNumberFormatter] stringFromNumber:@((long)self.currentProfile.pointsRequired)], LOCALIZED(@"pts")];
     
     [self updateProgressView];
+}
+
+/**
+ *  Update only points values (after refreshing)
+ */
+- (void)updatePoints
+{
+    self.earnedPointsLabel.text = [NSString stringWithFormat:@"%@ %@", [[BZRCommonNumberFormatter commonNumberFormatter] stringFromNumber:@((long)self.currentProfile.pointsAmount)], LOCALIZED(@"pts")];
+    self.pointsForNextGiftCardLabel.text = [NSString stringWithFormat:@"%@ %@", [[BZRCommonNumberFormatter commonNumberFormatter] stringFromNumber:@((long)self.currentProfile.pointsRequired)], LOCALIZED(@"pts")];
 }
 
 /**

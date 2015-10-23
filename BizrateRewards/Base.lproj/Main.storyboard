@@ -1329,7 +1329,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xGt-9G-zks">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xGt-9G-zks">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gQ9-qB-cGh" userLabel="Scroll Container View">
@@ -1920,6 +1920,7 @@
                         <outlet property="pointsForNextSurveyLabel" destination="MsH-T6-3Om" id="kN0-jD-QVu"/>
                         <outlet property="progressView" destination="VSs-f0-rwS" id="Aht-6Y-oAI"/>
                         <outlet property="redeemPointsButton" destination="tUt-5p-A82" id="0yU-Yo-s8i"/>
+                        <outlet property="scrollView" destination="xGt-9G-zks" id="VVy-Ml-9S1"/>
                         <outlet property="seeAvailableGiftCardsButton" destination="atw-jX-KW5" id="Wkv-hz-L5G"/>
                         <outlet property="takeSurveyButton" destination="Ian-0e-mEN" id="w3Q-1Z-HoY"/>
                         <outlet property="userAvatar" destination="CeF-qR-2A8" id="4ST-KA-LxL"/>
