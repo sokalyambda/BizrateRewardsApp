@@ -77,14 +77,6 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
     [self configureRefreshControl];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-    [self.view layoutIfNeeded];
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
-}
-
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
@@ -326,6 +318,13 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
 - (void)setupPointsForNextSurveyTextWithPoints:(NSInteger)points
 {
     self.pointsForNextSurveyLabel.text = LOCALIZED(@"Earn more points by taking another survey!");//[NSString localizedStringWithFormat:LOCALIZED(@"Earn %li points for the next survey"), points];
+}
+
+- (void)customizeNavigationItem
+{
+    [super customizeNavigationItem];
+    [self.view layoutIfNeeded];
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
 #pragma mark - UIStatusBar appearance

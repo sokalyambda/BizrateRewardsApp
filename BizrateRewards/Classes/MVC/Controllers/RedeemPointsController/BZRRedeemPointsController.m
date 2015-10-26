@@ -24,12 +24,6 @@
     [self loadSurveyInWebView];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    [self customizeNavigationBar];
-}
-
 #pragma mark - Actions
 
 /**
@@ -44,8 +38,9 @@
 /**
  *  Customize navigation bar appearance
  */
-- (void)customizeNavigationBar
+- (void)customizeNavigationItem
 {
+    [super customizeNavigationItem];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     self.navigationItem.title = LOCALIZED(@"Redeem Your Points");
     self.navigationItem.hidesBackButton = YES;

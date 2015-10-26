@@ -12,4 +12,6 @@
 
 @property (strong, nonatomic) BZRUserProfile *temporaryProfile;
 
+@property (assign, nonatomic, getter=isFacebookFlow) BOOL facebookFlow;
+
 @end

@@ -132,6 +132,24 @@ static NSMutableDictionary *_errorDict;
     return isValid;
 }
 
++ (BOOL)validateShareCodeField:(UITextField *)shareCodeField
+{
+    BOOL isValid = YES;
+    
+    if (!shareCodeField.text.length) {
+        isValid = NO;
+        
+        [self setErrorTitle:@"" andMessage:LOCALIZED(@"Incorrect share code!\n")];
+        [shareCodeField shakeView];
+    }
+    
+    if ([shareCodeField isKindOfClass:[BZRAuthorizationField class]] && !isValid) {
+        ((BZRAuthorizationField *)shareCodeField).errorImageName = kEmailErrorImageName;
+    }
+    
+    return isValid;
+}
+
 /**
  *  Validate checkboxes
  *
@@ -366,6 +384,23 @@ static NSMutableDictionary *_errorDict;
         success();
     }
     
+}
+
++ (void)validateShareCodeField:(UITextField *)shareCodeField
+                     onSuccess:(ValidationSuccessBlock)success
+                     onFailure:(ValidationFailureBlock)failure
+{
+    BOOL isValid = YES;
+    
+    if (![self validateShareCodeField:shareCodeField]) {
+        isValid = NO;
+    }
+    
+    if (!isValid && failure) {
+        failure([self validationErrorDict]);
+    } else if (success) {
+        success();
+    }
 }
 
 #pragma mark - Other actions

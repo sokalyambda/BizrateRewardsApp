@@ -33,7 +33,7 @@
 {
     [super viewWillAppear:animated];
     
-    self.navigationItem.leftBarButtonItem = self.baseNavigationController.customBackButton;
+    [self customizeNavigationItem];
 }
 
 /**
@@ -44,6 +44,13 @@
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
     return UIStatusBarStyleLightContent;
+}
+
+#pragma mark - Actions
+
+- (void)customizeNavigationItem
+{
+    self.navigationItem.leftBarButtonItem = self.baseNavigationController.customBackButton;
 }
 
 @end

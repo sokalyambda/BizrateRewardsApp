@@ -48,8 +48,6 @@ static NSString *const kDashboardSegueIdentifier = @"dashboardSegue";
 {
     [super viewWillAppear:animated];
     [self getUserDataFromKeychain];
-    self.navigationItem.title = LOCALIZED(@"Login");
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
 #pragma mark - Actions
@@ -190,6 +188,16 @@ static NSString *const kDashboardSegueIdentifier = @"dashboardSegue";
     if (!self.incorrectEmailView.isHidden) {
         self.incorrectEmailView.hidden = YES;
     }
+}
+
+/**
+ *  Customize navigation item
+ */
+- (void)customizeNavigationItem
+{
+    [super customizeNavigationItem];
+    self.navigationItem.title = LOCALIZED(@"Login");
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
 #pragma mark - Private methods

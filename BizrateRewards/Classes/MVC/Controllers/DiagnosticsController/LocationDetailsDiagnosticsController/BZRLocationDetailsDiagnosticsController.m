@@ -29,7 +29,6 @@
 {
     [super viewWillAppear:animated];
     [self loadRequestInWebView];
-    [self customizeNavigationItem];
 }
 
 #pragma mark - Actions
@@ -46,8 +45,12 @@
     
 }
 
+/**
+ *  Customize navigation item
+ */
 - (void)customizeNavigationItem
 {
+    [super customizeNavigationItem];
     self.navigationItem.title = LOCALIZED(@"Location Details");
 }
      

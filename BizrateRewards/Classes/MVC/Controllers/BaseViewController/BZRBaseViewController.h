@@ -8,4 +8,6 @@
 
 @interface BZRBaseViewController : UIViewController
 
+- (void)customizeNavigationItem;
+
 @end

@@ -32,7 +32,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
     [self setupEmailIfExists];
 }
 
@@ -95,6 +94,15 @@
     if (self.userName.length) {
         self.userNameField.text = self.userName;
     }
+}
+
+/**
+ *  Customize navigation item
+ */
+- (void)customizeNavigationItem
+{
+    [super customizeNavigationItem];
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
 #pragma mark - UITextFieldDelegate

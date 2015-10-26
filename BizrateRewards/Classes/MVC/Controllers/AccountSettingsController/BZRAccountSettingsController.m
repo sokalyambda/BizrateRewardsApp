@@ -58,7 +58,6 @@ static CGFloat const kDiagnosticShownHeightConstant = 246.f;
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
     [self updateUserData];
 }
 
@@ -158,6 +157,15 @@ static CGFloat const kDiagnosticShownHeightConstant = 246.f;
     [UIView animateWithDuration:.1f animations:^{
         [weakSelf.view layoutIfNeeded];
     }];
+}
+
+/**
+ *  Customize navigation item
+ */
+- (void)customizeNavigationItem
+{
+    [super customizeNavigationItem];
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
 #pragma mark - Change photo actions

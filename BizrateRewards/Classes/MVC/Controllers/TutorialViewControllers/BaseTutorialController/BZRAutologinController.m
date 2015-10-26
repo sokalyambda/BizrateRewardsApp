@@ -77,12 +77,6 @@ static NSString *const kStartTutorialSegueIdentirier = @"startTutorialSegue";
     [super viewDidLoad];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
-}
-
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
@@ -179,6 +173,15 @@ static NSString *const kStartTutorialSegueIdentirier = @"startTutorialSegue";
             }];
         }
     }];
+}
+
+/**
+ *  Customize navigation item
+ */
+- (void)customizeNavigationItem
+{
+    [super customizeNavigationItem];
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
 #pragma mark - Navigation

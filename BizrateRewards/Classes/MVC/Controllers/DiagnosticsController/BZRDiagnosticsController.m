@@ -70,12 +70,6 @@ static NSInteger const kLocationEventsCount = 10.f;
     [super viewDidLoad];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    [self customizeNavigationItem];
-}
-
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
@@ -87,6 +81,7 @@ static NSInteger const kLocationEventsCount = 10.f;
 
 - (void)customizeNavigationItem
 {
+    [super customizeNavigationItem];
     //show navigation bar
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     
