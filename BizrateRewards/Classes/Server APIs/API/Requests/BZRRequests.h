@@ -24,6 +24,7 @@
 #import "BZRGetLocationEventsListRequest.h"
 #import "BZRAPIInfoRequest.h"
 #import "BZRUpdateNotificationsAndGeolocationPermissionsRequest.h"
+#import "BZRDeleteTakenSurveysRequest.h"
 
 #import "BZRSignInWithFacebookRequest.h"
 

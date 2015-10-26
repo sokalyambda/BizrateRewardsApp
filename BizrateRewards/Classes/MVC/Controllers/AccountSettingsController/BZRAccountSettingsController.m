@@ -19,9 +19,6 @@
 
 static NSString *const kAccountSettingsContainerSegueIdentifier = @"accountSettingsContainerSegue";
 
-static CGFloat const kDiagnosticHiddenHeightConstant = 205.f;
-static CGFloat const kDiagnosticShownHeightConstant = 246.f;
-
 @interface BZRAccountSettingsController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (weak, nonatomic) BZRAccountSettingsContaiterController *container;
@@ -30,8 +27,6 @@ static CGFloat const kDiagnosticShownHeightConstant = 246.f;
 @property (weak, nonatomic) IBOutlet UILabel *userFullNameLabel;
 
 @property (strong, nonatomic) BZRUserProfile *currentProfile;
-
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *containerHeightConstraint;
 
 @end
 
@@ -59,12 +54,6 @@ static CGFloat const kDiagnosticShownHeightConstant = 246.f;
 {
     [super viewWillAppear:animated];
     [self updateUserData];
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    [self adjustContainerHeight];
 }
 
 #pragma mark - Actions
@@ -144,19 +133,6 @@ static CGFloat const kDiagnosticShownHeightConstant = 246.f;
 - (void)setupUserAvatar
 {
     [self.userIcon setNeedsImageUpdate];
-}
-
-/**
- *  Adjust container height depends on is_test_user value. Show Diagnostic cell if it is a test user.
- */
-- (void)adjustContainerHeight
-{
-    WEAK_SELF;
-    [self.view layoutIfNeeded];
-    self.containerHeightConstraint.constant = self.currentProfile.isTestUser ? kDiagnosticShownHeightConstant : kDiagnosticHiddenHeightConstant;
-    [UIView animateWithDuration:.1f animations:^{
-        [weakSelf.view layoutIfNeeded];
-    }];
 }
 
 /**

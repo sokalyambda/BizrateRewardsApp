@@ -383,6 +383,36 @@ static NSString *_baseURLString;
     return operation;
 }
 
++ (BZRNetworkOperation *)deleteTakenSurveysOnSuccess:(void(^)(BOOL isSuccess))success
+                                           onFailure:(void(^)(NSError *error, BOOL isCanceled))failure
+{
+    __block BZRNetworkOperation* operation;
+    
+    [self validateSessionWithType:BZRSessionTypeUser onSuccess:^(BOOL isSuccess) {
+        
+        BZRDeleteTakenSurveysRequest *request = [[BZRDeleteTakenSurveysRequest alloc] init];
+        
+        operation = [[self  HTTPClient] enqueueOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
+            
+            if (success) {
+                success(YES);
+            }
+            
+        } failure:^(BZRNetworkOperation *operation ,NSError *error, BOOL isCanceled) {
+            
+            if (failure) {
+                failure(error, isCanceled);
+            }
+        }];
+    } onFailure:^(NSError *error, BOOL isCanceled) {
+        if (failure) {
+            failure(error, isCanceled);
+        }
+    }];
+    
+    return operation;
+}
+
 //Location Events
 + (BZRNetworkOperation *)sendGeolocationEvent:(BZRLocationEvent *)locationEvent onSuccess:(void (^)(BZRLocationEvent *locationEvent))success
                                     onFailure:(void (^)(NSError *error, BOOL isCanceled))failure

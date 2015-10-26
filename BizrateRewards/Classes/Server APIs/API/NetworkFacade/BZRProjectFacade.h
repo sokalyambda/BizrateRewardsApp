@@ -74,6 +74,9 @@ extern NSString *defaultBaseURLString;
 
 + (BZRNetworkOperation *)getPointsForNextSurveyOnSuccess:(void(^)(NSInteger pointsForNextSurvey))success onFailure:(void(^)(NSError *error, BOOL isCanceled))failure;
 
++ (BZRNetworkOperation *)deleteTakenSurveysOnSuccess:(void(^)(BOOL isSuccess))success
+                                           onFailure:(void(^)(NSError *error, BOOL isCanceled))failure;
+
 //Location Events
 + (BZRNetworkOperation *)sendGeolocationEvent:(BZRLocationEvent *)locationEvent onSuccess:(void (^)(BZRLocationEvent *locationEvent))success
                                     onFailure:(void (^)(NSError *error, BOOL isCanceled))failure;

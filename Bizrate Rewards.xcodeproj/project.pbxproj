@@ -20,6 +20,7 @@
 		58219F201B38A59000A9541A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58219F1F1B38A59000A9541A /* Security.framework */; };
 		58219F221B38A59F00A9541A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58219F211B38A59F00A9541A /* CoreGraphics.framework */; };
 		58219F241B38A5A600A9541A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58219F231B38A5A600A9541A /* QuartzCore.framework */; };
+		582331BB1BDE7F650053E121 /* BZRDeleteTakenSurveysRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 582331BA1BDE7F650053E121 /* BZRDeleteTakenSurveysRequest.m */; settings = {ASSET_TAGS = (); }; };
 		583681711B579C6200D541A4 /* BZRKeychainHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 583681701B579C6200D541A4 /* BZRKeychainHandler.m */; };
 		583BAF5C1BDA83E300EE9489 /* BZRShareCodeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 583BAF5B1BDA83E300EE9489 /* BZRShareCodeController.m */; settings = {ASSET_TAGS = (); }; };
 		5850B3AD1B972B3E003FC2E9 /* UIViewController+FirstPresentingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5850B3AC1B972B3E003FC2E9 /* UIViewController+FirstPresentingController.m */; };
@@ -208,6 +209,8 @@
 		58219F1F1B38A59000A9541A /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		58219F211B38A59F00A9541A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		58219F231B38A5A600A9541A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		582331B91BDE7F650053E121 /* BZRDeleteTakenSurveysRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRDeleteTakenSurveysRequest.h; path = DeleteTakenSurveysRequest/BZRDeleteTakenSurveysRequest.h; sourceTree = "<group>"; };
+		582331BA1BDE7F650053E121 /* BZRDeleteTakenSurveysRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRDeleteTakenSurveysRequest.m; path = DeleteTakenSurveysRequest/BZRDeleteTakenSurveysRequest.m; sourceTree = "<group>"; };
 		5836816F1B579C6200D541A4 /* BZRKeychainHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRKeychainHandler.h; path = Classes/Utilities/KeyChain/KeychainHandler/BZRKeychainHandler.h; sourceTree = "<group>"; };
 		583681701B579C6200D541A4 /* BZRKeychainHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRKeychainHandler.m; path = Classes/Utilities/KeyChain/KeychainHandler/BZRKeychainHandler.m; sourceTree = "<group>"; };
 		583BAF5A1BDA83E300EE9489 /* BZRShareCodeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRShareCodeController.h; path = Classes/MVC/Controllers/ShareCodeController/BZRShareCodeController.h; sourceTree = "<group>"; };
@@ -831,6 +834,15 @@
 			name = "NSDictionary+JSONRepresentation";
 			sourceTree = "<group>";
 		};
+		582331B81BDE7F320053E121 /* DeleteTakenSurveysRequest */ = {
+			isa = PBXGroup;
+			children = (
+				582331B91BDE7F650053E121 /* BZRDeleteTakenSurveysRequest.h */,
+				582331BA1BDE7F650053E121 /* BZRDeleteTakenSurveysRequest.m */,
+			);
+			name = DeleteTakenSurveysRequest;
+			sourceTree = "<group>";
+		};
 		5836816E1B579C1700D541A4 /* KeychainHandler */ = {
 			isa = PBXGroup;
 			children = (
@@ -1190,6 +1202,7 @@
 		589889B81B654C78008684F3 /* Surveys */ = {
 			isa = PBXGroup;
 			children = (
+				582331B81BDE7F320053E121 /* DeleteTakenSurveysRequest */,
 				58AA306F1B7B844200363119 /* GetPointsForNextSurveyRequest */,
 				589889B91B654C80008684F3 /* GetEligibleSurveysRequest */,
 			);
@@ -2508,6 +2521,7 @@
 				58A7E23A1B45A3A200A1489A /* UIView+ConfigureAnchorPoint.m in Sources */,
 				58A91F481B3ABE6D0032607F /* BZRStorageManager.m in Sources */,
 				58AA30411B7B800A00363119 /* BZRMixpanelService.m in Sources */,
+				582331BB1BDE7F650053E121 /* BZRDeleteTakenSurveysRequest.m in Sources */,
 				58A841691B94436D0032AEF0 /* ISO8601DateFormatter.m in Sources */,
 				588CE7A01B70AAD00088DEB1 /* BZRConfirmPasswordController.m in Sources */,
 				58BF360B1B74F94300699A63 /* MFMailComposeViewController+Styles.m in Sources */,
