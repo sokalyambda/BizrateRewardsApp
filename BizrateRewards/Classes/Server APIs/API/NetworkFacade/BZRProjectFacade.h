@@ -83,6 +83,10 @@ extern NSString *defaultBaseURLString;
 //Device Requests
 + (BZRNetworkOperation *)sendDeviceDataOnSuccess:(void (^)(BOOL isSuccess))success onFailure:(void (^)(NSError *error, BOOL isCanceled))failure;
 
+//Update geolocation and notifications permissions
++ (BZRNetworkOperation *)updateNotificationsAndGeolocationPermissionsOnSuccess:(void (^)(BOOL isSuccess))success
+                                                                     onFailure:(void (^)(NSError *error, BOOL isCanceled))failure;
+
 //Gift Cards Requests
 + (BZRNetworkOperation *)getFeaturedGiftCardsOnSuccess:(void (^)(NSArray *giftCards))success onFailure:(void (^)(NSError *error, BOOL isCanceled))failure;
 

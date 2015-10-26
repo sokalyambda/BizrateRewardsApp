@@ -99,6 +99,19 @@ static NSString *const kPushPermissionsLastState = @"pushPermissionLastState";
         
         [BZRProjectFacade sendDeviceDataOnSuccess:^(BOOL isSuccess) {
             
+            /*
+             Uncomment when request will be done at beckend side
+            [BZRProjectFacade updateNotificationsAndGeolocationPermissionsOnSuccess:^(BOOL isSuccess) {
+                
+                //notifications and geolocation permissions have been updated successfully
+                
+            } onFailure:^(NSError *error, BOOL isCanceled) {
+                
+                //failure..
+                
+            }];
+             */
+            
         } onFailure:^(NSError *error, BOOL isCanceled) {
             
         }];
@@ -133,6 +146,21 @@ static NSString *const kPushPermissionsLastState = @"pushPermissionLastState";
         //track mixpanel event
         [BZRMixpanelService trackEventWithType:BZRMixpanelEventPushNotificationPermission
                                  propertyValue:isPushesEnabled? @"YES" : @"NO"];
+        
+        /*
+         
+         Uncomment when request will be done at beckend side
+         
+        [BZRProjectFacade updateNotificationsAndGeolocationPermissionsOnSuccess:^(BOOL isSuccess) {
+            
+            //notifications and geolocation permissions have been updated successfully
+            
+        } onFailure:^(NSError *error, BOOL isCanceled) {
+            
+            //failure..
+            
+        }];
+         */
     }
 }
 

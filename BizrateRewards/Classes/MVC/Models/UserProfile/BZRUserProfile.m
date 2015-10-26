@@ -10,6 +10,10 @@
 
 #import "BZRCommonDateFormatter.h"
 
+#import "BZRPushNotifiactionService.h"
+
+#import "BZRLocationObserver.h"
+
 static NSString *const kFirstName               = @"firstname";
 static NSString *const kLastName                = @"lastname";
 static NSString *const kEmail                   = @"email";
@@ -76,6 +80,16 @@ static NSString *const kIsTestUser              = @"is_test_user";
     } else {
         _genderString = genderString;
     }
+}
+
+- (BOOL)isRemoteNotificationsEnabled
+{
+    return [BZRPushNotifiactionService pushNotificationsEnabled];
+}
+
+- (BOOL)isGeolocationAccessGranted
+{
+    return [BZRLocationObserver sharedObserver].isAuthorized;
 }
 
 #pragma mark - BZRMappingProtocol

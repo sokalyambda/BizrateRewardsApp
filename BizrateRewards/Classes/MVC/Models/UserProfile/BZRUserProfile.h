@@ -32,6 +32,9 @@
 
 @property (assign, nonatomic) BOOL isMale;
 
+@property (assign, nonatomic, getter=isRemoteNotificationsEnabled) BOOL remoteNotificationsEnabled;
+@property (assign, nonatomic, getter=isGeolocationAccessGranted) BOOL geolocationAccessGranted;
+
 - (void)setUserProfileToDefaultsForKey:(NSString *)key;
 + (BZRUserProfile *)userProfileFromDefaultsForKey:(NSString *)key;
 
