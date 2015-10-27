@@ -138,7 +138,7 @@ static NSInteger const kLocationEventsCount = 10.f;
 - (void)updateDiagnosticsInformation
 {
     self.apiVersionValue.text = self.currentAPIEntity.apiVersion;
-    self.appVersionValue.text = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+    self.appVersionValue.text = [NSString stringWithFormat:@"%@, Build number: %@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"], [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"]];
     
     [self.eventsListTableView reloadData];
 }
