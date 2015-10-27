@@ -14,6 +14,7 @@
 #import "BZRAuthorizationField.h"
 #import "BZREditProfileField.h"
 
+static const NSInteger kMaxShareCodeSymbols = 5.f;
 static const NSInteger kMinPasswordSymbols = 8.f;
 static const NSInteger kMaxPasswordSymbols = 16.f;
 static const NSInteger kMinValidAge = 13.f;
@@ -136,10 +137,12 @@ static NSMutableDictionary *_errorDict;
 {
     BOOL isValid = YES;
     
-    if (!shareCodeField.text.length) {
+    NSCharacterSet *alphaNumeric = [NSCharacterSet alphanumericCharacterSet];
+    
+    if (!shareCodeField.text.length || shareCodeField.text.length < kMaxShareCodeSymbols || [shareCodeField.text rangeOfCharacterFromSet:alphaNumeric].location == NSNotFound) {
         isValid = NO;
-        
-        [self setErrorTitle:@"" andMessage:LOCALIZED(@"Incorrect share code!\n")];
+    
+        [self setErrorTitle:@"" andMessage:LOCALIZED(@"Invalid share code. Please double check and try again.\n")];
         [shareCodeField shakeView];
     }
     

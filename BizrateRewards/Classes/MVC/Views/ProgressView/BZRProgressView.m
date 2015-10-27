@@ -26,7 +26,7 @@
 
 - (void)setSavedProgress:(CGFloat)savedProgress
 {
-    if (fabs(_savedProgress - savedProgress) >= FLT_EPSILON) {
+    if (fabs(_savedProgress - savedProgress) > FLT_EPSILON) {
         _savedProgress = savedProgress;
         [self setProgress:_savedProgress animated:YES];
         [self setProgressTintColor:self.currentColor];

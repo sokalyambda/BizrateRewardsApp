@@ -163,6 +163,10 @@ static CGFloat const kMinBottomSpace = 8.f;
  */
 - (void)checkForTableScrolling
 {
+    if (!self.currentProfile.isTestUser) {
+        return;
+    }
+    
     CGFloat parentViewHeight = CGRectGetHeight(self.parentController.view.frame);
     CGFloat spaceForSignOutButton = CGRectGetHeight(self.parentController.signOutButton.frame) + self.parentController.spaceBetweenContainerBottomAndSignOutButtonTop.constant + kMinBottomSpace;
     CGFloat freeHeight = parentViewHeight  - self.parentController.headerHeightConstraint.constant - spaceForSignOutButton;
