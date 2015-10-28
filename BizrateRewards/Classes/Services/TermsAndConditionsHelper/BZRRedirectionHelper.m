@@ -6,6 +6,12 @@
 //  Copyright (c) 2015 Connexity. All rights reserved.
 //
 
+typedef NS_ENUM(NSUInteger, BZRCustomURLPathType) {
+    BZRCustomURLPathTypeIncorrect,
+    BZRCustomURLPathTypeSurvey,
+    BZRCustomURLPathTypeResetPassword
+};
+
 #import "BZRRedirectionHelper.h"
 #import "BZRCustomURLHandler.h"
 
@@ -13,8 +19,11 @@
 #import "BZRSuccessResettingController.h"
 #import "BZRFailureResettingController.h"
 #import "BZRBaseNavigationController.h"
+#import "BZRSurveyViewController.h"
 
 #import "BZRProjectFacade.h"
+#import "BZRSurveyService.h"
+#import "BZRFacebookService.h"
 
 #import "AppDelegate.h"
 
@@ -25,6 +34,15 @@ static NSString *const kIsResettingSuccess = @"isResettingSuccess";
 static NSString *const kAppURLPrefix = @"com.bizraterewards://";
 
 static NSString *const kTermsLink = @"http://www.bizraterewards.com/mobile-terms.html";
+
+static NSString *const kSurveyId = @"surveyId";
+
+static NSString *const kRedirectionError = @"redirectionError";
+static NSString *const kErrorDomain = @"com.thinkmobiles";
+
+static NSString *const kSurveyPath = @"survey";
+static NSString *const kLatestPath = @"latest";
+static NSString *const kResetPasswordPath = @"reset_password";
 
 @implementation BZRRedirectionHelper
 
@@ -64,17 +82,17 @@ static NSString *const kTermsLink = @"http://www.bizraterewards.com/mobile-terms
  */
 + (void)showResetPasswordResultControllerWithObtainedURL:(NSURL *)redirectURL
 {
-    if (!redirectURL || redirectURL.isFileURL || ![redirectURL.absoluteString containsString:kAppURLPrefix] || [redirectURL.absoluteString isEqualToString:kAppURLPrefix] || [BZRProjectFacade isUserSessionValid]) {
+    if (redirectURL.isFileURL || ![redirectURL.absoluteString containsString:kAppURLPrefix] || [redirectURL.absoluteString isEqualToString:kAppURLPrefix] || [BZRProjectFacade isUserSessionValid]) {
         return;
     }
     
     //app opened with URL
-    [BZRStorageManager sharedStorage].appOpenedWithURL = YES;
+    [BZRStorageManager sharedStorage].resetPasswordFlow = YES;
     
     AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
     BZRBaseNavigationController *rootController = (BZRBaseNavigationController *)appDelegate.window.rootViewController;
     
-    NSDictionary *parsedParameters = [BZRCustomURLHandler urlParsingParametersFromURL:redirectURL];
+    NSDictionary *parsedParameters = [BZRCustomURLHandler urlParsingParametersForPasswordResetFromURL:redirectURL];
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:kStoryboardName bundle:[NSBundle mainBundle]];
     
     if (parsedParameters.count) {
@@ -95,6 +113,156 @@ static NSString *const kTermsLink = @"http://www.bizraterewards.com/mobile-terms
         
         [rootController pushViewController:redirectedController animated:YES];
     }
+}
+
+/**
+ *  Application was opened by URL for survey presentation
+ *
+ *  @param redirectURL URL
+ */
++ (void)showSurveyControllerWithObtainedURL:(NSURL *)redirectURL
+{
+    if (redirectURL.isFileURL || ![redirectURL.absoluteString containsString:kAppURLPrefix] || [redirectURL.absoluteString isEqualToString:kAppURLPrefix]) {
+        return;
+    }
+    
+    if (([BZRProjectFacade isAutologinNeeded] || [BZRFacebookService isFacebookSessionValid]) && ![BZRProjectFacade isUserSessionValid]) {
+        [BZRStorageManager sharedStorage].redirectedSurveyURL = redirectURL;
+        return;
+    } else if (![BZRProjectFacade isUserSessionValid]) {
+        return;
+    }
+    
+    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+    BZRBaseNavigationController *rootController = (BZRBaseNavigationController *)appDelegate.window.rootViewController;
+    
+    NSDictionary *parsingParameters = [BZRCustomURLHandler urlParsingParametersForSurveyFromURL:redirectURL];
+    NSString *surveyId = parsingParameters[kSurveyId];
+    
+    BZRSurveyViewController *neededController = [rootController.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRSurveyViewController class])];
+    
+    [MBProgressHUD showHUDAddedTo:appDelegate.window animated:YES];
+    [BZRSurveyService getEligibleSurveysOnSuccess:^(NSArray *eligibleSurveys) {
+        [MBProgressHUD hideAllHUDsForView:appDelegate.window animated:YES];
+        
+        if ([surveyId isEqualToString:kLatestPath]) {
+            
+            if (eligibleSurveys.count) {
+                neededController.currentSurvey = eligibleSurveys.firstObject;
+            } else {
+                [BZRAlertFacade showAlertWithMessage:LOCALIZED(@"There are no surveys for you") forController:nil withCompletion:nil];
+                return;
+            }
+            
+        } else if (surveyId.length && [surveyId rangeOfCharacterFromSet:[NSCharacterSet alphanumericCharacterSet]].location != NSNotFound) {
+            
+            if (eligibleSurveys.count) {
+                BZRSurvey *neededSurvey = [BZRSurveyService findSurveyWithId:surveyId inArray:eligibleSurveys];
+                if (neededSurvey) {
+                    neededController.currentSurvey = neededSurvey;
+                } else {
+                    [BZRAlertFacade showAlertWithMessage:LOCALIZED(@"Survey with this id doesn't exist.") forController:nil withCompletion:nil];
+                    return;
+                }
+            } else {
+                [BZRAlertFacade showAlertWithMessage:LOCALIZED(@"There are no surveys for you") forController:nil withCompletion:nil];
+                return;
+            }
+        } else {
+            [BZRAlertFacade showAlertWithMessage:LOCALIZED(@"Survey not found.") forController:nil withCompletion:nil];
+            return;
+        }
+        
+        @autoreleasepool {
+            
+            for (BZRBaseViewController *controller in rootController.viewControllers) {
+                if ([controller isKindOfClass:[BZRSurveyViewController class]]) {
+                    return;
+                }
+            }
+            
+            for (UIViewController *controller in rootController.viewControllers) {
+                [controller.presentedViewController dismissViewControllerAnimated:YES completion:nil];
+            }
+        }
+        
+        
+        [rootController pushViewController:neededController animated:YES];
+        
+    } onFailure:^(NSError *error, BOOL isCanceled) {
+        [MBProgressHUD hideAllHUDsForView:appDelegate.window animated:YES];
+        
+    }];
+
+}
+
+/**
+ *  Check whether url is for reset password or for surveys
+ *
+ *  @param url URL for parsing
+ */
++ (void)redirectWithURL:(NSURL *)url withError:(NSError * __autoreleasing *)error
+{
+    if (!url) {
+        *error = [NSError errorWithDomain:kErrorDomain
+                                     code:BZRRedirectionURLHandlingErrorCodeNullURL
+                                 userInfo:@{kRedirectionError: LOCALIZED(@"URL doesn't exist.")}];
+        return;
+    }
+    
+    NSString *urlString = url.absoluteString;
+    if (!urlString.length) {
+        *error = [NSError errorWithDomain:kErrorDomain
+                                     code:BZRRedirectionURLHandlingErrorCodeEmptyURL
+                                 userInfo:@{kRedirectionError: LOCALIZED(@"URL is empty.")}];
+        return;
+    }
+    
+    NSArray *pathComponents = url.absoluteString.pathComponents;
+    
+    BZRCustomURLPathType pathType = [self checkPathComponents:pathComponents withError:error];
+    
+    switch (pathType) {
+        case BZRCustomURLPathTypeIncorrect:
+            return;
+        case BZRCustomURLPathTypeResetPassword: {
+            //reset
+            [self showResetPasswordResultControllerWithObtainedURL:url];
+            break;
+        }
+        case BZRCustomURLPathTypeSurvey: {
+            //survey
+            [self showSurveyControllerWithObtainedURL:url];
+            break;
+        }
+        default:
+            break;
+    }
+}
+
+/**
+ *  Check path components
+ */
++ (BZRCustomURLPathType)checkPathComponents:(NSArray *)components withError:(NSError *__autoreleasing *)error
+{
+    if (!components.count) {
+        *error = [NSError errorWithDomain:kErrorDomain
+                                    code:BZRRedirectionURLHandlingErrorCodeEmptyPathComponents
+                                userInfo:@{kRedirectionError: LOCALIZED(@"Empty path components.")}];
+        return BZRCustomURLPathTypeIncorrect;
+    }
+    
+    if ([components containsObject:kSurveyPath]) {
+        return BZRCustomURLPathTypeSurvey;
+    } else if ([components containsObject:kResetPasswordPath]) {
+        return BZRCustomURLPathTypeResetPassword;
+    } else {
+        *error = [NSError errorWithDomain:kErrorDomain
+                                    code:BZRRedirectionURLHandlingErrorCodeIncorrectPathComponents
+                                userInfo:@{kRedirectionError: LOCALIZED(@"Incorrect path components.")}];
+        return BZRCustomURLPathTypeIncorrect;
+    }
+
 }
 
 @end

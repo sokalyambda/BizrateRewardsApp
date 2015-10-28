@@ -39,9 +39,19 @@ static NSString *const kOfferBeamRetailerID = @"6F8E3A94-FE29-4144-BE86-AA8372D1
     //Reset keychain if it's a first launch of an app
     [BZRKeychainHandler resetKeychainIfFirstLaunch];
     
+    /*
+     TODO: Check whether appication was launched from pushNotification and redirect to needed screen.
+     
+     NSDictionary *userInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+     if (userInfo) {
+     [FRDPushNotifiactionService receivedPushNotification:userInfo withApplicationState:UIApplicationStateInactive];
+     }
+     
+     */
+    NSError *error;
     NSURL *url = (NSURL *)[launchOptions valueForKey:UIApplicationLaunchOptionsURLKey];
-    [BZRRedirectionHelper showResetPasswordResultControllerWithObtainedURL:url];
-    
+    [BZRRedirectionHelper redirectWithURL:url withError:&error];
+
     //setup mixPanel service
     [BZRMixpanelService setupMixpanel];
     //track mixpanel event
@@ -65,6 +75,9 @@ static NSString *const kOfferBeamRetailerID = @"6F8E3A94-FE29-4144-BE86-AA8372D1
 {
     [FBSDKAppEvents activateApp];
     
+    //clean badge count
+    [BZRPushNotifiactionService cleanPushNotificationsBadges];
+    
     if (![BZRPushNotifiactionService pushNotificationsEnabled]) {
         [BZRPushNotifiactionService failedToRegisterForPushNotificationsWithError:nil];
     } else {
@@ -74,12 +87,19 @@ static NSString *const kOfferBeamRetailerID = @"6F8E3A94-FE29-4144-BE86-AA8372D1
     [[NSNotificationCenter defaultCenter] postNotificationName:UIApplicationDidBecomeActiveNotification object:nil];
 }
 
+- (void)applicationWillEnterForeground:(UIApplication *)application
+{
+    //clean badge count
+    [BZRPushNotifiactionService cleanPushNotificationsBadges];
+}
+
 - (BOOL)application:(UIApplication *)application
             openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation
 {
-    [BZRRedirectionHelper showResetPasswordResultControllerWithObtainedURL:url];
+    NSError *error;
+    [BZRRedirectionHelper redirectWithURL:url withError:&error];
     
     return [[FBSDKApplicationDelegate sharedInstance] application:application
                                                           openURL:url
@@ -113,7 +133,8 @@ static NSString *const kOfferBeamRetailerID = @"6F8E3A94-FE29-4144-BE86-AA8372D1
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
-    [BZRPushNotifiactionService recivedPushNotification:userInfo];
+    [BZRPushNotifiactionService recivedPushNotification:userInfo
+                                   withApplicationState:application.applicationState];
 }
 
 @end

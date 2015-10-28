@@ -8,7 +8,7 @@
 
 #import "BZRMappingProtocol.h"
 
-@interface BZRSurvey : NSObject<BZRMappingProtocol>
+@interface BZRSurvey : NSObject
 
 @property (strong, nonatomic) NSString *surveyName;
 @property (strong, nonatomic) NSString *refSurveyId;

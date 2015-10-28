@@ -116,6 +116,7 @@ static NSString *const kDashboardSegueIdentifier = @"dashboardSegue";
                                    
                                    //Store Credentials
                                    [BZRKeychainHandler storeCredentialsWithUsername:weakSelf.userNameField.text andPassword:weakSelf.passwordField.text forService:UserCredentialsKey];
+                                   
                                    [weakSelf performSegueWithIdentifier:kDashboardSegueIdentifier sender:weakSelf];
                                    
                                } failure:^(NSError *error, BOOL isCanceled, BOOL emailRegistered) {

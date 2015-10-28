@@ -10,6 +10,8 @@
 
 #import "BZRSurvey.h"
 
+#import "BZRSurveyService.h"
+
 @implementation BZRGetPointsForNextSurveyRequest
 
 - (BOOL)parseJSONDataSucessfully:(id)responseObject error:(NSError *__autoreleasing *)error
@@ -18,7 +20,7 @@
         return NO;
     } else {
         if ([responseObject isKindOfClass:[NSArray class]]) {
-            BZRSurvey *nextSurvey = [[BZRSurvey alloc] initWithServerResponse:((NSArray *)responseObject).firstObject];
+            BZRSurvey *nextSurvey = [BZRSurveyService surveyFromServerResponse:((NSArray *)responseObject).firstObject];
             self.pointsForNextSurvey = nextSurvey.surveyPoints;
         }
         return YES;

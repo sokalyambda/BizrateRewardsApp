@@ -615,6 +615,34 @@ static NSString *_baseURLString;
     return [BZRFacebookService isFacebookSessionValid];
 }
 
+/**
+ *  Check whether autologin needed
+ */
++ (BOOL)isAutologinNeeded
+{
+    return self.isTutorialPassed && [self userDataExistsInKeychain];
+}
+
+/**
+ *  Check whether tutorial has been passed
+ */
++ (BOOL)isTutorialPassed
+{
+    return [[NSUserDefaults standardUserDefaults] boolForKey:IsTutorialPassed];
+}
+
+/**
+ *  Check whether user data exists in keychain
+ */
++ (BOOL)userDataExistsInKeychain
+{
+    NSDictionary *userCredentials = [BZRKeychainHandler getStoredCredentialsForService:UserCredentialsKey];
+    NSString *savedPassword = userCredentials[PasswordKey];
+    NSString *savedUsername = userCredentials[UserNameKey];
+    
+    return savedUsername.length && savedPassword.length;
+}
+
 /******* FaceBook *******/
 + (BZRNetworkOperation *)signInWithFacebookOnSuccess:(void (^)(BOOL isSuccess))success
                                            onFailure:(void (^)(NSError *error, BOOL isCanceled, BOOL userExists))failure

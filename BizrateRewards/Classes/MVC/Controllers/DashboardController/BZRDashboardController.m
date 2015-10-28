@@ -27,6 +27,8 @@
 #import "BZRSurveyService.h"
 #import "BZRProjectFacade.h"
 
+#import "BZRRedirectionHelper.h"
+
 static NSString *const kAccountSettingsSegueIdentifier = @"accountSettingsSegueIdentifier";
 static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
 
@@ -275,6 +277,9 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
             
             weakSelf.updateNeeded = NO;
             
+            //check for redirection to survey screen
+            [weakSelf checkForSurveyDeepLinkRedirection];
+            
         } onFailure:^(NSError *error, BOOL isCanceled) {
             [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
             [BZRAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:^{
@@ -325,6 +330,19 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
     [super customizeNavigationItem];
     [self.view layoutIfNeeded];
     [self.navigationController setNavigationBarHidden:YES animated:YES];
+}
+
+/**
+ *  If we opened app with URL for survey passing
+ */
+- (void)checkForSurveyDeepLinkRedirection
+{
+    NSURL *redirectedURL = [BZRStorageManager sharedStorage].redirectedSurveyURL;
+    if (redirectedURL) {
+        NSError *error;
+        [BZRRedirectionHelper redirectWithURL:redirectedURL withError:&error];
+        [BZRStorageManager sharedStorage].redirectedSurveyURL = nil;
+    }
 }
 
 #pragma mark - UIStatusBar appearance

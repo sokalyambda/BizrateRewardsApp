@@ -53,7 +53,12 @@ static NSString *_errorAlertTitle = nil;
 + (void)parseError:(NSError *)error withCompletion:(ErrorParsingCompletion)completion
 {
     [self setErrorAlertTitle:@""];
+
+    return completion([self getErrorAlertTitle], LOCALIZED(@"Sorry, something went wrong. Please try again."));
     
+    /*
+     Get error string from jsonResponse
+     
     NSString *errFromJsonString = [self errorStringFromJSONResponseError:error];
     if (errFromJsonString) {
         return completion([self getErrorAlertTitle], errFromJsonString);
@@ -66,6 +71,7 @@ static NSString *_errorAlertTitle = nil;
     NSString *errLocalizedDescription = error.localizedDescription;
     
     return completion([self getErrorAlertTitle], errLocalizedDescription);
+     */
 }
 
 /**

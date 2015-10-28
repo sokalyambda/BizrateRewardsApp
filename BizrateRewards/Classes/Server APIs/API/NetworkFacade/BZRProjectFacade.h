@@ -33,6 +33,9 @@ extern NSString *defaultBaseURLString;
 //check whether any operation is in process
 + (BOOL)isOperationInProcess;
 
+//check whether autologin needed
++ (BOOL)isAutologinNeeded;
+
 //GET API Info Request
 + (BZRNetworkOperation *)getAPIInfoOnSuccess:(void (^)(BOOL success))success
                                    onFailure:(void (^)(NSError *error, BOOL isCanceled))failure;

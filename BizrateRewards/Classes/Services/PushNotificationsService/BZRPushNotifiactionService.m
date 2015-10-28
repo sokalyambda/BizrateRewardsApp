@@ -72,8 +72,18 @@ static NSString *const kPushPermissionsLastState = @"pushPermissionLastState";
  *  @param userInfo Push notification info dictionary
  */
 + (void)recivedPushNotification:(NSDictionary*)userInfo
+           withApplicationState:(UIApplicationState)applicationState
 {
-    
+    /*
+     TODO: Handle push notification if app was in foreground
+     
+     if (state == UIApplicationStateActive) {
+     // app was already in the foreground
+     } else {
+     //do the same logic as with custom URL handler
+     }
+     
+     */
 }
 
 /**
@@ -116,6 +126,14 @@ static NSString *const kPushPermissionsLastState = @"pushPermissionLastState";
             
         }];
     }
+}
+
+/**
+ *  Clean notifications badges
+ */
++ (void)cleanPushNotificationsBadges
+{
+    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
 }
 
 #pragma mark - Private methods

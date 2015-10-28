@@ -10,12 +10,15 @@
 
 + (void)registerApplicationForPushNotifications:(UIApplication *)application;
 
-+ (void)recivedPushNotification:(NSDictionary*)userInfo;
++ (void)recivedPushNotification:(NSDictionary*)userInfo
+           withApplicationState:(UIApplicationState)applicationState;
 + (void)saveAndSendDeviceData:(NSString *)deviceToken;
 
 + (void)registeredForPushNotificationsWithToken:(NSData *)deviceToken;
 + (void)failedToRegisterForPushNotificationsWithError:(NSError *)error;
 
 + (BOOL)pushNotificationsEnabled;
+
++ (void)cleanPushNotificationsBadges;
 
 @end
