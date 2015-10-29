@@ -53,7 +53,7 @@
  */
 - (void)restartFailedOperation
 {
-    [self.sessionManager enqueueOperationWithNetworkRequest:self.currentFailedRequest success:self.successBlock failure:self.failureBlock];
+    [self.sessionManager createOperationWithNetworkRequest:self.currentFailedRequest success:self.successBlock failure:self.failureBlock];
 }
 
 /**
@@ -81,9 +81,11 @@
 {
     if (success) {
         self.successBlock = success;
+        self.successBlock = nil;
     }
     if (failure) {
         self.failureBlock = failure;
+        self.failureBlock = nil;
     }
 }
 

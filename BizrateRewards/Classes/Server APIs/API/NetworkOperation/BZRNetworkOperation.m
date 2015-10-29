@@ -16,6 +16,9 @@
 
 #import "BZRSessionManager.h"
 
+static NSString *const kCountOfBytesSent = @"countOfBytesSent";
+static NSString *const kCountOfBytesReceived = @"countOfBytesReceived";
+
 NS_CLASS_AVAILABLE(10_9, 7_0)
 @interface DataTask : NSURLSessionDataTask @end
 
@@ -31,11 +34,14 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
 @property (strong, nonatomic) NSMutableURLRequest *urlRequest;
 
 @property (strong, nonatomic) AFHTTPRequestOperation *operation;
-@property (strong, nonatomic) DataTask *dataTask;
-@property (strong, nonatomic) DownloadTask *downloadTask;
-@property (strong, nonatomic) UploadTask *uploadTask;
+
+@property (strong, nonatomic) DataTask      *dataTask;
+@property (strong, nonatomic) DownloadTask  *downloadTask;
+@property (strong, nonatomic) UploadTask    *uploadTask;
 
 @property (weak, nonatomic) id networkManager;
+
+@property (strong, nonatomic) NSDictionary *allHeaders;
 
 @property (strong, nonatomic, readwrite) NSProgress *progress;
 @property (strong, nonatomic) ProgressBlock progressBlock;
@@ -50,20 +56,21 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
 
 - (NSDictionary *)allHeaders
 {
-    _allHeaders = [self.operation.responseObject allHeaderFields];
-    return _allHeaders;
+    return [self.operation.responseObject allHeaderFields];
 }
 
 #pragma mark - Lifecycle
 
-- (id)initWithNetworkRequest:(BZRNetworkRequest*)networkRequest networkManager:(id)manager error:(NSError *__autoreleasing *)error
+- (id)initWithNetworkRequest:(BZRNetworkRequest*)networkRequest
+              networkManager:(id)manager
+                       error:(NSError *__autoreleasing *)error
 {
     BOOL passedParametersCheck = [networkRequest prepareAndCheckRequestParameters];
     
     if (!passedParametersCheck) {
         if (!networkRequest.error) {
             networkRequest.error = [NSError errorWithDomain:@"Internal inconsistency"
-                                                       code:3
+                                                       code:-2999
                                                    userInfo:@{NSLocalizedDescriptionKey: @"Parameters didn't pass validation."}];
         }
         LOG_NETWORK(@"ERROR: parameters didn't pass check. Aborting operation.");
@@ -75,23 +82,31 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
         return (self = [super init]);
     }
     
-    self.urlRequest = nil;
-    AFHTTPRequestSerializer* serializer = nil;
+    _urlRequest = nil;
+    AFHTTPRequestSerializer *serializer = nil;
 
     if ([NSURLSession class]) {
         NSAssert([manager isKindOfClass:[AFHTTPSessionManager class]], nil);
         
         AFHTTPSessionManager *networkManager = manager;
         serializer = networkManager.requestSerializer;
+    } else {
+        AFHTTPRequestOperationManager *networkManager = manager;
+        serializer = networkManager.requestSerializer;
     }
     
     if ([networkRequest.files count] > 0) {
-        self.urlRequest = [serializer  multipartFormRequestWithMethod:@"POST" URLString:[[NSURL URLWithString:networkRequest.path relativeToURL:[BZRProjectFacade HTTPClient].baseURL] absoluteString] parameters:networkRequest.parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-            
-            [networkRequest.files enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-
-            }];
-        } error:error];
+        self.urlRequest = [serializer  multipartFormRequestWithMethod:@"POST"
+                                                            URLString:[[NSURL URLWithString:networkRequest.path
+                                                                              relativeToURL:[BZRProjectFacade HTTPClient].baseURL] absoluteString]
+                                                           parameters:networkRequest.parameters
+                                            constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+                                                
+                                                [networkRequest.files enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                                                    //append formData
+                                                }];
+                                            }
+                                                                error:error];
         
     } else {
         self.urlRequest = [serializer requestWithMethod:networkRequest.method
@@ -105,8 +120,10 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
         return (self = [super init]);
     }
     
+    //cookies handling
     [self.urlRequest setHTTPShouldHandleCookies:NO];
     
+    //set custom headers
     WEAK_SELF;
     [networkRequest.customHeaders enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
         [weakSelf.urlRequest addValue:obj forHTTPHeaderField:key];
@@ -141,11 +158,11 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
             
             if (error.code == 500 || error.code == 404 || error.code == -1011) {
                 
-                NSString* path;
+                NSString *path;
                 
                 if ([operation isKindOfClass:[NSURLResponse class]]) {
                     path = [((NSURLResponse*)operation).URL path];
-                } else {
+                } else if ([operation isKindOfClass:[AFHTTPRequestOperation class]]) {
                     path = [((AFHTTPRequestOperation *)operation).request.URL path];
                 }
                 
@@ -172,7 +189,9 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
             
             if ([self.networkRequest.files count] > 0) {
                 NSProgress* progress;
-                _uploadTask = (UploadTask*)[networkManager uploadTaskWithStreamedRequest:self.urlRequest progress:&progress completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
+                _uploadTask = (UploadTask*)[networkManager uploadTaskWithStreamedRequest:self.urlRequest
+                                                                                progress:&progress
+                                                                       completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
                     if (!error) {
                         SuccessOperationBlock(response, responseObject);
                     } else {
@@ -181,7 +200,8 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
                 }];
                 _progress = progress;
             } else {
-                _dataTask = (DataTask *)[networkManager dataTaskWithRequest:self.urlRequest completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
+                _dataTask = (DataTask *)[networkManager dataTaskWithRequest:self.urlRequest
+                                                          completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
                     if (!error) {
                         SuccessOperationBlock(response, responseObject);
                     } else {
@@ -192,7 +212,9 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
         } else {
             NSAssert([manager isKindOfClass:[AFHTTPRequestOperationManager class]], nil);
             AFHTTPRequestOperationManager *networkManager = manager;
-            _operation = [networkManager HTTPRequestOperationWithRequest:self.urlRequest success:SuccessOperationBlock failure:FailureOperationBlock];
+            _operation = [networkManager HTTPRequestOperationWithRequest:self.urlRequest
+                                                                 success:SuccessOperationBlock
+                                                                 failure:FailureOperationBlock];
         }
     }
     return self;
@@ -202,9 +224,9 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
 {
     if (_progressBlock) {
         if (_uploadTask) {
-            [_uploadTask removeObserver:self forKeyPath:@"countOfBytesSent" context:NULL];
+            [_uploadTask removeObserver:self forKeyPath:kCountOfBytesSent context:NULL];
         } else if(_downloadTask) {
-            [_downloadTask removeObserver:self forKeyPath:@"countOfBytesReceived" context:NULL];
+            [_downloadTask removeObserver:self forKeyPath:kCountOfBytesReceived context:NULL];
         }
     }
 }
@@ -216,6 +238,9 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
     self.failureBlock = failure;
 }
 
+/**
+ *  Print description
+ */
 - (void)printRequestData:(NSURLRequest*)request withNumber:(NSInteger)number
 {
     LOG_NETWORK(@"Request >>> : %li \n%@\nmethod - %@\n%@\nHeaders\n%@",
@@ -233,10 +258,10 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
     if (block) {
         if (_uploadTask) {
             _progressBlock = block;
-            [_uploadTask addObserver:self forKeyPath:@"countOfBytesSent" options:NSKeyValueObservingOptionNew context:NULL];
+            [_uploadTask addObserver:self forKeyPath:kCountOfBytesSent options:NSKeyValueObservingOptionNew context:NULL];
         } else if (_downloadTask) {
             _progressBlock = block;
-            [_downloadTask addObserver:self forKeyPath:@"countOfBytesReceived" options:NSKeyValueObservingOptionNew context:NULL];
+            [_downloadTask addObserver:self forKeyPath:kCountOfBytesReceived options:NSKeyValueObservingOptionNew context:NULL];
         } else {
             __weak typeof(self)weakSelf = self;
             if (self.networkRequest.files.count > 0) {
@@ -328,17 +353,21 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
 {
     id newValue = change[NSKeyValueChangeNewKey];
     
-    if (![newValue isEqual:[NSNull null]] && [newValue isKindOfClass:[NSNumber class]] && self.progressBlock) {
+    if (![newValue isEqual:[NSNull null]] &&
+        [newValue isKindOfClass:[NSNumber class]] &&
+        self.progressBlock) {
         
         long long bytesSend = 0;
         long long totalBytesSend = 0;
+        
         if (_uploadTask) {
             bytesSend = _uploadTask.countOfBytesSent;
         } else if (_downloadTask) {
             bytesSend = (NSInteger)_downloadTask.countOfBytesReceived;
             totalBytesSend = (NSInteger)_downloadTask.countOfBytesExpectedToReceive;
         }
-        if(bytesSend > totalBytesSend) {
+        
+        if (bytesSend > totalBytesSend) {
             bytesSend = totalBytesSend;
         }
         //        NSLog(@"%@ + %ld + %ld", self, (long)bytesSend, (long)totalBytesSend);
