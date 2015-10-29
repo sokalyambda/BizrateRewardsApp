@@ -15,17 +15,19 @@
 #import "BZRUpdateCurrentUserRequest.h"
 #import "BZRGetClientCredentialsRequest.h"
 #import "BZRSignUpRequest.h"
-#import "BZRGetEligibleSurveysRequest.h"
-#import "BZRSendLocationEventRequest.h"
 #import "BZRForgotPasswordRequest.h"
 #import "BZRSendDeviceDataRequest.h"
-#import "BZRGetFeaturedGiftcards.h"
-#import "BZRGetPointsForNextSurveyRequest.h"
-#import "BZRGetLocationEventsListRequest.h"
 #import "BZRAPIInfoRequest.h"
-#import "BZRUpdateNotificationsAndGeolocationPermissionsRequest.h"
-#import "BZRDeleteTakenSurveysRequest.h"
-
 #import "BZRSignInWithFacebookRequest.h"
+#import "BZRUpdateNotificationsAndGeolocationPermissionsRequest.h"
+
+#import "BZRGetEligibleSurveysRequest.h"
+#import "BZRDeleteTakenSurveysRequest.h"
+#import "BZRGetPointsForNextSurveyRequest.h"
+
+#import "BZRSendLocationEventRequest.h"
+#import "BZRGetLocationEventsListRequest.h"
+
+#import "BZRGetFeaturedGiftcards.h"
 
 #endif

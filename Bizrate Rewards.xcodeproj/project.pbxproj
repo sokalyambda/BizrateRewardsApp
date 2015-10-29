@@ -24,6 +24,12 @@
 		583681711B579C6200D541A4 /* BZRKeychainHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 583681701B579C6200D541A4 /* BZRKeychainHandler.m */; };
 		583BAF5C1BDA83E300EE9489 /* BZRShareCodeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 583BAF5B1BDA83E300EE9489 /* BZRShareCodeController.m */; };
 		5850B3AD1B972B3E003FC2E9 /* UIViewController+FirstPresentingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5850B3AC1B972B3E003FC2E9 /* UIViewController+FirstPresentingController.m */; };
+		58558E991BE2232B000868CC /* BZRDropDownTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58558E971BE2232B000868CC /* BZRDropDownTableView.m */; };
+		58558E9A1BE2232B000868CC /* BZRDropDownTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58558E981BE2232B000868CC /* BZRDropDownTableView.xib */; };
+		58558E9F1BE228F8000868CC /* BZRBaseDropDownDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 58558E9E1BE228F8000868CC /* BZRBaseDropDownDataSource.m */; };
+		58558EA31BE22AB6000868CC /* BZRDiagnosticsDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 58558EA21BE22AB6000868CC /* BZRDiagnosticsDataSource.m */; };
+		58558EA71BE22AFC000868CC /* BZRDiagnosticsDropDownCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 58558EA61BE22AFC000868CC /* BZRDiagnosticsDropDownCell.m */; };
+		58558EAB1BE22CD3000868CC /* BZREnvironment.m in Sources */ = {isa = PBXBuildFile; fileRef = 58558EAA1BE22CD3000868CC /* BZREnvironment.m */; };
 		585641B61B4DA5AA007E7368 /* BZRAuthorizationField.m in Sources */ = {isa = PBXBuildFile; fileRef = 585641B51B4DA5AA007E7368 /* BZRAuthorizationField.m */; };
 		585756201BDE3A0000A8ACE0 /* BZRUpdateNotificationsAndGeolocationPermissionsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5857561F1BDE3A0000A8ACE0 /* BZRUpdateNotificationsAndGeolocationPermissionsRequest.m */; };
 		585813AA1B3BEDCC0087AEE2 /* BZRUserToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 585813A91B3BEDCC0087AEE2 /* BZRUserToken.m */; };
@@ -217,6 +223,17 @@
 		583BAF5B1BDA83E300EE9489 /* BZRShareCodeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRShareCodeController.m; path = Classes/MVC/Controllers/ShareCodeController/BZRShareCodeController.m; sourceTree = "<group>"; };
 		5850B3AB1B972B3E003FC2E9 /* UIViewController+FirstPresentingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIViewController+FirstPresentingController.h"; path = "Classes/Categories/UIViewController/UIViewController+LastPresentedController/UIViewController+FirstPresentingController.h"; sourceTree = "<group>"; };
 		5850B3AC1B972B3E003FC2E9 /* UIViewController+FirstPresentingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+FirstPresentingController.m"; path = "Classes/Categories/UIViewController/UIViewController+LastPresentedController/UIViewController+FirstPresentingController.m"; sourceTree = "<group>"; };
+		58558E961BE2232B000868CC /* BZRDropDownTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRDropDownTableView.h; path = Classes/MVC/Views/BaseDropDownView/BZRDropDownTableView.h; sourceTree = "<group>"; };
+		58558E971BE2232B000868CC /* BZRDropDownTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRDropDownTableView.m; path = Classes/MVC/Views/BaseDropDownView/BZRDropDownTableView.m; sourceTree = "<group>"; };
+		58558E981BE2232B000868CC /* BZRDropDownTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = BZRDropDownTableView.xib; path = Classes/MVC/Views/BaseDropDownView/BZRDropDownTableView.xib; sourceTree = "<group>"; };
+		58558E9D1BE228F8000868CC /* BZRBaseDropDownDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRBaseDropDownDataSource.h; path = Classes/DropDownDataSources/BaseDropDownDataSource/BZRBaseDropDownDataSource.h; sourceTree = "<group>"; };
+		58558E9E1BE228F8000868CC /* BZRBaseDropDownDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRBaseDropDownDataSource.m; path = Classes/DropDownDataSources/BaseDropDownDataSource/BZRBaseDropDownDataSource.m; sourceTree = "<group>"; };
+		58558EA11BE22AB6000868CC /* BZRDiagnosticsDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRDiagnosticsDataSource.h; path = Classes/DropDownDataSources/BZRDiagnosticsDataSource/BZRDiagnosticsDataSource.h; sourceTree = "<group>"; };
+		58558EA21BE22AB6000868CC /* BZRDiagnosticsDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRDiagnosticsDataSource.m; path = Classes/DropDownDataSources/BZRDiagnosticsDataSource/BZRDiagnosticsDataSource.m; sourceTree = "<group>"; };
+		58558EA51BE22AFC000868CC /* BZRDiagnosticsDropDownCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRDiagnosticsDropDownCell.h; path = Classes/Cells/UITableViewCells/DiagnosticsDropDownCell/BZRDiagnosticsDropDownCell.h; sourceTree = "<group>"; };
+		58558EA61BE22AFC000868CC /* BZRDiagnosticsDropDownCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRDiagnosticsDropDownCell.m; path = Classes/Cells/UITableViewCells/DiagnosticsDropDownCell/BZRDiagnosticsDropDownCell.m; sourceTree = "<group>"; };
+		58558EA91BE22CD3000868CC /* BZREnvironment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZREnvironment.h; path = Classes/MVC/Models/Environment/BZREnvironment.h; sourceTree = "<group>"; };
+		58558EAA1BE22CD3000868CC /* BZREnvironment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZREnvironment.m; path = Classes/MVC/Models/Environment/BZREnvironment.m; sourceTree = "<group>"; };
 		585641B41B4DA5AA007E7368 /* BZRAuthorizationField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRAuthorizationField.h; path = Classes/MVC/Views/AuthorizationField/BZRAuthorizationField.h; sourceTree = "<group>"; };
 		585641B51B4DA5AA007E7368 /* BZRAuthorizationField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRAuthorizationField.m; path = Classes/MVC/Views/AuthorizationField/BZRAuthorizationField.m; sourceTree = "<group>"; };
 		5857561E1BDE3A0000A8ACE0 /* BZRUpdateNotificationsAndGeolocationPermissionsRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRUpdateNotificationsAndGeolocationPermissionsRequest.h; path = UserProfile/UpdateNotificationsAndGeolocationPermissionsRequest/BZRUpdateNotificationsAndGeolocationPermissionsRequest.h; sourceTree = "<group>"; };
@@ -544,6 +561,7 @@
 		58219EDB1B38A06600A9541A /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				58558E9B1BE228C0000868CC /* DropDownDataSources */,
 				58AA1A231B5E32F800BA824A /* Libraries */,
 				58C770D91B5CCF6000E9031F /* Services */,
 				58A91F441B3ABE480032607F /* Managers */,
@@ -643,6 +661,7 @@
 		58219EE51B38A22F00A9541A /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				58558EA81BE22CBB000868CC /* Environment */,
 				58ECCEEA1B8F5FEA00528192 /* ServerAPIEntity */,
 				58BCCD871B6BA1E000521496 /* LocationEvent */,
 				58B52A401B6A30D7002D2529 /* FacebookProfile */,
@@ -657,6 +676,7 @@
 		58219EE61B38A23400A9541A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				58558E951BE22311000868CC /* BaseDropDownView */,
 				587E32301BD7A598009B6F3E /* TermsLabel */,
 				58C5052E1B7DE6400030DCE5 /* IncreaseableButton */,
 				58BCCD811B6B8B6500521496 /* BaseOverlapView */,
@@ -699,6 +719,7 @@
 		58219EE81B38A24300A9541A /* UITableViewCells */ = {
 			isa = PBXGroup;
 			children = (
+				58558EA41BE22ADE000868CC /* DiagnosticsDropDownCell */,
 				58ECCEDE1B8F45ED00528192 /* DiagnosticsCell */,
 				58A9FE941B53CD4A00DBE379 /* ZeroInsetsSeparatorCell */,
 			);
@@ -868,6 +889,61 @@
 				5850B3AC1B972B3E003FC2E9 /* UIViewController+FirstPresentingController.m */,
 			);
 			name = "UIViewController+FirstPresentingController";
+			sourceTree = "<group>";
+		};
+		58558E951BE22311000868CC /* BaseDropDownView */ = {
+			isa = PBXGroup;
+			children = (
+				58558E961BE2232B000868CC /* BZRDropDownTableView.h */,
+				58558E971BE2232B000868CC /* BZRDropDownTableView.m */,
+				58558E981BE2232B000868CC /* BZRDropDownTableView.xib */,
+			);
+			name = BaseDropDownView;
+			sourceTree = "<group>";
+		};
+		58558E9B1BE228C0000868CC /* DropDownDataSources */ = {
+			isa = PBXGroup;
+			children = (
+				58558EA01BE22A9A000868CC /* BZRDiagnosticsDataSource */,
+				58558E9C1BE228CD000868CC /* BaseDropDownDataSource */,
+			);
+			name = DropDownDataSources;
+			sourceTree = "<group>";
+		};
+		58558E9C1BE228CD000868CC /* BaseDropDownDataSource */ = {
+			isa = PBXGroup;
+			children = (
+				58558E9D1BE228F8000868CC /* BZRBaseDropDownDataSource.h */,
+				58558E9E1BE228F8000868CC /* BZRBaseDropDownDataSource.m */,
+			);
+			name = BaseDropDownDataSource;
+			sourceTree = "<group>";
+		};
+		58558EA01BE22A9A000868CC /* BZRDiagnosticsDataSource */ = {
+			isa = PBXGroup;
+			children = (
+				58558EA11BE22AB6000868CC /* BZRDiagnosticsDataSource.h */,
+				58558EA21BE22AB6000868CC /* BZRDiagnosticsDataSource.m */,
+			);
+			name = BZRDiagnosticsDataSource;
+			sourceTree = "<group>";
+		};
+		58558EA41BE22ADE000868CC /* DiagnosticsDropDownCell */ = {
+			isa = PBXGroup;
+			children = (
+				58558EA51BE22AFC000868CC /* BZRDiagnosticsDropDownCell.h */,
+				58558EA61BE22AFC000868CC /* BZRDiagnosticsDropDownCell.m */,
+			);
+			name = DiagnosticsDropDownCell;
+			sourceTree = "<group>";
+		};
+		58558EA81BE22CBB000868CC /* Environment */ = {
+			isa = PBXGroup;
+			children = (
+				58558EA91BE22CD3000868CC /* BZREnvironment.h */,
+				58558EAA1BE22CD3000868CC /* BZREnvironment.m */,
+			);
+			name = Environment;
 			sourceTree = "<group>";
 		};
 		585641B31B4DA57E007E7368 /* AuthorizationField */ = {
@@ -2421,6 +2497,7 @@
 				58AA30661B7B81B100363119 /* Los Angeles.gpx in Resources */,
 				58A0B2201B3854CF003C100C /* Images.xcassets in Resources */,
 				58AA30581B7B80C900363119 /* ErrorsCodes.plist in Resources */,
+				58558E9A1BE2232B000868CC /* BZRDropDownTableView.xib in Resources */,
 				58AA30671B7B81B100363119 /* Manhattan Beach.gpx in Resources */,
 				58AA306A1B7B81B100363119 /* San Ramon.gpx in Resources */,
 				58E5124C1B4C70AF00865694 /* OpenSans-SemiboldItalic.ttf in Resources */,
@@ -2529,6 +2606,7 @@
 				84BE35D11B5D0AE0001B99E2 /* BZRSurveyPointsValueLabel.m in Sources */,
 				58C505311B7DE68A0030DCE5 /* BZRIncreaseableButton.m in Sources */,
 				58ACC06D1B3937160081E546 /* BZRAutologinController.m in Sources */,
+				58558E9F1BE228F8000868CC /* BZRBaseDropDownDataSource.m in Sources */,
 				58A5BEBA1B414ADC00B2BC27 /* BZRLeftImageTextField.m in Sources */,
 				84BE35CC1B5D0A4F001B99E2 /* BZRSurveyPointsInscriptionLabel.m in Sources */,
 				58A5BEC01B415C2F00B2BC27 /* BZRCheckBoxButton.m in Sources */,
@@ -2556,6 +2634,7 @@
 				5878D3E11B4426E000A917D0 /* BZRCommonDateFormatter.m in Sources */,
 				58A08B6B1B73A4F500BEF1D8 /* BZRPrivacyAndTermsButton.m in Sources */,
 				58ECCEE91B8F5ECC00528192 /* BZRAPIInfoRequest.m in Sources */,
+				58558E991BE2232B000868CC /* BZRDropDownTableView.m in Sources */,
 				58C770E71B5D5B6A00E9031F /* BZRCommonNumberFormatter.m in Sources */,
 				58AA303D1B7B7FF300363119 /* BZRFacebookService.m in Sources */,
 				585C32AF1B63C854005BF07B /* BZRSignUpRequest.m in Sources */,
@@ -2571,11 +2650,13 @@
 				84AD3F011B4587DA00C294AE /* BZRProgressView.m in Sources */,
 				58B52A431B6A30F0002D2529 /* BZRFacebookProfile.m in Sources */,
 				585C32A71B63AA3F005BF07B /* BZRSessionManager.m in Sources */,
+				58558EA71BE22AFC000868CC /* BZRDiagnosticsDropDownCell.m in Sources */,
 				58A5BEBD1B414B1800B2BC27 /* BZRBorderedTextField.m in Sources */,
 				58ACC08B1B39A35D0081E546 /* BZRBaseAuthController.m in Sources */,
 				58AA30721B7B847000363119 /* BZRGetPointsForNextSurveyRequest.m in Sources */,
 				58BCCD9B1B6BB81700521496 /* BZRCustomURLHandler.m in Sources */,
 				58219F051B38A33E00A9541A /* UIViewController+fixOrientation.m in Sources */,
+				58558EAB1BE22CD3000868CC /* BZREnvironment.m in Sources */,
 				58219EFC1B38A30300A9541A /* BZRValidator.m in Sources */,
 				58B05A5D1B7A2DDF0017CCE8 /* BZRProfileChangesObserver.m in Sources */,
 				58BCCD841B6B8B8400521496 /* BZRBaseOverlapView.m in Sources */,
@@ -2583,6 +2664,7 @@
 				58BF35E21B74933600699A63 /* BZRMailComposeManager.m in Sources */,
 				58BCCDA31B6BCDCA00521496 /* BZRFailureResettingController.m in Sources */,
 				58C770E01B5CD07400E9031F /* BZRTutorialTitleLabel.m in Sources */,
+				58558EA31BE22AB6000868CC /* BZRDiagnosticsDataSource.m in Sources */,
 				589BCCDC1B565E7D00D49056 /* BZRBaseViewController.m in Sources */,
 				58BCCD971B6BB09000521496 /* BZRForgotPasswordRequest.m in Sources */,
 				5894208B1B450FF6004BAF48 /* BZRAccountSettingsContaiterController.m in Sources */,

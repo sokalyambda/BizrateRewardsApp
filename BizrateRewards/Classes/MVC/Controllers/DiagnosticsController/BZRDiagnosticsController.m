@@ -11,6 +11,7 @@
 #import "BZRAccountSettingsController.h"
 
 #import "BZRSerialViewConstructor.h"
+#import "BZRBaseDropDownDataSource.h"
 
 #import "BZRProjectFacade.h"
 
@@ -18,6 +19,11 @@
 
 #import "BZRLocationEvent.h"
 #import "BZRServerAPIEntity.h"
+#import "BZREnvironment.h"
+
+#import "BZRDropDownTableView.h"
+
+#import "UIView+MakeFromXib.h"
 
 static NSInteger const kCurrentNumberOfSections = 2.f;
 static NSInteger const kLocationEventsCount = 10.f;
@@ -29,6 +35,7 @@ static NSInteger const kLocationEventsCount = 10.f;
 @property (weak, nonatomic) IBOutlet UITextField *apiEndpointField;
 @property (weak, nonatomic) IBOutlet UIButton *saveAPIEndpointButton;
 @property (weak, nonatomic) IBOutlet UITableView *eventsListTableView;
+@property (weak, nonatomic) IBOutlet UILabel *environmentDropDownAnchor;
 
 @property (strong, nonatomic) NSArray *locationEvents;
 @property (strong, nonatomic) BZRLocationEvent *lastLocationEvent;
@@ -36,11 +43,23 @@ static NSInteger const kLocationEventsCount = 10.f;
 
 @property (strong, nonatomic) UIBarButtonItem *closeButton;
 
+@property (strong, nonatomic) BZRDropDownTableView *dropDownList;
+
+@property (strong, nonatomic) BZREnvironment *currentEnvironment;
+
 @end
 
 @implementation BZRDiagnosticsController
 
 #pragma mark - Accessors
+
+- (void)setCurrentEnvironment:(BZREnvironment *)currentEnvironment
+{
+    _currentEnvironment = currentEnvironment;
+    self.environmentDropDownAnchor.text = _currentEnvironment.environmentName;
+    self.apiEndpointField.text = _currentEnvironment.apiEndpointURLString;
+    //TODO: setup new mixpanel token
+}
 
 - (BZRLocationEvent *)lastLocationEvent
 {
@@ -68,6 +87,7 @@ static NSInteger const kLocationEventsCount = 10.f;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self initDropDownList];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -78,6 +98,29 @@ static NSInteger const kLocationEventsCount = 10.f;
 }
 
 #pragma mark - Actions
+
+- (IBAction)environmentClick:(id)sender
+{
+    if (self.dropDownList.isMoving) {
+        return;
+    }
+    
+    BZRBaseDropDownDataSource *smokerDataSource = [BZRBaseDropDownDataSource dataSourceWithType:BZRDataSourceTypeDiagnostics];
+    
+    WEAK_SELF;
+    [self.dropDownList dropDownTableBecomeActiveInView:self.view
+                                        fromAnchorView:self.environmentDropDownAnchor
+                                        withDataSource:smokerDataSource
+     
+                                 withShowingCompletion:^(BZRDropDownTableView *table) {
+                                     NSLog(@"presented");
+                                 } withCompletion:^(BZRDropDownTableView *table, id chosenValue) {
+                                     NSLog(@"chosen value %@", chosenValue);
+                                     if ([chosenValue isKindOfClass:[BZREnvironment class]]) {
+                                         weakSelf.currentEnvironment = (BZREnvironment *)chosenValue;
+                                     }
+                                 }];
+}
 
 - (void)customizeNavigationItem
 {
@@ -97,6 +140,14 @@ static NSInteger const kLocationEventsCount = 10.f;
     
     //set navigation title
     self.navigationItem.title = LOCALIZED(@"Diagnostics");
+}
+
+/**
+ *  Configure drop down list
+ */
+- (void)initDropDownList
+{
+    self.dropDownList = [BZRDropDownTableView makeFromXib];
 }
 
 /**

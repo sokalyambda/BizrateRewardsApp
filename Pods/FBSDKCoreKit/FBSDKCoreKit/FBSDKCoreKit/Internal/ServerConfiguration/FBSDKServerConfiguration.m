@@ -114,8 +114,8 @@ implicitPurchaseLoggingEnabled:(BOOL)implicitPurchaseLoggingEnabled
 - (BOOL)useNativeDialogForDialogName:(NSString *)dialogName
 {
     NSLog(@"%i", self.nativeAuthFlowEnabled);
-//    return YES;
-  return [self _useFeatureWithKey:FBSDKDialogConfigurationFeatureUseNativeFlow dialogName:dialogName];
+    //    return YES;
+    return [self _useFeatureWithKey:FBSDKDialogConfigurationFeatureUseNativeFlow dialogName:dialogName];
 }
 
 - (BOOL)useSafariViewControllerForDialogName:(NSString *)dialogName
@@ -127,18 +127,18 @@ implicitPurchaseLoggingEnabled:(BOOL)implicitPurchaseLoggingEnabled
 
 - (BOOL)_useFeatureWithKey:(NSString *)key dialogName:(NSString *)dialogName
 {
-  if ([dialogName isEqualToString:FBSDKDialogConfigurationNameLogin]) {
-      if (self.nativeAuthFlowEnabled) {
-          return YES;
-      } else {
-          return [(NSNumber *)(_dialogFlows[dialogName][key] ?:
-                               _dialogFlows[FBSDKDialogConfigurationNameDefault][key]) boolValue];
-      }
-  } else {
-    return [(NSNumber *)(_dialogFlows[dialogName][key] ?:
-                         _dialogFlows[FBSDKDialogConfigurationNameSharing][key] ?:
-                         _dialogFlows[FBSDKDialogConfigurationNameDefault][key]) boolValue];
-  }
+    if ([dialogName isEqualToString:FBSDKDialogConfigurationNameLogin]) {
+        if (self.nativeAuthFlowEnabled) {
+            return YES;
+        } else {
+            return [(NSNumber *)(_dialogFlows[dialogName][key] ?:
+                                 _dialogFlows[FBSDKDialogConfigurationNameDefault][key]) boolValue];
+        }
+    } else {
+        return [(NSNumber *)(_dialogFlows[dialogName][key] ?:
+                             _dialogFlows[FBSDKDialogConfigurationNameSharing][key] ?:
+                             _dialogFlows[FBSDKDialogConfigurationNameDefault][key]) boolValue];
+    }
 }
 
 #pragma mark - NSCoding

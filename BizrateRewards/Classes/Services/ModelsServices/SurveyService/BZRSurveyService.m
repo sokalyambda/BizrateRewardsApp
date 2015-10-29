@@ -56,5 +56,4 @@ static NSString *const kPoints      = @"points";
     return survey;
 }
 
-
 @end
