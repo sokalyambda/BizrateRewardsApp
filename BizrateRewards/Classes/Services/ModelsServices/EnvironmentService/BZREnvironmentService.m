@@ -13,8 +13,8 @@
 static NSString *const kDevelopmentAPIEndpoint      = @"https://api.bizraterewards.com/v1/";
 static NSString *const kStagingAPIEndpoint          = @"http://api-stage.bizraterewards.com/v1/";
 static NSString *const kProductionAPIEndpoint       = @"https://api.bizraterewards.com/v1/";
-
-static NSString *const kDevelopmentMixPanelToken    = @"developmentMixPanel";
+//live token aae3e2388125817b27b8afcf99093d97
+static NSString *const kDevelopmentMixPanelToken    = @"aae3e2388125817b27b8afcf99093d97";
 static NSString *const kStagingMixPanelToken        = @"stagingMixPanel";
 static NSString *const kProductionMixPanelToken     = @"productionMixPanel";
 

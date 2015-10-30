@@ -206,6 +206,16 @@ static Mixpanel *sharedInstance = nil;
     return [self initWithToken:apiToken launchOptions:nil andFlushInterval:flushInterval];
 }
 
+/**
+ *  Change token
+ *
+ *  @param newToken New Token
+ */
+- (void)reinitTokenWithToken:(NSString *)newToken
+{
+    self.apiToken = newToken;
+}
+
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];

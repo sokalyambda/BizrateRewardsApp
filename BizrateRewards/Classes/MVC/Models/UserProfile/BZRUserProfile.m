@@ -25,6 +25,8 @@ static NSString *const kContactID               = @"ref_contact_id";
 static NSString *const kPointsRequired          = @"points_next_redemption";
 static NSString *const kRedemptionURL           = @"redemption_url";
 
+static NSString *const kUserId                  = @"userId";
+
 static NSString *const kIsTestUser              = @"is_test_user";
 
 @interface BZRUserProfile ()<NSCoding>
@@ -109,6 +111,8 @@ static NSString *const kIsTestUser              = @"is_test_user";
         
         _redemptionURL  = [NSURL URLWithString:response[kRedemptionURL]];
         
+        _userId         = [response[kUserId] longLongValue];
+        
         self.genderString = response[kGender];
     }
     return self;
@@ -126,6 +130,7 @@ static NSString *const kIsTestUser              = @"is_test_user";
     [encoder encodeObject:@(self.isMale) forKey:kIsMale];
     [encoder encodeObject:self.genderString forKey:kGender];
     [encoder encodeObject:self.redemptionURL forKey:kRedemptionURL];
+    [encoder encodeObject:@(self.userId) forKey:kUserId];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder
@@ -139,6 +144,7 @@ static NSString *const kIsTestUser              = @"is_test_user";
         _isMale         = [[decoder decodeObjectForKey:kIsMale] boolValue];
         _genderString   = [decoder decodeObjectForKey:kGender];
         _redemptionURL  = [decoder decodeObjectForKey:kRedemptionURL];
+        _userId         = [[decoder decodeObjectForKey:kUserId] longLongValue];
     }
     return self;
 }

@@ -28,7 +28,7 @@ extern NSString *const kPushNotificationsEnabled;
 extern NSString *const kGeoLocationEnabled;
 extern NSString *const kFirstNameProperty;
 extern NSString *const kLastNameProperty;
-extern NSString *const kBizrateIDProperty;
+extern NSString *const kQualtricsContactId;
 
 @class BZRUserProfile;
 @class BZRLocationEvent;
@@ -42,5 +42,7 @@ extern NSString *const kBizrateIDProperty;
 + (void)trackLocationEvent:(BZRLocationEvent *)locationEvent;
 + (void)setAliasForUser:(BZRUserProfile *)userProfile;
 + (void)setPeopleForUser:(BZRUserProfile *)userProfile;
+
++ (void)reinitMixpanelToken;
 
 @end

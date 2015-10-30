@@ -10,6 +10,8 @@
 
 #import "BZRProjectFacade.h"
 
+#import <Mixpanel/Mixpanel.h>
+
 static NSString *const kPushPermissionsLastState = @"pushPermissionLastState";
 
 @implementation BZRPushNotifiactionService
@@ -21,11 +23,13 @@ static NSString *const kPushPermissionsLastState = @"pushPermissionLastState";
  */
 + (void)registeredForPushNotificationsWithToken:(NSData *)deviceToken
 {
-    NSString *token = [[[deviceToken.description
+    NSString *tokenString = [[[deviceToken.description
                          stringByReplacingOccurrencesOfString:@"<" withString:@""]
                         stringByReplacingOccurrencesOfString:@">" withString:@""]
                        stringByReplacingOccurrencesOfString:@" " withString:@""];
-    [self saveAndSendDeviceData:token];
+    
+    [self saveAndSendDeviceDataWithTokenString:tokenString andTokenData:deviceToken];
+    
     [[NSNotificationCenter defaultCenter] postNotificationName:PushNotificationServiceDidSuccessAuthorizeNotification object:nil];
 }
 
@@ -89,7 +93,8 @@ static NSString *const kPushPermissionsLastState = @"pushPermissionLastState";
 /**
  *  Save devicet token and send device data to server
  */
-+ (void)saveAndSendDeviceData:(NSString *)deviceToken
++ (void)saveAndSendDeviceDataWithTokenString:(NSString *)deviceToken
+                                andTokenData:(NSData *)tokenData
 {
     BOOL enabled = [self pushNotificationsEnabled];
     if (!enabled) {
@@ -108,6 +113,10 @@ static NSString *const kPushPermissionsLastState = @"pushPermissionLastState";
          */
         
         [BZRProjectFacade sendDeviceDataOnSuccess:^(BOOL isSuccess) {
+            
+            //send token to MixPanel
+            Mixpanel *mixpanel = [Mixpanel sharedInstance];
+            [mixpanel.people addPushDeviceToken:tokenData];
             
             /*
              Uncomment when request will be done at beckend side

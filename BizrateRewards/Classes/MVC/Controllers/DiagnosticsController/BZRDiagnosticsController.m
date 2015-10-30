@@ -254,7 +254,7 @@ static NSInteger const kLocationEventsCount = 10.f;
                     
                     //TODO: setup new mixpanel token
                     [BZRMixpanelService setMixpanelToken:_currentEnvironment.mixPanelToken];
-                    [BZRMixpanelService setupMixpanel];
+                    [BZRMixpanelService reinitMixpanelToken];
                     
                     [BZRProjectFacade signOutOnSuccess:^(BOOL isSuccess) {
                         
