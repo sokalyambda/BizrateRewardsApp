@@ -9,7 +9,7 @@
 #import "BZRBaseDropDownDataSource.h"
 #import "BZRDiagnosticsDataSource.h"
 
-#import "BZRDiagnosticsDropDownCell.h"
+#import "BZRDropDownCell.h"
 
 @interface BZRBaseDropDownDataSource ()
 
@@ -18,6 +18,18 @@
 @end
 
 @implementation BZRBaseDropDownDataSource
+
+@synthesize currentSelectedValue = _currentSelectedValue;
+
+#pragma mark - Accessors
+
+- (id)currentSelectedValue
+{
+    if (!_currentSelectedValue && self.currentDataSourceArray.count) {
+        _currentSelectedValue = self.currentDataSourceArray[0];
+    }
+    return _currentSelectedValue;
+}
 
 #pragma mark - Lifecycle
 
@@ -51,11 +63,11 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *cellIdentifier = NSStringFromClass([BZRDiagnosticsDropDownCell class]);
-    BZRDiagnosticsDropDownCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    NSString *cellIdentifier = NSStringFromClass([BZRDropDownCell class]);
+    BZRDropDownCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     
     if (!cell) {
-        cell = [[BZRDiagnosticsDropDownCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        cell = [[BZRDropDownCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
     
     cell.textLabel.textColor = [UIColor whiteColor];
@@ -76,10 +88,30 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    id chosenValue = self.currentDataSourceArray[indexPath.row];
+    
+    if (![chosenValue isEqual:self.currentSelectedValue]) {
+        _currentSelectedValue = chosenValue;
+    }
+    [tableView reloadData];
+    
     if (self.result) {
         [self.dropDownTableView hideDropDownList];
-        self.result(self.dropDownTableView, self.currentDataSourceArray[indexPath.row]);
+        self.result(self.dropDownTableView, chosenValue);
         self.result = nil;
+    }
+}
+
+#pragma mark - Actions
+
+- (void)updateSelectedValueInDataSourceArray:(id)value
+{
+    if (!value) {
+        return;
+    }
+
+    if ([self.currentDataSourceArray containsObject:value]) {
+        _currentSelectedValue = value;
     }
 }
 

@@ -17,6 +17,10 @@ typedef enum : NSUInteger {
 @property (nonatomic) BZRDropDownTableView *dropDownTableView;
 @property (copy, nonatomic) DropDownResult result;
 
+@property (strong, nonatomic, readonly) id currentSelectedValue;
+
 + (instancetype)dataSourceWithType:(BZRDataSourceType)sourceType;
+
+- (void)updateSelectedValueInDataSourceArray:(id)value;
 
 @end

@@ -44,6 +44,7 @@ static NSInteger const kLocationEventsCount = 10.f;
 @property (strong, nonatomic) UIBarButtonItem *closeButton;
 
 @property (strong, nonatomic) BZRDropDownTableView *dropDownList;
+@property (strong, nonatomic) BZRBaseDropDownDataSource *environmentsDataSource;
 
 @property (strong, nonatomic) BZREnvironment *currentEnvironment;
 
@@ -51,14 +52,32 @@ static NSInteger const kLocationEventsCount = 10.f;
 
 @implementation BZRDiagnosticsController
 
+@synthesize currentEnvironment = _currentEnvironment;
+
 #pragma mark - Accessors
+
+- (BZRBaseDropDownDataSource *)environmentsDataSource
+{
+    if (!_environmentsDataSource) {
+        _environmentsDataSource = [BZRBaseDropDownDataSource dataSourceWithType:BZRDataSourceTypeDiagnostics];
+        [_environmentsDataSource updateSelectedValueInDataSourceArray:self.currentEnvironment];
+    }
+    return _environmentsDataSource;
+}
 
 - (void)setCurrentEnvironment:(BZREnvironment *)currentEnvironment
 {
     _currentEnvironment = currentEnvironment;
     self.environmentDropDownAnchor.text = _currentEnvironment.environmentName;
     self.apiEndpointField.text = _currentEnvironment.apiEndpointURLString;
-    //TODO: setup new mixpanel token
+}
+
+- (BZREnvironment *)currentEnvironment
+{
+    if (!_currentEnvironment) {
+        _currentEnvironment = [BZREnvironment environmentFromDefaultsForKey:CurrentAPIEnvironment];
+    }
+    return _currentEnvironment;
 }
 
 - (BZRLocationEvent *)lastLocationEvent
@@ -105,12 +124,10 @@ static NSInteger const kLocationEventsCount = 10.f;
         return;
     }
     
-    BZRBaseDropDownDataSource *smokerDataSource = [BZRBaseDropDownDataSource dataSourceWithType:BZRDataSourceTypeDiagnostics];
-    
     WEAK_SELF;
     [self.dropDownList dropDownTableBecomeActiveInView:self.view
                                         fromAnchorView:self.environmentDropDownAnchor
-                                        withDataSource:smokerDataSource
+                                        withDataSource:self.environmentsDataSource
      
                                  withShowingCompletion:^(BZRDropDownTableView *table) {
                                      NSLog(@"presented");
@@ -148,6 +165,16 @@ static NSInteger const kLocationEventsCount = 10.f;
 - (void)initDropDownList
 {
     self.dropDownList = [BZRDropDownTableView makeFromXib];
+    
+    BZREnvironment *savedEnvironment = [BZREnvironment environmentFromDefaultsForKey:CurrentAPIEnvironment];
+    if (!savedEnvironment) {
+        id defaultValue = self.environmentsDataSource.currentSelectedValue;
+        if ([defaultValue isKindOfClass:[BZREnvironment class]]) {
+            self.currentEnvironment = defaultValue;
+        }
+    } else {
+        self.currentEnvironment = savedEnvironment;
+    }
 }
 
 /**
@@ -215,14 +242,19 @@ static NSInteger const kLocationEventsCount = 10.f;
         [BZRProjectFacade getAPIInfoOnSuccess:^(BOOL success) {
             
             [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-            [[NSUserDefaults standardUserDefaults] setObject:[BZRProjectFacade baseURLString] forKey:BaseURLStringKey];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-            
+
             [weakSelf updateAPIEndpointTextField];
             
             [BZRAlertFacade showAlertWithMessage:LOCALIZED(@"API endpoint has been saved.") forController:weakSelf withCompletion:^{
                 //logout..
-                if (![[BZRProjectFacade baseURLString] isEqualToString:defaultBaseURLString]) {
+                if ((![weakSelf.currentEnvironment isEqual:[BZREnvironment environmentFromDefaultsForKey:CurrentAPIEnvironment]]) || (!weakSelf.currentEnvironment && ![[BZRProjectFacade baseURLString] isEqualToString:defaultBaseURLString])) {
+                    
+                    //save current environment
+                    [weakSelf.currentEnvironment setEnvironmentToDefaultsForKey:CurrentAPIEnvironment];
+                    
+                    //TODO: setup new mixpanel token
+                    [BZRMixpanelService setMixpanelToken:_currentEnvironment.mixPanelToken];
+                    [BZRMixpanelService setupMixpanel];
                     
                     [BZRProjectFacade signOutOnSuccess:^(BOOL isSuccess) {
                         
@@ -245,6 +277,7 @@ static NSInteger const kLocationEventsCount = 10.f;
             
             [BZRAlertFacade showAlertWithMessage:LOCALIZED(@"API endpoint is incorrect.") forController:weakSelf withCompletion:nil];
             
+            //return to default value of base url
             [BZRProjectFacade setBaseURLString:defaultBaseURLString];
             [BZRProjectFacade initHTTPClientWithRootPath:[BZRProjectFacade baseURLString] withCompletion:nil];
             

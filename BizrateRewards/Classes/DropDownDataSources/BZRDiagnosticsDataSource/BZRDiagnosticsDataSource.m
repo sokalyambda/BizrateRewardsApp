@@ -10,15 +10,9 @@
 
 #import "BZREnvironment.h"
 
-#import "BZRDiagnosticsDropDownCell.h"
+#import "BZREnvironmentService.h"
 
-static NSString *const kDevelopmentAPIEndpoint      = @"";
-static NSString *const kStagingAPIEndpoint          = @"http://api-stage.bizraterewards.com/v1/";
-static NSString *const kProductionAPIEndpoint       = @"https://api.bizraterewards.com/v1/";
-
-static NSString *const kDevelopmentMixPanelToken    = @"";
-static NSString *const kStagingMixPanelToken        = @"";
-static NSString *const kProductionMixPanelToken     = @"";
+#import "BZRDropDownCell.h"
 
 @interface BZRDiagnosticsDataSource ()
 
@@ -33,7 +27,7 @@ static NSString *const kProductionMixPanelToken     = @"";
 - (NSArray *)environmentTypes
 {
     if (!_environmentTypes) {
-        _environmentTypes = [self eligibleEnvironmentsArray];
+        _environmentTypes = [BZREnvironmentService eligibleEnvironmentsArray];
     }
     return _environmentTypes;
 }
@@ -41,25 +35,6 @@ static NSString *const kProductionMixPanelToken     = @"";
 - (NSArray *)currentDataSourceArray
 {
     return self.environmentTypes;
-}
-
-#pragma mark - Actions
-
-- (NSArray *)eligibleEnvironmentsArray
-{
-    BZREnvironment *development = [BZREnvironment environmentWithName:LOCALIZED(@"Development")];
-    development.apiEndpointURLString = kDevelopmentAPIEndpoint;
-    development.mixPanelToken = kDevelopmentMixPanelToken;
-    
-    BZREnvironment *staging = [BZREnvironment environmentWithName:LOCALIZED(@"Staging")];
-    staging.apiEndpointURLString = kStagingAPIEndpoint;
-    staging.mixPanelToken = kStagingMixPanelToken;
-    
-    BZREnvironment *production = [BZREnvironment environmentWithName:LOCALIZED(@"Production")];
-    production.apiEndpointURLString = kProductionAPIEndpoint;
-    production.mixPanelToken = kProductionMixPanelToken;
-    
-    return @[development, staging, production];
 }
 
 #pragma mark - UITableViewDataSource
@@ -71,8 +46,19 @@ static NSString *const kProductionMixPanelToken     = @"";
 
 - (void)configureCell:(UITableViewCell *)cell forIndexPath:(NSIndexPath *)indexPath
 {
-    BZRDiagnosticsDropDownCell *dropDownCell = (BZRDiagnosticsDropDownCell *)cell;
+    BZRDropDownCell *dropDownCell = (BZRDropDownCell *)cell;
+    
     BZREnvironment *currentEnvironment = self.environmentTypes[indexPath.row];
+    
+    if ([currentEnvironment isEqual:self.currentSelectedValue]) {
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    } else {
+        cell.accessoryType = UITableViewCellAccessoryNone;
+    }
+    
+    dropDownCell.textLabel.textColor = [UIColor blackColor];
+    dropDownCell.selectionStyle = UITableViewCellSelectionStyleBlue;
+    
     dropDownCell.textLabel.text = currentEnvironment.environmentName;
 }
 

@@ -10,11 +10,14 @@
 #import <Mixpanel.h>
 
 #import "BZRLocationEvent.h"
+#import "BZREnvironment.h"
 
 #import "BZRPushNotifiactionService.h"
 #import "BZRLocationObserver.h"
+#import "BZREnvironmentService.h"
 
-static NSString *const kMixpanelToken = @"aae3e2388125817b27b8afcf99093d97";
+static NSString *const kMixpanelToken = @"aae3e2388125817b27b8afcf99093d97";//live
+//static NSString *const kMixpanelToken = @"f818411581cc210c670fe3351a46debe";//test
 
 static NSString *const kMixpanelEventsFile = @"MixpanelEvents";
 static NSString *const kPlistResourceType  = @"plist";
@@ -30,11 +33,41 @@ NSString *const kFirstNameProperty        = @"First Name";
 NSString *const kLastNameProperty         = @"Last Name";
 NSString *const kBizrateIDProperty        = @"Bizrate ID";
 
+NSString *defaultMixpanelToken = @"https://api.bizraterewards.com/v1/";
+static NSString *_mixpanelToken;
+
 @implementation BZRMixpanelService
+
+#pragma mark - Accessors
+
++ (NSString *)mixpanelToken
+{
+    @synchronized(self) {
+        
+        BZREnvironment *savedEnvironment = [BZREnvironment environmentFromDefaultsForKey:CurrentAPIEnvironment];
+        
+        if (!savedEnvironment) {
+            savedEnvironment = [BZREnvironmentService defaultEnvironment];
+            [savedEnvironment setEnvironmentToDefaultsForKey:CurrentAPIEnvironment];
+        }
+        
+        if (!_mixpanelToken && savedEnvironment) {
+            _mixpanelToken = savedEnvironment.mixPanelToken;
+        }
+        return _mixpanelToken;
+    }
+}
+
++ (void)setMixpanelToken:(NSString *)token
+{
+    @synchronized(self) {
+        _mixpanelToken = token;
+    }
+}
 
 + (void)setupMixpanel
 {
-    [Mixpanel sharedInstanceWithToken:kMixpanelToken];
+    [Mixpanel sharedInstanceWithToken:[self mixpanelToken]];
 }
 
 + (void)trackEventWithType:(BZRMixpanelEventType)eventType propertyValue:(NSString *)propertyValue

@@ -14,4 +14,7 @@
 
 + (instancetype)environmentWithName:(NSString *)name;
 
+- (void)setEnvironmentToDefaultsForKey:(NSString *)key;
++ (BZREnvironment *)environmentFromDefaultsForKey:(NSString *)key;
+
 @end

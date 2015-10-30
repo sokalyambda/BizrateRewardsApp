@@ -35,6 +35,8 @@ extern NSString *const kBizrateIDProperty;
 
 @interface BZRMixpanelService : NSObject
 
++ (void)setMixpanelToken:(NSString *)token;
+
 + (void)setupMixpanel;
 + (void)trackEventWithType:(BZRMixpanelEventType)eventType propertyValue:(NSString *)propertieValue;
 + (void)trackLocationEvent:(BZRLocationEvent *)locationEvent;

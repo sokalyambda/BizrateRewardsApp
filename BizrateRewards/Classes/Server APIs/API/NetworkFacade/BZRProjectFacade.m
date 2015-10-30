@@ -13,10 +13,12 @@
 #import "BZRRequests.h"
 
 #import "BZRApplicationToken.h"
+#import "BZREnvironment.h"
 
 #import "BZRFacebookService.h"
 #import "BZRErrorHandler.h"
 #import "BZRRedirectionHelper.h"
+#import "BZREnvironmentService.h"
 
 #import "BZRKeychainHandler.h"
 
@@ -34,10 +36,15 @@ static NSString *_baseURLString;
 + (NSString *)baseURLString
 {
     @synchronized(self) {
-        if (!_baseURLString && [[NSUserDefaults standardUserDefaults] stringForKey:BaseURLStringKey]) {
-            _baseURLString = [[NSUserDefaults standardUserDefaults] stringForKey:BaseURLStringKey];
-        } else if (!_baseURLString) {
-            _baseURLString = defaultBaseURLString;
+        BZREnvironment *savedEnvironment = [BZREnvironment environmentFromDefaultsForKey:CurrentAPIEnvironment];
+        
+        if (!savedEnvironment) {
+            savedEnvironment = [BZREnvironmentService defaultEnvironment];
+            [savedEnvironment setEnvironmentToDefaultsForKey:CurrentAPIEnvironment];
+        }
+        
+        if (!_baseURLString && savedEnvironment) {
+            _baseURLString = savedEnvironment.apiEndpointURLString;
         }
         return _baseURLString;
     }
