@@ -100,7 +100,7 @@ static NSString *_baseURLString;
  */
 + (void)cancelAllOperations
 {
-    return [sharedHTTPClient cancelAllOperations];
+    return [[self HTTPClient] cancelAllOperations];
 }
 
 /**

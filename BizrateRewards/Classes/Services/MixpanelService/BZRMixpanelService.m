@@ -113,10 +113,13 @@ static NSString *_mixpanelToken;
 + (void)setPeopleForUser:(BZRUserProfile *)userProfile
 {
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
+//    NSString *userIdString = [NSString stringWithFormat:@"%lld", userProfile.userId];
     
    [BZRPushNotifiactionService pushNotificationsEnabledWithCompletion:^(BOOL enabled, BOOL isPermissionsStateChanged) {
         BOOL isGeolocationEnabled = [BZRLocationObserver sharedObserver].isAuthorized;
-        
+       
+       [mixpanel identify:mixpanel.distinctId];
+       
         [mixpanel.people set:@{kPushNotificationsEnabled:enabled? @"YES" : @"NO",
                                kGeoLocationEnabled:isGeolocationEnabled? @"YES" : @"NO",
                                kFirstNameProperty:userProfile.firstName,

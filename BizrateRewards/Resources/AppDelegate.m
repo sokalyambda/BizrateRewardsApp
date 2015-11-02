@@ -40,13 +40,15 @@ static NSString *const kOfferBeamRetailerID = @"6F8E3A94-FE29-4144-BE86-AA8372D1
     [BZRKeychainHandler resetKeychainIfFirstLaunch];
     
     /*
-     TODO: Check whether appication was launched from pushNotification and redirect to needed screen.
-     
-     NSDictionary *userInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
-     if (userInfo) {
-     [FRDPushNotifiactionService receivedPushNotification:userInfo withApplicationState:UIApplicationStateInactive];
-     }
-     
+     If app was opened with push
+     */
+    NSDictionary *userInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+    if (userInfo) {
+        [BZRPushNotifiactionService receivedPushNotification:userInfo withApplicationState:UIApplicationStateInactive];
+    }
+    
+    /*
+     If app was opened with URL
      */
     NSError *error;
     NSURL *url = (NSURL *)[launchOptions valueForKey:UIApplicationLaunchOptionsURLKey];
@@ -135,7 +137,7 @@ static NSString *const kOfferBeamRetailerID = @"6F8E3A94-FE29-4144-BE86-AA8372D1
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
-    [BZRPushNotifiactionService recivedPushNotification:userInfo
+    [BZRPushNotifiactionService receivedPushNotification:userInfo
                                    withApplicationState:application.applicationState];
 }
 

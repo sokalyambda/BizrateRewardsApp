@@ -10,9 +10,13 @@
 
 #import "BZRProjectFacade.h"
 
+#import "BZRRedirectionHelper.h"
+
 #import <Mixpanel/Mixpanel.h>
 
 static NSString *const kPushPermissionsLastState = @"pushPermissionLastState";
+
+static NSString *const kRedirectedURL = @"redirected_url";
 
 @implementation BZRPushNotifiactionService
 
@@ -86,19 +90,12 @@ static NSString *const kPushPermissionsLastState = @"pushPermissionLastState";
  *
  *  @param userInfo Push notification info dictionary
  */
-+ (void)recivedPushNotification:(NSDictionary*)userInfo
++ (void)receivedPushNotification:(NSDictionary*)userInfo
            withApplicationState:(UIApplicationState)applicationState
 {
-    /*
-     TODO: Handle push notification if app was in foreground
-     
-     if (state == UIApplicationStateActive) {
-     // app was already in the foreground
-     } else {
-     //do the same logic as with custom URL handler
-     }
-     
-     */
+    NSURL *redirectedURL = userInfo[kRedirectedURL];
+    NSError *error;
+    [BZRRedirectionHelper redirectWithURL:redirectedURL withError:&error];
 }
 
 /**
@@ -127,6 +124,7 @@ static NSString *const kPushPermissionsLastState = @"pushPermissionLastState";
                     
                     //send token to MixPanel
                     Mixpanel *mixpanel = [Mixpanel sharedInstance];
+                    [mixpanel identify:mixpanel.distinctId];
                     [mixpanel.people addPushDeviceToken:tokenData];
                     
                     NSLog(@"Device token has been sent");

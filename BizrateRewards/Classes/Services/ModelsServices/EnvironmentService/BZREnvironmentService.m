@@ -10,14 +10,14 @@
 
 #import "BZREnvironment.h"
 
-static NSString *const kDevelopmentAPIEndpoint      = @"https://api.bizraterewards.com/v1/";
+static NSString *const kDevelopmentAPIEndpoint      = @"http://devxxx.ngrok.io/v1/";
 static NSString *const kStagingAPIEndpoint          = @"http://api-stage.bizraterewards.com/v1/";
 static NSString *const kProductionAPIEndpoint       = @"https://api.bizraterewards.com/v1/";
 //live token aae3e2388125817b27b8afcf99093d97
 //test token f818411581cc210c670fe3351a46debe
 static NSString *const kDevelopmentMixPanelToken    = @"f818411581cc210c670fe3351a46debe";
 static NSString *const kStagingMixPanelToken        = @"stagingMixPanel";
-static NSString *const kProductionMixPanelToken     = @"productionMixPanel";
+static NSString *const kProductionMixPanelToken     = @"f818411581cc210c670fe3351a46debe";
 
 @implementation BZREnvironmentService
 
@@ -40,7 +40,7 @@ static NSString *const kProductionMixPanelToken     = @"productionMixPanel";
 
 + (BZREnvironment *)defaultEnvironment
 {
-    return [self eligibleEnvironmentsArray][0];
+    return [[self eligibleEnvironmentsArray] lastObject]; //production
 }
 
 @end

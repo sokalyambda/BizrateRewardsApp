@@ -8,8 +8,6 @@
 
 #import "BZRSessionManager.h"
 
-extern NSString *defaultBaseURLString;
-
 @class BZRUserProfile, BZRLocationEvent;
 
 @interface BZRProjectFacade : NSObject

@@ -25,6 +25,7 @@
 #import "UIView+MakeFromXib.h"
 
 #import "BZRRedirectionHelper.h"
+#import "BZREnvironmentService.h"
 
 static NSInteger const kCurrentNumberOfSections = 2.f;
 static NSInteger const kLocationEventsCount = 10.f;
@@ -76,7 +77,7 @@ static NSInteger const kLocationEventsCount = 10.f;
 - (BZREnvironment *)currentEnvironment
 {
     if (!_currentEnvironment) {
-        _currentEnvironment = [BZREnvironment environmentFromDefaultsForKey:CurrentAPIEnvironment];
+        _currentEnvironment = [BZREnvironmentService defaultEnvironment];
     }
     return _currentEnvironment;
 }
@@ -114,7 +115,6 @@ static NSInteger const kLocationEventsCount = 10.f;
 {
     [super viewDidAppear:animated];
     [self getAPIInfo];
-    [self updateAPIEndpointTextField];
 }
 
 #pragma mark - Actions
@@ -167,6 +167,14 @@ static NSInteger const kLocationEventsCount = 10.f;
 {
     self.dropDownList = [BZRDropDownTableView makeFromXib];
     
+    [self reinitDefaultValue];
+}
+
+/**
+ *  Reinit default environment
+ */
+- (void)reinitDefaultValue
+{
     BZREnvironment *savedEnvironment = [BZREnvironment environmentFromDefaultsForKey:CurrentAPIEnvironment];
     if (!savedEnvironment) {
         id defaultValue = self.environmentsDataSource.currentSelectedValue;
@@ -176,6 +184,14 @@ static NSInteger const kLocationEventsCount = 10.f;
     } else {
         self.currentEnvironment = savedEnvironment;
     }
+}
+
+/**
+ *  Set the default data source selected value
+ */
+- (void)swapWithSavedValue
+{
+    [self.environmentsDataSource swapSelectedValueWithValue:self.currentEnvironment];
 }
 
 /**
@@ -222,11 +238,6 @@ static NSInteger const kLocationEventsCount = 10.f;
     [self.eventsListTableView reloadData];
 }
 
-- (void)updateAPIEndpointTextField
-{
-    self.apiEndpointField.text = [BZRProjectFacade baseURLString];
-}
-
 - (IBAction)saveAPIEndpointClick:(id)sender
 {
     [self saveAPIEndpoint];
@@ -243,18 +254,15 @@ static NSInteger const kLocationEventsCount = 10.f;
         [BZRProjectFacade getAPIInfoOnSuccess:^(BOOL success) {
             
             [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-
-            [weakSelf updateAPIEndpointTextField];
             
             [BZRAlertFacade showAlertWithMessage:LOCALIZED(@"API endpoint has been saved.") forController:weakSelf withCompletion:^{
                 //logout..
-                if ((![weakSelf.currentEnvironment isEqual:[BZREnvironment environmentFromDefaultsForKey:CurrentAPIEnvironment]]) || (!weakSelf.currentEnvironment && ![[BZRProjectFacade baseURLString] isEqualToString:defaultBaseURLString])) {
+                if ((![weakSelf.currentEnvironment isEqual:[BZREnvironment environmentFromDefaultsForKey:CurrentAPIEnvironment]])) {
                     
                     //save current environment
                     [weakSelf.currentEnvironment setEnvironmentToDefaultsForKey:CurrentAPIEnvironment];
                     
-                    //TODO: setup new mixpanel token
-                    [BZRMixpanelService setMixpanelToken:_currentEnvironment.mixPanelToken];
+                    [BZRMixpanelService setMixpanelToken:weakSelf.currentEnvironment.mixPanelToken];
                     [BZRMixpanelService reinitMixpanelToken];
 
                     [BZRRedirectionHelper performSignOut];
@@ -267,11 +275,14 @@ static NSInteger const kLocationEventsCount = 10.f;
             
             [BZRAlertFacade showAlertWithMessage:LOCALIZED(@"API endpoint is incorrect.") forController:weakSelf withCompletion:nil];
             
+            [weakSelf reinitDefaultValue];
+            [weakSelf swapWithSavedValue];
             //return to default value of base url
-            [BZRProjectFacade setBaseURLString:defaultBaseURLString];
+            [BZRProjectFacade setBaseURLString:weakSelf.currentEnvironment.apiEndpointURLString];
             [BZRProjectFacade initHTTPClientWithRootPath:[BZRProjectFacade baseURLString] withCompletion:nil];
             
-            [weakSelf updateAPIEndpointTextField];
+            
+            
         }];
         
     }];

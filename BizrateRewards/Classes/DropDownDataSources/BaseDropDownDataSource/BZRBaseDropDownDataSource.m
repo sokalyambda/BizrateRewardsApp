@@ -26,7 +26,7 @@
 - (id)currentSelectedValue
 {
     if (!_currentSelectedValue && self.currentDataSourceArray.count) {
-        _currentSelectedValue = self.currentDataSourceArray[0];
+        _currentSelectedValue = [self.currentDataSourceArray lastObject];
     }
     return _currentSelectedValue;
 }
@@ -112,6 +112,13 @@
 
     if ([self.currentDataSourceArray containsObject:value]) {
         _currentSelectedValue = value;
+    }
+}
+
+- (void)swapSelectedValueWithValue:(id)newValue
+{
+    if ([self.currentDataSourceArray containsObject:newValue]) {
+        _currentSelectedValue = newValue;
     }
 }
 

@@ -10,7 +10,7 @@
 
 + (void)registerApplicationForPushNotifications:(UIApplication *)application;
 
-+ (void)recivedPushNotification:(NSDictionary*)userInfo
++ (void)receivedPushNotification:(NSDictionary*)userInfo
            withApplicationState:(UIApplicationState)applicationState;
 + (void)saveAndSendDeviceDataWithTokenString:(NSString *)deviceToken andTokenData:(NSData *)tokenData;
 
