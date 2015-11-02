@@ -59,13 +59,13 @@ static NSString *const kOfferBeamRetailerID = @"6F8E3A94-FE29-4144-BE86-AA8372D1
     
     //setup hockey app service
 //    [[BITHockeyManager sharedHockeyManager] configureWithBetaIdentifier:kHockeyAppBetaIdentifier liveIdentifier:kHockeyAppProductionIdentifier delegate:nil];
-//    [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:kHockeyAppBetaIdentifier];
-//    [[BITHockeyManager sharedHockeyManager].authenticator authenticateInstallation];
-//    [[BITHockeyManager sharedHockeyManager] startManager];
+    [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:kHockeyAppBetaIdentifier];
+    [[BITHockeyManager sharedHockeyManager].authenticator authenticateInstallation];
+    [[BITHockeyManager sharedHockeyManager] startManager];
     
     //setup OfferBeam service
-//    [OB_Services start];
-//    [OB_Services setRetailerCode:kOfferBeamRetailerID];
+    [OB_Services start];
+    [OB_Services setRetailerCode:kOfferBeamRetailerID];
     
     return [[FBSDKApplicationDelegate sharedInstance] application:application
                                     didFinishLaunchingWithOptions:launchOptions];
@@ -78,10 +78,10 @@ static NSString *const kOfferBeamRetailerID = @"6F8E3A94-FE29-4144-BE86-AA8372D1
     //clean badge count
     [BZRPushNotifiactionService cleanPushNotificationsBadges];
     
-    [BZRPushNotifiactionService pushNotificationsEnabledWithCompletion:^(BOOL enabled) {
-        if (!enabled) {
+    [BZRPushNotifiactionService pushNotificationsEnabledWithCompletion:^(BOOL enabled, BOOL isPermissionStateChanged) {
+        if (!enabled && isPermissionStateChanged) {
             [BZRPushNotifiactionService failedToRegisterForPushNotificationsWithError:nil];
-        } else {
+        } else if (isPermissionStateChanged) {
             [[NSNotificationCenter defaultCenter] postNotificationName:PushNotificationServiceDidSuccessAuthorizeNotification object:nil];
         }
     }];

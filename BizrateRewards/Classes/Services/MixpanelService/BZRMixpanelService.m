@@ -114,7 +114,7 @@ static NSString *_mixpanelToken;
 {
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     
-   [BZRPushNotifiactionService pushNotificationsEnabledWithCompletion:^(BOOL enabled) {
+   [BZRPushNotifiactionService pushNotificationsEnabledWithCompletion:^(BOOL enabled, BOOL isPermissionsStateChanged) {
         BOOL isGeolocationEnabled = [BZRLocationObserver sharedObserver].isAuthorized;
         
         [mixpanel.people set:@{kPushNotificationsEnabled:enabled? @"YES" : @"NO",

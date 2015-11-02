@@ -61,17 +61,15 @@ static NSString *const kPushPermissionsLastState = @"pushPermissionLastState";
  *
  *  @return Returns 'YES' if registered
  */
-+ (void)pushNotificationsEnabledWithCompletion:(void(^)(BOOL enabled))completion
++ (void)pushNotificationsEnabledWithCompletion:(void(^)(BOOL enabled, BOOL isPermissionsStateChanged))completion
 {
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        BOOL isPushesEnabled = [[UIApplication sharedApplication] currentUserNotificationSettings].types != UIUserNotificationTypeNone;
-        
-        [self checkForPermissionsChangingWithPushesEnabled:isPushesEnabled];
-        
-        if (completion) {
-            completion(isPushesEnabled);
-        }
-    });
+    BOOL isPushesEnabled = [[UIApplication sharedApplication] currentUserNotificationSettings].types != UIUserNotificationTypeNone;
+    
+    BOOL isPermissionsChanges = [self checkForPermissionsChangingWithPushesEnabled:isPushesEnabled];
+    
+    if (completion) {
+        completion(isPushesEnabled, isPermissionsChanges);
+    }
 }
 
 + (BOOL)isPushNotificationsEnabled
@@ -109,7 +107,7 @@ static NSString *const kPushPermissionsLastState = @"pushPermissionLastState";
 + (void)saveAndSendDeviceDataWithTokenString:(NSString *)deviceToken
                                 andTokenData:(NSData *)tokenData
 {
-    [self pushNotificationsEnabledWithCompletion:^(BOOL enabled) {
+    [self pushNotificationsEnabledWithCompletion:^(BOOL enabled, BOOL isPermissionsStateChanged) {
         if (!enabled) {
             return;
         }
@@ -130,6 +128,8 @@ static NSString *const kPushPermissionsLastState = @"pushPermissionLastState";
                     //send token to MixPanel
                     Mixpanel *mixpanel = [Mixpanel sharedInstance];
                     [mixpanel.people addPushDeviceToken:tokenData];
+                    
+                    NSLog(@"Device token has been sent");
                     
                 } onFailure:^(NSError *error, BOOL isCanceled) {
                     
@@ -155,7 +155,7 @@ static NSString *const kPushPermissionsLastState = @"pushPermissionLastState";
  *
  *  @param isPushesEnabled Enable value
  */
-+ (void)checkForPermissionsChangingWithPushesEnabled:(BOOL)isPushesEnabled
++ (BOOL)checkForPermissionsChangingWithPushesEnabled:(BOOL)isPushesEnabled
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
@@ -181,11 +181,14 @@ static NSString *const kPushPermissionsLastState = @"pushPermissionLastState";
             //update notifications and geolocation settings
             [BZRProjectFacade sendDeviceDataOnSuccess:^(BOOL isSuccess) {
                 
+                NSLog(@"notifications access have been updated");
+                
             } onFailure:^(NSError *error, BOOL isCanceled) {
                 
             }];
         }
     }
+    return isPermissionsChanged;
 }
 
 @end

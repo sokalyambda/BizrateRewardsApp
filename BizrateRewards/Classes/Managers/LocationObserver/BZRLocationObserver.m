@@ -133,18 +133,16 @@ static NSString *const kOBStore = @"Store";
         [BZRMixpanelService trackEventWithType:BZRMixpanelEventLocationPermission
                                  propertyValue:isGeolocationEnable? @"YES" : @"NO"];
         
-        /*
-         Uncomment when request will be done at beckend side
-        [BZRProjectFacade updateNotificationsAndGeolocationPermissionsOnSuccess:^(BOOL isSuccess) {
-            
-            //notifications and geolocation permissions have been updated successfully
-            
-        } onFailure:^(NSError *error, BOOL isCanceled) {
-            
-            //failure..
-            
-        }];
-         */
+        if ([BZRProjectFacade isUserSessionValid]) {
+            //update notifications and geolocation settings
+            [BZRProjectFacade sendDeviceDataOnSuccess:^(BOOL isSuccess) {
+                
+                NSLog(@"geolocation access have been updated");
+                
+            } onFailure:^(NSError *error, BOOL isCanceled) {
+                
+            }];
+        }
     }
 }
 
