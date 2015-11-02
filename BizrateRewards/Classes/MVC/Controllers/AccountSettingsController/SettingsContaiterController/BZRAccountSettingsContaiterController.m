@@ -197,7 +197,7 @@ static CGFloat const kMinBottomSpace = 8.f;
     NSString *currentLocationImageName;
     NSString *currentPushesImageName;
     
-    BOOL isPushesEnabled = [BZRPushNotifiactionService pushNotificationsEnabled];
+    BOOL isPushesEnabled = [BZRPushNotifiactionService isPushNotificationsEnabled];
     BOOL isGeolocationEnabled = [BZRLocationObserver sharedObserver].isAuthorized;
     
     currentLocationImageName = isGeolocationEnabled ? @"checkboxes_selected" : @"error_notification";

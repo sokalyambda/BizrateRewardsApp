@@ -21,14 +21,14 @@ typedef enum : NSUInteger {
     BZRMixpanelEventGeofenceExit
 }BZRMixpanelEventType;
 
-extern NSString *const kMixpanelAliasID;
+//extern NSString *const kMixpanelAliasID;
 extern NSString *const kAuthTypeEmail;
 extern NSString *const kAuthTypeFacebook;
-extern NSString *const kPushNotificationsEnabled;
-extern NSString *const kGeoLocationEnabled;
-extern NSString *const kFirstNameProperty;
-extern NSString *const kLastNameProperty;
-extern NSString *const kQualtricsContactId;
+//extern NSString *const kPushNotificationsEnabled;
+//extern NSString *const kGeoLocationEnabled;
+//extern NSString *const kFirstNameProperty;
+//extern NSString *const kLastNameProperty;
+//extern NSString *const kQualtricsContactId;
 
 @class BZRUserProfile;
 @class BZRLocationEvent;

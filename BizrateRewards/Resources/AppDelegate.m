@@ -59,13 +59,13 @@ static NSString *const kOfferBeamRetailerID = @"6F8E3A94-FE29-4144-BE86-AA8372D1
     
     //setup hockey app service
 //    [[BITHockeyManager sharedHockeyManager] configureWithBetaIdentifier:kHockeyAppBetaIdentifier liveIdentifier:kHockeyAppProductionIdentifier delegate:nil];
-    [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:kHockeyAppBetaIdentifier];
-    [[BITHockeyManager sharedHockeyManager].authenticator authenticateInstallation];
-    [[BITHockeyManager sharedHockeyManager] startManager];
+//    [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:kHockeyAppBetaIdentifier];
+//    [[BITHockeyManager sharedHockeyManager].authenticator authenticateInstallation];
+//    [[BITHockeyManager sharedHockeyManager] startManager];
     
     //setup OfferBeam service
-    [OB_Services start];
-    [OB_Services setRetailerCode:kOfferBeamRetailerID];
+//    [OB_Services start];
+//    [OB_Services setRetailerCode:kOfferBeamRetailerID];
     
     return [[FBSDKApplicationDelegate sharedInstance] application:application
                                     didFinishLaunchingWithOptions:launchOptions];
@@ -78,11 +78,13 @@ static NSString *const kOfferBeamRetailerID = @"6F8E3A94-FE29-4144-BE86-AA8372D1
     //clean badge count
     [BZRPushNotifiactionService cleanPushNotificationsBadges];
     
-    if (![BZRPushNotifiactionService pushNotificationsEnabled]) {
-        [BZRPushNotifiactionService failedToRegisterForPushNotificationsWithError:nil];
-    } else {
-        [[NSNotificationCenter defaultCenter] postNotificationName:PushNotificationServiceDidSuccessAuthorizeNotification object:nil];
-    }
+    [BZRPushNotifiactionService pushNotificationsEnabledWithCompletion:^(BOOL enabled) {
+        if (!enabled) {
+            [BZRPushNotifiactionService failedToRegisterForPushNotificationsWithError:nil];
+        } else {
+            [[NSNotificationCenter defaultCenter] postNotificationName:PushNotificationServiceDidSuccessAuthorizeNotification object:nil];
+        }
+    }];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:UIApplicationDidBecomeActiveNotification object:nil];
 }

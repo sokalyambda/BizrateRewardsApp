@@ -16,14 +16,13 @@
 #import "BZRLocationObserver.h"
 #import "BZREnvironmentService.h"
 
-static NSString *const kMixpanelToken = @"aae3e2388125817b27b8afcf99093d97";//live
-//static NSString *const kMixpanelToken = @"f818411581cc210c670fe3351a46debe";//test
+//static NSString *const kMixpanelToken = @"aae3e2388125817b27b8afcf99093d97";//live
+static NSString *const kMixpanelToken = @"f818411581cc210c670fe3351a46debe";//test
 
 static NSString *const kMixpanelEventsFile = @"MixpanelEvents";
 static NSString *const kPlistResourceType  = @"plist";
 
 // Mixpanel events
-
 NSString *const kMixpanelAliasID          = @"MixpanelAliasID";
 NSString *const kAuthTypeEmail            = @"Email";
 NSString *const kAuthTypeFacebook         = @"Facebook";
@@ -33,6 +32,7 @@ NSString *const kFirstNameProperty        = @"First Name";
 NSString *const kLastNameProperty         = @"Last Name";
 NSString *const kQualtricsContactId       = @"Qualtrics Contact Id"; //mixpanel changes phase 2, was Bizrate ID
 NSString *const kBizrateRewardsUserId     = @"Bizrate Rewards User Id";
+NSString *const kIsTestUser               = @"Test User";
 
 NSString *defaultMixpanelToken = @"https://api.bizraterewards.com/v1/";
 static NSString *_mixpanelToken;
@@ -114,15 +114,18 @@ static NSString *_mixpanelToken;
 {
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     
-    BOOL isPushesEnabled = [BZRPushNotifiactionService pushNotificationsEnabled];
-    BOOL isGeolocationEnabled = [BZRLocationObserver sharedObserver].isAuthorized;
+   [BZRPushNotifiactionService pushNotificationsEnabledWithCompletion:^(BOOL enabled) {
+        BOOL isGeolocationEnabled = [BZRLocationObserver sharedObserver].isAuthorized;
+        
+        [mixpanel.people set:@{kPushNotificationsEnabled:enabled? @"YES" : @"NO",
+                               kGeoLocationEnabled:isGeolocationEnabled? @"YES" : @"NO",
+                               kFirstNameProperty:userProfile.firstName,
+                               kLastNameProperty:userProfile.lastName,
+                               kQualtricsContactId:userProfile.contactID,
+                               kBizrateRewardsUserId:@(userProfile.userId),
+                               kIsTestUser:@(userProfile.isTestUser)}];
+    }];
     
-    [mixpanel.people set:@{kPushNotificationsEnabled:isPushesEnabled? @"YES" : @"NO",
-                           kGeoLocationEnabled:isGeolocationEnabled? @"YES" : @"NO",
-                           kFirstNameProperty:userProfile.firstName,
-                           kLastNameProperty:userProfile.lastName,
-                           kQualtricsContactId:userProfile.contactID,
-                           kBizrateRewardsUserId:@(userProfile.userId)}];
 }
 
 + (void)setAliasForUser:(BZRUserProfile *)userProfile

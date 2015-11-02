@@ -19,7 +19,6 @@
 #import "BZRSendDeviceDataRequest.h"
 #import "BZRAPIInfoRequest.h"
 #import "BZRSignInWithFacebookRequest.h"
-#import "BZRUpdateNotificationsAndGeolocationPermissionsRequest.h"
 
 #import "BZRGetEligibleSurveysRequest.h"
 #import "BZRDeleteTakenSurveysRequest.h"

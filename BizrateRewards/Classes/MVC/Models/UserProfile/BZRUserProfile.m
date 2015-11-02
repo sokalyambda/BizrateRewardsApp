@@ -86,7 +86,7 @@ static NSString *const kIsTestUser              = @"is_test_user";
 
 - (BOOL)isRemoteNotificationsEnabled
 {
-    return [BZRPushNotifiactionService pushNotificationsEnabled];
+    return [BZRPushNotifiactionService isPushNotificationsEnabled];
 }
 
 - (BOOL)isGeolocationAccessGranted

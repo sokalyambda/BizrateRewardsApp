@@ -17,7 +17,8 @@
 + (void)registeredForPushNotificationsWithToken:(NSData *)deviceToken;
 + (void)failedToRegisterForPushNotificationsWithError:(NSError *)error;
 
-+ (BOOL)pushNotificationsEnabled;
++ (void)pushNotificationsEnabledWithCompletion:(void(^)(BOOL enabled))completion;
++ (BOOL)isPushNotificationsEnabled;
 
 + (void)cleanPushNotificationsBadges;
 
