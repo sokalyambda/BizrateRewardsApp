@@ -176,7 +176,8 @@ static NSString *const kPushPermissionsLastState = @"pushPermissionLastState";
         //track mixpanel event
         [BZRMixpanelService trackEventWithType:BZRMixpanelEventPushNotificationPermission
                                  propertyValue:isPushesEnabled? @"YES" : @"NO"];
-        if ([BZRProjectFacade isUserSessionValid]) {
+
+        if ([BZRProjectFacade isUserSessionValid] && !isPushesEnabled) {
             //update notifications and geolocation settings
             [BZRProjectFacade sendDeviceDataOnSuccess:^(BOOL isSuccess) {
                 

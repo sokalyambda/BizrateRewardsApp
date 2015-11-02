@@ -8,7 +8,6 @@
 
 #import "BZRDiagnosticsController.h"
 #import "BZRLocationDetailsDiagnosticsController.h"
-#import "BZRAccountSettingsController.h"
 
 #import "BZRSerialViewConstructor.h"
 #import "BZRBaseDropDownDataSource.h"
@@ -24,6 +23,8 @@
 #import "BZRDropDownTableView.h"
 
 #import "UIView+MakeFromXib.h"
+
+#import "BZRRedirectionHelper.h"
 
 static NSInteger const kCurrentNumberOfSections = 2.f;
 static NSInteger const kLocationEventsCount = 10.f;
@@ -255,20 +256,9 @@ static NSInteger const kLocationEventsCount = 10.f;
                     //TODO: setup new mixpanel token
                     [BZRMixpanelService setMixpanelToken:_currentEnvironment.mixPanelToken];
                     [BZRMixpanelService reinitMixpanelToken];
-                    
-                    [BZRProjectFacade signOutOnSuccess:^(BOOL isSuccess) {
-                        
-                        [CATransaction begin];
-                        [CATransaction setCompletionBlock:^{
-                            [weakSelf dismissViewControllerAnimated:YES completion:nil];
-                        }];
-                        [CATransaction commit];
-                        
-                        [weakSelf.settingsController signOut];
-                        
-                    } onFailure:^(NSError *error, BOOL isCanceled) {
-                        
-                    }];
+
+                    [BZRRedirectionHelper performSignOut];
+                    [weakSelf dismissViewControllerAnimated:YES completion:nil];
                     
                 }
             }];

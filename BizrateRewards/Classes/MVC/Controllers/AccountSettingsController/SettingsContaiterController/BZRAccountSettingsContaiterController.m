@@ -132,7 +132,6 @@ static CGFloat const kMinBottomSpace = 8.f;
         case BZRSettingsCellDiagnostics: {
             BZRDiagnosticsController *controller = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRDiagnosticsController class])];
             BZRBaseNavigationController *navigationController = [[BZRBaseNavigationController alloc] initWithRootViewController:controller];
-            controller.settingsController = (BZRAccountSettingsController *)self.parentViewController;
             [self presentViewController:navigationController animated:YES completion:nil];
         }
         case BZRSettingsCellDeleteSurveys: {

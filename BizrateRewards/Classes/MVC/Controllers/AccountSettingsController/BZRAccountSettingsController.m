@@ -12,6 +12,7 @@
 #import "BZRBaseNavigationController.h"
 
 #import "BZRAssetsHelper.h"
+#import "BZRRedirectionHelper.h"
 
 #import "BZRProjectFacade.h"
 
@@ -82,9 +83,8 @@ static NSString *const kAccountSettingsContainerSegueIdentifier = @"accountSetti
 {
     UIAlertController *signOutController = [UIAlertController alertControllerWithTitle:@"" message:LOCALIZED(@"Do you want to sign out?") preferredStyle:UIAlertControllerStyleActionSheet];
  
-    WEAK_SELF;
     UIAlertAction *signOutAction = [UIAlertAction actionWithTitle:LOCALIZED(@"Sign Out") style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-        [weakSelf signOut];
+        [BZRRedirectionHelper performSignOut];
     }];
     
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:LOCALIZED(@"Cancel") style:UIAlertActionStyleCancel handler:nil];
@@ -93,28 +93,6 @@ static NSString *const kAccountSettingsContainerSegueIdentifier = @"accountSetti
     [signOutController addAction:cancelAction];
     
     [self presentViewController:signOutController animated:YES completion:nil];
-}
-
-/**
- *  Sign out: clean user data and move to root controller.
- */
-- (void)signOut
-{
-    WEAK_SELF;
-    [BZRProjectFacade signOutOnSuccess:^(BOOL isSuccess) {
-        
-        BZRBaseNavigationController *navigationController = (BZRBaseNavigationController *)weakSelf.presentingViewController;
-        
-        [CATransaction begin];
-        [CATransaction setCompletionBlock:^{
-            [weakSelf dismissViewControllerAnimated:YES completion:nil];
-        }];
-        [navigationController popToRootViewControllerAnimated:YES];;
-        [CATransaction commit];
-        
-    } onFailure:^(NSError *error, BOOL isCanceled) {
-        
-    }];
 }
 
 /**

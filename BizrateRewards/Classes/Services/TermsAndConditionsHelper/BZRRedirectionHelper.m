@@ -265,4 +265,27 @@ static NSString *const kResetPasswordPath = @"reset_password";
 
 }
 
+/**
+ *  Sign out: clean user data and move to root controller.
+ */
++ (void)performSignOut
+{
+    [BZRProjectFacade signOutOnSuccess:^(BOOL isSuccess) {
+        
+        BZRBaseNavigationController *rootController = (BZRBaseNavigationController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+        
+        [CATransaction begin];
+        [CATransaction setCompletionBlock:^{
+            for (UIViewController *controller in rootController.viewControllers) {
+                [controller.presentedViewController dismissViewControllerAnimated:YES completion:nil];
+            }
+        }];
+        [rootController popToRootViewControllerAnimated:YES];;
+        [CATransaction commit];
+        
+    } onFailure:^(NSError *error, BOOL isCanceled) {
+        
+    }];
+}
+
 @end

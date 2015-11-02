@@ -25,4 +25,6 @@ typedef NS_ENUM(NSInteger, BZRRedirectionURLHandlingErrorCode) {
 
 + (void)redirectWithURL:(NSURL *)url withError:(NSError * __autoreleasing *)error;
 
++ (void)performSignOut;
+
 @end
