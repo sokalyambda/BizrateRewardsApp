@@ -131,9 +131,9 @@ static NSInteger const kLocationEventsCount = 10.f;
                                         withDataSource:self.environmentsDataSource
      
                                  withShowingCompletion:^(BZRDropDownTableView *table) {
-                                     NSLog(@"presented");
+                                     DLog(@"presented");
                                  } withCompletion:^(BZRDropDownTableView *table, id chosenValue) {
-                                     NSLog(@"chosen value %@", chosenValue);
+                                     DLog(@"chosen value %@", chosenValue);
                                      if ([chosenValue isKindOfClass:[BZREnvironment class]]) {
                                          weakSelf.currentEnvironment = (BZREnvironment *)chosenValue;
                                      }
@@ -219,11 +219,17 @@ static NSInteger const kLocationEventsCount = 10.f;
         } onFailure:^(NSError *error, BOOL isCanceled) {
             [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
             
+            if (weakSelf.redirectionBlock) {
+                weakSelf.redirectionBlock(error);
+            }
         }];
         
     } onFailure:^(NSError *error, BOOL isCanceled) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         
+        if (weakSelf.redirectionBlock) {
+            weakSelf.redirectionBlock(error);
+        }
     }];
 }
 
@@ -280,9 +286,7 @@ static NSInteger const kLocationEventsCount = 10.f;
             //return to default value of base url
             [BZRProjectFacade setBaseURLString:weakSelf.currentEnvironment.apiEndpointURLString];
             [BZRProjectFacade initHTTPClientWithRootPath:[BZRProjectFacade baseURLString] withCompletion:nil];
-            
-            
-            
+
         }];
         
     }];

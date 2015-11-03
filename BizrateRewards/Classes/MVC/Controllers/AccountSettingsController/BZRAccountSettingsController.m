@@ -14,8 +14,6 @@
 #import "BZRAssetsHelper.h"
 #import "BZRRedirectionHelper.h"
 
-#import "BZRProjectFacade.h"
-
 #import "BZRRoundedImageView.h"
 
 static NSString *const kAccountSettingsContainerSegueIdentifier = @"accountSettingsContainerSegue";

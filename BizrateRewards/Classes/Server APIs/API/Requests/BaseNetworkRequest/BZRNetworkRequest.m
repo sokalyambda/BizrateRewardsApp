@@ -84,7 +84,7 @@
         json = responseObject;
     }
     
-    NSLog(@"%@",json);
+    DLog(@"%@",json);
     
     if (error) {
         _error = error;

@@ -20,6 +20,7 @@ typedef NS_ENUM(NSUInteger, BZRCustomURLPathType) {
 #import "BZRFailureResettingController.h"
 #import "BZRBaseNavigationController.h"
 #import "BZRSurveyViewController.h"
+#import "BZRDashboardController.h"
 
 #import "BZRProjectFacade.h"
 #import "BZRSurveyService.h"
@@ -186,7 +187,6 @@ static NSString *const kResetPasswordPath = @"reset_password";
             }
         }
         
-        
         [rootController pushViewController:neededController animated:YES];
         
     } onFailure:^(NSError *error, BOOL isCanceled) {
@@ -270,22 +270,45 @@ static NSString *const kResetPasswordPath = @"reset_password";
  */
 + (void)performSignOut
 {
-    [BZRProjectFacade signOutOnSuccess:^(BOOL isSuccess) {
-        
-        BZRBaseNavigationController *rootController = (BZRBaseNavigationController *)[UIApplication sharedApplication].keyWindow.rootViewController;
-        
-        [CATransaction begin];
-        [CATransaction setCompletionBlock:^{
-            for (UIViewController *controller in rootController.viewControllers) {
-                [controller.presentedViewController dismissViewControllerAnimated:YES completion:nil];
-            }
+    if ([BZRProjectFacade isUserSessionValid]) {
+        [BZRProjectFacade signOutOnSuccess:^(BOOL isSuccess) {
+            
+            BZRBaseNavigationController *rootController = (BZRBaseNavigationController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+            
+            [CATransaction begin];
+            [CATransaction setCompletionBlock:^{
+                for (UIViewController *controller in rootController.viewControllers) {
+                    [controller.presentedViewController dismissViewControllerAnimated:YES completion:nil];
+                }
+            }];
+            [rootController popToRootViewControllerAnimated:YES];;
+            [CATransaction commit];
+            
+        } onFailure:^(NSError *error, BOOL isCanceled) {
+            
         }];
-        [rootController popToRootViewControllerAnimated:YES];;
-        [CATransaction commit];
-        
-    } onFailure:^(NSError *error, BOOL isCanceled) {
-        
-    }];
+    }
+}
+
+/**
+ *  Redirect to dashboard controller if error occurs
+ */
++ (void)redirectToDashboardController
+{
+    BZRBaseNavigationController *rootController = (BZRBaseNavigationController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+    
+    for (UIViewController *controller in rootController.viewControllers) {
+        [controller.presentedViewController dismissViewControllerAnimated:YES completion:nil];
+    }
+    
+    if (![rootController.topViewController isKindOfClass:[BZRDashboardController class]]) {
+        for (BZRBaseViewController *controller in rootController.viewControllers) {
+            if ([controller isKindOfClass:[BZRDashboardController class]]) {
+                [rootController popToViewController:controller animated:YES];
+                break;
+            }
+        }
+    }
 }
 
 @end

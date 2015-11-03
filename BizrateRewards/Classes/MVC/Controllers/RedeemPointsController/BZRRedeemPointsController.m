@@ -56,7 +56,7 @@
 {
     NSString *urlString = request.URL.absoluteString;
     
-    NSLog(@"URL string is %@", urlString);
+    DLog(@"URL string is %@", urlString);
     
     return YES;
 }

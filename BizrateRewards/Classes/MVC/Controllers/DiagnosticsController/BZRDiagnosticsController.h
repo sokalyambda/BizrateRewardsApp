@@ -12,6 +12,4 @@
 
 @interface BZRDiagnosticsController : BZRBaseViewController
 
-//@property (weak, nonatomic) BZRAccountSettingsController *settingsController;
-
 @end

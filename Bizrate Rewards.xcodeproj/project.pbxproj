@@ -158,6 +158,7 @@
 		58C770E71B5D5B6A00E9031F /* BZRCommonNumberFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C770E61B5D5B6A00E9031F /* BZRCommonNumberFormatter.m */; };
 		58D0A02F1BE0AF9400ED53D0 /* BZRRedirectionHelperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 58D0A02E1BE0AF9400ED53D0 /* BZRRedirectionHelperTests.m */; };
 		58D1E5D11B662EBD00347208 /* BZRSignInWithFacebookRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 58D1E5D01B662EBD00347208 /* BZRSignInWithFacebookRequest.m */; };
+		58DE416F1BE8A6420051018C /* NSError+HTTPResponseStatusCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 58DE416E1BE8A6420051018C /* NSError+HTTPResponseStatusCode.m */; };
 		58E238A41B5AA0B8007F8664 /* UIFont+Styles.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E238A31B5AA0B8007F8664 /* UIFont+Styles.m */; };
 		58E512431B4C70AF00865694 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 58E512391B4C70AF00865694 /* OpenSans-Bold.ttf */; };
 		58E512441B4C70AF00865694 /* OpenSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 58E5123A1B4C70AF00865694 /* OpenSans-BoldItalic.ttf */; };
@@ -489,6 +490,8 @@
 		58D0A02E1BE0AF9400ED53D0 /* BZRRedirectionHelperTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRRedirectionHelperTests.m; path = CustomURLHandlerTests/BZRRedirectionHelperTests.m; sourceTree = "<group>"; };
 		58D1E5CF1B662EBD00347208 /* BZRSignInWithFacebookRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRSignInWithFacebookRequest.h; path = SignInWithFacebookRequest/BZRSignInWithFacebookRequest.h; sourceTree = "<group>"; };
 		58D1E5D01B662EBD00347208 /* BZRSignInWithFacebookRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRSignInWithFacebookRequest.m; path = SignInWithFacebookRequest/BZRSignInWithFacebookRequest.m; sourceTree = "<group>"; };
+		58DE416D1BE8A6420051018C /* NSError+HTTPResponseStatusCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSError+HTTPResponseStatusCode.h"; path = "Classes/Categories/NSError/NSError+HTTPResponseStatusCode/NSError+HTTPResponseStatusCode.h"; sourceTree = "<group>"; };
+		58DE416E1BE8A6420051018C /* NSError+HTTPResponseStatusCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSError+HTTPResponseStatusCode.m"; path = "Classes/Categories/NSError/NSError+HTTPResponseStatusCode/NSError+HTTPResponseStatusCode.m"; sourceTree = "<group>"; };
 		58E238A21B5AA0B8007F8664 /* UIFont+Styles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIFont+Styles.h"; path = "Classes/Categories/UIFont/UIFont+Styles/UIFont+Styles.h"; sourceTree = "<group>"; };
 		58E238A31B5AA0B8007F8664 /* UIFont+Styles.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIFont+Styles.m"; path = "Classes/Categories/UIFont/UIFont+Styles/UIFont+Styles.m"; sourceTree = "<group>"; };
 		58E512391B4C70AF00865694 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-Bold.ttf"; path = "Resources/Fonts/OpenSans-Bold.ttf"; sourceTree = "<group>"; };
@@ -619,6 +622,7 @@
 		58219EE11B38A1F300A9541A /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				58DE416B1BE8A60B0051018C /* NSError */,
 				58C7310F1BD63E1D00112AD9 /* NSNull */,
 				58BF36071B74F92100699A63 /* MFMailComposeViewController */,
 				58B52A371B6A281D002D2529 /* UIImage */,
@@ -2175,6 +2179,23 @@
 			name = "Location Examples";
 			sourceTree = "<group>";
 		};
+		58DE416B1BE8A60B0051018C /* NSError */ = {
+			isa = PBXGroup;
+			children = (
+				58DE416C1BE8A6130051018C /* NSError+HTTPResponseStatusCode */,
+			);
+			name = NSError;
+			sourceTree = "<group>";
+		};
+		58DE416C1BE8A6130051018C /* NSError+HTTPResponseStatusCode */ = {
+			isa = PBXGroup;
+			children = (
+				58DE416D1BE8A6420051018C /* NSError+HTTPResponseStatusCode.h */,
+				58DE416E1BE8A6420051018C /* NSError+HTTPResponseStatusCode.m */,
+			);
+			name = "NSError+HTTPResponseStatusCode";
+			sourceTree = "<group>";
+		};
 		58DF1AE51B584CA800D28951 /* AssetsHelper */ = {
 			isa = PBXGroup;
 			children = (
@@ -2609,6 +2630,7 @@
 				58558E9F1BE228F8000868CC /* BZRBaseDropDownDataSource.m in Sources */,
 				58A5BEBA1B414ADC00B2BC27 /* BZRLeftImageTextField.m in Sources */,
 				84BE35CC1B5D0A4F001B99E2 /* BZRSurveyPointsInscriptionLabel.m in Sources */,
+				58DE416F1BE8A6420051018C /* NSError+HTTPResponseStatusCode.m in Sources */,
 				58A5BEC01B415C2F00B2BC27 /* BZRCheckBoxButton.m in Sources */,
 				58BD59C01B6F75AF00B6C5C4 /* BZRSendDeviceDataRequest.m in Sources */,
 				58ACC0761B395E6A0081E546 /* BZRPrivacyAndTermsController.m in Sources */,

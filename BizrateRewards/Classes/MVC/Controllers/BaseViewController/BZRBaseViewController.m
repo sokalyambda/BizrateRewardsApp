@@ -9,6 +9,12 @@
 #import "BZRBaseViewController.h"
 #import "BZRBaseNavigationController.h"
 
+#import "BZRRedirectionHelper.h"
+
+#import "NSError+HTTPResponseStatusCode.h"
+
+static NSInteger const kNotAuthorizedStatusCode = 401.f;
+
 @interface BZRBaseViewController ()
 
 @property (weak, nonatomic) BZRBaseNavigationController *baseNavigationController;
@@ -34,6 +40,18 @@
     [super viewWillAppear:animated];
     
     [self customizeNavigationItem];
+    
+    _redirectionBlock = ^(NSError *error) {
+        
+        NSInteger statusCode = error.HTTPResponseStatusCode;
+        
+        if (statusCode == kNotAuthorizedStatusCode) {
+            [BZRRedirectionHelper performSignOut];
+        } else {
+            [BZRRedirectionHelper redirectToDashboardController];
+        }
+        
+    };
 }
 
 /**

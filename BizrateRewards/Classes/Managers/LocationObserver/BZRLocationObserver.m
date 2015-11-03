@@ -137,7 +137,7 @@ static NSString *const kOBStore = @"Store";
             //update notifications and geolocation settings
             [BZRProjectFacade sendDeviceDataOnSuccess:^(BOOL isSuccess) {
                 
-                NSLog(@"geolocation access have been updated");
+                DLog(@"geolocation access have been updated");
                 
             } onFailure:^(NSError *error, BOOL isCanceled) {
                 

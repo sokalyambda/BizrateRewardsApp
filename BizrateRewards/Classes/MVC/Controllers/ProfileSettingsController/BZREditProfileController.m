@@ -142,7 +142,9 @@ static NSString *const kEditProfileContainerSegueIdentifier = @"editProfileConta
                                    } onFailure:^(NSError *error, BOOL isCanceled) {
                                        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
                                        [BZRAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:^{
-                                           
+                                           if (weakSelf.redirectionBlock) {
+                                               weakSelf.redirectionBlock(error);
+                                           }
                                        }];
                                    }];
                                } onFailure:^(NSMutableDictionary *errorDict) {

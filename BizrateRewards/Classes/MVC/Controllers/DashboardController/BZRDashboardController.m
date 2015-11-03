@@ -25,6 +25,7 @@
 
 #import "BZRPushNotifiactionService.h"
 #import "BZRSurveyService.h"
+
 #import "BZRProjectFacade.h"
 
 #import "BZRRedirectionHelper.h"
@@ -148,7 +149,11 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
 
     } onFailure:^(NSError *error, BOOL isCanceled) {
         [refreshControl endRefreshing];
-        [BZRAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
+        [BZRAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:^{
+            if (weakSelf.redirectionBlock) {
+                weakSelf.redirectionBlock(error);
+            }
+        }];
     }];
 }
 
@@ -177,7 +182,9 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
     } onFailure:^(NSError *error, BOOL isCanceled) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         [BZRAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:^{
-            
+            if (weakSelf.redirectionBlock) {
+                weakSelf.redirectionBlock(error);
+            }
         }];
     }];
 }
@@ -202,7 +209,9 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
     } onFailure:^(NSError *error, BOOL isCanceled) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         [BZRAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:^{
-            
+            if (weakSelf.redirectionBlock) {
+                weakSelf.redirectionBlock(error);
+            }
         }];
     }];
 }
@@ -283,14 +292,18 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
         } onFailure:^(NSError *error, BOOL isCanceled) {
             [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
             [BZRAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:^{
-                
+                if (weakSelf.redirectionBlock) {
+                    weakSelf.redirectionBlock(error);
+                }
             }];
         }];
         
     } onFailure:^(NSError *error, BOOL isCanceled) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         [BZRAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:^{
-            
+            if (weakSelf.redirectionBlock) {
+                weakSelf.redirectionBlock(error);
+            }
         }];
     }];
 }

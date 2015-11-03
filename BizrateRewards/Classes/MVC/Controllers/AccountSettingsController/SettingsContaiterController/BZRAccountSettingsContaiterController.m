@@ -237,7 +237,11 @@ static CGFloat const kMinBottomSpace = 8.f;
         [BZRAlertFacade showAlertWithMessage:LOCALIZED(@"Surveys have been deleted.") forController:weakSelf.parentController withCompletion:nil];
     } onFailure:^(NSError *error, BOOL isCanceled) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.parentController.view animated:YES];
-        [BZRAlertFacade showFailureResponseAlertWithError:error forController:weakSelf.parentController andCompletion:nil];
+        [BZRAlertFacade showFailureResponseAlertWithError:error forController:weakSelf.parentController andCompletion:^{
+            if (weakSelf.parentController.redirectionBlock) {
+                weakSelf.parentController.redirectionBlock(error);
+            }
+        }];
     }];
 }
 

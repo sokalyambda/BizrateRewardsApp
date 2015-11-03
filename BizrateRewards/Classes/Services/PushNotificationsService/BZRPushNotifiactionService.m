@@ -18,6 +18,8 @@ static NSString *const kPushPermissionsLastState = @"pushPermissionLastState";
 
 static NSString *const kRedirectedURL = @"redirected_url";
 
+static NSString *const kDefaultLatestSurveyURLString = @"com.bizraterewards://survey/latest";
+
 @implementation BZRPushNotifiactionService
 
 /**
@@ -93,7 +95,7 @@ static NSString *const kRedirectedURL = @"redirected_url";
 + (void)receivedPushNotification:(NSDictionary*)userInfo
            withApplicationState:(UIApplicationState)applicationState
 {
-    NSURL *redirectedURL = userInfo[kRedirectedURL];
+    NSURL *redirectedURL = [NSURL URLWithString:kDefaultLatestSurveyURLString];//userInfo[kRedirectedURL];
     NSError *error;
     [BZRRedirectionHelper redirectWithURL:redirectedURL withError:&error];
 }
@@ -127,7 +129,7 @@ static NSString *const kRedirectedURL = @"redirected_url";
                     [mixpanel identify:mixpanel.distinctId];
                     [mixpanel.people addPushDeviceToken:tokenData];
                     
-                    NSLog(@"Device token has been sent");
+                    DLog(@"Device token has been sent");
                     
                 } onFailure:^(NSError *error, BOOL isCanceled) {
                     
@@ -179,7 +181,7 @@ static NSString *const kRedirectedURL = @"redirected_url";
             //update notifications and geolocation settings
             [BZRProjectFacade sendDeviceDataOnSuccess:^(BOOL isSuccess) {
                 
-                NSLog(@"notifications access have been updated");
+                DLog(@"notifications access have been updated");
                 
             } onFailure:^(NSError *error, BOOL isCanceled) {
                 

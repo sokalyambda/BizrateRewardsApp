@@ -136,7 +136,7 @@ static NSString *const kCleanSessionLock = @"CleanSessionLock";
                     break;
                 }
             }
-            NSLog(@"%@", stateText);
+            DLog(@"%@", stateText);
 #endif
         }];
 

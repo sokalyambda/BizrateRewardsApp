@@ -16,8 +16,12 @@
 
 #import "BZRSessionManager.h"
 
+#import "NSError+HTTPResponseStatusCode.h"
+
 static NSString *const kCountOfBytesSent = @"countOfBytesSent";
 static NSString *const kCountOfBytesReceived = @"countOfBytesReceived";
+
+static NSInteger const kNotAuthorizedStatusCode = 401.f;
 
 NS_CLASS_AVAILABLE(10_9, 7_0)
 @interface DataTask : NSURLSessionDataTask @end
@@ -175,6 +179,14 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
                 requestCanceled = YES;
             } else {
                 weakSelf.networkRequest.error = error;
+            }
+            
+            //get status code of httpResponse
+            if ([operation isKindOfClass:[NSHTTPURLResponse class]]) {
+                NSInteger statusCode = ((NSHTTPURLResponse *)operation).statusCode;
+                DLog(@"status code %d", statusCode);
+                
+                weakSelf.networkRequest.error.HTTPResponseStatusCode = statusCode;
             }
             
             if (weakSelf.failureBlock) {
@@ -370,7 +382,9 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
         if (bytesSend > totalBytesSend) {
             bytesSend = totalBytesSend;
         }
-        //        NSLog(@"%@ + %ld + %ld", self, (long)bytesSend, (long)totalBytesSend);
+        
+        DLog(@"%@ + %ld + %ld", self, (long)bytesSend, (long)totalBytesSend);
+        
         self.progressBlock(self, bytesSend, totalBytesSend);
     }
 }

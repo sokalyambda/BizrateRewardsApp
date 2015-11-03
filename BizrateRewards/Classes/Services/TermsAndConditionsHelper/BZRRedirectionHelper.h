@@ -27,4 +27,6 @@ typedef NS_ENUM(NSInteger, BZRRedirectionURLHandlingErrorCode) {
 
 + (void)performSignOut;
 
++ (void)redirectToDashboardController;
+
 @end
