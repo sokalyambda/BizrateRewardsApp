@@ -158,6 +158,9 @@
 		58C770E71B5D5B6A00E9031F /* BZRCommonNumberFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 58C770E61B5D5B6A00E9031F /* BZRCommonNumberFormatter.m */; };
 		58D0A02F1BE0AF9400ED53D0 /* BZRRedirectionHelperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 58D0A02E1BE0AF9400ED53D0 /* BZRRedirectionHelperTests.m */; };
 		58D1E5D11B662EBD00347208 /* BZRSignInWithFacebookRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 58D1E5D01B662EBD00347208 /* BZRSignInWithFacebookRequest.m */; };
+		58D7AC7E1BF08C4400ECB928 /* BZRUserProfileService.m in Sources */ = {isa = PBXBuildFile; fileRef = 58D7AC7D1BF08C4400ECB928 /* BZRUserProfileService.m */; };
+		58D7AC821BF0926C00ECB928 /* BZRGiftCardsService.m in Sources */ = {isa = PBXBuildFile; fileRef = 58D7AC811BF0926C00ECB928 /* BZRGiftCardsService.m */; };
+		58D7AC861BF09C4500ECB928 /* BZRServerAPIEntityService.m in Sources */ = {isa = PBXBuildFile; fileRef = 58D7AC851BF09C4500ECB928 /* BZRServerAPIEntityService.m */; };
 		58DE416F1BE8A6420051018C /* NSError+HTTPResponseStatusCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 58DE416E1BE8A6420051018C /* NSError+HTTPResponseStatusCode.m */; };
 		58E238A41B5AA0B8007F8664 /* UIFont+Styles.m in Sources */ = {isa = PBXBuildFile; fileRef = 58E238A31B5AA0B8007F8664 /* UIFont+Styles.m */; };
 		58E512431B4C70AF00865694 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 58E512391B4C70AF00865694 /* OpenSans-Bold.ttf */; };
@@ -490,6 +493,12 @@
 		58D0A02E1BE0AF9400ED53D0 /* BZRRedirectionHelperTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRRedirectionHelperTests.m; path = CustomURLHandlerTests/BZRRedirectionHelperTests.m; sourceTree = "<group>"; };
 		58D1E5CF1B662EBD00347208 /* BZRSignInWithFacebookRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRSignInWithFacebookRequest.h; path = SignInWithFacebookRequest/BZRSignInWithFacebookRequest.h; sourceTree = "<group>"; };
 		58D1E5D01B662EBD00347208 /* BZRSignInWithFacebookRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRSignInWithFacebookRequest.m; path = SignInWithFacebookRequest/BZRSignInWithFacebookRequest.m; sourceTree = "<group>"; };
+		58D7AC7C1BF08C4400ECB928 /* BZRUserProfileService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRUserProfileService.h; path = Classes/Services/ModelsServices/UserProfileService/BZRUserProfileService.h; sourceTree = "<group>"; };
+		58D7AC7D1BF08C4400ECB928 /* BZRUserProfileService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRUserProfileService.m; path = Classes/Services/ModelsServices/UserProfileService/BZRUserProfileService.m; sourceTree = "<group>"; };
+		58D7AC801BF0926C00ECB928 /* BZRGiftCardsService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRGiftCardsService.h; path = Classes/Services/ModelsServices/GiftCardsService/BZRGiftCardsService.h; sourceTree = "<group>"; };
+		58D7AC811BF0926C00ECB928 /* BZRGiftCardsService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRGiftCardsService.m; path = Classes/Services/ModelsServices/GiftCardsService/BZRGiftCardsService.m; sourceTree = "<group>"; };
+		58D7AC841BF09C4500ECB928 /* BZRServerAPIEntityService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRServerAPIEntityService.h; path = Classes/Services/ModelsServices/ServerAPIEntityService/BZRServerAPIEntityService.h; sourceTree = "<group>"; };
+		58D7AC851BF09C4500ECB928 /* BZRServerAPIEntityService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRServerAPIEntityService.m; path = Classes/Services/ModelsServices/ServerAPIEntityService/BZRServerAPIEntityService.m; sourceTree = "<group>"; };
 		58DE416D1BE8A6420051018C /* NSError+HTTPResponseStatusCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSError+HTTPResponseStatusCode.h"; path = "Classes/Categories/NSError/NSError+HTTPResponseStatusCode/NSError+HTTPResponseStatusCode.h"; sourceTree = "<group>"; };
 		58DE416E1BE8A6420051018C /* NSError+HTTPResponseStatusCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSError+HTTPResponseStatusCode.m"; path = "Classes/Categories/NSError/NSError+HTTPResponseStatusCode/NSError+HTTPResponseStatusCode.m"; sourceTree = "<group>"; };
 		58E238A21B5AA0B8007F8664 /* UIFont+Styles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIFont+Styles.h"; path = "Classes/Categories/UIFont/UIFont+Styles/UIFont+Styles.h"; sourceTree = "<group>"; };
@@ -1682,6 +1691,10 @@
 		58AA30731B7B860000363119 /* ModelsServices */ = {
 			isa = PBXGroup;
 			children = (
+				58D7AC871BF09DA200ECB928 /* EnvironmentService */,
+				58D7AC831BF09C1F00ECB928 /* ServerAPIEntityService */,
+				58D7AC7F1BF0924400ECB928 /* GiftCardsService */,
+				58D7AC7B1BF08C1500ECB928 /* UserProfileService */,
 				58B553DE1BE376D200B6F48A /* EnvironmentService */,
 				58AA30741B7B860800363119 /* SurveyService */,
 			);
@@ -2179,6 +2192,40 @@
 			name = "Location Examples";
 			sourceTree = "<group>";
 		};
+		58D7AC7B1BF08C1500ECB928 /* UserProfileService */ = {
+			isa = PBXGroup;
+			children = (
+				58D7AC7C1BF08C4400ECB928 /* BZRUserProfileService.h */,
+				58D7AC7D1BF08C4400ECB928 /* BZRUserProfileService.m */,
+			);
+			name = UserProfileService;
+			sourceTree = "<group>";
+		};
+		58D7AC7F1BF0924400ECB928 /* GiftCardsService */ = {
+			isa = PBXGroup;
+			children = (
+				58D7AC801BF0926C00ECB928 /* BZRGiftCardsService.h */,
+				58D7AC811BF0926C00ECB928 /* BZRGiftCardsService.m */,
+			);
+			name = GiftCardsService;
+			sourceTree = "<group>";
+		};
+		58D7AC831BF09C1F00ECB928 /* ServerAPIEntityService */ = {
+			isa = PBXGroup;
+			children = (
+				58D7AC841BF09C4500ECB928 /* BZRServerAPIEntityService.h */,
+				58D7AC851BF09C4500ECB928 /* BZRServerAPIEntityService.m */,
+			);
+			name = ServerAPIEntityService;
+			sourceTree = "<group>";
+		};
+		58D7AC871BF09DA200ECB928 /* EnvironmentService */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = EnvironmentService;
+			sourceTree = "<group>";
+		};
 		58DE416B1BE8A60B0051018C /* NSError */ = {
 			isa = PBXGroup;
 			children = (
@@ -2658,11 +2705,13 @@
 				58ECCEE91B8F5ECC00528192 /* BZRAPIInfoRequest.m in Sources */,
 				58558E991BE2232B000868CC /* BZRDropDownTableView.m in Sources */,
 				58C770E71B5D5B6A00E9031F /* BZRCommonNumberFormatter.m in Sources */,
+				58D7AC861BF09C4500ECB928 /* BZRServerAPIEntityService.m in Sources */,
 				58AA303D1B7B7FF300363119 /* BZRFacebookService.m in Sources */,
 				585C32AF1B63C854005BF07B /* BZRSignUpRequest.m in Sources */,
 				58ACC0811B39689F0081E546 /* BZRSignUpController.m in Sources */,
 				585641B61B4DA5AA007E7368 /* BZRAuthorizationField.m in Sources */,
 				58AF4AF01B5BB6F10052C7E5 /* UIImagePickerController+AdjustStatusBar.m in Sources */,
+				58D7AC821BF0926C00ECB928 /* BZRGiftCardsService.m in Sources */,
 				58901CF41B500E1B00D4A16B /* BZRBaseNavigationController.m in Sources */,
 				58ECCEED1B8F600C00528192 /* BZRServerAPIEntity.m in Sources */,
 				58219F191B38A3F600A9541A /* NSDictionary+JSONRepresentation.m in Sources */,
@@ -2670,6 +2719,7 @@
 				585C32B81B63C9D9005BF07B /* BZRUpdateCurrentUserRequest.m in Sources */,
 				58AA30541B7B807F00363119 /* BZRLocationObserver.m in Sources */,
 				84AD3F011B4587DA00C294AE /* BZRProgressView.m in Sources */,
+				58D7AC7E1BF08C4400ECB928 /* BZRUserProfileService.m in Sources */,
 				58B52A431B6A30F0002D2529 /* BZRFacebookProfile.m in Sources */,
 				585C32A71B63AA3F005BF07B /* BZRSessionManager.m in Sources */,
 				58558EA71BE22AFC000868CC /* BZRDropDownCell.m in Sources */,

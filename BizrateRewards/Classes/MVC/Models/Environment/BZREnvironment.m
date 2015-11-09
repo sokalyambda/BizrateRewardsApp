@@ -8,9 +8,7 @@
 
 #import "BZREnvironment.h"
 
-static NSString *const kEnvironmentName = @"environmentName";
-static NSString *const kAPIURLString    = @"APIURLString";
-static NSString *const kMixPanelToken   = @"mixPanelToken";
+#import "BZREnvironmentService.h"
 
 @interface BZREnvironment ()<NSCoding>
 
@@ -38,50 +36,15 @@ static NSString *const kMixPanelToken   = @"mixPanelToken";
 
 - (void)encodeWithCoder:(NSCoder *)encoder
 {
-    //Encode properties, other class variables, etc
-    [encoder encodeObject:self.environmentName forKey:kEnvironmentName];
-    [encoder encodeObject:self.apiEndpointURLString forKey:kAPIURLString];
-    [encoder encodeObject:self.mixPanelToken forKey:kMixPanelToken];
+    [BZREnvironmentService encodeEnvironment:self withCoder:encoder];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder
 {
     if((self = [super init])) {
-        //decode properties, other class vars
-        _environmentName        = [decoder decodeObjectForKey:kEnvironmentName];
-        _apiEndpointURLString   = [decoder decodeObjectForKey:kAPIURLString];
-        _mixPanelToken          = [decoder decodeObjectForKey:kMixPanelToken];
-
+        [BZREnvironmentService decodeEnvironment:self withDecoder:decoder];
     }
     return self;
-}
-
-#pragma mark - NSUserDefaults methods
-
-- (void)setEnvironmentToDefaultsForKey:(NSString *)key
-{
-    NSData *encodedObject = [NSKeyedArchiver archivedDataWithRootObject:self];
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
-    if ([defaults.dictionaryRepresentation.allKeys containsObject:key]) {
-        [defaults removeObjectForKey:key];
-    }
-    
-    [defaults setObject:encodedObject forKey:key];
-    [defaults synchronize];
-}
-
-+ (BZREnvironment *)environmentFromDefaultsForKey:(NSString *)key
-{
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
-    if (![defaults.dictionaryRepresentation.allKeys containsObject:key]) {
-        return nil;
-    }
-    
-    NSData *encodedObject = [defaults objectForKey:key];
-    BZREnvironment *environment = [NSKeyedUnarchiver unarchiveObjectWithData:encodedObject];
-    return environment;
 }
 
 #pragma mark - Equality

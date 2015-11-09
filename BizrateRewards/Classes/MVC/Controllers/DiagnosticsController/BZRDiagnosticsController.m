@@ -175,7 +175,8 @@ static NSInteger const kLocationEventsCount = 10.f;
  */
 - (void)reinitDefaultValue
 {
-    BZREnvironment *savedEnvironment = [BZREnvironment environmentFromDefaultsForKey:CurrentAPIEnvironment];
+    BZREnvironment *savedEnvironment = [BZREnvironmentService environmentFromDefaultsForKey:CurrentAPIEnvironment];
+    
     if (!savedEnvironment) {
         id defaultValue = self.environmentsDataSource.currentSelectedValue;
         if ([defaultValue isKindOfClass:[BZREnvironment class]]) {
@@ -263,10 +264,10 @@ static NSInteger const kLocationEventsCount = 10.f;
             
             [BZRAlertFacade showAlertWithMessage:LOCALIZED(@"API endpoint has been saved.") forController:weakSelf withCompletion:^{
                 //logout..
-                if ((![weakSelf.currentEnvironment isEqual:[BZREnvironment environmentFromDefaultsForKey:CurrentAPIEnvironment]])) {
+                if ((![weakSelf.currentEnvironment isEqual:[BZREnvironmentService environmentFromDefaultsForKey:CurrentAPIEnvironment]])) {
                     
                     //save current environment
-                    [weakSelf.currentEnvironment setEnvironmentToDefaultsForKey:CurrentAPIEnvironment];
+                    [BZREnvironmentService setEnvironment:weakSelf.currentEnvironment toDefaultsForKey:CurrentAPIEnvironment];
                     
                     [BZRMixpanelService setMixpanelToken:weakSelf.currentEnvironment.mixPanelToken];
                     [BZRMixpanelService reinitMixpanelToken];

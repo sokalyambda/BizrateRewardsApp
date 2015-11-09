@@ -8,6 +8,8 @@
 
 #import "BZRGetCurrentUserRequest.h"
 
+#import "BZRUserProfileService.h"
+
 static NSString *const requestAction = @"user/me";
 
 @implementation BZRGetCurrentUserRequest
@@ -39,7 +41,7 @@ static NSString *const requestAction = @"user/me";
     if (!responseObject) {
         return NO;
     } else {
-        self.currentUserProfile = [[BZRUserProfile alloc] initWithServerResponse:responseObject];
+        self.currentUserProfile = [BZRUserProfileService userProfileWithServerResponse:responseObject];
         return !!self.currentUserProfile;
     }
 }

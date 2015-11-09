@@ -8,13 +8,10 @@
 
 @interface BZREnvironment : NSObject
 
-@property (strong, nonatomic, readonly) NSString *environmentName;
+@property (strong, nonatomic) NSString *environmentName;
 @property (strong, nonatomic) NSString *apiEndpointURLString;
 @property (strong, nonatomic) NSString *mixPanelToken;
 
 + (instancetype)environmentWithName:(NSString *)name;
-
-- (void)setEnvironmentToDefaultsForKey:(NSString *)key;
-+ (BZREnvironment *)environmentFromDefaultsForKey:(NSString *)key;
 
 @end

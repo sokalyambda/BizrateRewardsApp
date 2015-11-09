@@ -19,6 +19,10 @@ static NSString *const kDevelopmentMixPanelToken    = @"f818411581cc210c670fe335
 static NSString *const kStagingMixPanelToken        = @"stagingMixPanel";
 static NSString *const kProductionMixPanelToken     = @"f818411581cc210c670fe3351a46debe";
 
+static NSString *const kEnvironmentName = @"environmentName";
+static NSString *const kAPIURLString    = @"APIURLString";
+static NSString *const kMixPanelToken   = @"mixPanelToken";
+
 @implementation BZREnvironmentService
 
 + (NSArray *)eligibleEnvironmentsArray
@@ -41,6 +45,56 @@ static NSString *const kProductionMixPanelToken     = @"f818411581cc210c670fe335
 + (BZREnvironment *)defaultEnvironment
 {
     return [[self eligibleEnvironmentsArray] lastObject]; //production
+}
+
+#pragma mark - NSCoding
+
++ (void)encodeEnvironment:(BZREnvironment *)environment
+                withCoder:(NSCoder *)encoder
+{
+    //Encode properties, other class variables, etc
+    [encoder encodeObject:environment.environmentName forKey:kEnvironmentName];
+    [encoder encodeObject:environment.apiEndpointURLString forKey:kAPIURLString];
+    [encoder encodeObject:environment.mixPanelToken forKey:kMixPanelToken];
+}
+
++ (BZREnvironment *)decodeEnvironment:(BZREnvironment *)environment
+                          withDecoder:(NSCoder *)decoder
+{
+    environment.environmentName        = [decoder decodeObjectForKey:kEnvironmentName];
+    environment.apiEndpointURLString   = [decoder decodeObjectForKey:kAPIURLString];
+    environment.mixPanelToken          = [decoder decodeObjectForKey:kMixPanelToken];
+    
+    return environment;
+}
+
+#pragma mark - NSUserDefaults
+
++ (void)setEnvironment:(BZREnvironment *)environment
+      toDefaultsForKey:(NSString *)key
+{
+    NSData *encodedObject = [NSKeyedArchiver archivedDataWithRootObject:environment];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    if ([defaults.dictionaryRepresentation.allKeys containsObject:key]) {
+        [defaults removeObjectForKey:key];
+    }
+    
+    [defaults setObject:encodedObject forKey:key];
+    [defaults synchronize];
+}
+
++ (BZREnvironment *)environmentFromDefaultsForKey:(NSString *)key
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    if (![defaults.dictionaryRepresentation.allKeys containsObject:key]) {
+        return nil;
+    }
+    
+    NSData *encodedObject = [defaults objectForKey:key];
+    BZREnvironment *environment = [NSKeyedUnarchiver unarchiveObjectWithData:encodedObject];
+    return environment;
 }
 
 @end

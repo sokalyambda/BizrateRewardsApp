@@ -8,13 +8,13 @@
 
 #import "BZRMixpanelService.h"
 #import <Mixpanel.h>
+#import "BZRPushNotifiactionService.h"
+#import "BZREnvironmentService.h"
 
 #import "BZRLocationEvent.h"
 #import "BZREnvironment.h"
 
-#import "BZRPushNotifiactionService.h"
 #import "BZRLocationObserver.h"
-#import "BZREnvironmentService.h"
 
 //static NSString *const kMixpanelToken = @"aae3e2388125817b27b8afcf99093d97";//live
 static NSString *const kMixpanelToken = @"f818411581cc210c670fe3351a46debe";//test
@@ -45,11 +45,11 @@ static NSString *_mixpanelToken;
 {
     @synchronized(self) {
         
-        BZREnvironment *savedEnvironment = [BZREnvironment environmentFromDefaultsForKey:CurrentAPIEnvironment];
+        BZREnvironment *savedEnvironment = [BZREnvironmentService environmentFromDefaultsForKey:CurrentAPIEnvironment];
         
         if (!savedEnvironment) {
             savedEnvironment = [BZREnvironmentService defaultEnvironment];
-            [savedEnvironment setEnvironmentToDefaultsForKey:CurrentAPIEnvironment];
+            [BZREnvironmentService setEnvironment:savedEnvironment toDefaultsForKey:CurrentAPIEnvironment];
         }
         
         if (!_mixpanelToken && savedEnvironment) {

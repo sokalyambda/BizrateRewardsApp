@@ -8,6 +8,8 @@
 
 #import "BZRUpdateCurrentUserRequest.h"
 
+#import "BZRUserProfileService.h"
+
 static NSString *const requestAction = @"user/me";
 
 static NSString *const kFirstName = @"firstname";
@@ -46,7 +48,7 @@ static NSString *const kDateOfBirth = @"dob";
     if (!responseObject) {
         return NO;
     } else {
-        self.updatedProfile = [[BZRUserProfile alloc] initWithServerResponse:responseObject];
+        self.updatedProfile = [BZRUserProfileService userProfileWithServerResponse:responseObject];
         return !!self.updatedProfile;
     }
 }

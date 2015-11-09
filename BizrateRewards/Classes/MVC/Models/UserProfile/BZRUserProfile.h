@@ -8,7 +8,7 @@
 
 #import "BZRMappingProtocol.h"
 
-@interface BZRUserProfile : NSObject<BZRMappingProtocol>
+@interface BZRUserProfile : NSObject
 
 @property (strong, nonatomic) NSURL     *avatarURL;
 

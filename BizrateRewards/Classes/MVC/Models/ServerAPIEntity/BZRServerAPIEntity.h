@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Connexity. All rights reserved.
 //
 
-@interface BZRServerAPIEntity : NSObject<BZRMappingProtocol>
+@interface BZRServerAPIEntity : NSObject
 
 @property (strong, nonatomic) NSString *apiEnv;
 @property (strong, nonatomic) NSString *apiBranch;

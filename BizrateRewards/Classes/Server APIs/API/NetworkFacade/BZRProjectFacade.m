@@ -36,11 +36,11 @@ static NSString *_baseURLString;
 + (NSString *)baseURLString
 {
     @synchronized(self) {
-        BZREnvironment *savedEnvironment = [BZREnvironment environmentFromDefaultsForKey:CurrentAPIEnvironment];
+        BZREnvironment *savedEnvironment = [BZREnvironmentService environmentFromDefaultsForKey:CurrentAPIEnvironment];
         
         if (!savedEnvironment) {
             savedEnvironment = [BZREnvironmentService defaultEnvironment];
-            [savedEnvironment setEnvironmentToDefaultsForKey:CurrentAPIEnvironment];
+            [BZREnvironmentService setEnvironment:savedEnvironment toDefaultsForKey:CurrentAPIEnvironment];
         }
         
         if (!_baseURLString && savedEnvironment) {

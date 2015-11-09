@@ -10,6 +10,8 @@
 
 #import "BZRGiftCard.h"
 
+#import "BZRGiftCardsService.h"
+
 static NSString *requestAction = @"giftcards/featured";
 
 @implementation BZRGetFeaturedGiftcards
@@ -40,7 +42,7 @@ static NSString *requestAction = @"giftcards/featured";
         NSMutableArray *giftCards = [NSMutableArray array];
         if ([responseObject isKindOfClass:[NSArray class]]) {
             for (NSDictionary *responseDict in responseObject) {
-                BZRGiftCard *giftCard = [[BZRGiftCard alloc] initWithServerResponse:responseDict];
+                BZRGiftCard *giftCard = [BZRGiftCardsService giftCardFromServerResponse:responseDict];
                 [giftCards addObject:giftCard];
             }
         }
