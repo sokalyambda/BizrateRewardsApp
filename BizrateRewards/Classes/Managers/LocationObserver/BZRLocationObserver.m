@@ -185,6 +185,10 @@ static NSString *const kOBStore = @"Store";
 
 #pragma mark - OB_LocationServicesDelegate
 
+/**
+ *  All methods below should be implemented because OBSDK requires it
+ */
+
 - (void)OB_receivedOnEnter:(NSDictionary *)data
 {
     [self sendLocationEventWithInitDictionary:data andType:BZRLocationEventTypeEntry];
