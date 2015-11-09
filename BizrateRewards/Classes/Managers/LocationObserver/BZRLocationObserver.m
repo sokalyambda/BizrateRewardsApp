@@ -12,11 +12,12 @@
 
 #import "OB_Services.h"
 
-#import "BZRProjectFacade.h"
-
 #import "BZRLocationEvent.h"
 
 #import "BZRAlertFacade.h"
+#import "BZRProjectFacade.h"
+
+#import "BZRLocationEventService.h"
 
 static NSString *const kGeolocationPermissionsLastState = @"geolocationPermissionsLastState";
 
@@ -166,14 +167,14 @@ static NSString *const kOBStore = @"Store";
 - (void)sendLocationEventWithInitDictionary:(NSDictionary *)dictionary andType:(BZRLocaionEventType)eventType
 {
     if ([BZRProjectFacade isUserSessionValid]) {
-        BZRLocationEvent *locationEvent = [[BZRLocationEvent alloc] initWithOfferBeamCallback:dictionary[kOBStore]];
+        BZRLocationEvent *locationEvent = [BZRLocationEventService locationEventFromOfferBeamResponse:dictionary[kOBStore]];
         
         locationEvent.eventType = eventType;
         //track mixpanel event (enter/exit geofence)
         [BZRMixpanelService trackLocationEvent:locationEvent];
         
         //set last location event to userDefaults
-        [locationEvent setLocationEventToDefaultsForKey:LastReceivedLocationEvent];
+        [BZRLocationEventService setLocationEvent:locationEvent toDefaultsForKey:LastReceivedLocationEvent];
         
         [BZRProjectFacade sendGeolocationEvent:locationEvent onSuccess:^(BZRLocationEvent *locationEvent) {
             

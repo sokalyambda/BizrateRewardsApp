@@ -11,6 +11,8 @@
 #import "BZRLocationEvent.h"
 #import "BZRServerAPIEntity.h"
 
+#import "BZRLocationEventService.h"
+
 @interface BZRStorageManager ()
 
 @end
@@ -30,7 +32,7 @@
 - (BZRLocationEvent *)lastReceivedLocationEvent
 {
     if (!_lastReceivedLocationEvent) {
-        _lastReceivedLocationEvent = [BZRLocationEvent locationEventFromDefaultsForKey:LastReceivedLocationEvent];
+        _lastReceivedLocationEvent = [BZRLocationEventService locationEventFromDefaultsForKey:LastReceivedLocationEvent];
     }
     return _lastReceivedLocationEvent;
 }

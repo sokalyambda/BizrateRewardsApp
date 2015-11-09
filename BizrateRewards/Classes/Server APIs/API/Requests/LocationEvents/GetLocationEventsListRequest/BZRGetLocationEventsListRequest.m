@@ -10,6 +10,8 @@
 
 #import "BZRLocationEvent.h"
 
+#import "BZRLocationEventService.h"
+
 static NSString *requestAction = @"user/location/event";
 
 @implementation BZRGetLocationEventsListRequest
@@ -40,7 +42,7 @@ static NSString *requestAction = @"user/location/event";
         NSMutableArray *events = [NSMutableArray array];
         if ([responseObject isKindOfClass:[NSArray class]]) {
             for (NSDictionary *responseDict in responseObject) {
-                BZRLocationEvent *event = [[BZRLocationEvent alloc] initWithServerResponse:responseDict];
+                BZRLocationEvent *event = [BZRLocationEventService locationEventFromServerResponse:responseDict];
                 [events addObject:event];
             }
         }

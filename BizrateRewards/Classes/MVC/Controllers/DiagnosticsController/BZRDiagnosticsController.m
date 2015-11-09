@@ -26,6 +26,7 @@
 
 #import "BZRRedirectionHelper.h"
 #import "BZREnvironmentService.h"
+#import "BZRLocationEventService.h"
 
 static NSInteger const kCurrentNumberOfSections = 2.f;
 static NSInteger const kLocationEventsCount = 10.f;
@@ -84,7 +85,7 @@ static NSInteger const kLocationEventsCount = 10.f;
 
 - (BZRLocationEvent *)lastLocationEvent
 {
-    _lastLocationEvent = [BZRLocationEvent locationEventFromDefaultsForKey:LastReceivedLocationEvent];
+    _lastLocationEvent = [BZRLocationEventService locationEventFromDefaultsForKey:LastReceivedLocationEvent];
     return _lastLocationEvent;
 }
 
