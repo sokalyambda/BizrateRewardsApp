@@ -34,7 +34,7 @@
 @property (assign, nonatomic) BOOL resetPasswordFlow;
 @property (assign, nonatomic) BOOL resettingPasswordRepeatNeeded;
 
-//url for redirection, it will be saved if session still valid, but user hasn't authorized yet
+//url for redirection, it will be saved and if session will become valid after authorization - user will be redirected
 @property (strong, nonatomic) NSURL *redirectedSurveyURL;
 
 - (void)swapTokens;

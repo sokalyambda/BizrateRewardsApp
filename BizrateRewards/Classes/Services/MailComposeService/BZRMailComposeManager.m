@@ -59,7 +59,7 @@ static NSString *const kMailSubject = @"Bizrate Rewards Mobile App Help";
         
     } else {
         [BZRAlertFacade showAlertWithMessage:LOCALIZED(@"Unable to send the e-mail.") forController:nil withCompletion:^{
-            
+
         }];
     }
 }

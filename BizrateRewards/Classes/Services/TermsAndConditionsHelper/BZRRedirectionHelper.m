@@ -131,6 +131,7 @@ static NSString *const kResetPasswordPath = @"reset_password";
         [BZRStorageManager sharedStorage].redirectedSurveyURL = redirectURL;
         return;
     } else if (![BZRProjectFacade isUserSessionValid]) {
+        [BZRStorageManager sharedStorage].redirectedSurveyURL = redirectURL;
         return;
     }
     
