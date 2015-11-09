@@ -7,6 +7,7 @@
 //
 
 #import "BZRFacebookService.h"
+#import "BZRFacebookProfileService.h"
 
 static NSString *const kPublicProfile = @"public_profile";
 static NSString *const kEmail = @"email";
@@ -95,8 +96,8 @@ static NSString *const kFBAppSecret = @"530fa94f7370fc20a54cc392fbd83cf2";
         } else {
             NSMutableDictionary *userProfile = [NSMutableDictionary dictionaryWithDictionary:(NSDictionary *)response];
             
-            BZRFacebookProfile *facebookProfile = [[BZRFacebookProfile alloc] initWithServerResponse:userProfile];
-            [facebookProfile setFacebookProfileToDefaultsForKey:FBCurrentProfile];
+            BZRFacebookProfile *facebookProfile = [BZRFacebookProfileService facebookProfileFromServerResponse:userProfile];
+            [BZRFacebookProfileService setFacebookProfile:facebookProfile toDefaultsForKey:FBCurrentProfile];
             
             if (success) {
                 success(facebookProfile);

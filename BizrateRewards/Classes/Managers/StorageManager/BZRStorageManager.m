@@ -12,6 +12,7 @@
 #import "BZRServerAPIEntity.h"
 
 #import "BZRLocationEventService.h"
+#import "BZRFacebookProfileService.h"
 
 @interface BZRStorageManager ()
 
@@ -24,7 +25,7 @@
 - (BZRFacebookProfile *)facebookProfile
 {
     if (!_facebookProfile) {
-        _facebookProfile = [BZRFacebookProfile facebookProfileFromDefaultsForKey:FBCurrentProfile];
+        _facebookProfile = [BZRFacebookProfileService facebookProfileFromDefaultsForKey:FBCurrentProfile];
     }
     return _facebookProfile;
 }
