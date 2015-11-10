@@ -16,7 +16,7 @@
 #import "BZRLocationObserver.h"
 
 //static NSString *const kMixpanelToken = @"aae3e2388125817b27b8afcf99093d97";//live
-static NSString *const kMixpanelToken = @"f818411581cc210c670fe3351a46debe";//test
+//static NSString *const kMixpanelToken = @"f818411581cc210c670fe3351a46debe";//test
 
 static NSString *const kMixpanelEventsFile = @"MixpanelEvents";
 static NSString *const kPlistResourceType  = @"plist";
