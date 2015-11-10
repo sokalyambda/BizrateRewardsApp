@@ -13,11 +13,11 @@
 static NSString *const kDevelopmentAPIEndpoint      = @"http://devxxx.ngrok.io/v1/";
 static NSString *const kStagingAPIEndpoint          = @"http://api-stage.bizraterewards.com/v1/";
 static NSString *const kProductionAPIEndpoint       = @"https://api.bizraterewards.com/v1/";
-//live token aae3e2388125817b27b8afcf99093d97
+
 //test token f818411581cc210c670fe3351a46debe
-static NSString *const kDevelopmentMixPanelToken    = @"f818411581cc210c670fe3351a46debe";
-static NSString *const kStagingMixPanelToken        = @"stagingMixPanel";
-static NSString *const kProductionMixPanelToken     = @"f818411581cc210c670fe3351a46debe";
+static NSString *const kDevelopmentMixPanelToken    = @"a41e6ca3f37c963b273649b0436e5de5"; //live development
+static NSString *const kStagingMixPanelToken        = @"bf2a5a29d476a3f626ff7c1fa35d4e3e"; //live staging
+static NSString *const kProductionMixPanelToken     = @"aae3e2388125817b27b8afcf99093d97"; //live production
 
 static NSString *const kEnvironmentName = @"environmentName";
 static NSString *const kAPIURLString    = @"APIURLString";

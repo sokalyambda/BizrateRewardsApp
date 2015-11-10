@@ -316,13 +316,6 @@
  */
 - (instancetype)initWithToken:(NSString *)apiToken andFlushInterval:(NSUInteger)flushInterval;
 
-/**
- *  Setup new token
- *
- *  @param newToken New Token
- */
-- (void)reinitTokenWithToken:(NSString *)newToken;
-
 /*!
  @property
 

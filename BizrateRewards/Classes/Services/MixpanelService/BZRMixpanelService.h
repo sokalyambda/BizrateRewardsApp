@@ -21,19 +21,17 @@ typedef enum : NSUInteger {
     BZRMixpanelEventGeofenceExit
 }BZRMixpanelEventType;
 
-//extern NSString *const kMixpanelAliasID;
 extern NSString *const kAuthTypeEmail;
 extern NSString *const kAuthTypeFacebook;
-//extern NSString *const kPushNotificationsEnabled;
-//extern NSString *const kGeoLocationEnabled;
-//extern NSString *const kFirstNameProperty;
-//extern NSString *const kLastNameProperty;
-//extern NSString *const kQualtricsContactId;
+
+#import <Mixpanel.h>
 
 @class BZRUserProfile;
 @class BZRLocationEvent;
 
 @interface BZRMixpanelService : NSObject
+
++ (Mixpanel *)currentMixpanelProject;
 
 + (void)setMixpanelToken:(NSString *)token;
 
@@ -42,7 +40,5 @@ extern NSString *const kAuthTypeFacebook;
 + (void)trackLocationEvent:(BZRLocationEvent *)locationEvent;
 + (void)setAliasForUser:(BZRUserProfile *)userProfile;
 + (void)setPeopleForUser:(BZRUserProfile *)userProfile;
-
-+ (void)reinitMixpanelToken;
 
 @end

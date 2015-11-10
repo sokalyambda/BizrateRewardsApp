@@ -125,7 +125,7 @@ static NSString *const kDefaultLatestSurveyURLString = @"com.bizraterewards://su
                 [BZRProjectFacade sendDeviceDataOnSuccess:^(BOOL isSuccess) {
                     
                     //send token to MixPanel
-                    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+                    Mixpanel *mixpanel = [BZRMixpanelService currentMixpanelProject];
                     [mixpanel identify:mixpanel.distinctId];
                     [mixpanel.people addPushDeviceToken:tokenData];
                     
@@ -177,16 +177,16 @@ static NSString *const kDefaultLatestSurveyURLString = @"com.bizraterewards://su
         [BZRMixpanelService trackEventWithType:BZRMixpanelEventPushNotificationPermission
                                  propertyValue:isPushesEnabled? @"YES" : @"NO"];
 
-        if ([BZRProjectFacade isUserSessionValid] && !isPushesEnabled) {
-            //update notifications and geolocation settings
-            [BZRProjectFacade sendDeviceDataOnSuccess:^(BOOL isSuccess) {
-                
-                DLog(@"notifications access have been updated");
-                
-            } onFailure:^(NSError *error, BOOL isCanceled) {
-                
-            }];
-        }
+//        if ([BZRProjectFacade isUserSessionValid] && !isPushesEnabled) {
+//            //update notifications and geolocation settings
+//            [BZRProjectFacade sendDeviceDataOnSuccess:^(BOOL isSuccess) {
+//                
+//                DLog(@"notifications access have been updated");
+//                
+//            } onFailure:^(NSError *error, BOOL isCanceled) {
+//                
+//            }];
+//        }
     }
     return isPermissionsChanged;
 }

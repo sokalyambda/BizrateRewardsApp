@@ -7,7 +7,6 @@
 //
 
 #import "BZRMixpanelService.h"
-#import <Mixpanel.h>
 #import "BZRPushNotifiactionService.h"
 #import "BZREnvironmentService.h"
 
@@ -37,9 +36,41 @@ NSString *const kIsTestUser               = @"Test User";
 NSString *defaultMixpanelToken = @"https://api.bizraterewards.com/v1/";
 static NSString *_mixpanelToken;
 
+static Mixpanel *_currentMixpanelProject = nil;
+static NSArray *_possibleMixPanels = nil;
+
 @implementation BZRMixpanelService
 
 #pragma mark - Accessors
+
++ (NSArray *)possibleMixPanels
+{
+    if (!_possibleMixPanels) {
+        _possibleMixPanels = @[
+                               [[Mixpanel alloc] initWithToken:@"a41e6ca3f37c963b273649b0436e5de5" andFlushInterval:1],
+                               [[Mixpanel alloc] initWithToken:@"bf2a5a29d476a3f626ff7c1fa35d4e3e" andFlushInterval:1],
+                               [[Mixpanel alloc] initWithToken:@"aae3e2388125817b27b8afcf99093d97" andFlushInterval:1]];
+    }
+    return _possibleMixPanels;
+}
+
++ (Mixpanel *)currentMixpanelProject
+{
+    @synchronized(self) {
+        if (!_currentMixpanelProject) {
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"apiToken == %@", [self mixpanelToken]];
+            _currentMixpanelProject = [[self possibleMixPanels] filteredArrayUsingPredicate:predicate].count ? [[self possibleMixPanels] filteredArrayUsingPredicate:predicate].firstObject : nil;
+        }
+        return _currentMixpanelProject;
+    }
+}
+
++ (void)removeCurrentMixpanelProject
+{
+    @synchronized(self) {
+        _currentMixpanelProject = nil;
+    }
+}
 
 + (NSString *)mixpanelToken
 {
@@ -68,20 +99,12 @@ static NSString *_mixpanelToken;
 
 + (void)setupMixpanel
 {
-    [Mixpanel sharedInstanceWithToken:[self mixpanelToken]];
-}
-
-/**
- *  Set new MixPanel token
- */
-+ (void)reinitMixpanelToken
-{
-    [[Mixpanel sharedInstance] reinitTokenWithToken:[self mixpanelToken]];
+    [self removeCurrentMixpanelProject];
 }
 
 + (void)trackEventWithType:(BZRMixpanelEventType)eventType propertyValue:(NSString *)propertyValue
 {
-    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    Mixpanel *mixpanel = [self currentMixpanelProject];
     
     NSArray *eventsArray = [NSArray arrayWithContentsOfFile:[[NSBundle mainBundle] pathForResource:kMixpanelEventsFile ofType:kPlistResourceType]];
     NSString *eventName = [eventsArray[eventType] allKeys].firstObject;
@@ -112,28 +135,27 @@ static NSString *_mixpanelToken;
 
 + (void)setPeopleForUser:(BZRUserProfile *)userProfile
 {
-    Mixpanel *mixpanel = [Mixpanel sharedInstance];
-//    NSString *userIdString = [NSString stringWithFormat:@"%lld", userProfile.userId];
+    Mixpanel *mixpanel = [self currentMixpanelProject];
     
    [BZRPushNotifiactionService pushNotificationsEnabledWithCompletion:^(BOOL enabled, BOOL isPermissionsStateChanged) {
         BOOL isGeolocationEnabled = [BZRLocationObserver sharedObserver].isAuthorized;
        
        [mixpanel identify:mixpanel.distinctId];
        
-        [mixpanel.people set:@{kPushNotificationsEnabled:enabled? @"YES" : @"NO",
-                               kGeoLocationEnabled:isGeolocationEnabled? @"YES" : @"NO",
-                               kFirstNameProperty:userProfile.firstName,
-                               kLastNameProperty:userProfile.lastName,
-                               kQualtricsContactId:userProfile.contactID,
-                               kBizrateRewardsUserId:@(userProfile.userId),
-                               kIsTestUser:@(userProfile.isTestUser)}];
+       [mixpanel.people set:@{kPushNotificationsEnabled:enabled? @"YES" : @"NO",
+                              kGeoLocationEnabled:isGeolocationEnabled? @"YES" : @"NO",
+                              kFirstNameProperty:userProfile.firstName,
+                              kLastNameProperty:userProfile.lastName,
+                              kQualtricsContactId:userProfile.contactID,
+                              kBizrateRewardsUserId:@(userProfile.userId),
+                              kIsTestUser:@(userProfile.isTestUser)}];
     }];
     
 }
 
 + (void)setAliasForUser:(BZRUserProfile *)userProfile
 {
-    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    Mixpanel *mixpanel = [self currentMixpanelProject];
     NSString *userIdString = [NSString stringWithFormat:@"%lld", userProfile.userId];
     
     if (![[[NSUserDefaults standardUserDefaults] objectForKey:kMixpanelAliasID] isEqualToString:userIdString]) {

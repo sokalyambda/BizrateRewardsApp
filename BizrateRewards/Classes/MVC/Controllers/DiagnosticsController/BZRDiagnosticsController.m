@@ -271,7 +271,7 @@ static NSInteger const kLocationEventsCount = 10.f;
                     [BZREnvironmentService setEnvironment:weakSelf.currentEnvironment toDefaultsForKey:CurrentAPIEnvironment];
                     
                     [BZRMixpanelService setMixpanelToken:weakSelf.currentEnvironment.mixPanelToken];
-                    [BZRMixpanelService reinitMixpanelToken];
+                    [BZRMixpanelService setupMixpanel];
 
                     [BZRRedirectionHelper performSignOut];
                     [weakSelf dismissViewControllerAnimated:YES completion:nil];

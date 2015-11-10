@@ -1589,6 +1589,7 @@
 		58A91F441B3ABE480032607F /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				58BF35DF1B74930800699A63 /* MailComposeManager */,
 				58A91F301B3A821C0032607F /* LocationObserver */,
 				58A91F451B3ABE500032607F /* StorageManager */,
 			);
@@ -2050,13 +2051,13 @@
 			name = AlertFacade;
 			sourceTree = "<group>";
 		};
-		58BF35DF1B74930800699A63 /* MailComposeService */ = {
+		58BF35DF1B74930800699A63 /* MailComposeManager */ = {
 			isa = PBXGroup;
 			children = (
 				58BF35E01B74933600699A63 /* BZRMailComposeManager.h */,
 				58BF35E11B74933600699A63 /* BZRMailComposeManager.m */,
 			);
-			name = MailComposeService;
+			name = MailComposeManager;
 			sourceTree = "<group>";
 		};
 		58BF36071B74F92100699A63 /* MFMailComposeViewController */ = {
@@ -2106,7 +2107,6 @@
 			isa = PBXGroup;
 			children = (
 				58AA30731B7B860000363119 /* ModelsServices */,
-				58BF35DF1B74930800699A63 /* MailComposeService */,
 				58D1E5D21B66423700347208 /* FacebookService */,
 				84A6124B1B5E30E6005E01A7 /* MixpanelService */,
 				5878D3DA1B43F8D500A917D0 /* ReachabilityHelper */,
