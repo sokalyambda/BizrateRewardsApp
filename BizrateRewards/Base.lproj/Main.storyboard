@@ -3249,7 +3249,7 @@
                                             <rect key="frame" x="8" y="64" width="100" height="20"/>
                                         </variation>
                                         <connections>
-                                            <outletCollection property="gestureRecognizers" destination="18b-JL-4FX" appends="YES" id="94J-FC-Ygh"/>
+                                            <outletCollection property="gestureRecognizers" destination="18b-JL-4FX" appends="YES" id="45R-qo-7Mp"/>
                                         </connections>
                                     </label>
                                     <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rCx-5B-Qt8">
@@ -3273,6 +3273,9 @@
                                                 <include reference="bft-bZ-90Q"/>
                                             </mask>
                                         </variation>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="1l2-Cv-xYq" appends="YES" id="ydF-GB-I2l"/>
+                                        </connections>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -3390,9 +3393,6 @@
                                         <include reference="wYg-QI-r1B"/>
                                     </mask>
                                 </variation>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="18b-JL-4FX" appends="YES" id="8fA-TV-G0J"/>
-                                </connections>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="236" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="bYS-7m-TVz">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -3486,7 +3486,7 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="149" y="8" width="163" height="20"/>
+                                                        <rect key="frame" x="149" y="8" width="243" height="20"/>
                                                     </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fR7-rj-x7z" userLabel="Event Type Value">
@@ -3495,7 +3495,7 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="149" y="64" width="163" height="20"/>
+                                                        <rect key="frame" x="149" y="64" width="243" height="20"/>
                                                     </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FTc-f8-GpL" userLabel="Latitude Value">
@@ -3504,7 +3504,7 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="149" y="92" width="163" height="20"/>
+                                                        <rect key="frame" x="149" y="92" width="243" height="20"/>
                                                     </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sTd-WO-a0Z" userLabel="Longitude Value">
@@ -3513,7 +3513,7 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="149" y="120" width="163" height="20"/>
+                                                        <rect key="frame" x="149" y="120" width="243" height="20"/>
                                                     </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EJJ-jr-bQe" userLabel="Eyc Customer Id Value">
@@ -3522,7 +3522,7 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="149" y="148" width="163" height="20"/>
+                                                        <rect key="frame" x="149" y="148" width="243" height="20"/>
                                                     </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4av-Yy-xCt" userLabel="Created Value">
@@ -3531,7 +3531,7 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="149" y="176" width="163" height="20"/>
+                                                        <rect key="frame" x="149" y="176" width="243" height="20"/>
                                                     </variation>
                                                 </label>
                                                 <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ucg-bm-glW" userLabel="Location Value">
@@ -3540,7 +3540,7 @@
                                                     <color key="textColor" red="0.08235294118" green="0.57647058819999997" blue="0.80392156859999997" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="149" y="36" width="163" height="20"/>
+                                                        <rect key="frame" x="149" y="36" width="243" height="20"/>
                                                     </variation>
                                                 </label>
                                             </subviews>
@@ -3808,6 +3808,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l5A-pD-iEP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="1l2-Cv-xYq">
+                    <connections>
+                        <action selector="environmentClick:" destination="k4t-FB-a2N" id="7wv-a8-F1y"/>
+                    </connections>
+                </tapGestureRecognizer>
                 <tapGestureRecognizer id="18b-JL-4FX">
                     <connections>
                         <action selector="environmentClick:" destination="k4t-FB-a2N" id="axA-x1-Zak"/>

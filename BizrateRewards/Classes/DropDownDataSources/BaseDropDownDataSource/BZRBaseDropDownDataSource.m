@@ -115,11 +115,4 @@
     }
 }
 
-- (void)swapSelectedValueWithValue:(id)newValue
-{
-    if ([self.currentDataSourceArray containsObject:newValue]) {
-        _currentSelectedValue = newValue;
-    }
-}
-
 @end
