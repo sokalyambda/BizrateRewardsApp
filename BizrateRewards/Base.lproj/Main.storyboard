@@ -3148,7 +3148,8 @@
                                                 <exclude reference="b49-fU-FRZ"/>
                                             </mask>
                                         </variation>
-                                        <variation key="heightClass=regular-widthClass=compact">
+                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                            <rect key="frame" x="8" y="8" width="100" height="20"/>
                                             <mask key="constraints">
                                                 <include reference="b49-fU-FRZ"/>
                                             </mask>
@@ -3159,6 +3160,9 @@
                                         <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
+                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                            <rect key="frame" x="8" y="36" width="100" height="20"/>
+                                        </variation>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="API Endpoint:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="70m-gP-6C0">
                                         <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -3175,7 +3179,8 @@
                                                 <exclude reference="d2e-7X-hsP"/>
                                             </mask>
                                         </variation>
-                                        <variation key="heightClass=regular-widthClass=compact">
+                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                            <rect key="frame" x="8" y="92" width="132" height="20"/>
                                             <mask key="constraints">
                                                 <include reference="d2e-7X-hsP"/>
                                             </mask>
@@ -3185,6 +3190,9 @@
                                         <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
                                         <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                            <rect key="frame" x="8" y="120" width="342" height="30"/>
+                                        </variation>
                                         <connections>
                                             <outlet property="delegate" destination="k4t-FB-a2N" id="5n7-YC-pW2"/>
                                         </connections>
@@ -3194,12 +3202,18 @@
                                         <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
+                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                            <rect key="frame" x="116" y="8" width="276" height="20"/>
+                                        </variation>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kck-p7-5Xd" userLabel="APP Version Value">
                                         <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                         <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
+                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                            <rect key="frame" x="116" y="36" width="276" height="20"/>
+                                        </variation>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k24-bW-cip">
                                         <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -3216,7 +3230,8 @@
                                                 <exclude reference="Ifv-nL-wMz"/>
                                             </mask>
                                         </variation>
-                                        <variation key="heightClass=regular-widthClass=compact">
+                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                            <rect key="frame" x="358" y="120" width="34" height="30"/>
                                             <mask key="constraints">
                                                 <include reference="Ifv-nL-wMz"/>
                                             </mask>
@@ -3230,8 +3245,11 @@
                                         <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
+                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                            <rect key="frame" x="8" y="64" width="100" height="20"/>
+                                        </variation>
                                         <connections>
-                                            <outletCollection property="gestureRecognizers" destination="18b-JL-4FX" appends="YES" id="GGx-FS-7vB"/>
+                                            <outletCollection property="gestureRecognizers" destination="18b-JL-4FX" appends="YES" id="94J-FC-Ygh"/>
                                         </connections>
                                     </label>
                                     <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rCx-5B-Qt8">
@@ -3249,14 +3267,12 @@
                                                 <exclude reference="bft-bZ-90Q"/>
                                             </mask>
                                         </variation>
-                                        <variation key="heightClass=regular-widthClass=compact">
+                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                            <rect key="frame" x="116" y="64" width="200" height="20"/>
                                             <mask key="constraints">
                                                 <include reference="bft-bZ-90Q"/>
                                             </mask>
                                         </variation>
-                                        <connections>
-                                            <outletCollection property="gestureRecognizers" destination="18b-JL-4FX" appends="YES" id="g8v-OR-pwj"/>
-                                        </connections>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -3331,7 +3347,8 @@
                                         <exclude reference="wYg-QI-r1B"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact">
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="0.0" y="20" width="400" height="161"/>
                                     <mask key="subviews">
                                         <include reference="00I-GY-TzU"/>
                                         <include reference="an2-dv-NUC"/>
@@ -3373,6 +3390,9 @@
                                         <include reference="wYg-QI-r1B"/>
                                     </mask>
                                 </variation>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="18b-JL-4FX" appends="YES" id="8fA-TV-G0J"/>
+                                </connections>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="236" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="bYS-7m-TVz">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -3726,6 +3746,9 @@
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="0.0" y="189" width="400" height="611"/>
+                                </variation>
                                 <connections>
                                     <outlet property="dataSource" destination="k4t-FB-a2N" id="q47-Ll-jiq"/>
                                     <outlet property="delegate" destination="k4t-FB-a2N" id="ndT-iH-EwB"/>
@@ -3787,7 +3810,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l5A-pD-iEP" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="18b-JL-4FX">
                     <connections>
-                        <action selector="environmentClick:" destination="k4t-FB-a2N" id="kob-w0-er9"/>
+                        <action selector="environmentClick:" destination="k4t-FB-a2N" id="axA-x1-Zak"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>

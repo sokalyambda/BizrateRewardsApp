@@ -26,7 +26,7 @@
 
 static BZRSessionManager *sharedHTTPClient = nil;
 
-NSString *defaultBaseURLString = @"https://api.bizraterewards.com/v1/";
+//NSString *defaultBaseURLString = @"https://api.bizraterewards.com/v1/";
 static NSString *_baseURLString;
 
 @implementation BZRProjectFacade

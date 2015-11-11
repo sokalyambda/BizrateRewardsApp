@@ -167,7 +167,6 @@ static NSInteger const kLocationEventsCount = 10.f;
 - (void)initDropDownList
 {
     self.dropDownList = [BZRDropDownTableView makeFromXib];
-    
     [self reinitDefaultValue];
 }
 
@@ -177,13 +176,7 @@ static NSInteger const kLocationEventsCount = 10.f;
 - (void)reinitDefaultValue
 {
     BZREnvironment *savedEnvironment = [BZREnvironmentService environmentFromDefaultsForKey:CurrentAPIEnvironment];
-    
-    if (!savedEnvironment) {
-        id defaultValue = self.environmentsDataSource.currentSelectedValue;
-        if ([defaultValue isKindOfClass:[BZREnvironment class]]) {
-            self.currentEnvironment = defaultValue;
-        }
-    } else {
+    if (savedEnvironment) {
         self.currentEnvironment = savedEnvironment;
     }
 }
