@@ -134,16 +134,21 @@ static NSString *const kOBStore = @"Store";
         [BZRMixpanelService trackEventWithType:BZRMixpanelEventLocationPermission
                                  propertyValue:isGeolocationEnable? @"YES" : @"NO"];
         
-//        if ([BZRProjectFacade isUserSessionValid]) {
-//            //update notifications and geolocation settings
-//            [BZRProjectFacade sendDeviceDataOnSuccess:^(BOOL isSuccess) {
-//                
-//                DLog(@"geolocation access have been updated");
-//                
-//            } onFailure:^(NSError *error, BOOL isCanceled) {
-//                
-//            }];
-//        }
+        /*
+         
+         Temporary commented...
+         
+        if ([BZRProjectFacade isUserSessionValid]) {
+            //update notifications and geolocation settings
+            [BZRProjectFacade sendDeviceDataOnSuccess:^(BOOL isSuccess) {
+                
+                DLog(@"geolocation access have been updated");
+                
+            } onFailure:^(NSError *error, BOOL isCanceled) {
+                
+            }];
+        }
+         */
     }
 }
 

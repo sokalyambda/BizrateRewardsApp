@@ -31,11 +31,9 @@ extern NSString *const kAuthTypeFacebook;
 
 @interface BZRMixpanelService : NSObject
 
-+ (Mixpanel *)currentMixpanelProject;
++ (Mixpanel *)currentMixpanelInstance;
 
-+ (void)setMixpanelToken:(NSString *)token;
-
-+ (void)setupMixpanel;
++ (void)resetMixpanel;
 + (void)trackEventWithType:(BZRMixpanelEventType)eventType propertyValue:(NSString *)propertieValue;
 + (void)trackLocationEvent:(BZRLocationEvent *)locationEvent;
 + (void)setAliasForUser:(BZRUserProfile *)userProfile;

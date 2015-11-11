@@ -56,7 +56,7 @@ static NSString *const kOfferBeamRetailerID = @"6F8E3A94-FE29-4144-BE86-AA8372D1
     [BZRRedirectionHelper redirectWithURL:url withError:&error];
 
     //setup mixPanel service
-    [BZRMixpanelService setupMixpanel];
+    [BZRMixpanelService resetMixpanel];
     //track mixpanel event
     [BZRMixpanelService trackEventWithType:BZRMixpanelEventOpenApp propertyValue:nil];
     

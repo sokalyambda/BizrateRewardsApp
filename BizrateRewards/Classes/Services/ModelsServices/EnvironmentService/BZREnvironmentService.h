@@ -11,6 +11,7 @@
 @interface BZREnvironmentService : NSObject
 
 + (NSArray *)eligibleEnvironmentsArray;
++ (NSArray *)possibleMixPanels;
 
 + (BZREnvironment *)defaultEnvironment;
 
