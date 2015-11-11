@@ -13,6 +13,8 @@ static NSString *const requestAction    = @"user/device";
 static NSString *const kDeviceAPNSToken = @"device_token";
 static NSString *const kDeviceId        = @"device_uid";
 static NSString *const kDeviceName      = @"name";
+static NSString *const kRemoteNotificationsEnabled = @"notifications_enabled";
+static NSString *const kGeolocationAccessGranted = @"locations_enabled";
 
 @implementation BZRSendDeviceDataRequest
 
@@ -35,7 +37,14 @@ static NSString *const kDeviceName      = @"name";
         NSString *deviceToken = [BZRStorageManager sharedStorage].deviceToken;
         NSString *deviceName = [BZRStorageManager sharedStorage].deviceName;
         
-        NSDictionary *parameters = @{kDeviceAPNSToken: deviceToken, kDeviceId: deviceId, kDeviceName: deviceName};
+        BOOL notificationsEnabled = [BZRStorageManager sharedStorage].currentProfile.isRemoteNotificationsEnabled;
+        BOOL locationsEnabled = [BZRStorageManager sharedStorage].currentProfile.isGeolocationAccessGranted;
+        
+        NSDictionary *parameters = @{kDeviceAPNSToken: deviceToken,
+                                     kDeviceId: deviceId,
+                                     kDeviceName: deviceName,
+                                     kRemoteNotificationsEnabled: @(notificationsEnabled),
+                                     kGeolocationAccessGranted: @(locationsEnabled)};
         
         [self setParametersWithParamsData:parameters];
     }

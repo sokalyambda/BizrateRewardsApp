@@ -14,6 +14,7 @@
 #import "BZRAuthorizationField.h"
 #import "BZREditProfileField.h"
 
+static const NSInteger kMaxShareCodeSymbols = 5.f;
 static const NSInteger kMinPasswordSymbols = 8.f;
 static const NSInteger kMaxPasswordSymbols = 16.f;
 static const NSInteger kMinValidAge = 13.f;
@@ -127,6 +128,26 @@ static NSMutableDictionary *_errorDict;
         }
         
         isValid = NO;
+    }
+    
+    return isValid;
+}
+
++ (BOOL)validateShareCodeField:(UITextField *)shareCodeField
+{
+    BOOL isValid = YES;
+    
+    NSCharacterSet *alphaNumeric = [NSCharacterSet alphanumericCharacterSet];
+    
+    if (!shareCodeField.text.length || shareCodeField.text.length < kMaxShareCodeSymbols || [shareCodeField.text rangeOfCharacterFromSet:alphaNumeric].location == NSNotFound) {
+        isValid = NO;
+    
+        [self setErrorTitle:@"" andMessage:LOCALIZED(@"Invalid share code. Please double check and try again.\n")];
+        [shareCodeField shakeView];
+    }
+    
+    if ([shareCodeField isKindOfClass:[BZRAuthorizationField class]] && !isValid) {
+        ((BZRAuthorizationField *)shareCodeField).errorImageName = kEmailErrorImageName;
     }
     
     return isValid;
@@ -366,6 +387,23 @@ static NSMutableDictionary *_errorDict;
         success();
     }
     
+}
+
++ (void)validateShareCodeField:(UITextField *)shareCodeField
+                     onSuccess:(ValidationSuccessBlock)success
+                     onFailure:(ValidationFailureBlock)failure
+{
+    BOOL isValid = YES;
+    
+    if (![self validateShareCodeField:shareCodeField]) {
+        isValid = NO;
+    }
+    
+    if (!isValid && failure) {
+        failure([self validationErrorDict]);
+    } else if (success) {
+        success();
+    }
 }
 
 #pragma mark - Other actions

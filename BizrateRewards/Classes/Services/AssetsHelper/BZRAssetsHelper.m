@@ -40,7 +40,7 @@
 + (void)imageFromAssetURL:(NSURL *)url withCompletion:(AssetsRetrievingCompletion)completion
 {
     if (url) {
-        PHImageRequestOptions *imageRequestOptions = [PHImageRequestOptions new];
+        PHImageRequestOptions *imageRequestOptions = [[PHImageRequestOptions alloc] init];
         
         imageRequestOptions.resizeMode = PHImageRequestOptionsResizeModeExact;
         imageRequestOptions.networkAccessAllowed = YES;

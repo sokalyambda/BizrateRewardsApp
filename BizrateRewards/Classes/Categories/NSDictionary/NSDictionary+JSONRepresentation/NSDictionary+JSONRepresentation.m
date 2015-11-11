@@ -18,8 +18,8 @@
                                                          error:&error];
     NSString *jsonString;
     
-    if (! jsonData) {
-        NSLog(@"Error: %@", error);
+    if (!jsonData) {
+        DLog(@"Error: %@", error);
     } else {
         jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
     }

@@ -60,14 +60,14 @@
     BOOL parseJSONData = NO;
     
     //This needs because response from API for this request is empty
-    if ([self isKindOfClass:[BZRForgotPasswordRequest class]]) {
+    if ([self isKindOfClass:[BZRForgotPasswordRequest class]] || [self isKindOfClass:[BZRDeleteTakenSurveysRequest class]]) {
         return YES;
     }
     
     if (!responseObject) {
         LOG_NETWORK(@"Error: Response Is Empty");
         _error = [NSError errorWithDomain:[NSString stringWithFormat:@"%@ - response is empty", NSStringFromClass([self class])]
-                                     code:1
+                                     code:-3000
                                  userInfo:@{NSLocalizedDescriptionKey: @"Response is empty."}];
         return parseJSONData;
     }
@@ -84,7 +84,7 @@
         json = responseObject;
     }
     
-    NSLog(@"%@",json);
+    DLog(@"%@",json);
     
     if (error) {
         _error = error;
@@ -98,13 +98,11 @@
                 if (!_error) {
                     _error = error;
                 }
-                
-                //[self createErrorWithResponseObject:json];
             }
             @catch (NSException *exception) {
-                _error = [NSError errorWithDomain:@""
-                                             code:3
-                                         userInfo:@{NSLocalizedDescriptionKey: [NSString stringWithFormat:@"name:%@\nreason:%@", exception.name, exception.reason]}];
+                _error = [NSError errorWithDomain:@"com.thinkmobiles"
+                                             code:-4000
+                                         userInfo:@{NSLocalizedDescriptionKey:[NSString stringWithFormat:@"name:%@\nreason:%@", exception.name, exception.reason]}];
             }
             @finally {
                 

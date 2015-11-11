@@ -21,12 +21,6 @@
     [super viewDidLoad];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
-}
-
 #pragma mark - Actions
 
 - (IBAction)closeClick:(id)sender
@@ -42,6 +36,15 @@
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
     return UIStatusBarStyleDefault;
+}
+
+/**
+ *  Customize navigation item
+ */
+- (void)customizeNavigationItem
+{
+    [super customizeNavigationItem];
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
 @end

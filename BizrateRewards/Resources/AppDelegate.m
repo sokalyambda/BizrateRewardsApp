@@ -39,11 +39,24 @@ static NSString *const kOfferBeamRetailerID = @"6F8E3A94-FE29-4144-BE86-AA8372D1
     //Reset keychain if it's a first launch of an app
     [BZRKeychainHandler resetKeychainIfFirstLaunch];
     
-    NSURL *url = (NSURL *)[launchOptions valueForKey:UIApplicationLaunchOptionsURLKey];
-    [BZRRedirectionHelper showResetPasswordResultControllerWithObtainedURL:url];
+    /*
+     If app was opened with push
+     */
     
+    NSDictionary *userInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+    if (userInfo) {
+        [BZRPushNotifiactionService receivedPushNotification:userInfo withApplicationState:UIApplicationStateInactive];
+    }
+    
+    /*
+     If app was opened with URL
+     */
+    NSError *error;
+    NSURL *url = (NSURL *)[launchOptions valueForKey:UIApplicationLaunchOptionsURLKey];
+    [BZRRedirectionHelper redirectWithURL:url withError:&error];
+
     //setup mixPanel service
-    [BZRMixpanelService setupMixpanel];
+    [BZRMixpanelService resetMixpanel];
     //track mixpanel event
     [BZRMixpanelService trackEventWithType:BZRMixpanelEventOpenApp propertyValue:nil];
     
@@ -65,13 +78,24 @@ static NSString *const kOfferBeamRetailerID = @"6F8E3A94-FE29-4144-BE86-AA8372D1
 {
     [FBSDKAppEvents activateApp];
     
-    if (![BZRPushNotifiactionService pushNotificationsEnabled]) {
-        [BZRPushNotifiactionService failedToRegisterForPushNotificationsWithError:nil];
-    } else {
-        [[NSNotificationCenter defaultCenter] postNotificationName:PushNotificationServiceDidSuccessAuthorizeNotification object:nil];
-    }
+    //clean badge count
+    [BZRPushNotifiactionService cleanPushNotificationsBadges];
+    
+    [BZRPushNotifiactionService pushNotificationsEnabledWithCompletion:^(BOOL enabled, BOOL isPermissionStateChanged) {
+        if (!enabled && isPermissionStateChanged) {
+            [BZRPushNotifiactionService failedToRegisterForPushNotificationsWithError:nil];
+        } else if (isPermissionStateChanged) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:PushNotificationServiceDidSuccessAuthorizeNotification object:nil];
+        }
+    }];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:UIApplicationDidBecomeActiveNotification object:nil];
+}
+
+- (void)applicationWillEnterForeground:(UIApplication *)application
+{
+    //clean badge count
+    [BZRPushNotifiactionService cleanPushNotificationsBadges];
 }
 
 - (BOOL)application:(UIApplication *)application
@@ -79,7 +103,8 @@ static NSString *const kOfferBeamRetailerID = @"6F8E3A94-FE29-4144-BE86-AA8372D1
   sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation
 {
-    [BZRRedirectionHelper showResetPasswordResultControllerWithObtainedURL:url];
+    NSError *error;
+    [BZRRedirectionHelper redirectWithURL:url withError:&error];
     
     return [[FBSDKApplicationDelegate sharedInstance] application:application
                                                           openURL:url
@@ -113,7 +138,8 @@ static NSString *const kOfferBeamRetailerID = @"6F8E3A94-FE29-4144-BE86-AA8372D1
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
-    [BZRPushNotifiactionService recivedPushNotification:userInfo];
+    [BZRPushNotifiactionService receivedPushNotification:userInfo
+                                   withApplicationState:application.applicationState];
 }
 
 @end

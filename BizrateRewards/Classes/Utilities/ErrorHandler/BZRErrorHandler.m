@@ -9,6 +9,7 @@
 #import "BZRErrorHandler.h"
 
 #import "NSString+JSONRepresentation.h"
+#import "NSError+HTTPResponseStatusCode.h"
 
 static NSString *const kErrors              = @"errors";
 static NSString *const kErrorMessage        = @"error_message";
@@ -22,6 +23,8 @@ static NSString *const kEmailAlreadyExist           = @"EMAIL_ALREADY_REGISTERED
 static NSString *const kFacebookEmailAlreadyExist   = @"FACEBOOK_USER_ALREADY_REGISTERED";
 
 static NSString *const kErrorsCodesPlistName = @"ErrorsCodes";
+
+static NSInteger const kNotAuthorizedStatusCode = 401.f;
 
 @implementation BZRErrorHandler
 
@@ -53,7 +56,18 @@ static NSString *_errorAlertTitle = nil;
 + (void)parseError:(NSError *)error withCompletion:(ErrorParsingCompletion)completion
 {
     [self setErrorAlertTitle:@""];
+
+    NSInteger statusCode = error.HTTPResponseStatusCode;
     
+    if (statusCode == kNotAuthorizedStatusCode) {
+        return completion([self getErrorAlertTitle], LOCALIZED(@"Session is invalid, try to sign-in again."));
+    } else {
+        return completion([self getErrorAlertTitle], LOCALIZED(@"Sorry, something went wrong. Please try again."));
+    }
+    
+    /*
+     Get error string from jsonResponse
+     
     NSString *errFromJsonString = [self errorStringFromJSONResponseError:error];
     if (errFromJsonString) {
         return completion([self getErrorAlertTitle], errFromJsonString);
@@ -66,6 +80,7 @@ static NSString *_errorAlertTitle = nil;
     NSString *errLocalizedDescription = error.localizedDescription;
     
     return completion([self getErrorAlertTitle], errLocalizedDescription);
+     */
 }
 
 /**

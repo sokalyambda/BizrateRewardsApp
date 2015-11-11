@@ -52,12 +52,6 @@
     [BZRMixpanelService trackEventWithType:BZRMixpanelEventSurveyCompeted propertyValue:nil];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
-}
-
 - (void)viewDidAppear:(BOOL)animated
 {
     [self recalculateProgress];
@@ -68,6 +62,15 @@
 - (IBAction)homeClick:(id)sender
 {
     [self moveToDashboardController];
+}
+
+/**
+ *  Customize navigation item
+ */
+- (void)customizeNavigationItem
+{
+    [super customizeNavigationItem];
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
 /**

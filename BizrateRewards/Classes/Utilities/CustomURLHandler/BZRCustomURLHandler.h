@@ -8,6 +8,10 @@
 
 @interface BZRCustomURLHandler : NSObject
 
-+ (NSDictionary *)urlParsingParametersFromURL:(NSURL *)url;
+//parsed parameters for password resetting
++ (NSDictionary *)urlParsingParametersForPasswordResetFromURL:(NSURL *)url;
+
+//parsed parameters for survey
++ (NSDictionary *)urlParsingParametersForSurveyFromURL:(NSURL *)url;
 
 @end

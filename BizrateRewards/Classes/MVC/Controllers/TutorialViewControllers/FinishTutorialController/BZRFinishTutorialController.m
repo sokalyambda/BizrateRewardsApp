@@ -26,13 +26,6 @@ static NSString *const kGetStartedSegueIdentifier = @"getStartedSegueIdentifier"
     [super viewDidLoad];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    [self.view layoutIfNeeded];
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
-}
-
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
@@ -75,6 +68,16 @@ static NSString *const kGetStartedSegueIdentifier = @"getStartedSegueIdentifier"
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
     return UIStatusBarStyleDefault;
+}
+
+/**
+ *  Customize navigation item
+ */
+- (void)customizeNavigationItem
+{
+    [super customizeNavigationItem];
+    [self.view layoutIfNeeded];
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
 @end

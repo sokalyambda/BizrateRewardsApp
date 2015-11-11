@@ -10,6 +10,8 @@
 
 #import "BZRServerAPIEntity.h"
 
+#import "BZRServerAPIEntityService.h"
+
 static NSString *requestAction = @"info";
 
 @implementation BZRAPIInfoRequest
@@ -36,7 +38,7 @@ static NSString *requestAction = @"info";
     if (!responseObject) {
         return NO;
     } else {
-        self.apiEntity = [[BZRServerAPIEntity alloc] initWithServerResponse:responseObject];
+        self.apiEntity = [BZRServerAPIEntityService serverAPIEntityFromServerResponse:responseObject];
         return !!self.apiEntity;
     }
 }

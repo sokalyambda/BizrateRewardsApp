@@ -20,7 +20,7 @@
                                                                     error:&error];
     
     if (!jsonErrorDict) {
-        NSLog(@"Error: %@", error);
+        DLog(@"Error: %@", error);
         return nil;
     }
     

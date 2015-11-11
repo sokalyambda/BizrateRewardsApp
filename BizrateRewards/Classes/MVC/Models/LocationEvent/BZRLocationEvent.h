@@ -15,7 +15,7 @@ typedef enum : NSUInteger {
 
 @import CoreLocation;
 
-@interface BZRLocationEvent : NSObject<BZRMappingProtocol>
+@interface BZRLocationEvent : NSObject
 
 @property (assign, nonatomic) BZRLocaionEventType eventType;
 @property (assign, nonatomic) CLLocationCoordinate2D coordinate;
@@ -25,10 +25,5 @@ typedef enum : NSUInteger {
 @property (strong, nonatomic) NSString *creationDateString;
 @property (strong, nonatomic) NSString *localDateString;
 @property (strong, nonatomic) NSString *locationLink;
-
-- (instancetype)initWithOfferBeamCallback:(NSDictionary *)locationData;
-
-- (void)setLocationEventToDefaultsForKey:(NSString *)key;
-+ (BZRLocationEvent *)locationEventFromDefaultsForKey:(NSString *)key;
 
 @end

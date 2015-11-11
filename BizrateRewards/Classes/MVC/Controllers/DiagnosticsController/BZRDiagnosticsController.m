@@ -8,9 +8,9 @@
 
 #import "BZRDiagnosticsController.h"
 #import "BZRLocationDetailsDiagnosticsController.h"
-#import "BZRAccountSettingsController.h"
 
 #import "BZRSerialViewConstructor.h"
+#import "BZRBaseDropDownDataSource.h"
 
 #import "BZRProjectFacade.h"
 
@@ -18,6 +18,15 @@
 
 #import "BZRLocationEvent.h"
 #import "BZRServerAPIEntity.h"
+#import "BZREnvironment.h"
+
+#import "BZRDropDownTableView.h"
+
+#import "UIView+MakeFromXib.h"
+
+#import "BZRRedirectionHelper.h"
+#import "BZREnvironmentService.h"
+#import "BZRLocationEventService.h"
 
 static NSInteger const kCurrentNumberOfSections = 2.f;
 static NSInteger const kLocationEventsCount = 10.f;
@@ -29,6 +38,7 @@ static NSInteger const kLocationEventsCount = 10.f;
 @property (weak, nonatomic) IBOutlet UITextField *apiEndpointField;
 @property (weak, nonatomic) IBOutlet UIButton *saveAPIEndpointButton;
 @property (weak, nonatomic) IBOutlet UITableView *eventsListTableView;
+@property (weak, nonatomic) IBOutlet UILabel *environmentDropDownAnchor;
 
 @property (strong, nonatomic) NSArray *locationEvents;
 @property (strong, nonatomic) BZRLocationEvent *lastLocationEvent;
@@ -36,15 +46,46 @@ static NSInteger const kLocationEventsCount = 10.f;
 
 @property (strong, nonatomic) UIBarButtonItem *closeButton;
 
+@property (strong, nonatomic) BZRDropDownTableView *dropDownList;
+@property (strong, nonatomic) BZRBaseDropDownDataSource *environmentsDataSource;
+
+@property (strong, nonatomic) BZREnvironment *currentEnvironment;
+
 @end
 
 @implementation BZRDiagnosticsController
 
+@synthesize currentEnvironment = _currentEnvironment;
+
 #pragma mark - Accessors
+
+- (BZRBaseDropDownDataSource *)environmentsDataSource
+{
+    if (!_environmentsDataSource) {
+        _environmentsDataSource = [BZRBaseDropDownDataSource dataSourceWithType:BZRDataSourceTypeDiagnostics];
+        [_environmentsDataSource updateSelectedValueInDataSourceArray:self.currentEnvironment];
+    }
+    return _environmentsDataSource;
+}
+
+- (void)setCurrentEnvironment:(BZREnvironment *)currentEnvironment
+{
+    _currentEnvironment = currentEnvironment;
+    self.environmentDropDownAnchor.text = _currentEnvironment.environmentName;
+    self.apiEndpointField.text = _currentEnvironment.apiEndpointURLString;
+}
+
+- (BZREnvironment *)currentEnvironment
+{
+    if (!_currentEnvironment) {
+        _currentEnvironment = [BZREnvironmentService defaultEnvironment];
+    }
+    return _currentEnvironment;
+}
 
 - (BZRLocationEvent *)lastLocationEvent
 {
-    _lastLocationEvent = [BZRLocationEvent locationEventFromDefaultsForKey:LastReceivedLocationEvent];
+    _lastLocationEvent = [BZRLocationEventService locationEventFromDefaultsForKey:LastReceivedLocationEvent];
     return _lastLocationEvent;
 }
 
@@ -68,25 +109,41 @@ static NSInteger const kLocationEventsCount = 10.f;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    [self customizeNavigationItem];
+    [self initDropDownList];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     [self getAPIInfo];
-    [self updateAPIEndpointTextField];
 }
 
 #pragma mark - Actions
 
+- (IBAction)environmentClick:(id)sender
+{
+    if (self.dropDownList.isMoving) {
+        return;
+    }
+    
+    WEAK_SELF;
+    [self.dropDownList dropDownTableBecomeActiveInView:self.view
+                                        fromAnchorView:self.environmentDropDownAnchor
+                                        withDataSource:self.environmentsDataSource
+     
+                                 withShowingCompletion:^(BZRDropDownTableView *table) {
+                                     DLog(@"presented");
+                                 } withCompletion:^(BZRDropDownTableView *table, id chosenValue) {
+                                     DLog(@"chosen value %@", chosenValue);
+                                     if ([chosenValue isKindOfClass:[BZREnvironment class]]) {
+                                         weakSelf.currentEnvironment = (BZREnvironment *)chosenValue;
+                                     }
+                                 }];
+}
+
 - (void)customizeNavigationItem
 {
+    [super customizeNavigationItem];
     //show navigation bar
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     
@@ -102,6 +159,41 @@ static NSInteger const kLocationEventsCount = 10.f;
     
     //set navigation title
     self.navigationItem.title = LOCALIZED(@"Diagnostics");
+}
+
+/**
+ *  Configure drop down list
+ */
+- (void)initDropDownList
+{
+    self.dropDownList = [BZRDropDownTableView makeFromXib];
+    
+    [self reinitDefaultValue];
+}
+
+/**
+ *  Reinit default environment
+ */
+- (void)reinitDefaultValue
+{
+    BZREnvironment *savedEnvironment = [BZREnvironmentService environmentFromDefaultsForKey:CurrentAPIEnvironment];
+    
+    if (!savedEnvironment) {
+        id defaultValue = self.environmentsDataSource.currentSelectedValue;
+        if ([defaultValue isKindOfClass:[BZREnvironment class]]) {
+            self.currentEnvironment = defaultValue;
+        }
+    } else {
+        self.currentEnvironment = savedEnvironment;
+    }
+}
+
+/**
+ *  Set the default data source selected value
+ */
+- (void)swapWithSavedValue
+{
+    [self.environmentsDataSource swapSelectedValueWithValue:self.currentEnvironment];
 }
 
 /**
@@ -129,11 +221,17 @@ static NSInteger const kLocationEventsCount = 10.f;
         } onFailure:^(NSError *error, BOOL isCanceled) {
             [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
             
+            if (weakSelf.redirectionBlock) {
+                weakSelf.redirectionBlock(error);
+            }
         }];
         
     } onFailure:^(NSError *error, BOOL isCanceled) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         
+        if (weakSelf.redirectionBlock) {
+            weakSelf.redirectionBlock(error);
+        }
     }];
 }
 
@@ -143,14 +241,9 @@ static NSInteger const kLocationEventsCount = 10.f;
 - (void)updateDiagnosticsInformation
 {
     self.apiVersionValue.text = self.currentAPIEntity.apiVersion;
-    self.appVersionValue.text = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+    self.appVersionValue.text = [NSString stringWithFormat:@"%@, Build number: %@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"], [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"]];
     
     [self.eventsListTableView reloadData];
-}
-
-- (void)updateAPIEndpointTextField
-{
-    self.apiEndpointField.text = [BZRProjectFacade baseURLString];
 }
 
 - (IBAction)saveAPIEndpointClick:(id)sender
@@ -169,28 +262,17 @@ static NSInteger const kLocationEventsCount = 10.f;
         [BZRProjectFacade getAPIInfoOnSuccess:^(BOOL success) {
             
             [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-            [[NSUserDefaults standardUserDefaults] setObject:[BZRProjectFacade baseURLString] forKey:BaseURLStringKey];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-            
-            [weakSelf updateAPIEndpointTextField];
             
             [BZRAlertFacade showAlertWithMessage:LOCALIZED(@"API endpoint has been saved.") forController:weakSelf withCompletion:^{
                 //logout..
-                if (![[BZRProjectFacade baseURLString] isEqualToString:defaultBaseURLString]) {
+                if ((![weakSelf.currentEnvironment isEqual:[BZREnvironmentService environmentFromDefaultsForKey:CurrentAPIEnvironment]])) {
                     
-                    [BZRProjectFacade signOutOnSuccess:^(BOOL isSuccess) {
-                        
-                        [CATransaction begin];
-                        [CATransaction setCompletionBlock:^{
-                            [weakSelf dismissViewControllerAnimated:YES completion:nil];
-                        }];
-                        [CATransaction commit];
-                        
-                        [weakSelf.settingsController signOut];
-                        
-                    } onFailure:^(NSError *error, BOOL isCanceled) {
-                        
-                    }];
+                    //save current environment
+                    [BZREnvironmentService setEnvironment:weakSelf.currentEnvironment toDefaultsForKey:CurrentAPIEnvironment];
+                    [BZRMixpanelService resetMixpanel];
+
+                    [BZRRedirectionHelper performSignOut];
+                    [weakSelf dismissViewControllerAnimated:YES completion:nil];
                     
                 }
             }];
@@ -199,10 +281,12 @@ static NSInteger const kLocationEventsCount = 10.f;
             
             [BZRAlertFacade showAlertWithMessage:LOCALIZED(@"API endpoint is incorrect.") forController:weakSelf withCompletion:nil];
             
-            [BZRProjectFacade setBaseURLString:defaultBaseURLString];
+            [weakSelf reinitDefaultValue];
+            [weakSelf swapWithSavedValue];
+            //return to default value of base url
+            [BZRProjectFacade setBaseURLString:weakSelf.currentEnvironment.apiEndpointURLString];
             [BZRProjectFacade initHTTPClientWithRootPath:[BZRProjectFacade baseURLString] withCompletion:nil];
-            
-            [weakSelf updateAPIEndpointTextField];
+
         }];
         
     }];

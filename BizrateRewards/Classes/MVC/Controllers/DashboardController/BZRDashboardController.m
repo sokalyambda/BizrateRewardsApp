@@ -14,6 +14,7 @@
 #import "BZRAccountSettingsController.h"
 #import "BZRBaseNavigationController.h"
 #import "BZRGiftCardsListController.h"
+#import "BZRRedeemPointsController.h"
 
 #import "BZRRoundedImageView.h"
 #import "BZRProgressView.h"
@@ -24,12 +25,17 @@
 
 #import "BZRPushNotifiactionService.h"
 #import "BZRSurveyService.h"
+
 #import "BZRProjectFacade.h"
+
+#import "BZRRedirectionHelper.h"
 
 static NSString *const kAccountSettingsSegueIdentifier = @"accountSettingsSegueIdentifier";
 static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
 
 @interface BZRDashboardController ()
+
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
 @property (weak, nonatomic) IBOutlet BZRProgressView *progressView;
 @property (weak, nonatomic) IBOutlet BZRRoundedImageView *userAvatar;
@@ -38,6 +44,7 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
 @property (weak, nonatomic) IBOutlet BZRSurveyPointsValueLabel *pointsForNextGiftCardLabel;
 @property (weak, nonatomic) IBOutlet BZRTutorialDescriptionLabel *pointsForNextSurveyLabel;
 @property (weak, nonatomic) IBOutlet BZRHighlightedButton *takeSurveyButton;
+
 @property (weak, nonatomic) IBOutlet UIButton *seeAvailableGiftCardsButton;
 @property (weak, nonatomic) IBOutlet UIButton *redeemPointsButton;
 @property (weak, nonatomic) IBOutlet BZRSurveyCongratsLabel *congratulationsLabel;
@@ -67,12 +74,10 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
 
 #pragma mark - View Lifecycle
 
-- (void)viewWillAppear:(BOOL)animated
+- (void)viewDidLoad
 {
-    [super viewWillAppear:animated];
-    
-    [self.view layoutIfNeeded];
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
+    [super viewDidLoad];
+    [self configureRefreshControl];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -98,7 +103,7 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
 
 - (IBAction)redeemPointsClick:(id)sender
 {
-    
+    [self redeemPoints];
 }
 
 - (IBAction)accountSettingsClick:(id)sender
@@ -106,6 +111,50 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
     BZRAccountSettingsController *accountController = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRAccountSettingsController class])];
     BZRBaseNavigationController *navigationController = [[BZRBaseNavigationController alloc] initWithRootViewController:accountController];
     [self presentViewController:navigationController animated:YES completion:nil];
+}
+
+/**
+ *  Move to redeem points view controller
+ */
+- (void)redeemPoints
+{
+    BZRRedeemPointsController *controller = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRRedeemPointsController class])];
+    controller.currentRedemptionURL = self.currentProfile.redemptionURL;
+    [self.navigationController pushViewController:controller animated:YES];
+}
+
+/**
+ *  Configure the refresh control to update the total points
+ */
+- (void)configureRefreshControl
+{
+    self.scrollView.alwaysBounceVertical = YES;
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    [refreshControl addTarget:self action:@selector(updateTotalPointsWithRefreshControl:) forControlEvents:UIControlEventValueChanged];
+    [self.scrollView addSubview:refreshControl];
+}
+
+/**
+ *  Update total points
+ */
+- (void)updateTotalPointsWithRefreshControl:(UIRefreshControl *)refreshControl
+{
+    WEAK_SELF;
+    [refreshControl beginRefreshing];
+    [BZRProjectFacade getCurrentUserOnSuccess:^(BOOL isSuccess) {
+        [refreshControl endRefreshing];
+        
+        //update points
+        [weakSelf updatePoints];
+
+    } onFailure:^(NSError *error, BOOL isCanceled) {
+        [refreshControl endRefreshing];
+        [BZRAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:^{
+            if (weakSelf.redirectionBlock) {
+                weakSelf.redirectionBlock(error);
+            }
+        }];
+    }];
 }
 
 /**
@@ -133,7 +182,9 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
     } onFailure:^(NSError *error, BOOL isCanceled) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         [BZRAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:^{
-            
+            if (weakSelf.redirectionBlock) {
+                weakSelf.redirectionBlock(error);
+            }
         }];
     }];
 }
@@ -158,7 +209,9 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
     } onFailure:^(NSError *error, BOOL isCanceled) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         [BZRAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:^{
-            
+            if (weakSelf.redirectionBlock) {
+                weakSelf.redirectionBlock(error);
+            }
         }];
     }];
 }
@@ -176,6 +229,15 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
     self.pointsForNextGiftCardLabel.text = [NSString stringWithFormat:@"%@ %@", [[BZRCommonNumberFormatter commonNumberFormatter] stringFromNumber:@((long)self.currentProfile.pointsRequired)], LOCALIZED(@"pts")];
     
     [self updateProgressView];
+}
+
+/**
+ *  Update only points values (after refreshing)
+ */
+- (void)updatePoints
+{
+    self.earnedPointsLabel.text = [NSString stringWithFormat:@"%@ %@", [[BZRCommonNumberFormatter commonNumberFormatter] stringFromNumber:@((long)self.currentProfile.pointsAmount)], LOCALIZED(@"pts")];
+    self.pointsForNextGiftCardLabel.text = [NSString stringWithFormat:@"%@ %@", [[BZRCommonNumberFormatter commonNumberFormatter] stringFromNumber:@((long)self.currentProfile.pointsRequired)], LOCALIZED(@"pts")];
 }
 
 /**
@@ -224,17 +286,24 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
             
             weakSelf.updateNeeded = NO;
             
+            //check for redirection to survey screen
+            [weakSelf checkForSurveyDeepLinkRedirection];
+            
         } onFailure:^(NSError *error, BOOL isCanceled) {
             [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
             [BZRAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:^{
-                
+                if (weakSelf.redirectionBlock) {
+                    weakSelf.redirectionBlock(error);
+                }
             }];
         }];
         
     } onFailure:^(NSError *error, BOOL isCanceled) {
         [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
         [BZRAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:^{
-            
+            if (weakSelf.redirectionBlock) {
+                weakSelf.redirectionBlock(error);
+            }
         }];
     }];
 }
@@ -269,6 +338,26 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
     self.pointsForNextSurveyLabel.text = LOCALIZED(@"Earn more points by taking another survey!");//[NSString localizedStringWithFormat:LOCALIZED(@"Earn %li points for the next survey"), points];
 }
 
+- (void)customizeNavigationItem
+{
+    [super customizeNavigationItem];
+    [self.view layoutIfNeeded];
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+}
+
+/**
+ *  If we opened app with URL for survey passing
+ */
+- (void)checkForSurveyDeepLinkRedirection
+{
+    NSURL *redirectedURL = [BZRStorageManager sharedStorage].redirectedSurveyURL;
+    if (redirectedURL) {
+        NSError *error;
+        [BZRRedirectionHelper redirectWithURL:redirectedURL withError:&error];
+        [BZRStorageManager sharedStorage].redirectedSurveyURL = nil;
+    }
+}
+
 #pragma mark - UIStatusBar appearance
 
 /**
@@ -279,6 +368,15 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
     return UIStatusBarStyleLightContent;
+}
+
+#pragma mark - UIScrollViewDelegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if (scrollView.contentOffset.y > 0.f) {
+        [scrollView setContentOffset:CGPointZero];
+    }
 }
 
 @end

@@ -26,6 +26,10 @@ extern NSString *const kValidationErrorMessage;
 
 + (void)validateEmailField:(UITextField *)emailField andPasswordField:(UITextField *)passwordField andConfirmPasswordField:(UITextField *)confirmPassword onSuccess:(ValidationSuccessBlock)success onFailure:(ValidationFailureBlock)failure;
 
++ (void)validateShareCodeField:(UITextField *)shareCodeField
+                     onSuccess:(ValidationSuccessBlock)success
+                     onFailure:(ValidationFailureBlock)failure;
+
 + (void)cleanValidationErrorDict;
 
 @end

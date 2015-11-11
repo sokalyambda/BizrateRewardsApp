@@ -20,7 +20,6 @@ typedef void (^ProgressBlock)(BZRNetworkOperation* operation, long long totalByt
 
 @interface BZRNetworkOperation : NSObject
 
-@property (strong, nonatomic) NSDictionary *allHeaders;
 @property (strong, nonatomic, readonly) BZRNetworkRequest *networkRequest;
 
 @property (copy, nonatomic) SuccessOperationBlock successBlock;

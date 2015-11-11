@@ -30,6 +30,12 @@ static NSString *const kRejectedReason = @"rejected_link";
 static NSString *const kIsResettingSuccess = @"isResettingSuccess";
 static NSString *const kFailReasonMessage = @"failReasonMessage";
 
+//deep survey link
+static NSString *const kSurveyPath = @"survey";
+static NSString *const kLatestPath = @"latest";
+
+static NSString *const kSurveyId = @"surveyId";
+
 static NSTimeInterval const kSupposedExpirationDate = 86400.f;
 
 @implementation BZRCustomURLHandler
@@ -41,7 +47,7 @@ static NSTimeInterval const kSupposedExpirationDate = 86400.f;
  *
  *  @return Parsed Parameters
  */
-+ (NSDictionary *)urlParsingParametersFromURL:(NSURL *)url
++ (NSDictionary *)urlParsingParametersForPasswordResetFromURL:(NSURL *)url
 {
     NSString *urlString = url.absoluteString;
     NSMutableDictionary *urlParsingParameters = [NSMutableDictionary dictionary];
@@ -79,6 +85,24 @@ static NSTimeInterval const kSupposedExpirationDate = 86400.f;
         [urlParsingParameters setObject:failReasonMessage forKey:kFailReasonMessage];
     }
     
+    return urlParsingParameters;
+}
+
+/**
+ *  Parse URL for survey presentation
+ */
++ (NSDictionary *)urlParsingParametersForSurveyFromURL:(NSURL *)url
+{
+    NSMutableDictionary *urlParsingParameters = [@{} mutableCopy];
+    
+    NSArray *components = url.absoluteString.pathComponents;
+    NSString *pathComponentsString = [components componentsJoinedByString:@""];
+    NSArray *separatedComponents = [pathComponentsString componentsSeparatedByString:kSurveyPath];
+    
+    NSString *lastComponent = separatedComponents.lastObject;
+    
+    [urlParsingParameters setObject:lastComponent forKey:kSurveyId];
+
     return urlParsingParameters;
 }
 

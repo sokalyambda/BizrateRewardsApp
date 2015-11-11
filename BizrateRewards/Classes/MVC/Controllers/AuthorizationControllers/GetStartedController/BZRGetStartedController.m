@@ -55,8 +55,6 @@ static CGFloat const kCurrentNumberOfRows = 4.f;
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
-    self.navigationItem.title = NSLocalizedString(@"Get Started", nil);
     
     [self prefillUserDataIfExists];
     
@@ -187,6 +185,16 @@ static CGFloat const kCurrentNumberOfRows = 4.f;
 - (void)showProgramTerms
 {
     [BZRRedirectionHelper showPrivacyAndTermsWithType:BZRConditionsTypeTermsAndConditions andWithPresentingController:self];
+}
+
+/**
+ *  Customize navigation item
+ */
+- (void)customizeNavigationItem
+{
+    [super customizeNavigationItem];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    self.navigationItem.title = NSLocalizedString(@"Get Started", nil);
 }
 
 #pragma mark - TTTAttributedLabelDelegate

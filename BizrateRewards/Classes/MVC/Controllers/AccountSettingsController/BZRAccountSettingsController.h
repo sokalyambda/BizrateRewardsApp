@@ -10,6 +10,10 @@
 
 @interface BZRAccountSettingsController : BZRBaseViewController
 
-- (void)signOut;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *containerHeightConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *headerHeightConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *spaceBetweenContainerBottomAndSignOutButtonTop;
+
+@property (weak, nonatomic) IBOutlet UIButton *signOutButton;
 
 @end

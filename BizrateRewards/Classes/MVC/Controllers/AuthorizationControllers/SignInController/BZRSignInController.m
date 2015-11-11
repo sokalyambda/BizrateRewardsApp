@@ -48,8 +48,6 @@ static NSString *const kDashboardSegueIdentifier = @"dashboardSegue";
 {
     [super viewWillAppear:animated];
     [self getUserDataFromKeychain];
-    self.navigationItem.title = LOCALIZED(@"Login");
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
 #pragma mark - Actions
@@ -118,6 +116,7 @@ static NSString *const kDashboardSegueIdentifier = @"dashboardSegue";
                                    
                                    //Store Credentials
                                    [BZRKeychainHandler storeCredentialsWithUsername:weakSelf.userNameField.text andPassword:weakSelf.passwordField.text forService:UserCredentialsKey];
+                                   
                                    [weakSelf performSegueWithIdentifier:kDashboardSegueIdentifier sender:weakSelf];
                                    
                                } failure:^(NSError *error, BOOL isCanceled, BOOL emailRegistered) {
@@ -190,6 +189,16 @@ static NSString *const kDashboardSegueIdentifier = @"dashboardSegue";
     if (!self.incorrectEmailView.isHidden) {
         self.incorrectEmailView.hidden = YES;
     }
+}
+
+/**
+ *  Customize navigation item
+ */
+- (void)customizeNavigationItem
+{
+    [super customizeNavigationItem];
+    self.navigationItem.title = LOCALIZED(@"Login");
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
 #pragma mark - Private methods

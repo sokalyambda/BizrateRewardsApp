@@ -75,12 +75,6 @@ static NSString *const kEditProfileContainerSegueIdentifier = @"editProfileConta
     [self observeProfileChanges];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    [self customizeNavigationItem];
-}
-
 #pragma mark - Actions
 
 /**
@@ -104,6 +98,7 @@ static NSString *const kEditProfileContainerSegueIdentifier = @"editProfileConta
  */
 - (void)customizeNavigationItem
 {
+    [super customizeNavigationItem];
     //set navigation title
     self.navigationItem.title = LOCALIZED(@"Profile");
     
@@ -147,7 +142,9 @@ static NSString *const kEditProfileContainerSegueIdentifier = @"editProfileConta
                                    } onFailure:^(NSError *error, BOOL isCanceled) {
                                        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
                                        [BZRAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:^{
-                                           
+                                           if (weakSelf.redirectionBlock) {
+                                               weakSelf.redirectionBlock(error);
+                                           }
                                        }];
                                    }];
                                } onFailure:^(NSMutableDictionary *errorDict) {

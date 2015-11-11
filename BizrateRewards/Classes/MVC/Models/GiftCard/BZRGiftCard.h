@@ -8,7 +8,7 @@
 
 #import "BZRMappingProtocol.h"
 
-@interface BZRGiftCard : NSObject<BZRMappingProtocol>
+@interface BZRGiftCard : NSObject
 
 @property (strong, nonatomic) NSURL *giftCardImageURL;
 @property (strong, nonatomic) NSString *giftCardName;

@@ -22,15 +22,6 @@ static CGFloat const kCellHeight = 100.f;
 
 @implementation BZRGiftCardsListController
 
-#pragma mark - View Lifecycle
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-//    [self.view layoutIfNeeded];
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
-}
-
 #pragma mark - UICollectionViewDataSource
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -57,6 +48,14 @@ static CGFloat const kCellHeight = 100.f;
     CGFloat width = CGRectGetWidth(collectionView.bounds) / 2.f;
     size = CGSizeMake(width, kCellHeight);
     return size;
+}
+
+#pragma mark - Actions
+
+- (void)customizeNavigationItem
+{
+    [super customizeNavigationItem];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
 @end

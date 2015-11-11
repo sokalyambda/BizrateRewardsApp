@@ -11,6 +11,9 @@
 #import "BZRLocationEvent.h"
 #import "BZRServerAPIEntity.h"
 
+#import "BZRLocationEventService.h"
+#import "BZRFacebookProfileService.h"
+
 @interface BZRStorageManager ()
 
 @end
@@ -22,7 +25,7 @@
 - (BZRFacebookProfile *)facebookProfile
 {
     if (!_facebookProfile) {
-        _facebookProfile = [BZRFacebookProfile facebookProfileFromDefaultsForKey:FBCurrentProfile];
+        _facebookProfile = [BZRFacebookProfileService facebookProfileFromDefaultsForKey:FBCurrentProfile];
     }
     return _facebookProfile;
 }
@@ -30,7 +33,7 @@
 - (BZRLocationEvent *)lastReceivedLocationEvent
 {
     if (!_lastReceivedLocationEvent) {
-        _lastReceivedLocationEvent = [BZRLocationEvent locationEventFromDefaultsForKey:LastReceivedLocationEvent];
+        _lastReceivedLocationEvent = [BZRLocationEventService locationEventFromDefaultsForKey:LastReceivedLocationEvent];
     }
     return _lastReceivedLocationEvent;
 }

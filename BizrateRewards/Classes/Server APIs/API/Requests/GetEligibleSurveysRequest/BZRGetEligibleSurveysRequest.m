@@ -10,6 +10,8 @@
 
 #import "BZRSurvey.h"
 
+#import "BZRSurveyService.h"
+
 static NSString *requestAction = @"user/survey/eligible";
 
 @implementation BZRGetEligibleSurveysRequest
@@ -40,7 +42,7 @@ static NSString *requestAction = @"user/survey/eligible";
         NSMutableArray *surveys = [NSMutableArray array];
         if ([responseObject isKindOfClass:[NSArray class]]) {
             for (NSDictionary *responseDict in responseObject) {
-                BZRSurvey *survey = [[BZRSurvey alloc] initWithServerResponse:responseDict];
+                BZRSurvey *survey = [BZRSurveyService surveyFromServerResponse:responseDict];
                 [surveys addObject:survey];
             }
         }

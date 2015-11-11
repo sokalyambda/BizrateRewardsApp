@@ -13,10 +13,12 @@
 #import "BZRRequests.h"
 
 #import "BZRApplicationToken.h"
+#import "BZREnvironment.h"
 
 #import "BZRFacebookService.h"
 #import "BZRErrorHandler.h"
 #import "BZRRedirectionHelper.h"
+#import "BZREnvironmentService.h"
 
 #import "BZRKeychainHandler.h"
 
@@ -34,10 +36,15 @@ static NSString *_baseURLString;
 + (NSString *)baseURLString
 {
     @synchronized(self) {
-        if (!_baseURLString && [[NSUserDefaults standardUserDefaults] stringForKey:BaseURLStringKey]) {
-            _baseURLString = [[NSUserDefaults standardUserDefaults] stringForKey:BaseURLStringKey];
-        } else if (!_baseURLString) {
-            _baseURLString = defaultBaseURLString;
+        BZREnvironment *savedEnvironment = [BZREnvironmentService environmentFromDefaultsForKey:CurrentAPIEnvironment];
+        
+        if (!savedEnvironment) {
+            savedEnvironment = [BZREnvironmentService defaultEnvironment];
+            [BZREnvironmentService setEnvironment:savedEnvironment toDefaultsForKey:CurrentAPIEnvironment];
+        }
+        
+        if (!_baseURLString && savedEnvironment) {
+            _baseURLString = savedEnvironment.apiEndpointURLString;
         }
         return _baseURLString;
     }
@@ -93,7 +100,7 @@ static NSString *_baseURLString;
  */
 + (void)cancelAllOperations
 {
-    return [sharedHTTPClient cancelAllOperations];
+    return [[self HTTPClient] cancelAllOperations];
 }
 
 /**
@@ -114,7 +121,7 @@ static NSString *_baseURLString;
 {
     BZRAPIInfoRequest *request = [[BZRAPIInfoRequest alloc] init];
     
-    BZRNetworkOperation* operation = [[self  HTTPClient] enqueueOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
+    BZRNetworkOperation* operation = [[self  HTTPClient] createOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
         
         BZRAPIInfoRequest *request = (BZRAPIInfoRequest*)operation.networkRequest;
         [BZRStorageManager sharedStorage].currentServerAPIEntity = request.apiEntity;
@@ -140,7 +147,7 @@ static NSString *_baseURLString;
 {
     BZRSignInRequest *request = [[BZRSignInRequest alloc] initWithEmail:email andPassword:password];
     
-    BZRNetworkOperation* operation = [[self  HTTPClient] enqueueOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
+    BZRNetworkOperation* operation = [[self  HTTPClient] createOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
         
         //track mixpanel event
         [BZRMixpanelService trackEventWithType:BZRMixpanelEventLoginSuccessful
@@ -180,7 +187,7 @@ static NSString *_baseURLString;
     [self validateSessionWithType:BZRSessionTypeApplication onSuccess:^(BOOL isSuccess) {
         BZRSignUpRequest *request = [[BZRSignUpRequest alloc] initWithUserFirstName:firstName andUserLastName:lastName andEmail:email andPassword:password andDateOfBirth:birthDate andGender:gender];
         
-        operation = [[self  HTTPClient] enqueueOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
+        operation = [[self  HTTPClient] createOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
             
             //track mixpanel event
             [BZRMixpanelService trackEventWithType:BZRMixpanelEventRegistrationSuccessful
@@ -219,7 +226,7 @@ static NSString *_baseURLString;
     [self validateSessionWithType:BZRSessionTypeApplication onSuccess:^(BOOL isSuccess) {
         BZRForgotPasswordRequest *request = [[BZRForgotPasswordRequest alloc] initWithUserName:userName andNewPassword:newPassword];
         
-        operation = [[self  HTTPClient] enqueueOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
+        operation = [[self  HTTPClient] createOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
             
             if (success) {
                 success(YES);
@@ -248,7 +255,7 @@ static NSString *_baseURLString;
     [self validateSessionWithType:BZRSessionTypeUser onSuccess:^(BOOL isSuccess) {
         BZRGetCurrentUserRequest *request = [[BZRGetCurrentUserRequest alloc] init];
         
-        operation = [[self  HTTPClient] enqueueOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
+        operation = [[self  HTTPClient] createOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
             
             BZRGetCurrentUserRequest *request = (BZRGetCurrentUserRequest*)operation.networkRequest;
             
@@ -291,7 +298,7 @@ static NSString *_baseURLString;
     [self validateSessionWithType:BZRSessionTypeUser onSuccess:^(BOOL isSuccess) {
         BZRUpdateCurrentUserRequest *request = [[BZRUpdateCurrentUserRequest alloc] initWithFirstName:firstName andLastName:lastName andDateOfBirth:dateOfBirth andGender:gender];
         
-        operation = [[self  HTTPClient] enqueueOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
+        operation = [[self  HTTPClient] createOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
             
             BZRUpdateCurrentUserRequest *request = (BZRUpdateCurrentUserRequest*)operation.networkRequest;
             
@@ -329,7 +336,7 @@ static NSString *_baseURLString;
         
         BZRGetEligibleSurveysRequest *request = [[BZRGetEligibleSurveysRequest alloc] init];
         
-        operation = [[self  HTTPClient] enqueueOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
+        operation = [[self  HTTPClient] createOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
             
             BZRGetEligibleSurveysRequest *request = (BZRGetEligibleSurveysRequest*)operation.networkRequest;
             
@@ -360,12 +367,42 @@ static NSString *_baseURLString;
         
         BZRGetPointsForNextSurveyRequest *request = [[BZRGetPointsForNextSurveyRequest alloc] init];
         
-        operation = [[self  HTTPClient] enqueueOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
+        operation = [[self  HTTPClient] createOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
             
             BZRGetPointsForNextSurveyRequest *request = (BZRGetPointsForNextSurveyRequest*)operation.networkRequest;
             
             if (success) {
                 success(request.pointsForNextSurvey);
+            }
+            
+        } failure:^(BZRNetworkOperation *operation ,NSError *error, BOOL isCanceled) {
+            
+            if (failure) {
+                failure(error, isCanceled);
+            }
+        }];
+    } onFailure:^(NSError *error, BOOL isCanceled) {
+        if (failure) {
+            failure(error, isCanceled);
+        }
+    }];
+    
+    return operation;
+}
+
++ (BZRNetworkOperation *)deleteTakenSurveysOnSuccess:(void(^)(BOOL isSuccess))success
+                                           onFailure:(void(^)(NSError *error, BOOL isCanceled))failure
+{
+    __block BZRNetworkOperation* operation;
+    
+    [self validateSessionWithType:BZRSessionTypeUser onSuccess:^(BOOL isSuccess) {
+        
+        BZRDeleteTakenSurveysRequest *request = [[BZRDeleteTakenSurveysRequest alloc] init];
+        
+        operation = [[self  HTTPClient] createOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
+            
+            if (success) {
+                success(YES);
             }
             
         } failure:^(BZRNetworkOperation *operation ,NSError *error, BOOL isCanceled) {
@@ -392,7 +429,7 @@ static NSString *_baseURLString;
         
         BZRSendLocationEventRequest *request = [[BZRSendLocationEventRequest alloc] initWithLocationEvent:locationEvent];
         
-        operation = [[self  HTTPClient] enqueueOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
+        operation = [[self  HTTPClient] createOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
             
             BZRSendLocationEventRequest *request = (BZRSendLocationEventRequest*)operation.networkRequest;
             
@@ -421,7 +458,7 @@ static NSString *_baseURLString;
         
         BZRGetLocationEventsListRequest *request = [[BZRGetLocationEventsListRequest alloc] init];
         
-        operation = [[self  HTTPClient] enqueueOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
+        operation = [[self  HTTPClient] createOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
             
             BZRGetLocationEventsListRequest *request = (BZRGetLocationEventsListRequest*)operation.networkRequest;
             
@@ -449,7 +486,7 @@ static NSString *_baseURLString;
     [self validateSessionWithType:BZRSessionTypeUser onSuccess:^(BOOL isSuccess) {
         BZRSendDeviceDataRequest *request = [[BZRSendDeviceDataRequest alloc] init];
         
-        operation = [[self  HTTPClient] enqueueOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
+        operation = [[self  HTTPClient] createOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
             
             if (success) {
                 success(YES);
@@ -476,7 +513,7 @@ static NSString *_baseURLString;
     [self validateSessionWithType:BZRSessionTypeUser onSuccess:^(BOOL isSuccess) {
         BZRGetFeaturedGiftcards *request = [[BZRGetFeaturedGiftcards alloc] init];
         
-        operation = [[self  HTTPClient] enqueueOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
+        operation = [[self  HTTPClient] createOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
             
             BZRGetFeaturedGiftcards *request = (BZRGetFeaturedGiftcards*)operation.networkRequest;
             
@@ -557,6 +594,34 @@ static NSString *_baseURLString;
     return [BZRFacebookService isFacebookSessionValid];
 }
 
+/**
+ *  Check whether autologin needed
+ */
++ (BOOL)isAutologinNeeded
+{
+    return self.isTutorialPassed && [self userDataExistsInKeychain];
+}
+
+/**
+ *  Check whether tutorial has been passed
+ */
++ (BOOL)isTutorialPassed
+{
+    return [[NSUserDefaults standardUserDefaults] boolForKey:IsTutorialPassed];
+}
+
+/**
+ *  Check whether user data exists in keychain
+ */
++ (BOOL)userDataExistsInKeychain
+{
+    NSDictionary *userCredentials = [BZRKeychainHandler getStoredCredentialsForService:UserCredentialsKey];
+    NSString *savedPassword = userCredentials[PasswordKey];
+    NSString *savedUsername = userCredentials[UserNameKey];
+    
+    return savedUsername.length && savedPassword.length;
+}
+
 /******* FaceBook *******/
 + (BZRNetworkOperation *)signInWithFacebookOnSuccess:(void (^)(BOOL isSuccess))success
                                            onFailure:(void (^)(NSError *error, BOOL isCanceled, BOOL userExists))failure
@@ -566,7 +631,7 @@ static NSString *_baseURLString;
     [self validateSessionWithType:BZRSessionTypeApplication onSuccess:^(BOOL isSuccess) {
         BZRSignInWithFacebookRequest *request = [[BZRSignInWithFacebookRequest alloc] init];
         
-        operation = [[self  HTTPClient] enqueueOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
+        operation = [[self  HTTPClient] createOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
             
             //track mixpanel event
             [BZRMixpanelService trackEventWithType:BZRMixpanelEventLoginSuccessful
@@ -615,7 +680,7 @@ static NSString *_baseURLString;
         
         BZRSignUpRequest *request = [[BZRSignUpRequest alloc] initWithUserFirstName:firstName andUserLastName:lastName andEmail:email andDateOfBirth:dateOfBirth andGender:gender];
         
-        operation = [[self  HTTPClient] enqueueOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
+        operation = [[self  HTTPClient] createOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
             
             BZRSignUpRequest *request = (BZRSignUpRequest*)operation.networkRequest;
             

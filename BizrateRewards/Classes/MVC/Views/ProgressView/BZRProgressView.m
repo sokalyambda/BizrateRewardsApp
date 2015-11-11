@@ -16,9 +16,22 @@
 
 @property (strong, nonatomic) UIColor *currentColor;
 
+@property (assign, nonatomic) CGFloat savedProgress;
+
 @end
 
 @implementation BZRProgressView
+
+#pragma mark - Accessors
+
+- (void)setSavedProgress:(CGFloat)savedProgress
+{
+    if (fabs(_savedProgress - savedProgress) > FLT_EPSILON) {
+        _savedProgress = savedProgress;
+        [self setProgress:_savedProgress animated:YES];
+        [self setProgressTintColor:self.currentColor];
+    }
+}
 
 #pragma mark - Lifecycle
 
@@ -63,8 +76,7 @@
     self.maxPointsEarned = (currentPoints >= requiredPoints && requiredPoints != 0.f);
     
     if (!isnan(progress)) {
-        [self setProgress:progress animated:YES];
-        [self setProgressTintColor:self.currentColor];
+        self.savedProgress = progress;
     }
     
     if (completion) {

@@ -10,7 +10,15 @@
 
 #import "BZRProjectFacade.h"
 
+#import "BZRRedirectionHelper.h"
+
+#import <Mixpanel/Mixpanel.h>
+
 static NSString *const kPushPermissionsLastState = @"pushPermissionLastState";
+
+static NSString *const kRedirectedURL = @"redirected_url";
+
+static NSString *const kDefaultLatestSurveyURLString = @"com.bizraterewards://survey/latest";
 
 @implementation BZRPushNotifiactionService
 
@@ -21,11 +29,13 @@ static NSString *const kPushPermissionsLastState = @"pushPermissionLastState";
  */
 + (void)registeredForPushNotificationsWithToken:(NSData *)deviceToken
 {
-    NSString *token = [[[deviceToken.description
+    NSString *tokenString = [[[deviceToken.description
                          stringByReplacingOccurrencesOfString:@"<" withString:@""]
                         stringByReplacingOccurrencesOfString:@">" withString:@""]
                        stringByReplacingOccurrencesOfString:@" " withString:@""];
-    [self saveAndSendDeviceData:token];
+    
+    [self saveAndSendDeviceDataWithTokenString:tokenString andTokenData:deviceToken];
+    
     [[NSNotificationCenter defaultCenter] postNotificationName:PushNotificationServiceDidSuccessAuthorizeNotification object:nil];
 }
 
@@ -57,8 +67,19 @@ static NSString *const kPushPermissionsLastState = @"pushPermissionLastState";
  *
  *  @return Returns 'YES' if registered
  */
-+ (BOOL)pushNotificationsEnabled
-{ 
++ (void)pushNotificationsEnabledWithCompletion:(void(^)(BOOL enabled, BOOL isPermissionsStateChanged))completion
+{
+    BOOL isPushesEnabled = [[UIApplication sharedApplication] currentUserNotificationSettings].types != UIUserNotificationTypeNone;
+    
+    BOOL isPermissionsChanges = [self checkForPermissionsChangingWithPushesEnabled:isPushesEnabled];
+    
+    if (completion) {
+        completion(isPushesEnabled, isPermissionsChanges);
+    }
+}
+
++ (BOOL)isPushNotificationsEnabled
+{
     BOOL isPushesEnabled = [[UIApplication sharedApplication] currentUserNotificationSettings].types != UIUserNotificationTypeNone;
     
     [self checkForPermissionsChangingWithPushesEnabled:isPushesEnabled];
@@ -71,38 +92,60 @@ static NSString *const kPushPermissionsLastState = @"pushPermissionLastState";
  *
  *  @param userInfo Push notification info dictionary
  */
-+ (void)recivedPushNotification:(NSDictionary*)userInfo
++ (void)receivedPushNotification:(NSDictionary*)userInfo
+           withApplicationState:(UIApplicationState)applicationState
 {
-    
+    NSURL *redirectedURL = [NSURL URLWithString:kDefaultLatestSurveyURLString];//userInfo[kRedirectedURL];
+    NSError *error;
+    [BZRRedirectionHelper redirectWithURL:redirectedURL withError:&error];
 }
 
 /**
  *  Save devicet token and send device data to server
  */
-+ (void)saveAndSendDeviceData:(NSString *)deviceToken
++ (void)saveAndSendDeviceDataWithTokenString:(NSString *)deviceToken
+                                andTokenData:(NSData *)tokenData
 {
-    BOOL enabled = [self pushNotificationsEnabled];
-    if (!enabled) {
-        deviceToken = nil;
-        return;
-    }
-    if (deviceToken.length && [BZRProjectFacade isUserSessionValid]) {
-        
-        [BZRStorageManager sharedStorage].deviceToken = deviceToken;
-        
-        //Uncomment below lines to show the progress hud added to main window.
-        /*
-        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
-        hud.labelText = LOCALIZED(@"Sending device data...");
-        [MBProgressHUD hideAllHUDsForView:[UIApplication sharedApplication].keyWindow animated:YES];
-         */
-        
-        [BZRProjectFacade sendDeviceDataOnSuccess:^(BOOL isSuccess) {
+    [self pushNotificationsEnabledWithCompletion:^(BOOL enabled, BOOL isPermissionsStateChanged) {
+        if (!enabled) {
+            return;
+        }
+        if (deviceToken.length && [BZRProjectFacade isUserSessionValid]) {
             
-        } onFailure:^(NSError *error, BOOL isCanceled) {
+            [BZRStorageManager sharedStorage].deviceToken = deviceToken;
             
-        }];
-    }
+            //Uncomment below lines to show the progress hud added to main window.
+            /*
+             MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
+             hud.labelText = LOCALIZED(@"Sending device data...");
+             [MBProgressHUD hideAllHUDsForView:[UIApplication sharedApplication].keyWindow animated:YES];
+             */
+            
+            if ([BZRProjectFacade isUserSessionValid]) {
+                [BZRProjectFacade sendDeviceDataOnSuccess:^(BOOL isSuccess) {
+                    
+                    //send token to MixPanel
+                    Mixpanel *mixpanel = [BZRMixpanelService currentMixpanelInstance];
+                    [mixpanel identify:mixpanel.distinctId];
+                    [mixpanel.people addPushDeviceToken:tokenData];
+                    
+                    DLog(@"Device token has been sent");
+                    
+                } onFailure:^(NSError *error, BOOL isCanceled) {
+                    
+                }];
+            }
+        }
+    }];
+    
+}
+
+/**
+ *  Clean notifications badges
+ */
++ (void)cleanPushNotificationsBadges
+{
+    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
 }
 
 #pragma mark - Private methods
@@ -112,7 +155,7 @@ static NSString *const kPushPermissionsLastState = @"pushPermissionLastState";
  *
  *  @param isPushesEnabled Enable value
  */
-+ (void)checkForPermissionsChangingWithPushesEnabled:(BOOL)isPushesEnabled
++ (BOOL)checkForPermissionsChangingWithPushesEnabled:(BOOL)isPushesEnabled
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
@@ -133,7 +176,19 @@ static NSString *const kPushPermissionsLastState = @"pushPermissionLastState";
         //track mixpanel event
         [BZRMixpanelService trackEventWithType:BZRMixpanelEventPushNotificationPermission
                                  propertyValue:isPushesEnabled? @"YES" : @"NO"];
+
+        if ([BZRProjectFacade isUserSessionValid] && !isPushesEnabled) {
+            //update notifications and geolocation settings
+            [BZRProjectFacade sendDeviceDataOnSuccess:^(BOOL isSuccess) {
+                
+                DLog(@"notifications access have been updated");
+                
+            } onFailure:^(NSError *error, BOOL isCanceled) {
+                
+            }];
+        }
     }
+    return isPermissionsChanged;
 }
 
 @end

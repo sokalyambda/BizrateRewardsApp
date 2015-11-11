@@ -8,8 +8,6 @@
 
 #import "BZRSessionManager.h"
 
-extern NSString *defaultBaseURLString;
-
 @class BZRUserProfile, BZRLocationEvent;
 
 @interface BZRProjectFacade : NSObject
@@ -32,6 +30,9 @@ extern NSString *defaultBaseURLString;
 
 //check whether any operation is in process
 + (BOOL)isOperationInProcess;
+
+//check whether autologin needed
++ (BOOL)isAutologinNeeded;
 
 //GET API Info Request
 + (BZRNetworkOperation *)getAPIInfoOnSuccess:(void (^)(BOOL success))success
@@ -73,6 +74,9 @@ extern NSString *defaultBaseURLString;
                                           onFailure:(void (^)(NSError *error, BOOL isCanceled))failure;
 
 + (BZRNetworkOperation *)getPointsForNextSurveyOnSuccess:(void(^)(NSInteger pointsForNextSurvey))success onFailure:(void(^)(NSError *error, BOOL isCanceled))failure;
+
++ (BZRNetworkOperation *)deleteTakenSurveysOnSuccess:(void(^)(BOOL isSuccess))success
+                                           onFailure:(void(^)(NSError *error, BOOL isCanceled))failure;
 
 //Location Events
 + (BZRNetworkOperation *)sendGeolocationEvent:(BZRLocationEvent *)locationEvent onSuccess:(void (^)(BZRLocationEvent *locationEvent))success

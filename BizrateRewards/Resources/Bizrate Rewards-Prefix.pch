@@ -9,7 +9,6 @@
 #ifndef BizrateRewards_BizrateRewards_Prefix_pch
 #define BizrateRewards_BizrateRewards_Prefix_pch
 
-#import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import <MobileCoreServices/MobileCoreServices.h>
 
@@ -24,8 +23,6 @@
 #import "BZRAlertFacade.h"
 #import "BZRGlobalConstants.h"
 #import "BZRValidator.h"
-
-#import "BZRReachabilityHelper.h"
 
 #import "BZRMixpanelService.h"
 

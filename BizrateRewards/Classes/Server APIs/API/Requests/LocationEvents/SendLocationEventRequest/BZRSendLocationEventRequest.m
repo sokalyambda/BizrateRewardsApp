@@ -10,6 +10,8 @@
 
 #import "BZRLocationEvent.h"
 
+#import "BZRLocationEventService.h"
+
 static NSString *const requestAction = @"user/location/event";
 
 static NSString *const kLocation    = @"location";
@@ -54,7 +56,7 @@ static NSString *const kEventType   = @"event_type";
     if (!responseObject) {
         return NO;
     } else {
-        self.loggedEvent = [[BZRLocationEvent alloc] initWithServerResponse:responseObject];
+        self.loggedEvent = [BZRLocationEventService locationEventFromServerResponse:responseObject];
         return !!self.loggedEvent;
     }
 }

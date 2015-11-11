@@ -25,7 +25,7 @@ static NSString *const kStartTutorialSegueIdentirier = @"startTutorialSegue";
 @property (assign, nonatomic, getter=isFacebookSessionValid) BOOL facebookSessionValid;
 
 @property (assign, nonatomic, getter=isForgotPasswordRedirectionNeeded) BOOL forgotPasswordRedirecionNeeded;
-@property (assign, nonatomic, getter=isAppOpenedWithURL) BOOL appOpenedWithURL;
+@property (assign, nonatomic, getter=isResetPasswordFlow) BOOL resetPasswordFlow;
 
 @property (strong, nonatomic) NSUserDefaults *defaults;
 
@@ -47,7 +47,7 @@ static NSString *const kStartTutorialSegueIdentirier = @"startTutorialSegue";
 {
     _facebookSessionValid = [BZRProjectFacade isFacebookSessionValid];
     if (_facebookSessionValid) {
-        return !self.isAppOpenedWithURL;
+        return !self.isResetPasswordFlow;
     }
     return NO;
 }
@@ -57,9 +57,9 @@ static NSString *const kStartTutorialSegueIdentirier = @"startTutorialSegue";
     return [BZRStorageManager sharedStorage].resettingPasswordRepeatNeeded;
 }
 
-- (BOOL)isAppOpenedWithURL
+- (BOOL)isResetPasswordFlow
 {
-    return [BZRStorageManager sharedStorage].appOpenedWithURL;
+    return [BZRStorageManager sharedStorage].resetPasswordFlow;
 }
 
 - (NSUserDefaults *)defaults
@@ -75,12 +75,6 @@ static NSString *const kStartTutorialSegueIdentirier = @"startTutorialSegue";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -117,7 +111,7 @@ static NSString *const kStartTutorialSegueIdentirier = @"startTutorialSegue";
 - (BOOL)isAutologinNeeded
 {
     if (self.isTutorialPassed && [self userDataExistsInKeychain]) {
-        return !self.isAppOpenedWithURL;
+        return !self.isResetPasswordFlow;
     }
     return NO;
 }
@@ -179,6 +173,15 @@ static NSString *const kStartTutorialSegueIdentirier = @"startTutorialSegue";
             }];
         }
     }];
+}
+
+/**
+ *  Customize navigation item
+ */
+- (void)customizeNavigationItem
+{
+    [super customizeNavigationItem];
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
 #pragma mark - Navigation

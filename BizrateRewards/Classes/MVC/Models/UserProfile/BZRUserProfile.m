@@ -8,19 +8,10 @@
 
 #import "BZRUserProfile.h"
 
-#import "BZRCommonDateFormatter.h"
+#import "BZRPushNotifiactionService.h"
+#import "BZRUserProfileService.h"
 
-static NSString *const kFirstName               = @"firstname";
-static NSString *const kLastName                = @"lastname";
-static NSString *const kEmail                   = @"email";
-static NSString *const kDateOfBirth             = @"dob";
-static NSString *const kGender                  = @"gender";
-static NSString *const kIsMale                  = @"isMale";
-static NSString *const kPointsAmount            = @"points_awarded";
-static NSString *const kContactID               = @"ref_contact_id";
-static NSString *const kPointsRequired          = @"points_next_redemption";
-
-static NSString *const kIsTestUser              = @"is_test_user";
+#import "BZRLocationObserver.h"
 
 @interface BZRUserProfile ()<NSCoding>
 
@@ -77,79 +68,29 @@ static NSString *const kIsTestUser              = @"is_test_user";
     }
 }
 
-#pragma mark - BZRMappingProtocol
-
-- (instancetype)initWithServerResponse:(NSDictionary *)response
+- (BOOL)isRemoteNotificationsEnabled
 {
-    self = [super init];
-    if (self) {
-        _firstName      = response[kFirstName];
-        _lastName       = response[kLastName];
-        _email          = response[kEmail];
-        _contactID      = response[kContactID];
-        _dateOfBirth    = [[BZRCommonDateFormatter commonDateFormatter] dateFromString:response[kDateOfBirth]];
-        _pointsAmount   = [response[kPointsAmount] integerValue];
-        _pointsRequired = [response[kPointsRequired] integerValue];
-        _testUser       = [response[kIsTestUser] boolValue];
-        
-        self.genderString = response[kGender];
-    }
-    return self;
+    return [BZRPushNotifiactionService isPushNotificationsEnabled];
 }
 
-#pragma mark - NSCoder methods
+- (BOOL)isGeolocationAccessGranted
+{
+    return [BZRLocationObserver sharedObserver].isAuthorized;
+}
+
+#pragma mark - NSCoding methods
 
 - (void)encodeWithCoder:(NSCoder *)encoder
 {
-    //Encode properties, other class variables, etc
-    [encoder encodeObject:self.firstName forKey:kFirstName];
-    [encoder encodeObject:self.lastName forKey:kLastName];
-    [encoder encodeObject:self.email forKey:kEmail];
-    [encoder encodeObject:self.dateOfBirth forKey:kDateOfBirth];
-    [encoder encodeObject:@(self.isMale) forKey:kIsMale];
-    [encoder encodeObject:self.genderString forKey:kGender];
+    [BZRUserProfileService encodeUserProfile:self withCoder:encoder];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder
 {
     if((self = [super init])) {
-        //decode properties, other class vars
-        _firstName      = [decoder decodeObjectForKey:kFirstName];
-        _lastName       = [decoder decodeObjectForKey:kLastName];
-        _email          = [decoder decodeObjectForKey:kEmail];
-        _dateOfBirth    = [decoder decodeObjectForKey:kDateOfBirth];
-        _isMale         = [[decoder decodeObjectForKey:kIsMale] boolValue];
-        _genderString   = [decoder decodeObjectForKey:kGender];
+        [BZRUserProfileService decodeUserProfile:self withDecoder:decoder];
     }
     return self;
-}
-
-#pragma mark - NSUserDefaults methods
-
-- (void)setUserProfileToDefaultsForKey:(NSString *)key
-{
-    NSData *encodedObject = [NSKeyedArchiver archivedDataWithRootObject:self];
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
-    if (![defaults.dictionaryRepresentation.allKeys containsObject:key]) {
-        [defaults removeObjectForKey:key];
-    }
-    
-    [defaults setObject:encodedObject forKey:key];
-    [defaults synchronize];
-}
-
-+ (BZRUserProfile *)userProfileFromDefaultsForKey:(NSString *)key
-{
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
-    if (![defaults.dictionaryRepresentation.allKeys containsObject:key]) {
-        return nil;
-    }
-    
-    NSData *encodedObject = [defaults objectForKey:key];
-    BZRUserProfile *userProfile = [NSKeyedUnarchiver unarchiveObjectWithData:encodedObject];
-    return userProfile;
 }
 
 @end

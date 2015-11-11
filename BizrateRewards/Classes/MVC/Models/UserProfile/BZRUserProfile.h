@@ -8,7 +8,7 @@
 
 #import "BZRMappingProtocol.h"
 
-@interface BZRUserProfile : NSObject<BZRMappingProtocol>
+@interface BZRUserProfile : NSObject
 
 @property (strong, nonatomic) NSURL     *avatarURL;
 
@@ -18,6 +18,10 @@
 @property (strong, nonatomic) NSString  *email;
 @property (strong, nonatomic) NSDate    *dateOfBirth;
 @property (strong, nonatomic) NSString  *contactID;
+
+@property (assign, nonatomic) long long userId;
+
+@property (strong, nonatomic) NSURL *redemptionURL;
 
 @property (strong, nonatomic) NSString *genderString;
 
@@ -30,7 +34,7 @@
 
 @property (assign, nonatomic) BOOL isMale;
 
-- (void)setUserProfileToDefaultsForKey:(NSString *)key;
-+ (BZRUserProfile *)userProfileFromDefaultsForKey:(NSString *)key;
+@property (assign, nonatomic, getter=isRemoteNotificationsEnabled) BOOL remoteNotificationsEnabled;
+@property (assign, nonatomic, getter=isGeolocationAccessGranted) BOOL geolocationAccessGranted;
 
 @end

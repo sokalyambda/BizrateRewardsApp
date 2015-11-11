@@ -12,15 +12,11 @@
 #import "BZRBaseNavigationController.h"
 
 #import "BZRAssetsHelper.h"
-
-#import "BZRProjectFacade.h"
+#import "BZRRedirectionHelper.h"
 
 #import "BZRRoundedImageView.h"
 
 static NSString *const kAccountSettingsContainerSegueIdentifier = @"accountSettingsContainerSegue";
-
-static CGFloat const kDiagnosticHiddenHeightConstant = 205.f;
-static CGFloat const kDiagnosticShownHeightConstant = 246.f;
 
 @interface BZRAccountSettingsController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -30,8 +26,6 @@ static CGFloat const kDiagnosticShownHeightConstant = 246.f;
 @property (weak, nonatomic) IBOutlet UILabel *userFullNameLabel;
 
 @property (strong, nonatomic) BZRUserProfile *currentProfile;
-
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *containerHeightConstraint;
 
 @end
 
@@ -58,14 +52,7 @@ static CGFloat const kDiagnosticShownHeightConstant = 246.f;
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
     [self updateUserData];
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    [self adjustContainerHeight];
 }
 
 #pragma mark - Actions
@@ -94,9 +81,8 @@ static CGFloat const kDiagnosticShownHeightConstant = 246.f;
 {
     UIAlertController *signOutController = [UIAlertController alertControllerWithTitle:@"" message:LOCALIZED(@"Do you want to sign out?") preferredStyle:UIAlertControllerStyleActionSheet];
  
-    WEAK_SELF;
     UIAlertAction *signOutAction = [UIAlertAction actionWithTitle:LOCALIZED(@"Sign Out") style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-        [weakSelf signOut];
+        [BZRRedirectionHelper performSignOut];
     }];
     
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:LOCALIZED(@"Cancel") style:UIAlertActionStyleCancel handler:nil];
@@ -105,28 +91,6 @@ static CGFloat const kDiagnosticShownHeightConstant = 246.f;
     [signOutController addAction:cancelAction];
     
     [self presentViewController:signOutController animated:YES completion:nil];
-}
-
-/**
- *  Sign out: clean user data and move to root controller.
- */
-- (void)signOut
-{
-    WEAK_SELF;
-    [BZRProjectFacade signOutOnSuccess:^(BOOL isSuccess) {
-        
-        BZRBaseNavigationController *navigationController = (BZRBaseNavigationController *)weakSelf.presentingViewController;
-        
-        [CATransaction begin];
-        [CATransaction setCompletionBlock:^{
-            [weakSelf dismissViewControllerAnimated:YES completion:nil];
-        }];
-        [navigationController popToRootViewControllerAnimated:YES];;
-        [CATransaction commit];
-        
-    } onFailure:^(NSError *error, BOOL isCanceled) {
-        
-    }];
 }
 
 /**
@@ -148,16 +112,12 @@ static CGFloat const kDiagnosticShownHeightConstant = 246.f;
 }
 
 /**
- *  Adjust container height depends on is_test_user value. Show Diagnostic cell if it is a test user.
+ *  Customize navigation item
  */
-- (void)adjustContainerHeight
+- (void)customizeNavigationItem
 {
-    WEAK_SELF;
-    [self.view layoutIfNeeded];
-    self.containerHeightConstraint.constant = self.currentProfile.isTestUser ? kDiagnosticShownHeightConstant : kDiagnosticHiddenHeightConstant;
-    [UIView animateWithDuration:.1f animations:^{
-        [weakSelf.view layoutIfNeeded];
-    }];
+    [super customizeNavigationItem];
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
 #pragma mark - Change photo actions

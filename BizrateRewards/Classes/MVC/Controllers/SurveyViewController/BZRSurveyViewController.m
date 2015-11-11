@@ -33,12 +33,6 @@ static NSString *const kSurveyID = @"Survey ID";
     [self loadSurveyInWebView];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    [self customizeNavigationBar];
-}
-
 #pragma mark - Actions
 
 /**
@@ -57,8 +51,9 @@ static NSString *const kSurveyID = @"Survey ID";
 /**
  *  Customize navigation bar appearance
  */
-- (void)customizeNavigationBar
+- (void)customizeNavigationItem
 {
+    [super customizeNavigationItem];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     self.navigationItem.title = NSLocalizedString(self.currentSurvey.surveyName, nil);
     self.navigationItem.hidesBackButton = YES;
