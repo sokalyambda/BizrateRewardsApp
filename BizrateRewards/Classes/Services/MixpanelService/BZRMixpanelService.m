@@ -33,7 +33,7 @@ NSString *const kQualtricsContactId       = @"Qualtrics Contact Id"; //mixpanel 
 NSString *const kBizrateRewardsUserId     = @"Bizrate Rewards User Id";
 NSString *const kIsTestUser               = @"Test User";
 
-NSString *defaultMixpanelToken = @"https://api.bizraterewards.com/v1/";
+//NSString *defaultMixpanelToken = @"https://api.bizraterewards.com/v1/";
 
 static Mixpanel *_currentMixpanelInstance = nil;
 

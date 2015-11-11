@@ -134,10 +134,6 @@ static NSString *const kOBStore = @"Store";
         [BZRMixpanelService trackEventWithType:BZRMixpanelEventLocationPermission
                                  propertyValue:isGeolocationEnable? @"YES" : @"NO"];
         
-        /*
-         
-         Temporary commented...
-         
         if ([BZRProjectFacade isUserSessionValid]) {
             //update notifications and geolocation settings
             [BZRProjectFacade sendDeviceDataOnSuccess:^(BOOL isSuccess) {
@@ -148,7 +144,6 @@ static NSString *const kOBStore = @"Store";
                 
             }];
         }
-         */
     }
 }
 

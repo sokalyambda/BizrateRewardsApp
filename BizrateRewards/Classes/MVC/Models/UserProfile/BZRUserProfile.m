@@ -78,7 +78,7 @@
     return [BZRLocationObserver sharedObserver].isAuthorized;
 }
 
-#pragma mark - NSCoder methods
+#pragma mark - NSCoding methods
 
 - (void)encodeWithCoder:(NSCoder *)encoder
 {
@@ -91,18 +91,6 @@
         [BZRUserProfileService decodeUserProfile:self withDecoder:decoder];
     }
     return self;
-}
-
-#pragma mark - NSUserDefaults methods
-
-- (void)setUserProfileToDefaultsForKey:(NSString *)key
-{
-    [BZRUserProfileService setUserProfile:self toDefaultsForKey:key];
-}
-
-+ (BZRUserProfile *)userProfileFromDefaultsForKey:(NSString *)key
-{
-    return [BZRUserProfileService userProfileFromDefaultsForKey:key];
 }
 
 @end
