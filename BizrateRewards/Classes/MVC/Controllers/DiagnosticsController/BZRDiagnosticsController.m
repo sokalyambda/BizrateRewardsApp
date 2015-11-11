@@ -167,13 +167,13 @@ static NSInteger const kLocationEventsCount = 10.f;
 - (void)initDropDownList
 {
     self.dropDownList = [BZRDropDownTableView makeFromXib];
-    [self reinitDefaultValue];
+    [self resetCurrentEnvironment];
 }
 
 /**
  *  Reinit default environment
  */
-- (void)reinitDefaultValue
+- (void)resetCurrentEnvironment
 {
     BZREnvironment *savedEnvironment = [BZREnvironmentService environmentFromDefaultsForKey:CurrentAPIEnvironment];
     if (savedEnvironment) {
@@ -184,9 +184,9 @@ static NSInteger const kLocationEventsCount = 10.f;
 /**
  *  Set the default data source selected value
  */
-- (void)swapWithSavedValue
+- (void)updateSelectedValue
 {
-    [self.environmentsDataSource swapSelectedValueWithValue:self.currentEnvironment];
+    [self.environmentsDataSource updateSelectedValueInDataSourceArray:self.currentEnvironment];
 }
 
 /**
@@ -274,8 +274,8 @@ static NSInteger const kLocationEventsCount = 10.f;
             
             [BZRAlertFacade showAlertWithMessage:LOCALIZED(@"API endpoint is incorrect.") forController:weakSelf withCompletion:nil];
             
-            [weakSelf reinitDefaultValue];
-            [weakSelf swapWithSavedValue];
+            [weakSelf resetCurrentEnvironment];
+            [weakSelf updateSelectedValue];
             //return to default value of base url
             [BZRProjectFacade setBaseURLString:weakSelf.currentEnvironment.apiEndpointURLString];
             [BZRProjectFacade initHTTPClientWithRootPath:[BZRProjectFacade baseURLString] withCompletion:nil];
