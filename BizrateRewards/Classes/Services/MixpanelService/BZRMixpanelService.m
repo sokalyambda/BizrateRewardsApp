@@ -11,9 +11,11 @@
 #import "BZREnvironmentService.h"
 
 #import "BZRLocationEvent.h"
-#import "BZREnvironment.h"
+#import "Environment.h"
 
 #import "BZRLocationObserver.h"
+
+#import "BZRCoreDataStorage.h"
 
 static NSString *const kMixpanelEventsFile = @"MixpanelEvents";
 static NSString *const kPlistResourceType  = @"plist";
@@ -39,7 +41,7 @@ static Mixpanel *_currentMixpanelInstance = nil;
 {
     @synchronized(self) {
         
-        BZREnvironment *savedEnvironment = [self savedEnvironment];
+        Environment *savedEnvironment = [self savedEnvironment];
         
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"apiToken == %@", savedEnvironment.mixPanelToken];
         _currentMixpanelInstance = [[BZREnvironmentService possibleMixPanels] filteredArrayUsingPredicate:predicate].count ? [[BZREnvironmentService possibleMixPanels] filteredArrayUsingPredicate:predicate].firstObject : nil;
@@ -48,12 +50,13 @@ static Mixpanel *_currentMixpanelInstance = nil;
     }
 }
 
-+ (BZREnvironment *)savedEnvironment
++ (Environment *)savedEnvironment
 {
-    BZREnvironment *savedEnvironment = [BZREnvironmentService environmentFromDefaultsForKey:CurrentAPIEnvironment];
+    Environment *savedEnvironment = [BZRCoreDataStorage getCurrentEnvironment];
     if (!savedEnvironment) {
         savedEnvironment = [BZREnvironmentService defaultEnvironment];
-        [BZREnvironmentService setEnvironment:savedEnvironment toDefaultsForKey:CurrentAPIEnvironment];
+        savedEnvironment.isCurrent = @(YES);
+        [BZRCoreDataStorage saveContext];
     }
     return savedEnvironment;
 }
@@ -126,7 +129,7 @@ static Mixpanel *_currentMixpanelInstance = nil;
     Mixpanel *mixpanel = [self currentMixpanelInstance];
     NSString *userIdString = [NSString stringWithFormat:@"%lld", userProfile.userId];
 
-    BZREnvironment *savedEnvironment = [self savedEnvironment];
+    Environment *savedEnvironment = [self savedEnvironment];
     
     if (![[[NSUserDefaults standardUserDefaults] objectForKey:savedEnvironment.mixPanelToken] isEqualToString:userIdString]) {
         [mixpanel createAlias:userIdString forDistinctID:mixpanel.distinctId];

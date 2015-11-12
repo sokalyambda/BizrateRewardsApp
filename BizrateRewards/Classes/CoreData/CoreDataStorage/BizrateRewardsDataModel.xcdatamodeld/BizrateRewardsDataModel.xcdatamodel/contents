@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9057" systemVersion="14F27" minimumToolsVersion="Xcode 7.0">
+    <entity name="Environment" representedClassName="Environment" syncable="YES">
+        <attribute name="apiEndpointURLString" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="environmentName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isCurrent" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="mixPanelToken" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Environment" positionX="-1188" positionY="-18" width="128" height="103"/>
+    </elements>
+</model>

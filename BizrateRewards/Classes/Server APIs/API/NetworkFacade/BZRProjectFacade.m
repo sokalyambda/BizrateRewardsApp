@@ -13,7 +13,7 @@
 #import "BZRRequests.h"
 
 #import "BZRApplicationToken.h"
-#import "BZREnvironment.h"
+#import "Environment.h"
 
 #import "BZRFacebookService.h"
 #import "BZRErrorHandler.h"
@@ -21,6 +21,8 @@
 #import "BZREnvironmentService.h"
 
 #import "BZRKeychainHandler.h"
+
+#import "BZRCoreDataStorage.h"
 
 #import <AFNetworking/AFNetworkActivityIndicatorManager.h>
 
@@ -36,11 +38,12 @@ static NSString *_baseURLString;
 + (NSString *)baseURLString
 {
     @synchronized(self) {
-        BZREnvironment *savedEnvironment = [BZREnvironmentService environmentFromDefaultsForKey:CurrentAPIEnvironment];
+        Environment *savedEnvironment = [BZRCoreDataStorage getCurrentEnvironment];
         
         if (!savedEnvironment) {
             savedEnvironment = [BZREnvironmentService defaultEnvironment];
-            [BZREnvironmentService setEnvironment:savedEnvironment toDefaultsForKey:CurrentAPIEnvironment];
+            savedEnvironment.isCurrent = @(YES);
+            [BZRCoreDataStorage saveContext];
         }
         
         if (!_baseURLString && savedEnvironment) {

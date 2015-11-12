@@ -8,7 +8,7 @@
 
 #import "BZREnvironmentService.h"
 
-#import "BZREnvironment.h"
+#import "BZRCoreDataStorage.h"
 
 #import <Mixpanel/Mixpanel.h>
 
@@ -40,76 +40,35 @@ static NSArray *_possibleMixPanels = nil;
     return _possibleMixPanels;
 }
 
-+ (NSArray *)eligibleEnvironmentsArray
+/**
+ *  If environments array doesn't exist in coreData - create it
+ */
++ (void)createEligibleEnvironments
 {
-    BZREnvironment *development = [BZREnvironment environmentWithName:LOCALIZED(@"Development")];
-    development.apiEndpointURLString = kDevelopmentAPIEndpoint;
-    development.mixPanelToken = kDevelopmentMixPanelToken;
-    
-    BZREnvironment *staging = [BZREnvironment environmentWithName:LOCALIZED(@"Staging")];
-    staging.apiEndpointURLString = kStagingAPIEndpoint;
-    staging.mixPanelToken = kStagingMixPanelToken;
-    
-    BZREnvironment *production = [BZREnvironment environmentWithName:LOCALIZED(@"Production")];
-    production.apiEndpointURLString = kProductionAPIEndpoint;
-    production.mixPanelToken = kProductionMixPanelToken;
-    
-    return @[development, staging, production];
-}
-
-+ (BZREnvironment *)defaultEnvironment
-{
-    return [[self eligibleEnvironmentsArray] lastObject]; //production
-}
-
-#pragma mark - NSCoding
-
-+ (void)encodeEnvironment:(BZREnvironment *)environment
-                withCoder:(NSCoder *)encoder
-{
-    //Encode properties, other class variables, etc
-    [encoder encodeObject:environment.environmentName forKey:kEnvironmentName];
-    [encoder encodeObject:environment.apiEndpointURLString forKey:kAPIURLString];
-    [encoder encodeObject:environment.mixPanelToken forKey:kMixPanelToken];
-}
-
-+ (BZREnvironment *)decodeEnvironment:(BZREnvironment *)environment
-                          withDecoder:(NSCoder *)decoder
-{
-    environment.environmentName        = [decoder decodeObjectForKey:kEnvironmentName];
-    environment.apiEndpointURLString   = [decoder decodeObjectForKey:kAPIURLString];
-    environment.mixPanelToken          = [decoder decodeObjectForKey:kMixPanelToken];
-    
-    return environment;
-}
-
-#pragma mark - NSUserDefaults
-
-+ (void)setEnvironment:(BZREnvironment *)environment
-      toDefaultsForKey:(NSString *)key
-{
-    NSData *encodedObject = [NSKeyedArchiver archivedDataWithRootObject:environment];
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
-    if ([defaults.dictionaryRepresentation.allKeys containsObject:key]) {
-        [defaults removeObjectForKey:key];
+    NSArray *eligibleEnvironments = [BZRCoreDataStorage getAllEnvironments];
+    if (!eligibleEnvironments.count) {
+        [BZRCoreDataStorage addNewEnvironmentWithName:LOCALIZED(@"Development")
+                              andAPIEndpointURLString:kDevelopmentAPIEndpoint
+                                     andMixpanelToken:kDevelopmentMixPanelToken];
+        [BZRCoreDataStorage addNewEnvironmentWithName:LOCALIZED(@"Staging")
+                              andAPIEndpointURLString:kStagingAPIEndpoint
+                                     andMixpanelToken:kStagingMixPanelToken];
+        [BZRCoreDataStorage addNewEnvironmentWithName:LOCALIZED(@"Production")
+                              andAPIEndpointURLString:kProductionAPIEndpoint
+                                     andMixpanelToken:kProductionMixPanelToken];
     }
-    
-    [defaults setObject:encodedObject forKey:key];
-    [defaults synchronize];
 }
 
-+ (BZREnvironment *)environmentFromDefaultsForKey:(NSString *)key
+/**
+ *  Production environment is default value
+ */
++ (Environment *)defaultEnvironment
 {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [self createEligibleEnvironments];
     
-    if (![defaults.dictionaryRepresentation.allKeys containsObject:key]) {
-        return nil;
-    }
+    Environment *env = [BZRCoreDataStorage getEnvironmentByName:LOCALIZED(@"Production")]; //production
     
-    NSData *encodedObject = [defaults objectForKey:key];
-    BZREnvironment *environment = [NSKeyedUnarchiver unarchiveObjectWithData:encodedObject];
-    return environment;
+    return env;
 }
 
 @end

@@ -10,12 +10,4 @@
 
 + (BZRUserProfile *)userProfileWithServerResponse:(NSDictionary *)response;
 
-+ (void)encodeUserProfile:(BZRUserProfile *)userProfile
-                withCoder:(NSCoder *)encoder;
-+ (BZRUserProfile *)decodeUserProfile:(BZRUserProfile *)userProfile
-                          withDecoder:(NSCoder *)decoder;
-
-+ (void)setUserProfile:(BZRUserProfile *)userProfile toDefaultsForKey:(NSString *)key;
-+ (BZRUserProfile *)userProfileFromDefaultsForKey:(NSString *)key;
-
 @end

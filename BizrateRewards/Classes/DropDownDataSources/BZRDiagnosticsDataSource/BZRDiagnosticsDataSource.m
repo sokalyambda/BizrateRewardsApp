@@ -8,9 +8,11 @@
 
 #import "BZRDiagnosticsDataSource.h"
 
-#import "BZREnvironment.h"
-
 #import "BZREnvironmentService.h"
+
+#import "Environment.h"
+
+#import "BZRCoreDataStorage.h"
 
 #import "BZRDropDownCell.h"
 
@@ -24,7 +26,7 @@
 
 - (NSArray *)currentDataSourceArray
 {
-    return [BZREnvironmentService eligibleEnvironmentsArray];
+    return [BZRCoreDataStorage getAllEnvironments];
 }
 
 #pragma mark - UITableViewDataSource
@@ -38,7 +40,7 @@
 {
     BZRDropDownCell *dropDownCell = (BZRDropDownCell *)cell;
     
-    BZREnvironment *currentEnvironment = [self currentDataSourceArray][indexPath.row];
+    Environment *currentEnvironment = [self currentDataSourceArray][indexPath.row];
     
     if ([currentEnvironment isEqual:self.currentSelectedValue]) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
