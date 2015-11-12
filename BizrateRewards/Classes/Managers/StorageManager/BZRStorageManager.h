@@ -10,7 +10,7 @@
 #import "BZRFacebookProfile.h"
 #import "BZRUserToken.h"
 
-@class BZRServerAPIEntity;
+@class BZRServerAPIEntity, BZRFacebookProfile;
 
 @interface BZRStorageManager : NSObject
 

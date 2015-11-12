@@ -21,8 +21,6 @@
 static NSString *const kCountOfBytesSent = @"countOfBytesSent";
 static NSString *const kCountOfBytesReceived = @"countOfBytesReceived";
 
-static NSInteger const kNotAuthorizedStatusCode = 401.f;
-
 NS_CLASS_AVAILABLE(10_9, 7_0)
 @interface DataTask : NSURLSessionDataTask @end
 
@@ -184,7 +182,7 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
             //get status code of httpResponse
             if ([operation isKindOfClass:[NSHTTPURLResponse class]]) {
                 NSInteger statusCode = ((NSHTTPURLResponse *)operation).statusCode;
-                DLog(@"status code %d", statusCode);
+                DLog(@"status code %ld", (long)statusCode);
                 
                 weakSelf.networkRequest.error.HTTPResponseStatusCode = statusCode;
             }

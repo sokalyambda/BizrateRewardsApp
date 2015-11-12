@@ -8,6 +8,11 @@
 
 #import "BZRSignInWithFacebookRequest.h"
 
+#import "BZRFacebookAccessToken.h"
+#import "BZRFacebookProfile.h"
+
+#import "BZRCoreDataStorage.h"
+
 static NSString *const requestAction = @"user/facebook";
 
 static NSString *const kFacebookAccessToken = @"access_token";
@@ -26,9 +31,10 @@ static NSString *const kFacebookAccessToken = @"access_token";
         _userAuthorizationRequired = NO;
         _applicationAuthorizationRequired = YES;
         
-        NSString *fbAccessTokenString = [[NSUserDefaults standardUserDefaults] objectForKey:FBAccessToken];
+        BZRFacebookAccessToken *token = [BZRCoreDataStorage getCurrentFacebookProfile].facebookAccessToken;
+        NSString *fbAccessTokenString = token.tokenValue;
         
-        NSMutableDictionary *parameters;
+        NSMutableDictionary *parameters = [@{} mutableCopy];
         if (fbAccessTokenString) {
             parameters = [NSMutableDictionary dictionaryWithDictionary:@{kFacebookAccessToken: fbAccessTokenString}];
         }

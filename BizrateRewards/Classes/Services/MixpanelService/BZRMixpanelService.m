@@ -15,6 +15,8 @@
 
 #import "BZRLocationObserver.h"
 
+#import "BZRCoreDataStorage.h"
+
 static NSString *const kMixpanelEventsFile = @"MixpanelEvents";
 static NSString *const kPlistResourceType  = @"plist";
 
@@ -50,10 +52,11 @@ static Mixpanel *_currentMixpanelInstance = nil;
 
 + (BZREnvironment *)savedEnvironment
 {
-    BZREnvironment *savedEnvironment = [BZREnvironmentService environmentFromDefaultsForKey:CurrentAPIEnvironment];
+    BZREnvironment *savedEnvironment = [BZRCoreDataStorage getCurrentEnvironment];
     if (!savedEnvironment) {
         savedEnvironment = [BZREnvironmentService defaultEnvironment];
-        [BZREnvironmentService setEnvironment:savedEnvironment toDefaultsForKey:CurrentAPIEnvironment];
+        savedEnvironment.isCurrent = @(YES);
+        [BZRCoreDataStorage saveContext];
     }
     return savedEnvironment;
 }

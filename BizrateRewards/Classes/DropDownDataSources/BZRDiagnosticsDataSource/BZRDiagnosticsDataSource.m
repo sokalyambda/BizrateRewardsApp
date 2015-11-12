@@ -8,9 +8,11 @@
 
 #import "BZRDiagnosticsDataSource.h"
 
+#import "BZREnvironmentService.h"
+
 #import "BZREnvironment.h"
 
-#import "BZREnvironmentService.h"
+#import "BZRCoreDataStorage.h"
 
 #import "BZRDropDownCell.h"
 
@@ -24,7 +26,7 @@
 
 - (NSArray *)currentDataSourceArray
 {
-    return [BZREnvironmentService eligibleEnvironmentsArray];
+    return [BZRCoreDataStorage getAllEnvironments];
 }
 
 #pragma mark - UITableViewDataSource

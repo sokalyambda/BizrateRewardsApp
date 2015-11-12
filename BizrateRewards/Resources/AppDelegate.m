@@ -42,7 +42,6 @@ static NSString *const kOfferBeamRetailerID = @"6F8E3A94-FE29-4144-BE86-AA8372D1
     /*
      If app was opened with push
      */
-    
     NSDictionary *userInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
     if (userInfo) {
         [BZRPushNotifiactionService receivedPushNotification:userInfo withApplicationState:UIApplicationStateInactive];

@@ -22,6 +22,8 @@
 
 #import "BZRKeychainHandler.h"
 
+#import "BZRCoreDataStorage.h"
+
 #import <AFNetworking/AFNetworkActivityIndicatorManager.h>
 
 static BZRSessionManager *sharedHTTPClient = nil;
@@ -36,11 +38,12 @@ static NSString *_baseURLString;
 + (NSString *)baseURLString
 {
     @synchronized(self) {
-        BZREnvironment *savedEnvironment = [BZREnvironmentService environmentFromDefaultsForKey:CurrentAPIEnvironment];
+        BZREnvironment *savedEnvironment = [BZRCoreDataStorage getCurrentEnvironment];
         
         if (!savedEnvironment) {
             savedEnvironment = [BZREnvironmentService defaultEnvironment];
-            [BZREnvironmentService setEnvironment:savedEnvironment toDefaultsForKey:CurrentAPIEnvironment];
+            savedEnvironment.isCurrent = @(YES);
+            [BZRCoreDataStorage saveContext];
         }
         
         if (!_baseURLString && savedEnvironment) {

@@ -28,6 +28,8 @@
 #import "BZREnvironmentService.h"
 #import "BZRLocationEventService.h"
 
+#import "BZRCoreDataStorage.h"
+
 static NSInteger const kCurrentNumberOfSections = 2.f;
 static NSInteger const kLocationEventsCount = 10.f;
 
@@ -175,7 +177,7 @@ static NSInteger const kLocationEventsCount = 10.f;
  */
 - (void)resetCurrentEnvironment
 {
-    BZREnvironment *savedEnvironment = [BZREnvironmentService environmentFromDefaultsForKey:CurrentAPIEnvironment];
+    BZREnvironment *savedEnvironment = [BZRCoreDataStorage getCurrentEnvironment];
     if (savedEnvironment) {
         self.currentEnvironment = savedEnvironment;
     }
@@ -258,15 +260,17 @@ static NSInteger const kLocationEventsCount = 10.f;
             
             [BZRAlertFacade showAlertWithMessage:LOCALIZED(@"API endpoint has been saved.") forController:weakSelf withCompletion:^{
                 //logout..
-                if ((![weakSelf.currentEnvironment isEqual:[BZREnvironmentService environmentFromDefaultsForKey:CurrentAPIEnvironment]])) {
+                if ((![weakSelf.currentEnvironment isEqual:[BZRCoreDataStorage getCurrentEnvironment]])) {
                     
+                    [BZRCoreDataStorage getCurrentEnvironment].isCurrent = @(NO);
                     //save current environment
-                    [BZREnvironmentService setEnvironment:weakSelf.currentEnvironment toDefaultsForKey:CurrentAPIEnvironment];
+                    weakSelf.currentEnvironment.isCurrent = @(YES);
+                    [BZRCoreDataStorage saveContext];
+                    
                     [BZRMixpanelService resetMixpanel];
 
                     [BZRRedirectionHelper performSignOut];
                     [weakSelf dismissViewControllerAnimated:YES completion:nil];
-                    
                 }
             }];
         } onFailure:^(NSError *error, BOOL isCanceled) {
