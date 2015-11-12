@@ -134,7 +134,7 @@ static NSString *const kOBStore = @"Store";
         [BZRMixpanelService trackEventWithType:BZRMixpanelEventLocationPermission
                                  propertyValue:isGeolocationEnable? @"YES" : @"NO"];
         
-        if ([BZRProjectFacade isUserSessionValid]) {
+        if ([BZRProjectFacade isUserSessionValid] && [BZRStorageManager sharedStorage].deviceToken.length) {
             //update notifications and geolocation settings
             [BZRProjectFacade sendDeviceDataOnSuccess:^(BOOL isSuccess) {
                 

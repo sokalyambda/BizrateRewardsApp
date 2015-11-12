@@ -122,11 +122,6 @@
     }
 }
 
-- (void)clearDataBase
-{
-    [self saveContext];
-}
-
 - (void)deleteAllObjects:(NSString *)entityDescription
 {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];

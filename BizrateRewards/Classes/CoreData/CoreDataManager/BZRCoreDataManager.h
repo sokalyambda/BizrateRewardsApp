@@ -19,8 +19,7 @@
 
 - (void)deleteManagedObject:(NSManagedObject *)object;
 - (void)deleteCollection:(id<NSFastEnumeration>)collection;
-- (void)deleteAllObjects:(NSString*) entityDescription;
-- (void)clearDataBase;
+- (void)deleteAllObjects:(NSString*)entityDescription;
 
 - (NSManagedObject*)addNewManagedObjectForName:(NSString*)name;
 - (NSArray*)getEntities:(NSString*)entityName byPredicate:(NSPredicate*)predicate;

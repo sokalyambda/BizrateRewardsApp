@@ -29,7 +29,7 @@
 - (BZRFacebookProfile *)facebookProfile
 {
     if (!_facebookProfile) {
-        _facebookProfile = [BZRCoreDataStorage getCurrentFacebookProfile];//[BZRFacebookProfileService facebookProfileFromDefaultsForKey:FBCurrentProfile];
+        _facebookProfile = [BZRCoreDataStorage getCurrentFacebookProfile];
     }
     return _facebookProfile;
 }
