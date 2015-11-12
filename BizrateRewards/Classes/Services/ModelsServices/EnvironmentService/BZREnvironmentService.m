@@ -62,11 +62,11 @@ static NSArray *_possibleMixPanels = nil;
 /**
  *  Production environment is default value
  */
-+ (Environment *)defaultEnvironment
++ (BZREnvironment *)defaultEnvironment
 {
     [self createEligibleEnvironments];
     
-    Environment *env = [BZRCoreDataStorage getEnvironmentByName:LOCALIZED(@"Production")]; //production
+    BZREnvironment *env = [BZRCoreDataStorage getEnvironmentByName:LOCALIZED(@"Production")]; //production
     
     return env;
 }

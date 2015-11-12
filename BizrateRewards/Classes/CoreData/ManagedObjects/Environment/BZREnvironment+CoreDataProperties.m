@@ -9,9 +9,9 @@
 //  to delete and recreate this implementation file for your updated model.
 //
 
-#import "Environment+CoreDataProperties.h"
+#import "BZREnvironment+CoreDataProperties.h"
 
-@implementation Environment (CoreDataProperties)
+@implementation BZREnvironment (CoreDataProperties)
 
 @dynamic mixPanelToken;
 @dynamic apiEndpointURLString;

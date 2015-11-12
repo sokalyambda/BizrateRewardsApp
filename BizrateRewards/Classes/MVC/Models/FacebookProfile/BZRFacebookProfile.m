@@ -16,16 +16,16 @@
 
 @implementation BZRFacebookProfile
 
-#pragma mark - NSCoding methods
+//#pragma mark - NSCoding methods
 
-- (void)encodeWithCoder:(NSCoder *)encoder
-{
-    [BZRFacebookProfileService encodeFacebookProfile:self withCoder:encoder];
-}
-
-- (id)initWithCoder:(NSCoder *)decoder
-{
-    return [BZRFacebookProfileService decodeFacebookProfile:self withDecoder:decoder];
-}
+//- (void)encodeWithCoder:(NSCoder *)encoder
+//{
+//    [BZRFacebookProfileService encodeFacebookProfile:self withCoder:encoder];
+//}
+//
+//- (id)initWithCoder:(NSCoder *)decoder
+//{
+//    return [BZRFacebookProfileService decodeFacebookProfile:self withDecoder:decoder];
+//}
 
 @end

@@ -6,9 +6,9 @@
 //  Copyright © 2015 Connexity. All rights reserved.
 //
 
-#import "Environment.h"
+#import "BZREnvironment.h"
 
-@implementation Environment
+@implementation BZREnvironment
 
 // Insert code here to add functionality to your managed object subclass
 

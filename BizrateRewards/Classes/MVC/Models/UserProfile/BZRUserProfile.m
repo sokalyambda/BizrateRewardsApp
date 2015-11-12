@@ -13,7 +13,7 @@
 
 #import "BZRLocationObserver.h"
 
-@interface BZRUserProfile ()<NSCoding>
+@interface BZRUserProfile ()
 
 @property (strong, nonatomic) NSUserDefaults *defaults;
 

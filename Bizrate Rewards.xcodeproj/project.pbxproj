@@ -24,6 +24,10 @@
 		583681711B579C6200D541A4 /* BZRKeychainHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 583681701B579C6200D541A4 /* BZRKeychainHandler.m */; };
 		583BAF5C1BDA83E300EE9489 /* BZRShareCodeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 583BAF5B1BDA83E300EE9489 /* BZRShareCodeController.m */; };
 		5850B3AD1B972B3E003FC2E9 /* UIViewController+FirstPresentingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5850B3AC1B972B3E003FC2E9 /* UIViewController+FirstPresentingController.m */; };
+		585262ED1BF4A49B00386932 /* FacebookProfile+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 585262EA1BF4A49B00386932 /* FacebookProfile+CoreDataProperties.m */; };
+		585262EE1BF4A49B00386932 /* FacebookProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 585262EC1BF4A49B00386932 /* FacebookProfile.m */; };
+		585262F31BF4A4C100386932 /* FacebookAccessToken+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 585262F01BF4A4C100386932 /* FacebookAccessToken+CoreDataProperties.m */; };
+		585262F41BF4A4C100386932 /* FacebookAccessToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 585262F21BF4A4C100386932 /* FacebookAccessToken.m */; };
 		58558E991BE2232B000868CC /* BZRDropDownTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58558E971BE2232B000868CC /* BZRDropDownTableView.m */; };
 		58558E9A1BE2232B000868CC /* BZRDropDownTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58558E981BE2232B000868CC /* BZRDropDownTableView.xib */; };
 		58558E9F1BE228F8000868CC /* BZRBaseDropDownDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 58558E9E1BE228F8000868CC /* BZRBaseDropDownDataSource.m */; };
@@ -49,8 +53,8 @@
 		586311761BF4737800C2F654 /* BZRCoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 586311751BF4737800C2F654 /* BZRCoreDataManager.m */; };
 		586311791BF4738F00C2F654 /* BZRCoreDataStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 586311781BF4738F00C2F654 /* BZRCoreDataStorage.m */; };
 		5863117C1BF473B300C2F654 /* BizrateRewardsDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5863117A1BF473B300C2F654 /* BizrateRewardsDataModel.xcdatamodeld */; };
-		586311881BF47C0600C2F654 /* Environment+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 586311851BF47C0600C2F654 /* Environment+CoreDataProperties.m */; };
-		586311891BF47C0600C2F654 /* Environment.m in Sources */ = {isa = PBXBuildFile; fileRef = 586311871BF47C0600C2F654 /* Environment.m */; };
+		586311881BF47C0600C2F654 /* BZREnvironment+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 586311851BF47C0600C2F654 /* BZREnvironment+CoreDataProperties.m */; };
+		586311891BF47C0600C2F654 /* BZREnvironment.m in Sources */ = {isa = PBXBuildFile; fileRef = 586311871BF47C0600C2F654 /* BZREnvironment.m */; };
 		5864DFB61BDA382600F4331A /* BZRRedeemPointsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5864DFB51BDA382600F4331A /* BZRRedeemPointsController.m */; };
 		586ED0D11B46E8F500FEB250 /* UIView+SoftRemoving.m in Sources */ = {isa = PBXBuildFile; fileRef = 586ED0D01B46E8F500FEB250 /* UIView+SoftRemoving.m */; };
 		5878D3E11B4426E000A917D0 /* BZRCommonDateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5878D3E01B4426DF00A917D0 /* BZRCommonDateFormatter.m */; };
@@ -234,6 +238,14 @@
 		583BAF5B1BDA83E300EE9489 /* BZRShareCodeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRShareCodeController.m; path = Classes/MVC/Controllers/ShareCodeController/BZRShareCodeController.m; sourceTree = "<group>"; };
 		5850B3AB1B972B3E003FC2E9 /* UIViewController+FirstPresentingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIViewController+FirstPresentingController.h"; path = "Classes/Categories/UIViewController/UIViewController+LastPresentedController/UIViewController+FirstPresentingController.h"; sourceTree = "<group>"; };
 		5850B3AC1B972B3E003FC2E9 /* UIViewController+FirstPresentingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+FirstPresentingController.m"; path = "Classes/Categories/UIViewController/UIViewController+LastPresentedController/UIViewController+FirstPresentingController.m"; sourceTree = "<group>"; };
+		585262E91BF4A49B00386932 /* FacebookProfile+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "FacebookProfile+CoreDataProperties.h"; path = "Classes/CoreData/ManagedObjects/FacebookProfile/FacebookProfile+CoreDataProperties.h"; sourceTree = "<group>"; };
+		585262EA1BF4A49B00386932 /* FacebookProfile+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "FacebookProfile+CoreDataProperties.m"; path = "Classes/CoreData/ManagedObjects/FacebookProfile/FacebookProfile+CoreDataProperties.m"; sourceTree = "<group>"; };
+		585262EB1BF4A49B00386932 /* FacebookProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FacebookProfile.h; path = Classes/CoreData/ManagedObjects/FacebookProfile/FacebookProfile.h; sourceTree = "<group>"; };
+		585262EC1BF4A49B00386932 /* FacebookProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FacebookProfile.m; path = Classes/CoreData/ManagedObjects/FacebookProfile/FacebookProfile.m; sourceTree = "<group>"; };
+		585262EF1BF4A4C100386932 /* FacebookAccessToken+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "FacebookAccessToken+CoreDataProperties.h"; path = "Classes/CoreData/ManagedObjects/FacebookAccessToken/FacebookAccessToken+CoreDataProperties.h"; sourceTree = "<group>"; };
+		585262F01BF4A4C100386932 /* FacebookAccessToken+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "FacebookAccessToken+CoreDataProperties.m"; path = "Classes/CoreData/ManagedObjects/FacebookAccessToken/FacebookAccessToken+CoreDataProperties.m"; sourceTree = "<group>"; };
+		585262F11BF4A4C100386932 /* FacebookAccessToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FacebookAccessToken.h; path = Classes/CoreData/ManagedObjects/FacebookAccessToken/FacebookAccessToken.h; sourceTree = "<group>"; };
+		585262F21BF4A4C100386932 /* FacebookAccessToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FacebookAccessToken.m; path = Classes/CoreData/ManagedObjects/FacebookAccessToken/FacebookAccessToken.m; sourceTree = "<group>"; };
 		58558E961BE2232B000868CC /* BZRDropDownTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRDropDownTableView.h; path = Classes/MVC/Views/BaseDropDownView/BZRDropDownTableView.h; sourceTree = "<group>"; };
 		58558E971BE2232B000868CC /* BZRDropDownTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRDropDownTableView.m; path = Classes/MVC/Views/BaseDropDownView/BZRDropDownTableView.m; sourceTree = "<group>"; };
 		58558E981BE2232B000868CC /* BZRDropDownTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = BZRDropDownTableView.xib; path = Classes/MVC/Views/BaseDropDownView/BZRDropDownTableView.xib; sourceTree = "<group>"; };
@@ -280,10 +292,10 @@
 		586311771BF4738F00C2F654 /* BZRCoreDataStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRCoreDataStorage.h; path = Classes/CoreData/CoreDataStorage/BZRCoreDataStorage.h; sourceTree = "<group>"; };
 		586311781BF4738F00C2F654 /* BZRCoreDataStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRCoreDataStorage.m; path = Classes/CoreData/CoreDataStorage/BZRCoreDataStorage.m; sourceTree = "<group>"; };
 		5863117B1BF473B300C2F654 /* BizrateRewardsDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BizrateRewardsDataModel.xcdatamodel; sourceTree = "<group>"; };
-		586311841BF47C0600C2F654 /* Environment+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Environment+CoreDataProperties.h"; path = "Classes/CoreData/ManagedObjects/Environment/Environment+CoreDataProperties.h"; sourceTree = "<group>"; };
-		586311851BF47C0600C2F654 /* Environment+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Environment+CoreDataProperties.m"; path = "Classes/CoreData/ManagedObjects/Environment/Environment+CoreDataProperties.m"; sourceTree = "<group>"; };
-		586311861BF47C0600C2F654 /* Environment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Environment.h; path = Classes/CoreData/ManagedObjects/Environment/Environment.h; sourceTree = "<group>"; };
-		586311871BF47C0600C2F654 /* Environment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Environment.m; path = Classes/CoreData/ManagedObjects/Environment/Environment.m; sourceTree = "<group>"; };
+		586311841BF47C0600C2F654 /* BZREnvironment+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "BZREnvironment+CoreDataProperties.h"; path = "Classes/CoreData/ManagedObjects/Environment/BZREnvironment+CoreDataProperties.h"; sourceTree = "<group>"; };
+		586311851BF47C0600C2F654 /* BZREnvironment+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "BZREnvironment+CoreDataProperties.m"; path = "Classes/CoreData/ManagedObjects/Environment/BZREnvironment+CoreDataProperties.m"; sourceTree = "<group>"; };
+		586311861BF47C0600C2F654 /* BZREnvironment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZREnvironment.h; path = Classes/CoreData/ManagedObjects/Environment/BZREnvironment.h; sourceTree = "<group>"; };
+		586311871BF47C0600C2F654 /* BZREnvironment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZREnvironment.m; path = Classes/CoreData/ManagedObjects/Environment/BZREnvironment.m; sourceTree = "<group>"; };
 		5864DFB41BDA382600F4331A /* BZRRedeemPointsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRRedeemPointsController.h; path = Classes/MVC/Controllers/RedeemPointsController/BZRRedeemPointsController.h; sourceTree = "<group>"; };
 		5864DFB51BDA382600F4331A /* BZRRedeemPointsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRRedeemPointsController.m; path = Classes/MVC/Controllers/RedeemPointsController/BZRRedeemPointsController.m; sourceTree = "<group>"; };
 		586ED0CF1B46E8F500FEB250 /* UIView+SoftRemoving.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+SoftRemoving.h"; path = "Classes/Categories/UIView/UIView+SoftRemoving/UIView+SoftRemoving.h"; sourceTree = "<group>"; };
@@ -924,6 +936,28 @@
 			name = "UIViewController+FirstPresentingController";
 			sourceTree = "<group>";
 		};
+		585262D51BF4933400386932 /* FacebookProfile */ = {
+			isa = PBXGroup;
+			children = (
+				585262E91BF4A49B00386932 /* FacebookProfile+CoreDataProperties.h */,
+				585262EA1BF4A49B00386932 /* FacebookProfile+CoreDataProperties.m */,
+				585262EB1BF4A49B00386932 /* FacebookProfile.h */,
+				585262EC1BF4A49B00386932 /* FacebookProfile.m */,
+			);
+			name = FacebookProfile;
+			sourceTree = "<group>";
+		};
+		585262E21BF49B4900386932 /* FacebookAccessToken */ = {
+			isa = PBXGroup;
+			children = (
+				585262EF1BF4A4C100386932 /* FacebookAccessToken+CoreDataProperties.h */,
+				585262F01BF4A4C100386932 /* FacebookAccessToken+CoreDataProperties.m */,
+				585262F11BF4A4C100386932 /* FacebookAccessToken.h */,
+				585262F21BF4A4C100386932 /* FacebookAccessToken.m */,
+			);
+			name = FacebookAccessToken;
+			sourceTree = "<group>";
+		};
 		58558E951BE22311000868CC /* BaseDropDownView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1201,6 +1235,8 @@
 		586311731BF4731F00C2F654 /* ManagedObjects */ = {
 			isa = PBXGroup;
 			children = (
+				585262E21BF49B4900386932 /* FacebookAccessToken */,
+				585262D51BF4933400386932 /* FacebookProfile */,
 				586311831BF4777900C2F654 /* Environment */,
 			);
 			name = ManagedObjects;
@@ -1209,10 +1245,10 @@
 		586311831BF4777900C2F654 /* Environment */ = {
 			isa = PBXGroup;
 			children = (
-				586311841BF47C0600C2F654 /* Environment+CoreDataProperties.h */,
-				586311851BF47C0600C2F654 /* Environment+CoreDataProperties.m */,
-				586311861BF47C0600C2F654 /* Environment.h */,
-				586311871BF47C0600C2F654 /* Environment.m */,
+				586311841BF47C0600C2F654 /* BZREnvironment+CoreDataProperties.h */,
+				586311851BF47C0600C2F654 /* BZREnvironment+CoreDataProperties.m */,
+				586311861BF47C0600C2F654 /* BZREnvironment.h */,
+				586311871BF47C0600C2F654 /* BZREnvironment.m */,
 			);
 			name = Environment;
 			sourceTree = "<group>";
@@ -2725,10 +2761,12 @@
 				58A59E3C1B3EE9E300A5F30C /* BZRSurveyViewController.m in Sources */,
 				589BCCD91B565E0400D49056 /* BZRSerialViewConstructor.m in Sources */,
 				58AA304E1B7B805B00363119 /* BZRPushNotifiactionService.m in Sources */,
+				585262EE1BF4A49B00386932 /* FacebookProfile.m in Sources */,
 				585C32A21B63AA3F005BF07B /* BZRNetworkOperation.m in Sources */,
 				58ECCEE11B8F462300528192 /* BZRDiagnosticsCell.m in Sources */,
 				58ACC0841B3968BF0081E546 /* BZRChooseSignUpTypeController.m in Sources */,
 				58AA1A221B5E1E6400BA824A /* BZRHighlightedButton.m in Sources */,
+				585262ED1BF4A49B00386932 /* FacebookProfile+CoreDataProperties.m in Sources */,
 				585C32B41B63C9B9005BF07B /* BZRGetCurrentUserRequest.m in Sources */,
 				58AA30481B7B803300363119 /* BZRRedirectionHelper.m in Sources */,
 				585C32A51B63AA3F005BF07B /* BZRNetworkRequest.m in Sources */,
@@ -2750,10 +2788,10 @@
 				582331BB1BDE7F650053E121 /* BZRDeleteTakenSurveysRequest.m in Sources */,
 				58A841691B94436D0032AEF0 /* ISO8601DateFormatter.m in Sources */,
 				588CE7A01B70AAD00088DEB1 /* BZRConfirmPasswordController.m in Sources */,
-				586311881BF47C0600C2F654 /* Environment+CoreDataProperties.m in Sources */,
+				586311881BF47C0600C2F654 /* BZREnvironment+CoreDataProperties.m in Sources */,
 				58BF360B1B74F94300699A63 /* MFMailComposeViewController+Styles.m in Sources */,
 				58ECCEE51B8F4D9B00528192 /* BZRGetLocationEventsListRequest.m in Sources */,
-				586311891BF47C0600C2F654 /* Environment.m in Sources */,
+				586311891BF47C0600C2F654 /* BZREnvironment.m in Sources */,
 				84BE35D11B5D0AE0001B99E2 /* BZRSurveyPointsValueLabel.m in Sources */,
 				58C505311B7DE68A0030DCE5 /* BZRIncreaseableButton.m in Sources */,
 				58ACC06D1B3937160081E546 /* BZRAutologinController.m in Sources */,
@@ -2779,6 +2817,7 @@
 				58219F111B38A3B200A9541A /* UIImagePickerController+fixOrientation.m in Sources */,
 				58B52A3B1B6A2874002D2529 /* UIImage+Base64Encoding.m in Sources */,
 				58ADC0E41B4BDCC200DF849F /* BZRFinishSurveyController.m in Sources */,
+				585262F41BF4A4C100386932 /* FacebookAccessToken.m in Sources */,
 				585C32A31B63AA3F005BF07B /* BZRSignInRequest.m in Sources */,
 				58ADC0E81B4BDCE400DF849F /* BZRSecondTutorialController.m in Sources */,
 				587E32331BD7A5BB009B6F3E /* BZRTermsLabel.m in Sources */,
@@ -2835,6 +2874,7 @@
 				58ACC0871B3968DA0081E546 /* BZRGetStartedController.m in Sources */,
 				585C32AB1B63C82F005BF07B /* BZRRenewSessionTokenRequest.m in Sources */,
 				585813AE1B3C23840087AEE2 /* BZRSurvey.m in Sources */,
+				585262F31BF4A4C100386932 /* FacebookAccessToken+CoreDataProperties.m in Sources */,
 				58B18C8C1B790D7200F13F53 /* BZRGetFeaturedGiftcards.m in Sources */,
 				58ECEAFE1B908451000F699D /* BZRLocationDetailsDiagnosticsController.m in Sources */,
 				58AA30771B7B862D00363119 /* BZRSurveyService.m in Sources */,

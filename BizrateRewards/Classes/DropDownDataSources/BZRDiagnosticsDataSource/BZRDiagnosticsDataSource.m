@@ -10,7 +10,7 @@
 
 #import "BZREnvironmentService.h"
 
-#import "Environment.h"
+#import "BZREnvironment.h"
 
 #import "BZRCoreDataStorage.h"
 
@@ -40,7 +40,7 @@
 {
     BZRDropDownCell *dropDownCell = (BZRDropDownCell *)cell;
     
-    Environment *currentEnvironment = [self currentDataSourceArray][indexPath.row];
+    BZREnvironment *currentEnvironment = [self currentDataSourceArray][indexPath.row];
     
     if ([currentEnvironment isEqual:self.currentSelectedValue]) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;

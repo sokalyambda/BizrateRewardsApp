@@ -9,11 +9,11 @@
 //  to delete and recreate this implementation file for your updated model.
 //
 
-#import "Environment.h"
+#import "BZREnvironment.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface Environment (CoreDataProperties)
+@interface BZREnvironment (CoreDataProperties)
 
 @property (nullable, nonatomic, retain) NSString *mixPanelToken;
 @property (nullable, nonatomic, retain) NSString *apiEndpointURLString;

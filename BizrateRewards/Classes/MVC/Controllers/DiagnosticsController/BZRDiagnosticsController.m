@@ -18,7 +18,7 @@
 
 #import "BZRLocationEvent.h"
 #import "BZRServerAPIEntity.h"
-#import "Environment.h"
+#import "BZREnvironment.h"
 
 #import "BZRDropDownTableView.h"
 
@@ -51,7 +51,7 @@ static NSInteger const kLocationEventsCount = 10.f;
 @property (strong, nonatomic) BZRDropDownTableView *dropDownList;
 @property (strong, nonatomic) BZRBaseDropDownDataSource *environmentsDataSource;
 
-@property (strong, nonatomic) Environment *currentEnvironment;
+@property (strong, nonatomic) BZREnvironment *currentEnvironment;
 
 @end
 
@@ -70,14 +70,14 @@ static NSInteger const kLocationEventsCount = 10.f;
     return _environmentsDataSource;
 }
 
-- (void)setCurrentEnvironment:(Environment *)currentEnvironment
+- (void)setCurrentEnvironment:(BZREnvironment *)currentEnvironment
 {
     _currentEnvironment = currentEnvironment;
     self.environmentDropDownAnchor.text = _currentEnvironment.environmentName;
     self.apiEndpointField.text = _currentEnvironment.apiEndpointURLString;
 }
 
-- (Environment *)currentEnvironment
+- (BZREnvironment *)currentEnvironment
 {
     if (!_currentEnvironment) {
         _currentEnvironment = [BZREnvironmentService defaultEnvironment];
@@ -137,8 +137,8 @@ static NSInteger const kLocationEventsCount = 10.f;
                                      DLog(@"presented");
                                  } withCompletion:^(BZRDropDownTableView *table, id chosenValue) {
                                      DLog(@"chosen value %@", chosenValue);
-                                     if ([chosenValue isKindOfClass:[Environment class]]) {
-                                         weakSelf.currentEnvironment = (Environment *)chosenValue;
+                                     if ([chosenValue isKindOfClass:[BZREnvironment class]]) {
+                                         weakSelf.currentEnvironment = (BZREnvironment *)chosenValue;
                                      }
                                  }];
 }
@@ -177,7 +177,7 @@ static NSInteger const kLocationEventsCount = 10.f;
  */
 - (void)resetCurrentEnvironment
 {
-    Environment *savedEnvironment = [BZRCoreDataStorage getCurrentEnvironment];
+    BZREnvironment *savedEnvironment = [BZRCoreDataStorage getCurrentEnvironment];
     if (savedEnvironment) {
         self.currentEnvironment = savedEnvironment;
     }

@@ -9,6 +9,11 @@
 #import "BZRFacebookService.h"
 #import "BZRFacebookProfileService.h"
 
+#import "FacebookProfile.h"
+#import "FacebookAccessToken.h"
+
+#import "BZRCoreDataStorage.h"
+
 static NSString *const kPublicProfile = @"public_profile";
 static NSString *const kEmail = @"email";
 static NSString *const kFields = @"fields";
@@ -54,7 +59,6 @@ static NSString *const kFBAppSecret = @"530fa94f7370fc20a54cc392fbd83cf2";
                                   onSuccess:(FacebookAuthSuccessBlock)success
                                   onFailure:(FacebookAuthFailureBlock)failure
 {
-    WEAK_SELF;
     [[self facebookLoginManager] logInWithReadPermissions:@[kPublicProfile, kEmail] fromViewController:fromController handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
         
         if (error && failure) {
@@ -63,8 +67,6 @@ static NSString *const kFBAppSecret = @"530fa94f7370fc20a54cc392fbd83cf2";
             failure(error, result.isCancelled);
         } else {
             if ([result.grantedPermissions containsObject:kEmail] && [result.grantedPermissions containsObject:kPublicProfile]) {
-                //store fb auth data
-                [weakSelf storeFacebookAuthData];
                 if (success) {
                     success(YES);
                 }
@@ -90,14 +92,16 @@ static NSString *const kFBAppSecret = @"530fa94f7370fc20a54cc392fbd83cf2";
     
     FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:parameters HTTPMethod:@"GET"];
     
+    WEAK_SELF;
     [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id response, NSError *error) {
         if (error && failure) {
             failure(error);
         } else {
             NSMutableDictionary *userProfile = [NSMutableDictionary dictionaryWithDictionary:(NSDictionary *)response];
             
-            BZRFacebookProfile *facebookProfile = [BZRFacebookProfileService facebookProfileFromServerResponse:userProfile];
-            [BZRFacebookProfileService setFacebookProfile:facebookProfile toDefaultsForKey:FBCurrentProfile];
+            FacebookProfile *facebookProfile = [BZRFacebookProfileService facebookProfileFromServerResponse:userProfile];
+            //store fb auth data
+            [weakSelf storeFacebookAuthData];
             
             if (success) {
                 success(facebookProfile);
@@ -124,9 +128,11 @@ static NSString *const kFBAppSecret = @"530fa94f7370fc20a54cc392fbd83cf2";
  */
 + (void)setLoginSuccess:(BOOL)success
 {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setBool:success forKey:FBLoginSuccess];
-    [defaults synchronize];
+    FacebookProfile *currentProfile = [BZRCoreDataStorage getCurrentFacebookProfile];
+    if (currentProfile) {
+        currentProfile.isLogined = @(success);
+        [BZRCoreDataStorage saveContext];
+    }
 }
 
 /**
@@ -136,17 +142,14 @@ static NSString *const kFBAppSecret = @"530fa94f7370fc20a54cc392fbd83cf2";
  */
 + (BOOL)isFacebookSessionValid
 {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSDate *fbTokenExpidaionDate = [defaults objectForKey:FBAccessTokenExpirationDate];
+    NSDate *fbTokenExpidaionDate = [BZRCoreDataStorage getCurrentFacebookProfile].facebookAccessToken.expirationDate;
     
     if ([self isLoginedWithFacebook] && ([[NSDate date] compare:fbTokenExpidaionDate] == NSOrderedAscending)) {
         return YES;
     } else {
         //if session isn't valid - remove FB profile from defaults (if exists)
-        if ([defaults objectForKey:FBCurrentProfile]) {
-            [BZRStorageManager sharedStorage].facebookProfile = nil;
-            [defaults removeObjectForKey:FBCurrentProfile];
-            [defaults synchronize];
+        if ([BZRCoreDataStorage getCurrentFacebookProfile]) {
+            [BZRCoreDataStorage removeFacebookProfile:[BZRCoreDataStorage getCurrentFacebookProfile]];
         }
         return NO;
     }
@@ -159,10 +162,8 @@ static NSString *const kFBAppSecret = @"530fa94f7370fc20a54cc392fbd83cf2";
  */
 + (void)storeFacebookAuthData
 {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:[FBSDKAccessToken currentAccessToken].tokenString forKey:FBAccessToken];
-    [defaults setObject:[FBSDKAccessToken currentAccessToken].expirationDate forKey:FBAccessTokenExpirationDate];
-    [defaults synchronize];
+    FacebookProfile *profile = [BZRCoreDataStorage getCurrentFacebookProfile];
+    profile.facebookAccessToken = [BZRCoreDataStorage addFacebookAccessTokenWithTokenValue:[FBSDKAccessToken currentAccessToken].tokenString andExpirationDate:[FBSDKAccessToken currentAccessToken].expirationDate];
 }
 
 /**
@@ -170,14 +171,10 @@ static NSString *const kFBAppSecret = @"530fa94f7370fc20a54cc392fbd83cf2";
  */
 + (void)clearFacebookAuthData
 {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
-    [defaults removeObjectForKey:FBAccessToken];
-    [defaults removeObjectForKey:FBAccessTokenExpirationDate];
-    [defaults removeObjectForKey:FBCurrentProfile];
+    if ([BZRCoreDataStorage getCurrentFacebookProfile]) {
+        [BZRCoreDataStorage removeFacebookProfile:[BZRCoreDataStorage getCurrentFacebookProfile]];
+    }
     [self setLoginSuccess:NO];
-    
-    [defaults synchronize];
 }
 
 /**
@@ -187,8 +184,9 @@ static NSString *const kFBAppSecret = @"530fa94f7370fc20a54cc392fbd83cf2";
  */
 + (BOOL)isLoginedWithFacebook
 {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    return [defaults objectForKey:FBAccessToken] && [defaults objectForKey:FBAccessTokenExpirationDate] && [defaults boolForKey:FBLoginSuccess];
+    FacebookProfile *currentProfile = [BZRCoreDataStorage getCurrentFacebookProfile];
+    FacebookAccessToken *token = currentProfile.facebookAccessToken;
+    return token.tokenValue && token.expirationDate && currentProfile.isLogined;
 }
 
 @end

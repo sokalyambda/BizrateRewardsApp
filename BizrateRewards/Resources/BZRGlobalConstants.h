@@ -28,12 +28,6 @@ static NSString *const PasswordKey = @"PasswordKey";
 
 static NSString *const IsFirstLaunch = @"IsFirstLaunch";
 
-//Facebook (keys for NSUserDefaults)
-static NSString *const FBAccessToken = @"FBAccessToken";
-static NSString *const FBAccessTokenExpirationDate = @"FBAccessTokenExpirationDate";
-static NSString *const FBLoginSuccess = @"FBLoginSuccess";
-static NSString *const FBCurrentProfile = @"FBCurrentProfile";
-
 //Location Events (keys for NSUserDefaults)
 static NSString *const LastReceivedLocationEvent = @"LastReceivedLocationEvent";
 

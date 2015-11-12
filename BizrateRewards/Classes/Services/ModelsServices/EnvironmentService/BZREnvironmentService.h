@@ -6,13 +6,13 @@
 //  Copyright © 2015 Connexity. All rights reserved.
 //
 
-@class Environment;
+@class BZREnvironment;
 
 @interface BZREnvironmentService : NSObject
 
 + (void)createEligibleEnvironments;
 + (NSArray *)possibleMixPanels;
 
-+ (Environment *)defaultEnvironment;
++ (BZREnvironment *)defaultEnvironment;
 
 @end

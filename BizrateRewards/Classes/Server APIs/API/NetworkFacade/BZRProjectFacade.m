@@ -13,7 +13,7 @@
 #import "BZRRequests.h"
 
 #import "BZRApplicationToken.h"
-#import "Environment.h"
+#import "BZREnvironment.h"
 
 #import "BZRFacebookService.h"
 #import "BZRErrorHandler.h"
@@ -38,7 +38,7 @@ static NSString *_baseURLString;
 + (NSString *)baseURLString
 {
     @synchronized(self) {
-        Environment *savedEnvironment = [BZRCoreDataStorage getCurrentEnvironment];
+        BZREnvironment *savedEnvironment = [BZRCoreDataStorage getCurrentEnvironment];
         
         if (!savedEnvironment) {
             savedEnvironment = [BZREnvironmentService defaultEnvironment];

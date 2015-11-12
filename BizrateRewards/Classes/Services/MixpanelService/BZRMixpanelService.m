@@ -11,7 +11,7 @@
 #import "BZREnvironmentService.h"
 
 #import "BZRLocationEvent.h"
-#import "Environment.h"
+#import "BZREnvironment.h"
 
 #import "BZRLocationObserver.h"
 
@@ -41,7 +41,7 @@ static Mixpanel *_currentMixpanelInstance = nil;
 {
     @synchronized(self) {
         
-        Environment *savedEnvironment = [self savedEnvironment];
+        BZREnvironment *savedEnvironment = [self savedEnvironment];
         
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"apiToken == %@", savedEnvironment.mixPanelToken];
         _currentMixpanelInstance = [[BZREnvironmentService possibleMixPanels] filteredArrayUsingPredicate:predicate].count ? [[BZREnvironmentService possibleMixPanels] filteredArrayUsingPredicate:predicate].firstObject : nil;
@@ -50,9 +50,9 @@ static Mixpanel *_currentMixpanelInstance = nil;
     }
 }
 
-+ (Environment *)savedEnvironment
++ (BZREnvironment *)savedEnvironment
 {
-    Environment *savedEnvironment = [BZRCoreDataStorage getCurrentEnvironment];
+    BZREnvironment *savedEnvironment = [BZRCoreDataStorage getCurrentEnvironment];
     if (!savedEnvironment) {
         savedEnvironment = [BZREnvironmentService defaultEnvironment];
         savedEnvironment.isCurrent = @(YES);
@@ -129,7 +129,7 @@ static Mixpanel *_currentMixpanelInstance = nil;
     Mixpanel *mixpanel = [self currentMixpanelInstance];
     NSString *userIdString = [NSString stringWithFormat:@"%lld", userProfile.userId];
 
-    Environment *savedEnvironment = [self savedEnvironment];
+    BZREnvironment *savedEnvironment = [self savedEnvironment];
     
     if (![[[NSUserDefaults standardUserDefaults] objectForKey:savedEnvironment.mixPanelToken] isEqualToString:userIdString]) {
         [mixpanel createAlias:userIdString forDistinctID:mixpanel.distinctId];

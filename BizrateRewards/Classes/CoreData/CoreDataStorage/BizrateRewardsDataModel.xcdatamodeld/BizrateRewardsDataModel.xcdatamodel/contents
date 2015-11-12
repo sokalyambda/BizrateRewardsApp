@@ -1,12 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9057" systemVersion="14F27" minimumToolsVersion="Xcode 7.0">
-    <entity name="Environment" representedClassName="Environment" syncable="YES">
+    <entity name="BZREnvironment" representedClassName="BZREnvironment" syncable="YES">
         <attribute name="apiEndpointURLString" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="environmentName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="isCurrent" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="mixPanelToken" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
+    <entity name="FacebookAccessToken" representedClassName="FacebookAccessToken" syncable="YES">
+        <attribute name="expirationDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="tokenValue" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="facebookProfile" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="FacebookProfile" inverseName="facebookAccessToken" inverseEntity="FacebookProfile" syncable="YES"/>
+    </entity>
+    <entity name="FacebookProfile" representedClassName="FacebookProfile" syncable="YES">
+        <attribute name="avatarURLString" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="facebookUserId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="fullName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="genderString" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isLogined" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="facebookAccessToken" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="FacebookAccessToken" inverseName="facebookProfile" inverseEntity="FacebookAccessToken" syncable="YES"/>
+    </entity>
     <elements>
-        <element name="Environment" positionX="-1188" positionY="-18" width="128" height="103"/>
+        <element name="BZREnvironment" positionX="0" positionY="0" width="128" height="105"/>
+        <element name="FacebookProfile" positionX="-198" positionY="-0" width="128" height="178"/>
+        <element name="FacebookAccessToken" positionX="-351" positionY="-0" width="128" height="88"/>
     </elements>
 </model>

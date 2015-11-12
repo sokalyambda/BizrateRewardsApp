@@ -15,6 +15,8 @@
 #import "BZRFacebookService.h"
 #import "BZRProjectFacade.h"
 
+#import "FacebookProfile.h"
+
 #import "BZRCommonDateFormatter.h"
 
 #import "BZRErrorHandler.h"
@@ -111,7 +113,7 @@
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [BZRFacebookService authorizeWithFacebookFromController:self onSuccess:^(BOOL isSuccess) {
         
-        [BZRFacebookService getFacebookUserProfileOnSuccess:^(BZRFacebookProfile *facebookProfile) {
+        [BZRFacebookService getFacebookUserProfileOnSuccess:^(FacebookProfile *facebookProfile) {
             
             NSString *email = facebookProfile.email ? facebookProfile.email : @"";
             

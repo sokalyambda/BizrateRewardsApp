@@ -8,6 +8,11 @@
 
 #import "BZRSignUpRequest.h"
 
+#import "FacebookAccessToken.h"
+#import "FacebookProfile.h"
+
+#import "BZRCoreDataStorage.h"
+
 static NSString *const kFirstName   = @"firstname";
 static NSString *const kLastName    = @"lastname";
 static NSString *const kEmail       = @"email";
@@ -71,7 +76,7 @@ static NSString *const requestAction = @"user/create";
         _userAuthorizationRequired = NO;
         _applicationAuthorizationRequired = YES;
         
-        NSString *fbAccessTokenString = [[NSUserDefaults standardUserDefaults] objectForKey:FBAccessToken];
+        NSString *fbAccessTokenString = [BZRCoreDataStorage getCurrentFacebookProfile].facebookAccessToken.tokenValue;
         
         NSMutableDictionary *parameters = [@{kFirstName: firstName,
                                      kLastName: lastName,

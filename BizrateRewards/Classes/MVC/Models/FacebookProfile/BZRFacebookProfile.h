@@ -6,8 +6,6 @@
 //  Copyright (c) 2015 Connexity. All rights reserved.
 //
 
-#import "BZRMappingProtocol.h"
-
 @interface BZRFacebookProfile : NSObject
 
 @property (strong, nonatomic) NSString *firstName;

@@ -145,7 +145,7 @@ static NSString *const kDashboardSegueIdentifier = @"dashboardSegue";
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [BZRFacebookService authorizeWithFacebookFromController:self onSuccess:^(BOOL isSuccess) {
         
-        [BZRFacebookService getFacebookUserProfileOnSuccess:^(BZRFacebookProfile *facebookProfile) {
+        [BZRFacebookService getFacebookUserProfileOnSuccess:^(FacebookProfile *facebookProfile) {
             
             [BZRProjectFacade signInWithFacebookOnSuccess:^(BOOL isSuccess) {
                 

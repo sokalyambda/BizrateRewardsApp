@@ -38,7 +38,7 @@
 - (NSManagedObjectModel *)managedObjectModel
 {
     // The managed object model for the application. It is a fatal error for the application not to be able to find and load its model.
-    if (_managedObjectModel != nil) {
+    if (_managedObjectModel) {
         return _managedObjectModel;
     }
     NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"BizrateRewardsDataModel" withExtension:@"momd"];
