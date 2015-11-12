@@ -6,14 +6,14 @@
 //  Copyright (c) 2015 Connexity. All rights reserved.
 //
 
-@class FacebookProfile;
+@class BZRFacebookProfile;
 
 @interface BZRFacebookService : NSObject
 
 typedef void(^FacebookAuthSuccessBlock)(BOOL isSuccess);
 typedef void(^FacebookAuthFailureBlock)(NSError *error, BOOL isCanceled);
 
-typedef void(^FacebookProfileSuccessBlock)(FacebookProfile *facebookProfile);
+typedef void(^FacebookProfileSuccessBlock)(BZRFacebookProfile *facebookProfile);
 typedef void(^FacebookProfileFailureBlock)(NSError *error);
 
 + (void)authorizeWithFacebookFromController:(UIViewController *)fromController

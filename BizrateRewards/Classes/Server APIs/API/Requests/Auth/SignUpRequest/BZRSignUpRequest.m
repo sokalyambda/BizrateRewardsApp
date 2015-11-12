@@ -8,8 +8,8 @@
 
 #import "BZRSignUpRequest.h"
 
-#import "FacebookAccessToken.h"
-#import "FacebookProfile.h"
+#import "BZRFacebookAccessToken.h"
+#import "BZRFacebookProfile.h"
 
 #import "BZRCoreDataStorage.h"
 

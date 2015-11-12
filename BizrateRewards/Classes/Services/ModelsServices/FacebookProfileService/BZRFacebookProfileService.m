@@ -10,7 +10,7 @@
 
 #import "BZRFacebookProfile.h"
 
-#import "FacebookProfile.h"
+#import "BZRFacebookProfile.h"
 
 #import "BZRCoreDataStorage.h"
 
@@ -28,9 +28,9 @@ static NSString *const kGender = @"gender";
 
 @implementation BZRFacebookProfileService
 
-+ (FacebookProfile *)facebookProfileFromServerResponse:(NSDictionary *)response
++ (BZRFacebookProfile *)facebookProfileFromServerResponse:(NSDictionary *)response
 {
-    FacebookProfile *currentFacebookProfile = [BZRCoreDataStorage getCurrentFacebookProfile];
+    BZRFacebookProfile *currentFacebookProfile = [BZRCoreDataStorage getCurrentFacebookProfile];
     if (currentFacebookProfile) {
         [BZRCoreDataStorage removeFacebookProfile:currentFacebookProfile];
     }

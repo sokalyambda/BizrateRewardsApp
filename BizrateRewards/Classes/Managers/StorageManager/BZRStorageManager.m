@@ -16,7 +16,7 @@
 
 #import "BZRCoreDataStorage.h"
 
-#import "FacebookProfile.h"
+#import "BZRFacebookProfile.h"
 
 @interface BZRStorageManager ()
 
@@ -26,7 +26,7 @@
 
 #pragma mark - Accessors
 
-- (FacebookProfile *)facebookProfile
+- (BZRFacebookProfile *)facebookProfile
 {
     if (!_facebookProfile) {
         _facebookProfile = [BZRCoreDataStorage getCurrentFacebookProfile];//[BZRFacebookProfileService facebookProfileFromDefaultsForKey:FBCurrentProfile];

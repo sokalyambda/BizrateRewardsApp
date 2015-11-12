@@ -9,15 +9,15 @@
 //  to delete and recreate this implementation file for your updated model.
 //
 
-#import "FacebookAccessToken.h"
+#import "BZRFacebookAccessToken.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface FacebookAccessToken (CoreDataProperties)
+@interface BZRFacebookAccessToken (CoreDataProperties)
 
 @property (nullable, nonatomic, retain) NSString *tokenValue;
 @property (nullable, nonatomic, retain) NSDate *expirationDate;
-@property (nullable, nonatomic, retain) FacebookProfile *facebookProfile;
+@property (nullable, nonatomic, retain) BZRFacebookProfile *facebookProfile;
 
 @end
 

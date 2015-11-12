@@ -9,8 +9,8 @@
 #import "BZRFacebookService.h"
 #import "BZRFacebookProfileService.h"
 
-#import "FacebookProfile.h"
-#import "FacebookAccessToken.h"
+#import "BZRFacebookProfile.h"
+#import "BZRFacebookAccessToken.h"
 
 #import "BZRCoreDataStorage.h"
 
@@ -99,7 +99,7 @@ static NSString *const kFBAppSecret = @"530fa94f7370fc20a54cc392fbd83cf2";
         } else {
             NSMutableDictionary *userProfile = [NSMutableDictionary dictionaryWithDictionary:(NSDictionary *)response];
             
-            FacebookProfile *facebookProfile = [BZRFacebookProfileService facebookProfileFromServerResponse:userProfile];
+            BZRFacebookProfile *facebookProfile = [BZRFacebookProfileService facebookProfileFromServerResponse:userProfile];
             //store fb auth data
             [weakSelf storeFacebookAuthData];
             
@@ -128,7 +128,7 @@ static NSString *const kFBAppSecret = @"530fa94f7370fc20a54cc392fbd83cf2";
  */
 + (void)setLoginSuccess:(BOOL)success
 {
-    FacebookProfile *currentProfile = [BZRCoreDataStorage getCurrentFacebookProfile];
+    BZRFacebookProfile *currentProfile = [BZRCoreDataStorage getCurrentFacebookProfile];
     if (currentProfile) {
         currentProfile.isLogined = @(success);
         [BZRCoreDataStorage saveContext];
@@ -162,7 +162,7 @@ static NSString *const kFBAppSecret = @"530fa94f7370fc20a54cc392fbd83cf2";
  */
 + (void)storeFacebookAuthData
 {
-    FacebookProfile *profile = [BZRCoreDataStorage getCurrentFacebookProfile];
+    BZRFacebookProfile *profile = [BZRCoreDataStorage getCurrentFacebookProfile];
     profile.facebookAccessToken = [BZRCoreDataStorage addFacebookAccessTokenWithTokenValue:[FBSDKAccessToken currentAccessToken].tokenString andExpirationDate:[FBSDKAccessToken currentAccessToken].expirationDate];
 }
 
@@ -184,8 +184,8 @@ static NSString *const kFBAppSecret = @"530fa94f7370fc20a54cc392fbd83cf2";
  */
 + (BOOL)isLoginedWithFacebook
 {
-    FacebookProfile *currentProfile = [BZRCoreDataStorage getCurrentFacebookProfile];
-    FacebookAccessToken *token = currentProfile.facebookAccessToken;
+    BZRFacebookProfile *currentProfile = [BZRCoreDataStorage getCurrentFacebookProfile];
+    BZRFacebookAccessToken *token = currentProfile.facebookAccessToken;
     return token.tokenValue && token.expirationDate && currentProfile.isLogined;
 }
 

@@ -1,15 +1,15 @@
 //
-//  FacebookProfile.m
+//  FacebookAccessToken.m
 //  Bizrate Rewards
 //
 //  Created by Eugenity on 12.11.15.
 //  Copyright © 2015 Connexity. All rights reserved.
 //
 
-#import "FacebookProfile.h"
-#import "FacebookAccessToken.h"
+#import "BZRFacebookAccessToken.h"
+#import "BZRFacebookProfile.h"
 
-@implementation FacebookProfile
+@implementation BZRFacebookAccessToken
 
 // Insert code here to add functionality to your managed object subclass
 

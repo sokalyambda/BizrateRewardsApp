@@ -6,7 +6,7 @@
 //  Copyright © 2015 Connexity. All rights reserved.
 //
 
-@class BZREnvironment, FacebookProfile, FacebookAccessToken;
+@class BZREnvironment, BZRFacebookProfile, BZRFacebookAccessToken;
 
 @interface BZRCoreDataStorage : NSObject
 
@@ -21,18 +21,18 @@
 + (NSArray *)getAllEnvironments;
 
 //MARK: Facebook Profile
-+ (FacebookProfile *)addFacebookProfileWithFirstName:(NSString *)firstName
++ (BZRFacebookProfile *)addFacebookProfileWithFirstName:(NSString *)firstName
                                          andLastName:(NSString *)lastName
                                          andFullName:(NSString *)fullName
                                      andGenderString:(NSString *)genderString
                                             andEmail:(NSString *)email
                                   andAvatarURLString:(NSString *)avatarURLString
                                            andUserId:(long long)userId;
-+ (FacebookProfile *)getCurrentFacebookProfile;
-+ (void)removeFacebookProfile:(FacebookProfile *)facebookProfile;
++ (BZRFacebookProfile *)getCurrentFacebookProfile;
++ (void)removeFacebookProfile:(BZRFacebookProfile *)facebookProfile;
 
 //MARK: Facebook Access Token
-+ (FacebookAccessToken *)addFacebookAccessTokenWithTokenValue:(NSString *)tokenValue
++ (BZRFacebookAccessToken *)addFacebookAccessTokenWithTokenValue:(NSString *)tokenValue
                                             andExpirationDate:(NSDate *)expDate;
 
 @end

@@ -9,9 +9,9 @@
 //  to delete and recreate this implementation file for your updated model.
 //
 
-#import "FacebookProfile+CoreDataProperties.h"
+#import "BZRFacebookProfile+CoreDataProperties.h"
 
-@implementation FacebookProfile (CoreDataProperties)
+@implementation BZRFacebookProfile (CoreDataProperties)
 
 @dynamic firstName;
 @dynamic lastName;

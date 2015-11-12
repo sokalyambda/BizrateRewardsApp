@@ -9,9 +9,9 @@
 //  to delete and recreate this implementation file for your updated model.
 //
 
-#import "FacebookAccessToken+CoreDataProperties.h"
+#import "BZRFacebookAccessToken+CoreDataProperties.h"
 
-@implementation FacebookAccessToken (CoreDataProperties)
+@implementation BZRFacebookAccessToken (CoreDataProperties)
 
 @dynamic tokenValue;
 @dynamic expirationDate;

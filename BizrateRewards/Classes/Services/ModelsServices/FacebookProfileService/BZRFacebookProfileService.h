@@ -6,10 +6,10 @@
 //  Copyright © 2015 Connexity. All rights reserved.
 //
 
-@class FacebookProfile;
+@class BZRFacebookProfile;
 
 @interface BZRFacebookProfileService : NSObject
 
-+ (FacebookProfile *)facebookProfileFromServerResponse:(NSDictionary *)response;
++ (BZRFacebookProfile *)facebookProfileFromServerResponse:(NSDictionary *)response;
 
 @end

@@ -11,8 +11,8 @@
 #import "BZRCoreDataManager.h"
 
 #import "BZREnvironment.h"
-#import "FacebookProfile.h"
-#import "FacebookAccessToken.h"
+#import "BZRFacebookProfile.h"
+#import "BZRFacebookAccessToken.h"
 
 @implementation BZRCoreDataStorage
 
@@ -60,7 +60,7 @@
 
 #pragma mark - Facebook Profile
 
-+ (FacebookProfile *)addFacebookProfileWithFirstName:(NSString *)firstName
++ (BZRFacebookProfile *)addFacebookProfileWithFirstName:(NSString *)firstName
                                          andLastName:(NSString *)lastName
                                          andFullName:(NSString *)fullName
                                      andGenderString:(NSString *)genderString
@@ -68,7 +68,7 @@
                                   andAvatarURLString:(NSString *)avatarURLString
                                            andUserId:(long long)userId
 {
-    FacebookProfile *facebookProfile = (FacebookProfile *)[self.coreDataManager addNewManagedObjectForName:NSStringFromClass([FacebookProfile class])];
+    BZRFacebookProfile *facebookProfile = (BZRFacebookProfile *)[self.coreDataManager addNewManagedObjectForName:NSStringFromClass([BZRFacebookProfile class])];
     facebookProfile.firstName = firstName;
     facebookProfile.lastName = lastName;
     facebookProfile.fullName = fullName;
@@ -80,23 +80,23 @@
     return facebookProfile;
 }
 
-+ (FacebookProfile *)getCurrentFacebookProfile
++ (BZRFacebookProfile *)getCurrentFacebookProfile
 {
-    NSArray *profiles = [self.coreDataManager getEntities:NSStringFromClass([FacebookProfile class])];
+    NSArray *profiles = [self.coreDataManager getEntities:NSStringFromClass([BZRFacebookProfile class])];
     return [profiles firstObject];
 }
 
-+ (void)removeFacebookProfile:(FacebookProfile *)facebookProfile
++ (void)removeFacebookProfile:(BZRFacebookProfile *)facebookProfile
 {
     [self removeObject:facebookProfile];
 }
 
 #pragma mark - Facebook Access Token
 
-+ (FacebookAccessToken *)addFacebookAccessTokenWithTokenValue:(NSString *)tokenValue
++ (BZRFacebookAccessToken *)addFacebookAccessTokenWithTokenValue:(NSString *)tokenValue
                                             andExpirationDate:(NSDate *)expDate
 {
-    FacebookAccessToken *facebookToken = (FacebookAccessToken *)[self.coreDataManager addNewManagedObjectForName:NSStringFromClass([FacebookAccessToken class])];
+    BZRFacebookAccessToken *facebookToken = (BZRFacebookAccessToken *)[self.coreDataManager addNewManagedObjectForName:NSStringFromClass([BZRFacebookAccessToken class])];
     
     facebookToken.tokenValue = tokenValue;
     facebookToken.expirationDate = expDate;

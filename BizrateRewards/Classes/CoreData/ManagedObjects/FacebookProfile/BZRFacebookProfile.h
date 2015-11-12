@@ -6,11 +6,11 @@
 //  Copyright © 2015 Connexity. All rights reserved.
 //
 
-@class FacebookAccessToken;
+@class BZRFacebookAccessToken;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface FacebookProfile : NSManagedObject
+@interface BZRFacebookProfile : NSManagedObject
 
 // Insert code here to declare functionality of your managed object subclass
 
@@ -18,4 +18,4 @@ NS_ASSUME_NONNULL_BEGIN
 
 NS_ASSUME_NONNULL_END
 
-#import "FacebookProfile+CoreDataProperties.h"
+#import "BZRFacebookProfile+CoreDataProperties.h"
