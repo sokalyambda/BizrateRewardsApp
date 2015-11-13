@@ -8,15 +8,15 @@
 
 #import "BZRDiagnosticsDataSource.h"
 
+#import "BZREnvironmentService.h"
+
 #import "BZREnvironment.h"
 
-#import "BZREnvironmentService.h"
+#import "BZRCoreDataStorage.h"
 
 #import "BZRDropDownCell.h"
 
 @interface BZRDiagnosticsDataSource ()
-
-@property (strong, nonatomic) NSArray *environmentTypes;
 
 @end
 
@@ -24,31 +24,23 @@
 
 #pragma mark - Accessors
 
-- (NSArray *)environmentTypes
-{
-    if (!_environmentTypes) {
-        _environmentTypes = [BZREnvironmentService eligibleEnvironmentsArray];
-    }
-    return _environmentTypes;
-}
-
 - (NSArray *)currentDataSourceArray
 {
-    return self.environmentTypes;
+    return [BZRCoreDataStorage getAllEnvironments];
 }
 
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.environmentTypes.count;
+    return [self currentDataSourceArray].count;
 }
 
 - (void)configureCell:(UITableViewCell *)cell forIndexPath:(NSIndexPath *)indexPath
 {
     BZRDropDownCell *dropDownCell = (BZRDropDownCell *)cell;
     
-    BZREnvironment *currentEnvironment = self.environmentTypes[indexPath.row];
+    BZREnvironment *currentEnvironment = [self currentDataSourceArray][indexPath.row];
     
     if ([currentEnvironment isEqual:self.currentSelectedValue]) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;

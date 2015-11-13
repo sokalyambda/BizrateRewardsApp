@@ -13,7 +13,7 @@
 
 #import "BZRLocationObserver.h"
 
-@interface BZRUserProfile ()<NSCoding>
+@interface BZRUserProfile ()
 
 @property (strong, nonatomic) NSUserDefaults *defaults;
 
@@ -76,21 +76,6 @@
 - (BOOL)isGeolocationAccessGranted
 {
     return [BZRLocationObserver sharedObserver].isAuthorized;
-}
-
-#pragma mark - NSCoding methods
-
-- (void)encodeWithCoder:(NSCoder *)encoder
-{
-    [BZRUserProfileService encodeUserProfile:self withCoder:encoder];
-}
-
-- (id)initWithCoder:(NSCoder *)decoder
-{
-    if((self = [super init])) {
-        [BZRUserProfileService decodeUserProfile:self withDecoder:decoder];
-    }
-    return self;
 }
 
 @end

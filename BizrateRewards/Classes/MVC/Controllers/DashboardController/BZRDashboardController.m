@@ -80,10 +80,17 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
     [self configureRefreshControl];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [self updateUserInformation];
+}
+
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [self updateUserInformation];
+    
     if (self.isUpdateNeeded) {
         [self getCurrentUserProfile];
     }
@@ -222,13 +229,7 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
 - (void)updateUserInformation
 {
     [self setupUserAvatar];
-    
     self.userNameLabel.text = self.currentProfile.fullName;
-    
-    self.earnedPointsLabel.text = [NSString stringWithFormat:@"%@ %@", [[BZRCommonNumberFormatter commonNumberFormatter] stringFromNumber:@((long)self.currentProfile.pointsAmount)], LOCALIZED(@"pts")];
-    self.pointsForNextGiftCardLabel.text = [NSString stringWithFormat:@"%@ %@", [[BZRCommonNumberFormatter commonNumberFormatter] stringFromNumber:@((long)self.currentProfile.pointsRequired)], LOCALIZED(@"pts")];
-    
-    [self updateProgressView];
 }
 
 /**
@@ -280,7 +281,10 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
                 weakSelf.takeSurveyButton.enabled = YES;
             }
             
+            //perform updating actions
             [weakSelf updateUserInformation];
+            [weakSelf updatePoints];
+            [weakSelf updateProgressView];
             //Register app for push notifications, if success - send device data to server
             [BZRPushNotifiactionService registerApplicationForPushNotifications:[UIApplication sharedApplication]];
             
@@ -313,14 +317,17 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
  */
 - (void)updateProgressView
 {
+    [self.progressView layoutIfNeeded];
     WEAK_SELF;
-    [self.progressView recalculateProgressWithCurrentPoints:self.currentProfile.pointsAmount requiredPoints:self.currentProfile.pointsRequired withCompletion:^(BOOL maxPointsEarned) {
-
-        weakSelf.seeAvailableGiftCardsButton.hidden = maxPointsEarned;
-        weakSelf.redeemPointsButton.hidden = !maxPointsEarned;
-        
-        [weakSelf updateSurveyCongratulationsLabelWithMaxPointsEarned:maxPointsEarned];
-    }];
+    [self.progressView recalculateProgressWithCurrentPoints:self.currentProfile.pointsAmount
+                                             requiredPoints:self.currentProfile.pointsRequired
+                                             withCompletion:^(BOOL maxPointsEarned) {
+                                                 
+                                                 weakSelf.seeAvailableGiftCardsButton.hidden = maxPointsEarned;
+                                                 weakSelf.redeemPointsButton.hidden = !maxPointsEarned;
+                                                 
+                                                 [weakSelf updateSurveyCongratulationsLabelWithMaxPointsEarned:maxPointsEarned];
+                                             }];
 }
 
 - (void)updateSurveyCongratulationsLabelWithMaxPointsEarned:(BOOL)maxPointsEarned

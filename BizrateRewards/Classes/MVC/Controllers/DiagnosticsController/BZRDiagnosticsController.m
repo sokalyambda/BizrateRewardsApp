@@ -28,6 +28,8 @@
 #import "BZREnvironmentService.h"
 #import "BZRLocationEventService.h"
 
+#import "BZRCoreDataStorage.h"
+
 static NSInteger const kCurrentNumberOfSections = 2.f;
 static NSInteger const kLocationEventsCount = 10.f;
 
@@ -167,23 +169,16 @@ static NSInteger const kLocationEventsCount = 10.f;
 - (void)initDropDownList
 {
     self.dropDownList = [BZRDropDownTableView makeFromXib];
-    
-    [self reinitDefaultValue];
+    [self resetCurrentEnvironment];
 }
 
 /**
  *  Reinit default environment
  */
-- (void)reinitDefaultValue
+- (void)resetCurrentEnvironment
 {
-    BZREnvironment *savedEnvironment = [BZREnvironmentService environmentFromDefaultsForKey:CurrentAPIEnvironment];
-    
-    if (!savedEnvironment) {
-        id defaultValue = self.environmentsDataSource.currentSelectedValue;
-        if ([defaultValue isKindOfClass:[BZREnvironment class]]) {
-            self.currentEnvironment = defaultValue;
-        }
-    } else {
+    BZREnvironment *savedEnvironment = [BZRCoreDataStorage getCurrentEnvironment];
+    if (savedEnvironment) {
         self.currentEnvironment = savedEnvironment;
     }
 }
@@ -191,9 +186,9 @@ static NSInteger const kLocationEventsCount = 10.f;
 /**
  *  Set the default data source selected value
  */
-- (void)swapWithSavedValue
+- (void)updateSelectedValue
 {
-    [self.environmentsDataSource swapSelectedValueWithValue:self.currentEnvironment];
+    [self.environmentsDataSource updateSelectedValueInDataSourceArray:self.currentEnvironment];
 }
 
 /**
@@ -265,15 +260,17 @@ static NSInteger const kLocationEventsCount = 10.f;
             
             [BZRAlertFacade showAlertWithMessage:LOCALIZED(@"API endpoint has been saved.") forController:weakSelf withCompletion:^{
                 //logout..
-                if ((![weakSelf.currentEnvironment isEqual:[BZREnvironmentService environmentFromDefaultsForKey:CurrentAPIEnvironment]])) {
+                if ((![weakSelf.currentEnvironment isEqual:[BZRCoreDataStorage getCurrentEnvironment]])) {
                     
+                    [BZRCoreDataStorage getCurrentEnvironment].isCurrent = @(NO);
                     //save current environment
-                    [BZREnvironmentService setEnvironment:weakSelf.currentEnvironment toDefaultsForKey:CurrentAPIEnvironment];
+                    weakSelf.currentEnvironment.isCurrent = @(YES);
+                    [BZRCoreDataStorage saveContext];
+                    
                     [BZRMixpanelService resetMixpanel];
 
                     [BZRRedirectionHelper performSignOut];
                     [weakSelf dismissViewControllerAnimated:YES completion:nil];
-                    
                 }
             }];
         } onFailure:^(NSError *error, BOOL isCanceled) {
@@ -281,8 +278,8 @@ static NSInteger const kLocationEventsCount = 10.f;
             
             [BZRAlertFacade showAlertWithMessage:LOCALIZED(@"API endpoint is incorrect.") forController:weakSelf withCompletion:nil];
             
-            [weakSelf reinitDefaultValue];
-            [weakSelf swapWithSavedValue];
+            [weakSelf resetCurrentEnvironment];
+            [weakSelf updateSelectedValue];
             //return to default value of base url
             [BZRProjectFacade setBaseURLString:weakSelf.currentEnvironment.apiEndpointURLString];
             [BZRProjectFacade initHTTPClientWithRootPath:[BZRProjectFacade baseURLString] withCompletion:nil];

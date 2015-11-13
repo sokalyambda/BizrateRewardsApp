@@ -20,9 +20,6 @@ static NSString *const PushNotificationServiceDidFailAuthorizeNotification = @"P
 //Strings
 static NSString *const InternetIsNotReachableString = @"Internet is not reachable.";
 
-//User
-static NSString *const CurrentProfileKey    = @"CurrentProfileKey";
-
 static NSString *const IsTutorialPassed     = @"IsTutorialPassed";
 static NSString *const RememberMeKey        = @"RememberMeKey";
 
@@ -30,14 +27,6 @@ static NSString *const UserNameKey = @"UsernameKey";
 static NSString *const PasswordKey = @"PasswordKey";
 
 static NSString *const IsFirstLaunch = @"IsFirstLaunch";
-
-//Facebook (keys for NSUserDefaults)
-static NSString *const FBAccessToken = @"FBAccessToken";
-static NSString *const FBAccessTokenExpirationDate = @"FBAccessTokenExpirationDate";
-static NSString *const FBLoginSuccess = @"FBLoginSuccess";
-static NSString *const FBCurrentProfile = @"FBCurrentProfile";
-
-static NSString *const CurrentAPIEnvironment = @"CurrentAPIEnvironment";
 
 //Location Events (keys for NSUserDefaults)
 static NSString *const LastReceivedLocationEvent = @"LastReceivedLocationEvent";

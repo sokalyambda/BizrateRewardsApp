@@ -10,18 +10,9 @@
 
 @interface BZREnvironmentService : NSObject
 
-+ (NSArray *)eligibleEnvironmentsArray;
++ (void)createEligibleEnvironments;
 + (NSArray *)possibleMixPanels;
 
 + (BZREnvironment *)defaultEnvironment;
-
-+ (void)setEnvironment:(BZREnvironment *)environment
-      toDefaultsForKey:(NSString *)key;
-+ (BZREnvironment *)environmentFromDefaultsForKey:(NSString *)key;
-
-+ (void)encodeEnvironment:(BZREnvironment *)environment
-                withCoder:(NSCoder *)encoder;
-+ (BZREnvironment *)decodeEnvironment:(BZREnvironment *)environment
-                          withDecoder:(NSCoder *)decoder;
 
 @end

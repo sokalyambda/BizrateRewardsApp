@@ -14,6 +14,10 @@
 #import "BZRLocationEventService.h"
 #import "BZRFacebookProfileService.h"
 
+#import "BZRCoreDataStorage.h"
+
+#import "BZRFacebookProfile.h"
+
 @interface BZRStorageManager ()
 
 @end
@@ -25,7 +29,7 @@
 - (BZRFacebookProfile *)facebookProfile
 {
     if (!_facebookProfile) {
-        _facebookProfile = [BZRFacebookProfileService facebookProfileFromDefaultsForKey:FBCurrentProfile];
+        _facebookProfile = [BZRCoreDataStorage getCurrentFacebookProfile];
     }
     return _facebookProfile;
 }

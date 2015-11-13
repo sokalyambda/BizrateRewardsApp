@@ -15,6 +15,8 @@
 #import "BZRFacebookService.h"
 #import "BZRProjectFacade.h"
 
+#import "BZRFacebookProfile.h"
+
 #import "BZRCommonDateFormatter.h"
 
 #import "BZRErrorHandler.h"

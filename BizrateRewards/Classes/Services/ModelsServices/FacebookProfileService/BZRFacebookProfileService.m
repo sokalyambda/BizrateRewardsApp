@@ -10,6 +10,10 @@
 
 #import "BZRFacebookProfile.h"
 
+#import "BZRFacebookProfile.h"
+
+#import "BZRCoreDataStorage.h"
+
 static NSString *const kFirstName = @"first_name";
 static NSString *const kLastName = @"last_name";
 static NSString *const kFullName = @"name";
@@ -26,76 +30,26 @@ static NSString *const kGender = @"gender";
 
 + (BZRFacebookProfile *)facebookProfileFromServerResponse:(NSDictionary *)response
 {
-    BZRFacebookProfile *facebookProfile = [[BZRFacebookProfile alloc] init];
-    facebookProfile.firstName = response[kFirstName];
-    facebookProfile.lastName = response[kLastName];
-    facebookProfile.fullName = response[kFullName];
-    facebookProfile.userId = [response[kUserId] longLongValue];
-    facebookProfile.email = response[kEmail];
-    facebookProfile.genderString = [response[kGender] capitalizedString];
-    
-    facebookProfile.avararURL = [NSURL URLWithString:response[kPicture][kData][kURL]];
-    
-    return facebookProfile;
-}
-
-#pragma mark - NSCoding methods
-
-+ (void)encodeFacebookProfile:(BZRFacebookProfile *)facebookProfile
-                    withCoder:(NSCoder *)encoder
-{
-    //Encode properties, other class variables, etc
-    [encoder encodeObject:facebookProfile.firstName forKey:kFirstName];
-    [encoder encodeObject:facebookProfile.lastName forKey:kLastName];
-    [encoder encodeObject:facebookProfile.email forKey:kEmail];
-    [encoder encodeObject:facebookProfile.fullName forKey:kFullName];
-    [encoder encodeObject:@(facebookProfile.userId) forKey:kUserId];
-    [encoder encodeObject:facebookProfile.avararURL forKey:kAvatarURL];
-    [encoder encodeObject:facebookProfile.genderString forKey:kGender];
-}
-
-+ (BZRFacebookProfile *)decodeFacebookProfile:(BZRFacebookProfile *)facebookProfile
-                                  withDecoder:(NSCoder *)decoder
-{
-    //decode properties, other class vars
-    facebookProfile.firstName      = [decoder decodeObjectForKey:kFirstName];
-    facebookProfile.lastName       = [decoder decodeObjectForKey:kLastName];
-    facebookProfile.email          = [decoder decodeObjectForKey:kEmail];
-    facebookProfile.fullName       = [decoder decodeObjectForKey:kFullName];
-    facebookProfile.userId         = [[decoder decodeObjectForKey:kUserId] longLongValue];
-    facebookProfile.avararURL      = [decoder decodeObjectForKey:kAvatarURL];
-    facebookProfile.genderString   = [decoder decodeObjectForKey:kGender];
-
-    return facebookProfile;
-}
-
-#pragma mark - NSUserDefaults methods
-
-+ (void)setFacebookProfile:(BZRFacebookProfile *)facebookProfile
-          toDefaultsForKey:(NSString *)key
-{
-    NSData *encodedObject = [NSKeyedArchiver archivedDataWithRootObject:facebookProfile];
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
-    if ([defaults.dictionaryRepresentation.allKeys containsObject:key]) {
-        [defaults removeObjectForKey:key];
+    BZRFacebookProfile *currentFacebookProfile = [BZRCoreDataStorage getCurrentFacebookProfile];
+    if (currentFacebookProfile) {
+        [BZRCoreDataStorage removeFacebookProfile:currentFacebookProfile];
     }
     
-    [defaults setObject:encodedObject forKey:key];
-    [defaults synchronize];
-}
-
-+ (BZRFacebookProfile *)facebookProfileFromDefaultsForKey:(NSString *)key
-{
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *firstName = response[kFirstName];
+    NSString *lastName = response[kLastName];
+    NSString *fullName = response[kFullName];
+    long long userId = [response[kUserId] longLongValue];
+    NSString *email = response[kEmail];
+    NSString *genderString = [response[kGender] capitalizedString];
+    NSString *avararURL = response[kPicture][kData][kURL];
     
-    if (![defaults.dictionaryRepresentation.allKeys containsObject:key]) {
-        return nil;
-    }
-    
-    NSData *encodedObject = [defaults objectForKey:key];
-    BZRFacebookProfile *userProfile = [NSKeyedUnarchiver unarchiveObjectWithData:encodedObject];
-    return userProfile;
+    return [BZRCoreDataStorage addFacebookProfileWithFirstName:firstName
+                                                   andLastName:lastName
+                                                   andFullName:fullName
+                                               andGenderString:genderString
+                                                      andEmail:email
+                                            andAvatarURLString:avararURL
+                                                     andUserId:userId];
 }
 
 @end

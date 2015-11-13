@@ -23,6 +23,4 @@ typedef enum : NSUInteger {
 
 - (void)updateSelectedValueInDataSourceArray:(id)value;
 
-- (void)swapSelectedValueWithValue:(id)newValue;
-
 @end
