@@ -10,6 +10,8 @@
 
 #import "BZREnvironment.h"
 
+#import <Mixpanel/Mixpanel.h>
+
 static NSString *const kDevelopmentAPIEndpoint      = @"http://devxxx.ngrok.io/v1/";
 static NSString *const kStagingAPIEndpoint          = @"http://api-stage.bizraterewards.com/v1/";
 static NSString *const kProductionAPIEndpoint       = @"https://api.bizraterewards.com/v1/";
@@ -23,7 +25,20 @@ static NSString *const kEnvironmentName = @"environmentName";
 static NSString *const kAPIURLString    = @"APIURLString";
 static NSString *const kMixPanelToken   = @"mixPanelToken";
 
+static NSArray *_possibleMixPanels = nil;
+
 @implementation BZREnvironmentService
+
++ (NSArray *)possibleMixPanels
+{
+    if (!_possibleMixPanels) {
+        _possibleMixPanels = @[
+                               [[Mixpanel alloc] initWithToken:kDevelopmentMixPanelToken andFlushInterval:1],
+                               [[Mixpanel alloc] initWithToken:kStagingMixPanelToken andFlushInterval:1],
+                               [[Mixpanel alloc] initWithToken:kProductionMixPanelToken andFlushInterval:1]];
+    }
+    return _possibleMixPanels;
+}
 
 + (NSArray *)eligibleEnvironmentsArray
 {

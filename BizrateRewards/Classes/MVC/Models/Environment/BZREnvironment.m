@@ -16,6 +16,13 @@
 
 @implementation BZREnvironment
 
+#pragma mark - Accessors
+
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"Entity class: %@\nName: %@\nBase URL: %@\nMixpanel Token: %@\n", NSStringFromClass([self class]), self.environmentName, self.apiEndpointURLString, self.mixPanelToken];
+}
+
 #pragma mark - Lifecycle
 
 - (instancetype)initWithEnvironmentName:(NSString *)name
