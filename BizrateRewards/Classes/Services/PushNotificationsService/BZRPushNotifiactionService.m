@@ -177,6 +177,9 @@ static NSString *const kDefaultLatestSurveyURLString = @"com.bizraterewards://su
         [BZRMixpanelService trackEventWithType:BZRMixpanelEventPushNotificationPermission
                                  propertyValue:isPushesEnabled? @"YES" : @"NO"];
 
+        /*
+         Commented because of version 1.0.1
+         
         if ([BZRProjectFacade isUserSessionValid] && !isPushesEnabled && [BZRStorageManager sharedStorage].deviceToken.length) {
             //update notifications and geolocation settings
             [BZRProjectFacade sendDeviceDataOnSuccess:^(BOOL isSuccess) {
@@ -187,6 +190,7 @@ static NSString *const kDefaultLatestSurveyURLString = @"com.bizraterewards://su
                 
             }];
         }
+         */
     }
     return isPermissionsChanged;
 }
