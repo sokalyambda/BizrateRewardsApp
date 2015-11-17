@@ -22,6 +22,7 @@ static NSString *const kPointsAmount            = @"points_awarded";
 static NSString *const kContactID               = @"ref_contact_id";
 static NSString *const kPointsRequired          = @"points_next_redemption";
 static NSString *const kRedemptionURL           = @"redemption_url";
+static NSString *const kAllowRedemption         = @"allow_redemption";
 
 static NSString *const kUserId                  = @"userId";
 static NSString *const kShareCode               = @"share_code";
@@ -35,19 +36,20 @@ static NSString *const kIsTestUser              = @"is_test_user";
 + (BZRUserProfile *)userProfileWithServerResponse:(NSDictionary *)response
 {
     BZRUserProfile *userProfile = [[BZRUserProfile alloc] init];
-    userProfile.firstName      = response[kFirstName];
-    userProfile.lastName       = response[kLastName];
-    userProfile.email          = response[kEmail];
-    userProfile.contactID      = response[kContactID];
-    userProfile.dateOfBirth    = [[BZRCommonDateFormatter commonDateFormatter] dateFromString:response[kDateOfBirth]];
-    userProfile.pointsAmount   = [response[kPointsAmount] integerValue];
-    userProfile.pointsRequired = [response[kPointsRequired] integerValue];
-    userProfile.testUser       = [response[kIsTestUser] boolValue];
+    userProfile.firstName       = response[kFirstName];
+    userProfile.lastName        = response[kLastName];
+    userProfile.email           = response[kEmail];
+    userProfile.contactID       = response[kContactID];
+    userProfile.dateOfBirth     = [[BZRCommonDateFormatter commonDateFormatter] dateFromString:response[kDateOfBirth]];
+    userProfile.pointsAmount    = [response[kPointsAmount] integerValue];
+    userProfile.pointsRequired  = [response[kPointsRequired] integerValue];
+    userProfile.testUser        = [response[kIsTestUser] boolValue];
     
-    userProfile.redemptionURL  = [NSURL URLWithString:response[kRedemptionURL]];
+    userProfile.redemptionURL   = [NSURL URLWithString:response[kRedemptionURL]];
+    userProfile.allowRedemption = [response[kAllowRedemption] boolValue];
     
-    userProfile.userId         = [response[kUserId] longLongValue];
-    userProfile.shareCode      = response[kShareCode];
+    userProfile.userId          = [response[kUserId] longLongValue];
+    userProfile.shareCode       = response[kShareCode];
     
     userProfile.genderString = response[kGender];
     

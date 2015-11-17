@@ -22,7 +22,7 @@ static NSString *const kPassword    = @"password";
 static NSString *const kIsTestUser  = @"is_test_user";
 
 static NSString *const kFacebookParams = @"facebook";
-static NSString *const kAccessToken = @"access_token";
+static NSString *const kAccessToken    = @"access_token";
 
 static NSString *const kShareCode   = @"share_code";
 
@@ -56,8 +56,7 @@ static NSString *const requestAction = @"user/create";
                                      kEmail: email,
                                      kPassword: password,
                                      kDateOfBirth: birthDate,
-                                             kGender: gender, kIsTestUser :
-                                                 @(YES)} mutableCopy];
+                                     kGender: gender} mutableCopy];
         if (shareCode) {
             [parameters setObject:shareCode forKey:kShareCode];
         }

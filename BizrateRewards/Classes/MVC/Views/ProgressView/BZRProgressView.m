@@ -17,6 +17,7 @@
 @property (strong, nonatomic) UIColor *currentColor;
 
 @property (assign, nonatomic) CGFloat savedProgress;
+@property (assign, nonatomic) BOOL allowRedemption;
 
 @end
 
@@ -64,15 +65,16 @@
 
 - (UIColor *)currentColor
 {
-    return self.isMaxPointsEarned ? UIColorFromRGB(0x1bc886) : UIColorFromRGB(0x1e91d2); //if earned color will be green, otherwise - blue
+    return (self.isMaxPointsEarned || self.allowRedemption) ? UIColorFromRGB(0x1bc886) : UIColorFromRGB(0x1e91d2); //if earned color will be green, otherwise - blue
 }
 
 #pragma mark - Actions
 
-- (void)recalculateProgressWithCurrentPoints:(NSInteger)currentPoints requiredPoints:(NSInteger)requiredPoints withCompletion:(void(^)(BOOL maxPointsEarned))completion
+- (void)recalculateProgressWithCurrentPoints:(NSInteger)currentPoints requiredPoints:(NSInteger)requiredPoints allowRedemption:(BOOL)allowRedemption withCompletion:(void(^)(BOOL maxPointsEarned))completion
 {
     CGFloat progress = (CGFloat)currentPoints / (CGFloat)requiredPoints;
     
+    self.allowRedemption = allowRedemption;
     self.maxPointsEarned = (currentPoints >= requiredPoints && requiredPoints != 0.f);
     
     if (!isnan(progress)) {

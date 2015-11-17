@@ -10,14 +10,14 @@
 #import "BZRShareCodeController.h"
 
 //Temporary
-//#import "BZRSignUpController.h"
-//#import "BZRDashboardController.h"
-//#import "BZRForgotPasswordController.h"
-//#import "BZRBaseNavigationController.h"
-//#import "BZRFacebookService.h"
-//#import "BZRProjectFacade.h"
-//#import "BZRCommonDateFormatter.h"
-//#import "BZRErrorHandler.h"
+#import "BZRSignUpController.h"
+#import "BZRDashboardController.h"
+#import "BZRForgotPasswordController.h"
+#import "BZRBaseNavigationController.h"
+#import "BZRFacebookService.h"
+#import "BZRProjectFacade.h"
+#import "BZRCommonDateFormatter.h"
+#import "BZRErrorHandler.h"
 
 @interface BZRChooseSignUpTypeController ()
 
@@ -53,12 +53,14 @@
     //track mixpanel event
     [BZRMixpanelService trackEventWithType:BZRMixpanelEventCreateAcountClicked propertyValue:kAuthTypeEmail];
     
-//    BZRSignUpController *controller = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRSignUpController class])];
-//    controller.temporaryProfile = self.temporaryProfile;
-//    [self.navigationController pushViewController:controller animated:YES];
-
-    [self moveToShareCodeControllerFromFacebookFlow:NO];
-    
+    BZRSignUpController *controller = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRSignUpController class])];
+    controller.temporaryProfile = self.temporaryProfile;
+    [self.navigationController pushViewController:controller animated:YES];
+    /*
+     Commented because of version 1.0.1
+     
+     [self moveToShareCodeControllerFromFacebookFlow:NO];
+     */
 }
 
 /**
@@ -66,52 +68,55 @@
  */
 - (void)signUpWithFacebook
 {
-//    WEAK_SELF;
-//    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-//    [BZRFacebookService authorizeWithFacebookFromController:self onSuccess:^(BOOL isSuccess) {
-//        
-//        [BZRFacebookService getFacebookUserProfileOnSuccess:^(BZRFacebookProfile *facebookProfile) {
-//            
-//            NSString *email = facebookProfile.email ? facebookProfile.email : @"";
-//            
-//            [BZRProjectFacade signUpWithFacebookWithUserFirstName:weakSelf.temporaryProfile.firstName andUserLastName:weakSelf.temporaryProfile.lastName andEmail:email andDateOfBirth:[[BZRCommonDateFormatter commonDateFormatter] stringFromDate:weakSelf.temporaryProfile.dateOfBirth] andGender:[weakSelf.temporaryProfile.genderString substringToIndex:1] onSuccess:^(BOOL isSuccess) {
-//                
-//                [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-//                
-//                //detect success login with facebook
-//                [BZRFacebookService setLoginSuccess:YES];
-//                //go to dashboard
-//                BZRDashboardController *controller = [weakSelf.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRDashboardController class])];
-//                controller.updateNeeded = YES;
-//                [weakSelf.navigationController pushViewController:controller animated:YES];
-//                
-//            } onFailure:^(NSError *error, BOOL isCanceled) {
-//                [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-//                
-//                BOOL isFacebookEmailAlreadyRegistered = [BZRErrorHandler isFacebookEmailAlreadyExistFromError:error];
-//                
-//                if (isFacebookEmailAlreadyRegistered) {
-//                    [BZRAlertFacade showEmailAlreadyRegisteredAlertWithError:error forController:weakSelf andCompletion:^{
-//                        BZRForgotPasswordController *controller = [weakSelf.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRForgotPasswordController class])];
-//                        controller.userName = weakSelf.userNameField.text;
-//                        BZRBaseNavigationController *navController = [[BZRBaseNavigationController alloc] initWithRootViewController:controller];
-//                        [weakSelf presentViewController:navController animated:YES completion:nil];
-//                    }];
-//                } else {
-//                    [BZRAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
-//                }
-//            }];
-//            
-//        } onFailure:^(NSError *error) {
-//            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-//            
-//        }];
-//    } onFailure:^(NSError *error, BOOL isCanceled) {
-//        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
-//        
-//    }];
-
-    [self moveToShareCodeControllerFromFacebookFlow:YES];
+    WEAK_SELF;
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [BZRFacebookService authorizeWithFacebookFromController:self onSuccess:^(BOOL isSuccess) {
+        
+        [BZRFacebookService getFacebookUserProfileOnSuccess:^(BZRFacebookProfile *facebookProfile) {
+            
+            NSString *email = facebookProfile.email ? facebookProfile.email : @"";
+            
+            [BZRProjectFacade signUpWithFacebookWithUserFirstName:weakSelf.temporaryProfile.firstName andUserLastName:weakSelf.temporaryProfile.lastName andEmail:email andDateOfBirth:[[BZRCommonDateFormatter commonDateFormatter] stringFromDate:weakSelf.temporaryProfile.dateOfBirth] andGender:[weakSelf.temporaryProfile.genderString substringToIndex:1] andShareCode:weakSelf.temporaryProfile.shareCode onSuccess:^(BOOL isSuccess) {
+                
+                [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+                
+                //detect success login with facebook
+                [BZRFacebookService setLoginSuccess:YES];
+                //go to dashboard
+                BZRDashboardController *controller = [weakSelf.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRDashboardController class])];
+                controller.updateNeeded = YES;
+                [weakSelf.navigationController pushViewController:controller animated:YES];
+                
+            } onFailure:^(NSError *error, BOOL isCanceled) {
+                [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+                
+                BOOL isFacebookEmailAlreadyRegistered = [BZRErrorHandler isFacebookEmailAlreadyExistFromError:error];
+                
+                if (isFacebookEmailAlreadyRegistered) {
+                    [BZRAlertFacade showEmailAlreadyRegisteredAlertWithError:error forController:weakSelf andCompletion:^{
+                        BZRForgotPasswordController *controller = [weakSelf.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRForgotPasswordController class])];
+                        controller.userName = weakSelf.userNameField.text;
+                        BZRBaseNavigationController *navController = [[BZRBaseNavigationController alloc] initWithRootViewController:controller];
+                        [weakSelf presentViewController:navController animated:YES completion:nil];
+                    }];
+                } else {
+                    [BZRAlertFacade showFailureResponseAlertWithError:error forController:weakSelf andCompletion:nil];
+                }
+            }];
+            
+        } onFailure:^(NSError *error) {
+            [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+            
+        }];
+    } onFailure:^(NSError *error, BOOL isCanceled) {
+        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
+        
+    }];
+    /*
+     Commented because of version 1.0.1
+     
+     [self moveToShareCodeControllerFromFacebookFlow:YES];
+     */
 }
 
 /**

@@ -321,18 +321,18 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
     WEAK_SELF;
     [self.progressView recalculateProgressWithCurrentPoints:self.currentProfile.pointsAmount
                                              requiredPoints:self.currentProfile.pointsRequired
-                                             withCompletion:^(BOOL maxPointsEarned) {
-                                                 
-                                                 weakSelf.seeAvailableGiftCardsButton.hidden = maxPointsEarned;
-                                                 weakSelf.redeemPointsButton.hidden = !maxPointsEarned;
-                                                 
-                                                 [weakSelf updateSurveyCongratulationsLabelWithMaxPointsEarned:maxPointsEarned];
-                                             }];
+                                            allowRedemption:self.currentProfile.allowRedemption withCompletion:^(BOOL maxPointsEarned) {
+                                                
+                                                weakSelf.seeAvailableGiftCardsButton.hidden = weakSelf.currentProfile.allowRedemption || maxPointsEarned;
+                                                weakSelf.redeemPointsButton.hidden = !weakSelf.currentProfile.allowRedemption && !maxPointsEarned;
+                                                [weakSelf updateSurveyCongratulationsLabelIfAllowRedemption:weakSelf.currentProfile.allowRedemption orMaxPointEarned:maxPointsEarned];
+                                            }];
+
 }
 
-- (void)updateSurveyCongratulationsLabelWithMaxPointsEarned:(BOOL)maxPointsEarned
+- (void)updateSurveyCongratulationsLabelIfAllowRedemption:(BOOL)allowRedemption orMaxPointEarned:(BOOL)maxPointsEarned
 {
-    self.congratulationsLabel.text = maxPointsEarned ? LOCALIZED(@"Congrats! You have earned enough points to redeem for a gift card!") : LOCALIZED(@"Congrats! You are getting close to receiving your first gift card!");
+    self.congratulationsLabel.text = allowRedemption || maxPointsEarned  ? LOCALIZED(@"Congrats! You have earned enough points to redeem for a gift card!") : LOCALIZED(@"Congrats! You are getting close to receiving your first gift card!");
 }
 
 /**

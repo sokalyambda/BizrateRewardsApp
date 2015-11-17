@@ -23,6 +23,7 @@
 @property (assign, nonatomic) long long userId;
 
 @property (strong, nonatomic) NSURL *redemptionURL;
+@property (assign, nonatomic) BOOL allowRedemption;
 
 @property (strong, nonatomic) NSString *genderString;
 

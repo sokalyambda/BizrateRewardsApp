@@ -68,7 +68,7 @@ static NSString *const kOBStore = @"Store";
     }
     
     if (isGeolocationStatusDetermine) {
-       [self checkForPermissionsChangingWithGeolocationEnabled:isGeolocationEnable];
+        [self checkForPermissionsChangingWithGeolocationEnabled:isGeolocationEnable];
         
         if (isGeolocationEnable) {
             
@@ -96,7 +96,7 @@ static NSString *const kOBStore = @"Store";
     _locationManager.delegate           = self;
     _locationManager.distanceFilter     = kCLDistanceFilterNone;
     _locationManager.desiredAccuracy    = kCLLocationAccuracyKilometer;
-
+    
     [_locationManager startUpdatingLocation];
 }
 
@@ -136,19 +136,20 @@ static NSString *const kOBStore = @"Store";
         
         /*
          Commented because of version 1.0.1
-        */
-        if ([BZRProjectFacade isUserSessionValid] && [BZRStorageManager sharedStorage].deviceToken.length) {
-            //update notifications and geolocation settings
-            [BZRProjectFacade sendDeviceDataOnSuccess:^(BOOL isSuccess) {
-                
-                DLog(@"geolocation access have been updated");
-                
-            } onFailure:^(NSError *error, BOOL isCanceled) {
-                
-            }];
-        }
          
+         if ([BZRProjectFacade isUserSessionValid] && [BZRStorageManager sharedStorage].deviceToken.length) {
+         //update notifications and geolocation settings
+         [BZRProjectFacade sendDeviceDataOnSuccess:^(BOOL isSuccess) {
+         
+         DLog(@"geolocation access have been updated");
+         
+         } onFailure:^(NSError *error, BOOL isCanceled) {
+         
+         }];
+         }
+         */
     }
+    
 }
 
 #pragma mark - Private methods

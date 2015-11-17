@@ -176,21 +176,21 @@ static NSString *const kDefaultLatestSurveyURLString = @"com.bizraterewards://su
         //track mixpanel event
         [BZRMixpanelService trackEventWithType:BZRMixpanelEventPushNotificationPermission
                                  propertyValue:isPushesEnabled? @"YES" : @"NO"];
-
+        
         /*
          Commented because of version 1.0.1
-        */
-        
-        if ([BZRProjectFacade isUserSessionValid] && !isPushesEnabled && [BZRStorageManager sharedStorage].deviceToken.length) {
-            //update notifications and geolocation settings
-            [BZRProjectFacade sendDeviceDataOnSuccess:^(BOOL isSuccess) {
-                
-                DLog(@"notifications access have been updated");
-                
-            } onFailure:^(NSError *error, BOOL isCanceled) {
-                
-            }];
-        }
+         
+         if ([BZRProjectFacade isUserSessionValid] && !isPushesEnabled && [BZRStorageManager sharedStorage].deviceToken.length) {
+         //update notifications and geolocation settings
+         [BZRProjectFacade sendDeviceDataOnSuccess:^(BOOL isSuccess) {
+         
+         DLog(@"notifications access have been updated");
+         
+         } onFailure:^(NSError *error, BOOL isCanceled) {
+         
+         }];
+         }
+         */
     }
     return isPermissionsChanged;
 }
