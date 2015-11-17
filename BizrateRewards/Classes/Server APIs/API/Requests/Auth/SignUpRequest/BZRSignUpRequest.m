@@ -24,6 +24,8 @@ static NSString *const kIsTestUser  = @"is_test_user";
 static NSString *const kFacebookParams = @"facebook";
 static NSString *const kAccessToken = @"access_token";
 
+static NSString *const kShareCode   = @"share_code";
+
 static NSString *const requestAction = @"user/create";
 
 @implementation BZRSignUpRequest
@@ -37,6 +39,7 @@ static NSString *const requestAction = @"user/create";
                           andPassword:(NSString *)password
                        andDateOfBirth:(NSString *)birthDate
                             andGender:(NSString *)gender
+                         andShareCode:(NSString *)shareCode;
 {
     self = [super init];
     if (self) {
@@ -48,12 +51,16 @@ static NSString *const requestAction = @"user/create";
         _userAuthorizationRequired = NO;
         _applicationAuthorizationRequired = YES;
         
-        NSDictionary *parameters = @{kFirstName: firstName,
+        NSMutableDictionary *parameters = [@{kFirstName: firstName,
                                      kLastName: lastName,
                                      kEmail: email,
                                      kPassword: password,
                                      kDateOfBirth: birthDate,
-                                     kGender: gender};
+                                             kGender: gender, kIsTestUser :
+                                                 @(YES)} mutableCopy];
+        if (shareCode) {
+            [parameters setObject:shareCode forKey:kShareCode];
+        }
         [self setParametersWithParamsData:parameters];
     }
     return self;
@@ -65,6 +72,7 @@ static NSString *const requestAction = @"user/create";
                              andEmail:(NSString *)email
                        andDateOfBirth:(NSString *)birthDate
                             andGender:(NSString *)gender
+                         andShareCode:(NSString *)shareCode;
 {
     self = [super init];
     if (self) {
@@ -83,9 +91,12 @@ static NSString *const requestAction = @"user/create";
                                      kEmail: email,
                                      kDateOfBirth: birthDate,
                                      kGender: gender
-                                            } mutableCopy];
+                                             }mutableCopy];
         if (fbAccessTokenString) {
             [parameters setObject:@{kAccessToken: fbAccessTokenString} forKey:kFacebookParams];
+        }
+        if (shareCode) {
+            [parameters setObject:shareCode forKey:kShareCode];
         }
         [self setParametersWithParamsData:parameters];
     }

@@ -182,13 +182,15 @@ static NSString *_baseURLString;
                                      andPassword:(NSString *)password
                                   andDateOfBirth:(NSString *)birthDate
                                        andGender:(NSString *)gender
+                                    andShareCode:(NSString *)shareCode
+
                                          success:(void (^)(BOOL success))success
                                          failure:(void (^)(NSError *error, BOOL isCanceled))failure
 {
     __block BZRNetworkOperation* operation;
     
     [self validateSessionWithType:BZRSessionTypeApplication onSuccess:^(BOOL isSuccess) {
-        BZRSignUpRequest *request = [[BZRSignUpRequest alloc] initWithUserFirstName:firstName andUserLastName:lastName andEmail:email andPassword:password andDateOfBirth:birthDate andGender:gender];
+        BZRSignUpRequest *request = [[BZRSignUpRequest alloc] initWithUserFirstName:firstName andUserLastName:lastName andEmail:email andPassword:password andDateOfBirth:birthDate andGender:gender andShareCode:shareCode];
         
         operation = [[self  HTTPClient] createOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
             
@@ -670,6 +672,8 @@ static NSString *_baseURLString;
                                                     andEmail:(NSString *)email
                                               andDateOfBirth:(NSString *)dateOfBirth
                                                    andGender:(NSString *)gender
+                                                andShareCode:(NSString *)shareCode
+
                                                    onSuccess:(void (^)(BOOL isSuccess))success
                                                    onFailure:(void (^)(NSError *error, BOOL isCanceled))failure
 {
@@ -681,7 +685,7 @@ static NSString *_baseURLString;
         [BZRMixpanelService trackEventWithType:BZRMixpanelEventRegistrationSuccessful
                                  propertyValue:kAuthTypeFacebook];
         
-        BZRSignUpRequest *request = [[BZRSignUpRequest alloc] initWithUserFirstName:firstName andUserLastName:lastName andEmail:email andDateOfBirth:dateOfBirth andGender:gender];
+        BZRSignUpRequest *request = [[BZRSignUpRequest alloc] initWithUserFirstName:firstName andUserLastName:lastName andEmail:email andDateOfBirth:dateOfBirth andGender:gender andShareCode:shareCode];
         
         operation = [[self  HTTPClient] createOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
             

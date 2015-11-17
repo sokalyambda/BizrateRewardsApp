@@ -46,6 +46,13 @@
     return [filteredArray firstObject];
 }
 
++ (BZREnvironment *)getEnvironmentByApiEndpoint:(NSString *)apiEndpoint
+{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"apiEndpointURLString == %@", apiEndpoint];
+    NSArray *filteredArray = [self.coreDataManager getEntities:NSStringFromClass([BZREnvironment class]) byPredicate:predicate];
+    return [filteredArray firstObject];
+}
+
 + (BZREnvironment *)getCurrentEnvironment
 {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isCurrent == YES"];

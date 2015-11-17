@@ -251,7 +251,7 @@ static NSInteger const kLocationEventsCount = 10.f;
     WEAK_SELF;
     [BZRProjectFacade setBaseURLString:self.apiEndpointField.text];
     
-    [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [BZRProjectFacade initHTTPClientWithRootPath:[BZRProjectFacade baseURLString] withCompletion:^{
         
         [BZRProjectFacade getAPIInfoOnSuccess:^(BOOL success) {
@@ -262,15 +262,22 @@ static NSInteger const kLocationEventsCount = 10.f;
                 //logout..
                 if ((![weakSelf.currentEnvironment isEqual:[BZRCoreDataStorage getCurrentEnvironment]])) {
                     
+                    //if user choose environment and change apiEndpointURL on url of another existing environment
+                    if (![weakSelf.currentEnvironment.apiEndpointURLString isEqualToString:weakSelf.apiEndpointField.text] && [BZRCoreDataStorage getEnvironmentByApiEndpoint:weakSelf.apiEndpointField.text]) {
+                        
+                        self.currentEnvironment = [BZRCoreDataStorage getEnvironmentByApiEndpoint:weakSelf.apiEndpointField.text];
+                    }
+                    
                     [BZRCoreDataStorage getCurrentEnvironment].isCurrent = @(NO);
                     //save current environment
                     weakSelf.currentEnvironment.isCurrent = @(YES);
                     [BZRCoreDataStorage saveContext];
                     
                     [BZRMixpanelService resetMixpanel];
-
+                    
                     [BZRRedirectionHelper performSignOut];
                     [weakSelf dismissViewControllerAnimated:YES completion:nil];
+                    
                 }
             }];
         } onFailure:^(NSError *error, BOOL isCanceled) {

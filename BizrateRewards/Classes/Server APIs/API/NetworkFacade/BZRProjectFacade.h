@@ -50,6 +50,7 @@
                                     andPassword:(NSString *)password
                                  andDateOfBirth:(NSString *)birthDate
                                       andGender:(NSString *)gender
+                                   andShareCode:(NSString *)shareCode
                                         success:(void (^)(BOOL success))success
                                         failure:(void (^)(NSError *error, BOOL isCanceled))failure;
 
@@ -102,6 +103,7 @@
                                                     andEmail:(NSString *)email
                                               andDateOfBirth:(NSString *)dateOfBirth
                                                    andGender:(NSString *)gender
+                                                andShareCode:(NSString *)shareCode
                                                    onSuccess:(void (^)(BOOL isSuccess))success
                                                    onFailure:(void (^)(NSError *error, BOOL isCanceled))failure;
 

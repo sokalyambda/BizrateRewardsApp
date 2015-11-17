@@ -48,7 +48,7 @@
     self.eventTypeLabel.text = locationEvent.eventType == BZRLocationEventTypeEntry ? LOCALIZED(@"ENTRY") : LOCALIZED(@"EXIT");
     
     if (locationEvent.locationId != 0) {
-        self.locationLabel.text = [NSString stringWithFormat:@"%d", locationEvent.locationId];
+        self.locationLabel.text = [NSString stringWithFormat:@"%ld", (long)locationEvent.locationId];
     } else if (locationEvent.locationLink.length) {
         self.locationLabel.text = locationEvent.locationLink;
     } else {

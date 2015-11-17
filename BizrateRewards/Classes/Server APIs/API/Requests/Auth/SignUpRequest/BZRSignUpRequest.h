@@ -20,13 +20,15 @@
                              andEmail:(NSString *)email
                           andPassword:(NSString *)password
                        andDateOfBirth:(NSString *)birthDate
-                            andGender:(NSString *)gender;
+                            andGender:(NSString *)gender
+                         andShareCode:(NSString *)shareCode;
 
 //Facebook
 - (instancetype)initWithUserFirstName:(NSString *)firstName
                       andUserLastName:(NSString *)lastName
                              andEmail:(NSString *)email
                        andDateOfBirth:(NSString *)birthDate
-                            andGender:(NSString *)gender;
+                            andGender:(NSString *)gender
+                         andShareCode:(NSString *)shareCode;
 
 @end

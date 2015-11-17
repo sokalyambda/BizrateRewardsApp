@@ -3099,7 +3099,7 @@
                                             <action selector="saveAPIEndpointClick:" destination="k4t-FB-a2N" eventType="touchUpInside" id="rJJ-to-zWZ"/>
                                         </connections>
                                     </button>
-                                    <label hidden="YES" opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Environment:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zff-NW-KOb">
+                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Environment:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zff-NW-KOb">
                                         <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                         <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -3108,7 +3108,7 @@
                                             <outletCollection property="gestureRecognizers" destination="18b-JL-4FX" appends="YES" id="45R-qo-7Mp"/>
                                         </connections>
                                     </label>
-                                    <label hidden="YES" opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rCx-5B-Qt8">
+                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rCx-5B-Qt8">
                                         <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="150" id="bft-bZ-90Q">
@@ -3160,7 +3160,6 @@
                                     <constraint firstItem="Zff-NW-KOb" firstAttribute="top" secondItem="an2-dv-NUC" secondAttribute="bottom" constant="8" id="jlT-rv-rAN"/>
                                     <constraint firstItem="00I-GY-TzU" firstAttribute="leading" secondItem="an2-dv-NUC" secondAttribute="leading" id="kwf-bs-CPj"/>
                                     <constraint firstItem="4XB-E4-Esc" firstAttribute="top" secondItem="70m-gP-6C0" secondAttribute="bottom" constant="8" id="r0M-k7-Ivs"/>
-                                    <constraint firstItem="70m-gP-6C0" firstAttribute="top" secondItem="an2-dv-NUC" secondAttribute="bottom" constant="8" id="t1a-K1-fY7"/>
                                     <constraint firstItem="rCx-5B-Qt8" firstAttribute="bottom" secondItem="Zff-NW-KOb" secondAttribute="bottom" id="wYg-QI-r1B"/>
                                     <constraint firstItem="Zff-NW-KOb" firstAttribute="leading" secondItem="an2-dv-NUC" secondAttribute="leading" id="xdB-nI-FfT"/>
                                 </constraints>
@@ -3191,7 +3190,6 @@
                                         <exclude reference="XUn-aX-W7v"/>
                                         <exclude reference="r0M-k7-Ivs"/>
                                         <exclude reference="8Lo-E3-typ"/>
-                                        <exclude reference="t1a-K1-fY7"/>
                                         <exclude reference="Im8-ZB-ilV"/>
                                         <exclude reference="MJI-ok-h9i"/>
                                         <exclude reference="hVe-Me-WVf"/>
@@ -3234,7 +3232,6 @@
                                         <include reference="XUn-aX-W7v"/>
                                         <include reference="r0M-k7-Ivs"/>
                                         <include reference="8Lo-E3-typ"/>
-                                        <include reference="t1a-K1-fY7"/>
                                         <include reference="Im8-ZB-ilV"/>
                                         <include reference="MJI-ok-h9i"/>
                                         <include reference="hVe-Me-WVf"/>
@@ -3323,63 +3320,42 @@
                                                     <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="15"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="149" y="8" width="163" height="20"/>
-                                                    </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fR7-rj-x7z" userLabel="Event Type Value">
                                                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="15"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="149" y="64" width="163" height="20"/>
-                                                    </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FTc-f8-GpL" userLabel="Latitude Value">
                                                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="15"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="149" y="92" width="163" height="20"/>
-                                                    </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sTd-WO-a0Z" userLabel="Longitude Value">
                                                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="15"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="149" y="120" width="163" height="20"/>
-                                                    </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EJJ-jr-bQe" userLabel="Eyc Customer Id Value">
                                                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="15"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="149" y="148" width="163" height="20"/>
-                                                    </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4av-Yy-xCt" userLabel="Created Value">
                                                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="15"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="149" y="176" width="163" height="20"/>
-                                                    </variation>
                                                 </label>
                                                 <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ucg-bm-glW" userLabel="Location Value">
                                                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="15"/>
                                                     <color key="textColor" red="0.08235294118" green="0.57647058819999997" blue="0.80392156859999997" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="149" y="36" width="163" height="20"/>
-                                                    </variation>
                                                 </label>
                                             </subviews>
                                             <constraints>

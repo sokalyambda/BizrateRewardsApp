@@ -17,6 +17,7 @@
                    andAPIEndpointURLString:(NSString *)apiEndpoint
                           andMixpanelToken:(NSString *)mixpanelToken;
 + (BZREnvironment *)getEnvironmentByName:(NSString *)envName;
++ (BZREnvironment *)getEnvironmentByApiEndpoint:(NSString *)apiEndpoint;
 + (BZREnvironment *)getCurrentEnvironment;
 + (NSArray *)getAllEnvironments;
 

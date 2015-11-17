@@ -71,7 +71,7 @@
     WEAK_SELF;
     [BZRValidator validateShareCodeField:shareCodeField onSuccess:^{
         
-        //TODO: Send request with Share Code
+        weakSelf.temporaryProfile.shareCode = shareCodeField.text;
         [weakSelf moveToNextControllerOrPerformFacebookAuthorization];
         
     } onFailure:^(NSMutableDictionary *errorDict) {
@@ -117,7 +117,7 @@
             
             NSString *email = facebookProfile.email ? facebookProfile.email : @"";
             
-            [BZRProjectFacade signUpWithFacebookWithUserFirstName:weakSelf.temporaryProfile.firstName andUserLastName:weakSelf.temporaryProfile.lastName andEmail:email andDateOfBirth:[[BZRCommonDateFormatter commonDateFormatter] stringFromDate:weakSelf.temporaryProfile.dateOfBirth] andGender:[weakSelf.temporaryProfile.genderString substringToIndex:1] onSuccess:^(BOOL isSuccess) {
+            [BZRProjectFacade signUpWithFacebookWithUserFirstName:weakSelf.temporaryProfile.firstName andUserLastName:weakSelf.temporaryProfile.lastName andEmail:email andDateOfBirth:[[BZRCommonDateFormatter commonDateFormatter] stringFromDate:weakSelf.temporaryProfile.dateOfBirth] andGender:[weakSelf.temporaryProfile.genderString substringToIndex:1] andShareCode:weakSelf.temporaryProfile.shareCode onSuccess:^(BOOL isSuccess) {
                 
                 [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
                 

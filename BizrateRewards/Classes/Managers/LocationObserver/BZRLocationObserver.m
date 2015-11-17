@@ -136,7 +136,7 @@ static NSString *const kOBStore = @"Store";
         
         /*
          Commented because of version 1.0.1
-         
+        */
         if ([BZRProjectFacade isUserSessionValid] && [BZRStorageManager sharedStorage].deviceToken.length) {
             //update notifications and geolocation settings
             [BZRProjectFacade sendDeviceDataOnSuccess:^(BOOL isSuccess) {
@@ -147,7 +147,7 @@ static NSString *const kOBStore = @"Store";
                 
             }];
         }
-         */
+         
     }
 }
 

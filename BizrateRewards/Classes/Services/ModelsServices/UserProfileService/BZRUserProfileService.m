@@ -24,6 +24,7 @@ static NSString *const kPointsRequired          = @"points_next_redemption";
 static NSString *const kRedemptionURL           = @"redemption_url";
 
 static NSString *const kUserId                  = @"userId";
+static NSString *const kShareCode               = @"share_code";
 
 static NSString *const kIsTestUser              = @"is_test_user";
 
@@ -46,6 +47,7 @@ static NSString *const kIsTestUser              = @"is_test_user";
     userProfile.redemptionURL  = [NSURL URLWithString:response[kRedemptionURL]];
     
     userProfile.userId         = [response[kUserId] longLongValue];
+    userProfile.shareCode      = response[kShareCode];
     
     userProfile.genderString = response[kGender];
     

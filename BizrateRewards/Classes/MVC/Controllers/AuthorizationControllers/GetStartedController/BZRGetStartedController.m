@@ -130,7 +130,7 @@ static CGFloat const kCurrentNumberOfRows = 4.f;
                                    [weakSelf createNewTemporaryProfile];
                                    
                                    [MBProgressHUD showHUDAddedTo:weakSelf.view animated:YES];
-                                   [BZRProjectFacade signUpWithFacebookWithUserFirstName:weakSelf.temporaryProfile.firstName andUserLastName:weakSelf.temporaryProfile.lastName andEmail:weakSelf.temporaryProfile.email andDateOfBirth:[[BZRCommonDateFormatter commonDateFormatter] stringFromDate:weakSelf.temporaryProfile.dateOfBirth] andGender:[weakSelf.temporaryProfile.genderString substringToIndex:1] onSuccess:^(BOOL isSuccess) {
+                                   [BZRProjectFacade signUpWithFacebookWithUserFirstName:weakSelf.temporaryProfile.firstName andUserLastName:weakSelf.temporaryProfile.lastName andEmail:weakSelf.temporaryProfile.email andDateOfBirth:[[BZRCommonDateFormatter commonDateFormatter] stringFromDate:weakSelf.temporaryProfile.dateOfBirth] andGender:[weakSelf.temporaryProfile.genderString substringToIndex:1] andShareCode:self.temporaryProfile.shareCode onSuccess:^(BOOL isSuccess) {
                                        
                                        [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
                                        
