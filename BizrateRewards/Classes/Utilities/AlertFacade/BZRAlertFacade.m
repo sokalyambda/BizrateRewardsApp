@@ -162,8 +162,12 @@ NSString *const kErrorAlertMessage = @"AlertMessage";
 + (void)showCurrentAlertController:(UIAlertController *)alertController forController:(UIViewController *)currentController
 {
     if (!currentController) {
-        AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-        BZRBaseNavigationController *navigationController = (BZRBaseNavigationController *)appDelegate.window.rootViewController;
+        
+        UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
+        if (!window)
+            window = [[UIApplication sharedApplication] keyWindow];
+        
+        BZRBaseNavigationController *navigationController = (BZRBaseNavigationController *)window.rootViewController;
         UIViewController *lastPresentedViewController = ((UIViewController *)navigationController.viewControllers.lastObject).presentedViewController;
         
         if (lastPresentedViewController) {
@@ -171,8 +175,13 @@ NSString *const kErrorAlertMessage = @"AlertMessage";
             if ([lastPresentedViewController.presentedViewController isKindOfClass:[UIAlertController class]] || [lastPresentedViewController isKindOfClass:[UIAlertController class]]) {
                 return;
             }
-            
-            [lastPresentedViewController presentViewController:alertController animated:YES completion:nil];
+            // for DiagnosticViewController that was not in the window hierarchy
+            if (lastPresentedViewController.childViewControllers.lastObject.presentedViewController) {
+                [lastPresentedViewController.childViewControllers.lastObject.presentedViewController presentViewController:alertController animated:YES completion:nil];
+            } else {
+                [lastPresentedViewController presentViewController:alertController animated:YES completion:nil];
+            }
+
         } else {
             
             if ([navigationController.visibleViewController isKindOfClass:[UIAlertController class]]) {

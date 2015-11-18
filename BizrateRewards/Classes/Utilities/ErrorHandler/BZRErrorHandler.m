@@ -103,7 +103,7 @@ static NSString *_errorAlertTitle = nil;
     
     switch (error.code) {
         case NSURLErrorTimedOut:
-//        case NSURLErrorCannotFindHost:
+        case NSURLErrorCannotFindHost:
         case NSURLErrorCannotConnectToHost:
         case NSURLErrorNetworkConnectionLost:
         case NSURLErrorDNSLookupFailed:

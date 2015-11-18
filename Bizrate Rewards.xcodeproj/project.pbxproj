@@ -2614,7 +2614,12 @@
 				TargetAttributes = {
 					58A0B20E1B3854CF003C100C = {
 						CreatedOnToolsVersion = 6.3.1;
-						DevelopmentTeam = 7JSQETKKF7;
+						DevelopmentTeam = 27U87D64G8;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					58A0B2271B3854CF003C100C = {
 						CreatedOnToolsVersion = 6.3.1;
