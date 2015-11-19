@@ -258,28 +258,34 @@ static NSInteger const kLocationEventsCount = 10.f;
             
             [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
             
-            [BZRAlertFacade showAlertWithMessage:LOCALIZED(@"API endpoint has been saved.") forController:weakSelf withCompletion:^{
-                //logout..
-                if ((![weakSelf.currentEnvironment isEqual:[BZRCoreDataStorage getCurrentEnvironment]])) {
+            if ((![weakSelf.currentEnvironment isEqual:[BZRCoreDataStorage getCurrentEnvironment]])) {
+                
+                if (![weakSelf.apiEndpointField.text isEqualToString:weakSelf.currentEnvironment.apiEndpointURLString]) {
                     
-                    //if user choose environment and change apiEndpointURL on url of another existing environment
-                    if (![weakSelf.currentEnvironment.apiEndpointURLString isEqualToString:weakSelf.apiEndpointField.text] && [BZRCoreDataStorage getEnvironmentByApiEndpoint:weakSelf.apiEndpointField.text]) {
-                        
-                        self.currentEnvironment = [BZRCoreDataStorage getEnvironmentByApiEndpoint:weakSelf.apiEndpointField.text];
+                    if ([BZRCoreDataStorage getEnvironmentByApiEndpoint:weakSelf.apiEndpointField.text]) {
+                        weakSelf.currentEnvironment = [BZRCoreDataStorage getEnvironmentByApiEndpoint:weakSelf.apiEndpointField.text];
+                    } else {
+                        [BZRCoreDataStorage getEnvironmentByName:LOCALIZED(@"Development")].apiEndpointURLString = weakSelf.apiEndpointField.text;
+                        weakSelf.currentEnvironment = [BZRCoreDataStorage getEnvironmentByName:LOCALIZED(@"Development")];
                     }
+                }
+            
+                [BZRCoreDataStorage getCurrentEnvironment].isCurrent = @(NO);
+                //save current environment
+                weakSelf.currentEnvironment.isCurrent = @(YES);
+                
+                [BZRCoreDataStorage saveContext];
+                [BZRMixpanelService resetMixpanel];
+                
+                [BZRAlertFacade showAlertWithMessage:LOCALIZED(@"API endpoint has been saved.") forController:weakSelf withCompletion:^{
                     
-                    [BZRCoreDataStorage getCurrentEnvironment].isCurrent = @(NO);
-                    //save current environment
-                    weakSelf.currentEnvironment.isCurrent = @(YES);
-                    [BZRCoreDataStorage saveContext];
-                    
-                    [BZRMixpanelService resetMixpanel];
-                    
+                    //logout..
                     [BZRRedirectionHelper performSignOut];
                     [weakSelf dismissViewControllerAnimated:YES completion:nil];
-                    
-                }
-            }];
+                }];
+                
+            }
+
         } onFailure:^(NSError *error, BOOL isCanceled) {
             [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
             

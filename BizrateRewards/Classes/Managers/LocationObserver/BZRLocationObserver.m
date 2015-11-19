@@ -134,22 +134,17 @@ static NSString *const kOBStore = @"Store";
         [BZRMixpanelService trackEventWithType:BZRMixpanelEventLocationPermission
                                  propertyValue:isGeolocationEnable? @"YES" : @"NO"];
         
-        /*
-         Commented because of version 1.0.1
-         
-         if ([BZRProjectFacade isUserSessionValid] && [BZRStorageManager sharedStorage].deviceToken.length) {
-         //update notifications and geolocation settings
-         [BZRProjectFacade sendDeviceDataOnSuccess:^(BOOL isSuccess) {
-         
-         DLog(@"geolocation access have been updated");
-         
-         } onFailure:^(NSError *error, BOOL isCanceled) {
-         
-         }];
-         }
-         */
+        if ([BZRProjectFacade isUserSessionValid] && [BZRStorageManager sharedStorage].deviceToken.length) {
+            //update notifications and geolocation settings
+            [BZRProjectFacade sendDeviceDataOnSuccess:^(BOOL isSuccess) {
+                
+                DLog(@"geolocation access have been updated");
+                
+            } onFailure:^(NSError *error, BOOL isCanceled) {
+                
+            }];
+        }
     }
-    
 }
 
 #pragma mark - Private methods

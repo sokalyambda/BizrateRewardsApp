@@ -151,8 +151,9 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
     [BZRProjectFacade getCurrentUserOnSuccess:^(BOOL isSuccess) {
         [refreshControl endRefreshing];
         
-        //update points
+        //update points & progress view
         [weakSelf updatePoints];
+        [weakSelf updateProgressView];
 
     } onFailure:^(NSError *error, BOOL isCanceled) {
         [refreshControl endRefreshing];
