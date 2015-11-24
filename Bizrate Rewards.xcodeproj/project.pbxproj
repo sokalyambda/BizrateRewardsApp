@@ -139,7 +139,7 @@
 		58B05A5D1B7A2DDF0017CCE8 /* BZRProfileChangesObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B05A5C1B7A2DDF0017CCE8 /* BZRProfileChangesObserver.m */; };
 		58B18C8C1B790D7200F13F53 /* BZRGetFeaturedGiftcards.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B18C8B1B790D7200F13F53 /* BZRGetFeaturedGiftcards.m */; };
 		58B38A491B7349AB00EDB024 /* BZRFailedOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B38A481B7349AB00EDB024 /* BZRFailedOperationManager.m */; };
-		58B3B50A1BA4278F00264FFB /* libOfferBeamSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58B3B5081BA4278F00264FFB /* libOfferBeamSDK.a */; };
+		58B3B50A1BA4278F00264FFB /* libOfferBeamSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58B3B5081BA4278F00264FFB /* libOfferBeamSDK.a */; settings = {ATTRIBUTES = (Required, ); }; };
 		58B3B50B1BA4278F00264FFB /* ModelOfferBeamSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 58B3B5091BA4278F00264FFB /* ModelOfferBeamSDK.bundle */; };
 		58B52A3B1B6A2874002D2529 /* UIImage+Base64Encoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B52A3A1B6A2874002D2529 /* UIImage+Base64Encoding.m */; };
 		58B52A3F1B6A28D3002D2529 /* NSString+Base64Decoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 58B52A3E1B6A28D3002D2529 /* NSString+Base64Decoding.m */; };
@@ -1707,13 +1707,13 @@
 			name = UserProfile;
 			sourceTree = "<group>";
 		};
-		58A9FE8C1B53A4FB00DBE379 /* TermsAndConditionsHelper */ = {
+		58A9FE8C1B53A4FB00DBE379 /* RedirectionHelper */ = {
 			isa = PBXGroup;
 			children = (
 				58AA30461B7B803300363119 /* BZRRedirectionHelper.h */,
 				58AA30471B7B803300363119 /* BZRRedirectionHelper.m */,
 			);
-			name = TermsAndConditionsHelper;
+			name = RedirectionHelper;
 			sourceTree = "<group>";
 		};
 		58A9FE941B53CD4A00DBE379 /* ZeroInsetsSeparatorCell */ = {
@@ -2194,7 +2194,7 @@
 				58D1E5D21B66423700347208 /* FacebookService */,
 				84A6124B1B5E30E6005E01A7 /* MixpanelService */,
 				5878D3DA1B43F8D500A917D0 /* ReachabilityHelper */,
-				58A9FE8C1B53A4FB00DBE379 /* TermsAndConditionsHelper */,
+				58A9FE8C1B53A4FB00DBE379 /* RedirectionHelper */,
 				58DF1AE51B584CA800D28951 /* AssetsHelper */,
 				58F49FBF1B417F06002F93EE /* PushNotificationsService */,
 			);

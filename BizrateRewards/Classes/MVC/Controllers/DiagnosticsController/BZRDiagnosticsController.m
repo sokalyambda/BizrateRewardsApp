@@ -258,21 +258,13 @@ static NSInteger const kLocationEventsCount = 10.f;
             
             [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
             
-            if ((![weakSelf.currentEnvironment isEqual:[BZRCoreDataStorage getCurrentEnvironment]])) {
-                
-                if (![weakSelf.apiEndpointField.text isEqualToString:weakSelf.currentEnvironment.apiEndpointURLString]) {
-                    
-                    if ([BZRCoreDataStorage getEnvironmentByApiEndpoint:weakSelf.apiEndpointField.text]) {
-                        weakSelf.currentEnvironment = [BZRCoreDataStorage getEnvironmentByApiEndpoint:weakSelf.apiEndpointField.text];
-                    } else {
-                        [BZRCoreDataStorage getEnvironmentByName:LOCALIZED(@"Development")].apiEndpointURLString = weakSelf.apiEndpointField.text;
-                        weakSelf.currentEnvironment = [BZRCoreDataStorage getEnvironmentByName:LOCALIZED(@"Development")];
-                    }
-                }
-            
+            if ((![weakSelf.currentEnvironment isEqual:[BZRCoreDataStorage getCurrentEnvironment]] || ![weakSelf.currentEnvironment.apiEndpointURLString isEqualToString:weakSelf.apiEndpointField.text])) {
+
                 [BZRCoreDataStorage getCurrentEnvironment].isCurrent = @(NO);
                 //save current environment
                 weakSelf.currentEnvironment.isCurrent = @(YES);
+                //save url if it was changed
+                weakSelf.currentEnvironment.apiEndpointURLString = weakSelf.apiEndpointField.text;
                 
                 [BZRCoreDataStorage saveContext];
                 [BZRMixpanelService resetMixpanel];
@@ -285,7 +277,7 @@ static NSInteger const kLocationEventsCount = 10.f;
                 }];
                 
             }
-
+            
         } onFailure:^(NSError *error, BOOL isCanceled) {
             [MBProgressHUD hideAllHUDsForView:weakSelf.view animated:YES];
             

@@ -158,7 +158,7 @@ static NSString *const kFBAppSecret = @"530fa94f7370fc20a54cc392fbd83cf2";
 #pragma mark - Private Methods
 
 /**
- *  Store FB authorization data in user defaults
+ *  Store FB authorization data in Core Data
  */
 + (void)storeFacebookAuthData
 {
@@ -167,7 +167,7 @@ static NSString *const kFBAppSecret = @"530fa94f7370fc20a54cc392fbd83cf2";
 }
 
 /**
- *  Remove facebook data (access token and expiration date from User Defaults)
+ *  Remove facebook data (access token and expiration date from Core Data)
  */
 + (void)clearFacebookAuthData
 {
