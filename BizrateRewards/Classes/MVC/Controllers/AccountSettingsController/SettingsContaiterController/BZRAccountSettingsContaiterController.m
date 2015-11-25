@@ -12,6 +12,7 @@ typedef enum : NSUInteger {
     BZRSettingsCellPushNotification,
     BZRSettingsCellTermsOfService,
     BZRSettingsCellContactSupport,
+    BZRSettingsCellShareWithFriends,
     BZRSettingsCellDiagnostics,
     BZRSettingsCellDeleteSurveys
 } BZRSettingsCellType;
@@ -20,6 +21,7 @@ typedef enum : NSUInteger {
 #import "BZRDiagnosticsController.h"
 #import "BZRBaseNavigationController.h"
 #import "BZRAccountSettingsController.h"
+#import "BZRShareWithFriendController.h"
 
 #import "BZRPushNotifiactionService.h"
 #import "BZRLocationObserver.h"
@@ -129,10 +131,17 @@ static CGFloat const kMinBottomSpace = 8.f;
             }];
             break;
         }
+        case BZRSettingsCellShareWithFriends: {
+            BZRShareWithFriendController *controller = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRShareWithFriendController class])];
+            controller.shareCode = self.currentProfile.shareCode;
+            [self.navigationController pushViewController:controller animated:YES];
+            break;
+        }
         case BZRSettingsCellDiagnostics: {
             BZRDiagnosticsController *controller = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRDiagnosticsController class])];
             BZRBaseNavigationController *navigationController = [[BZRBaseNavigationController alloc] initWithRootViewController:controller];
             [self presentViewController:navigationController animated:YES completion:nil];
+            break;
         }
         case BZRSettingsCellDeleteSurveys: {
             
@@ -148,7 +157,7 @@ static CGFloat const kMinBottomSpace = 8.f;
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
-    
+ 
     if (([cell isEqual:self.diagnosticCell] || [cell isEqual:self.deleteSurveysCell]) && !self.currentProfile.isTestUser) {
         return 0.f;
     }
