@@ -141,4 +141,11 @@ static Mixpanel *_currentMixpanelInstance = nil;
     }
 }
 
++ (void)addPushDeviceToken:(NSData *)deviceToken
+{
+    Mixpanel *mixpanel = [self currentMixpanelInstance];
+    [mixpanel identify:mixpanel.distinctId];
+    [mixpanel.people addPushDeviceToken:deviceToken];
+}
+
 @end

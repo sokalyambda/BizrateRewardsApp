@@ -39,4 +39,6 @@ extern NSString *const kAuthTypeFacebook;
 + (void)setAliasForUser:(BZRUserProfile *)userProfile;
 + (void)setPeopleForUser:(BZRUserProfile *)userProfile;
 
++ (void)addPushDeviceToken:(NSData *)deviceToken;
+
 @end

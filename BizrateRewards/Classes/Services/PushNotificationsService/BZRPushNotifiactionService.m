@@ -125,9 +125,8 @@ static NSString *const kDefaultLatestSurveyURLString = @"com.bizraterewards://su
                 [BZRProjectFacade sendDeviceDataOnSuccess:^(BOOL isSuccess) {
                     
                     //send token to MixPanel
-                    Mixpanel *mixpanel = [BZRMixpanelService currentMixpanelInstance];
-                    [mixpanel identify:mixpanel.distinctId];
-                    [mixpanel.people addPushDeviceToken:tokenData];
+                    
+                    [BZRMixpanelService addPushDeviceToken:tokenData];
                     
                     DLog(@"Device token has been sent");
                     
