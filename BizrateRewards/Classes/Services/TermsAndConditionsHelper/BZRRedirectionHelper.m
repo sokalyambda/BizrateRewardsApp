@@ -21,6 +21,7 @@ typedef NS_ENUM(NSUInteger, BZRCustomURLPathType) {
 #import "BZRBaseNavigationController.h"
 #import "BZRSurveyViewController.h"
 #import "BZRDashboardController.h"
+#import "BZRFinishTutorialController.h"
 
 #import "BZRProjectFacade.h"
 #import "BZRSurveyService.h"
@@ -113,6 +114,48 @@ static NSString *const kResetPasswordPath = @"reset_password";
         }
         
         [rootController pushViewController:redirectedController animated:YES];
+    }
+}
+
++ (void)redirectAfterNotificationWithoutSurvey
+{
+    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+    BZRBaseNavigationController *rootController = (BZRBaseNavigationController *)appDelegate.window.rootViewController;
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:kStoryboardName bundle:[NSBundle mainBundle]];
+    
+    for (UIViewController *controller in rootController.viewControllers) {
+        [controller.presentedViewController dismissViewControllerAnimated:YES completion:nil];
+    }
+    
+    if ((([BZRProjectFacade isAutologinNeeded] || [BZRFacebookService isFacebookSessionValid]) && ![BZRProjectFacade isUserSessionValid]) || ![BZRProjectFacade isUserSessionValid]) {
+        
+        if (![rootController.topViewController isKindOfClass:[BZRFinishTutorialController class]]) {
+            for (BZRBaseViewController *controller in rootController.viewControllers) {
+                if ([controller isKindOfClass:[BZRFinishTutorialController class]]) {
+                    [rootController popToViewController:controller animated:YES];
+                    return;
+                } else {
+                    BZRFinishTutorialController *controller = [storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRFinishTutorialController class])];
+                    [rootController pushViewController:controller animated:YES];
+                    return;
+                }
+            }
+        }
+    }
+
+    if (![rootController.topViewController isKindOfClass:[BZRDashboardController class]]) {
+        for (BZRBaseViewController *controller in rootController.viewControllers) {
+            if ([controller isKindOfClass:[BZRDashboardController class]]) {
+                [rootController popToViewController:controller animated:YES];
+                return;
+            } else {
+               
+                BZRDashboardController *controller = [storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRDashboardController class])];
+                controller.updateNeeded = YES;
+                [rootController pushViewController:controller animated:YES];
+                return;
+            }
+        }
     }
 }
 

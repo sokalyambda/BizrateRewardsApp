@@ -95,9 +95,13 @@ static NSString *const kDefaultLatestSurveyURLString = @"com.bizraterewards://su
 + (void)receivedPushNotification:(NSDictionary*)userInfo
            withApplicationState:(UIApplicationState)applicationState
 {
-    NSURL *redirectedURL = [NSURL URLWithString:kDefaultLatestSurveyURLString];//userInfo[kRedirectedURL];
-    NSError *error;
-    [BZRRedirectionHelper redirectWithURL:redirectedURL withError:&error];
+    NSURL *redirectedURL = [NSURL URLWithString:userInfo[kRedirectedURL]];
+    if (!redirectedURL && applicationState != UIApplicationStateInactive) {
+        [BZRRedirectionHelper redirectAfterNotificationWithoutSurvey];
+    } else {
+        NSError *error;
+        [BZRRedirectionHelper redirectWithURL:redirectedURL withError:&error];
+    }
 }
 
 /**
