@@ -17,6 +17,7 @@
 static NSString *const kPushPermissionsLastState = @"pushPermissionLastState";
 
 static NSString *const kRedirectedURL = @"redirected_url";
+static NSString *const kBZRRedirectURL = @"bzr-redirect-url";
 
 static NSString *const kDefaultLatestSurveyURLString = @"com.bizraterewards://survey/latest";
 
@@ -95,8 +96,11 @@ static NSString *const kDefaultLatestSurveyURLString = @"com.bizraterewards://su
 + (void)receivedPushNotification:(NSDictionary*)userInfo
            withApplicationState:(UIApplicationState)applicationState
 {
-    NSURL *redirectedURL = [NSURL URLWithString:userInfo[kRedirectedURL]];
-    if (!redirectedURL && applicationState != UIApplicationStateInactive) {
+    NSURL *redirectedURL = [NSURL URLWithString:userInfo[kBZRRedirectURL]];
+    if (!redirectedURL || !redirectedURL.absoluteString.length) {
+        redirectedURL = [NSURL URLWithString:userInfo[kRedirectedURL]];
+    }
+    if ((!redirectedURL || !redirectedURL.absoluteString.length) && applicationState != UIApplicationStateInactive) {
         [BZRRedirectionHelper redirectAfterNotificationWithoutSurvey];
     } else {
         NSError *error;
