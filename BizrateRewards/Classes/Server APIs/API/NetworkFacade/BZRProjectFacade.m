@@ -148,31 +148,43 @@ static NSString *_baseURLString;
                               success:(void (^)(BOOL success))success
                               failure:(void (^)(NSError *error, BOOL isCanceled, BOOL emailRegistered))failure
 {
-    BZRSignInRequest *request = [[BZRSignInRequest alloc] initWithEmail:email andPassword:password];
+    __block BZRNetworkOperation* operation;
     
-    BZRNetworkOperation* operation = [[self  HTTPClient] createOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
+    [self validateSessionWithType:BZRSessionTypeApplication onSuccess:^(BOOL isSuccess) {
+    
+        BZRSignInRequest *request = [[BZRSignInRequest alloc] initWithEmail:email andPassword:password];
         
-        //track mixpanel event
-        [BZRMixpanelService trackEventWithType:BZRMixpanelEventLoginSuccessful
-                                 propertyValue:kAuthTypeEmail];
-        //to avoid FB profile usage when user has been logged with email
-        [BZRFacebookService logoutFromFacebook];
+        operation = [[self  HTTPClient] createOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
+            
+            //track mixpanel event
+            [BZRMixpanelService trackEventWithType:BZRMixpanelEventLoginSuccessful
+                                     propertyValue:kAuthTypeEmail];
+            //to avoid FB profile usage when user has been logged with email
+            [BZRFacebookService logoutFromFacebook];
+            
+            BZRSignInRequest *request = (BZRSignInRequest*)operation.networkRequest;
+            
+            [BZRStorageManager sharedStorage].userToken = request.token;
+            
+            if (success) {
+                success(YES);
+            }
+            
+        } failure:^(BZRNetworkOperation *operation, NSError *error, BOOL isCanceled) {
+            
+            BOOL isEmailRegistered = [BZRErrorHandler isEmailRegisteredFromError:error];
+            if (failure) {
+                failure(error, isCanceled, isEmailRegistered);
+            }
+            
+        }];
         
-        BZRSignInRequest *request = (BZRSignInRequest*)operation.networkRequest;
-        
-        [BZRStorageManager sharedStorage].userToken = request.token;
-        
-        if (success) {
-            success(YES);
-        }
-        
-    } failure:^(BZRNetworkOperation *operation, NSError *error, BOOL isCanceled) {
-        
-        BOOL isEmailRegistered = [BZRErrorHandler isEmailRegisteredFromError:error];
+    } onFailure:^(NSError *error, BOOL isCanceled) {
         if (failure) {
-            failure(error, isCanceled, isEmailRegistered);
+            failure(error, isCanceled,NO);
         }
     }];
+
     return operation;
 }
 
@@ -188,7 +200,7 @@ static NSString *_baseURLString;
                                          failure:(void (^)(NSError *error, BOOL isCanceled))failure
 {
     __block BZRNetworkOperation* operation;
-    
+
     [self validateSessionWithType:BZRSessionTypeApplication onSuccess:^(BOOL isSuccess) {
         BZRSignUpRequest *request = [[BZRSignUpRequest alloc] initWithUserFirstName:firstName andUserLastName:lastName andEmail:email andPassword:password andDateOfBirth:birthDate andGender:gender andShareCode:shareCode];
         
@@ -220,7 +232,7 @@ static NSString *_baseURLString;
             failure(error, isCanceled);
         }
     }];
-    
+
     return operation;
 }
 
