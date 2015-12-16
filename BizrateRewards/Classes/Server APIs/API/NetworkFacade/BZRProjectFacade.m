@@ -80,7 +80,7 @@ static NSString *_baseURLString;
             AFNetworkActivityIndicatorManager.sharedManager.enabled = NO;
             
             sharedHTTPClient = [[BZRSessionManager alloc] initWithBaseURL:[NSURL URLWithString:baseURL]];
-
+            
             AFNetworkActivityIndicatorManager.sharedManager.enabled = YES;
             
             if (completion) {
@@ -144,14 +144,14 @@ static NSString *_baseURLString;
 
 //Authorization Requests
 + (BZRNetworkOperation *)signInWithEmail:(NSString*)email
-                             password:(NSString*)password
-                              success:(void (^)(BOOL success))success
-                              failure:(void (^)(NSError *error, BOOL isCanceled, BOOL emailRegistered))failure
+                                password:(NSString*)password
+                                 success:(void (^)(BOOL success))success
+                                 failure:(void (^)(NSError *error, BOOL isCanceled, BOOL emailRegistered))failure
 {
     __block BZRNetworkOperation* operation;
     
     [self validateSessionWithType:BZRSessionTypeApplication onSuccess:^(BOOL isSuccess) {
-    
+        
         BZRSignInRequest *request = [[BZRSignInRequest alloc] initWithEmail:email andPassword:password];
         
         operation = [[self  HTTPClient] createOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
@@ -184,7 +184,7 @@ static NSString *_baseURLString;
             failure(error, isCanceled,NO);
         }
     }];
-
+    
     return operation;
 }
 
@@ -200,8 +200,9 @@ static NSString *_baseURLString;
                                          failure:(void (^)(NSError *error, BOOL isCanceled))failure
 {
     __block BZRNetworkOperation* operation;
-
+    
     [self validateSessionWithType:BZRSessionTypeApplication onSuccess:^(BOOL isSuccess) {
+    
         BZRSignUpRequest *request = [[BZRSignUpRequest alloc] initWithUserFirstName:firstName andUserLastName:lastName andEmail:email andPassword:password andDateOfBirth:birthDate andGender:gender andShareCode:shareCode];
         
         operation = [[self  HTTPClient] createOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
@@ -218,7 +219,7 @@ static NSString *_baseURLString;
             [BZRStorageManager sharedStorage].userToken = request.userToken;
             
             if (success) {
-               success(YES);
+                success(YES);
             }
             
         } failure:^(BZRNetworkOperation *operation ,NSError *error, BOOL isCanceled) {
@@ -226,13 +227,13 @@ static NSString *_baseURLString;
                 failure(error, isCanceled);
             }
         }];
-
+        
     } onFailure:^(NSError *error, BOOL isCanceled) {
         if (failure) {
             failure(error, isCanceled);
         }
     }];
-
+    
     return operation;
 }
 
@@ -269,32 +270,41 @@ static NSString *_baseURLString;
 {
     __block BZRNetworkOperation* operation;
     
-    [self validateSessionWithType:BZRSessionTypeUser onSuccess:^(BOOL isSuccess) {
-        BZRGetCurrentUserRequest *request = [[BZRGetCurrentUserRequest alloc] init];
+    [self validateSessionWithType:BZRSessionTypeApplication onSuccess:^(BOOL isSuccess) {
         
-        operation = [[self  HTTPClient] createOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
+        [self validateSessionWithType:BZRSessionTypeUser onSuccess:^(BOOL isSuccess) {
             
-            BZRGetCurrentUserRequest *request = (BZRGetCurrentUserRequest*)operation.networkRequest;
+            BZRGetCurrentUserRequest *request = [[BZRGetCurrentUserRequest alloc] init];
             
-            BZRUserProfile *currentProfile = request.currentUserProfile;
-            
-            [BZRStorageManager sharedStorage].currentProfile = currentProfile;
-            
-            //set mixpanel alias
-            [BZRMixpanelService setAliasForUser:currentProfile];
-            //set mixpanel people
-            [BZRMixpanelService setPeopleForUser:currentProfile];
-            
-            if (success) {
-               success(YES);
-            }
-            
-        } failure:^(BZRNetworkOperation *operation ,NSError *error, BOOL isCanceled) {
-            
+            operation = [[self  HTTPClient] createOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
+                
+                BZRGetCurrentUserRequest *request = (BZRGetCurrentUserRequest*)operation.networkRequest;
+                
+                BZRUserProfile *currentProfile = request.currentUserProfile;
+                
+                [BZRStorageManager sharedStorage].currentProfile = currentProfile;
+                
+                //set mixpanel alias
+                [BZRMixpanelService setAliasForUser:currentProfile];
+                //set mixpanel people
+                [BZRMixpanelService setPeopleForUser:currentProfile];
+                
+                if (success) {
+                    success(YES);
+                }
+                
+            } failure:^(BZRNetworkOperation *operation ,NSError *error, BOOL isCanceled) {
+                
+                if (failure) {
+                    failure(error, isCanceled);
+                }
+            }];
+        } onFailure:^(NSError *error, BOOL isCanceled) {
             if (failure) {
                 failure(error, isCanceled);
             }
         }];
+        
     } onFailure:^(NSError *error, BOOL isCanceled) {
         if (failure) {
             failure(error, isCanceled);
@@ -305,68 +315,86 @@ static NSString *_baseURLString;
 }
 
 + (BZRNetworkOperation *)updateUserWithFirstName:(NSString *)firstName
-                                    andLastName:(NSString *)lastName
-                                 andDateOfBirth:(NSString *)dateOfBirth
-                                      andGender:(NSString *)gender
-                                      onSuccess:(void (^)(BOOL success))success
-                                        onFailure:(void (^)(NSError *error, BOOL isCanceled))failure
+                                     andLastName:(NSString *)lastName
+                                  andDateOfBirth:(NSString *)dateOfBirth
+                                       andGender:(NSString *)gender
+                                       onSuccess:(void (^)(BOOL success))success
+                                       onFailure:(void (^)(NSError *error, BOOL isCanceled))failure
 {
     __block BZRNetworkOperation* operation;
-    [self validateSessionWithType:BZRSessionTypeUser onSuccess:^(BOOL isSuccess) {
-        BZRUpdateCurrentUserRequest *request = [[BZRUpdateCurrentUserRequest alloc] initWithFirstName:firstName andLastName:lastName andDateOfBirth:dateOfBirth andGender:gender];
+    
+    [self validateSessionWithType:BZRSessionTypeApplication onSuccess:^(BOOL isSuccess) {
         
-        operation = [[self  HTTPClient] createOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
+        [self validateSessionWithType:BZRSessionTypeUser onSuccess:^(BOOL isSuccess) {
             
-            BZRUpdateCurrentUserRequest *request = (BZRUpdateCurrentUserRequest*)operation.networkRequest;
+            BZRUpdateCurrentUserRequest *request = [[BZRUpdateCurrentUserRequest alloc] initWithFirstName:firstName andLastName:lastName andDateOfBirth:dateOfBirth andGender:gender];
             
-            [BZRStorageManager sharedStorage].currentProfile = request.updatedProfile;
-            
-            //set mixpanel people
-            [BZRMixpanelService setPeopleForUser:request.updatedProfile];
-            
-            if (success) {
-                success(YES);
-            }
-            
-        } failure:^(BZRNetworkOperation *operation ,NSError *error, BOOL isCanceled) {
-            
+            operation = [[self  HTTPClient] createOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
+                
+                BZRUpdateCurrentUserRequest *request = (BZRUpdateCurrentUserRequest*)operation.networkRequest;
+                
+                [BZRStorageManager sharedStorage].currentProfile = request.updatedProfile;
+                
+                //set mixpanel people
+                [BZRMixpanelService setPeopleForUser:request.updatedProfile];
+                
+                if (success) {
+                    success(YES);
+                }
+                
+            } failure:^(BZRNetworkOperation *operation ,NSError *error, BOOL isCanceled) {
+                
+                if (failure) {
+                    failure(error, isCanceled);
+                }
+            }];
+        } onFailure:^(NSError *error, BOOL isCanceled) {
             if (failure) {
                 failure(error, isCanceled);
             }
         }];
+        
     } onFailure:^(NSError *error, BOOL isCanceled) {
         if (failure) {
             failure(error, isCanceled);
         }
     }];
-    
+
     return operation;
 }
 
 //Surveys Requests
 + (BZRNetworkOperation *)getEligibleSurveysOnSuccess:(void (^)(NSArray *surveys))success
-                                          onFailure:(void (^)(NSError *error, BOOL isCanceled))failure
+                                           onFailure:(void (^)(NSError *error, BOOL isCanceled))failure
 {
     __block BZRNetworkOperation* operation;
     
-    [self validateSessionWithType:BZRSessionTypeUser onSuccess:^(BOOL isSuccess) {
+    [self validateSessionWithType:BZRSessionTypeApplication onSuccess:^(BOOL isSuccess) {
         
-        BZRGetEligibleSurveysRequest *request = [[BZRGetEligibleSurveysRequest alloc] init];
-        
-        operation = [[self  HTTPClient] createOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
+        [self validateSessionWithType:BZRSessionTypeUser onSuccess:^(BOOL isSuccess) {
             
-            BZRGetEligibleSurveysRequest *request = (BZRGetEligibleSurveysRequest*)operation.networkRequest;
+            BZRGetEligibleSurveysRequest *request = [[BZRGetEligibleSurveysRequest alloc] init];
             
-            if (success) {
-                success(request.eligibleSurveys);
-            }
-            
-        } failure:^(BZRNetworkOperation *operation ,NSError *error, BOOL isCanceled) {
-            
+            operation = [[self  HTTPClient] createOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
+                
+                BZRGetEligibleSurveysRequest *request = (BZRGetEligibleSurveysRequest*)operation.networkRequest;
+                
+                if (success) {
+                    success(request.eligibleSurveys);
+                }
+                
+            } failure:^(BZRNetworkOperation *operation ,NSError *error, BOOL isCanceled) {
+                
+                if (failure) {
+                    failure(error, isCanceled);
+                }
+            }];
+        } onFailure:^(NSError *error, BOOL isCanceled) {
             if (failure) {
                 failure(error, isCanceled);
             }
         }];
+        
     } onFailure:^(NSError *error, BOOL isCanceled) {
         if (failure) {
             failure(error, isCanceled);
@@ -380,24 +408,32 @@ static NSString *_baseURLString;
 {
     __block BZRNetworkOperation* operation;
     
-    [self validateSessionWithType:BZRSessionTypeUser onSuccess:^(BOOL isSuccess) {
+    [self validateSessionWithType:BZRSessionTypeApplication onSuccess:^(BOOL isSuccess) {
         
-        BZRGetPointsForNextSurveyRequest *request = [[BZRGetPointsForNextSurveyRequest alloc] init];
-        
-        operation = [[self  HTTPClient] createOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
+        [self validateSessionWithType:BZRSessionTypeUser onSuccess:^(BOOL isSuccess) {
             
-            BZRGetPointsForNextSurveyRequest *request = (BZRGetPointsForNextSurveyRequest*)operation.networkRequest;
+            BZRGetPointsForNextSurveyRequest *request = [[BZRGetPointsForNextSurveyRequest alloc] init];
             
-            if (success) {
-                success(request.pointsForNextSurvey);
-            }
-            
-        } failure:^(BZRNetworkOperation *operation ,NSError *error, BOOL isCanceled) {
-            
+            operation = [[self  HTTPClient] createOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
+                
+                BZRGetPointsForNextSurveyRequest *request = (BZRGetPointsForNextSurveyRequest*)operation.networkRequest;
+                
+                if (success) {
+                    success(request.pointsForNextSurvey);
+                }
+                
+            } failure:^(BZRNetworkOperation *operation ,NSError *error, BOOL isCanceled) {
+                
+                if (failure) {
+                    failure(error, isCanceled);
+                }
+            }];
+        } onFailure:^(NSError *error, BOOL isCanceled) {
             if (failure) {
                 failure(error, isCanceled);
             }
         }];
+
     } onFailure:^(NSError *error, BOOL isCanceled) {
         if (failure) {
             failure(error, isCanceled);
@@ -412,22 +448,30 @@ static NSString *_baseURLString;
 {
     __block BZRNetworkOperation* operation;
     
-    [self validateSessionWithType:BZRSessionTypeUser onSuccess:^(BOOL isSuccess) {
+    [self validateSessionWithType:BZRSessionTypeApplication onSuccess:^(BOOL isSuccess) {
         
-        BZRDeleteTakenSurveysRequest *request = [[BZRDeleteTakenSurveysRequest alloc] init];
-        
-        operation = [[self  HTTPClient] createOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
+        [self validateSessionWithType:BZRSessionTypeUser onSuccess:^(BOOL isSuccess) {
             
-            if (success) {
-                success(YES);
-            }
+            BZRDeleteTakenSurveysRequest *request = [[BZRDeleteTakenSurveysRequest alloc] init];
             
-        } failure:^(BZRNetworkOperation *operation ,NSError *error, BOOL isCanceled) {
-            
+            operation = [[self  HTTPClient] createOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
+                
+                if (success) {
+                    success(YES);
+                }
+                
+            } failure:^(BZRNetworkOperation *operation ,NSError *error, BOOL isCanceled) {
+                
+                if (failure) {
+                    failure(error, isCanceled);
+                }
+            }];
+        } onFailure:^(NSError *error, BOOL isCanceled) {
             if (failure) {
                 failure(error, isCanceled);
             }
         }];
+        
     } onFailure:^(NSError *error, BOOL isCanceled) {
         if (failure) {
             failure(error, isCanceled);
@@ -442,19 +486,27 @@ static NSString *_baseURLString;
                                     onFailure:(void (^)(NSError *error, BOOL isCanceled))failure
 {
     __block BZRNetworkOperation *operation;
-    [self validateSessionWithType:BZRSessionTypeUser onSuccess:^(BOOL isSuccess) {
+    
+    [self validateSessionWithType:BZRSessionTypeApplication onSuccess:^(BOOL isSuccess) {
         
-        BZRSendLocationEventRequest *request = [[BZRSendLocationEventRequest alloc] initWithLocationEvent:locationEvent];
-        
-        operation = [[self  HTTPClient] createOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
+        [self validateSessionWithType:BZRSessionTypeUser onSuccess:^(BOOL isSuccess) {
             
-            BZRSendLocationEventRequest *request = (BZRSendLocationEventRequest*)operation.networkRequest;
+            BZRSendLocationEventRequest *request = [[BZRSendLocationEventRequest alloc] initWithLocationEvent:locationEvent];
             
-            if (success) {
-                success(request.loggedEvent);
-            }
-            
-        } failure:^(BZRNetworkOperation *operation, NSError *error, BOOL isCanceled) {
+            operation = [[self  HTTPClient] createOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
+                
+                BZRSendLocationEventRequest *request = (BZRSendLocationEventRequest*)operation.networkRequest;
+                
+                if (success) {
+                    success(request.loggedEvent);
+                }
+                
+            } failure:^(BZRNetworkOperation *operation, NSError *error, BOOL isCanceled) {
+                if (failure) {
+                    failure(error, isCanceled);
+                }
+            }];
+        } onFailure:^(NSError *error, BOOL isCanceled) {
             if (failure) {
                 failure(error, isCanceled);
             }
@@ -464,6 +516,8 @@ static NSString *_baseURLString;
             failure(error, isCanceled);
         }
     }];
+    
+
     return operation;
 }
 
@@ -471,19 +525,27 @@ static NSString *_baseURLString;
                                                  onFailure:(void (^)(NSError *error, BOOL isCanceled))failure
 {
     __block BZRNetworkOperation *operation;
-    [self validateSessionWithType:BZRSessionTypeUser onSuccess:^(BOOL isSuccess) {
+    
+    [self validateSessionWithType:BZRSessionTypeApplication onSuccess:^(BOOL isSuccess) {
         
-        BZRGetLocationEventsListRequest *request = [[BZRGetLocationEventsListRequest alloc] init];
-        
-        operation = [[self  HTTPClient] createOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
+        [self validateSessionWithType:BZRSessionTypeUser onSuccess:^(BOOL isSuccess) {
             
-            BZRGetLocationEventsListRequest *request = (BZRGetLocationEventsListRequest*)operation.networkRequest;
+            BZRGetLocationEventsListRequest *request = [[BZRGetLocationEventsListRequest alloc] init];
             
-            if (success) {
-                success(request.locationEventsList);
-            }
-            
-        } failure:^(BZRNetworkOperation *operation, NSError *error, BOOL isCanceled) {
+            operation = [[self  HTTPClient] createOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
+                
+                BZRGetLocationEventsListRequest *request = (BZRGetLocationEventsListRequest*)operation.networkRequest;
+                
+                if (success) {
+                    success(request.locationEventsList);
+                }
+                
+            } failure:^(BZRNetworkOperation *operation, NSError *error, BOOL isCanceled) {
+                if (failure) {
+                    failure(error, isCanceled);
+                }
+            }];
+        } onFailure:^(NSError *error, BOOL isCanceled) {
             if (failure) {
                 failure(error, isCanceled);
             }
@@ -493,6 +555,7 @@ static NSString *_baseURLString;
             failure(error, isCanceled);
         }
     }];
+    
     return operation;
 }
 
@@ -500,26 +563,37 @@ static NSString *_baseURLString;
 + (BZRNetworkOperation *)sendDeviceDataOnSuccess:(void (^)(BOOL isSuccess))success onFailure:(void (^)(NSError *error, BOOL isCanceled))failure
 {
     __block BZRNetworkOperation *operation;
-    [self validateSessionWithType:BZRSessionTypeUser onSuccess:^(BOOL isSuccess) {
-        BZRSendDeviceDataRequest *request = [[BZRSendDeviceDataRequest alloc] init];
+    
+    [self validateSessionWithType:BZRSessionTypeApplication onSuccess:^(BOOL isSuccess) {
         
-        operation = [[self  HTTPClient] createOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
+        [self validateSessionWithType:BZRSessionTypeUser onSuccess:^(BOOL isSuccess) {
             
-            if (success) {
-                success(YES);
-            }
+            BZRSendDeviceDataRequest *request = [[BZRSendDeviceDataRequest alloc] init];
             
-        } failure:^(BZRNetworkOperation *operation, NSError *error, BOOL isCanceled) {
-            
+            operation = [[self  HTTPClient] createOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
+                
+                if (success) {
+                    success(YES);
+                }
+                
+            } failure:^(BZRNetworkOperation *operation, NSError *error, BOOL isCanceled) {
+                
+                if (failure) {
+                    failure(error, isCanceled);
+                }
+            }];
+        } onFailure:^(NSError *error, BOOL isCanceled) {
             if (failure) {
                 failure(error, isCanceled);
             }
         }];
+        
     } onFailure:^(NSError *error, BOOL isCanceled) {
         if (failure) {
             failure(error, isCanceled);
         }
     }];
+    
     return operation;
 }
 
@@ -527,28 +601,39 @@ static NSString *_baseURLString;
 + (BZRNetworkOperation *)getFeaturedGiftCardsOnSuccess:(void (^)(NSArray *giftCards))success onFailure:(void (^)(NSError *error, BOOL isCanceled))failure
 {
     __block BZRNetworkOperation *operation;
-    [self validateSessionWithType:BZRSessionTypeUser onSuccess:^(BOOL isSuccess) {
-        BZRGetFeaturedGiftcards *request = [[BZRGetFeaturedGiftcards alloc] init];
+    
+    [self validateSessionWithType:BZRSessionTypeApplication onSuccess:^(BOOL isSuccess) {
         
-        operation = [[self  HTTPClient] createOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
+        [self validateSessionWithType:BZRSessionTypeUser onSuccess:^(BOOL isSuccess) {
             
-            BZRGetFeaturedGiftcards *request = (BZRGetFeaturedGiftcards*)operation.networkRequest;
+            BZRGetFeaturedGiftcards *request = [[BZRGetFeaturedGiftcards alloc] init];
             
-            if (success) {
-                success(request.featuredGiftCards);
-            }
-            
-        } failure:^(BZRNetworkOperation *operation, NSError *error, BOOL isCanceled) {
-            
+            operation = [[self  HTTPClient] createOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
+                
+                BZRGetFeaturedGiftcards *request = (BZRGetFeaturedGiftcards*)operation.networkRequest;
+                
+                if (success) {
+                    success(request.featuredGiftCards);
+                }
+                
+            } failure:^(BZRNetworkOperation *operation, NSError *error, BOOL isCanceled) {
+                
+                if (failure) {
+                    failure(error, isCanceled);
+                }
+            }];
+        } onFailure:^(NSError *error, BOOL isCanceled) {
             if (failure) {
                 failure(error, isCanceled);
             }
         }];
+        
     } onFailure:^(NSError *error, BOOL isCanceled) {
         if (failure) {
             failure(error, isCanceled);
         }
     }];
+
     return operation;
 }
 
