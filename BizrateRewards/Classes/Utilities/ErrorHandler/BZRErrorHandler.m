@@ -22,7 +22,10 @@ static NSString *const kEmailNotRegistered          = @"EMAIL_NOT_REGISTERED";
 static NSString *const kEmailAlreadyExist           = @"EMAIL_ALREADY_REGISTERED";
 static NSString *const kFacebookEmailAlreadyExist   = @"FACEBOOK_USER_ALREADY_REGISTERED";
 
+static NSString *const kBadCredentialsErrorDescription = @"Bad credentials";
+
 static NSString *const kErrorsCodesPlistName = @"ErrorsCodes";
+static NSString *const kUserDosentExistForEmail = @"User does not exist for email:";
 
 static NSInteger const kNotAuthorizedStatusCode = 401.f;
 
@@ -57,16 +60,21 @@ static NSString *_errorAlertTitle = nil;
 {
     [self setErrorAlertTitle:@""];
 
+    NSString *errFromJsonString = [self errorStringFromJSONResponseError:error];
+    if ([errFromJsonString isEqualToString:kBadCredentialsErrorDescription]) {
+        return completion([self getErrorAlertTitle], LOCALIZED(@"Invalid username or password. Please try again"));
+    }
+    if ([errFromJsonString hasPrefix: kUserDosentExistForEmail]) {
+        return completion([self getErrorAlertTitle], LOCALIZED(@"This email does not exist, please create an account"));
+    }
     NSInteger statusCode = error.HTTPResponseStatusCode;
-    
     if (statusCode == kNotAuthorizedStatusCode) {
         return completion([self getErrorAlertTitle], LOCALIZED(@"Session is invalid, try to sign-in again."));
     } else {
         return completion([self getErrorAlertTitle], LOCALIZED(@"Sorry, something went wrong. Please try again."));
     }
-    
-    /*
-     Get error string from jsonResponse
+
+    /*Get error string from jsonResponse
      
     NSString *errFromJsonString = [self errorStringFromJSONResponseError:error];
     if (errFromJsonString) {
@@ -81,6 +89,7 @@ static NSString *_errorAlertTitle = nil;
     
     return completion([self getErrorAlertTitle], errLocalizedDescription);
      */
+    
 }
 
 /**

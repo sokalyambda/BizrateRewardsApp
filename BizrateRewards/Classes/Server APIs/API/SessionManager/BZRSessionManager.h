@@ -31,6 +31,8 @@ typedef void (^CleanBlock)();
 //session validation
 - (void)validateSessionWithType:(BZRSessionType)sessionType onSuccess:(SuccessBlock)success onFailure:(FailureBlock)failure;
 - (BOOL)isSessionValidWithType:(BZRSessionType)sessionType;
+- (BZRNetworkOperation *)getClientCredentialsOnSuccess:(void (^)(BOOL success))success onFailure:(void (^)(NSError *error, BOOL isCanceled))failure;
+
 
 //check whether operation is in process
 - (BOOL)isOperationInProcess;
