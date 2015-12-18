@@ -67,6 +67,9 @@ static NSString *_errorAlertTitle = nil;
     if ([errFromJsonString hasPrefix: kUserDosentExistForEmail]) {
         return completion([self getErrorAlertTitle], LOCALIZED(@"This email does not exist, please create an account"));
     }
+    if (![self isEmailAlreadyExistFromError:error]) {
+        return completion([self getErrorAlertTitle], LOCALIZED(@"Email address is not registered."));
+    }
     NSInteger statusCode = error.HTTPResponseStatusCode;
     if (statusCode == kNotAuthorizedStatusCode) {
         return completion([self getErrorAlertTitle], LOCALIZED(@"Session is invalid, try to sign-in again."));
