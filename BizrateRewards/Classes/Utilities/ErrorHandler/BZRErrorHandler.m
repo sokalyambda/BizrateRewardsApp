@@ -67,7 +67,7 @@ static NSString *_errorAlertTitle = nil;
     if ([errFromJsonString hasPrefix: kUserDosentExistForEmail]) {
         return completion([self getErrorAlertTitle], LOCALIZED(@"This email does not exist, please create an account"));
     }
-    if (![self isEmailAlreadyExistFromError:error]) {
+    if ([self isEmailNotRegisteredFromError:error]) {
         return completion([self getErrorAlertTitle], LOCALIZED(@"Email address is not registered."));
     }
     NSInteger statusCode = error.HTTPResponseStatusCode;
@@ -148,6 +148,26 @@ static NSString *_errorAlertTitle = nil;
         }
     }
     return isRegistered;
+}
+/**
+ *  Check whether current email address has not been registered
+ *
+ *  @param error Error that should be parsed
+ *
+ *  @return 'YES' if email is not registered
+ */
++ (BOOL)isEmailNotRegisteredFromError:(NSError *)error
+{
+    NSArray *errors = [self getErrorsArrayDataFromError:error];
+    
+    BOOL isNotRegistered = NO;
+    for (NSDictionary *errorDict in errors) {
+        if ([errorDict[kErrorStatusCode] isEqualToString:kEmailNotRegistered]) {
+            isNotRegistered = YES;
+            break;
+        }
+    }
+    return isNotRegistered;
 }
 
 /**
