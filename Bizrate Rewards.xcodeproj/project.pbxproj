@@ -195,6 +195,8 @@
 		84BE35D11B5D0AE0001B99E2 /* BZRSurveyPointsValueLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BE35D01B5D0AE0001B99E2 /* BZRSurveyPointsValueLabel.m */; };
 		84BE35D61B5D0C66001B99E2 /* BZRSurveyRemarkLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BE35D51B5D0C66001B99E2 /* BZRSurveyRemarkLabel.m */; };
 		84BE35D91B5D0C93001B99E2 /* BZRSurveyCongratsLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BE35D81B5D0C93001B99E2 /* BZRSurveyCongratsLabel.m */; };
+		BB459B0F1CBBF2450041831D /* BZRSharingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BB459B0E1CBBF2450041831D /* BZRSharingManager.m */; };
+		BBC644E01CBBF0CB007DFD83 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBC644DF1CBBF0CB007DFD83 /* Social.framework */; };
 		D3EFC7841C05961200DE9426 /* BZRShareWithFriendController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3EFC7831C05961200DE9426 /* BZRShareWithFriendController.m */; };
 /* End PBXBuildFile section */
 
@@ -567,6 +569,9 @@
 		84BE35D51B5D0C66001B99E2 /* BZRSurveyRemarkLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRSurveyRemarkLabel.m; path = Classes/MVC/Views/Styles/SurveyStyleLabels/SurveyRemarkLabel/BZRSurveyRemarkLabel.m; sourceTree = "<group>"; };
 		84BE35D71B5D0C93001B99E2 /* BZRSurveyCongratsLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRSurveyCongratsLabel.h; path = Classes/MVC/Views/Styles/SurveyStyleLabels/SurveyCongratsLabel/BZRSurveyCongratsLabel.h; sourceTree = "<group>"; };
 		84BE35D81B5D0C93001B99E2 /* BZRSurveyCongratsLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRSurveyCongratsLabel.m; path = Classes/MVC/Views/Styles/SurveyStyleLabels/SurveyCongratsLabel/BZRSurveyCongratsLabel.m; sourceTree = "<group>"; };
+		BB459B0D1CBBF2450041831D /* BZRSharingManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRSharingManager.h; path = Classes/Managers/SharingManager/BZRSharingManager.h; sourceTree = "<group>"; };
+		BB459B0E1CBBF2450041831D /* BZRSharingManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRSharingManager.m; path = Classes/Managers/SharingManager/BZRSharingManager.m; sourceTree = "<group>"; };
+		BBC644DF1CBBF0CB007DFD83 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		D3EFC7821C05961200DE9426 /* BZRShareWithFriendController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRShareWithFriendController.h; path = Classes/MVC/Controllers/ShareWithFriendsController/BZRShareWithFriendController.h; sourceTree = "<group>"; };
 		D3EFC7831C05961200DE9426 /* BZRShareWithFriendController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRShareWithFriendController.m; path = Classes/MVC/Controllers/ShareWithFriendsController/BZRShareWithFriendController.m; sourceTree = "<group>"; };
 		E535AA4CB211EDDB654D82EC /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -577,6 +582,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BBC644E01CBBF0CB007DFD83 /* Social.framework in Frameworks */,
 				5863116E1BF472FD00C2F654 /* CoreData.framework in Frameworks */,
 				5858F26A1B61247D00F38DFC /* SystemConfiguration.framework in Frameworks */,
 				58A9FE931B53AF4600DBE379 /* AssetsLibrary.framework in Frameworks */,
@@ -1686,6 +1692,7 @@
 		58A91F441B3ABE480032607F /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				BB459B0C1CBBF22C0041831D /* SharingManager */,
 				58BF35DF1B74930800699A63 /* MailComposeManager */,
 				58A91F301B3A821C0032607F /* LocationObserver */,
 				58A91F451B3ABE500032607F /* StorageManager */,
@@ -2539,9 +2546,19 @@
 			name = SurveyRemarkLabel;
 			sourceTree = "<group>";
 		};
+		BB459B0C1CBBF22C0041831D /* SharingManager */ = {
+			isa = PBXGroup;
+			children = (
+				BB459B0D1CBBF2450041831D /* BZRSharingManager.h */,
+				BB459B0E1CBBF2450041831D /* BZRSharingManager.m */,
+			);
+			name = SharingManager;
+			sourceTree = "<group>";
+		};
 		D31C9EB6CC9E9EA49476A0B1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BBC644DF1CBBF0CB007DFD83 /* Social.framework */,
 				5863116D1BF472FD00C2F654 /* CoreData.framework */,
 				5858F2691B61247D00F38DFC /* SystemConfiguration.framework */,
 				58A9FE921B53AF4600DBE379 /* AssetsLibrary.framework */,
@@ -2627,7 +2644,6 @@
 				TargetAttributes = {
 					58A0B20E1B3854CF003C100C = {
 						CreatedOnToolsVersion = 6.3.1;
-						DevelopmentTeam = 27U87D64G8;
 						SystemCapabilities = {
 							com.apple.Push = {
 								enabled = 1;
@@ -2796,6 +2812,7 @@
 				588CE7A01B70AAD00088DEB1 /* BZRConfirmPasswordController.m in Sources */,
 				586311881BF47C0600C2F654 /* BZREnvironment+CoreDataProperties.m in Sources */,
 				58BF360B1B74F94300699A63 /* MFMailComposeViewController+Styles.m in Sources */,
+				BB459B0F1CBBF2450041831D /* BZRSharingManager.m in Sources */,
 				58ECCEE51B8F4D9B00528192 /* BZRGetLocationEventsListRequest.m in Sources */,
 				586311891BF47C0600C2F654 /* BZREnvironment.m in Sources */,
 				84BE35D11B5D0AE0001B99E2 /* BZRSurveyPointsValueLabel.m in Sources */,
@@ -3010,8 +3027,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Myroslava Polovka (2JHPL6TT8U)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Myroslava Polovka (2JHPL6TT8U)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CURRENT_PROJECT_VERSION = 62;
 				ENABLE_BITCODE = NO;
@@ -3027,7 +3044,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.shopzilla.bizrate.rewards;
 				PRODUCT_NAME = "Bizrate Rewards";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "88e81b7b-eb4e-438e-ad6e-243b4323f9a9";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -3038,7 +3055,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Myroslava Polovka (2JHPL6TT8U)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CURRENT_PROJECT_VERSION = 62;
@@ -3055,7 +3072,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.shopzilla.bizrate.rewards;
 				PRODUCT_NAME = "Bizrate Rewards";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "88e81b7b-eb4e-438e-ad6e-243b4323f9a9";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
@@ -3139,7 +3156,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Myroslava Polovka (2JHPL6TT8U)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CURRENT_PROJECT_VERSION = 62;
@@ -3156,7 +3173,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.shopzilla.bizrate.rewards;
 				PRODUCT_NAME = "Bizrate Rewards";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "88e81b7b-eb4e-438e-ad6e-243b4323f9a9";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = AppStore;
@@ -3220,7 +3237,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Myroslava Polovka (2JHPL6TT8U)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CURRENT_PROJECT_VERSION = 62;
@@ -3237,7 +3254,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.shopzilla.bizrate.rewards;
 				PRODUCT_NAME = "Bizrate Rewards";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "88e81b7b-eb4e-438e-ad6e-243b4323f9a9";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = AdHoc;

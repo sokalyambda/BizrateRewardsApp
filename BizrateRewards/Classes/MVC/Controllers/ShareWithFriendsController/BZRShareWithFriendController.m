@@ -7,8 +7,11 @@
 //
 
 #import "BZRShareWithFriendController.h"
+#import "BZRFacebookService.h"
+#import "BZRSharingManager.h"
+#import "BZRAlertFacade.h"
 
-@interface BZRShareWithFriendController ()
+@interface BZRShareWithFriendController () <BZRSharingManagerDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *shareCodeLabel;
 
@@ -27,6 +30,26 @@
 
 #pragma mark - Actions
 
+- (IBAction)shareWithFacebook:(id)sender
+{
+    [[BZRSharingManager sharedManager] shareWithFacebookFromController:self inviteCode:self.shareCode];
+}
+
+- (IBAction)shareWithTwitter:(id)sender
+{
+    [[BZRSharingManager sharedManager] shareWithTwitterFromController:self inviteCode:self.shareCode];
+}
+
+- (IBAction)shareWithMessage:(id)sender
+{
+    [[BZRSharingManager sharedManager] shareWithMessageFromController:self inviteCode:self.shareCode];
+}
+
+- (IBAction)shareWithEmail:(id)sender
+{
+    [[BZRSharingManager sharedManager] shareWithEmailFromController:self inviteCode:self.shareCode];
+}
+
 /**
  *  Customize navigation bar appearance
  */
@@ -38,6 +61,13 @@
     
     //Show navigation bar
     [self.navigationController setNavigationBarHidden:NO animated:YES];
+}
+
+#pragma mark - BZRSharingManagerDelegate
+
+- (void)sharingWasCanceledForType:(BZRSharingType)sharingType
+{
+    [BZRAlertFacade showAlertWithMessage:@"Invite code was successfully shared." forController:self withCompletion:NULL];
 }
 
 @end

@@ -11,6 +11,11 @@ typedef enum : NSUInteger {
     BZRAccessTypePushNotifications
 } BZRAccessType;
 
+typedef enum : NSUInteger {
+    BZRSocialFacebook,
+    BZRSocialTwitter
+} BZRSocialType;
+
 extern NSString *const kErrorAlertTitle;
 extern NSString *const kErrorAlertMessage;
 
@@ -29,6 +34,9 @@ extern NSString *const kErrorAlertMessage;
 
 //Change permissions
 + (void)showChangePermissionsAlertWithAccessType:(BZRAccessType)accessType forController:(UIViewController *)controller andCompletion:(void(^)(UIAlertAction *action, BOOL isCanceled))completion;
+
+//No social account in settings
++ (void)showNoSocialAccountAlertForController:(UIViewController*)forController socialType:(BZRSocialType)socialType andCompletion:(void(^)(UIAlertAction *action, BOOL isCanceled))completion;
 
 //Common alerts methods
 + (void)showFailureResponseAlertWithError:(NSError *)error forController:(UIViewController *)controller andCompletion:(void(^)(void))completion;
