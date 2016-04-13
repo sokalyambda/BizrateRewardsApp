@@ -71,8 +71,15 @@
     WEAK_SELF;
     [BZRValidator validateShareCodeField:shareCodeField onSuccess:^{
         
-        weakSelf.temporaryProfile.shareCode = shareCodeField.text;
-        [weakSelf moveToNextControllerOrPerformFacebookAuthorization];
+        [BZRProjectFacade validateShareCode:shareCodeField.text onSuccess:^(BOOL success) {
+            weakSelf.temporaryProfile.shareCode = shareCodeField.text;
+            [weakSelf moveToNextControllerOrPerformFacebookAuthorization];
+            
+        } onFailure:^(NSError *error, BOOL isCanceled) {
+            
+            //TODO: error alert
+            [weakSelf moveToNextControllerOrPerformFacebookAuthorization];
+        }];
         
     } onFailure:^(NSMutableDictionary *errorDict) {
         

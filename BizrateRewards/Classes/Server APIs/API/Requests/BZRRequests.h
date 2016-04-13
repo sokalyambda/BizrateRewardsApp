@@ -19,6 +19,7 @@
 #import "BZRSendDeviceDataRequest.h"
 #import "BZRAPIInfoRequest.h"
 #import "BZRSignInWithFacebookRequest.h"
+#import "BZRValidateShareCodeRequest.h"
 
 #import "BZRGetEligibleSurveysRequest.h"
 #import "BZRDeleteTakenSurveysRequest.h"
