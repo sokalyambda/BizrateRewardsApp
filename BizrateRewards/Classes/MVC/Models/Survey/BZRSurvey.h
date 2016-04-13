@@ -15,5 +15,6 @@
 @property (assign, nonatomic) NSInteger surveyId;
 @property (strong, nonatomic) NSURL *surveyLink;
 @property (assign, nonatomic) NSInteger surveyPoints;
+@property (assign, nonatomic) NSInteger disqualifiedPoints;
 
 @end
