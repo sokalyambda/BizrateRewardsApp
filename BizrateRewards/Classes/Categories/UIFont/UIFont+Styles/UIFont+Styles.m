@@ -179,4 +179,17 @@ static NSString *const kOpenSansBoldFontName = @"OpenSans-Bold";
     }
 }
 
++ (UIFont*)tapToCopyFont
+{
+    if (IS_IPHONE_4) {
+        return [UIFont fontWithName:kOpenSansFontName size:kSurveyCongratsExtraSmallFontSize];
+    } else if (IS_IPHONE_5) {
+        return [UIFont fontWithName:kOpenSansFontName size:kSurveyCongratsSmallFontSize];
+    } else if (IS_IPHONE_6) {
+        return [UIFont fontWithName:kOpenSansFontName size:kSurveyCongratsMediumFontSize];
+    } else {
+        return [UIFont fontWithName:kOpenSansFontName size:kSurveyCongratsLargeFontSize];
+    }
+}
+
 @end

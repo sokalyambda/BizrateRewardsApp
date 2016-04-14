@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#define ShareBody(inviteCode) [NSString stringWithFormat:@"Use my invite code, %@, when you sign up for Bizrate Rewards and get up to 350 extra points!", inviteCode]
+
 @import MessageUI;
 
 typedef enum : NSUInteger {

@@ -14,6 +14,18 @@
 
 @implementation BZRBirthDatePickerView
 
+- (void)awakeFromNib
+{
+    NSDate *now = [NSDate date];
+    NSDateComponents *minusHundredYears = [NSDateComponents new];
+    minusHundredYears.year = -120;
+    NSDate *hundredYearsAgo = [[NSCalendar currentCalendar] dateByAddingComponents:minusHundredYears
+                                                                            toDate:now
+                                                                           options:0];
+    [self.datePicker setMinimumDate:hundredYearsAgo];
+    [self.datePicker setMaximumDate:now];
+}
+
 #pragma mark - Actions
 
 - (IBAction)doneClick:(id)sender

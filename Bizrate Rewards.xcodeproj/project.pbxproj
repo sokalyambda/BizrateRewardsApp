@@ -196,8 +196,9 @@
 		84BE35D61B5D0C66001B99E2 /* BZRSurveyRemarkLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BE35D51B5D0C66001B99E2 /* BZRSurveyRemarkLabel.m */; };
 		84BE35D91B5D0C93001B99E2 /* BZRSurveyCongratsLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BE35D81B5D0C93001B99E2 /* BZRSurveyCongratsLabel.m */; };
 		BB459B0F1CBBF2450041831D /* BZRSharingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BB459B0E1CBBF2450041831D /* BZRSharingManager.m */; };
-		BBA7AFE91CBF74950075FE7E /* BZRShareCodeLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = BBA7AFE81CBF74950075FE7E /* BZRShareCodeLabel.m */; };
 		BBA7AFEC1CBF76640075FE7E /* BZRShareTitleLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = BBA7AFEB1CBF76640075FE7E /* BZRShareTitleLabel.m */; };
+		BBA7AFEF1CBFBEB30075FE7E /* BZRTapToCopyLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = BBA7AFEE1CBFBEB30075FE7E /* BZRTapToCopyLabel.m */; };
+		BBA7AFF21CBFBF740075FE7E /* BZRShareCodeLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = BBA7AFF11CBFBF740075FE7E /* BZRShareCodeLabel.m */; };
 		BBC644E01CBBF0CB007DFD83 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBC644DF1CBBF0CB007DFD83 /* Social.framework */; };
 		BBFD0DE61CBE8B6F00F22FF1 /* BZRInviteTextLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = BBFD0DE51CBE8B6F00F22FF1 /* BZRInviteTextLabel.m */; };
 		D36E8A511CBE11D500109333 /* BZRValidateShareCodeRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = D36E8A501CBE11D500109333 /* BZRValidateShareCodeRequest.m */; };
@@ -575,10 +576,12 @@
 		84BE35D81B5D0C93001B99E2 /* BZRSurveyCongratsLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRSurveyCongratsLabel.m; path = Classes/MVC/Views/Styles/SurveyStyleLabels/SurveyCongratsLabel/BZRSurveyCongratsLabel.m; sourceTree = "<group>"; };
 		BB459B0D1CBBF2450041831D /* BZRSharingManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRSharingManager.h; path = Classes/Managers/SharingManager/BZRSharingManager.h; sourceTree = "<group>"; };
 		BB459B0E1CBBF2450041831D /* BZRSharingManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRSharingManager.m; path = Classes/Managers/SharingManager/BZRSharingManager.m; sourceTree = "<group>"; };
-		BBA7AFE71CBF74950075FE7E /* BZRShareCodeLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BZRShareCodeLabel.h; sourceTree = "<group>"; };
-		BBA7AFE81CBF74950075FE7E /* BZRShareCodeLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BZRShareCodeLabel.m; sourceTree = "<group>"; };
 		BBA7AFEA1CBF76640075FE7E /* BZRShareTitleLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRShareTitleLabel.h; path = Classes/MVC/Views/Styles/ShareCodeStyleLabels/BZRShareTitleLabel.h; sourceTree = "<group>"; };
 		BBA7AFEB1CBF76640075FE7E /* BZRShareTitleLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRShareTitleLabel.m; path = Classes/MVC/Views/Styles/ShareCodeStyleLabels/BZRShareTitleLabel.m; sourceTree = "<group>"; };
+		BBA7AFED1CBFBEB30075FE7E /* BZRTapToCopyLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRTapToCopyLabel.h; path = Classes/MVC/Views/Styles/ShareCodeStyleLabels/BZRTapToCopyLabel.h; sourceTree = "<group>"; };
+		BBA7AFEE1CBFBEB30075FE7E /* BZRTapToCopyLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRTapToCopyLabel.m; path = Classes/MVC/Views/Styles/ShareCodeStyleLabels/BZRTapToCopyLabel.m; sourceTree = "<group>"; };
+		BBA7AFF01CBFBF730075FE7E /* BZRShareCodeLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRShareCodeLabel.h; path = Classes/MVC/Views/Styles/ShareCodeStyleLabels/BZRShareCodeLabel.h; sourceTree = "<group>"; };
+		BBA7AFF11CBFBF740075FE7E /* BZRShareCodeLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRShareCodeLabel.m; path = Classes/MVC/Views/Styles/ShareCodeStyleLabels/BZRShareCodeLabel.m; sourceTree = "<group>"; };
 		BBC644DF1CBBF0CB007DFD83 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		BBFD0DE41CBE8B6F00F22FF1 /* BZRInviteTextLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRInviteTextLabel.h; path = Classes/MVC/Views/Styles/ShareCodeStyleLabels/BZRInviteTextLabel.h; sourceTree = "<group>"; };
 		BBFD0DE51CBE8B6F00F22FF1 /* BZRInviteTextLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRInviteTextLabel.m; path = Classes/MVC/Views/Styles/ShareCodeStyleLabels/BZRInviteTextLabel.m; sourceTree = "<group>"; };
@@ -2580,12 +2583,14 @@
 		BBFD0DE31CBE89B600F22FF1 /* InviteTextLabel */ = {
 			isa = PBXGroup;
 			children = (
+				BBA7AFF01CBFBF730075FE7E /* BZRShareCodeLabel.h */,
+				BBA7AFF11CBFBF740075FE7E /* BZRShareCodeLabel.m */,
 				BBFD0DE41CBE8B6F00F22FF1 /* BZRInviteTextLabel.h */,
 				BBFD0DE51CBE8B6F00F22FF1 /* BZRInviteTextLabel.m */,
-				BBA7AFE71CBF74950075FE7E /* BZRShareCodeLabel.h */,
-				BBA7AFE81CBF74950075FE7E /* BZRShareCodeLabel.m */,
 				BBA7AFEA1CBF76640075FE7E /* BZRShareTitleLabel.h */,
 				BBA7AFEB1CBF76640075FE7E /* BZRShareTitleLabel.m */,
+				BBA7AFED1CBFBEB30075FE7E /* BZRTapToCopyLabel.h */,
+				BBA7AFEE1CBFBEB30075FE7E /* BZRTapToCopyLabel.m */,
 			);
 			name = InviteTextLabel;
 			sourceTree = "<group>";
@@ -2831,6 +2836,7 @@
 				D36E8A511CBE11D500109333 /* BZRValidateShareCodeRequest.m in Sources */,
 				58AA304E1B7B805B00363119 /* BZRPushNotifiactionService.m in Sources */,
 				585C32A21B63AA3F005BF07B /* BZRNetworkOperation.m in Sources */,
+				BBA7AFF21CBFBF740075FE7E /* BZRShareCodeLabel.m in Sources */,
 				58ECCEE11B8F462300528192 /* BZRDiagnosticsCell.m in Sources */,
 				58ACC0841B3968BF0081E546 /* BZRChooseSignUpTypeController.m in Sources */,
 				58AA1A221B5E1E6400BA824A /* BZRHighlightedButton.m in Sources */,
@@ -2938,7 +2944,6 @@
 				58219F151B38A3D700A9541A /* NSString+ContainsString.m in Sources */,
 				D3EFC7841C05961200DE9426 /* BZRShareWithFriendController.m in Sources */,
 				583681711B579C6200D541A4 /* BZRKeychainHandler.m in Sources */,
-				BBA7AFE91CBF74950075FE7E /* BZRShareCodeLabel.m in Sources */,
 				58BCCD8A1B6BA1FD00521496 /* BZRLocationEvent.m in Sources */,
 				58AA304B1B7B804200363119 /* BZRAssetsHelper.m in Sources */,
 				58219F0A1B38A37600A9541A /* UIView+Shaking.m in Sources */,
@@ -2948,6 +2953,7 @@
 				585262F31BF4A4C100386932 /* BZRFacebookAccessToken+CoreDataProperties.m in Sources */,
 				58B18C8C1B790D7200F13F53 /* BZRGetFeaturedGiftcards.m in Sources */,
 				58ECEAFE1B908451000F699D /* BZRLocationDetailsDiagnosticsController.m in Sources */,
+				BBA7AFEF1CBFBEB30075FE7E /* BZRTapToCopyLabel.m in Sources */,
 				58AA30771B7B862D00363119 /* BZRSurveyService.m in Sources */,
 				58D1E5D11B662EBD00347208 /* BZRSignInWithFacebookRequest.m in Sources */,
 				58C770E31B5CD08E00E9031F /* BZRTutorialDescriptionLabel.m in Sources */,

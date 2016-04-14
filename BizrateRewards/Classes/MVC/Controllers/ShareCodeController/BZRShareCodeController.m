@@ -20,6 +20,7 @@
 #import "BZRCommonDateFormatter.h"
 
 #import "BZRErrorHandler.h"
+#import "BZRAlertFacade.h"
 
 @interface BZRShareCodeController ()
 
@@ -76,9 +77,11 @@
             [weakSelf moveToNextControllerOrPerformFacebookAuthorization];
             
         } onFailure:^(NSError *error, BOOL isCanceled) {
-            
-            //TODO: error alert
-            [weakSelf moveToNextControllerOrPerformFacebookAuthorization];
+            if (![BZRErrorHandler isShareCodeValidFormatFromError:error]) {
+                [BZRAlertFacade showAlertWithTitle:@"" andMessage:@"Invalid share code format." forController:self withCompletion:NULL];
+            } else {
+                [BZRAlertFacade showAlertWithTitle:@"" andMessage:@"Share code does not exist." forController:self withCompletion:NULL];
+            }
         }];
         
     } onFailure:^(NSMutableDictionary *errorDict) {

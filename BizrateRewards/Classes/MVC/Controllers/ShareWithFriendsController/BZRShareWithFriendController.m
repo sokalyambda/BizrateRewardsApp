@@ -30,6 +30,12 @@
 
 #pragma mark - Actions
 
+- (IBAction)copyShareCode:(id)sender
+{
+    UIPasteboard *pb = [UIPasteboard generalPasteboard];
+    [pb setString:ShareBody(self.shareCode)];
+}
+
 - (IBAction)shareWithFacebook:(id)sender
 {
     [[BZRSharingManager sharedManager] shareWithFacebookFromController:self inviteCode:self.shareCode];

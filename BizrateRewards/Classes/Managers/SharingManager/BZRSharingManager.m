@@ -10,8 +10,6 @@
 #import <Social/Social.h>
 #import <FBSDKShareKit/FBSDKShareKit.h>
 
-#define ShareBody(inviteCode) [NSString stringWithFormat:@"Use my invite code, %@, when you sign up for Bizrate Rewards and get up to 350 extra points!", inviteCode]
-
 static NSString * const kMailSubject = @"Bizrate Rewards. Get up to 350 extra points!";
 
 @interface BZRSharingManager () <MFMailComposeViewControllerDelegate, MFMessageComposeViewControllerDelegate>

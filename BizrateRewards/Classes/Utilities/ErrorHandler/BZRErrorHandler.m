@@ -201,6 +201,17 @@ static NSString *_errorAlertTitle = nil;
     return emailExists;
 }
 
+/*
+ * Check whether Share code has valid format
+ */
+
++ (BOOL)isShareCodeValidFormatFromError:(NSError*)error
+{
+    NSArray *errors = [self getErrorsArrayDataFromError:error];
+    
+    return !errors.count;
+}
+
 #pragma mark - Private methods
 
 /**
