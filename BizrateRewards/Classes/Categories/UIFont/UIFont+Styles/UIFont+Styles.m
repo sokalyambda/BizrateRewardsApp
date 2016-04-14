@@ -138,4 +138,45 @@ static NSString *const kOpenSansBoldFontName = @"OpenSans-Bold";
     }
 }
 
+//MARK: Share Code
+
++ (UIFont*)inviteTextFont
+{
+    if (IS_IPHONE_4) {
+        return [UIFont fontWithName:kOpenSansFontName size:kDescriptionExtraSmallFontSize];
+    } else if (IS_IPHONE_5) {
+        return [UIFont fontWithName:kOpenSansFontName size:kDescriptionSmallFontSize];
+    } else if (IS_IPHONE_6) {
+        return [UIFont fontWithName:kOpenSansFontName size:kDescriptionMediumFontSize];
+    } else {
+        return [UIFont fontWithName:kOpenSansFontName size:kDescriptionLargeFontSize];
+    }
+}
+
++ (UIFont*)shareCodeFont
+{
+    if (IS_IPHONE_4) {
+        return [UIFont fontWithName:kOpenSansSemiboldFontName size:kPointsValueExtraSmallFontSize];
+    } else if (IS_IPHONE_5) {
+        return [UIFont fontWithName:kOpenSansSemiboldFontName size:kPointsValueSmallFontSize];
+    } else if (IS_IPHONE_6) {
+        return [UIFont fontWithName:kOpenSansSemiboldFontName size:kPointsValueMediumFontSize];
+    } else {
+        return [UIFont fontWithName:kOpenSansSemiboldFontName size:kPointsValueLargeFontSize];
+    }
+}
+
++ (UIFont*)shareTitleFont
+{
+    if (IS_IPHONE_4) {
+        return [UIFont fontWithName:kOpenSansFontName size:kPointsValueExtraSmallFontSize];
+    } else if (IS_IPHONE_5) {
+        return [UIFont fontWithName:kOpenSansFontName size:kPointsValueSmallFontSize];
+    } else if (IS_IPHONE_6) {
+        return [UIFont fontWithName:kOpenSansFontName size:kPointsValueMediumFontSize];
+    } else {
+        return [UIFont fontWithName:kOpenSansFontName size:kPointsValueLargeFontSize];
+    }
+}
+
 @end

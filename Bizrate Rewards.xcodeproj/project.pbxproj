@@ -196,7 +196,10 @@
 		84BE35D61B5D0C66001B99E2 /* BZRSurveyRemarkLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BE35D51B5D0C66001B99E2 /* BZRSurveyRemarkLabel.m */; };
 		84BE35D91B5D0C93001B99E2 /* BZRSurveyCongratsLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BE35D81B5D0C93001B99E2 /* BZRSurveyCongratsLabel.m */; };
 		BB459B0F1CBBF2450041831D /* BZRSharingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BB459B0E1CBBF2450041831D /* BZRSharingManager.m */; };
+		BBA7AFE91CBF74950075FE7E /* BZRShareCodeLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = BBA7AFE81CBF74950075FE7E /* BZRShareCodeLabel.m */; };
+		BBA7AFEC1CBF76640075FE7E /* BZRShareTitleLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = BBA7AFEB1CBF76640075FE7E /* BZRShareTitleLabel.m */; };
 		BBC644E01CBBF0CB007DFD83 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBC644DF1CBBF0CB007DFD83 /* Social.framework */; };
+		BBFD0DE61CBE8B6F00F22FF1 /* BZRInviteTextLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = BBFD0DE51CBE8B6F00F22FF1 /* BZRInviteTextLabel.m */; };
 		D36E8A511CBE11D500109333 /* BZRValidateShareCodeRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = D36E8A501CBE11D500109333 /* BZRValidateShareCodeRequest.m */; };
 		D3EFC7841C05961200DE9426 /* BZRShareWithFriendController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3EFC7831C05961200DE9426 /* BZRShareWithFriendController.m */; };
 /* End PBXBuildFile section */
@@ -572,7 +575,13 @@
 		84BE35D81B5D0C93001B99E2 /* BZRSurveyCongratsLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRSurveyCongratsLabel.m; path = Classes/MVC/Views/Styles/SurveyStyleLabels/SurveyCongratsLabel/BZRSurveyCongratsLabel.m; sourceTree = "<group>"; };
 		BB459B0D1CBBF2450041831D /* BZRSharingManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRSharingManager.h; path = Classes/Managers/SharingManager/BZRSharingManager.h; sourceTree = "<group>"; };
 		BB459B0E1CBBF2450041831D /* BZRSharingManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRSharingManager.m; path = Classes/Managers/SharingManager/BZRSharingManager.m; sourceTree = "<group>"; };
+		BBA7AFE71CBF74950075FE7E /* BZRShareCodeLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BZRShareCodeLabel.h; sourceTree = "<group>"; };
+		BBA7AFE81CBF74950075FE7E /* BZRShareCodeLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BZRShareCodeLabel.m; sourceTree = "<group>"; };
+		BBA7AFEA1CBF76640075FE7E /* BZRShareTitleLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRShareTitleLabel.h; path = Classes/MVC/Views/Styles/ShareCodeStyleLabels/BZRShareTitleLabel.h; sourceTree = "<group>"; };
+		BBA7AFEB1CBF76640075FE7E /* BZRShareTitleLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRShareTitleLabel.m; path = Classes/MVC/Views/Styles/ShareCodeStyleLabels/BZRShareTitleLabel.m; sourceTree = "<group>"; };
 		BBC644DF1CBBF0CB007DFD83 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		BBFD0DE41CBE8B6F00F22FF1 /* BZRInviteTextLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRInviteTextLabel.h; path = Classes/MVC/Views/Styles/ShareCodeStyleLabels/BZRInviteTextLabel.h; sourceTree = "<group>"; };
+		BBFD0DE51CBE8B6F00F22FF1 /* BZRInviteTextLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRInviteTextLabel.m; path = Classes/MVC/Views/Styles/ShareCodeStyleLabels/BZRInviteTextLabel.m; sourceTree = "<group>"; };
 		D36E8A4F1CBE11D500109333 /* BZRValidateShareCodeRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRValidateShareCodeRequest.h; path = UserProfile/ValidateShareCodeRequest/BZRValidateShareCodeRequest.h; sourceTree = "<group>"; };
 		D36E8A501CBE11D500109333 /* BZRValidateShareCodeRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BZRValidateShareCodeRequest.m; path = UserProfile/ValidateShareCodeRequest/BZRValidateShareCodeRequest.m; sourceTree = "<group>"; };
 		D3EFC7821C05961200DE9426 /* BZRShareWithFriendController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BZRShareWithFriendController.h; path = Classes/MVC/Controllers/ShareWithFriendsController/BZRShareWithFriendController.h; sourceTree = "<group>"; };
@@ -2219,6 +2228,7 @@
 		58C770DA1B5CCFF400E9031F /* Styles */ = {
 			isa = PBXGroup;
 			children = (
+				BBFD0DE21CBE89A800F22FF1 /* ShareCodeLabels */,
 				58A08B681B73A4B100BEF1D8 /* PrivacyAndTerms */,
 				84BE35C91B5D0A04001B99E2 /* SurveyStyleLabels */,
 				58C770DB1B5CCFFF00E9031F /* TutorialStyleLabels */,
@@ -2559,6 +2569,27 @@
 			name = SharingManager;
 			sourceTree = "<group>";
 		};
+		BBFD0DE21CBE89A800F22FF1 /* ShareCodeLabels */ = {
+			isa = PBXGroup;
+			children = (
+				BBFD0DE31CBE89B600F22FF1 /* InviteTextLabel */,
+			);
+			name = ShareCodeLabels;
+			sourceTree = "<group>";
+		};
+		BBFD0DE31CBE89B600F22FF1 /* InviteTextLabel */ = {
+			isa = PBXGroup;
+			children = (
+				BBFD0DE41CBE8B6F00F22FF1 /* BZRInviteTextLabel.h */,
+				BBFD0DE51CBE8B6F00F22FF1 /* BZRInviteTextLabel.m */,
+				BBA7AFE71CBF74950075FE7E /* BZRShareCodeLabel.h */,
+				BBA7AFE81CBF74950075FE7E /* BZRShareCodeLabel.m */,
+				BBA7AFEA1CBF76640075FE7E /* BZRShareTitleLabel.h */,
+				BBA7AFEB1CBF76640075FE7E /* BZRShareTitleLabel.m */,
+			);
+			name = InviteTextLabel;
+			sourceTree = "<group>";
+		};
 		D31C9EB6CC9E9EA49476A0B1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -2822,6 +2853,7 @@
 				58A7E23A1B45A3A200A1489A /* UIView+ConfigureAnchorPoint.m in Sources */,
 				58A91F481B3ABE6D0032607F /* BZRStorageManager.m in Sources */,
 				58AA30411B7B800A00363119 /* BZRMixpanelService.m in Sources */,
+				BBA7AFEC1CBF76640075FE7E /* BZRShareTitleLabel.m in Sources */,
 				582331BB1BDE7F650053E121 /* BZRDeleteTakenSurveysRequest.m in Sources */,
 				58A841691B94436D0032AEF0 /* ISO8601DateFormatter.m in Sources */,
 				588CE7A01B70AAD00088DEB1 /* BZRConfirmPasswordController.m in Sources */,
@@ -2906,6 +2938,7 @@
 				58219F151B38A3D700A9541A /* NSString+ContainsString.m in Sources */,
 				D3EFC7841C05961200DE9426 /* BZRShareWithFriendController.m in Sources */,
 				583681711B579C6200D541A4 /* BZRKeychainHandler.m in Sources */,
+				BBA7AFE91CBF74950075FE7E /* BZRShareCodeLabel.m in Sources */,
 				58BCCD8A1B6BA1FD00521496 /* BZRLocationEvent.m in Sources */,
 				58AA304B1B7B804200363119 /* BZRAssetsHelper.m in Sources */,
 				58219F0A1B38A37600A9541A /* UIView+Shaking.m in Sources */,
@@ -2920,6 +2953,7 @@
 				58C770E31B5CD08E00E9031F /* BZRTutorialDescriptionLabel.m in Sources */,
 				58BD59C41B6FC75100B6C5C4 /* BZRAlertFacade.m in Sources */,
 				586311791BF4738F00C2F654 /* BZRCoreDataStorage.m in Sources */,
+				BBFD0DE61CBE8B6F00F22FF1 /* BZRInviteTextLabel.m in Sources */,
 				58A59E281B3EE00B00A5F30C /* BZRPushNotificationsAccessController.m in Sources */,
 				58A59E2C1B3EE91000A5F30C /* BZRFinishTutorialController.m in Sources */,
 			);
@@ -3060,6 +3094,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.shopzilla.bizrate.rewards;
 				PRODUCT_NAME = "Bizrate Rewards";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -3088,6 +3123,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.shopzilla.bizrate.rewards;
 				PRODUCT_NAME = "Bizrate Rewards";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
@@ -3189,6 +3225,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.shopzilla.bizrate.rewards;
 				PRODUCT_NAME = "Bizrate Rewards";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = AppStore;
@@ -3270,6 +3307,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.shopzilla.bizrate.rewards;
 				PRODUCT_NAME = "Bizrate Rewards";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = AdHoc;

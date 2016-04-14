@@ -17,7 +17,6 @@
 static NSString *const kPublicProfile = @"public_profile";
 static NSString *const kEmail = @"email";
 static NSString *const kFields = @"fields";
-static NSString *const kPublish = @"publish_permission";
 
 static NSString *const kFBAppId = @"851500644887516";
 static NSString *const kFBAppSecret = @"530fa94f7370fc20a54cc392fbd83cf2";
@@ -60,7 +59,7 @@ static NSString *const kFBAppSecret = @"530fa94f7370fc20a54cc392fbd83cf2";
                                   onSuccess:(FacebookAuthSuccessBlock)success
                                   onFailure:(FacebookAuthFailureBlock)failure
 {
-    [[self facebookLoginManager] logInWithReadPermissions:@[kPublicProfile, kEmail, kPublish] fromViewController:fromController handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+    [[self facebookLoginManager] logInWithReadPermissions:@[kPublicProfile, kEmail] fromViewController:fromController handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
         
         if (error && failure) {
             failure(error, result.isCancelled);

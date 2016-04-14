@@ -18,4 +18,8 @@
 
 + (UIFont *)privacyAndTermsFont;
 
++ (UIFont*)inviteTextFont;
++ (UIFont*)shareCodeFont;
++ (UIFont*)shareTitleFont;
+
 @end

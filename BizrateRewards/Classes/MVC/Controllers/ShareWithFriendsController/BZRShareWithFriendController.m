@@ -25,7 +25,7 @@
 {
     [super viewDidLoad];
     
-    self.shareCodeLabel.text = self.shareCode;
+    self.shareCodeLabel.text = [NSString stringWithFormat:@"USER CODE: %@", self.shareCode];
 }
 
 #pragma mark - Actions
@@ -57,7 +57,7 @@
 {
     [super customizeNavigationItem];
     //set navigation title
-    self.navigationItem.title = LOCALIZED(@"Share Code");
+    self.navigationItem.title = LOCALIZED(@"Extra Gift Cards");
     
     //Show navigation bar
     [self.navigationController setNavigationBarHidden:NO animated:YES];
