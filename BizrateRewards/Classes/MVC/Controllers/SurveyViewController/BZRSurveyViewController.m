@@ -14,6 +14,7 @@
 #import "NSString+ContainsString.h"
 
 static NSString *const kFinishSurveyString = @"SaveButton";
+static NSString *const kDisqualified = @"disqualified";
 
 static NSString *const kSurveyID = @"Survey ID";
 
@@ -70,9 +71,9 @@ static NSString *const kSurveyID = @"Survey ID";
     NSString *urlString = request.URL.absoluteString;
     
     if ([urlString containsString:kFinishSurveyString]) {
-        
         BZRFinishSurveyController *controller = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRFinishSurveyController class])];
         controller.passedSurvey = self.currentSurvey;
+        controller.disqualified = [urlString containsString:kDisqualified];
         [self.navigationController pushViewController:controller animated:YES];
     }
     
