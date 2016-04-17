@@ -44,7 +44,6 @@ static NSString *const kIsTestUser              = @"is_test_user";
     userProfile.pointsAmount    = [response[kPointsAmount] integerValue];
     userProfile.pointsRequired  = [response[kPointsRequired] integerValue];
     userProfile.testUser        = [response[kIsTestUser] boolValue];
-    
     userProfile.redemptionURL   = [NSURL URLWithString:response[kRedemptionURL]];
     userProfile.allowRedemption = [response[kAllowRedemption] boolValue];
     
