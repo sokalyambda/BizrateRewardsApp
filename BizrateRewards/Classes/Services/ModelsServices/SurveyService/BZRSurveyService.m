@@ -17,6 +17,7 @@ static NSString *const kSurveyLink  = @"url";
 static NSString *const kRefSurveyId = @"ref_survey_id";
 static NSString *const kSurveyName  = @"name";
 static NSString *const kPoints      = @"points";
+static NSString *const kDisqualifiedPoints = @"disqualified_points";
 
 @implementation BZRSurveyService
 
@@ -53,6 +54,7 @@ static NSString *const kPoints      = @"points";
     survey.surveyName     = response[kSurveyName];
     survey.refSurveyId    = response[kRefSurveyId];
     survey.surveyPoints   = [response[kPoints] integerValue];
+    survey.disqualifiedPoints = [response[kDisqualifiedPoints] integerValue];
     return survey;
 }
 

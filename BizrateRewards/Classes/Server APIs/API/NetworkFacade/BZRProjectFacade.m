@@ -346,6 +346,36 @@ static NSString *_baseURLString;
     return operation;
 }
 
+
++ (BZRNetworkOperation *)validateShareCode:(NSString *)shareCode
+                                 onSuccess:(void (^)(BOOL success))success
+                                 onFailure:(void (^)(NSError *error, BOOL isCanceled))failure
+{
+    __block BZRNetworkOperation* operation;
+    [self validateSessionWithType:BZRSessionTypeApplication onSuccess:^(BOOL isSuccess) {
+        BZRValidateShareCodeRequest *request = [[BZRValidateShareCodeRequest alloc] initWithShareCode:shareCode];
+        
+        operation = [[self  HTTPClient] createOperationWithNetworkRequest:request success:^(BZRNetworkOperation *operation) {
+    
+            if (success) {
+                success(YES);
+            }
+            
+        } failure:^(BZRNetworkOperation *operation ,NSError *error, BOOL isCanceled) {
+            
+            if (failure) {
+                failure(error, isCanceled);
+            }
+        }];
+    } onFailure:^(NSError *error, BOOL isCanceled) {
+        if (failure) {
+            failure(error, isCanceled);
+        }
+    }];
+    
+    return operation;
+}
+
 //Surveys Requests
 + (BZRNetworkOperation *)getEligibleSurveysOnSuccess:(void (^)(NSArray *surveys))success
                                            onFailure:(void (^)(NSError *error, BOOL isCanceled))failure

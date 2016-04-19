@@ -18,6 +18,8 @@ typedef void(^ErrorParsingCompletion)(NSString *alertTitle, NSString *alertMessa
 + (BOOL)isEmailAlreadyExistFromError:(NSError *)error;
 + (BOOL)isFacebookEmailAlreadyExistFromError:(NSError *)error;
 
++ (BOOL)isShareCodeValidFormatFromError:(NSError*)error;
+
 + (void)parseError:(NSError *)error withCompletion:(ErrorParsingCompletion)completion;
 
 @end

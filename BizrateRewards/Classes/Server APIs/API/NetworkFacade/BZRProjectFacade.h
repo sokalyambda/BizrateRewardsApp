@@ -70,6 +70,10 @@
                                       onSuccess:(void (^)(BOOL success))success
                                       onFailure:(void (^)(NSError *error, BOOL isCanceled))failure;
 
++ (BZRNetworkOperation *)validateShareCode:(NSString *)shareCode
+                                 onSuccess:(void (^)(BOOL success))success
+                                 onFailure:(void (^)(NSError *error, BOOL isCanceled))failure;
+
 //Surveys Requests
 + (BZRNetworkOperation*)getEligibleSurveysOnSuccess:(void (^)(NSArray *surveys))success
                                           onFailure:(void (^)(NSError *error, BOOL isCanceled))failure;

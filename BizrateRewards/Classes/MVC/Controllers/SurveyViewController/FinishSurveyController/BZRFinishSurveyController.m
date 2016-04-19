@@ -95,7 +95,8 @@
  */
 - (void)setupObtainedPointsText
 {
-    self.obtainedPointsLabel.text = [NSString localizedStringWithFormat:LOCALIZED(@"%li points have deposited to your account!"), (long)self.passedSurvey.surveyPoints];
+    NSInteger earnedPoints = self.isDisqualified? self.passedSurvey.disqualifiedPoints: self.passedSurvey.surveyPoints;
+    self.obtainedPointsLabel.text = [NSString localizedStringWithFormat:LOCALIZED(@"%li points have deposited to your account!"), (long)earnedPoints];
 }
 
 /**
@@ -103,7 +104,8 @@
  */
 - (void)recalculateProgress
 {
-    NSInteger updatedPoints = self.currentProfile.pointsAmount + self.passedSurvey.surveyPoints;
+    NSInteger earnedPoints = self.isDisqualified? self.passedSurvey.disqualifiedPoints: self.passedSurvey.surveyPoints;
+    NSInteger updatedPoints = self.currentProfile.pointsAmount + earnedPoints;
     WEAK_SELF;
     [self.progressView recalculateProgressWithCurrentPoints:updatedPoints
                                              requiredPoints:self.currentProfile.pointsRequired

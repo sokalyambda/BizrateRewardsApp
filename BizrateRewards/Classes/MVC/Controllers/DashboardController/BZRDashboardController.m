@@ -15,6 +15,7 @@
 #import "BZRBaseNavigationController.h"
 #import "BZRGiftCardsListController.h"
 #import "BZRRedeemPointsController.h"
+#import "BZRShareWithFriendController.h"
 
 #import "BZRRoundedImageView.h"
 #import "BZRProgressView.h"
@@ -118,6 +119,13 @@ static NSString *const kAllGiftCardsSegueIdentifier = @"allGiftCardsSegue";
     BZRAccountSettingsController *accountController = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRAccountSettingsController class])];
     BZRBaseNavigationController *navigationController = [[BZRBaseNavigationController alloc] initWithRootViewController:accountController];
     [self presentViewController:navigationController animated:YES completion:nil];
+}
+
+- (IBAction)extraGiftCardsClick:(id)sender
+{
+    BZRShareWithFriendController *controller = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([BZRShareWithFriendController class])];
+    controller.shareCode = self.currentProfile.shareCode;
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 /**

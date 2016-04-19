@@ -60,7 +60,7 @@
     BOOL parseJSONData = NO;
     
     //This needs because response from API for this request is empty
-    if ([self isKindOfClass:[BZRForgotPasswordRequest class]] || [self isKindOfClass:[BZRDeleteTakenSurveysRequest class]]) {
+    if ([self isKindOfClass:[BZRForgotPasswordRequest class]] || [self isKindOfClass:[BZRDeleteTakenSurveysRequest class]] || [self isKindOfClass:[BZRValidateShareCodeRequest class]]) {
         return YES;
     }
     

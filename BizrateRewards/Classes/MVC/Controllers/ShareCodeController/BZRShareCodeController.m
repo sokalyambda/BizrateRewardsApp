@@ -20,6 +20,7 @@
 #import "BZRCommonDateFormatter.h"
 
 #import "BZRErrorHandler.h"
+#import "BZRAlertFacade.h"
 
 @interface BZRShareCodeController ()
 
@@ -71,8 +72,17 @@
     WEAK_SELF;
     [BZRValidator validateShareCodeField:shareCodeField onSuccess:^{
         
-        weakSelf.temporaryProfile.shareCode = shareCodeField.text;
-        [weakSelf moveToNextControllerOrPerformFacebookAuthorization];
+        [BZRProjectFacade validateShareCode:shareCodeField.text onSuccess:^(BOOL success) {
+            weakSelf.temporaryProfile.shareCode = shareCodeField.text;
+            [weakSelf moveToNextControllerOrPerformFacebookAuthorization];
+            
+        } onFailure:^(NSError *error, BOOL isCanceled) {
+            if (![BZRErrorHandler isShareCodeValidFormatFromError:error]) {
+                [BZRAlertFacade showAlertWithTitle:@"" andMessage:@"Invalid share code format." forController:self withCompletion:NULL];
+            } else {
+                [BZRAlertFacade showAlertWithTitle:@"" andMessage:@"Share code does not exist." forController:self withCompletion:NULL];
+            }
+        }];
         
     } onFailure:^(NSMutableDictionary *errorDict) {
         

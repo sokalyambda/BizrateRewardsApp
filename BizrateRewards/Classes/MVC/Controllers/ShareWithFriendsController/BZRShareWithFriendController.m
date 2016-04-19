@@ -7,8 +7,11 @@
 //
 
 #import "BZRShareWithFriendController.h"
+#import "BZRFacebookService.h"
+#import "BZRSharingManager.h"
+#import "BZRAlertFacade.h"
 
-@interface BZRShareWithFriendController ()
+@interface BZRShareWithFriendController () <BZRSharingManagerDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *shareCodeLabel;
 
@@ -22,10 +25,36 @@
 {
     [super viewDidLoad];
     
-    self.shareCodeLabel.text = self.shareCode;
+    self.shareCodeLabel.text = [NSString stringWithFormat:@"USER CODE: %@", self.shareCode];
 }
 
 #pragma mark - Actions
+
+- (IBAction)copyShareCode:(id)sender
+{
+    UIPasteboard *pb = [UIPasteboard generalPasteboard];
+    [pb setString:ShareBody(self.shareCode)];
+}
+
+- (IBAction)shareWithFacebook:(id)sender
+{
+    [[BZRSharingManager sharedManager] shareWithFacebookFromController:self inviteCode:self.shareCode];
+}
+
+- (IBAction)shareWithTwitter:(id)sender
+{
+    [[BZRSharingManager sharedManager] shareWithTwitterFromController:self inviteCode:self.shareCode];
+}
+
+- (IBAction)shareWithMessage:(id)sender
+{
+    [[BZRSharingManager sharedManager] shareWithMessageFromController:self inviteCode:self.shareCode];
+}
+
+- (IBAction)shareWithEmail:(id)sender
+{
+    [[BZRSharingManager sharedManager] shareWithEmailFromController:self inviteCode:self.shareCode];
+}
 
 /**
  *  Customize navigation bar appearance
@@ -34,10 +63,17 @@
 {
     [super customizeNavigationItem];
     //set navigation title
-    self.navigationItem.title = LOCALIZED(@"Share Code");
+    self.navigationItem.title = LOCALIZED(@"Extra Gift Cards");
     
     //Show navigation bar
     [self.navigationController setNavigationBarHidden:NO animated:YES];
+}
+
+#pragma mark - BZRSharingManagerDelegate
+
+- (void)sharingWasCanceledForType:(BZRSharingType)sharingType
+{
+    [BZRAlertFacade showAlertWithMessage:@"Invite code was successfully shared." forController:self withCompletion:NULL];
 }
 
 @end

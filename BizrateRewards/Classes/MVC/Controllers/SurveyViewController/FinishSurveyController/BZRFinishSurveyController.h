@@ -13,5 +13,6 @@
 @interface BZRFinishSurveyController : BZRBaseViewController
 
 @property (strong, nonatomic) BZRSurvey *passedSurvey;
+@property (assign, nonatomic, getter=isDisqualified) BOOL disqualified;
 
 @end

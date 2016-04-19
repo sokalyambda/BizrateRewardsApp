@@ -152,6 +152,50 @@ NSString *const kErrorAlertMessage = @"AlertMessage";
     [self showCurrentAlertController:alertController forController:controller];
 }
 
++ (void)showNoSocialAccountAlertForController:(UIViewController*)forController socialType:(BZRSocialType)socialType andCompletion:(void(^)(UIAlertAction *action, BOOL isCanceled))completion
+{
+    NSString *alertTitle;
+    NSString *alertMessage;
+    NSString *settingPath;
+    switch (socialType) {
+        case BZRSocialFacebook: {
+            alertTitle = LOCALIZED(@"No Facebook Account");
+            alertMessage = LOCALIZED(@"There are no Facebook accounts configured. You can add or create Facebook accounts in Settings.");
+            settingPath = @"FACEBOOK";
+            break;
+        }
+        case BZRSocialTwitter: {
+            alertTitle = LOCALIZED(@"No Twitter Account");
+            alertMessage = LOCALIZED(@"There are no Twitter accounts configured. You can add or create Twitter accounts in Settings.");
+            settingPath = @"TWITTER";
+            break;
+        }
+        default:
+            break;
+    }
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:alertTitle message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:LOCALIZED(@"Cancel") style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+        if (completion) {
+            completion(action, YES);
+        }
+    }];
+    
+    UIAlertAction *settingsAction = [UIAlertAction actionWithTitle:LOCALIZED(@"Settings") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"prefs:root=%@", settingPath]]];
+        if (completion) {
+            completion(action, NO);
+        }
+    }];
+    
+    [alertController addAction:cancelAction];
+    [alertController addAction:settingsAction];
+    
+    [self showCurrentAlertController:alertController forController:forController];
+}
+
 #pragma mark - Private methods
 
 /**
