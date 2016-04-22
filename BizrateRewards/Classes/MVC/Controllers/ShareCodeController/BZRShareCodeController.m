@@ -77,11 +77,7 @@
             [weakSelf moveToNextControllerOrPerformFacebookAuthorization];
             
         } onFailure:^(NSError *error, BOOL isCanceled) {
-            if (![BZRErrorHandler isShareCodeValidFormatFromError:error]) {
-                [BZRAlertFacade showAlertWithTitle:@"" andMessage:@"Invalid share code format." forController:self withCompletion:NULL];
-            } else {
-                [BZRAlertFacade showAlertWithTitle:@"" andMessage:@"Share code does not exist." forController:self withCompletion:NULL];
-            }
+            [BZRAlertFacade showAlertWithTitle:@"Share Code Error" andMessage:@"Share code is invalid. Please try again." forController:self withCompletion:NULL];
         }];
         
     } onFailure:^(NSMutableDictionary *errorDict) {

@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#define ShareBody(inviteCode) [NSString stringWithFormat:@"Use my invite code, %@, when you sign up for Bizrate Rewards and get up to 350 extra points!", inviteCode]
+#define ShareBody(inviteCode) [NSString stringWithFormat:@"Use my invite code, %@, and get 350 points towards a gift card on Bizrate Rewards. Bizrate Rewards iOS https://appsto.re/us/rltO9.i", inviteCode]
 
 @import MessageUI;
 
