@@ -18,7 +18,11 @@ typedef enum : NSUInteger {
     BZRMixpanelEventPushNotificationPermission,
     BZRMixpanelEventLocationPermission,
     BZRMixpanelEventGeofenceEnter,
-    BZRMixpanelEventGeofenceExit
+    BZRMixpanelEventGeofenceExit,
+    BZRMixpanelEventShareWithFacebookClicked,
+    BZRMixpanelEventShareWithTwitterClicked,
+    BZRMixpanelEventShareWithMessageClicked,
+    BZRMixpanelEventShareWithEmailClicked
 }BZRMixpanelEventType;
 
 extern NSString *const kAuthTypeEmail;
